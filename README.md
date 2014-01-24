@@ -1,4 +1,4 @@
-# _mojePanstwo-Portal [![Build Status](https://travis-ci.org/epforgpl/_mojePanstwo-Portal.png)](https://travis-ci.org/epforgpl/_mojePanstwo-Portal)
+# _mojePanstwo Portal [![Build Status](https://secure.travis-ci.org/epforgpl/_mojePanstwo-Portal.png?branch=master)](https://travis-ci.org/epforgpl/_mojePanstwo-Portal)
 
 ##Instalacja
 
