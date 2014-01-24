@@ -1,0 +1,44 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^(.*)$ index.php [QSA,L]
+</IfModule>
+# mod_deflate configuration
+<IfModule mod_deflate.c>
+ #   Header unset ETag
+ #   FileETag None
+
+ #   ExpiresActive On
+ #   ExpiresByType image/gif "access plus 6 months"
+ #   ExpiresByType image/jpeg "access plus 6 months"
+ #   ExpiresByType image/png "access plus 6 months"
+ #   ExpiresByType text/css "access plus 6 months"
+ #   ExpiresByType text/javascript "access plus 6 months"
+ #   ExpiresByType application/javascript "access plus 6 months"
+ #   ExpiresByType image/x-icon "access plus 6 months"
+ #   ExpiresByType application/octet-stream "access plus 6 months"
+
+#    SetOutputFilter DEFLATE
+#    AddOutputFilterByType DEFLATE text/css
+#    AddOutputFilterByType DEFLATE text/javascript
+#    AddOutputFilterByType DEFLATE text/html
+#    AddOutputFilterByType DEFLATE text/php
+#    AddOutputFilterByType DEFLATE text/xml
+#    AddOutputFilterByType DEFLATE text/xml+html
+#    AddOutputFilterByType DEFLATE text/php
+#    AddOutputFilterByType DEFLATE application/javascript
+#    AddOutputFilterByType DEFLATE application/x-javascript
+#
+#    ## Level of compression (Highest 9 - Lowest 1)
+#    #DeflateCompressionLevel 9
+#
+#    # Netscape 4.x has some problems.
+#    BrowserMatch ^Mozilla/4 gzip-only-text/html
+#
+#    # Netscape 4.06-4.08 have some more problems
+#    BrowserMatch ^Mozilla/4\.0[678] no-gzip
+#
+#    # MSIE masquerades as Netscape, but it is fine
+#    BrowserMatch \bMSI[E] !no-gzip !gzip-only-text/html
+</IfModule>

@@ -1,0 +1,14 @@
+h1 {
+    font-size: 24px;
+    margin: 15px 5px;
+}
+
+.objectPageHeader .objectRender .content blockquote._ {
+    font-size: 20px;
+    line-height: 28px;
+    border-left-color: #BBB;
+}
+
+.objectPageHeader .objectRender .button_div.details {
+    display: none;
+}

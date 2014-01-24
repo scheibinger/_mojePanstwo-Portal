@@ -1,0 +1,27 @@
+@menuBackgroundColorTop: #016ba9;
+@menuBackgroundColorMiddle: lighten(@menuBackgroundColorTop, 4%);
+//~#0177a8
+@menuBackgroundColorBottom: darken(@menuBackgroundColorTop, 17%);
+//~#00478c
+
+.standardGradient() {
+    background: #016ba9;
+    background: -moz-linear-gradient(top, @menuBackgroundColorTop 0%, @menuBackgroundColorMiddle 50%, @menuBackgroundColorBottom 99%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, @menuBackgroundColorTop), color-stop(50%, @menuBackgroundColorMiddle), color-stop(99%, @menuBackgroundColorBottom));
+    background: -webkit-linear-gradient(top, @menuBackgroundColorTop 0%, @menuBackgroundColorMiddle 50%, @menuBackgroundColorBottom 99%);
+    background: -o-linear-gradient(top, @menuBackgroundColorTop 0%, @menuBackgroundColorMiddle 50%, @menuBackgroundColorBottom 99%);
+    background: -ms-linear-gradient(top, @menuBackgroundColorTop 0%, @menuBackgroundColorMiddle 50%, @menuBackgroundColorBottom 99%);
+    background: linear-gradient(to bottom, @menuBackgroundColorTop 0%, @menuBackgroundColorMiddle 50%, @menuBackgroundColorBottom 99%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='@menuBackgroundColorTop', endColorstr='@menuBackgroundColorBottom', GradientType=0);
+}
+
+.reversedGradient() {
+    background: #016ba9;
+    background: -moz-linear-gradient(top, @menuBackgroundColorTop 100%, @menuBackgroundColorMiddle 50%, @menuBackgroundColorBottom 0%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(100%, @menuBackgroundColorTop), color-stop(50%, @menuBackgroundColorMiddle), color-stop(0%, @menuBackgroundColorBottom));
+    background: -webkit-linear-gradient(top, @menuBackgroundColorTop 100%, @menuBackgroundColorMiddle 50%, @menuBackgroundColorBottom 0%);
+    background: -o-linear-gradient(top, @menuBackgroundColorTop 100%, @menuBackgroundColorMiddle 50%, @menuBackgroundColorBottom 0%);
+    background: -ms-linear-gradient(top, @menuBackgroundColorTop 100%, @menuBackgroundColorMiddle 50%, @menuBackgroundColorBottom 0%);
+    background: linear-gradient(to bottom, @menuBackgroundColorTop 100%, @menuBackgroundColorMiddle 50%, @menuBackgroundColorBottom 0%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='@menuBackgroundColorBottom', endColorstr='@menuBackgroundColorTop', GradientType=0);
+}

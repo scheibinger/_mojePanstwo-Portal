@@ -1,0 +1,16 @@
+<?
+
+    define('CAKE_salt', "alphanumericsalt");
+    define('CAKE_cipherSeed', 'numericseednumbersonly');
+
+    define('OAUTH_client_id', 'alphanumericsalt');
+    define('OAUTH_client_secret', 'alphanumericsalt');
+
+    define('PASSPORT_client', 'alphanumericsalt');
+    define('PASSPORT_salt', 'alphanumericwithspecialcharsalt');
+
+    define('FACEBOOK_appId', 'numericsalt');
+    define('FACEBOOK_apiKey', 'numericsalt');
+    define('FACEBOOK_secret', 'alphanumericsalt');
+
+    define('MPAPI_path', 'path to local API CLIENT');

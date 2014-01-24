@@ -1,0 +1,183 @@
+#_main {
+    margin-top: 75px;
+
+    .searchBar {
+        height: 75px;
+        position: fixed;
+        top: 40px;
+        left: 0;
+        z-index: 100;
+        -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=3, Direction=162, Color=#aaa)"; /*IE 8*/
+        -moz-box-shadow: 1px 3px 3px #aaa; /*FF 3.5+*/
+        -webkit-box-shadow: 1px 3px 3px #aaa; /*Saf3-4, Chrome, iOS 4.0.2-4.2, Android 2.3+*/
+        box-shadow: 1px 3px 3px #aaa; /* FF3.5+, Opera 9+, Saf1+, Chrome, IE10 */
+        filter: progid:DXImageTransform.Microsoft.Shadow(Strength=3, Direction=162, Color=#aaa); /*IE 5.5-7*/
+    }
+}
+
+.form-control.search {
+    margin-top: 22px;
+}
+
+.stripe {
+
+    background-color: #F3F3F3;
+
+    &.odd {
+        background-color: #EBEBEB;
+
+    }
+}
+
+.catalog {
+    font-family: "Lato", sans-serif;
+
+    .catalogSquares {
+
+        h2:first-child {
+            margin-top: 0px;
+        }
+
+        h2 {
+            font-size: 40px;
+            font-weight: 300;
+            color: #666;
+            font-family: "Lato", sans-serif;
+            margin-bottom: 10px;
+            margin-left: 5px;
+
+            small {
+                font-size: 16px;
+                color: #157AB5;
+                margin-left: 10px;
+            }
+        }
+
+        .datasets {
+
+            padding: 0 30px;
+
+            ul {
+                list-style: none;
+                padding: 0;
+
+                li {
+                    line-height: 1.3em;
+                    padding: 1px 10px;
+                    float: left;
+                }
+
+            }
+
+            .description .title {
+                margin-top: 0;
+                font-family: "Lato", sans-serif;
+                margin-bottom: 3px;
+            }
+        }
+
+        .datachannel {
+            overflow: auto;
+            margin: 0;
+            padding: 10px 0;
+            width: 100%;
+
+            .dataobjectsSliderRow {
+                width: 100%;
+                height: 100%;
+                float: left;
+                padding: 0;
+                margin: 0;
+
+                > div, .dataset, .dataobjectsSlider {
+                    width: 100%;
+                    height: 100%;
+                    float: left;
+                    padding: 0;
+                    margin: 0;
+                }
+                .dataobjectsSlider .carousel .item .object {
+                    border-bottom: none;
+
+                    &:last-child {
+                        border-right: none;
+                        border-left: 1px solid #DDDDDD;
+                    }
+                }
+            }
+        }
+
+        .catalogSlice {
+            padding: 0 20px;
+            list-style-type: none;
+
+            li.square {
+                padding-top: 10px;
+                padding-bottom: 10px;
+
+                a {
+                    padding: 15px;
+                    background-color: #fff;
+                    padding-bottom: 10px;
+                    border: 1px solid #AAA;
+                    display: block;
+                    float: left;
+                    height: 190px;
+                    position: relative;
+
+                    > .title, > .desc, > .count {
+                        font-size: 12px;
+                        font-weight: 400;
+                        color: #2f2f2f;
+                        display: inline-block;
+                        line-height: 1.2em;
+                    }
+
+                    > .title {
+                        font-size: 15px;
+                        font-weight: 600;
+                        display: inline-block;
+                        padding-bottom: 6px;
+                        color: #0783b8;
+                    }
+
+                    > .desc {
+                        padding-bottom: 40px;
+                    }
+
+                    > .count {
+                        position: absolute;
+                        right: 10px;
+                        bottom: 10px;
+                        font-size: 14px;
+                        font-weight: 600;
+                        padding: 6px 8px;
+                        float: right;
+                        background-color: #CCC;
+                        color: #fff;
+                    }
+
+                    &:hover {
+                        background-color: #0897d4;
+
+                        > .title, > .desc {
+                            color: #fff;
+                        }
+
+                        > .count {
+                            background-color: #EEE;
+                            color: #666;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .objectRender {
+        .attachment {
+            padding-right: 5px;
+        }
+    }
+}
+

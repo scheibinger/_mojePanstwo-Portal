@@ -1,0 +1,191 @@
+@import "variable";
+@import "statusbar-submenu.less";
+
+.msg {
+    text-align: center;
+    font-weight: 300;
+    color: #EEE;
+}
+
+#_mojePanstwoCockpit {
+    ._mojePanstwoCockpitContent {
+        width: 100%;
+    }
+}
+
+#_wrapper {
+    .standardGradient();
+
+    #home {
+        font-family: "Lato", sans-serif;
+        color: #ffffff;
+
+        .header h2 {
+            float: left;
+            font-size: 20px;
+            font-weight: 300;
+            letter-spacing: 0.05em;
+            line-height: 1.3em;
+            text-align: center;
+            margin: 3em 0;
+            color: #F3F3F3;
+            padding: 0 20px;
+
+            strong {
+                font-weight: 700;
+            }
+            span {
+                font-weight: 300;
+            }
+
+            a.learnMore {
+                color: #ffffff;
+                font-size: 18px;
+                font-weight: 400;
+            }
+        }
+
+        .globalSearch {
+            @searchBackground: #026899;
+            @searchHeight: 44px;
+
+            font-weight: 400;
+            font-size: 18px;
+            margin-bottom: 1em;
+
+            .input-group {
+                width: 100%;
+
+                .form-control,
+                .input-group-btn button {
+                    height: @searchHeight;
+                    color: #FFF !important;
+                    font-size: 16px;
+
+                }
+                .form-control {
+                    @iconColor: #026c99;
+                    @iconColorShadow: #025A80;
+                    @iconColorBorder: lighten(@iconColor, 1%);
+
+                    border: 1px solid #02709E;
+                    background-color: @searchBackground;
+                    padding-right: @searchHeight;
+                    width: 100%;
+                    -moz-border-radius: 20px; /*Firefox*/
+                    -webkit-border-radius: 20px; /*Safari, Chrome*/
+                    border-radius: 20px;
+                    font-size: 16px;
+
+                }
+
+                .form-control::-webkit-input-placeholder {
+                    /* WebKit browsers */
+                    color: #BBB;
+                }
+                .form-control:-moz-placeholder {
+                    /* Mozilla Firefox 4 to 18 */
+                    color: #BBB;
+                }
+                .form-control::-moz-placeholder {
+                    /* Mozilla Firefox 19+ */
+                    color: #BBB;
+                }
+                .form-control:-ms-input-placeholder {
+                    /* Internet Explorer 10+ */
+                    color: #BBB;
+                }
+
+                .input-group-btn {
+                    position: inherit;
+
+                    button {
+                        position: absolute;
+                        top: 0;
+                        right: 2px;
+                        background: none;
+                        border-width: 0;
+                        width: @searchHeight;
+                        text-align: center;
+                        color: #BBB;
+                    }
+                }
+            }
+        }
+
+        .apps ul {
+            margin: 4em 0 0;
+            padding: 0;
+            list-style: none;
+
+            li {
+                margin-bottom: 5em;
+                height: 145px;
+
+                .appContruct {
+                    &.appFolder {
+                        position: relative;
+                        cursor: pointer;
+                    }
+
+                    @iconSize: 90px;
+                    @iconColor: #026c99;
+
+                    width: 100%;
+                    display: block;
+                    text-align: center;
+                    color: #ffffff;
+
+                    &:hover {
+                        .appIcon {
+                            @iconColorShadow: darken(@iconColor, 10%);
+                            -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=10, Direction=90, Color=@iconColorShadow)"; /*IE 8*/
+                            -moz-box-shadow: 0px 0px 10px @iconColorShadow; /*FF 3.5+*/
+                            -webkit-box-shadow: 0px 0px 10px @iconColorShadow; /*Saf3-4, Chrome, iOS 4.0.2-4.2, Android 2.3+*/
+                            box-shadow: 0px 0px 10px @iconColorShadow; /* FF3.5+, Opera 9+, Saf1+, Chrome, IE10 */
+                            filter: progid:DXImageTransform.Microsoft.Shadow(Strength=10, Direction=90, Color=@iconColorShadow); /*IE 5.5-7*/
+                        }
+                    }
+
+                    .appIcon {
+                        @iconColor: #026c99;
+                        @iconColorBorder: lighten(@iconColor, 1%);
+                        @iconColorShadow: darken(@iconColor, 5%);
+
+                        width: @iconSize;
+                        height: @iconSize;
+                        margin: 0 auto;
+                        background-color: @iconColor;
+                        border: 1px solid @iconColorBorder;
+                        -moz-border-radius: 50px; /*Firefox*/
+                        -webkit-border-radius: 50px; /*Safari, Chrome*/
+                        border-radius: 50px;
+                        -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=5, Direction=90, Color=@iconColorShadow)"; /*IE 8*/
+                        -moz-box-shadow: 0px 0px 5px @iconColorShadow; /*FF 3.5+*/
+                        -webkit-box-shadow: 0px 0px 5px @iconColorShadow; /*Saf3-4, Chrome, iOS 4.0.2-4.2, Android 2.3+*/
+                        box-shadow: 0px 0px 5px @iconColorShadow; /* FF3.5+, Opera 9+, Saf1+, Chrome, IE10 */
+                        filter: progid:DXImageTransform.Microsoft.Shadow(Strength=5, Direction=90, Color=@iconColorShadow); /*IE 5.5-7*/
+
+                        .innerIcon {
+                            width: @iconSize;
+                            height: @iconSize;
+                            display: table-cell;
+                            vertical-align: middle;
+                        }
+
+                    }
+
+                    .appName {
+                        margin-top: 20px;
+                        font-size: 16px;
+                        font-weight: 400;
+                        line-height: 1em;
+                        text-align: center;
+                        color: #ffffff;
+                    }
+                }
+
+            }
+        }
+    }
+}

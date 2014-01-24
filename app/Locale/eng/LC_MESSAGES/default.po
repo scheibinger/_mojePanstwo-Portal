@@ -1,0 +1,20 @@
+msgid "LC_MAINHEADER_TEXT"
+msgstr "<b>_moje</b>Państwo <span>to zestaw aplikacji, dzięki którym możesz kontrolować i wpływać na działania Twojego państwa.</span>"
+
+msgid "LC_MAINHEADER_GUIDE"
+msgstr "More&nbsp;&raquo;"
+
+msgid "LC_SEARCH_PUBLIC_DATA_PLACEHOLDER"
+msgstr "Search in public data..."
+
+msgid "LC_FOOTER_COPYRIGHTS"
+msgstr "Some rights reserved"
+
+msgid "LC_FOOTER_EPF"
+msgstr "ePaństwo Fundation"
+
+msgid "LC_SEARCH"
+msgstr "Search"
+
+msgid "LC_SEARCH_DOTS"
+msgstr "Search..."

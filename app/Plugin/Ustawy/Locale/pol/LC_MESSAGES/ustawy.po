@@ -1,0 +1,29 @@
+msgid "LC_USTAWY_HEADLINE"
+msgstr "Aktualne treści <b>ustaw</b> obowiązujących w Polsce"
+
+msgid "LC_USTAWY_SZUKAJ"
+msgstr "Szukaj..."
+
+msgid "LC_USTAWY_SZUKAJ_ORGANIZACJI"
+msgstr "Szukaj ustawy..."
+
+msgid "LC_USTAWY_USTAWA"
+msgstr "Ustawa"
+
+msgid "LC_USTAWY_WIECEJ_WYNIKOW"
+msgstr "Więcej wyników"
+
+msgid "LC_USTAWY_WIECEJ_KONSTYTUCJA"
+msgstr "Konstytucja"
+
+msgid "LC_USTAWY_WIECEJ_USTROJOWE"
+msgstr "Ustrojowe"
+
+msgid "LC_USTAWY_WIECEJ_KODEKSY"
+msgstr "Kodeksy"
+
+msgid "LC_USTAWY_WIECEJ_PODATKOWE"
+msgstr "Podatkowe"
+
+msgid "LC_USTAWY_WIECEJ_RATYFIKACJE"
+msgstr "Ratyfikacje umów"

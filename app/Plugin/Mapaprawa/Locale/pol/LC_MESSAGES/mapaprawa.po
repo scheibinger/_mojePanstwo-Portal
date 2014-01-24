@@ -1,0 +1,26 @@
+msgid "LC_MAPAPRAWA_STATUSETAPU"
+msgstr "Co się wydarzyło?"
+
+msgid "LC_MAPAPRAWA_DOKUMENTACJA"
+msgstr "Dokumentacja"
+
+msgid "LC_MAPAPRAWA_PROJEKT_USTAWY"
+msgstr "Projekt ustawy"
+
+msgid "LC_MAPAPRAWA_DZIALAJ"
+msgstr "Działaj"
+
+msgid "LC_MAPAPRAWA_PROJEKT_OCOCHODZI"
+msgstr "O co chodzi w tym projekcie ustawy?"
+
+msgid "LC_MAPAPRAWA_AUTOR"
+msgstr "Autor"
+
+msgid "LC_MAPAPRAWA_LUDZIE"
+msgstr "Ludzie"
+
+msgid "LC_MAPAPRAWA_OPINIE"
+msgstr "Opinie"
+
+msgid "LC_MAPAPRAWA_STATYSTYKI"
+msgstr "Statystyki"

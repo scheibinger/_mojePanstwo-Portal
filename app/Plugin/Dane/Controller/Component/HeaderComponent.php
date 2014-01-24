@@ -1,0 +1,7 @@
+<?
+
+class HeaderComponent extends Component
+{
+
+
+}

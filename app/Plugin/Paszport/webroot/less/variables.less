@@ -1,0 +1,54 @@
+@import "../../../../webroot/less/variable";
+
+@white: #ffffff;
+@darkerBlue: #004367;
+@darkBlue: #008bd2;
+@lightBlue: #009fe3;
+@lighterBlue: #b8e4f2;
+@lightGray: #a8a8a8;
+@gray: #999999;
+@darkGray: #343434;
+@almostBlack: #424953;
+
+/* Montserrat: 400, 700 */
+.customFont(@font, @fontSize, @fontWeight: 400) {
+    font-family: @font, Arial, sans-serif;
+    font-weight: @fontWeight;
+    font-size: @fontSize;
+    text-rendering: geometricPrecision;
+}
+
+.border-radius (@radius: 5px) {
+    border-radius: @radius;
+    -moz-border-radius: @radius;
+    -webkit-border-radius: @radius;
+}
+
+.gradient(@start, @end) {
+    background: @start;
+    background: -moz-linear-gradient(top,  @start 0%, @end 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,@start), color-stop(100%,@end));
+    background: -webkit-linear-gradient(top,  @start 0%,@end 100%);
+    background: -o-linear-gradient(top,  @start 0%,@end 100%);
+    background: -ms-linear-gradient(top,  @start 0%,@end 100%);
+    background: linear-gradient(to bottom,  @start 0%,@end 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=@start, endColorstr=@end, GradientType=0);
+}
+
+.opacity(@transparent) {
+    opacity: @transparent;
+    -moz-opacity: @transparent;
+    filter: Alpha(Opacity='@transparent * 100');
+}
+
+.icon-inside(@content) {
+    font-family: 'paszport';
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    content: @content;
+}

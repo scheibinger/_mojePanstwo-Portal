@@ -1,0 +1,12 @@
+.left-panel {
+    margin: 20px 0px 10px 0px;
+}
+
+.right-panel {
+    margin: 20px 0px 0px 0px;
+}
+
+.objectsPage .dataobjectsSlider .carousel .item .object {
+    width: 33.3333%;
+    border-bottom: none !important;
+}

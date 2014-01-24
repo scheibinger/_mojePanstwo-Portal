@@ -1,0 +1,276 @@
+/* VARIABLE */
+@headerHeight: 40px;
+@footerHeight: 40px;
+
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+    color: #555;
+    font-weight: 400;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    z-index: 9999;
+}
+
+a, a:hover, a:focus {
+    text-decoration: none;
+    outline: none;
+}
+
+a {
+    color: #157AB5;
+}
+
+.main_description {
+    font-size: 14px;
+    padding: 20px;
+    margin-bottom: -30px;
+    color: #666;
+}
+
+.separator {
+    color: #DDD;
+    padding: 0 5px;
+}
+
+.block {
+    padding: 10px 20px;
+
+    h2 {
+        font-weight: 300;
+    }
+
+    h3 {
+        font-weight: 300;
+
+        .label {
+            font-weight: bold;
+            font-size: 11 daapx;
+            line-height: 1;
+            position: relative;
+            top: -3px;
+
+            &.label-default {
+                background-color: #AAA;
+            }
+        }
+    }
+
+    .subtitle {
+        color: #777;
+    }
+}
+
+.list-group.less-borders {
+    margin-bottom: 0;
+}
+
+.list-group.less-borders .list-group-item {
+    border: none;
+    border-top: 1px solid #DDDDDD;
+
+    &:first-child {
+        border-top: none;
+    }
+
+    .list-group-item-heading {
+        .wiek {
+            font-size: 12px;
+            color: #666;
+        }
+    }
+}
+
+.list-group.less-borders a.list-group-item {
+    .list-group-item-heading {
+        color: #157AB5;
+    }
+}
+
+.badge {
+    &.badge-data {
+        background-color: #AAA;
+    }
+    &.badge-active {
+        background-color: #5CB85C;
+    }
+}
+
+.col-lg-1.half {
+    width: 4.1666666%;
+}
+
+&.normalizeText {
+    &:first-letter {
+        text-transform: uppercase;
+    }
+    text-transform: lowercase;
+}
+
+.indicators {
+
+    margin: 10px 0;
+
+    .indicator {
+
+        text-align: center;
+
+        ._value {
+            font-size: 20px;
+            font-weight: 200;
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            margin-bottom: 0;
+        }
+        ._label {
+            font-weight: 600;
+            font-size: 13px;
+            color: #777;
+        }
+    }
+}
+
+.form-control::-moz-placeholder {
+    color: #444;
+}
+
+.form-control::-webkit-placeholder {
+    color: #444;
+}
+
+.form-control::-placeholder {
+    color: #444;
+}
+
+blockquote p {
+    letter-spacing: 0.03em;
+    line-height: 1.4;
+}
+
+.overflow-auto {
+    overflow: auto;
+}
+
+/* FONTS */
+@font-face {
+    font-family: 'mojePanstwo';
+    src: url('../fonts/mojePanstwo.eot');
+    src: url('../fonts/mojePanstwo.eot?#iefix') format('embedded-opentype'), url('../fonts/mojePanstwo.ttf') format('truetype'), url('../fonts/mojePanstwo.woff') format('woff'), url('../fonts/mojePanstwo.svg#mojePanstwo') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* ICONS */
+[data-icon]:before {
+    font-family: 'mojePanstwo';
+    content: attr(data-icon);
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+[data-icon-after]:after {
+    font-family: 'mojePanstwo';
+    content: attr(data-icon-after);
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* GLOBAL DECLARATION */
+* {
+    margin: 0;
+}
+
+.alert {
+    font-family: "Lato", sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    text-align: center;
+    padding: 5px 0;
+
+    border-width: 0;
+    -moz-border-radius: 0px; /*Firefox*/
+    -webkit-border-radius: 0px; /*Safari, Chrome*/
+    border-radius: 0px;
+
+}
+
+html,
+body {
+    height: 100%;
+}
+
+/* GLOBAL HELPER CLASS */
+._fullwidth {
+    width: 100%;
+}
+
+/* FIRST STRUCTURE SETUP */
+#_wrapper {
+    position: relative;
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    margin-bottom: -@footerHeight; /* the bottom margin is the negative value of the footer's height */
+    padding-top: 40px;
+    background-color: #EEE;
+
+    &.white {
+        background-color: #FFF;
+    }
+
+    &.grey {
+        background-color: #EEE;
+    }
+
+    header {
+        width: 100%;
+        height: @headerHeight;
+    }
+
+    #_sizeControl {
+        height: @footerHeight;
+    }
+
+    #_main {
+        width: 100%;
+        height: 100%;
+    }
+}
+
+footer {
+    @footerColor: #999;
+
+    font-family: "Lato", sans-serif;
+    font-weight: 300;
+    font-size: 11px;
+    line-height: 16px;
+    color: @footerColor;
+    position: relative;
+    width: 100%;
+    height: @footerHeight;
+    padding: (@footerHeight/2)-6 0;
+    background-color: #222222;
+
+    .pull-left {
+        text-align: left;
+    }
+    .pull-right {
+        text-align: right;
+
+        a {
+            color: @footerColor;
+        }
+    }
+}

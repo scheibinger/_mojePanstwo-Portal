@@ -1,0 +1,56 @@
+msgid "LC_MAINHEADER_TEXT"
+msgstr "<b>_moje</b>Państwo <span>to zestaw aplikacji, dzięki którym możesz kontrolować i wpływać na działania Twojego państwa.</span>"
+
+msgid "LC_MAINHEADER_GUIDE"
+msgstr "Więcej&nbsp;&raquo;"
+
+msgid "LC_SEARCH_PUBLIC_DATA_PLACEHOLDER"
+msgstr "Szukaj w danych publicznych..."
+
+msgid "LC_FOOTER_COPYRIGHTS"
+msgstr "Niektóre prawa zastrzeżone"
+
+msgid "LC_FOOTER_EPF"
+msgstr "Fundacja ePaństwo"
+
+msgid "LC_SEARCH"
+msgstr "Szukaj"
+
+msgid "LC_SEARCH_DOTS"
+msgstr "Szukaj..."
+
+msgid "Jan"
+msgstr "Sty"
+
+msgid "Feb"
+msgstr "Lut"
+
+msgid "Mar"
+msgstr "Mar"
+
+msgid "Apr"
+msgstr "Kwi"
+
+msgid "May"
+msgstr "Maj"
+
+msgid "Jun"
+msgstr "Cze"
+
+msgid "Jul"
+msgstr "Lip"
+
+msgid "Aug"
+msgstr "Sie"
+
+msgid "Sep"
+msgstr "Wrz"
+
+msgid "Oct"
+msgstr "Paź"
+
+msgid "Nov"
+msgstr "Lis"
+
+msgid "Dec"
+msgstr "Gru"

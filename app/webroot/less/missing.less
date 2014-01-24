@@ -1,0 +1,58 @@
+.container {
+    .mathFunction {
+        font-weight: 700;
+        margin: 5em 0 1em;
+        float: left;
+
+        .result {
+            font-size: 40px;
+
+            span {
+                float: left;
+                line-height: 8em;
+                margin-left: 50px;
+                margin-right: 0.5em;
+            }
+
+            strong {
+                color: #009DE0;
+                font-size: 4.5em;
+                float: left;
+            }
+        }
+    }
+
+    .information {
+        text-align: center;
+        font-variant: small-caps;
+        margin-top: 15em;
+
+        h2 {
+            font-family: "Lato", sans-serif;
+            font-size: 34px;
+            font-weight: 700;
+            text-transform: uppercase;
+            padding-bottom: 10px;
+            border-bottom: 15px solid #d3d3d3;
+        }
+
+        h4 {
+            font-family: "Lato", sans-serif;
+            font-size: 20px;
+            font-weight: 400;
+        }
+        a {
+            font-family: "Lato", sans-serif;
+            font-size: 16px;
+            font-weight: 400;
+            text-transform: uppercase;
+        }
+    }
+}
+
+@media (max-width: 991px) {
+    .container .mathFunction .result strong {
+        text-align: center;
+        width: 100%;
+    }
+}

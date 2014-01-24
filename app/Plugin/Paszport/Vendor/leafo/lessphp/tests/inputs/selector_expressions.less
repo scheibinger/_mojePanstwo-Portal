@@ -1,0 +1,34 @@
+@color: blue;
+
+(~"something @{color}"), world {
+    color: blue;
+}
+
+.div {
+    @color: red;(3434) {
+height: 100 px;
+}
+
+    (~"cool @{color}") {
+        height: 4000px;
+    }
+
+}
+
+.heck(@a) {
+    color: @a+10
+}
+
+.spanX (@index) when (@index > 0) {
+    (~".span@{index}") {
+        .heck(@index)
+    }
+    .spanX(@index - 1);
+}
+
+.spanX (0) {
+}
+
+.spanX (5);
+
+
