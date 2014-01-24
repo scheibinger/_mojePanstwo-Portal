@@ -112,7 +112,6 @@ before_script:
     }" > app/Config/database.php
     - cp app/Config/constants.php.default app/Config/constants.php
     - cp app/Config/core.php.default app/Config/core.php
-    - cp app/Config/database.php.default app/Config/database.php
 
 script:
   - sh -c "if [ '$PHPCS' = '1' ]; then phpcs -p --extensions=php --standard=CakePHP ./lib/Cake; elif [ '$DB' = 'mysql' ]; then ./lib/Cake/Console/cake test core AllTests --stderr; else ./lib/Cake/Console/cake test core AllDbRelated --stderr; fi"
