@@ -40,12 +40,10 @@
         <? } else { ?>
             <div id="shortcuts">
                 <ul>
-                    <li><a href="?q=konstytucja"><?php echo __d('ustawy', 'LC_USTAWY_WIECEJ_KONSTYTUCJA'); ?></a></li>
-                    <li><a href="?q=ustrojowe"><?php echo __d('ustawy', 'LC_USTAWY_WIECEJ_USTROJOWE'); ?></a></li>
-                    <li><a href="?q=kodeksy"><?php echo __d('ustawy', 'LC_USTAWY_WIECEJ_KODEKSY'); ?></a></li>
-                    <li><a href="?q=podatkowe"><?php echo __d('ustawy', 'LC_USTAWY_WIECEJ_PODATKOWE'); ?></a></li>
-                    <li><a href="?q=ratyfikacje+umów"><?php echo __d('ustawy', 'LC_USTAWY_WIECEJ_RATYFIKACJE'); ?></a>
-                    </li>
+                    <li><a href="dane/ustawy?typ_id[]=3" target="_self"><?php echo __d('ustawy', 'LC_USTAWY_WIECEJ_KODEKSY'); ?></a></li>
+                    <li><a href="dane/ustawy?typ_id[]=2" target="_self"><?php echo __d('ustawy', 'LC_USTAWY_WIECEJ_KONSTYTUCJE'); ?></a></li>
+                    <li><a href="dane/ustawy?typ_id[]=4" target="_self"><?php echo __d('ustawy', 'LC_USTAWY_WIECEJ_RATYFIKACJE'); ?></a>
+                    <li><a href="dane/ustawy?typ_id[]=1" target="_self"><?php echo __d('ustawy', 'LC_USTAWY_WIECEJ_POZOSTALE'); ?></a></li>
                 </ul>
             </div>
         <? } ?>

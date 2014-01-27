@@ -13,17 +13,14 @@ msgstr "Ustawa"
 msgid "LC_USTAWY_WIECEJ_WYNIKOW"
 msgstr "Więcej wyników"
 
-msgid "LC_USTAWY_WIECEJ_KONSTYTUCJA"
-msgstr "Konstytucja"
+msgid "LC_USTAWY_WIECEJ_KONSTYTUCJE"
+msgstr "Konstytucje"
 
-msgid "LC_USTAWY_WIECEJ_USTROJOWE"
+msgid "LC_USTAWY_WIECEJ_POZOSTALE"
 msgstr "Ustrojowe"
 
 msgid "LC_USTAWY_WIECEJ_KODEKSY"
 msgstr "Kodeksy"
-
-msgid "LC_USTAWY_WIECEJ_PODATKOWE"
-msgstr "Podatkowe"
 
 msgid "LC_USTAWY_WIECEJ_RATYFIKACJE"
 msgstr "Ratyfikacje umów"
