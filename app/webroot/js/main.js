@@ -188,4 +188,7 @@ jQuery(function () {
         jQuery.removeCookie('_mPViewportReload');
     }
 
+    /*JS SHORTER TITLE FUNCTION*/
+    if (jQuery('.trimTitle').length > 0)
+        trimTitle();
 });

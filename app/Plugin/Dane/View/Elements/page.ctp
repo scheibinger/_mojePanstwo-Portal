@@ -39,11 +39,11 @@ if (in_array($object->getDataset(), array('rady_posiedzenia', 'rady_gmin_debaty'
                         <? if ($object->getShortTitle()) { ?>
                             <h1 class="title trimTitle" title="<?= htmlspecialchars($object->getShortTitle()) ?>"
                                 data-trimlength="15">
-                                <?php if ($object->getUrl() != false) { ?>
+                                <?php if (($object->getUrl() != false) && !empty($this->request)) { ?>
                                 <a href="<?= $object->getUrl() ?>" title="<?= strip_tags($object->getTitle()) ?>">
                                     <?php } ?>
                                     <?= $object->getShortTitle() ?>
-                                    <?php if ($object->getUrl() != false) { ?>
+                                    <?php if (($object->getUrl() != false) && !empty($this->request)) { ?>
                                 </a>
                             <?php } ?>
                             </h1>

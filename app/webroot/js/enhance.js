@@ -34,28 +34,39 @@ function imgFixer(img) {
 
     return true;
 }
-/**/
+/*FUNCTION CUT TITLE TO SHORTER FORM WITH OPTION OF EXPANDING IT*/
 trimTitle = function () {
     jQuery('.trimTitle').each(function () {
         var that = jQuery(this),
-            body = that.html(),
+            body = jQuery.trim(that.text()),
             title = (that.attr('title') != undefined && that.attr('title') != '') ? that.attr('title') : ((that.data('trimtitle') != undefined && that.data('trimtitle') != '') ? that.data('trimtitle') : false),
-            trimLength = that.data('trimlength');
+            trimLength = ((that.data('trimlength') != undefined) ? that.data('trimlength') : 150);
 
         if (title != false && trimLength != undefined) {
             if (body.length > trimLength + 20) {
                 var splitLocation = body.indexOf(' ', trimLength),
-                    shortTitle = false;
+                    shortTitle = false,
+                    hyperlink = (that.children().length > 0);
 
                 if (splitLocation != -1) {
                     splitLocation = body.indexOf(' ', trimLength);
                     shortTitle = body.substring(0, splitLocation);
-                    that.html(shortTitle + '...');
                     that.data('trimtitle', title);
 
-                    that.click(function () {
-                        jQuery(this).html(jQuery(this).data('trimtitle'));
-                    });
+                    if (hyperlink == true) { /*TARGET IS HYPERLINK*/
+                        that.find('a').html(shortTitle).after('<span class="trimTitleTrigger">...</span>');
+
+                        that.find('.trimTitleTrigger').click(function () {
+                            that.find('a').html(that.data('trimtitle'));
+                            jQuery('.trimTitleTrigger').remove();
+                        });
+                    } else { /*TARGET IS NORMAL TEXT */
+                        that.html(shortTitle + '<span class="trimTitleTrigger">...</span>');
+
+                        that.click(function () {
+                            that.html(jQuery(this).data('trimtitle'));
+                        });
+                    }
                 }
             }
         }

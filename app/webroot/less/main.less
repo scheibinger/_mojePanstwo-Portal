@@ -1,6 +1,7 @@
 /* VARIABLE */
 @headerHeight: 40px;
 @footerHeight: 40px;
+@linkColor: #157AB5;
 
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
     color: #555;
@@ -19,7 +20,7 @@ a, a:hover, a:focus {
 }
 
 a {
-    color: #157AB5;
+    color: @linkColor;
 }
 
 .main_description {
@@ -84,7 +85,7 @@ a {
 
 .list-group.less-borders a.list-group-item {
     .list-group-item-heading {
-        color: #157AB5;
+        color: @linkColor;
     }
 }
 
@@ -209,6 +210,11 @@ blockquote p {
 html,
 body {
     height: 100%;
+}
+
+.trimTitle {
+    cursor: pointer;
+    color: @linkColor;
 }
 
 /* GLOBAL HELPER CLASS */
