@@ -117,7 +117,7 @@ var DataObjectesAjax = {
         sorting.find('.sortingName').addClass('hidden');
 
         /*CREATE DROPDOWN MENU STRUCTURE*/
-        var sortingChoosed = (sorting.find('#DatasetSort option:selected').length > 0) ? sorting.find('#DatasetSort option:selected').text() : sorting.find('#DatasetSort option:first').text();
+        var sortingChoosed = (sorting.find('#DatasetSort option:selected').length > 0) ? sorting.find('#DatasetSort option:selected').attr('title') : sorting.find('#DatasetSort option:first').attr('title');
         sorting.find('#DatasetSort').before(
                 jQuery('<div></div>').addClass('sortingGroup btn-group pull-right').append(
                         jQuery('<button></button>').addClass('DatasetSort btn btn-default btn-sm').attr({'data-toggle': 'dropdown', 'type': 'button'}).text(sortingChoosed)
@@ -128,9 +128,29 @@ var DataObjectesAjax = {
                     ).append(function () {
                         var ul = jQuery('<ul></ul>').addClass('dropdown-menu').attr('role', 'menu');
 
-                        jQuery.each(sorting.find('#DatasetSort option'), function () {
-                            if (jQuery(this).val() != '')
-                                ul.append(jQuery('<li></li>').append(jQuery('<a></a>').attr({'href': '#', 'value': jQuery(this).val()}).text(jQuery(this).text())));
+                        jQuery.each(sorting.find('#DatasetSort optgroup'), function () {
+                            var grp = jQuery(this);
+                            if (grp.data('special') == 'result') {
+                                ul.append(
+                                    jQuery('<li></li>').addClass('special result').append(function () {
+                                        var that = jQuery(this);
+                                        jQuery.each(grp.find('option'), function () {
+                                            that.append(jQuery('<a></a>').attr({'href': '#', 'title': jQuery.trim(jQuery(this).text()), 'value': jQuery(this).val()}).text(jQuery.trim(jQuery(this).text())))
+                                        });
+                                    })
+                                )
+                            } else {
+                                ul.append(jQuery('<li></li>').append(
+                                        jQuery('<label></label>').text(grp.attr('label'))
+                                    ).append(function () {
+                                        var span = jQuery('<span></span>');
+                                        jQuery.each(grp.find('option'), function () {
+                                            span.append(jQuery('<a></a>').attr({'href': '#', 'title': grp.attr('label') + ' (' + jQuery.trim(jQuery(this).text()) + ')', 'value': jQuery(this).val()}).text(jQuery.trim(jQuery(this).text())));
+                                        });
+                                        jQuery(this).append(span);
+                                    })
+                                )
+                            }
                         });
                         jQuery(this).append(ul);
 
@@ -143,7 +163,7 @@ var DataObjectesAjax = {
             var sortingDirection = sorting.find('.DatasetSort');
             event.preventDefault();
 
-            sortingDirection.data('sort', jQuery(this).attr('value')).text(jQuery(this).text());
+            sortingDirection.data('sort', jQuery(this).attr('value')).text(jQuery(this).attr('title'));
 
             DataObjectesAjax.sortingReload();
         });
@@ -151,15 +171,21 @@ var DataObjectesAjax = {
     /*ADDING/REMOVING NEW OPTION NORMALY ADDED AT GENERATING PAGE*/
     sortingAddRemoveOptions: function () {
         var filtersInputQ = jQuery('#filters').find('input[name="q"]'),
-            ul = jQuery('.dataSortings .sortingGroup > ul');
+            sortingGroup = jQuery('.dataSortings .sortingGroup'),
+            sortingName = sortingGroup.find('.DatasetSort'),
+            sortingList = sortingGroup.find('ul.dropdown-menu');
 
         /*WHEN "LOOKING PHRASE" EXIST - WE ADD NEW OPTIONS AT SORTING...*/
-        if (((filtersInputQ.length > 0) && (filtersInputQ.val() != '')) && (ul.find('a[value="score desc"]').length == 0))
-            ul.prepend(jQuery('<li></li>').append(jQuery('<a></a>').attr({'href': '#', 'value': 'score desc'}).text(_mPHeart.translation.LC_DANE_SORTOWANIE_TRAFNOSC)));
+        if (((filtersInputQ.length > 0) && (filtersInputQ.val() != '')) && (sortingList.find('a[value="score desc"]').length == 0)) {
+            sortingList.prepend(jQuery('<li></li>').addClass('special result').append(jQuery('<a></a>').attr({'href': '#', 'title': _mPHeart.translation.LC_DANE_SORTOWANIE_TRAFNOSC, 'value': 'score desc'}).text(_mPHeart.translation.LC_DANE_SORTOWANIE_TRAFNOSC)));
+            sortingName.text(_mPHeart.translation.LC_DANE_SORTOWANIE_TRAFNOSC);
+        }
 
         /*... AND WHEN "LOOKING PHRASE" NOT EXIST - WE REMOVE IT*/
-        if (((filtersInputQ.length == 0) || (filtersInputQ.val() == '')) && (ul.find('a[value="score desc"]').length != 0))
-            ul.find('a[value="score desc"]').parent().remove();
+        if (((filtersInputQ.length == 0) || (filtersInputQ.val() == '')) && (sortingList.find('a[value="score desc"]').length != 0)) {
+            sortingList.find('li.special.result').remove();
+            sortingName.text(sortingList.find('a:first').attr('title'));
+        }
     },
     /*FUNCTION RUN CHAGE PAGE BY AJAX*/
     pageChange: function () {
@@ -266,6 +292,7 @@ var DataObjectesAjax = {
                     DataObjectesAjax.removeHiddenInput();
                     DataObjectesAjax.buttonSearchWithoutPhrase();
 
+                    DataObjectesAjax.sortingAddRemoveOptions();
                     DataObjectesAjax.specialCase();
                 });
 

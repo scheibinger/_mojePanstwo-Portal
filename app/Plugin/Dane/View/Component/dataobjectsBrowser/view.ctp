@@ -81,18 +81,22 @@ if ($__mode == 'object')
                             foreach ($orders as $order) {
                                 if ($order['sorting']['field'] == 'score') {
                                     ?>
-                                    <option<? if (isset($order['selected_direction'])) { ?> selected="selected"<? } ?>
-                                        value="<?= $order['sorting']['field'] ?> desc"><?= $order['sorting']['label'] ?>
-                                    </option>
+                                    <optgroup data-special="result">
+                                        <option<? if (isset($order['selected_direction'])) { ?> selected="selected"<? } ?>
+                                            value="<?= $order['sorting']['field'] ?> desc" title="<?= $order['sorting']['label'] ?>"><?= $order['sorting']['label'] ?>
+                                        </option>
+                                    </optgroup>
                                 <?
                                 } else {
                                     ?>
-                                    <option<? if (isset($order['selected_direction']) && $order['selected_direction'] == 'desc') { ?> selected="selected"<? } ?>
-                                        value="<?= $order['sorting']['field'] ?> desc"><?= $order['sorting']['label'] . ' (' . __d('dane', 'LC_DANE_SORTOWANIE_MALEJACO') . ')' ?>
-                                    </option>
-                                    <option<? if (isset($order['selected_direction']) && $order['selected_direction'] == 'asc') { ?> selected="selected"<? } ?>
-                                        value="<?= $order['sorting']['field'] ?> asc"><?= $order['sorting']['label'] . ' (' . __d('dane', 'LC_DANE_SORTOWANIE_ROSNACO') . ')' ?>
-                                    </option>
+                                    <optgroup label="<?= $order['sorting']['label'] ?>">
+                                        <option<? if (isset($order['selected_direction']) && $order['selected_direction'] == 'desc') { ?> selected="selected"<? } ?>
+                                            value="<?= $order['sorting']['field'] ?> desc" title="<?= $order['sorting']['label'] . ' (' . __d('dane', 'LC_DANE_SORTOWANIE_MALEJACO') . ')' ?>"><?= __d('dane', 'LC_DANE_SORTOWANIE_MALEJACO') ?>
+                                        </option>
+                                        <option<? if (isset($order['selected_direction']) && $order['selected_direction'] == 'asc') { ?> selected="selected"<? } ?>
+                                            value="<?= $order['sorting']['field'] ?> asc" title="<?= $order['sorting']['label'] . ' (' . __d('dane', 'LC_DANE_SORTOWANIE_ROSNACO') . ')' ?>"><?= __d('dane', 'LC_DANE_SORTOWANIE_ROSNACO') ?>
+                                        </option>
+                                    </optgroup>
                                 <?
                                 }
                             }
