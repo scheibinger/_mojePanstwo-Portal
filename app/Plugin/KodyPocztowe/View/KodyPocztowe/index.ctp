@@ -15,11 +15,17 @@ $this->Combinator->add_libs('css', $this->Less->css('kody_pocztowe', array('plug
                 </div>
                 <div class="row">
                     <form action="/kody_pocztowe" method="get">
-                        <div class="form-group">
-                            <?php echo $this->Form->input('miejscowosc', array('label' => false, 'class' => 'form-control', 'placeholder' => __d('kody_pocztowe', "LC_KODY_POCZTOWE_WPISZ_MIEJSCOWOSC"), 'id' => 'cityv', 'name' => 'mstr', 'value' => $mstr)); ?>
+                        <div class="input-group">
+                            <?php if ($details) {
+                                echo $this->Form->input('miejscowosc', array('label' => false, 'class' => 'form-control', 'placeholder' => __d('kody_pocztowe', "LC_KODY_POCZTOWE_WPISZ_MIEJSCOWOSC"), 'id' => 'cityv', 'name' => 'mstr', 'value' => $mstr));
+                            } else {
+                                echo $this->Form->input('miejscowosc', array('label' => false, 'class' => 'form-control input-lg', 'placeholder' => __d('kody_pocztowe', "LC_KODY_POCZTOWE_WPISZ_MIEJSCOWOSC"), 'id' => 'cityv', 'name' => 'mstr', 'value' => $mstr));
+                            }?>
+                            <span class="input-group-btn">
+                                <button class="btn btn-success<?php if (!$details) echo ' btn-lg' ?>" type="submit"
+                                        data-icon="&#xe600;"></button>
+                            </span>
                         </div>
-                        <input type="submit" id="code" class="btn btn-success"
-                               value="<?php echo __d('kody_pocztowe', "LC_KODY_POCZTOWE_SZUKAJ"); ?>"/>
                     </form>
                 </div>
             </div>
@@ -31,12 +37,17 @@ $this->Combinator->add_libs('css', $this->Less->css('kody_pocztowe', array('plug
                 </div>
                 <div class="row">
                     <form action="/kody_pocztowe" method="get">
-                        <div class="form-group">
-                            <?php echo $this->Form->input('kod', array('label' => false, 'class' => 'form-control', 'placeholder' => __d('kody_pocztowe', "LC_KODY_POCZTOWE_WPISZ_KOD"), 'name' => 'kod', 'value' => $kod)); ?>
-
+                        <div class="input-group">
+                            <?php if ($details) {
+                                echo $this->Form->input('kod', array('label' => false, 'class' => 'form-control', 'placeholder' => __d('kody_pocztowe', "LC_KODY_POCZTOWE_WPISZ_KOD"), 'name' => 'kod', 'value' => $kod));
+                            } else {
+                                echo $this->Form->input('kod', array('label' => false, 'class' => 'form-control input-lg', 'placeholder' => __d('kody_pocztowe', "LC_KODY_POCZTOWE_WPISZ_KOD"), 'name' => 'kod', 'value' => $kod));
+                            } ?>
+                            <span class="input-group-btn">
+                                <button class="btn btn-success<?php if (!$details) echo ' btn-lg' ?>" type="submit"
+                                        data-icon="&#xe600;"></button>
+                            </span>
                         </div>
-                        <input type="submit" id="code" class="btn btn-success"
-                               value="<?php echo __d('kody_pocztowe', "LC_KODY_POCZTOWE_SZUKAJ"); ?>"/>
                     </form>
                 </div>
             </div>
