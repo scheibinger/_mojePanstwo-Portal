@@ -1,17 +1,20 @@
 msgid "LC_KRS_HEADLINE"
 msgstr "Przeglądaj dane o organizacjach zarejestrowanych w Polsce"
 
-msgid "LC_KRS_SUBHEADLINE"
-msgstr "Dla każdej organizacji dostępne są podstawowe dane rejestracyjne, a także skład zarządów, rad nadzorczych i innych ciał danej organizacji"
-
 msgid "LC_KRS_SZUKAJ_ORGANIZACJI"
-msgstr "Szukaj organizacji..."
+msgstr "Szukaj organizacji"
 
-msgid "LC_KRS_SZUKAJ"
-msgstr "Szukaj"
+msgid "LC_KRS_SZUKAJ_ORGANIZACJI_PLACEHOLDER"
+msgstr "Nazwa organizacji..."
 
-msgid "LC_KRS_ORGANIZACJA"
-msgstr "Organizacja"
+msgid "LC_KRS_SZUKAJ_ORGANIZACJI_NO_RESULTS"
+msgstr "Nie odnaleziono wyników dla szukanej organizacji"
 
-msgid "LC_KRS_WIECEJ_WYNIKOW"
-msgstr "Więcej wyników"
+msgid "LC_KRS_SZUKAJ_OSOB"
+msgstr "Szukaj osób"
+
+msgid "LC_KRS_SZUKAJ_OSOB_PLACEHOLDER"
+msgstr "Imię bądź nazwisko..."
+
+msgid "LC_KRS_SZUKAJ_OSOB_NO_RESULTS"
+msgstr "Nie odnaleziono szukanej osoby"

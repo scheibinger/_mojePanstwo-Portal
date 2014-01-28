@@ -9,16 +9,15 @@ class OrganizacjeController extends AppController
 
     public function index()
     {
-
-
-        $q = @$this->params->query['q'];
-        $this->set('q', $q);
+        $org = @$this->params->query['org'];
+        $osb = @$this->params->query['osb'];
+        $this->set('org', $org);
+        $this->set('osb', $osb);
         $results = false;
 
-        if ($q) {
-
+        if ($org) {
             $conditions = array(
-                'q' => $q,
+                'org' => $org,
                 'dataset' => 'krs_podmioty',
             );
 
@@ -28,13 +27,29 @@ class OrganizacjeController extends AppController
                 'limit' => 5,
             ));
 
-            $objects = $searcher->getObjects();
-            if (!empty($objects))
+            $organization = $searcher->getObjects();
+            if (!empty($organization))
                 $results = true;
 
-            $this->set('objects', $objects);
-            $this->set('pagination', $searcher->getPagination());
+            $this->set('organization', $organization);
 
+        }elseif($osb){
+            $conditions = array(
+                'osb' => $osb,
+                'dataset' => 'krs_podmioty',
+            );
+
+            $searcher = $this->API->Dane();
+            $searcher->searchDataset('krs_podmioty', array(
+                'conditions' => $conditions,
+                'limit' => 5,
+            ));
+
+            $osoba = $searcher->getObjects();
+            if (!empty($osoba))
+                $results = true;
+
+            $this->set('osoba', $osoba);
         }
 
         $this->set('results', $results);
