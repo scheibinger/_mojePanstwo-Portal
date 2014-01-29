@@ -269,14 +269,20 @@ footer {
     padding: (@footerHeight/2)-6 0;
     background-color: #222222;
 
+    a {
+        color: @footerColor;
+    }
+
     .pull-left {
         text-align: left;
     }
     .pull-right {
         text-align: right;
+    }
 
-        a {
-            color: @footerColor;
-        }
+    .separator{
+        padding: 0 10px;
+        text-align: center;
+        color: darken(@footerColor, 15%);
     }
 }
