@@ -1,82 +1,113 @@
 #bdl-wskazniki .wskaznik {
-  font-family: "Lato", sans-serif;
-  font-size: 13px;
-  font-weight: 400;
-  padding: 40px 100px;
+    font-family: "Lato", sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    padding: 40px 100px;
 }
+
 #bdl-wskazniki .wskaznik h2 {
-  border: none;
-  font-size: 18px;
-  font-style: 400;
-  margin: 0 0 20px;
-  padding: 0;
+    border: none;
+    font-size: 18px;
+    font-style: 400;
+    margin: 0 0 20px;
+    padding: 0;
 }
-#bdl-wskazniki .wskaznik table {
-  display: block;
-  margin-top: 10px;
-  overflow: hidden;
+
+#bdl-wskazniki .wskaznik .stats {
+    display: block;
+    float: left;
+    width: 100%;
+    margin: 10px;
 }
-#bdl-wskazniki .wskaznik table td {
-  vertical-align: top;
+
+#bdl-wskazniki .wskaznik .stats .map {
+    padding: 10px;
+    width: 178px;
+    height: 165px;
+    float: left;
 }
-#bdl-wskazniki .wskaznik table td.map {
-  padding: 10px;
-  width: 178px;
+
+#bdl-wskazniki .wskaznik .stats .map .imageInside {
+    height: 165px;
+    width: 178px;
 }
-#bdl-wskazniki .wskaznik table td.map .image {
-  height: 165px;
-  width: 178px;
+
+#bdl-wskazniki .wskaznik .stats .charts {
+    margin: 5px;
+    float: right;
 }
-#bdl-wskazniki .wskaznik table td.map .image .imageInside {
-  height: 165px;
-  width: 178px;
+
+#bdl-wskazniki .wskaznik .stats .charts .head {
+    margin-left: 30px;
+    margin-top: 10px;
+    overflow: hidden;
 }
-#bdl-wskazniki .wskaznik table td.charts .index {
-  margin: 5px;
+
+#bdl-wskazniki .wskaznik .stats .charts .head .vp {
+    float: left;
 }
-#bdl-wskazniki .wskaznik table td.charts .index .head {
-  margin-left: 30px;
-  margin-top: 10px;
-  overflow: hidden;
+
+#bdl-wskazniki .wskaznik .stats .charts .head .vp .v {
+    color: #555555;
+    font-size: 18px;
 }
-#bdl-wskazniki .wskaznik table td.charts .index .head .vp {
-  float: left;
+
+#bdl-wskazniki .wskaznik .stats .charts .head .vp .u {
+    color: #666688;
+    font-size: 12px;
+    margin: 0 3px;
 }
-#bdl-wskazniki .wskaznik table td.charts .index .head .vp .v {
-  color: #555555;
-  font-size: 18px;
+
+#bdl-wskazniki .wskaznik .stats .charts .head .vp .y {
+    color: #666666;
+    font-size: 12px;
 }
-#bdl-wskazniki .wskaznik table td.charts .index .head .vp .u {
-  color: #666688;
-  font-size: 12px;
-  margin: 0 3px;
+
+#bdl-wskazniki .wskaznik .stats .charts .head .fp {
+    float: right;
+    margin-right: 75px;
 }
-#bdl-wskazniki .wskaznik table td.charts .index .head .vp .y {
-  color: #666666;
-  font-size: 12px;
+
+#bdl-wskazniki .wskaznik .stats .charts .head .fp .factor {
+    font-size: 14px;
+    margin-right: 5px;
+    float: left;
 }
-#bdl-wskazniki .wskaznik table td.charts .index .head .fp {
-  float: right;
-  margin-right: 75px;
+
+#bdl-wskazniki .wskaznik .stats .charts .head .fp .factor.u {
+    color: #447744;
 }
-#bdl-wskazniki .wskaznik table td.charts .index .head .fp .factor {
-  font-size: 14px;
-  margin-right: 5px;
-  float: left;
+
+#bdl-wskazniki .wskaznik .stats .charts .head .fp .factor.u:before {
+    content: "\2191";
+    padding-right: 5px;
 }
-#bdl-wskazniki .wskaznik table td.charts .index .head .fp .factor.u {
-  color: #447744;
+
+#bdl-wskazniki .wskaznik .stats .charts .head .fp .factor.d {
+    color: #994444;
 }
-#bdl-wskazniki .wskaznik table td.charts .index .head .fp .factor.d {
-  color: #994444;
+
+#bdl-wskazniki .wskaznik .stats .charts .head .fp .factor.d:before {
+    content: "\2193";
+    padding-right: 5px;
 }
-#bdl-wskazniki .wskaznik table td.charts .index .head .fp .i {
-  color: #666666;
-  font-size: 12px;
-  margin: 5px 0;
+
+#bdl-wskazniki .wskaznik .stats .charts .head .fp .i {
+    color: #666666;
+    font-size: 12px;
+    margin: 5px 0;
 }
-#bdl-wskazniki .wskaznik table td.charts .index .chart {
-  height: 150px;
-  width: 688px;
-  position: relative;
+
+#bdl-wskazniki .wskaznik .stats .charts .chart {
+    height: 150px;
+    width: 688px;
+    position: relative;
+}
+
+#bdl-wskazniki .wskaznik .stats .charts .chart .progress {
+    height: 16px;
+    margin: 0 25% 0 15%;
+    position: relative;
+    top: 40%;
+    width: 60%;
 }

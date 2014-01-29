@@ -3,7 +3,6 @@
 
 <?php $this->Combinator->add_libs('js', 'highcharts/highcharts'); ?>
 <?php $this->Combinator->add_libs('js', 'highcharts/locals'); ?>
-<?php $this->Combinator->add_libs('js', 'highcharts/modules/exporting'); ?>
 <?php $this->Combinator->add_libs('js', 'mapaprawa.highcharts-init'); ?>
 <?php $this->Combinator->add_libs('js', 'mapaprawa.mapaprawa-graph'); ?>
 

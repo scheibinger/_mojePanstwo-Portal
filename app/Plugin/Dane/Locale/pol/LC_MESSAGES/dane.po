@@ -882,3 +882,9 @@ msgstr "Od"
 
 msgid "LC_DANE_POSLOWIE_KOMISJESTANOWISKO_DO"
 msgstr "do"
+
+msgid "LC_BDL_WSKAZNIKI_LASTYEAR"
+msgstr "w %s r."
+
+msgid "LC_BDL_WSKAZNIKI_PREVLASTYEAR"
+msgstr "w stosunku do %s r."

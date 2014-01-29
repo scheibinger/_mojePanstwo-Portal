@@ -7,7 +7,6 @@ $this->Combinator->add_libs('css', $this->Less->css('view-twitteraccounts', arra
 $this->Combinator->add_libs('css', $this->Less->css('dataobjectslider', array('plugin' => 'Dane')));
 $this->Combinator->add_libs('js', 'highcharts/highcharts');
 $this->Combinator->add_libs('js', 'highcharts/locals');
-$this->Combinator->add_libs('js', 'highcharts/modules/exporting');
 $this->Combinator->add_libs('js', 'Dane.highcharts-twitter-accounts');
 $this->Combinator->add_libs('js', 'Dane.view-twitter-accounts');
 $this->Combinator->add_libs('js', 'Dane.dataobjectsslider');

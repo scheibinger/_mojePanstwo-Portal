@@ -13,88 +13,99 @@
             padding: 0;
         }
 
-        table {
+        .stats {
             display: block;
-            margin-top: 10px;
-            overflow: hidden;
+            float: left;
+            width: 100%;
+            margin: 10px;
 
-            td {
-                vertical-align: top;
+            .map {
+                padding: 10px;
+                width: 178px;
+                height: 165px;
+                float: left;
 
-                &.map {
-                    padding: 10px;
+                .imageInside {
+                    height: 165px;
                     width: 178px;
+                }
+            }
+            .charts {
+                margin: 5px;
+                float: right;
 
-                    .image {
-                        height: 165px;
-                        width: 178px;
+                .head {
+                    margin-left: 30px;
+                    margin-top: 10px;
+                    overflow: hidden;
 
-                        .imageInside {
-                            height: 165px;
-                            width: 178px;
+                    .vp {
+                        float: left;
+
+                        .v {
+                            color: #555555;
+                            font-size: 18px;
+                        }
+
+                        .u {
+                            color: #666688;
+                            font-size: 12px;
+                            margin: 0 3px;
+                        }
+
+                        .y {
+                            color: #666666;
+                            font-size: 12px;
+                        }
+                    }
+
+                    .fp {
+                        float: right;
+                        margin-right: 75px;
+
+                        .factor {
+                            font-size: 14px;
+                            margin-right: 5px;
+                            float: left;
+
+                            &.u {
+                                color: #447744;
+
+                                &:before {
+                                    content: "\2191";
+                                    padding-right: 5px;
+                                }
+                            }
+
+                            &.d {
+                                color: #994444;
+
+                                &:before {
+                                    content: "\2193";
+                                    padding-right: 5px;
+                                }
+                            }
+                        }
+
+                        .i {
+                            color: #666666;
+                            font-size: 12px;
+                            margin: 5px 0;
                         }
                     }
                 }
-                &.charts {
-                    .index {
-                        margin: 5px;
 
-                        .head {
-                            margin-left: 30px;
-                            margin-top: 10px;
-                            overflow: hidden;
+                .chart {
+                    height: 150px;
+                    width: 688px;
+                    position: relative;
 
-                            .vp {
-                                float: left;
-
-                                .v {
-                                    color: #555555;
-                                    font-size: 18px;
-                                }
-
-                                .u {
-                                    color: #666688;
-                                    font-size: 12px;
-                                    margin: 0 3px;
-                                }
-
-                                .y {
-                                    color: #666666;
-                                    font-size: 12px;
-                                }
-                            }
-
-                            .fp {
-                                float: right;
-                                margin-right: 75px;
-
-                                .factor {
-                                    font-size: 14px;
-                                    margin-right: 5px;
-                                    float: left;
-
-                                    &.u {
-                                        color: #447744;
-                                    }
-
-                                    &.d {
-                                        color: #994444;
-                                    }
-                                }
-
-                                .i {
-                                    color: #666666;
-                                    font-size: 12px;
-                                    margin: 5px 0;
-                                }
-                            }
-                        }
-
-                        .chart {
-                            height: 150px;
-                            width: 688px;
-                            position: relative;
-                        }
+                    .progress {
+                        height: 16px;
+                        margin: 0 25% 0 15%;
+                        position: relative;
+                        top: 40%;
+                        width: 60%;
                     }
                 }
             }
