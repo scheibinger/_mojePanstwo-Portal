@@ -8,7 +8,7 @@ class BdlWskaznikiController extends DataobjectsController
 	public $menu = array();
 	public $components = array('RequestHandler');
 	
-    public function view()
+    private function _view( $dimension = array() )
     {
 
         parent::_prepareView();
@@ -16,6 +16,7 @@ class BdlWskaznikiController extends DataobjectsController
         $expand_dimension = isset( $this->request->query['i'] ) ? (int) $this->request->query['i'] : $this->object->getData('i');
 		$dims = $this->object->loadLayer('dimennsions');
 		$expanded_dimension = array();
+		
 		
 		
 		
@@ -51,6 +52,7 @@ class BdlWskaznikiController extends DataobjectsController
 			
 			if( $expand_dimension == $i )
 			{
+								
 				
 				$expanded_dimension = $dim;
 				$params_dimmensions = array();
@@ -62,20 +64,36 @@ class BdlWskaznikiController extends DataobjectsController
 		    		$temp_dimmensions_array[ $i ] = (int) $option['id'];	    		
 		    		$params_dimmensions[] = $temp_dimmensions_array;
 		    		$option['dim_str'] = implode(',', $temp_dimmensions_array);
-
+		    		
+		    		if( isset($dimension['dim_str']) )
+		    		{
+						if( $dimension['dim_str'] == $option['dim_str'] )
+							$option['data'] = $dimension;
+						else
+							$option = null;
+					}
+					
 		    	}
+		    	
+		    	if( isset($dimension['dim_str']) )
+		    		$expanded_dimension['options'] = array_filter($expanded_dimension['options']);
+		    						
+				if( empty($dimension) )
+				{
 				
-				$data_for_dimmensions = $this->API->BDL()->getDataForDimmesions( $params_dimmensions );
-				if( !empty($data_for_dimmensions) )
-					foreach( $data_for_dimmensions as $data )
-						foreach( $expanded_dimension['options'] as &$option )
-							if( $data['dim_str'] == $option['dim_str'] )
-							{
-								
-								$option['data'] = $data;
-								break;
-								
-							}
+					$data_for_dimmensions = $this->API->BDL()->getDataForDimmesions( $params_dimmensions );
+					if( !empty($data_for_dimmensions) )
+						foreach( $data_for_dimmensions as $data )
+							foreach( $expanded_dimension['options'] as &$option )
+								if( $data['dim_str'] == $option['dim_str'] )
+								{
+									
+									$option['data'] = $data;
+									break;
+									
+								}
+				
+				}
 								
 			}
 			
@@ -87,8 +105,26 @@ class BdlWskaznikiController extends DataobjectsController
 		$this->set('expand_dimension', $expand_dimension);
 		$this->set('expanded_dimension', $expanded_dimension);
 		$this->set('dimmensions_array', $dimmensions_array);
-
+		
+		
+		
+				
     }
+    
+    public function view()
+    {
+	    
+	    $this->_view();
+	    
+    }
+    
+    public function view_dimension()
+    {
+    	$dimension = $this->API->BDL()->getDataForDimension( $this->request->params['dim_id'] );
+	    $this->_view( $dimension );
+    }
+    
+    
     
     public function chart_data_for_dimmensions()
     {
