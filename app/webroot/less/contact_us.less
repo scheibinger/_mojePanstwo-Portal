@@ -1,0 +1,47 @@
+#contactUs .content {
+    @marginSpace: 4em;
+
+    margin-top: @marginSpace;
+    margin-bottom: @marginSpace;
+
+    hr {
+        border-color: #ccc;
+    }
+
+    h4 {
+        line-height: 1em;
+
+        strong, small {
+            display: inline-block;
+        }
+    }
+
+    address {
+        margin-bottom: 2.5em;
+
+        p {
+            margin: 0;
+        }
+    }
+
+    .contact-form {
+        padding-top: 5em;
+
+        button{
+            margin-top:15px;
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    #contactUs .content {
+
+        address {
+            margin-bottom: 20px;
+        }
+
+        .contact-form {
+            padding-top: 1em;
+        }
+    }
+}
