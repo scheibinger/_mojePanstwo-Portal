@@ -161,5 +161,12 @@ class AppController extends Controller
             }
         }
     */
+    
+	public function bdl_data_for_dimmensions()
+	{
+		
+		echo 'asdfg';
+		
+	}
 
 }

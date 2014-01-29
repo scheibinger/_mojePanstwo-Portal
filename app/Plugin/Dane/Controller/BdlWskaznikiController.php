@@ -6,6 +6,7 @@ class BdlWskaznikiController extends DataobjectsController
 {
 	
 	public $menu = array();
+	public $components = array('RequestHandler');
 	
     public function view()
     {
@@ -73,6 +74,17 @@ class BdlWskaznikiController extends DataobjectsController
 			
 		$this->set('dims', $dims);
 		$this->set('expanded_dim', $expand_dimmension);
+		$this->set('dimmensions_array', $dimmensions_array);
 
+    }
+    
+    public function data_for_dimmensions()
+    {
+	    
+	    $data = array();
+	    
+	    $this->set('data', $data);
+	    $this->set('_serialize', array('data'));
+	    
     }
 } 
