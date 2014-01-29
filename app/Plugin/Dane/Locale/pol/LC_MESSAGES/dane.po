@@ -548,7 +548,7 @@ msgid "LC_DANE_NAGLOSNIJ"
 msgstr "Nagłośnij"
 
 msgid "LC_DANE_LOKALIZACJA_STACJI"
-msgstr "Lokalizacja stacjia"
+msgstr "Lokalizacja stacji"
 
 msgid "LC_DANE_LINIE"
 msgstr "Linie"
