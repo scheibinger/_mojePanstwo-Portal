@@ -2,7 +2,6 @@
 
 <?= $this->Element('dataobject/pageBegin'); ?>
     <div class="object">
-        <? debug($expanded_dim); ?>
-        <? debug($dims); ?>
+        <?= $this->Element('bdl_select', array('expanded_dim' => $expanded_dim, 'dims' => $dims)); ?>
     </div>
 <?= $this->Element('dataobject/pageEnd'); ?>

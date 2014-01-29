@@ -1,3 +1,4 @@
+bdl-select.css
 dataobject.css
 dataobjectpage.css
 dataobjectslider.css
@@ -12,6 +13,7 @@ view-gminy_rada.css
 view-kodypocztowe.css
 view-kolejelinie.css
 view-kolejestacje.css
+view-krsosoby.css
 view-krspodmioty.css
 view-miejscowosci.css
 view-poslowie.css
@@ -24,5 +26,7 @@ view-sejmposiedzenia.css
 view-sejmposiedzeniapunkty.css
 view-sejmwystapienia.css
 view-sporzeczenia.css
+view-twitter.css
+view-twitteraccounts.css
 view-wyborydarczyncy.css
 view-zamowieniapubliczne.css
