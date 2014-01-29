@@ -13,9 +13,9 @@ class BdlWskaznikiController extends DataobjectsController
 
         parent::_prepareView();
         
-        $expand_dimmension = isset( $this->request['i'] ) ? (int) $this->request['i'] : $this->object->getData('i');
+        $expand_dimension = isset( $this->request->query['i'] ) ? (int) $this->request->query['i'] : $this->object->getData('i');
 		$dims = $this->object->loadLayer('dimennsions');
-		
+		$expanded_dimension = array();
 		
 		
 		
@@ -27,31 +27,13 @@ class BdlWskaznikiController extends DataobjectsController
 			
 			$dvalue = 0;
 			
-			if( $d==$expand_dimmension )
-			{
-				/*
-				if( $kombinacja )
-				{
-		  		
-		  			$v = $d + 1;
-		  		
-		  			foreach( $dims[$d]['options'] as $o )
-		  				if( $o['id']==$kombinacja['wymiar']['w' . $v] )
-		  					$kombinacja['value'] = $o['value'];
-		  		
-				}
-				*/
-			}
-			else
-			{
-			
-		  		$dvalue = isset( $this->request['d' . $d] ) ? 
-		  			(int) $this->request['d' . $d] : 
+			if( $d != $expand_dimension )			
+		  		$dvalue = isset( $this->request->query['d' . $d] ) ? 
+		  			(int) $this->request->query['d' . $d] : 
 		  			(int) @$dims[ $d ]['options'][0]['id'];
-				
-			}
-			
+							
 			$dimmensions_array[] = $dvalue;
+			
 		}
 		
 		
@@ -66,22 +48,54 @@ class BdlWskaznikiController extends DataobjectsController
 		
 			foreach( $dim['options'] as &$option )			
 				$option['selected'] = ( $option['id'] == $dimmensions_array[$i] );
+			
+			if( $expand_dimension == $i )
+			{
 				
+				$expanded_dimension = $dim;
+				$params_dimmensions = array();
+				
+				foreach( $expanded_dimension['options'] as &$option )
+		    	{
+		    		
+		    		$temp_dimmensions_array = $dimmensions_array;
+		    		$temp_dimmensions_array[ $i ] = (int) $option['id'];	    		
+		    		$params_dimmensions[] = $temp_dimmensions_array;
+		    		$option['dim_str'] = implode(',', $temp_dimmensions_array);
+
+		    	}
+				
+				$data_for_dimmensions = $this->API->BDL()->getDataForDimmesions( $params_dimmensions );
+				if( !empty($data_for_dimmensions) )
+					foreach( $data_for_dimmensions as $data )
+						foreach( $expanded_dimension['options'] as &$option )
+							if( $data['dim_str'] == $option['dim_str'] )
+							{
+								
+								$option['data'] = $data;
+								break;
+								
+							}
+								
+			}
+			
 			$i++;
 		}
 				
-		
 			
 		$this->set('dims', $dims);
-		$this->set('expanded_dim', $expand_dimmension);
+		$this->set('expand_dimension', $expand_dimension);
+		$this->set('expanded_dimension', $expanded_dimension);
 		$this->set('dimmensions_array', $dimmensions_array);
 
     }
     
     public function data_for_dimmensions()
     {
+				
+	    $dims = isset($this->request->query['dims']) ? explode(';', $this->request->query['dims']) : array();
 	    
-	    $data = array();
+	    $data = $this->API->BDL()->getDataForDimmesions( $dims );
 	    
 	    $this->set('data', $data);
 	    $this->set('_serialize', array('data'));

@@ -7,7 +7,7 @@
 <form id="filters_form" class="bdl-select">
     <ul>
         <? foreach ($dims as $key => $d) {
-            if ($key != $expanded_dim) {
+            if ($key != $expand_dimension) {
                 ?>
                 <li>
                     <p class="label"><?= $d['label'] ?>:</p>
