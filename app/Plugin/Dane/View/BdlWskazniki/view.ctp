@@ -18,14 +18,14 @@
 
                     <div class="wskaznik" data-dim_id="<?= $option['data']['id'] ?>">
                         <h2>
-                            <a href="<?= $this->here ?>?dim_id=<?= $option['data']['id'] ?>">
+                            <a href="<?= $this->here ?>/<?= $option['data']['id'] ?>">
                                 <?= $option['value'] ?>
                             </a>
                         </h2>
 
                         <div class="stats">
                             <div class="map">
-                                <a href="<?= $this->here ?>?dim_id=<?= $option['data']['id'] ?>">
+                                <a href="<?= $this->here ?>/<?= $option['data']['id'] ?>">
                                     <img width="216" height="200"
                                          src="http://resources.sejmometr.pl/bdl_wymiary_kombinacje/bdl_wymiary_kombinacje_<?= $option['data']['id'] ?>.png"
                                          class="imageInside"/>

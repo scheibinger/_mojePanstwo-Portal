@@ -23,18 +23,30 @@ class BdlWskaznikiController extends DataobjectsController
 		// building dimmensions array (it will be usefull as a parameter for future API calls
 		
 		$dimmensions_array = array();
-		for( $d=0; $d<5; $d++ )
+		
+		if( isset($dimension['dim_str']) )
 		{
-			
-			$dvalue = 0;
-			
-			if( $d != $expand_dimension )			
-		  		$dvalue = isset( $this->request->query['d' . $d] ) ? 
-		  			(int) $this->request->query['d' . $d] : 
-		  			(int) @$dims[ $d ]['options'][0]['id'];
-							
-			$dimmensions_array[] = $dvalue;
-			
+		
+			$dimmensions_array = explode(',', $dimension['dim_str']);
+		
+		}
+		else
+		{
+		
+			for( $d=0; $d<5; $d++ )
+			{
+				
+				$dvalue = 0;
+				
+				if( $d != $expand_dimension )			
+			  		$dvalue = isset( $this->request->query['d' . $d] ) ? 
+			  			(int) $this->request->query['d' . $d] : 
+			  			(int) @$dims[ $d ]['options'][0]['id'];
+								
+				$dimmensions_array[] = $dvalue;
+				
+			}
+		
 		}
 		
 		
@@ -120,9 +132,63 @@ class BdlWskaznikiController extends DataobjectsController
     
     public function view_dimension()
     {
+    	
+    	if( isset($this->request->query['d']) && $this->request->query['d'] )
+    	{
+	    	
+	    	$dimmensions_array = array();
+		    for( $d=0; $d<5; $d++ )																			
+				$dimmensions_array[] = isset( $this->request->query['d' . $d] ) ? 
+		  			(int) $this->request->query['d' . $d] : 
+		  			0;
+			
+			$data_for_dimmensions = $this->API->BDL()->getDataForDimmesions( array($dimmensions_array) );
+			if( $data_for_dimmensions )
+			{
+				$url = '/dane/bdl_wskazniki/' . $this->request->params['id'] . '/' . $data_for_dimmensions[0]['id'];
+				$this->redirect($url);
+				die();
+			}
+	    	
+    	}
+    	
     	$dimension = $this->API->BDL()->getDataForDimension( $this->request->params['dim_id'] );
 	    $this->_view( $dimension );
+	    
+	    
+	    $level_selected = false;
+	    $selected_level_id = false;
+		    
+	    if( !empty($dimension['levels']) )
+	    {
+		    		    
+		    foreach( $dimension['levels'] as &$level )
+		    {
+			    
+			    
+			    
+		    }
+		    
+		    if( !$level_selected )
+		    {
+		    	$dimension['levels'][0]['selected'] = true;
+				$selected_level_id = $dimension['levels'][0]['id'];
+		    }
+	    
+	    }
+	    
+	    if( $selected_level_id )
+	    {
+		    
+		    $local_data = $this->API->BDL()->getLocalDataForDimension( $dimension['id'], $selected_level_id );
+		    $this->set('local_data', $local_data);
+		    
+	    }
+	    
+	    $this->set('dimension', $dimension);
     }
+    
+   
     
     
     
