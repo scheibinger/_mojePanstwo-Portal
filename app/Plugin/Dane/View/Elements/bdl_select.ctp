@@ -4,13 +4,13 @@
 <?php $this->Combinator->add_libs('js', 'bootstrap-select'); ?>
 <?php $this->Combinator->add_libs('js', 'Dane.bdl-select'); ?>
 
-<form id="filters_form" class="bdl-select">
+<form id="filters_form" class="bdl-select col-xs-12">
     <ul>
         <? foreach ($dims as $key => $d) {
             if ($key != $expand_dimension) {
                 ?>
-                <li>
-                    <p class="label"><?= $d['label'] ?>:</p>
+                <li class="col-xs-11 col-sm-6 col-md-3">
+                <p class="label"><?= $d['label'] ?>:</p>
 
                     <p class="value">
                         <select onchange="document.getElementById('filters_form').submit();" name="d<?= $d['order'] ?>">
