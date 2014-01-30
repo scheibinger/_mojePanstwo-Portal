@@ -78,5 +78,60 @@ class DataobjectHelper extends AppHelper
 
         return $this->_View->element($theme, array('item' => $this->object->getObject(), 'object' => $this->object, 'theme' => $theme, 'file' => $this->object->getDataset()), array('plugin' => 'Dane'));
     }
+    
+    public function highlights()
+    {
+	    
+	    $output = '';
+	    
+	    $fields = $this->object->getHighlightsFields();
+	    $fields_count = count( $fields );
+	    if( $fields_count )
+	    {
+		    
+		    $col_width = 3;
+		    
+		    if( $fields_count==1 )
+		    	$col_width = 12;
+	    	elseif( $fields_count==2 )
+		    	$col_width =6;
+		    elseif( $fields_count==3 )
+		    	$col_width = 4;
+		    
+		    $output .= '<div class="row dataHighlights dimmed">';
+		    
+		    foreach($fields as $field => $field_params)
+		    {
+			    
+			    $field_value = $this->object->getData( $field );
+			    
+			    if( is_array($field_params) )
+			    {
+				    
+				    $field_label = $field_params['label'];
+				    
+				    if( isset($field_params['img']) )
+				    {
+					    
+					    $field_value = '<img src="' . $field_params['img'] . '" />' . $field_value;
+					    
+				    }
+				    
+			    }
+			    else
+			    {
+				    $field_label = $field_params;
+			    }			    
+			    
+			    $output .= '<div class="dataHighlight col-md-6"><p class="_label">' . $field_label . ':</p><p class="_value">' . $field_value . '</p></div>';
+			    
+		    }
+		    
+		    $output .= '</div>';
+	    }
+	    
+	    return $output;
+	    
+    }
 
 } 

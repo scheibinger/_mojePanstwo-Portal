@@ -5,7 +5,9 @@
 
 <?= $this->Element('dataobject/pageBegin'); ?>
 
-<?php if (empty($teksty) && $wydarzenie['s_interpelacje_tablice']['dokument_id']) { ?>
+
+
+<?php if (empty($teksty) && $wydarzenie['dokument_id']) { ?>
     <?php echo $this->Html->css($document->getCSSLocation()); ?>
 
     <div class="htmlexDoc" data-packages="<?php echo $document->getPackagesCount(); ?>"
@@ -14,12 +16,15 @@
          data-document-id="<?php echo $document->getId(); ?>"
          data-dataset="<?php echo $dataset['Dataset']['alias']; ?>">
 
-        <?= $this->Element('toolbar'); ?>
+        <?= $this->Element('toolbar', array(
+        	'left_column_width' => 9,
+        	'right_column_width' => 3,
+        )); ?>
 
         <div class="document container">
             <div class="row">
-                <div class="content col-md-10">
-                    <div class="canvas">
+                <div class="content col-md-9">
+                    <div class="canvas" style="margin-left: -50px;">
                         <?php echo $document->loadHtml($documentPackage); ?>
                     </div>
                     <div class="loadMoreDocumentContent <?php if ($document->getPackagesCount() > 1) {
@@ -29,37 +34,37 @@
                     } ?>"></div>
                 </div>
 
-                <? if (!empty($docs) && is_array($docs)) { ?>
-                    <div class="sidebox col-md-2">
-                        <ul class="categories">
+                <? if (!empty($wydarzenia) && is_array($wydarzenia)) { ?>
+                    <div class="sidebox col-md-3">
+                        <ul class="tables">
                             <?php foreach ($wydarzenia as $t) { ?>
-                                <li class="<?php if ($wydarzenie['s_interpelacje_tablice']['id'] == $t['s_interpelacje_tablice']['id']) { ?>s<?php } ?>">
-                                    <a href="?t=<?php echo $t['s_interpelacje_tablice']['id']; ?>">
-                                        <p class="nazwa"><?php echo $t['s_interpelacje_tablice']['nazwa']; ?></p>
+                                <li class="<?php if ($wydarzenie['id'] == $t['id']) { ?>s<?php } ?>">
+                                    <a href="/dane/sejm_interpelacje/<?= $object->getId() ?>/<?= $t['id'] ?>">
+                                        <p class="nazwa"><?php echo $t['nazwa']; ?></p>
 
                                         <div class="desc">
-                                            <?php if ($t['s_interpelacje_tablice']['autor_str']) { ?><p>
+                                            <?php if ($t['autor_str']) { ?><p>
                                                 <span
-                                                    class="l"><?= __d('dane', 'LC_DANE_AUTHOR') ?>:</span> <span
-                                                    class="v"><?php echo $t['s_interpelacje_tablice']['autor_str']; ?></span>
+                                                    class="l">Od:</span> <span
+                                                    class="v"><?php echo $t['autor_str']; ?></span>
                                                 </p><?php } ?>
-                                            <?php if ($t['s_interpelacje_tablice']['adresaci_str']) { ?><p>
+                                            <?php if ($t['adresaci_str']) { ?><p>
                                                 <span
-                                                    class="l"><?= __d('dane', 'LC_DANE_ADRESAT') ?>
+                                                    class="l">Do
                                                     :</span> <span
-                                                    class="v"><?php echo $t['s_interpelacje_tablice']['adresaci_str']; ?></span>
+                                                    class="v"><?php echo $t['adresaci_str']; ?></span>
                                                 </p><?php } ?>
-                                            <?php if ($t['s_interpelacje_tablice']['data'] != '0000-00-00') { ?>
+                                            <?php if ($t['data'] != '0000-00-00') { ?>
                                                 <p>
                                                 <span
                                                     class="l"><?= __d('dane', 'LC_DANE_DATA_WPLYWU') ?>:</span> <span
-                                                    class="v"><?php echo $t['s_interpelacje_tablice']['data']; ?></span>
+                                                    class="v"><?= $this->Czas->dataSlownie($t['data']); ?></span>
                                                 </p><?php } ?>
-                                            <?php if ($t['s_interpelacje_tablice']['data_ogloszenia'] != '0000-00-00') { ?>
+                                            <?php if ($t['data_ogloszenia'] != '0000-00-00') { ?>
                                                 <p><span
                                                     class="l"><?= __d('dane', 'LC_DANE_DATA_OGLOSZENIA') ?>
                                                     :</span> <span
-                                                    class="v"><?php echo $t['s_interpelacje_tablice']['data_ogloszenia']; ?></span>
+                                                    class="v"><?= $this->Czas->dataSlownie($t['data_ogloszenia']); ?></span>
                                                 </p><?php } ?>
                                         </div>
                                     </a>
@@ -74,45 +79,52 @@
 <?php } else { ?>
     <div class="htmlexDoc">
         <div class="document">
-            <div class="content col-md-8">
+            <div class="content col-md-9">
                 <?php foreach ($teksty as $t) { ?>
-                    <?php if ($wydarzenie['s_interpelacje_tablice']['typ_id'] == 1 || $wydarzenie['s_interpelacje_tablice']['typ_id'] == 3) { ?>
-                        <h2>
-                        <?= __d('dane', 'LC_DANE_ADRESAT') ?>
-                        : <?php echo $t['wypowiedzi_funkcje']['funkcja_nazwa']; ?></h2><?php } ?>
-                    <div class="html">
-                        <?php echo $t['s_interpelacje_sekcje_texty']['html']; ?>
+                    <div class="block">
+	                    <?
+	                    	if ($wydarzenie['typ_id'] == 1 || $wydarzenie['typ_id'] == 3) {
+	                    ?>
+	                        <h2>
+	                        <small>Do:</small> <?php echo $t['funkcja_nazwa']; ?></h2>
+	                    <? } elseif( $wydarzenie['typ_id'] == 2 || $wydarzenie['typ_id'] == 4 ) { ?>
+	                    	<h2>
+	                        <small>Od:</small> <?php echo $wydarzenie['autor_str']; ?></h2>
+	                    <? } ?>
+	                    <div class="html" style="padding:20px 50px;">
+	                        <?php echo $t['html']; ?>
+	                    </div>
                     </div>
                 <?php } ?>
             </div>
-            <div class="sidebox col-md-4">
+            <div class="sidebox col-md-3">
                 <ul class="tables">
                     <?php foreach ($wydarzenia as $t) { ?>
-                        <li<?php if ($wydarzenie['s_interpelacje_tablice']['id'] == $t['s_interpelacje_tablice']['id']) { ?> class="s"<?php } ?>>
-                            <a href="?t=<?php echo $t['s_interpelacje_tablice']['id']; ?>">
-                                <p class="nazwa"><?php echo $t['s_interpelacje_tablice']['nazwa']; ?></p>
+                        <li<?php if ($wydarzenie['id'] == $t['id']) { ?> class="s"<?php } ?>>
+                            <a href="/dane/sejm_interpelacje/<?= $object->getId() ?>/<?= $t['id'] ?>">
+                                <p class="nazwa"><?php echo $t['nazwa']; ?></p>
 
                                 <div class="desc">
-                                    <?php if ($t['s_interpelacje_tablice']['autor_str']) { ?><p><span
-                                            class="l"><?= __d('dane', 'LC_DANE_AUTHOR') ?>:</span> <span
-                                            class="v"><?php echo $t['s_interpelacje_tablice']['autor_str']; ?></span>
+                                    <?php if ($t['autor_str']) { ?><p><span
+                                            class="l">Od:</span> <span
+                                            class="v"><?php echo $t['autor_str']; ?></span>
                                         </p><?php } ?>
-                                    <?php if ($t['s_interpelacje_tablice']['adresaci_str']) { ?><p><span
-                                            class="l"><?= __d('dane', 'LC_DANE_ADRESAT') ?>:</span> <span
-                                            class="v"><?php echo $t['s_interpelacje_tablice']['adresaci_str']; ?></span>
+                                    <?php if ($t['adresaci_str']) { ?><p><span
+                                            class="l">Do:</span> <span
+                                            class="v"><?php echo $t['adresaci_str']; ?></span>
                                         </p><?php } ?>
-                                    <?php if ($t['s_interpelacje_tablice']['data'] != '0000-00-00') { ?>
+                                    <?php if ($t['data'] != '0000-00-00') { ?>
                                         <p>
                                         <span
                                             class="l"><?= __d('dane', 'LC_DANE_DATA_WPLYWU') ?>:</span> <span
-                                            class="v"><?php echo $t['s_interpelacje_tablice']['data']; ?></span>
+                                            class="v"><?= $this->Czas->dataSlownie($t['data']); ?></span>
                                         </p><?php } ?>
-                                    <?php if ($t['s_interpelacje_tablice']['data_ogloszenia'] == '0000-00-00') { ?>
+                                    <?php if ($t['data_ogloszenia'] == '0000-00-00') { ?>
                                         <p>
                                         <span
                                             class="l"><?= __d('dane', 'LC_DANE_DATA_OGLOSZENIA') ?>
                                             :</span> <span
-                                            class="v"><?php echo $t['s_interpelacje_tablice']['data_ogloszenia']; ?></span>
+                                            class="v"><?= $this->Czas->dataSlownie($t['data_ogloszenia']); ?></span>
                                         </p><?php } ?>
                                 </div>
                             </a>

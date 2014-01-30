@@ -14,7 +14,7 @@ if (in_array($object->getDataset(), array('rady_posiedzenia', 'rady_gmin_debaty'
 <div class="objectRender col-md-12 <?php echo $object->getDataset(); ?>" oid="<?php echo $item['data']['id'] ?>">
     <div class="row">
         <? if ($this->Dataobject->getDate()) { ?>
-            <div class="formatDate col-md-1">
+            <div class="formatDate col-md-1 dimmed">
                 <?php echo($this->Dataobject->getDate()); ?>
             </div>
         <? } ?>
@@ -32,9 +32,12 @@ if (in_array($object->getDataset(), array('rady_posiedzenia', 'rady_gmin_debaty'
                     <?php } ?>
                     </div>
                     <div class="content col-md-<?= $object_content_sizes[1] ?>">
+                        
+                        <? /*
                         <p class="header">
                             <?= $object->getLabel(); ?>
                         </p>
+                        */ ?>
 
                         <p class="title">
                             <?php if ($object->getUrl() != false) { ?>
@@ -56,9 +59,12 @@ if (in_array($object->getDataset(), array('rady_posiedzenia', 'rady_gmin_debaty'
 
                 <? } else { ?>
                     <div class="content">
+                        
+                        <? /*
                         <p class="header">
                             <?= $object->getLabel(); ?>
                         </p>
+                        */ ?>
 
                         <p class="title">
                             <?php if ($object->getUrl() != false){ ?>
