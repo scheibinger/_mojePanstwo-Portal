@@ -161,12 +161,22 @@ class BdlWskaznikiController extends DataobjectsController
 		    
 	    if( !empty($dimension['levels']) )
 	    {
-		    		    
-		    foreach( $dimension['levels'] as &$level )
+		    
+		    if( isset($this->request->params['level']) && in_array($this->request->params['level'], array('gminy', 'powiaty', 'wojewodztwa')) )
 		    {
-			    
-			    
-			    
+		    
+			    foreach( $dimension['levels'] as &$level )
+			    {
+				    if( $level['id'] == $this->request->params['level'] )
+				    {
+					    
+					    $selected_level_id = $level['id'];
+					    $level['selected'] = true;
+					    $level_selected = true;
+					    
+				    }
+			    }
+		    
 		    }
 		    
 		    if( !$level_selected )
