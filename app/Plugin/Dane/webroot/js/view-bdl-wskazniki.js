@@ -70,8 +70,8 @@ jQuery(document).ready(function () {
     });
 
     if (wskaznikiStatic.length > 0) {
-        jQuery.each(wskaznikiStatic, function () {
-            var wskaznik = jQuery(this).find('.chart'),
+        /*jQuery.each(wskaznikiStatic, function () {
+         var wskaznik = jQuery(this).find('.chart'),
                 chart = wskaznik.data('chart-datas'),
                 label = [],
                 value = [];
@@ -108,6 +108,6 @@ jQuery(document).ready(function () {
                     }
                 ]
             });
-        })
+         })*/
     }
 });

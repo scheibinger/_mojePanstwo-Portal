@@ -66,10 +66,15 @@
         ?>
 
         <div class="menu col-md-3">
-            <ul>
-
+            <ul class="nav nav-pills nav-stacked">
+                <? foreach ($dimension['levels'] as $level) { ?>
+                    <li<? if (isset($level['selected'])) { ?> class="active" <? } ?>>
+                        <a href="<?= $this->here . DS . $level['id'] ?>">
+                            <?= $level["label"] ?>
+                        </a>
+                    </li>
+                <? } ?>
             </ul>
-            <? debug($dimension['levels']); ?>
         </div>
         <div class="content col-md-9">
             <? if (isset($local_data)) {
@@ -89,7 +94,8 @@
                                         <span class="v"><?= number_format($local['lv'], 2, ',', ' ') ?></span>
                                         <? /* <span class="u"><?= $local['jednostka'] ?></span> */ ?>
                                         <span
-                                            class="y"><?= __d('dane', 'LC_BDL_WSKAZNIKI_LASTYEAR', array($local['ly'])) ?></span>
+                                            class="y"><?= __d('dane', 'LC_BDL_WSKAZNIKI_LASTYEAR', array($local['ly'])) ?>
+                                        </span>
                                     </p>
 
                                     <? /*<p class="fp">
@@ -106,8 +112,8 @@
                                     </p>*/
                                     ?>
                                 </div>
-                                <div class="chart" data-chart-datas='<?= json_encode($local['data']) ?>'>
-                                    <div class="progress progress-striped active">
+                                <div class="chart" data-chart-datas='<? /*= json_encode($local['data']) */ ?>'>
+                                <div class="progress progress-striped active">
                                         <div class="progress-bar" role="progressbar" aria-valuenow="45"
                                              aria-valuemin="0" aria-valuemax="100" style="width: 15%"></div>
                                     </div>
