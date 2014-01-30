@@ -10,7 +10,6 @@
     <div id="bdl-wskazniki">
         <div class="object">
 
-
             <?
             if (!empty($expanded_dimension)) {
                 foreach ($expanded_dimension['options'] as $option) {
@@ -18,9 +17,7 @@
 
                     <div class="wskaznik" data-dim_id="<?= $option['data']['id'] ?>">
                         <h2>
-                            <a href="<?= $this->here ?>/<?= $option['data']['id'] ?>">
-                                <?= $option['value'] ?>
-                            </a>
+                            <a href="<?= $this->here ?>/<?= $option['data']['id'] ?>"><?= trim($option['value']) ?></a>
                         </h2>
 
                         <div class="stats">
