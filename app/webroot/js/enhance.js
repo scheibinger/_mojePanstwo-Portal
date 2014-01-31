@@ -30,7 +30,7 @@ function imgFixer(img) {
     img.src = imgBlankSrc;
 
     if (typeof countDataObjectsSliderRowDetect != 'undefined' && countDataObjectsSliderRowDetect == true)
-        countDataObjectsSliderRow();
+        window.setTimeout(countDataObjectsSliderRow, 0);
 
     return true;
 }

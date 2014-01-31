@@ -4,7 +4,7 @@
     margin: 0;
 
     .carousel {
-        @arrowsControlSize: 25px;
+        @arrowsControlSize: 40px;
         @indicatorsSize: 30px;
 
         color: #555;
@@ -65,21 +65,27 @@
             z-index: 1;
 
             > .item {
-                margin: 0 -1px -1px 0;
+                margin: 0 0 -1px -1px;
                 overflow: hidden;
             }
         }
 
         .carousel-control {
             width: @arrowsControlSize;
-            background-image: none;
-            background: fade(#000, 5%);
+            background: none;
             margin: 20px 0;
+            font-size: 32px;
+            color: #CCCCCC;
+            text-shadow: 0 0 1px rgba(0, 0, 0, 0.6);
+
+            &:hover span {
+                color: #4183C4;
+            }
 
             > span {
                 width: 20px;
                 height: 20px;
-                margin-top: -11px;
+                margin-top: -16px;
                 color: #FFF;
             }
 
@@ -88,13 +94,13 @@
 
             &.left {
                 > span {
-                    margin-left: -10px;
+                    margin-left: -14px;
                 }
             }
 
             &.right {
                 > span {
-                    margin-right: -10px;
+                    margin-right: 0;
                 }
             }
         }
