@@ -34,16 +34,7 @@ class CzasHelper extends AppHelper
 
     public function dataSlownie($data)
     {
-
-        $parts = explode('-', substr($data, 0, 10));
-        if (count($parts) != 3) return $data;
-
-        $rok = (int)$parts[2];
-        $miesiac = (int)$parts[1];
-        $dzien = (int)$parts[0];
-
-        return '<span class="_ds" value="' . strip_tags($data) . '">' . $rok . ' ' . $this->strings['miesiace']['celownik'][$miesiac] . ' ' . $dzien . ' r.</span>';
-
+        return dataSlownie($data);
     }
 
 }

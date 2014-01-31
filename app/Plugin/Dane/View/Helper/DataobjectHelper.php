@@ -63,11 +63,17 @@ class DataobjectHelper extends AppHelper
     {
         return App::pluginPath('Dane') . '/View/Elements/' . $theme . '/' . $object->getDataset() . '.ctp';
     }
-
+	
+	public function setObject($object)
+	{
+		$this->object = $object;
+	}
+	
     public function render($object, $theme = 'default')
     {
-        $this->object = $object;
-
+        
+		$this->setObject($object);
+		
         /*
         if ($theme != 'dataobjectSlider') {
             $path = $this->getRenderPath($object, $theme);
@@ -98,12 +104,23 @@ class DataobjectHelper extends AppHelper
 		    elseif( $fields_count==3 )
 		    	$col_width = 4;
 		    
-		    $output .= '<div class="row dataHighlights dimmed">';
+		    $output .= '<div class="row dataHighlights dimmed';
+		    if( $col_width>=6 )
+		    	$output .= ' inl';
+		    $output .= '">';
 		    
 		    foreach($fields as $field => $field_params)
 		    {
-			    
+
 			    $field_value = $this->object->getData( $field );
+			    
+			    $field_type = false;
+			    if( stripos($field, 'data')===0 )
+			    	$field_type = 'date';
+			    
+			    if( $field_type == 'date' )
+			    	$field_value = dataSlownie( $field_value );
+			    
 			    
 			    if( is_array($field_params) )
 			    {
@@ -123,7 +140,7 @@ class DataobjectHelper extends AppHelper
 				    $field_label = $field_params;
 			    }			    
 			    
-			    $output .= '<div class="dataHighlight col-md-6"><p class="_label">' . $field_label . ':</p><p class="_value">' . $field_value . '</p></div>';
+			    $output .= '<div class="dataHighlight col-md-' . $col_width . '"><p class="_label">' . $field_label . ':</p><p class="_value">' . $field_value . '</p></div>';
 			    
 		    }
 		    

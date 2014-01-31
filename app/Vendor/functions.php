@@ -1,5 +1,7 @@
 <?
 
+
+
 function _ucfirst($str)
 {
 
@@ -71,4 +73,36 @@ if (!function_exists('array_column')) {
                 }
         return $output;
     }
+}
+
+function dataSlownie( $data )
+{
+	
+	$___vars = array(
+	    'miesiace' => array(
+	        'celownik' => array(
+	            1 => 'stycznia',
+	            2 => 'lutego',
+	            3 => 'marca',
+	            4 => 'kwietnia',
+	            5 => 'maja',
+	            6 => 'czerwca',
+	            7 => 'lipca',
+	            8 => 'sierpnia',
+	            9 => 'września',
+	            10 => 'października',
+	            11 => 'listopada',
+	            12 => 'grudnia',
+	        ),
+	    ),
+	);
+	
+	$parts = explode('-', substr($data, 0, 10));
+    if (count($parts) != 3) return $data;
+
+    $rok = (int)$parts[2];
+    $miesiac = (int)$parts[1];
+    $dzien = (int)$parts[0];
+
+    return '<span class="_ds" value="' . strip_tags($data) . '">' . $rok . ' ' . $___vars['miesiace']['celownik'][$miesiac] . ' ' . $dzien . ' r.</span>';
 }

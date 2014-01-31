@@ -109,15 +109,13 @@ a {
 		overflow: auto;
 		
 		._label {
-			font-size: 12px;
+			font-size: 11px;
 			margin: 0 0 3px;
-			color: #666;
-			font-weight: 300;
-			float: left;
-			margin-right: 10px;
+			color: #999;
 		}
+				
 		._value {
-			font-size: 14px;
+			font-size: 13px;
 			margin: 0;
 			
 			img {
@@ -125,6 +123,15 @@ a {
 				margin-right: 5px;
 			}
 			
+		}
+	}
+	
+	&.inl {
+		.dataHighlight {
+			._label {
+				float: left;
+				margin-right: 10px;
+			}
 		}
 	}
 }

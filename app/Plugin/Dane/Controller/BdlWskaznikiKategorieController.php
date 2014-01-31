@@ -4,6 +4,7 @@ App::uses('DataobjectsController', 'Dane.Controller');
 
 class BdlWskaznikiKategorieController extends DataobjectsController
 {
+	public $menu = array();
     public function view()
     {
         parent::_prepareView();

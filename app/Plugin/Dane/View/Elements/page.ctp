@@ -9,7 +9,7 @@ if (in_array($object->getDataset(), array('rady_posiedzenia', 'rady_gmin_debaty'
     $object_content_sizes = array(2, 10);
 }
 
-
+$this->Dataobject->setObject($object);
 ?>
 <div class="objectRender col-md-12 <?php echo $object->getDataset(); ?>" oid="<?php echo $item['data']['id'] ?>">
     <div class="row">
@@ -38,7 +38,7 @@ if (in_array($object->getDataset(), array('rady_posiedzenia', 'rady_gmin_debaty'
 
                         <? if ($object->getShortTitle()) { ?>
                             <h1 class="title trimTitle" title="<?= htmlspecialchars($object->getShortTitle()) ?>"
-                                data-trimlength="15">
+                                data-trimlength="200">
                                 <?php if (($object->getUrl() != false) && !empty($this->request)) { ?>
                                 <a href="<?= $object->getUrl() ?>" title="<?= strip_tags($object->getTitle()) ?>">
                                     <?php } ?>
@@ -55,6 +55,8 @@ if (in_array($object->getDataset(), array('rady_posiedzenia', 'rady_gmin_debaty'
                                 'item' => $item,
                                 'object' => $object
                             ));
+                        else
+                        	echo $this->Dataobject->highlights();
                         ?>
                     </div>
 
@@ -80,6 +82,8 @@ if (in_array($object->getDataset(), array('rady_posiedzenia', 'rady_gmin_debaty'
                                 'item' => $item,
                                 'object' => $object
                             ));
+                        else
+                        	echo $this->Dataobject->highlights();
                         ?>
 
                     </div>

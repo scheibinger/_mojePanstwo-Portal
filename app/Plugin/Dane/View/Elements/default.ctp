@@ -9,7 +9,7 @@ if (in_array($object->getDataset(), array('rady_posiedzenia', 'rady_gmin_debaty'
     $object_content_sizes = array(2, 10);
 }
 
-
+$this->Dataobject->setObject( $object );
 ?>
 <div class="objectRender col-md-12 <?php echo $object->getDataset(); ?>" oid="<?php echo $item['data']['id'] ?>">
     <div class="row">
@@ -33,11 +33,11 @@ if (in_array($object->getDataset(), array('rady_posiedzenia', 'rady_gmin_debaty'
                     </div>
                     <div class="content col-md-<?= $object_content_sizes[1] ?>">
                         
-                        <? /*
+                        <? if( $object->forceHighlightsFields() ) { ?>
                         <p class="header">
                             <?= $object->getLabel(); ?>
                         </p>
-                        */ ?>
+                        <? } ?>
 
                         <p class="title">
                             <?php if ($object->getUrl() != false) { ?>
@@ -54,17 +54,19 @@ if (in_array($object->getDataset(), array('rady_posiedzenia', 'rady_gmin_debaty'
                                 'item' => $item,
                                 'object' => $object
                             ));
+                        else
+	                        echo $this->Dataobject->highlights();
                         ?>
                     </div>
 
                 <? } else { ?>
                     <div class="content">
                         
-                        <? /*
+                        <? if( $object->forceHighlightsFields() ) { ?>
                         <p class="header">
                             <?= $object->getLabel(); ?>
                         </p>
-                        */ ?>
+                        <? } ?>
 
                         <p class="title">
                             <?php if ($object->getUrl() != false){ ?>
@@ -81,6 +83,8 @@ if (in_array($object->getDataset(), array('rady_posiedzenia', 'rady_gmin_debaty'
                                 'item' => $item,
                                 'object' => $object
                             ));
+                        else
+                        	echo $this->Dataobject->highlights();
                         ?>
 
                     </div>
