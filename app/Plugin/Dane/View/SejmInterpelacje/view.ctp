@@ -1,16 +1,15 @@
 <?php $this->Combinator->add_libs('css', $this->Less->css('htmlexDocMain')); ?>
 <?php $this->Combinator->add_libs('css', $this->Less->css('htmlexDoc', array('plugin' => 'Dane'))); ?>
+<?php $this->Combinator->add_libs('css', $this->Less->css('view-sejminterpelacje', array('plugin' => 'Dane'))); ?>
 
 <?php $this->Combinator->add_libs('js', 'toolbar'); ?>
 
 <?= $this->Element('dataobject/pageBegin'); ?>
 
-
-
 <?php if (empty($teksty) && $wydarzenie['dokument_id']) { ?>
     <?php echo $this->Html->css($document->getCSSLocation()); ?>
 
-    <div class="htmlexDoc" data-packages="<?php echo $document->getPackagesCount(); ?>"
+    <div class="htmlexDoc sejmInterpelacje" data-packages="<?php echo $document->getPackagesCount(); ?>"
          data-current-package="<?php echo $documentPackage; ?>"
          data-pages="<?php echo $document->getPagesCount(); ?>"
          data-document-id="<?php echo $document->getId(); ?>"
@@ -24,8 +23,8 @@
         <div class="document container">
             <div class="row">
                 <div class="content col-md-9">
-                    <div class="canvas" style="margin-left: -50px;">
-                        <?php echo $document->loadHtml($documentPackage); ?>
+                    <div class="canvas">
+                    <?php echo $document->loadHtml($documentPackage); ?>
                     </div>
                     <div class="loadMoreDocumentContent <?php if ($document->getPackagesCount() > 1) {
                         echo 'show';
@@ -91,8 +90,8 @@
 	                    	<h2>
 	                        <small>Od:</small> <?php echo $wydarzenie['autor_str']; ?></h2>
 	                    <? } ?>
-	                    <div class="html" style="padding:20px 50px;">
-	                        <?php echo $t['html']; ?>
+                        <div class="html">
+                        <?php echo $t['html']; ?>
 	                    </div>
                     </div>
                 <?php } ?>
