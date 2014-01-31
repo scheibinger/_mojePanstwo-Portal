@@ -113,6 +113,7 @@ class DataobjectHelper extends AppHelper
 		    {
 
 			    $field_value = $this->object->getData( $field );
+			    $normalizeText = false;
 			    
 			    $field_type = false;
 			    if( stripos($field, 'data')===0 )
@@ -134,13 +135,30 @@ class DataobjectHelper extends AppHelper
 					    
 				    }
 				    
+				    if( isset($field_params['href']) )
+				    {
+					    
+					    $field_value = '<a href="' . $field_params['href'] . '" />' . $field_value . '</a>';
+					    
+				    }
+				    
+				    if( isset($field_params['normalizeText']) && $field_params['normalizeText'] )
+				    {
+					    
+					    $normalizeText = true;
+					    
+				    }
+				    
 			    }
 			    else
 			    {
 				    $field_label = $field_params;
 			    }			    
 			    
-			    $output .= '<div class="dataHighlight col-md-' . $col_width . '"><p class="_label">' . $field_label . ':</p><p class="_value">' . $field_value . '</p></div>';
+			    $output .= '<div class="dataHighlight col-md-' . $col_width . '"><p class="_label">' . $field_label . ':</p><p class="_value';
+			    if( $normalizeText )
+			    	$output .= ' normalizeText';
+			    $output .= '">' . $field_value . '</p></div>';
 			    
 		    }
 		    
