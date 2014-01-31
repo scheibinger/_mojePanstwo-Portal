@@ -2,8 +2,7 @@
     float: left;
     overflow: auto;
 
-    .wskaznik,
-    .wskaznikStatic {
+    .wskaznik {
         font-family: "Lato", sans-serif;
         font-size: 13px;
         font-weight: 400;
@@ -133,5 +132,34 @@
         background-color: #FFFFFF;
         padding-top: 10px;
         padding-bottom: 10px;
+
+        table {
+            .ay-sort {
+                cursor: pointer;
+
+                &.ay-sort-asc:after,
+                &.ay-sort-desc:after {
+                    color: #666666;
+                    font-weight: normal;
+                    margin-left: 5px;
+                }
+                &.sortString {
+                    &.ay-sort-asc:after {
+                        content: "[A-Z]";
+                    }
+                    &.ay-sort-desc:after {
+                        content: "[Z-A]";
+                    }
+                }
+                &.sortNumber {
+                    &.ay-sort-asc:after {
+                        content: "\2191";
+                    }
+                    &.ay-sort-desc:after {
+                        content: "\2193";
+                    }
+                }
+            }
+        }
     }
 }

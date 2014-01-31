@@ -888,3 +888,15 @@ msgstr "w %s r."
 
 msgid "LC_BDL_WSKAZNIKI_PREVLASTYEAR"
 msgstr "w stosunku do %s r."
+
+msgid "LC_BDL_WSKAZNIKI_NAZWA"
+msgstr "Nazwa"
+
+msgid "LC_BDL_WSKAZNIKI_WARTOSC"
+msgstr "Wartość"
+
+msgid "LC_BDL_WSKAZNIKI_ROK"
+msgstr "Rok"
+
+msgid "LC_BDL_WSKAZNIKI_PRZYROST"
+msgstr "Przyrost"

@@ -77,53 +77,67 @@
             </ul>
         </div>
         <div class="content col-md-9">
-            <? if (isset($local_data)) {
-                foreach ($local_data as $local) {
-                    ?>
-                    <div class="wskaznikStatic">
-                        <h2>
-                            <a href="<?= $this->here ?>/<?= $local['local_id'] ?>">
-                                <?= $local['local_name'] ?>
-                            </a>
-                        </h2>
-
-                        <div class="stats">
-                            <div class="charts">
-                                <div class="head">
-                                    <p class="vp">
-                                        <span class="v"><?= number_format($local['lv'], 2, ',', ' ') ?></span>
-                                        <? /* <span class="u"><?= $local['jednostka'] ?></span> */ ?>
-                                        <span
-                                            class="y"><?= __d('dane', 'LC_BDL_WSKAZNIKI_LASTYEAR', array($local['ly'])) ?>
-                                        </span>
-                                    </p>
-
-                                    <? /*<p class="fp">
-                                        <span class="factor <? if (intval($local['dv']) < 0) {
-                                            echo "d";
-                                        } else {
-                                            echo "u";
-                                        } ?>">
-                                            <?= $local['dv'] ?> %
-                                        </span>
-                                        <span class="i">
-                                            <?= __d('dane', 'LC_BDL_WSKAZNIKI_PREVLASTYEAR', array($local['ply'])) ?>
-                                        </span>
-                                    </p>*/
-                                    ?>
-                                </div>
-                                <div class="chart" data-chart-datas='<? /*= json_encode($local['data']) */ ?>'>
-                                <div class="progress progress-striped active">
-                                        <div class="progress-bar" role="progressbar" aria-valuenow="45"
-                                             aria-valuemin="0" aria-valuemax="100" style="width: 15%"></div>
-                                    </div>
-                                </div>
+            <? if (isset($local_data)) { ?>
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>
+                                <span class="ay-sort sortString"
+                                      data-ay-sort-index="0"><?= __d('dane', 'LC_BDL_WSKAZNIKI_NAZWA') ?>
+                        </th>
+                        <th>
+                            <span class="ay-sort sortNumber"
+                                  data-ay-sort-index="1"><?= __d('dane', 'LC_BDL_WSKAZNIKI_WARTOSC') ?></span>
+                            /
+                            <span class="ay-sort sortNumber"
+                                  data-ay-sort-index="2"><?= __d('dane', 'LC_BDL_WSKAZNIKI_ROK') ?></span>
+                        </th>
+                        <? /*
+                            <th>
+                                <span class="ay-sort sortNumber" data-ay-sort-index="3"><?= __d('dane','LC_BDL_WSKAZNIKI_PRZYROST') ?></span>
+                                /
+                                <span class="ay-sort sortNumber" data-ay-sort-index="4"><?= __d('dane','LC_BDL_WSKAZNIKI_ROK') ?></span>
+                            </th>
+                            */
+                        ?>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <? foreach ($local_data as $local) { ?>
+                        <tr class="wskaznikStatic">
+                            <td>
+                                <a class="sortOption"
+                                   href="<?= $this->here ?>/<?= $local['local_id'] ?>"><?= $local['local_name'] ?></a>
+                            </td>
+                            <td>
+                                <span class="sortOption"
+                                      data-ay-sort-weight="<?= $local['lv'] ?>"><?= number_format($local['lv'], 2, ',', ' ') ?></span>
+                                <span class="sortOption"
+                                      data-ay-sort-weight="<?= $local['ly'] ?>"><?= __d('dane', 'LC_BDL_WSKAZNIKI_LASTYEAR', array($local['ly'])) ?></span>
+                            </td>
+                            <? /*
+                        <td>
+                            <span class="sortOption factor <? if (intval($local['dv']) < 0) {echo "d";} else {echo "u";} ?>" data-ay-sort-weight="<?= $local['dv'] ?>"><?= $local['dv'] ?> %</span>
+                            <span class="sortOption" data-ay-sort-weight="<?= $local['ply'] ?>"><?= __d('dane', 'LC_BDL_WSKAZNIKI_PREVLASTYEAR', array($local['ply'])) ?></span>
+                        </td>
+                        */
+                            ?>
+                        </tr>
+                        <? /*
+                    <tr clas="wskaznikStaticChart">
+                        <div class="chart" data-chart-datas='<?= json_encode($local['data']) ?>'>
+                            <div class="progress progress-striped active">
+                                <div class="progress-bar" role="progressbar" aria-valuenow="45"
+                                     aria-valuemin="0" aria-valuemax="100" style="width: 15%"></div>
                             </div>
                         </div>
-                    </div>
-                <?
-                }
-            }?>
+                    </tr>
+                    */
+                        ?>
+                    <? } ?>
+                    </tbody>
+                </table>
+            <? } ?>
         </div>
     </div>
 
