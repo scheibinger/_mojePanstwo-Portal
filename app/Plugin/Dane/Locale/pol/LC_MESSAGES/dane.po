@@ -900,3 +900,9 @@ msgstr "Rok"
 
 msgid "LC_BDL_WSKAZNIKI_PRZYROST"
 msgstr "Przyrost"
+
+msgid "LC_BDL_WSKAZNIKI_SEARCH_PLACEHOLDER"
+msgstr "Wpisz szukaną frazę..."
+
+msgid "LC_BDL_WSKAZNIKI_SEARCH_CLEAN"
+msgstr "Wyczyść"

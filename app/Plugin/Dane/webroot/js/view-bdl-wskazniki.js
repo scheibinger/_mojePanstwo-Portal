@@ -134,8 +134,9 @@
 /** BDL WSKAZNIKI PAGE CODE */
 jQuery(document).ready(function () {
     var main = jQuery('#bdl-wskazniki'),
-        wskazniki = main.find('.wskaznik'),
-        wskaznikiStatic = main.find('.wskaznikStatic'),
+        wskaznikiTable = main.find('.localDataTable tbody'),
+        wskazniki = wskaznikiTable.find('.wskaznik'),
+        wskaznikiStatic = wskaznikiTable.find('.wskaznikStatic'),
         wskaznikiString = '';
 
     wskazniki.each(function () {
@@ -273,43 +274,26 @@ jQuery(document).ready(function () {
             wskaznik.unbind('click');
         });
 
-        /*var wskaznik = jQuery(this).find('.chart'),
-         chart = wskaznik.data('chart-datas'),
-         label = [],
-         value = [];
+        jQuery('.localDataSearch input').keyup(function () {
+            var input = jQuery(this).val();
 
-         jQuery.each(chart, function () {
-         label.push(this['rocznik']);
-         value.push(Number(this['v']));
-         });
+            if (input != '') {
+                wskaznikiTable.find('tr').hide();
+                wskaznikiTable.find('td:contains(' + input + ')').each(function () {
+                    jQuery(this).parents('tr').show();
+                });
+                wskaznikiTable.find('[data-ay-sort-weight*="' + input + '"]').each(function () {
+                    jQuery(this).parents('tr').show();
+                });
+            } else {
+                wskaznikiTable.find('tr:hidden').show();
+            }
+        });
 
-         wskaznik.highcharts({
-         title: {
-         text: ''
-         },
-         credits: {
-         enabled: false
-         },
-         xAxis: {
-         categories: label
-         },
-         yAxis: {
-         title: ''
-         },
-         tooltip: {
-         valueSuffix: ''
-         },
-         legend: {
-         enabled: false,
-         align: 'left'
-         },
-         series: [
-         {
-         name: "Wartość",
-         data: value
-         }
-         ]
-         });*/
+        jQuery('.localDataSearch .btn').click(function (e) {
+            e.preventDefault();
+            jQuery('.localDataSearch input').val('');
+            wskaznikiTable.find('tr:hidden').show();
+        });
     }
 })
-;

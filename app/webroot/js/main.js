@@ -5,10 +5,10 @@ jQuery.extend(jQuery.ui.dialog.prototype.options, {
     draggable: false
 });
 
-/* JQUERY FUNCTION RETURNING SIZE/WIDTH/HEIGHT/ETC HIDDEN ELEMENTS */
 (function ($) {
-    $.fn.addBack = $.fn.addBack || $.fn.andSelf;
+    /* JQUERY FUNCTION RETURNING SIZE/WIDTH/HEIGHT/ETC HIDDEN ELEMENTS */
 
+    $.fn.addBack = $.fn.addBack || $.fn.andSelf;
     $.fn.extend({
 
         actual: function (method, options) {
@@ -93,6 +93,13 @@ jQuery.extend(jQuery.ui.dialog.prototype.options, {
             // IMPORTANT, this plugin only return the value of the first element
             return actual;
         }
+    });
+
+    /*TURN OFF CASE-SENSITIVE FOR CONTAINS PLUGIN IN JQUERY*/
+    $.expr[":"].contains = $.expr.createPseudo(function (arg) {
+        return function (elem) {
+            return $(elem).text().toLowerCase().indexOf(arg.toLowerCase()) >= 0;
+        };
     });
 })(jQuery);
 

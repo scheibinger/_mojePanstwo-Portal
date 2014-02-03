@@ -69,7 +69,7 @@
                 <? foreach ($dimension['levels'] as $level) { ?>
                     <li<? if (isset($level['selected'])) { ?> class="active" <? } ?>>
                         <a href="/dane/bdl_wskazniki/<?= $object->getId() . DS . $option['data']['id'] . DS . $level['id'] ?>">
-                        <?= $level["label"] ?>
+                            <?= $level["label"] ?>
                         </a>
                     </li>
                 <? } ?>
@@ -77,8 +77,17 @@
         </div>
         <div class="content col-md-9">
             <? if (isset($local_data)) { ?>
-                <table class="table table-striped">
-                    <thead>
+                <div class="input-group localDataSearch">
+                    <span class="input-group-addon" data-icon="&#xe600;"></span>
+                    <input type="text" class="form-control"
+                           placeholder="<?= __d('dane', 'LC_BDL_WSKAZNIKI_SEARCH_PLACEHOLDER') ?>">
+                    <span class="input-group-btn">
+                        <button class="btn btn-info"
+                                type="button"><?= __d('dane', 'LC_BDL_WSKAZNIKI_SEARCH_CLEAN') ?></button>
+                    </span>
+                </div>
+                <table class="localDataTable table table-striped">
+                <thead>
                     <tr>
                         <th>
                                 <span class="ay-sort sortString"
