@@ -160,6 +160,39 @@
                     }
                 }
             }
+
+            .wskaznikStatic {
+                cursor: pointer;
+                @charHorizontal: 160px;
+
+                &.clicked {
+                    cursor: default;
+
+                    > td {
+                        padding-bottom: @charHorizontal;
+                    }
+                }
+                .holder {
+                    position: relative;
+
+                    .wskaznikChart {
+                        display: none;
+                        height: 150px;
+                        width: 100%;
+                        position: absolute;
+                        bottom: -@charHorizontal;
+                        left: -8px;
+
+                        .progress {
+                            height: 16px;
+                            margin: 0 25% 0 15%;
+                            position: relative;
+                            top: 40%;
+                            width: 60%;
+                        }
+                    }
+                }
+            }
         }
     }
 }

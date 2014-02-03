@@ -204,9 +204,76 @@ jQuery(document).ready(function () {
     });
 
     if (wskaznikiStatic.length > 0) {
-        jQuery.ay.tableSort({target: jQuery('#bdl-wskazniki .content table'), debug: false});
-        /*jQuery.each(wskaznikiStatic, function () {
-         var wskaznik = jQuery(this).find('.chart'),
+        jQuery.ay.tableSort({target: main.find('.content table'), debug: false});
+
+        wskaznikiStatic.click(function () {
+            var wskaznik = jQuery(this),
+                wskaznikwidth = jQuery(this).outerWidth(),
+                wskaznikData = wskaznik.data(),
+                wskaznikChart = wskaznik.find('.wskaznikChart');
+
+            wskaznikChart.css({'width': wskaznikwidth});
+
+            jQuery.ajax({
+                url: "/dane/bdl_wskazniki/chart_data_for_dimmensions.json?dims=" + wskaznikData.dim_id + '&localtype=' + wskaznikData.local_type + '&localid=' + wskaznikData.local_id,
+                type: "POST",
+                dataType: "json",
+                beforeSend: function () {
+                    wskaznikChart.slideDown();
+                    wskaznikChart.find('.chart .progress-bar').attr('aria-valuenow', '45').css('width', '45%');
+                },
+                always: function () {
+                    wskazniki.find('.chart .progress-bar').attr('aria-valuenow', '80').css('width', '80%');
+                },
+                complete: function (res) {
+                    var data = res.responseJSON.data;
+
+                    jQuery.each(data, function () {
+                        var chart = this,
+                            label = [],
+                            value = [];
+
+                        jQuery.each(chart.data, function () {
+                            label.push(this.y);
+                            value.push(Number(this.v));
+                        });
+
+                        wskaznikChart.highcharts({
+                            title: {
+                                text: ''
+                            },
+                            credits: {
+                                enabled: false
+                            },
+                            xAxis: {
+                                categories: label
+                            },
+                            yAxis: {
+                                title: ''
+                            },
+                            tooltip: {
+                                valueSuffix: ''
+                            },
+                            legend: {
+                                enabled: false,
+                                align: 'left'
+                            },
+                            series: [
+                                {
+                                    name: "Wartość",
+                                    data: value
+                                }
+                            ]
+                        });
+                    })
+                }
+            });
+
+            wskaznik.addClass('clicked');
+            wskaznik.unbind('click');
+        });
+
+        /*var wskaznik = jQuery(this).find('.chart'),
          chart = wskaznik.data('chart-datas'),
          label = [],
          value = [];
@@ -242,7 +309,7 @@ jQuery(document).ready(function () {
          data: value
          }
          ]
-         });
-         })*/
+         });*/
     }
-});
+})
+;

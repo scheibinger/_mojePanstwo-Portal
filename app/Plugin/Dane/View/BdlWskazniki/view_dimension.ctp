@@ -8,7 +8,6 @@
 <?= $this->Element('bdl_select', array('expand_dimension' => $expand_dimension, 'dims' => $dims, 'redirect' => true)); ?>
 
     <div id="bdl-wskazniki">
-
         <?
         if (!empty($expanded_dimension)) {
             foreach ($expanded_dimension['options'] as $option) {
@@ -69,8 +68,8 @@
             <ul class="nav nav-pills nav-stacked">
                 <? foreach ($dimension['levels'] as $level) { ?>
                     <li<? if (isset($level['selected'])) { ?> class="active" <? } ?>>
-                        <a href="<?= $this->here . DS . $level['id'] ?>">
-                            <?= $level["label"] ?>
+                        <a href="/dane/bdl_wskazniki/<?= $object->getId() . DS . $option['data']['id'] . DS . $level['id'] ?>">
+                        <?= $level["label"] ?>
                         </a>
                     </li>
                 <? } ?>
@@ -104,10 +103,20 @@
                     </thead>
                     <tbody>
                     <? foreach ($local_data as $local) { ?>
-                        <tr class="wskaznikStatic">
+                        <tr class="wskaznikStatic" data-dim_id="<?= $option['data']['id'] ?>" data-local_type="2"
+                            data-local_id="<?= $local["local_id"] ?>">
                             <td>
-                                <a class="sortOption"
-                                   href="<?= $this->here ?>/<?= $local['local_id'] ?>"><?= $local['local_name'] ?></a>
+                                <div class="holder">
+                                    <a class="sortOption"
+                                       href="<?= $this->here ?>/<?= $local['local_id'] ?>"><?= $local['local_name'] ?></a>
+
+                                    <div class="wskaznikChart">
+                                        <div class="progress progress-striped active">
+                                            <div class="progress-bar" role="progressbar" aria-valuenow="45"
+                                                 aria-valuemin="0" aria-valuemax="100" style="width: 15%"></div>
+                                        </div>
+                                    </div>
+                                </div>
                             </td>
                             <td>
                                 <span class="sortOption"
@@ -116,24 +125,13 @@
                                       data-ay-sort-weight="<?= $local['ly'] ?>"><?= __d('dane', 'LC_BDL_WSKAZNIKI_LASTYEAR', array($local['ly'])) ?></span>
                             </td>
                             <? /*
-                        <td>
-                            <span class="sortOption factor <? if (intval($local['dv']) < 0) {echo "d";} else {echo "u";} ?>" data-ay-sort-weight="<?= $local['dv'] ?>"><?= $local['dv'] ?> %</span>
-                            <span class="sortOption" data-ay-sort-weight="<?= $local['ply'] ?>"><?= __d('dane', 'LC_BDL_WSKAZNIKI_PREVLASTYEAR', array($local['ply'])) ?></span>
-                        </td>
-                        */
+                            <td>
+                                <span class="sortOption factor <? if (intval($local['dv']) < 0) {echo "d";} else {echo "u";} ?>" data-ay-sort-weight="<?= $local['dv'] ?>"><?= $local['dv'] ?> %</span>
+                                <span class="sortOption" data-ay-sort-weight="<?= $local['ply'] ?>"><?= __d('dane', 'LC_BDL_WSKAZNIKI_PREVLASTYEAR', array($local['ply'])) ?></span>
+                            </td>
+                            */
                             ?>
                         </tr>
-                        <? /*
-                    <tr clas="wskaznikStaticChart">
-                        <div class="chart" data-chart-datas='<?= json_encode($local['data']) ?>'>
-                            <div class="progress progress-striped active">
-                                <div class="progress-bar" role="progressbar" aria-valuenow="45"
-                                     aria-valuemin="0" aria-valuemax="100" style="width: 15%"></div>
-                            </div>
-                        </div>
-                    </tr>
-                    */
-                        ?>
                     <? } ?>
                     </tbody>
                 </table>
