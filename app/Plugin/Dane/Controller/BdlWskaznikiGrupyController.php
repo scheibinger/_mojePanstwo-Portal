@@ -17,6 +17,7 @@ class BdlWskaznikiGrupyController extends DataobjectsController
                 'grupa_id',
                 'kategoria_id',
             ),
+            'hlFields' => array('poziom_str', 'data_aktualizacji'),
         ));
     }
 } 

@@ -7,7 +7,10 @@ class DataobjectHelper extends AppHelper
      */
     protected $object;
     public $helpers = array('Number');
-
+	
+	private $thumbnail_sizes_map = array(
+		'poslowie' => '0',
+	);
 
     public function __construct(View $view, $settings = array())
     {
@@ -69,9 +72,12 @@ class DataobjectHelper extends AppHelper
 		$this->object = $object;
 	}
 	
-    public function render($object, $theme = 'default')
+    public function render($object, $theme = 'default', $options = array())
     {
-        
+     	// debug( $object->getData() );
+     	$bg = isset($options['bg']) ? $options['bg'] : false;   
+     	$hlFields = isset($options['hlFields']) ? $options['hlFields'] : false;   
+		
 		$this->setObject($object);
 		
         /*
@@ -82,15 +88,23 @@ class DataobjectHelper extends AppHelper
         }
         */
 
-        return $this->_View->element($theme, array('item' => $this->object->getObject(), 'object' => $this->object, 'theme' => $theme, 'file' => $this->object->getDataset()), array('plugin' => 'Dane'));
+        return $this->_View->element($theme, array(
+        	'item' => $this->object->getObject(), 
+        	'object' => $this->object, 
+        	'theme' => $theme, 
+        	'bg' => $bg, 
+        	'hlFields' => $hlFields,
+        	'file' => $this->object->getDataset(),
+        	'thumbSize' => $this->getThumbSize(),
+        ), array('plugin' => 'Dane'));
     }
     
-    public function highlights()
+    public function highlights( $fields = false )
     {
 	    
 	    $output = '';
-	    
-	    $fields = $this->object->getHighlightsFields();
+	    $fields = $this->object->getHiglightedFields( $fields );
+	   	    
 	    $fields_count = count( $fields );
 	    if( $fields_count )
 	    {
@@ -103,57 +117,114 @@ class DataobjectHelper extends AppHelper
 		    	$col_width =6;
 		    elseif( $fields_count==3 )
 		    	$col_width = 4;
+		    elseif( $fields_count==5 )
+		    	$col_width = 2;
+		    elseif( $fields_count==6 )
+		    	$col_width = 2;
 		    
 		    $output .= '<div class="row dataHighlights dimmed';
 		    if( $col_width>=6 )
 		    	$output .= ' inl';
 		    $output .= '">';
-		    
+		    		    
 		    foreach($fields as $field => $field_params)
 		    {
-
-			    $field_value = $this->object->getData( $field );
-			    $normalizeText = false;
-			    
-			    $field_type = false;
+				
+				$normalizeText = false;
+				
+				$field_label = $field_params['label'];
+			    $field_value = $field_params['value'];
+			    $field_options = isset($field_params['options']) ? $field_params['options'] : array();			    
+			    			    
+			    $field_type = $field_params['type'];
 			    if( stripos($field, 'data')===0 )
 			    	$field_type = 'date';
 			    
-			    if( $field_type == 'date' )
+			    
+			    
+			    
+			    if( ($field_type == 'date') && !isset($field_options['format']) )
+			    {
+			    	if( $field_value=='0000-00-00' )
+			    		continue;
 			    	$field_value = dataSlownie( $field_value );
-			    
-			    
-			    if( is_array($field_params) )
-			    {
-				    
-				    $field_label = $field_params['label'];
-				    
-				    if( isset($field_params['img']) )
-				    {
-					    
-					    $field_value = '<img src="' . $field_params['img'] . '" />' . $field_value;
-					    
-				    }
-				    
-				    if( isset($field_params['href']) )
-				    {
-					    
-					    $field_value = '<a href="' . $field_params['href'] . '" />' . $field_value . '</a>';
-					    
-				    }
-				    
-				    if( isset($field_params['normalizeText']) && $field_params['normalizeText'] )
-				    {
-					    
-					    $normalizeText = true;
-					    
-				    }
-				    
 			    }
-			    else
+			    elseif( $field_type == 'pln' )
 			    {
-				    $field_label = $field_params;
-			    }			    
+			    	setlocale(LC_MONETARY, 'pl_PL');
+			    	$field_value = money_format('%i', $field_value);
+			    }
+			    elseif( $field_type == 'integer' )
+			    {
+				    if( !$field_value )
+				    	continue;
+				    else
+				    	$field_value = number_format($field_value, 0, '', ' ');
+			    }
+			    elseif( $field_type == 'duration' )
+			    {
+				    if( !$field_value )
+				    	continue;
+				    else
+				    	$field_value = number_format($field_value, 0, '', ' ') . 'm';
+			    }
+			    
+			    
+			    
+			    
+			    if( isset($field_options['format']) )
+			    {
+				    switch( $field_options['format'] )
+				    {
+					    case 'wiek':
+					    {
+					    	$field_value = pl_dopelniacz(pl_wiek($field_value), 'rok', 'lata', 'lat');
+						    break;
+					    }
+				    }
+			    }
+			    
+			    
+			    
+			    if( isset($field_options['dictionary']) )
+				    $field_value = @$field_options['dictionary'][ $field_value ];
+			    
+			    
+			    
+			    if( isset($field_options['img']) )
+			    	if( preg_match_all('/\{\$(.*?)\}/i', $field_options['img'], $matches) )
+				    	for( $m=0; $m<count($matches[0]); $m++ )
+					    	$field_value = '<img src="' . str_replace($matches[0][$m], $this->object->getData($matches[1][$m]), $field_options['img']) . '" /> ' . $field_value;
+				    	
+				
+				 
+			    
+			    if( isset($field_options['normalizeText']) && $field_options['normalizeText'] )
+				    $normalizeText = true;
+			    
+			    if( isset($field_options['link']) )
+			    {
+				    if( is_array($field_options['link']) && $field_options['link']['dataset'] && $field_options['link']['object_id'] )
+				    {
+					    $object_id = ( $field_options['link']['object_id'][0] == '$' ) ? 
+					    	$this->object->getData( substr($field_options['link']['object_id'], 1) ) : 
+					    	$field_options['link']['object_id'];
+					    
+					    $href = '/dane/' . $field_options['link']['dataset'] . '/' . $object_id;
+					    
+					    $field_value = '<a href="' . $href . '">' . $field_value . '</a>';
+					    
+				    }
+				}
+				
+				if( isset($field_options['dopelniacz']) )
+					$field_value = pl_dopelniacz($field_value, $field_options['dopelniacz'][0], $field_options['dopelniacz'][1], $field_options['dopelniacz'][2]);
+			    
+			    
+				    
+
+
+	    
 			    
 			    $output .= '<div class="dataHighlight col-md-' . $col_width . '"><p class="_label">' . $field_label . ':</p><p class="_value';
 			    if( $normalizeText )
@@ -166,6 +237,15 @@ class DataobjectHelper extends AppHelper
 	    }
 	    
 	    return $output;
+	    
+    }
+    
+    private function getThumbSize()
+    {
+	    
+	    return array_key_exists($this->object->getDataset(), $this->thumbnail_sizes_map) ? 
+	    	$this->thumbnail_sizes_map[ $this->object->getDataset() ] : 
+	    	'1';
 	    
     }
 

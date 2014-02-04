@@ -4,6 +4,7 @@
 <?php $this->Combinator->add_libs('js', 'bootstrap-select'); ?>
 <?php $this->Combinator->add_libs('js', 'Dane.bdl-select'); ?>
 
+<div class="row">
 <form id="filters_form" class="bdl-select col-xs-12">
     <ul>
         <? foreach ($dims as $key => $d) {
@@ -42,3 +43,4 @@
         } ?>
     </ul>
 </form>
+</div>

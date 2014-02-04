@@ -12,6 +12,7 @@ class DataobjectsBrowserComponent extends Component
     public $datasetLocked = false;
     public $showTitle = false;
     public $titleTag = 'h2';
+    public $hlFields = false;
 
     public $excludeFilters = array();
 
@@ -45,6 +46,9 @@ class DataobjectsBrowserComponent extends Component
 
         if (isset($settings['excludeFilters']))
             $this->excludeFilters = $settings['excludeFilters'];
+            
+        if (isset($settings['hlFields']))
+            $this->hlFields = $settings['hlFields'];
 
         $add_source_params = array();
         $source_params = array();

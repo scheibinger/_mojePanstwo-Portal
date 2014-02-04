@@ -89,7 +89,7 @@ class BdlWskaznikiController extends DataobjectsController
 		    	
 		    	if( isset($dimension['dim_str']) )
 		    		$expanded_dimension['options'] = array_filter($expanded_dimension['options']);
-		    						
+		    			    					
 				if( empty($dimension) )
 				{
 				

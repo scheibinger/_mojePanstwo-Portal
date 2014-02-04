@@ -24,12 +24,7 @@ class CzasHelper extends AppHelper
 
     public function wiek($data)
     {
-
-        $birthDate = explode("-", substr($data, 0, 10));
-        $age = (date("md", date("U", mktime(0, 0, 0, $birthDate[1], $birthDate[2], $birthDate[0]))) > date("md") ? ((date("Y") - $birthDate[0]) - 1) : (date("Y") - $birthDate[0]));
-
-        return pl_dopelniacz($age, 'rok', 'lata', 'lat');
-
+        return pl_dopelniacz(pl_wiek($data), 'rok', 'lata', 'lat');
     }
 
     public function dataSlownie($data)

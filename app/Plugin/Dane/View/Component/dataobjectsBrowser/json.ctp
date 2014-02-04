@@ -3,11 +3,18 @@
 </div>
 <div class="innerContainer">
     <ul class="list-group list-dataobjects">
-        <? foreach ($objects as $object) {
-            echo $this->Dataobject->render($object['Dataobject']);
-        } ?>
+        <?
+	    	$bg = false;
+	    	foreach ($objects as $object) {
+	        	echo $this->Dataobject->render($object['Dataobject'], 'default', array(
+	        		'bg' => $bg,
+	        		'hlFields' => $dataBrowser->hlFields,
+	        	));
+	        	$bg = !$bg;
+			}
+		?>
     </ul>
-    <div class="col-xs-12 col-sm-6 col-sm-offset-3">
+    <div class="col-xs-12">
         <ul class="pagination pagination-sm">
             <?php echo $this->Paginator->numbers(array('tag' => 'li', 'currentTag' => 'a', 'currentClass' => 'active', 'separator' => false, 'escape' => false)); ?>
         </ul>

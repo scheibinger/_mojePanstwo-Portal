@@ -11,7 +11,7 @@ if (in_array($object->getDataset(), array('rady_posiedzenia', 'rady_gmin_debaty'
 
 $this->Dataobject->setObject( $object );
 ?>
-<div class="objectRender col-md-12 <?php echo $object->getDataset(); ?>" oid="<?php echo $item['data']['id'] ?>">
+<div class="objectRender col-md-12 <?=$object->getDataset() ?><?if($bg){?> bg <?}?>" oid="<?php echo $item['data']['id'] ?>">
     <div class="row">
         <? if ($this->Dataobject->getDate()) { ?>
             <div class="formatDate col-md-1 dimmed">
@@ -20,12 +20,12 @@ $this->Dataobject->setObject( $object );
         <? } ?>
         <div class="data col-md-<?= $this->Dataobject->getDate() ? '11' : '12' ?>">
             <div class="row">
-                <? if ($object->getThumbnailUrl('1')) { ?>
+                <? if ($object->getThumbnailUrl( $thumbSize )) { ?>
                     <div class="attachment col-md-<?= $object_content_sizes[0] ?> text-center">
                         <?php if ($object->getUrl() != false) { ?>
                         <a href="<?= $object->getUrl() ?>">
                             <?php } ?>
-                            <img onerror="imgFixer(this)" src="<?= $object->getThumbnailUrl('1') ?>"
+                            <img onerror="imgFixer(this)" src="<?= $object->getThumbnailUrl( $thumbSize ) ?>"
                                  alt="<?= strip_tags($object->getTitle()) ?>"/>
                             <?php if ($object->getUrl() != false) { ?>
                         </a>
@@ -33,7 +33,7 @@ $this->Dataobject->setObject( $object );
                     </div>
                     <div class="content col-md-<?= $object_content_sizes[1] ?>">
                         
-                        <? if( $object->forceHighlightsFields() ) { ?>
+                        <? if( $object->force_hl_fields ) { ?>
                         <p class="header">
                             <?= $object->getLabel(); ?>
                         </p>
@@ -45,7 +45,7 @@ $this->Dataobject->setObject( $object );
                                 <?php } ?>
                                 <?= $object->getShortTitle() ?>
                                 <?php if ($object->getUrl() != false) { ?>
-                            </a>
+                            </a> <? if($object->getTitleAddon()) echo '<small>' . $object->getTitleAddon() . '</small>'; ?>
                         <?php } ?>
                         </p>
                         <?
@@ -55,14 +55,14 @@ $this->Dataobject->setObject( $object );
                                 'object' => $object
                             ));
                         else
-	                        echo $this->Dataobject->highlights();
+	                        echo $this->Dataobject->highlights( $hlFields );
                         ?>
                     </div>
 
                 <? } else { ?>
                     <div class="content">
                         
-                        <? if( $object->forceHighlightsFields() ) { ?>
+                        <? if( $object->force_hl_fields ) { ?>
                         <p class="header">
                             <?= $object->getLabel(); ?>
                         </p>
@@ -74,7 +74,7 @@ $this->Dataobject->setObject( $object );
                                 <?php } ?>
                                 <?= $object->getShortTitle() ?>
                                 <?php if ($object->getUrl() != false){ ?>
-                            </a>
+                            </a> <? if($object->getTitleAddon()) echo '<small>' . $object->getTitleAddon() . '</small>'; ?>
                         <?php } ?>
                         </p>
                         <?
@@ -84,7 +84,7 @@ $this->Dataobject->setObject( $object );
                                 'object' => $object
                             ));
                         else
-                        	echo $this->Dataobject->highlights();
+                        	echo $this->Dataobject->highlights( $hlFields );
                         ?>
 
                     </div>

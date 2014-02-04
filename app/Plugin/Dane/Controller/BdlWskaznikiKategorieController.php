@@ -16,6 +16,7 @@ class BdlWskaznikiKategorieController extends DataobjectsController
             'excludeFilters' => array(
                 'kategoria_id',
             ),
+            'hlFields' => array(),
         ));
     }
 } 

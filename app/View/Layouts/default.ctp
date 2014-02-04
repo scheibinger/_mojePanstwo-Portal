@@ -19,7 +19,7 @@
     echo $this->Html->meta(array('property' => 'fb:admins', 'content' => '616010705'));
     echo $this->Html->meta(array('property' => 'fb:app_id', 'content' => FACEBOOK_appId));
 
-    echo $this->Html->css('//fonts.googleapis.com/css?family=Lato:300,400,700,900,400italic');
+    echo $this->Html->css('//fonts.googleapis.com/css?family=Lato:200,300,400,700,900,400italic');
     echo $this->Html->css('//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/ui-darkness/jquery-ui.min.css');
 
     $this->Combinator->add_libs('css', $this->Less->css('jquery/jquery-ui-customize'), false);
