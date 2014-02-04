@@ -1,3 +1,15 @@
+/* HTML5 HISTORY.JS */
+(function (window) {
+    // Prepare
+    var History = window.History; // Note: We are using a capital H instead of a lower h
+    if (!History.enabled) {
+        // History.js is disabled for this browser.
+        // This is because we can optionally choose to support HTML4 browsers or not.
+        return false;
+    }
+})(window);
+
+
 /* REDEFINE JQUERY UI DIALOG DEFAULT OPTIONS*/
 jQuery.extend(jQuery.ui.dialog.prototype.options, {
     modal: true,
@@ -102,17 +114,6 @@ jQuery.extend(jQuery.ui.dialog.prototype.options, {
         };
     });
 })(jQuery);
-
-/* HTML5 HISTORY.JS */
-(function (window) {
-    // Prepare
-    var History = window.History; // Note: We are using a capital H instead of a lower h
-    if (!History.enabled) {
-        // History.js is disabled for this browser.
-        // This is because we can optionally choose to support HTML4 browsers or not.
-        return false;
-    }
-})(window);
 
 jQuery(function () {
     var carouselList;

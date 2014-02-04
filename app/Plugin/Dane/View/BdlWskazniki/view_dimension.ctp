@@ -87,7 +87,7 @@
                     </span>
                 </div>
                 <table class="localDataTable table table-striped">
-                <thead>
+                    <thead>
                     <tr>
                         <th>
                                 <span class="ay-sort sortString"
@@ -102,7 +102,7 @@
                         </th>
                         <? /*
                             <th>
-                                <span class="ay-sort sortNumber" data-ay-sort-index="3"><?= __d('dane','LC_BDL_WSKAZNIKI_PRZYROST') ?></span>
+                                <span class="ay-sort sortNumber" data-ay-sort-index="3  "><?= __d('dane','LC_BDL_WSKAZNIKI_PRZYROST') ?></span>
                                 /
                                 <span class="ay-sort sortNumber" data-ay-sort-index="4"><?= __d('dane','LC_BDL_WSKAZNIKI_ROK') ?></span>
                             </th>

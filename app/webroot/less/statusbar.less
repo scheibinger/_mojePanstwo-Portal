@@ -40,8 +40,10 @@
 
 #_mojePanstwoCockpit {
     @borderColor: #2e4555;
-    @backgroundColor: #222222;
-    @backgroundColorDark: darken(@backgroundColor, 15%);
+    @backgroundColor: #263339;
+    @backgroundColorMenu: #0078ac;
+    @backgroundColorMenuArrow: #005a7f;
+    @backgroundColorMenuHoverIcon: #024a68;
     @globalHeight: 40px;
 
     width: 100%;
@@ -163,8 +165,8 @@
                     z-index: 9999;
                     overflow: hidden;
                     background-clip: padding-box;
-                    background-color: @backgroundColor;
-                    border: 1px solid @backgroundColor;
+                    background-color: @backgroundColorMenu;
+                    border: 1px solid @backgroundColorMenu;
                     -moz-border-radius: 5px; /*Firefox*/
                     -webkit-border-radius: 5px; /*Safari, Chrome*/
                     border-top-left-radius: 0;
@@ -194,11 +196,6 @@
                             > .appContruct {
                                 @iconColor: #026c99;
 
-                                &.appFolder {
-                                    position: relative;
-                                    cursor: pointer;
-                                }
-
                                 width: 2*@iconSize;
                                 height: 2*@iconSize;
                                 padding: @iconPadding @iconPadding;
@@ -207,12 +204,23 @@
                                 color: #ffffff;
                                 float: left;
 
+                                &.appFolder {
+                                    position: relative;
+                                    cursor: pointer;
+                                }
+
+                                &:hover {
+                                    ._mojePanstwoCockpitMenuUpSubMenuListIcon {
+                                        background-color: @backgroundColorMenuHoverIcon;
+                                    }
+                                }
+
                                 ._mojePanstwoCockpitMenuUpSubMenuListIcon {
                                     width: @iconSize;
                                     height: @iconSize;
                                     margin: 0 auto;
-                                    background-color: @backgroundColorDark;
-                                    border: 1px solid @backgroundColorDark;
+                                    background-color: @backgroundColorMenuArrow;
+                                    border: 1px solid @backgroundColorMenuArrow;
                                     -moz-border-radius: 50px; /*Firefox*/
                                     -webkit-border-radius: 50px; /*Safari, Chrome*/
                                     border-radius: 50px;
@@ -235,7 +243,7 @@
 
                                 ._mojePanstwoCockpitMenuUpSubMenuListName {
                                     margin-top: 10px;
-                                    font-size: 12px;
+                                    font-size: 11px;
                                     font-weight: 400;
                                     line-height: 1.3em;
                                     text-align: center;
@@ -264,8 +272,8 @@
                             position: absolute;
                             bottom: 0;
                             display: block;
-                            background: @backgroundColorDark;
-                            border: 1px solid @backgroundColorDark;
+                            background: @backgroundColorMenuArrow;
+                            border: 1px solid @backgroundColorMenuArrow;
 
                             &._mojePanstwoCockpitMenuUpSubMenuControlsArrowLeft {
                                 left: -20px;
@@ -308,7 +316,7 @@
                             text-align: center;
 
                             > a {
-                                background: none repeat scroll 0 0 @backgroundColor;
+                                background: none repeat scroll 0 0 @backgroundColorMenu;
                                 border: 2px solid #ffffff;
                                 border-radius: 10px;
                                 -moz-border-radius: 10px;

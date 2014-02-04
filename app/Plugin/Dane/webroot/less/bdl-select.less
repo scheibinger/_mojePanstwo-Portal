@@ -9,6 +9,8 @@
     ul {
         padding: 0;
         margin: 0;
+        width: 100%;
+        float: left;
         list-style-type: none;
 
         li {
@@ -30,6 +32,10 @@
                     width: 80%;
                     float: left;
                     display: inline-block;
+                }
+
+                .bootstrap-select:not([class*="span"]):not([class*="col-"]):not([class*="form-control"]) {
+                    width: 100%;
                 }
 
                 .dropdown-menu {

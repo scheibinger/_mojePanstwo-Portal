@@ -31,9 +31,8 @@
                                                 alt="<?= $app['Application']['name'] ?>"/>
                                         </div>
                                     </div>
-                                    <div class="_mojePanstwoCockpitMenuUpSubMenuListName">
-                                        <?= $app['Application']['name'] ?>
-                                    </div>
+                                    <div
+                                        class="_mojePanstwoCockpitMenuUpSubMenuListName"><?= $app['Application']['name'] ?></div>
                                 </a>
                             <?php } else if ($app['Application']['type'] == 'folder') { ?>
                                 <div class="appContruct appFolder"
@@ -43,9 +42,8 @@
                                             <img src="/icon/folder.svg" alt="<?= $app['Application']['name'] ?>"/>
                                         </div>
                                     </div>
-                                    <div class="_mojePanstwoCockpitMenuUpSubMenuListName">
-                                        <?= $app['Application']['name'] ?>
-                                    </div>
+                                    <div
+                                        class="_mojePanstwoCockpitMenuUpSubMenuListName"><?= $app['Application']['name'] ?></div>
                                     <ul class="appList">
                                         <?php foreach ($app['Content'] as $key => $appList) { ?>
                                             <li>
@@ -57,9 +55,7 @@
                                                                 alt="<?= $appList['name'] ?>"/>
                                                         </div>
                                                     </div>
-                                                    <div class="appName">
-                                                        <?= $appList['name'] ?>
-                                                    </div>
+                                                    <div class="appName"><?= $appList['name'] ?></div>
                                                 </a>
                                             </li>
                                         <?php } ?>

@@ -135,8 +135,8 @@
 jQuery(document).ready(function () {
     var main = jQuery('#bdl-wskazniki'),
         wskaznikiTable = main.find('.localDataTable tbody'),
-        wskazniki = wskaznikiTable.find('.wskaznik'),
-        wskaznikiStatic = wskaznikiTable.find('.wskaznikStatic'),
+        wskazniki = main.find('.wskaznik'),
+        wskaznikiStatic = main.find('.wskaznikStatic'),
         wskaznikiString = '';
 
     wskazniki.each(function () {
@@ -278,22 +278,22 @@ jQuery(document).ready(function () {
             var input = jQuery(this).val();
 
             if (input != '') {
-                wskaznikiTable.find('tr').hide();
+                wskaznikiTable.find('tr').slideUp();
                 wskaznikiTable.find('td:contains(' + input + ')').each(function () {
-                    jQuery(this).parents('tr').show();
+                    jQuery(this).parents('tr').slideDown();
                 });
                 wskaznikiTable.find('[data-ay-sort-weight*="' + input + '"]').each(function () {
-                    jQuery(this).parents('tr').show();
+                    jQuery(this).parents('tr').slideDown();
                 });
             } else {
-                wskaznikiTable.find('tr:hidden').show();
+                wskaznikiTable.find('tr:hidden').slideDown();
             }
         });
 
         jQuery('.localDataSearch .btn').click(function (e) {
             e.preventDefault();
             jQuery('.localDataSearch input').val('');
-            wskaznikiTable.find('tr:hidden').show();
+            wskaznikiTable.find('tr:hidden').slideDown();
         });
     }
 })
