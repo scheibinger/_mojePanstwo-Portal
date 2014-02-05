@@ -271,32 +271,34 @@ class DataobjectHelper extends AppHelper
 			    
 			    
 				    
-
-
-	    
-			    
-			    if( !is_array($field_value) && stripos($field_value, $field_label)===0 )
-			    	$field_value = trim( substr($field_value, strlen($field_label)) );
 			    
 			    
-			    $output .= '<div class="dataHighlight col-md-' . $col_width . '">';
+			    if( !empty( $field_value ) )
+			    {
+			    	
+			    	if( !is_array($field_value) && stripos($field_value, $field_label)===0 )
+				    	$field_value = trim( substr($field_value, strlen($field_label)) );
+			    	
+				    $output .= '<div class="dataHighlight col-md-' . $col_width . '">';
+				    
+				    if( $field_label && !isset($field_options['hide'] ) )
+				    	$output .= '<p class="_label">' . $field_label . ':</p>';
+				    
+				    $output .= '<p class="_value';
+				    
+				    if( $normalizeText )
+				    	$output .= ' normalizeText';
+				    
+				    $output .= '">';
+				    
+				    if( is_array($field_value) )
+				    	$output .= '<ul class="hl_ul normalizeText"><li>' . implode('</li><li>', $field_value) . '</li></ul>';
+				    else
+					    $output .= $field_value;
+				    
+				    $output .= '</p></div>';
 			    
-			    if( $field_label && !isset($field_options['hide'] ) )
-			    	$output .= '<p class="_label">' . $field_label . ':</p>';
-			    
-			    $output .= '<p class="_value';
-			    
-			    if( $normalizeText )
-			    	$output .= ' normalizeText';
-			    
-			    $output .= '">';
-			    
-			    if( is_array($field_value) )
-			    	$output .= '<ul class="hl_ul normalizeText"><li>' . implode('</li><li>', $field_value) . '</li></ul>';
-			    else
-				    $output .= $field_value;
-			    
-			    $output .= '</p></div>';
+			    }
 			    
 		    }
 		    
