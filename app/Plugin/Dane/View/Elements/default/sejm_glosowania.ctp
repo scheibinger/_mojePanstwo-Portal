@@ -5,7 +5,11 @@
 <?php $this->Combinator->add_libs('js', 'Dane.highcharts-sejmglosowania'); ?>
 
 <?
-$wynikiKlubowe = $object->loadLayer('wynikiKlubowe');
+$wynikiKlubowe = array();
+$data = $object->loadLayer('wynikiKlubowe');
+foreach ($data as $d)
+    $wynikiKlubowe[$d['wynik_id']][] = $d;
+
 $chartData = array(
     array(
         'id' => 'z',

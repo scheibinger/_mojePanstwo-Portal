@@ -581,7 +581,7 @@ msgid "LC_DANE_TRESC"
 msgstr "Treść"
 
 msgid "LC_INDYWIDUALNE_WYNIKI_GLOSWANIA"
-msgstr "Indywidualne wyniki głosowania"
+msgstr "Wyniki głosowania"
 
 msgid "LC_DANE_PRZEBIEG_POSIEDZENIA"
 msgstr "Przebieg posiedzenia"
