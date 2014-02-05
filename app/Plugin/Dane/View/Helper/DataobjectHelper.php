@@ -77,8 +77,11 @@ class DataobjectHelper extends AppHelper
      	// debug( $object->getData() );
      	$bg = isset($options['bg']) ? $options['bg'] : false;   
      	$hlFields = isset($options['hlFields']) ? $options['hlFields'] : false;   
-		
+     	$routes = isset($options['routes']) ? $options['routes'] : array();   
+	 		 	
 		$this->setObject($object);
+		if( !empty($routes) )
+			$object->addRoutes($routes);
 		
         /*
         if ($theme != 'dataobjectSlider') {

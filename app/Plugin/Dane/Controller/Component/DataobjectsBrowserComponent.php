@@ -13,6 +13,7 @@ class DataobjectsBrowserComponent extends Component
     public $showTitle = false;
     public $titleTag = 'h2';
     public $hlFields = false;
+    public $routes = array();
 
     public $excludeFilters = array();
 
@@ -49,7 +50,10 @@ class DataobjectsBrowserComponent extends Component
             
         if (isset($settings['hlFields']))
             $this->hlFields = $settings['hlFields'];
-
+            
+        if (isset($settings['routes']))
+            $this->routes = $settings['routes'];
+            		
         $add_source_params = array();
         $source_params = array();
         $source_parts = explode(' ', $settings['source']);
@@ -227,7 +231,8 @@ class DataobjectsBrowserComponent extends Component
             $conditions['dataset'] = $this->tag;
 
             $dataset = $controller->API->getDataset($this->tag);
-            $this->title = $dataset['Dataset']['name'];
+            if( !$this->title )
+	            $this->title = $dataset['Dataset']['name'];
 
             // ŁADOWANIE SORTOWAŃ
 
