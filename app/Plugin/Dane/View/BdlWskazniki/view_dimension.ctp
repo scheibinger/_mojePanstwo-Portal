@@ -81,10 +81,8 @@
                     <span class="input-group-addon" data-icon="&#xe600;"></span>
                     <input type="text" class="form-control"
                            placeholder="<?= __d('dane', 'LC_BDL_WSKAZNIKI_SEARCH_PLACEHOLDER') ?>">
-                    <span class="input-group-btn">
-                        <button class="btn btn-info"
-                                type="button"><?= __d('dane', 'LC_BDL_WSKAZNIKI_SEARCH_CLEAN') ?></button>
-                    </span>
+                    <button class="close"
+                            type="button" data-icon="&#xe605;">
                 </div>
                 <table class="localDataTable table table-striped">
                     <thead>
