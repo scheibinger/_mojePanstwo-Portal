@@ -6,6 +6,9 @@ class DataobjectsController extends DaneAppController
     public $helpers = array('Paginator');
     public $components = array('Paginator');
     public $object = false;
+    public $objectOptions = array(
+    	'hlFields' => false,
+    );
     public $dataset = false;
     public $menu = array(
         array(
@@ -64,6 +67,7 @@ class DataobjectsController extends DaneAppController
                 }
 
             $this->set('object', $this->object);
+            $this->set('objectOptions', $this->objectOptions);
 
             $this->prepareMenu();
 

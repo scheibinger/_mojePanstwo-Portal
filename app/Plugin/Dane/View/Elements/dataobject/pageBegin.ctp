@@ -1,5 +1,6 @@
 <?
 $object = $this->viewVars['object'];
+$objectOptions = $this->viewVars['objectOptions'];
 $menu = $this->viewVars['menu'];
 ?>
 <?php $this->Combinator->add_libs('css', $this->Less->css('dataobject', array('plugin' => 'Dane'))) ?>
@@ -14,7 +15,9 @@ $menu = $this->viewVars['menu'];
             <div class="row">
                 <div class="col-md-9">
                     <div class="objectPageHeader">
-                        <?= $this->Dataobject->render($object, 'page') ?>
+                        <?= $this->Dataobject->render($object, 'page', array(
+                        	'hlFields' => $objectOptions['hlFields'],
+                        )) ?>
                     </div>
                 </div>
                 <div class="col-md-3">

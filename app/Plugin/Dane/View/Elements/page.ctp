@@ -56,7 +56,7 @@ $this->Dataobject->setObject($object);
                                 'object' => $object
                             ));
                         else
-                        	echo $this->Dataobject->highlights();
+                        	echo $this->Dataobject->highlights( $hlFields );
                         ?>
                     </div>
 
@@ -83,7 +83,7 @@ $this->Dataobject->setObject($object);
                                 'object' => $object
                             ));
                         else
-                        	echo $this->Dataobject->highlights();
+                        	echo $this->Dataobject->highlights( $hlFields );
                         ?>
 
                     </div>

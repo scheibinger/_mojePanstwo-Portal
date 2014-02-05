@@ -6,6 +6,9 @@ class RadyPosiedzeniaController extends DataobjectsController
 {
 	
 	public $menu = array();
+	public $objectOptions = array(
+		'hlFields' => array('gminy.rada_nazwa', 'numer'),
+	);
 	
     public function view()
     {
