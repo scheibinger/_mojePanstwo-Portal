@@ -1,4 +1,5 @@
 <?php $this->Combinator->add_libs('css', $this->Less->css('krs', array('plugin' => 'Krs'))) ?>
+<?php $this->Combinator->add_libs('js', 'Krs.index.js') ?>
 
 <div<? if ($results) echo(' class="results"'); ?> id="krs">
     <div class="header">
@@ -26,8 +27,8 @@
             <h3><?= __d('krs', 'LC_KRS_POSLOWIE_HEADLINE') ?></h3>
 
             <div class="row">
-                <div class="blockInfo active col-xs-6 col-md-3">
-                    <div class="logo">
+                <div class="blockInfo col-xs-6 col-md-3">
+                <div class="logo">
                         <img class="main" src="http://resources.sejmometr.pl/s_kluby/1_t.png"
                              alt="Platforma Obywatelska"/>
                     </div>
@@ -88,7 +89,22 @@
                     <div class="name">Platforma Obywatelska</div>
                     <div class="info">122 NGO / 314 biznes</div>
                     <div class="link">
-                        <a href="#"><?= __d('krs', 'LC_KRS_POSLOWIE_BLOCK_LINK') ?></a>
+                        <a href="#" target="_self"><?= __d('krs', 'LC_KRS_POSLOWIE_BLOCK_LINK') ?></a>
+                    </div>
+                </div>
+                <div class="blockInfo col-xs-6 col-md-3">
+                    <div class="logo">
+                        <div class="circle">
+                            <img class="main" src="http://resources.sejmometr.pl/s_kluby/1_t.png"
+                                 alt="Platforma Obywatelska"/>
+                        </div>
+                        <img class="addon" src="http://resources.sejmometr.pl/s_kluby/1_t.png"
+                             alt="Platforma Obywatelska"/>
+                    </div>
+                    <div class="name">Platforma Obywatelska</div>
+                    <div class="info">122 NGO / 314 biznes</div>
+                    <div class="link">
+                        <a href="#" target="_self"><?= __d('krs', 'LC_KRS_POSLOWIE_BLOCK_LINK') ?></a>
                     </div>
                 </div>
             </div>
