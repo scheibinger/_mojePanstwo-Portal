@@ -57,7 +57,7 @@
         }
     ],
     "require": {
-        "slywalker/twitter_bootstrap": "dev-master",
+        "slywalker/boost_cake": "*",
         "leafo/lessphp": "0.3.*@dev",
         "browserstate/history.js": "master",
         "carhartl/jquery-cookie": "master"

@@ -11,7 +11,7 @@ app/[Cc]onfig/database.php
 # User specific & automatically generated files #
 #################################################
 /app/Plugin/Minify
-/app/Plugin/TwitterBootstrap
+/app/Plugin/BoostCake
 /app/Plugin/Composer/Vendor/Composer/composer.phar
 /app/Vendor/autoload.php
 /app/Vendor/composer

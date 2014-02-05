@@ -103,7 +103,7 @@ CakePlugin::loadAll(
         array('routes' => true, 'bootstrap' => true),
         'DebugKit' => array('routes' => false),
         'UserBar' => array('routes' => false, 'bootstrap' => true),
-        'TwitterBootstrap' => array('bootstrap' => false, 'routes' => false),
+        'BoostCake' => array('bootstrap' => false, 'routes' => false),
         'Composer' => array('routes' => false),
         'Less' => array('routes' => false, 'bootstrap' => false),
         'Facebook' => array('routes' => false, 'bootstrap' => false),
