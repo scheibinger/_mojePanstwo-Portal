@@ -8,8 +8,9 @@ var highchartInit = function () {
 
     /*RUN HIGHCHART FUNCTION ON EACH SPECIFY ELEMENT*/
     $('.highchart').each(function () {
-        var data = $(this).data('wynikiklubowe');
-        var series_data = [];
+        var data = $(this).data('wynikiklubowe'),
+            series_data = [],
+            charColor = (jQuery(this).parents('.objectRender').hasClass('bg') ? "#FCFCFC" : "#FFFFFF");
 
         for (var i = 0; i < data.length; i++) {
             var d = data[ i ];
@@ -26,6 +27,7 @@ var highchartInit = function () {
                 enabled: false
             },
             chart: {
+                backgroundColor: charColor,
                 plotBackgroundColor: null,
                 plotBorderWidth: null,
                 plotShadow: false,
