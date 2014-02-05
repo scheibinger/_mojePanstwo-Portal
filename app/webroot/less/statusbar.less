@@ -148,6 +148,18 @@
                 vertical-align: middle;
                 display: inline-block;
 
+                #_mojePanstwoCockpitMenuUpSubMenuTopArrow {
+                    width: 0;
+                    height: 0;
+                    border-bottom: 10px solid @backgroundColorMenu;
+                    border-left: 10px solid transparent;
+                    border-right: 10px solid transparent;
+                    position: absolute;
+                    top: 45px;
+                    left: 10px;
+                    display: none;
+                }
+
                 #_mojePanstwoCockpitMenuUpSubMenu {
                     @iconSize: 60px;
                     @iconPadding: 20px;
@@ -169,14 +181,9 @@
                     border: 1px solid @backgroundColorMenu;
                     -moz-border-radius: 5px; /*Firefox*/
                     -webkit-border-radius: 5px; /*Safari, Chrome*/
-                    border-top-left-radius: 0;
-                    -moz-border-top-left-radius: 0;
-                    -webkit-border-top-left-radius: 0;
-                    border-top-right-radius: 0;
-                    -moz-border-top-right-radius: 0;
-                    -webkit-border-top-right-radius: 0;
                     border-radius: 5px;
                     margin-left: -31px;
+                    margin-top: 15px;
 
                     #_mojePanstwoCockpitMenuUpSubMenuList {
                         width: 3*(2*@iconSize);
@@ -265,10 +272,10 @@
                             font-size: 20px;
                             font-weight: 700;
                             color: #ffffff;
-                            line-height: 19em;
+                            line-height: 14em;
                             text-align: center;
                             width: 30px;
-                            height: 350px;
+                            height: 290px;
                             position: absolute;
                             bottom: 0;
                             display: block;

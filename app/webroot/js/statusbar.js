@@ -198,6 +198,7 @@ var _mojePanstwoCockpitSlider = {
 
         //Closing menu list
         document.getElementById('_mojePanstwoCockpitMenuUpSubMenu').style.display = 'none';
+        document.getElementById('_mojePanstwoCockpitMenuUpSubMenuTopArrow').style.display = 'none';
 
         while (nodeMain.className != 'appContruct appFolder') {
             nodeMain = nodeMain.parentNode;
@@ -293,8 +294,10 @@ var _mojePanstwoCockpitSlider = {
     document.getElementById('_mojePanstwoCockpitMenuUpContent').onclick = function (e) {
         e.stopPropagation();
         document.getElementById('_mojePanstwoCockpitMenuUpSubMenu').style.display = 'block';
+        document.getElementById('_mojePanstwoCockpitMenuUpSubMenuTopArrow').style.display = 'block';
     };
     document.getElementsByTagName('html')[0].onclick = function () {
         document.getElementById('_mojePanstwoCockpitMenuUpSubMenu').style.display = 'none';
+        document.getElementById('_mojePanstwoCockpitMenuUpSubMenuTopArrow').style.display = 'none';
     }
 })();

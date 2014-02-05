@@ -13,7 +13,7 @@
                 <div
                     class="_mojePanstwoCockpitMenuUpContentButton _mojePanstwoCockpitIcons _mojePanstwoCockpitIcons-menuUp _mojePanstwoCockpitBorderLeft"
                     href="/"></div>
-
+                <div id="_mojePanstwoCockpitMenuUpSubMenuTopArrow"></div>
                 <div id="_mojePanstwoCockpitMenuUpSubMenu">
                     <?php if (!empty($applications['list'])) {
                         echo '<ul id="_mojePanstwoCockpitMenuUpSubMenuList"><li>';
