@@ -44,7 +44,7 @@ $this->Dataobject->setObject($object);
                                     <?php } ?>
                                     <?= $object->getShortTitle() ?>
                                     <?php if (($object->getUrl() != false) && !empty($this->request)) { ?>
-                                </a>
+                                </a> <? if($object->getTitleAddon()) echo '<small>' . $object->getTitleAddon() . '</small>'; ?>
                             <?php } ?>
                             </h1>
                         <? } ?>
@@ -73,7 +73,7 @@ $this->Dataobject->setObject($object);
                                 <?php } ?>
                                 <?= $object->getShortTitle() ?>
                                 <?php if ($object->getUrl() != false){ ?>
-                            </a>
+                            </a> <? if($object->getTitleAddon()) echo '<small>' . $object->getTitleAddon() . '</small>'; ?>
                         <?php } ?>
                         </h1>
                         <?

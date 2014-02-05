@@ -1,5 +1,5 @@
 		<blockquote class="_">
-		    <?php echo $item['data']['html'] ?>
+		    <?= $object->getData('html') ?>
 		</blockquote>
 		
 		<?= $this->Dataobject->highlights() ?>

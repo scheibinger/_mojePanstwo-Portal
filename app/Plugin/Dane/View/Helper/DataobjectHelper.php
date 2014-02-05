@@ -161,6 +161,10 @@ class DataobjectHelper extends AppHelper
 				    else
 				    	$field_value = number_format($field_value, 0, '', ' ');
 			    }
+			    elseif( $field_type == 'percent' )
+			    {
+				    $field_value .= '%';
+			    }
 			    elseif( $field_type == 'duration' )
 			    {
 				    if( !$field_value )
@@ -187,8 +191,30 @@ class DataobjectHelper extends AppHelper
 			    
 			    
 			    if( isset($field_options['dictionary']) )
-				    $field_value = @$field_options['dictionary'][ $field_value ];
-			    
+			    {
+			    	if( is_array($field_value) )
+			    	{
+				    	if( !empty($field_value) )
+				    		foreach( $field_value as &$v )
+				    			$v = @$field_options['dictionary'][ $v ];
+			    	}
+			    	else
+			    	{
+					    $field_value = @$field_options['dictionary'][ $field_value ];
+					}
+				}
+				
+				
+				if( isset($field_options['truncate']) )
+				{
+					
+					$base_part = substr($field_value, 0, $field_options['truncate']);
+					$add_part = substr($field_value, $field_options['truncate']);
+					$field_value = '<span class="base">' . $base_part . '</span>';
+					if( $add_part )
+						$field_value .= ' <a href="#" onclick="return false;">...</a><span class="add">' . $add_part . '</span>';
+					
+				} 		    
 			    
 			    
 			    if( isset($field_options['img']) )
@@ -202,17 +228,37 @@ class DataobjectHelper extends AppHelper
 			    if( isset($field_options['normalizeText']) && $field_options['normalizeText'] )
 				    $normalizeText = true;
 			    
+
+			    
 			    if( isset($field_options['link']) )
 			    {
 				    if( is_array($field_options['link']) && $field_options['link']['dataset'] && $field_options['link']['object_id'] )
 				    {
-					    $object_id = ( $field_options['link']['object_id'][0] == '$' ) ? 
-					    	$this->object->getData( substr($field_options['link']['object_id'], 1) ) : 
-					    	$field_options['link']['object_id'];
 					    
-					    $href = '/dane/' . $field_options['link']['dataset'] . '/' . $object_id;
-					    
-					    $field_value = '<a href="' . $href . '">' . $field_value . '</a>';
+					    if( is_array($field_value) )
+					    {
+						    for( $f=0; $f<count($field_value); $f++ )
+						    {
+						    	$object_id = ( $field_options['link']['object_id'][0] == '$' ) ? 
+							    	$this->object->getData( substr($field_options['link']['object_id'], 1) ) : 
+							    	$field_options['link']['object_id'];
+							    
+							    $object_id = @$object_id[$f];							    
+							    $href = '/dane/' . $field_options['link']['dataset'] . '/' . $object_id;
+
+							    $field_value[$f] = '<a href="' . $href . '">' . $field_value[$f] . '</a>';
+						    }
+					    }
+					    else
+					    {
+						    $object_id = ( $field_options['link']['object_id'][0] == '$' ) ? 
+						    	$this->object->getData( substr($field_options['link']['object_id'], 1) ) : 
+						    	$field_options['link']['object_id'];
+						    
+						    $href = '/dane/' . $field_options['link']['dataset'] . '/' . $object_id;
+						    
+						    $field_value = '<a href="' . $href . '">' . $field_value . '</a>';
+					    }
 					    
 				    }
 				}
@@ -226,10 +272,28 @@ class DataobjectHelper extends AppHelper
 
 	    
 			    
-			    $output .= '<div class="dataHighlight col-md-' . $col_width . '"><p class="_label">' . $field_label . ':</p><p class="_value';
+			    if( !is_array($field_value) && stripos($field_value, $field_label)===0 )
+			    	$field_value = trim( substr($field_value, strlen($field_label)) );
+			    
+			    
+			    $output .= '<div class="dataHighlight col-md-' . $col_width . '">';
+			    
+			    if( $field_label && !isset($field_options['hide'] ) )
+			    	$output .= '<p class="_label">' . $field_label . ':</p>';
+			    
+			    $output .= '<p class="_value';
+			    
 			    if( $normalizeText )
 			    	$output .= ' normalizeText';
-			    $output .= '">' . $field_value . '</p></div>';
+			    
+			    $output .= '">';
+			    
+			    if( is_array($field_value) )
+			    	$output .= '<ul class="hl_ul normalizeText"><li>' . implode('</li><li>', $field_value) . '</li></ul>';
+			    else
+				    $output .= $field_value;
+			    
+			    $output .= '</p></div>';
 			    
 		    }
 		    

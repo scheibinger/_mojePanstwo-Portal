@@ -1,5 +1,1 @@
-<p class="line desc">
-    <?php
-    echo $item['data']['opis'];
-    ?>
-</p>
+<p class="line desc dimmed"><?= $object->getData('opis') ?></p>
