@@ -20,7 +20,6 @@ app/[Cc]onfig/database.php
 /app/Vendor/carhartl
 /app/webroot/js/plugins/browserstate
 /app/webroot/js/plugins/carhartl
-/app/webroot/cache-css
 /app/Config/constants.php
 /app/tmp/*.log.*
 /app/tmp/cake*
