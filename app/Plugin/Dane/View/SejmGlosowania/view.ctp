@@ -84,19 +84,36 @@ $dictionary = array(
                         <? } ?>
                         </tbody>
                     </table>
-                    <? debug($object->getLayer('wynikiKlubowe')); ?>
-
                 </div>
             </div>
         </div>
 
         <div class="col-md-12">
-            <div class="block">
+            <div class="block indywidualneTable">
                 <h2>Wyniki indywidualne</h2>
 
-                <div>
-                    <? debug($object->getLayer('wynikiIndywidualne')); ?>
-                </div>
+                <? foreach ($object->getLayer('wynikiIndywidualne') as $person) { ?>
+                    <div class="slide col-xs-6 col-md-4">
+                        <div class="person">
+                            <div class="avatar">
+                                <img src="http://resources.sejmometr.pl/mowcy/a/0/<?= $person['poslowie']['id'] ?>.jpg"
+                                     alt="<?= $person['poslowie']['nazwa'] ?>" onerror="imgFixer(this);"/>
+                            </div>
+                            <div class="info">
+                                <a class="poselName" href="<?= $person['poslowie']['id'] ?>"
+                                   target="_self"><?= $person['poslowie']['nazwa'] ?></a>
+                                <a class="clubName" href="<?= $person['kluby']['id'] ?>" target="_self"
+                                   title="<?= $person['kluby']['nazwa'] ?>">
+                                    <img src="http://resources.sejmometr.pl/s_kluby/<?= $person['kluby']['id'] ?>_a.png"
+                                         alt="<?= $person['kluby']['nazwa'] ?>"/>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="voted btn btn-default btn-glos-<?= $person['glosy']['glos_id'] ?>"
+                             data-glos="<?= $person['glosy']['glos_id'] ?>"><?= $person['glosy']['glos_str'] ?></div>
+                    </div>
+                <? } ?>
+                <? debug($object->getLayer('wynikiIndywidualne')); ?>
             </div>
         </div>
 
