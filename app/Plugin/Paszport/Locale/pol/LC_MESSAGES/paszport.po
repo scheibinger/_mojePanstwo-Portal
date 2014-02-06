@@ -443,7 +443,7 @@ msgstr "Wyrób paszport"
 #: View/Users/gate.ctp:9
 #: View/Users/login.ctp:17
 msgid "LC_PASZPORT_FORGOT_PASSWORD"
-msgstr "Zapomniane hasło"
+msgstr "Nie pamiętasz hasła?"
 
 #: View/Users/index.ctp:7;10
 msgid "LC_PASZPORT_NAME"
@@ -557,8 +557,8 @@ msgstr "Wprowadź poprawne hasło"
 msgid "LC_PASZPORT_HOMEPAGE_OR"
 msgstr "lub"
 
-msgid "LC_PASZPORT_HOMEPAGE_SIGN"
-msgstr "zaloguj mnie"
+msgid "LC_PASZPORT_HOMEPAGE_REGISTER"
+msgstr "Nie masz jeszcze paszportu? Wyrób go!"
 
 #: View/Users/login.ctp:11
 msgid "LC_PASZPORT_LOGIN_FB"

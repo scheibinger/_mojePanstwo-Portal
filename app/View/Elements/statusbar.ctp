@@ -118,10 +118,10 @@
         <div class="_mojePanstwoCockpitPower">
             <?php if ($this->Session->read('Auth.User.id')) { ?>
                 <a class="_mojePanstwoCockpitPowerButton _mojePanstwoCockpitIcons _mojePanstwoCockpitIcons-logout _mojePanstwoCockpitBorderLeft"
-                   href="<?php echo $this->Html->url(array('plugin' => 'paszport', 'controller' => 'users', 'action' => 'logout')); ?>"></a>
+                   href="<?php echo $this->Html->url(array('plugin' => 'paszport', 'controller' => 'users', 'action' => 'logout')); ?>"><?php echo __('LC_COCKPITBAR_LOGOUT'); ?></a>
             <?php } else { ?>
                 <a class="_mojePanstwoCockpitPowerButton _mojePanstwoCockpitIcons _mojePanstwoCockpitIcons-login _mojePanstwoCockpitBorderLeft"
-                   href="<?php echo $this->Html->url(array('plugin' => 'paszport', 'controller' => 'pages', 'action' => 'home')); ?>"></a>
+                   href="<?php echo $this->Html->url(array('plugin' => 'paszport', 'controller' => 'pages', 'action' => 'home')); ?>"><?php echo __('LC_COCKPITBAR_LOGIN'); ?></a>
             <?php } ?>
         </div>
 
@@ -145,8 +145,7 @@
                 </div>
                 <?php if (count($streams) > 1) { ?>
                     <ul id="_mojePanstwoCockpitUserNameDropdownList">
-                        <li class="_mojePanstwoCockpitUserNameDropdownListStream">
-                            Streams
+                        <li class="_mojePanstwoCockpitUserNameDropdownListStream">Streams
                             <ul class="_mojePanstwoCockpitUserNameDropdownListSubList">
                                 <?php foreach ($streams as $id => $name) { ?>
                                     <li data-stream-id="<?php echo $id; ?>"><a
