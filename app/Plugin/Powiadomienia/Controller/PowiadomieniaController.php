@@ -21,7 +21,8 @@ class PowiadomieniaController extends PowiadomieniaAppController
 
     public function index()
     {
-
+		
+		/*
         $this->data = ($this->data) ? $this->data : (isset($this->request->query['data'])) ? $this->request->query['data'] : null;
         $data = $this->data;
         $phrases = $this->requestAction(array(
@@ -38,9 +39,7 @@ class PowiadomieniaController extends PowiadomieniaAppController
 
         $this->set('phrases', $phrases);
         $this->set('objects', $objects);
-
-        $application = $this->getApplication();
-        $this->set('title_for_layout', $application['Application']['name']);
+        */
 
     }
 

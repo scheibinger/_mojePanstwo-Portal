@@ -8,6 +8,8 @@
 
 <div id="powiadomienia">
     <div class="content col-xs-12">
+        
+        <? /*
         <div class="searchPhrase col-md-3">
             <?php echo $this->Form->create('Phrase', array('url' => array('controller' => 'phrases', 'action' => 'index'), 'type' => 'get')); ?>
             <div class="form-group col-md-12 input-group">
@@ -18,8 +20,12 @@
             </div>
             <?php echo $this->Form->end(); ?>
         </div>
+        
         <div class="clearfix"></div>
-        <?php echo $this->Form->create('Dataobjects', array('type' => 'get')); ?>
+        */ ?>
+        
+        <?php // echo $this->Form->create('Dataobjects', array('type' => 'get')); ?>
+        
         <div class="frazy col-xs-12 col-md-3 pull-left">
 
             <?php echo $phrases; ?>
@@ -30,6 +36,8 @@
             <?php echo $objects; ?>
 
         </div>
-        <?php echo $this->Form->end(); ?>
+        
+        <?php // echo $this->Form->end(); ?>
+    
     </div>
 </div>
