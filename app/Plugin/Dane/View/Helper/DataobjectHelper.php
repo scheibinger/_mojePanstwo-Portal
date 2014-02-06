@@ -137,7 +137,7 @@ class DataobjectHelper extends AppHelper
 				
 				$field_label = $field_params['label'];
 			    $field_value = $field_params['value'];
-			    $field_options = isset($field_params['options']) ? $field_params['options'] : array();			    
+			    $field_options = (isset($field_params['options']) && is_array($field_params['options'])) ? $field_params['options'] : array();
 			    			    
 			    $field_type = $field_params['type'];
 			    if( stripos($field, 'data')===0 )
