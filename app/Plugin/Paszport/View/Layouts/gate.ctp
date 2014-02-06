@@ -23,7 +23,7 @@
     <?php echo $this->Session->flash(); ?>
     <?php echo $this->Session->flash('auth', array(
         'element' => 'alert',
-        'params' => array('plugin' => 'TwitterBootstrap')));
+        'params' => array('plugin' => 'BoostCake')));
     ?>
     <?php echo $this->fetch('content'); ?>
 </div>

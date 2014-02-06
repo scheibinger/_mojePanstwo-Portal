@@ -37,35 +37,69 @@ $dictionary = array(
 );
 ?>
 
-<div class="object glosowanie_stats">
-    
-    <div class="row">
-	    <div class="col-md-6 sejm_glosowania">
-	        <p class="wynikGlosowania <?= $dictionary[$object->getData('wynik_id')][1]; ?> label"><?= $dictionary[$object->getData('wynik_id')][0]; ?></p>
-	        <div class="highchart" data-wynikiKlubowe='<?= json_encode($chartData) ?>'></div>
-	        
-	    </div>
-	    <div class="col-md-6">
-	        <div class="block">
-	        	<h2>Wyniki klubowe</h2>
-	        	
-	        	<div>
-	        		<? debug( $object->getLayer('wynikiKlubowe') ); ?>
-	        	</div>
-	        </div>
-	    </div>
+    <div class="object glosowanie_stats">
+
+        <div class="row">
+            <div class="col-md-4 sejm_glosowania">
+                <p class="wynikGlosowania <?= $dictionary[$object->getData('wynik_id')][1]; ?> label"><?= $dictionary[$object->getData('wynik_id')][0]; ?></p>
+
+                <div class="highchart" data-wynikiKlubowe='<?= json_encode($chartData) ?>'></div>
+
+            </div>
+            <div class="col-md-8">
+                <div class="block">
+                    <h2>Wyniki klubowe</h2>
+
+                    <table class="clubTable table">
+                        <thead>
+                        <tr>
+                            <th><?= __d('dane', 'LC_SEJMGLOSOWANIA_KLUBY_NAZWAKLUBU') ?></th>
+                            <th><?= __d('dane', 'LC_SEJMGLOSOWANIA_KLUBY_LICZEBNOSCKLUBU') ?></th>
+                            <th><?= __d('dane', 'LC_SEJMGLOSOWANIA_KLUBY_LICZBAGLOSUJACYCH') ?></th>
+                            <th><?= __d('dane', 'LC_SEJMGLOSOWANIA_KLUBY_NIEOBECNI') ?></th>
+                            <th><?= __d('dane', 'LC_SEJMGLOSOWANIA_KLUBY_ZA') ?></th>
+                            <th><?= __d('dane', 'LC_SEJMGLOSOWANIA_KLUBY_PRZECIW') ?></th>
+                            <th><?= __d('dane', 'LC_SEJMGLOSOWANIA_KLUBY_WSTRZYMALISIE') ?></th>
+                            <th><?= __d('dane', 'LC_SEJMGLOSOWANIA_KLUBY_LICZBABUNTOW') ?></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <? foreach ($object->getLayer('wynikiKlubowe') as $row) { ?>
+                            <tr>
+                                <td class="club" data-club-id="<?= $row['klub_id'] ?>">
+                                    <? if ($row['klub_id'] != '7') { ?>
+                                        <img src="http://resources.sejmometr.pl/s_kluby/<?= $row['klub_id'] ?>_a.png"
+                                             alt="<?= $row['klub_nazwa'] ?>"/>
+                                    <? } ?>
+                                    <strong><?= $row['klub_nazwa'] ?></strong>
+                                </td>
+                                <td><?= $row['l'] ?></td>
+                                <td><?= $row['g'] ?></td>
+                                <td class="notVoted" data-glos-id="4"><?= $row['n'] ?></td>
+                                <td class="voteYes" data-glos-id="1"><?= $row['z'] ?></td>
+                                <td class="voteNo" data-glos-id="2"><?= $row['p'] ?></td>
+                                <td class="voteHold" data-glos-id="3"><?= $row['w'] ?></td>
+                                <td><?= $row['b'] ?></td>
+                            </tr>
+                        <? } ?>
+                        </tbody>
+                    </table>
+                    <? debug($object->getLayer('wynikiKlubowe')); ?>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-12">
+            <div class="block">
+                <h2>Wyniki indywidualne</h2>
+
+                <div>
+                    <? debug($object->getLayer('wynikiIndywidualne')); ?>
+                </div>
+            </div>
+        </div>
+
     </div>
-    
-    <div class="col-md-12">
-	    <div class="block">
-	    	<h2>Wyniki indywidualne</h2>
-	    	
-	    	<div>
-        		<? debug( $object->getLayer('wynikiIndywidualne') ); ?>
-        	</div>
-	    </div>
-    </div>
-    
-</div>
 
 <?= $this->Element('dataobject/pageEnd') ?>

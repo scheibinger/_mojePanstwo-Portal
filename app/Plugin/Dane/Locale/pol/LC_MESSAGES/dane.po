@@ -903,3 +903,27 @@ msgstr "Przyrost"
 
 msgid "LC_BDL_WSKAZNIKI_SEARCH_PLACEHOLDER"
 msgstr "Wpisz szukaną frazę..."
+
+msgid "LC_SEJMGLOSOWANIA_KLUBY_NAZWAKLUBU"
+msgstr "Nazwa klubu"
+
+msgid "LC_SEJMGLOSOWANIA_KLUBY_LICZEBNOSCKLUBU"
+msgstr "Liczebność"
+
+msgid "LC_SEJMGLOSOWANIA_KLUBY_LICZBAGLOSUJACYCH"
+msgstr "Głosowało"
+
+msgid "LC_SEJMGLOSOWANIA_KLUBY_NIEOBECNI"
+msgstr "Nieobecnych"
+
+msgid "LC_SEJMGLOSOWANIA_KLUBY_ZA"
+msgstr "Za"
+
+msgid "LC_SEJMGLOSOWANIA_KLUBY_PRZECIW"
+msgstr "Przeciw"
+
+msgid "LC_SEJMGLOSOWANIA_KLUBY_WSTRZYMALISIE"
+msgstr "Wstrzymali się"
+
+msgid "LC_SEJMGLOSOWANIA_KLUBY_LICZBABUNTOW"
+msgstr "Liczba buntów"

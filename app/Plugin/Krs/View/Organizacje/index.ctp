@@ -28,7 +28,7 @@
 
             <div class="row">
                 <div class="blockInfo col-xs-6 col-md-3">
-                <div class="logo">
+                    <div class="logo">
                         <img class="main" src="http://resources.sejmometr.pl/s_kluby/1_t.png"
                              alt="Platforma Obywatelska"/>
                     </div>
@@ -83,7 +83,7 @@
                             <img class="main" src="http://resources.sejmometr.pl/s_kluby/1_t.png"
                                  alt="Platforma Obywatelska"/>
                         </div>
-                        <img class="addon" src="http://resources.sejmometr.pl/s_kluby/1_t.png"
+                        <img class="addon" src="http://resources.sejmometr.pl/s_kluby/1_a.png"
                              alt="Platforma Obywatelska"/>
                     </div>
                     <div class="name">Platforma Obywatelska</div>
@@ -98,7 +98,7 @@
                             <img class="main" src="http://resources.sejmometr.pl/s_kluby/1_t.png"
                                  alt="Platforma Obywatelska"/>
                         </div>
-                        <img class="addon" src="http://resources.sejmometr.pl/s_kluby/1_t.png"
+                        <img class="addon" src="http://resources.sejmometr.pl/s_kluby/1_a.png"
                              alt="Platforma Obywatelska"/>
                     </div>
                     <div class="name">Platforma Obywatelska</div>

@@ -67,10 +67,10 @@ class PaszportAppController extends AppController
     public $helpers = array(
 //        'Session' => array('className' => 'Passport.MySession'),
         'Session',
-        'Html' => array('className' => 'TwitterBootstrap.BootstrapHtml'),
-        'Form' => array('className' => 'TwitterBootstrap.BootstrapForm'),
+        'Html' => array('className' => 'BoostCake.BoostCakeHtml'),
+        'Form' => array('className' => 'BoostCake.BoostCakeForm'),
         'Paginator',
-        'TwitterBootstrap.BootstrapPaginator',
+        'BoostCake.BoostCakePaginator',
         'Time',
         'Paszport.Image2',
         'Less.Less',
