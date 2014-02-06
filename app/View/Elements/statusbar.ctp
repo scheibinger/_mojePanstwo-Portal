@@ -118,10 +118,14 @@
         <div class="_mojePanstwoCockpitPower">
             <?php if ($this->Session->read('Auth.User.id')) { ?>
                 <a class="_mojePanstwoCockpitPowerButton _mojePanstwoCockpitIcons _mojePanstwoCockpitIcons-logout _mojePanstwoCockpitBorderLeft"
-                   href="<?php echo $this->Html->url(array('plugin' => 'paszport', 'controller' => 'users', 'action' => 'logout')); ?>"><?php echo __('LC_COCKPITBAR_LOGOUT'); ?></a>
+                   href="<?php echo $this->Html->url(array('plugin' => 'paszport', 'controller' => 'users', 'action' => 'logout')); ?>">
+                    <span><?php echo __('LC_COCKPITBAR_LOGOUT'); ?></span>
+                </a>
             <?php } else { ?>
                 <a class="_mojePanstwoCockpitPowerButton _mojePanstwoCockpitIcons _mojePanstwoCockpitIcons-login _mojePanstwoCockpitBorderLeft"
-                   href="<?php echo $this->Html->url(array('plugin' => 'paszport', 'controller' => 'pages', 'action' => 'home')); ?>"><?php echo __('LC_COCKPITBAR_LOGIN'); ?></a>
+                   href="<?php echo $this->Html->url(array('plugin' => 'paszport', 'controller' => 'pages', 'action' => 'home')); ?>">
+                    <span><?php echo __('LC_COCKPITBAR_LOGIN'); ?></span>
+                </a>
             <?php } ?>
         </div>
 
