@@ -8,7 +8,10 @@ class mpapiComponent extends Component
     {
 
         if ($controller->Auth->loggedIn()) {
-            $controller->API = $this->getAPI($controller->Auth->user('id'), $controller->Session->read('Stream.id'));
+            $controller->API = $this->getAPI(array(
+            	'user_id' => $controller->Auth->user('id'), 
+            	'stream_id' => $controller->Session->read('Stream.id')
+            ));
         } else {
             $controller->API = $this->getAPI();
         }
@@ -78,10 +81,17 @@ class mpapiComponent extends Component
 
     }
 
-    public function getAPI($user_id = null, $stream_id = 1)
+    public function getAPI( $options = array() )
     {
+    	
+    	if( !isset($options['user_id']) )
+    		$options['user_id'] = 0;
+    	
+    	if( !isset($options['stream_id']) )
+    		$options['stream_id'] = 1;
+    		    	
         require_once(MPAPI_path . 'loader.php');
-        return new MP\API($user_id, $stream_id);
+        return new MP\API($options);
 
     }
 
