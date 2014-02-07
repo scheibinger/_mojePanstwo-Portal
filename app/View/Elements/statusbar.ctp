@@ -131,6 +131,7 @@
 
 
         <?php if ($this->Session->read('Auth.User.id')) { ?>
+            <? /*
             <div class="_mojePanstwoCockpitNotify">
                 <a class="_mojePanstwoCockpitNotifyButton _mojePanstwoCockpitIcons _mojePanstwoCockpitIcons-notify _mojePanstwoCockpitBorderLeft"
                    href="<?php echo $this->Html->url(array('plugin' => 'powiadomienia', 'controller' => 'powiadomienia', 'action' => 'index')); ?>">
@@ -138,14 +139,16 @@
                     <span title="<?php echo $this->Session->read('Auth.User.unread_count'); ?>">!</span><?php } ?>
                 </a>
             </div>
+            */
+            ?>
 
             <div
                 class="_mojePanstwoCockpitUser <?php echo (count($streams) > 1) ? "_mojePanstwoCockpitUserNameDropdown" : null; ?>">
-                <div class="_mojePanstwoCockpitUserName">
-                    <a href="<?php echo $this->Html->url(array('plugin' => 'paszport', 'controller' => 'users', 'action' => 'index')); ?>"><?php echo $this->Session->read('Auth.User.username'); ?></a>
-                </div>
                 <div class="_mojePanstwoCockpitUserAvatar">
                     <img src="<?php echo $this->Session->read('Auth.User.photo_small'); ?>" class="img img-circle"/>
+                </div>
+                <div class="_mojePanstwoCockpitUserName">
+                    <a href="<?php echo $this->Html->url(array('plugin' => 'paszport', 'controller' => 'users', 'action' => 'index')); ?>"><?php echo $this->Session->read('Auth.User.username'); ?></a>
                 </div>
                 <?php if (count($streams) > 1) { ?>
                     <ul id="_mojePanstwoCockpitUserNameDropdownList">
