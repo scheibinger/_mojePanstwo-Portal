@@ -11,16 +11,20 @@
             <div class="row userHelper logInAccount">
                 <?php echo $this->Form->create('User', array('action' => 'login')); ?>
                 <div class="row">
+                    <div class="or nomargin col-xs-12 col-sm-10 col-md-6 col-sm-offset-1 col-md-offset-3">
+                        <span
+                            class="middle"><?php echo __d('paszport', 'LC_PASZPORT_MODAL_LOGIN_VIA_FACEBOOK') ?></span>
+                    </div>
                     <div class="logInVia col-xs-12 col-sm-8 col-sm-offset-2">
                         <div class="content">
-                            <?php echo $this->Html->link('<i class="fa fa-facebook"></i>' . __d('paszport', 'LC_PASZPORT_LOGIN_FB'), array('action' => 'fblogin'), array('class' => 'btn btn-facebook btn-lg', 'target' => '_blank', 'escape' => false)); ?>
+                            <?php echo $this->Html->link('<i class="fa fa-facebook"></i>' . __d('paszport', 'LC_PASZPORT_LOGIN'), array('action' => 'fblogin'), array('class' => 'btn btn-facebook btn-md', 'target' => '_blank', 'escape' => false)); ?>
                         </div>
                     </div>
                 </div>
 
                 <div class="row">
-                    <div class="or col-xs-12 col-md-8 col-md-offset-2">
-                        <span class="middle"><?php echo __d('paszport', 'LC_PASZPORT_HOMEPAGE_OR'); ?></span>
+                    <div class="or col-xs-12 col-sm-10 col-md-6 col-sm-offset-1 col-md-offset-3">
+                        <span class="middle"><?php echo __d('paszport', 'LC_PASZPORT_MODAL_LOGIN_VIA_EMAIL') ?></span>
                     </div>
                 </div>
 
@@ -37,15 +41,17 @@
                 </div>
 
                 <div class="row">
-                    <div class="loginSend col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4">
-                        <?php echo $this->Form->submit(__d('paszport', 'LC_PASZPORT_LOGIN'), array('class' => 'btn btn-primary pull-right')); ?>
+                    <div class="loginSend col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4 text-center">
+                        <?php echo $this->Form->submit(__d('paszport', 'LC_PASZPORT_LOGIN'), array('class' => 'btn btn-default')); ?>
                     </div>
                 </div>
                 <?php echo $this->Form->end(); ?>
-            </div>
-            <div class="row registerAccount">
-                <div class="col-xs-12 col-sm-4 col-sm-offset-4">
-                    <?php echo $this->Html->link(__d('paszport', 'LC_PASZPORT_HOMEPAGE_REGISTER', true), array('controller' => 'users', 'action' => 'add'), array('class' => 'register btn btn-success btn-lg', 'autocomplete' => 'off')); ?>
+                <div class="row registerAccount">
+                    <div class="or col-xs-12 col-sm-10 col-md-6 col-sm-offset-1 col-md-offset-3">
+                    <span class="middle">
+                        <?php echo $this->Html->link(__d('paszport', 'LC_PASZPORT_MODAL_LOGIN_REGISTER', true), array('controller' => 'users', 'action' => 'add'), array('class' => 'register', 'autocomplete' => 'off', 'target' => '_self')); ?>
+                    </span>
+                    </div>
                 </div>
             </div>
         </div>

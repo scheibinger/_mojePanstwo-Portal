@@ -561,10 +561,6 @@ msgid "LC_PASZPORT_HOMEPAGE_REGISTER"
 msgstr "Nie masz jeszcze paszportu? Wyrób go!"
 
 #: View/Users/login.ctp:11
-msgid "LC_PASZPORT_LOGIN_FB"
-msgstr "Zaloguj mnie przez konto Facebook"
-
-#: View/Users/login.ctp:11
 msgid "LC_PASZPORT_LOGIN_G+"
 msgstr "Zaloguj mnie przez Google+"
 
@@ -691,3 +687,12 @@ msgstr "Zmień"
 
 msgid "LC_PASZPORT_CLOSE"
 msgstr "Zamknij"
+
+msgid "LC_PASZPORT_MODAL_LOGIN_VIA_FACEBOOK"
+msgstr "Zaloguj się przez swoje konto Facebook"
+
+msgid "LC_PASZPORT_MODAL_LOGIN_VIA_EMAIL"
+msgstr "Zaloguj się przez konto email"
+
+msgid "LC_PASZPORT_MODAL_LOGIN_REGISTER"
+msgstr "Wyrób paszport na Twoje konto email"
