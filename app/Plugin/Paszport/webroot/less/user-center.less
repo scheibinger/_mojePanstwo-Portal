@@ -6,6 +6,8 @@
 
     ul.userNav {
         border-bottom: 0 none;
+        margin-top: 52px;
+        margin-bottom: 30px;
 
         li {
             .customFont('Istok Web', 14px, 700);
@@ -14,7 +16,7 @@
 
             &.active a,
             &.active a:before {
-                color: @lightBlue;
+                color: @white;
             }
 
             &:first-child > a {
@@ -67,9 +69,9 @@
 
     h1 {
         font-size: 36px;
-    	font-weight: 300;
-    	margin: 0 0 15px 0;
-    	padding: 0;
+        font-weight: 300;
+        margin: 0 0 15px 0;
+        padding: 0;
     }
 
     .general {
@@ -373,5 +375,11 @@ table {
     }
     &.logs {
         /**/
+    }
+}
+
+@media (max-width: 768px) {
+    .userCenter ul.userNav {
+        margin-top: 0;
     }
 }

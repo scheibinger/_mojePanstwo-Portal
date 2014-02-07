@@ -4,7 +4,7 @@ $inlinejs .= "$('a[href=" . '"' . "'+current_url+'" . '"' . "]').parent().addCla
 $this->Combinator->add_inline_code('js', $inlinejs);
 ?>
 
-<ul class="userNav nav nav-tabs nav-stacked">
+<ul class="userNav nav nav-pills nav-stacked">
     <li <?php echo ($this->request->controller == 'users') ? 'class="active"' : null; ?>><a class="accountInfo"
                                                                                             href="<?php echo $this->Html->url(array('plugin' => 'paszport', 'controller' => 'users', 'action' => 'index')); ?>"><?php echo __d('paszport', 'LC_PASZPORT_ACCOUNT_INFO'); ?></a>
     </li>

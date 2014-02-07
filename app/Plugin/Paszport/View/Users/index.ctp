@@ -9,8 +9,8 @@
 <h1><?php echo __d('paszport', $title_for_layout); ?></h1>
 
 <div class="row general mpanel">
-    <div class="basic col-xs-11 col-md-6">
-        <ul>
+    <div class="basic col-xs-11 col-md-8">
+    <ul>
             <?php if ($this->data['User']['group_id'] == '1') { ?>
                 <li class="name">
                     <?php echo $this->Form->create('User', array('url' => array('controller' => 'users', 'action' => 'field', 'ext' => 'json'))); ?>
@@ -175,8 +175,8 @@
         </ul>
 
     </div>
-    <div class="avatar col-md-3 hidden-xs hidden-sm">
-        <?php if ($this->Session->read('Auth.User.photo')) { ?>
+    <div class="avatar col-md-4 hidden-xs hidden-sm">
+    <?php if ($this->Session->read('Auth.User.photo')) { ?>
             <?php echo $this->Html->image($this->Session->read('Auth.User.photo'), array('class' => 'img-polaroid')); ?>
         <?php } else { ?>
             <?php $thumb = $this->Image2->source('img/default.jpg')
