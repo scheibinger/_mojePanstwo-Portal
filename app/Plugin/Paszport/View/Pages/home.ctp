@@ -3,8 +3,8 @@
 <div class="main">
     <div class="content">
         <div class="container">
-            <div class="row motto">
-                <div class="col-xs-10 col-xs-offset-1">
+            <div class="row">
+                <div class="col-xs-10 col-xs-offset-1 text-center">
                     <h1><?php echo __d('paszport', 'LC_PASZPORT_PROJECT_MOTTO'); ?></h1>
                 </div>
             </div>

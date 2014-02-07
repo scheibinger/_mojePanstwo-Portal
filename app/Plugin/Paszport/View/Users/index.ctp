@@ -6,9 +6,9 @@
     <?php echo $this->element('left_nav_block'); ?>
 </div>
 <div class="col-xs-12 col-sm-9">
-<h3><?php echo __d('paszport', $title_for_layout); ?></h3>
+<h1><?php echo __d('paszport', $title_for_layout); ?></h1>
 
-<div class="row general">
+<div class="row general mpanel">
     <div class="basic col-xs-11 col-md-6">
         <ul>
             <?php if ($this->data['User']['group_id'] == '1') { ?>

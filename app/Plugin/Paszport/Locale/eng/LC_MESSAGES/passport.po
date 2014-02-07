@@ -541,7 +541,7 @@ msgstr "Zamień"
 
 #: View/Users/login.ctp:4
 msgid "LC_PASZPORT_PROJECT_MOTTO"
-msgstr "Paszport to system logowania do platformy _mojePaństwo. <br/>Wyrób swój paszport, aby uzyskać dostęp do wszystkich usług."
+msgstr "Logowanie"
 
 
 #: View/Users/login.ctp:8

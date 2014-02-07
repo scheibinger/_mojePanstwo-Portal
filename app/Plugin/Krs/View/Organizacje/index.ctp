@@ -4,24 +4,26 @@
 <div<? if ($results) echo(' class="results"'); ?> id="krs">
     <div class="header">
         <div class="container">
-            <h2 class="col-xs-12 col-md-8 col-md-offset-2"><?= __d('krs', 'LC_KRS_HEADER') ?></h2>
+            <h1 class="col-xs-12 col-md-8 col-md-offset-2"><?= __d('krs', 'LC_KRS_HEADER') ?></h1>
 
             <p class="col-xs-12 col-md-8 col-md-offset-2"><?= __d('krs', 'LC_KRS_HEADLINE') ?></p>
-
-            <div class="searchKRS input-group col-xs-12 col-md-10 col-md-offset-1">
-                <input type="text" class="form-control input-lg" name="q"
-                       placeholder="<?= __d('krs', 'LC_KRS_SEARCH_PLACEHOLDER') ?>">
-                    <span class="input-group-btn">
-                        <button class="btn btn-success btn-lg" type="button" data-icon="&#xe600;"></button>
-                    </span>
-            </div>
+			
+			<form action="/krs" method="get">
+	            <div class="searchKRS input-group col-xs-12 col-md-10 col-md-offset-1">
+		                <input type="text" class="form-control input-lg" name="q" placeholder="<?= __d('krs', 'LC_KRS_SEARCH_PLACEHOLDER') ?>">
+		                <input type="submit" value="Szukaj" style="display: none;" />
+	            </div>
+            </form>
+            
         </div>
     </div>
     <div class="resultsList">
         <div class="container">
-            <h3>Największe spółki publiczne</h3>
+            <h2>Największe spółki publiczne:</h2>
         </div>
     </div>
+    
+    <? /*
     <div class="poslowie">
         <div class="container">
             <h3><?= __d('krs', 'LC_KRS_POSLOWIE_HEADLINE') ?></h3>
@@ -110,4 +112,5 @@
             </div>
         </div>
     </div>
+    */ ?>
 </div>

@@ -1,5 +1,9 @@
 @import 'variables.less';
 
+h1 {
+	font-weight: 300;
+}
+
 .help-block {
     font-size: 12px;
 
@@ -22,39 +26,16 @@
         height: 50px;
         color: @almostBlack;
 
-        .container h1 {
-            .customFont('Roboto Condensed', 26px, 700);
-            color: @almostBlack;
-            line-height: 1.3em;
-            float: left;
-            text-align: left;
-            padding: 0 10%;
-            width: 100%;
-        }
+        
     }
 
     .content {
-        .customFont('Roboto Condensed', 17px);
-        color: @darkGray;
+        
 
         .row {
             margin-bottom: 40px;
 
-            &.motto {
-                margin-bottom: 0;
-
-                h1 {
-                    .customFont('Roboto Condensed', 36px);
-                    color: @almostBlack;
-                    line-height: 1.3em;
-                    float: left;
-                    text-shadow: 0 1px 1px @lightGray;
-                    text-align: center;
-                    margin-top: 60px;
-                    padding: 45px 0;
-                    width: 100%;
-                }
-            }
+            
             &.logInAccount {
                 margin-top: 0;
                 margin-bottom: 0;
@@ -67,7 +48,6 @@
                     > span {
                         color: @darkGray;
                         float: left;
-                        font-family: 'Roboto Condensed', sans-serif;
                         font-size: 18px;
                         font-weight: 300;
                         line-height: 1.8em;
@@ -149,13 +129,11 @@
             color: @darkGray;
 
             h2 {
-                .customFont('Roboto Condensed', 24px);
                 margin: 0 0 25px 0;
                 line-height: 1.5em;
             }
 
             h4 {
-                .customFont('Roboto Condensed', 18px);
                 font-weight: normal;
                 margin: 0 0 45px 0;
                 line-height: 1.2em;

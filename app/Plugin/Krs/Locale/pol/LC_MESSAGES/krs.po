@@ -2,7 +2,7 @@ msgid "LC_KRS_HEADER"
 msgstr "Krajowy Rejestr Sądowy"
 
 msgid "LC_KRS_HEADLINE"
-msgstr "Przeglądaj dane o organizacjach zarejestrowanych w Polsce.<br/>Dla każdej organizacji dostępne są podstawowe dane rejestracyjne, a także skład zarządów, rad nadzorczych i innych ciał danej organizacji"
+msgstr "Przeglądaj dane o organizacjach i osobach z nimi zwiazanych."
 
 msgid "LC_KRS_SEARCH_PLACEHOLDER"
 msgstr "Szukaj firmy lub osoby"

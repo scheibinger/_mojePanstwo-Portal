@@ -1,31 +1,41 @@
+@menuBackgroundColorTop: #006cac;
+@menuBackgroundColorMiddle: #0078ac;
+@menuBackgroundColorBottom: #004f94;
+
+.standardGradient() {
+    background: #016ba9;
+    background: -moz-linear-gradient(top, @menuBackgroundColorTop 0%, @menuBackgroundColorMiddle 50%, @menuBackgroundColorBottom 99%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, @menuBackgroundColorTop), color-stop(50%, @menuBackgroundColorMiddle), color-stop(99%, @menuBackgroundColorBottom));
+    background: -webkit-linear-gradient(top, @menuBackgroundColorTop 0%, @menuBackgroundColorMiddle 50%, @menuBackgroundColorBottom 99%);
+    background: -o-linear-gradient(top, @menuBackgroundColorTop 0%, @menuBackgroundColorMiddle 50%, @menuBackgroundColorBottom 99%);
+    background: -ms-linear-gradient(top, @menuBackgroundColorTop 0%, @menuBackgroundColorMiddle 50%, @menuBackgroundColorBottom 99%);
+    background: linear-gradient(to bottom, @menuBackgroundColorTop 0%, @menuBackgroundColorMiddle 50%, @menuBackgroundColorBottom 99%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='@menuBackgroundColorTop', endColorstr='@menuBackgroundColorBottom', GradientType=0);
+}
+
 #_wrapper {
-    background-color: #FFFFFF;
+    background-color: #2d353a;
 
     #krs {
         @mainImgSize: 70px;
 
         .header {
-            height: 435px;
+            padding-bottom: 15px;
             width: 100%;
             text-align: center;
-            background: url(../Krs/img/header.jpg) center center no-repeat #12669f;
+            .standardGradient();
 
-            h2 {
-                @borderSize: 3px;
-                @marginSize: 50px;
-                @paddingSize: 30px;
-
-                margin-top: @marginSize;
-                margin-bottom: @marginSize;
-                border-top: @borderSize solid #ffffff;
-                border-bottom: @borderSize solid #ffffff;
-                padding-top: @paddingSize;
-                padding-bottom: @paddingSize;
+            h1 {
+                margin-top: 0;
+                margin-bottom: 0;
+                padding-top: 15px;
+                padding-bottom: 15px;
                 font-family: "Lato", sans-serif;
                 font-size: 46px;
-                font-weight: 400;
+                font-weight: 300;
                 color: #ffffff;
             }
+                        
             p {
                 font-family: "Lato", sans-serif;
                 font-size: 16px;
@@ -40,20 +50,45 @@
                     height: 55px;
                     font-family: "Lato", sans-serif;
                     font-size: 22px;
-                    font-weight: 400;
+                    font-weight: 300;
+                    background: rgba(255, 255, 255, 0.15);
+                    border: none;
+                    color: #FFF;
                 }
+                
+                :focus {
+	                border: none;
+	                box-shadow: inherit;
+	                outline: inherit;
+                }
+                
+                ::-webkit-input-placeholder {
+				   color: #F3F3F3;
+				}
+				
+				:-moz-placeholder { /* Firefox 18- */
+				   color: #F3F3F3;  
+				}
+				
+				::-moz-placeholder {  /* Firefox 19+ */
+				   color: #F3F3F3;  
+				}
+				
+				:-ms-input-placeholder {  
+				   color: #F3F3F3;  
+				}
 
             }
         }
         .resultsList {
             background-color: #2d353a;
-            min-height: 515px;
+            min-height: 250px;
 
-            h3 {
+            h2 {
                 font-family: "Lato", sans-serif;
-                font-size: 30px;
-                font-weight: 400;
-                color: #FFFFFF;
+                font-size: 22px;
+                font-weight: 300;
+                color: #AAA;
                 text-align: center;
             }
 
