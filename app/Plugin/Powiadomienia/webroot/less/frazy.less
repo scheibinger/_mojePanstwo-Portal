@@ -1,3 +1,8 @@
+a.wrap {
+    display: block;
+    width: 100%;
+}
+
 #powiadomienia {
     &.read .frazy ul li > a span.nonzero,
     &.read .frazy ul li > div span.nonzero {
@@ -12,7 +17,6 @@
         font-weight: 400;
         margin-bottom: 20px;
 
-
         .nokeywords {
             padding: 8px 18px;
         }
@@ -24,19 +28,21 @@
 
             li {
                 padding: 0 15px 0 10px;
-				
+
                 &:nth-last-child(-n+2) > a,
                 &:nth-last-child(-n+2) > div {
                     border-bottom: 0;
                 }
 
-				.radio-inline, .checkbox-inline {padding-left: 0;}
-				
+                .radio-inline, .checkbox-inline {
+                    padding-left: 0;
+                }
+
                 &:hover {
                     cursor: pointer;
 
                     > div.inner {
-                        .nonzero {
+                        .count {
                             visibility: hidden;
                         }
                         .delete {
@@ -68,7 +74,7 @@
                             color: #000;
 
                             &:before {
-                                content: "\e605";
+                                //content: "\e605";
                                 color: #FF0000;
                             }
                         }
@@ -102,40 +108,26 @@
                             left: -7px;
                         }
 
-                        span {
+                        .count {
                             position: absolute;
                             top: 50%;
                             right: 0;
-                            margin-top: -14px;
+                            margin-top: -10px;
                             display: block;
-                            visibility: hidden;
-
-                            font-size: 9px;
-                            font-weight: bold;
-                            color: #ffffff;
+                            width: 50px;
                             text-align: center;
-                            line-height: 24px;
 
-                            height: 26px;
-
-                            padding: 1px 5px;
-
-                            background-color: #de3339;
-                            border: 1px solid #de3339;
-                            -moz-border-radius: 20px; /*Firefox*/
-                            -webkit-border-radius: 20px; /*Safari, Chrome*/
-                            border-radius: 20px;
-
-                            &.nonzero {
-                                visibility: visible;
+                            > span.nonzero {
+                                background-color: #5CB85C;
+                                border: 1px solid #4CAE4C;
                             }
                         }
 
                         .delete {
                             position: absolute;
                             top: 50%;
-                            right: 3px;
-                            margin-top: -14px;
+                            right: 15px;
+                            margin-top: -11px;
                             padding: 5px;
                             display: block;
                             float: right;
@@ -148,13 +140,13 @@
                         }
                     }
                 }
-				
-				&:last-child {
-					> div.inner {
-						border-bottom: 0;
-					}
-				}
-				
+
+                &:last-child {
+                    > div.inner {
+                        border-bottom: 0;
+                    }
+                }
+
                 &.s {
                     background-color: white;
 

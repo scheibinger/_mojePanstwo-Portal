@@ -1,8 +1,10 @@
 <ul class="tabsList">
     <li data-mode="1"
-        class="new<?php echo (isset($this->request->query['data']['Dataobject']['visited']) && $this->request->query['data']['Dataobject']['visited'] == '1') ? null : ' s'; ?>"
+        class="new<?php if (isset($this->request->query['mode']) == false || $this->request->query['mode'] == '1') echo ' s'; ?>"
         title="new">
-        <a href="#" data-icon-after="&#xe602;"><?php echo __d('powiadomienia', "LC_POWIADOMIENIA_DANE_NEW") ?>
+        <a href="<?php
+        echo $this->Html->url(array("controller" => "powiadomienia", "action" => "index", "?" => array("mode" => "1", "keyword" => (isset($this->request->query['keyword'])) ? $this->request->query['keyword'] : null))) ?>"
+           data-icon-after="&#xe602;"><?php echo __d('powiadomienia', "LC_POWIADOMIENIA_DANE_NEW") ?>
             <?php
             /*
             * @TODO: fix this or remove permamently
@@ -19,13 +21,14 @@
              */
             ?>
         </a>
-        <input type="submit" name="data[Dataobject][visited]" value="0"/>
+        <?php /*<input type="submit" name="data[Dataobject][visited]" value="0"/>*/ ?>
     </li>
     <li data-mode="2"
-        class="read<?php echo (isset($this->request->query['data']['Dataobject']['visited']) && $this->request->query['data']['Dataobject']['visited'] == '1') ? ' s' : null; ?>"
+        class="read<?php if (isset($this->request->query['mode']) && $this->request->query['mode'] == '2') echo ' s'; ?>"
         title="read">
-        <a href="#" data-icon-after="&#xe603;"><?php echo __d('powiadomienia', "LC_POWIADOMIENIA_DANE_READ") ?></a>
-        <input type="submit" name="data[Dataobject][visited]" value="1"/>
+        <a href="<?php echo $this->Html->url(array("controller" => "powiadomienia", "action" => "index", "?" => array("mode" => "2", "keyword" => (isset($this->request->query['keyword'])) ? $this->request->query['keyword'] : null))) ?>"
+           data-icon-after="&#xe603;"><?php echo __d('powiadomienia', "LC_POWIADOMIENIA_DANE_READ") ?></a>
+        <?php /* <input type="submit" name="data[Dataobject][visited]" value="1"/> */ ?>
     </li>
     <a class="notifyAllRead<?php if (true) { //@TODO : przywrocic
         echo ' hidden';

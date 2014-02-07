@@ -203,7 +203,7 @@ jQuery(function () {
 
     /*GLOBAL MODAL FOR LOGIN VIA PASZPORT PLUGIN*/
     if ((modalPaszportLoginForm = jQuery('#modalPaszportLoginForm')).length > 0)
-        jQuery('#_mojePanstwoCockpit').find('a._mojePanstwoCockpitPowerButton').click(function (e) {
+        jQuery('#_mojePanstwoCockpit').find('a._mojePanstwoCockpitPowerButton._mojePanstwoCockpitIcons-login').click(function (e) {
             e.preventDefault();
             modalPaszportLoginForm.modal('show');
         });

@@ -2,15 +2,18 @@
      aria-labelledby="<?php echo __d('paszport', 'LC_PASZPORT_PROJECT_MOTTO'); ?>" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
+            <?php echo $this->Form->create('User', array(
+                'id' => 'UserLoginForm',
+                'url' => $this->Html->url(array('plugin' => 'paszport', 'controller' => 'users', 'action' => 'login', 'full_base' => true))
+
+            )); ?>
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h4 class="modal-title"
                     id="myModalLabel"><?php echo __d('paszport', 'LC_PASZPORT_PROJECT_MOTTO'); ?></h4>
             </div>
             <div class="modal-body">
-                
-                
-                
+
                 <div class="row">
                     
                     <div class="or nomargin col-xs-12 col-sm-10 col-sm-offset-1">
@@ -45,6 +48,7 @@
                         <?php echo $this->Html->link(__d('paszport', 'LC_PASZPORT_FORGOT_PASSWORD', true), array('action' => 'forgot')); ?>
                     </div>
                 </div>
+<<<<<<< HEAD
                 */ ?>
                 
                 <div class="row">
@@ -61,7 +65,7 @@
                 
                 <?php echo $this->Form->end(); ?>
             </div>
-            
+
         </div>
     </div>
 </div>
