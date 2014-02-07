@@ -116,7 +116,8 @@ jQuery.extend(jQuery.ui.dialog.prototype.options, {
 })(jQuery);
 
 jQuery(function () {
-    var carouselList;
+    var carouselList,
+        modalPaszportLoginForm;
 
     /* STOP ALL BOOTSTRAP CAROUSEL */
     if ((carouselList = jQuery('.carousel')).length > 0) {
@@ -199,4 +200,11 @@ jQuery(function () {
     /*JS SHORTER TITLE FUNCTION*/
     if (jQuery('.trimTitle').length > 0)
         trimTitle();
+
+    /*GLOBAL MODAL FOR LOGIN VIA PASZPORT PLUGIN*/
+    if ((modalPaszportLoginForm = jQuery('#modalPaszportLoginForm')).length > 0)
+        jQuery('#_mojePanstwoCockpit').find('a._mojePanstwoCockpitPowerButton').click(function (e) {
+            e.preventDefault();
+            modalPaszportLoginForm.modal('show');
+        });
 });

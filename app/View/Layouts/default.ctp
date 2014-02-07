@@ -27,6 +27,13 @@
     $this->Combinator->add_libs('css', $this->Less->css('main'), false);
     $this->Combinator->add_libs('css', $this->Less->css('flatly'), false);
 
+    /* GLOBAL CSS FOR LOGIN FORM FOR PASZPORT PLUGIN*/
+    $this->Combinator->add_libs('css', $this->Less->css('loginForm', array('plugin' => 'Paszport')), false);
+
+    /* SOCIAL BUTTONS */
+    echo $this->Html->css('//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css');
+    $this->Combinator->add_libs('css', $this->Less->css('social-buttons'), false);
+
     /* HAD TO BE EXCLUDED CAUSE ERRORS AT BOOTSTRAP */
     echo $this->Html->css('//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css');
     echo $this->Combinator->scripts('css');
@@ -58,6 +65,7 @@
             'applicationCrumbs' => @$statusbarCrumbs,
             'streams' => $this->Session->read('Auth.User.streams'),
         ));
+        echo $this->Element('Paszport.modal_login');
         ?>
     </header>
     <?php if ($this->Session->read('Message.flash.message')) { ?>
