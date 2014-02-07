@@ -34,7 +34,7 @@ $this->Dataobject->setObject( $object );
                     </div>
                     <div class="content col-md-<?= $object_content_sizes[1] ?>">
                         
-                        <? if( $object->force_hl_fields ) { ?>
+                        <? if( $object->force_hl_fields || $forceLabel ) { ?>
                         <p class="header">
                             <?= $object->getLabel(); ?>
                         </p>
@@ -63,7 +63,7 @@ $this->Dataobject->setObject( $object );
                 <? } else { ?>
                     <div class="content">
                         
-                        <? if( $object->force_hl_fields ) { ?>
+                        <? if( $object->force_hl_fields || $forceLabel ) { ?>
                         <p class="header">
                             <?= $object->getLabel(); ?>
                         </p>
