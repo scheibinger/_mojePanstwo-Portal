@@ -1,15 +1,62 @@
 /* GLOBAL SETTING FOR MODAL LOGIN BOX FROM PASZPORT PLUGIN */
-#modalPaszportLoginForm .modal-body {
-    .or {
-        margin-top: 35px;
-        margin-bottom: 45px;
-        text-align: center;
-        height: 12px;
-        border-bottom: 1px solid #CCCCCC;
+#modalPaszportLoginForm {
 
-        .middle {
-            background-color: #FFFFFF;
-            padding: 4px 20px;
-        }
-    }
+	label {
+		font-weight: 400;
+		font-size: 13px;
+		color: #666;
+	}
+	
+	.modal-header {
+		background-color: #006CAC;
+		color: #FFF;
+		padding: 10px 15px;
+		
+		.modal-title {
+			color: #FFF;
+			font-weight: 300;
+			font-size: 24px;
+		}
+		
+		.close {
+			font-size: 30px;
+		    font-weight: 300;
+		    margin-right: 5px;
+		    margin-top: 0;
+		    color: #FFF;
+		}
+	}
+	
+	.modal-body {
+    
+	    background-color: #EEE;
+	    padding: 0;
+	    
+	    .or {
+	        margin-top: 30px;
+	        margin-bottom: 30px;
+	        text-align: center;
+	        height: 14px;
+	        border-bottom: 1px solid #CCCCCC;
+	        font-size: 16px;
+	
+	        .middle {
+	            padding: 4px 20px;
+	            background-color: #EEE;
+	        }
+	        
+	        &.nomargin {
+		        margin-top: 20px;
+	        }
+	    }
+	    
+	    .loginSend {
+		    margin-top: 10px;
+	    }
+	    
+	    .loginOptions {
+		    font-size: 12px;
+	    }
+	}
+	
 }

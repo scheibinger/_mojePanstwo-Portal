@@ -5,28 +5,30 @@ class DatachannelsController extends DaneAppController
 
     public function index()
     {
-        $channels = $this->API->getDatachannels();
-        $searchParams = array(
-            'limit' => 12,
-            'conditions' => array(),
-            'facets' => true,
+    	
+    	$q = (string) @$this->request->query['q'];
+    	
+    	$queryData = array(
+        	'includeContent' => true,
         );
+        
+        if( $q )
+        	$queryData['conditions']['q'] = $q;
+    	
+        $channels = $this->API->getDatachannels( $queryData );
+           
 
-        $q = (string)@$this->request->query['q'];
-
-        if ($q) {
-
-            $searchParams['q'] = $q;
-
+        if( $q && !empty($channels) )
+        {
             foreach ($channels as &$ch) {
-
-                $this->API->searchDatachannel($ch['Datachannel']['slug'], $searchParams);
-                $ch['dataobjects'] = $this->API->getObjects();
-                $datachannel_count = 0;
-
-                $facets = $this->API->getFacets();
+				
+				$datachannel_count = 0;
+								
+                $facets = $ch['facets'];
                 if (!empty($facets)) {
+             
                     $facets = array_column($facets, 'params', 'field');
+                                 
                     if (array_key_exists('dataset', $facets) &&
                         isset($facets['dataset']['options']) &&
                         !empty($facets['dataset']['options'])
@@ -55,31 +57,9 @@ class DatachannelsController extends DaneAppController
                 if (!empty($ch['dataobjects']))
                     $ch['Datachannel']['score'] = $ch['dataobjects'][0]->getScore();
 
-                /*
-                $ch['Datachannel']['score'] = 0;
-                if( !empty($ch['dataobjects']) )
-                {
-                    $i = 0;
-                    foreach( $ch['dataobjects'] as $object )
-                    {
-                        $ch['Datachannel']['score'] += $object->getScore();
-                        $i++;
-                    }
-                    if( $i )
-                        $ch['Datachannel']['score'] = $ch['Datachannel']['score'] / $i;
-                }
-                */
             }
 
             uasort($channels, array($this, 'channelsCompareMethod'));
-            // var_export( $channels ); die();
-
-        } else {
-
-            foreach ($channels as &$ch) {
-                $res = $this->API->searchDatachannel($ch['Datachannel']['slug'], $searchParams);
-                $ch['dataobjects'] = $this->API->getObjects();
-            }
 
         }
 
