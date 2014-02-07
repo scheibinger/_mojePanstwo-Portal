@@ -93,7 +93,6 @@ class AppController extends Controller
      */
     public function getApplication()
     {
-
         if ($this->params->plugin) {
             foreach ($this->getApplications() as $app) {
                 if ($app['Application']['slug'] == strtolower($this->params->plugin) || $app['Application']['slug'] == Inflector::underscore($this->params->plugin)) {
