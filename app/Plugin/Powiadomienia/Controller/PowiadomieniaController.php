@@ -22,6 +22,13 @@ class PowiadomieniaController extends PowiadomieniaAppController
     public function index()
     {
 		
+		$phrases = $this->API->getPhrases();
+		$this->set('phrases', $phrases);
+		
+		$this->API->search();
+		$this->set('objects', $this->API->getObjects());
+		
+		
 		/*
         $this->data = ($this->data) ? $this->data : (isset($this->request->query['data'])) ? $this->request->query['data'] : null;
         $data = $this->data;

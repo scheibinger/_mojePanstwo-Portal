@@ -12,18 +12,6 @@
         font-weight: 400;
         margin-bottom: 20px;
 
-        h2 {
-            font-size: 18px;
-            font-weight: 300;
-
-            padding-left: 15px;
-            color: #0783b8;
-            margin-bottom: 0;
-        }
-
-        .keywords {
-            margin-top: 50px;
-        }
 
         .nokeywords {
             padding: 8px 18px;
@@ -35,13 +23,15 @@
             list-style-type: none;
 
             li {
-                padding: 0 8% 0 10px;
-
+                padding: 0 15px 0 10px;
+				
                 &:nth-last-child(-n+2) > a,
                 &:nth-last-child(-n+2) > div {
                     border-bottom: 0;
                 }
 
+				.radio-inline, .checkbox-inline {padding-left: 0;}
+				
                 &:hover {
                     cursor: pointer;
 
@@ -158,7 +148,13 @@
                         }
                     }
                 }
-
+				
+				&:last-child {
+					> div.inner {
+						border-bottom: 0;
+					}
+				}
+				
                 &.s {
                     background-color: white;
 

@@ -78,6 +78,7 @@ class DataobjectHelper extends AppHelper
      	$bg = isset($options['bg']) ? $options['bg'] : false;   
      	$hlFields = isset($options['hlFields']) ? $options['hlFields'] : false;   
      	$routes = isset($options['routes']) ? $options['routes'] : array();   
+     	$forceLabel = isset($options['forceLabel']) ? $options['forceLabel'] : false;
 	 		 	
 		$this->setObject($object);
 		if( !empty($routes) )
@@ -97,6 +98,7 @@ class DataobjectHelper extends AppHelper
         	'theme' => $theme, 
         	'bg' => $bg, 
         	'hlFields' => $hlFields,
+        	'forceLabel' => $forceLabel,
         	'file' => $this->object->getDataset(),
         	'thumbSize' => $this->getThumbSize(),
         ), array('plugin' => 'Dane'));
