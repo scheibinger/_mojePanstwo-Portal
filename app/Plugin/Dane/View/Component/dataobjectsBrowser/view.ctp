@@ -139,18 +139,18 @@ if ($__mode == 'object')
             <ul class="pagination pagination-sm">
                 <?
                 $this->Paginator->options(array(
-                    'url' => array(
+                    'url' => array_merge($this->request->query, array(
                         'plugin' => false,
                         'controller' => false,
                         'action' => $this->here,
-                    ),
+                    )),
                 ));
                 echo $this->Paginator->numbers(array(
                     'tag' => 'li',
                     'currentTag' => 'a',
                     'currentClass' => 'active',
                     'separator' => false,
-                    'escape' => false
+                    'escape' => false,
                 ));
                 ?>
             </ul>

@@ -2,6 +2,8 @@
 $object = $this->viewVars['object'];
 $objectOptions = $this->viewVars['objectOptions'];
 $menu = $this->viewVars['menu'];
+
+$buttons = isset($objectOptions['buttons']) ? $objectOptions['buttons'] : array('shoutIt');
 ?>
 <?php $this->Combinator->add_libs('css', $this->Less->css('dataobject', array('plugin' => 'Dane'))) ?>
 <?php $this->Combinator->add_libs('css', $this->Less->css('dataobjectpage', array('plugin' => 'Dane'))) ?>
@@ -22,43 +24,11 @@ $menu = $this->viewVars['menu'];
                 </div>
                 <div class="col-md-3">
                     <ul class="objectButtons">
-                        <li>
-                            <div class="shoutIt hide">
-                                <button class="btn btn-primary shoutItButton"
-                                        type="button"><?php echo __d('dane', 'LC_DANE_NAGLOSNIJ'); ?></button>
-
-                                <div class="shoutItContent">
-                                    <div class="facebookBox">
-                                        <div class="fb-like" data-href="<?php echo Router::url($this->here, true); ?>"
-                                             data-send="false"
-                                             data-layout="button_count"
-                                             data-action="<?php if (Configure::read('Config.language') == 'pol') {
-                                                 echo('recommend');
-                                             } else {
-                                                 echo('like');
-                                             } ?>"
-                                             data-width="85"
-                                             data-show-faces="false">
-                                        </div>
-                                    </div>
-                                    <div class="twitterBox">
-                                        <div class="tweet">
-                                            <a href="https://twitter.com/share" class="twitter-share-button"
-                                               data-url="<?php echo Router::url($this->here, true); ?>"
-                                               data-lang="<?php if (Configure::read('Config.language') == 'pol') {
-                                                   echo('pl');
-                                               } else {
-                                                   echo('en');
-                                               } ?>">Tweet</a>
-                                        </div>
-                                    </div>
-                                    <div class="wykopBox">
-                                        <div class="wykop-button"
-                                             data-href="<?php echo Router::url($this->here, true); ?>"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
+                    	<? foreach( $buttons as $button ) { ?>
+	                        <li><?= $this->Element('dataobject/buttons/' . $button, array(
+	                        	'base_url' => '/dane/' . $object->getDataset() . '/' . $object->getId(),
+	                        )); ?></li>
+                        <? } ?>
                     </ul>
                 </div>
             </div>

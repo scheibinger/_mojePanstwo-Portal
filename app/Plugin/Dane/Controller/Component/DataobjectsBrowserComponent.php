@@ -18,7 +18,7 @@ class DataobjectsBrowserComponent extends Component
     public $excludeFilters = array();
 
     public $components = array(
-        'Paginator',
+        'Paginator'
     );
 
     public $helpers = array(
@@ -229,7 +229,8 @@ class DataobjectsBrowserComponent extends Component
         if ($this->mode == 'dataset') {
 
             $conditions['dataset'] = $this->tag;
-
+			
+			
             $dataset = $controller->API->getDataset($this->tag);
             if( !$this->title )
 	            $this->title = $dataset['Dataset']['name'];

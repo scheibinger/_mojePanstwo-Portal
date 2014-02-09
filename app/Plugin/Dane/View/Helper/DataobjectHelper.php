@@ -190,6 +190,13 @@ class DataobjectHelper extends AppHelper
 					    	$field_value = pl_dopelniacz(pl_wiek($field_value), 'rok', 'lata', 'lat');
 						    break;
 					    }
+					    
+					    case 'bytes':
+					    {
+					    	$field_value = round( $field_params['value'] / 1024 );
+					    	$field_value = number_format($field_value, 0, '', ' ') . 'kB';
+						    break;
+					    }
 				    }
 			    }
 			    
@@ -237,7 +244,7 @@ class DataobjectHelper extends AppHelper
 			    
 			    if( isset($field_options['link']) )
 			    {
-				    if( is_array($field_options['link']) && $field_options['link']['dataset'] && $field_options['link']['object_id'] )
+				    if( is_array($field_options['link']) && isset($field_options['link']['dataset']) && isset($field_options['link']['object_id']) )
 				    {
 					    
 					    if( is_array($field_value) )
@@ -265,6 +272,19 @@ class DataobjectHelper extends AppHelper
 						    $field_value = '<a href="' . $href . '">' . $field_value . '</a>';
 					    }
 					    
+				    }
+				    elseif( is_array($field_options['link']) && $field_options['link']['href'] )
+				    {
+				    	$href = ( $field_options['link']['href'][0] == '$' ) ? 
+							    	$this->object->getData( substr($field_options['link']['href'], 1) ) : 
+							    	$field_options['link']['href'];
+					    
+					    $_field_value = $field_value;
+					    
+					    $field_value = '<a';
+					    if( isset($field_options['link']['newWindow']) && $field_options['link']['newWindow'])
+					    	$field_value .= ' target="_blank"';
+					    $field_value .= ' href="' . $href . '">' . $_field_value . '</a>';
 				    }
 				}
 				

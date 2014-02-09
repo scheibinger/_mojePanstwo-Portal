@@ -10,7 +10,7 @@ class mpapiComponent extends Component
         if ($controller->Auth->loggedIn()) {
             $controller->API = $this->getAPI(array(
             	'user_id' => $controller->Auth->user('id'), 
-            	'stream_id' => $controller->Session->read('Stream.id')
+            	'stream_id' => $controller->Session->read('Stream.id'),
             ));
         } else {
             $controller->API = $this->getAPI();

@@ -15,13 +15,12 @@
 			}
 		?>
     </ul>
-    <div class="col-xs-12">
-        <ul class="pagination pagination-sm">
-            <?php echo $this->Paginator->numbers(array('tag' => 'li', 'currentTag' => 'a', 'currentClass' => 'active', 'separator' => false, 'escape' => false)); ?>
-        </ul>
-    </div>
 </div>
-
+<div class="col-xs-12">
+    <ul class="pagination pagination-sm">
+        <?php echo $this->Paginator->numbers(array('tag' => 'li', 'currentTag' => 'a', 'currentClass' => 'active', 'separator' => false, 'escape' => false)); ?>
+    </ul>
+</div>
 <div id="hiddenFilters">
     <div class="header">
         <h1>
