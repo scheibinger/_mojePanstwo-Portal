@@ -1,6 +1,14 @@
 <div id="_mojePanstwoCockpit">
     <div class="_mojePanstwoCockpitContent">
-        <div class="_mojePanstwoCockpitLogo">
+        <div <? /*HACK FOR BETA LOGO CHANGE*/ ?>
+            class="_mojePanstwoCockpitLogo<?php if (isset($_COOKIE['_mPFirstTime']) && ($_COOKIE['_mPFirstTime'] == '1')) { ?> firstTime<? } ?>">
+            <img src="/img/beta.png"/>
+            <?php if (isset($_COOKIE['_mPFirstTime']) && ($_COOKIE['_mPFirstTime'] == '1')) { ?>
+                <div class="morph">
+                    <img height="18" src="http://sejmometr.pl/assets/img/logo.png">
+                    <small>zmienia się w</small>
+                </div>
+            <?php } ?>
             <p>
                 <a href="/" target="_self">
                     <strong>_moje</strong>Państwo
@@ -155,17 +163,19 @@
                     <a href="<?php echo $this->Html->url(array('plugin' => 'paszport', 'controller' => 'users', 'action' => 'index')); ?>"><?php echo $this->Session->read('Auth.User.username'); ?></a>
                 </div>
                 <?php if (count($_STREAMS) > 1) { ?>
-                    
-                <div class="_mojePanstwoCockpitUserStreams">
-                	<form method="get" action="<?php echo $this->Html->url(array('plugin' => 'paszport', 'controller' => 'users', 'action' => 'switchstreams')); ?>">
-                	<select autocomplete="off" name="stream" onchange="this.form.submit()">
-                		<?php foreach( $_STREAMS as $stream ) { ?>
-                            <option <? if( $stream['selected'] ) {?>selected="selected" <? } ?>value="<?= $stream['id'] ?>"><?= $stream['name'] ?></option>
-                        <?php } ?>
-                	</select>
-                	</form>
-                </div>
-                    
+
+                    <div class="_mojePanstwoCockpitUserStreams">
+                        <form method="get"
+                              action="<?php echo $this->Html->url(array('plugin' => 'paszport', 'controller' => 'users', 'action' => 'switchstreams')); ?>">
+                            <select autocomplete="off" name="stream" onchange="this.form.submit()">
+                                <?php foreach ($_STREAMS as $stream) { ?>
+                                    <option <? if ($stream['selected']) { ?>selected="selected"
+                                            <? } ?>value="<?= $stream['id'] ?>"><?= $stream['name'] ?></option>
+                                <?php } ?>
+                            </select>
+                        </form>
+                    </div>
+
                     <? /*
                     <ul class="_mojePanstwoCockpitUserNameDropdownList">
                         <li class="_mojePanstwoCockpitUserNameDropdownListStream">Streams
@@ -174,7 +184,8 @@
                             </ul>
                         </li>
                     </ul>
-                    */ ?>
+                    */
+                    ?>
                 <?php } ?>
             </div>
         <?php } ?>

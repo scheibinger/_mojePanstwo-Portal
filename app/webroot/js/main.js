@@ -158,6 +158,10 @@ jQuery(function () {
 
     viewport.sizeMarker = checkSizeMarker;
 
+    /*HACK FOR BETA LOGO CHANGE*/
+    if (jQuery.cookie('_mPFirstTime') == null)
+        jQuery.cookie('_mPFirstTime', 1);
+
     if ((jQuery.cookie('_mPViewport') == null) || (jQuery.cookie('_mPViewport') != checkSizeMarker)) {
         var rescaleOverlay = $('<div></div>').css({
                 'position': 'fixed',

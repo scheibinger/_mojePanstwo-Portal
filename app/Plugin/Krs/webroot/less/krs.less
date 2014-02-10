@@ -61,6 +61,7 @@
 
                 > span button {
                     background-color: #4689B7;
+                    width: 55px;
                 }
 
                 &:focus {
@@ -93,28 +94,88 @@
             background-color: #2d353a;
             min-height: 250px;
 
-            h2 {
-                font-family: "Lato", sans-serif;
-                font-size: 22px;
-                font-weight: 300;
-                color: #AAA;
-                text-align: center;
-            }
+            #groupsAndResults {
+                @sideSize: 4%;
+                @innerSize: 92%;
 
-            ul {
-                font-family: "Lato", sans-serif;
-                font-size: 16px;
-                font-weight: 400;
+                .carousel-inner {
+                    width: @innerSize;
+                    margin: 0 @sideSize;
 
-                a {
-                    color: #bbc4c9;
+                    .item {
+                        height: 420px;
 
-                    &:hover {
-                        color: #4a85b3
+                        &.results {
+                            ul li {
+                                height: 42px;
+                            }
+                            .seeMore {
+                                float: left;
+                                text-align: center;
+                                width: 100%;
+                            }
+                        }
+
+                        .carousel-title {
+                            font-family: "Lato", sans-serif;
+                            font-size: 30px;
+                            font-weight: 300;
+                            color: #FFFFFF;
+                            text-align: center;
+                            margin: 30px 0 50px;
+                        }
+                        ul {
+                            font-family: "Lato", sans-serif;
+                            font-size: 14px;
+                            font-weight: 400;
+                            line-height: 1.1em;
+                            padding: 0;
+                            margin: 0;
+                            width: 100%;
+                            display: inline-block;
+
+                            li {
+                                width: 50%;
+                                height: 50px;
+                                padding: 6px 12px;
+                                float: left;
+
+                                a {
+                                    color: #bbc4c9;
+                                    display: block;
+
+                                    &:hover {
+                                        color: #4a85b3
+                                    }
+
+                                    small {
+                                        color: #71787d;
+                                    }
+                                }
+                            }
+                        }
                     }
+                }
+                .carousel-control {
+                    width: @sideSize;
+                    background: none;
+                }
+                .carousel-indicators {
+                    bottom: 0;
+                    position: relative;
+                    margin-top: 25px;
 
-                    small {
-                        color: #71787d;
+                    li {
+                        margin: 1px 2px;
+
+                        &, &.active {
+                            width: 10px;
+                            height: 10px;
+                        }
+
+                        &:first-child {
+                            margin-right: -2px;
+                        }
                     }
                 }
             }

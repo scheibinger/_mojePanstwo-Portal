@@ -6,39 +6,27 @@
         <div class="col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
             <h2>
                 <?php echo __('LC_MAINHEADER_TEXT') ?>
-                <!--                <a class="learnMore" href="/przewodnik">-->
-                <!--                    --><?php //echo __('LC_MAINHEADER_GUIDE') ?>
-                <!--                </a>-->
             </h2>
         </div>
     </div>
 
-    <div class="row">
-        <div class="col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
-            <p class="msg">
-                To jest wersja alpha <b>_mojego</b>Państwa. Portal zostanie uruchomiony wkrótce.
-            </p>
-        </div>
-    </div>
-
-    <? /*
     <div class="globalSearch row">
         <div class="col-sm-10 col-md-8 col-md-offset-2 col-lg-6 col-sm-offset-1 col-md-offset-2 col-lg-offset-3">
 
             <div class="input-group">
-            		<form action="/dane" method="get">
-	                <input name="q" type="text" class="form-control" placeholder="<?php echo __('LC_SEARCH_PUBLIC_DATA_PLACEHOLDER') ?>">
-	                <input type="submit" name="submit" style="display: none;" />
+                <form action="/dane" method="get">
+                    <input name="q" type="text" class="form-control"
+                           placeholder="<?php echo __('LC_SEARCH_PUBLIC_DATA_PLACEHOLDER') ?>">
+                    <input type="submit" name="submit" style="display: none;"/>
 	                <span class="input-group-btn">
 	                    <button class="btn btn-default" type="button" data-icon="&#xe600;"></button>
 	                </span>
-            		</form>
+                </form>
             </div>
 
         </div>
     </div>
-    */
-    ?>
+
 
     <div class="apps row">
         <div class="col-md-12 col-lg-12">

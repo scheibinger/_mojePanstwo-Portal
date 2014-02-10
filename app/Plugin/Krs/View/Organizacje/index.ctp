@@ -8,8 +8,8 @@
 
             <p class="col-xs-12 col-md-8 col-md-offset-2"><?= __d('krs', 'LC_KRS_HEADLINE') ?></p>
 
-            <form action="/krs" method="get">
-                <div class="searchKRS input-group col-xs-12 col-md-10 col-md-offset-1">
+            <form class="searchKRSForm" action="/krs/search.json" method="get">
+            <div class="searchKRS input-group col-xs-12 col-md-10 col-md-offset-1">
                     <input type="text" class="form-control input-lg" name="q"
                            placeholder="<?= __d('krs', 'LC_KRS_SEARCH_PLACEHOLDER') ?>">
                     <span class="input-group-btn">
@@ -22,7 +22,53 @@
     </div>
     <div class="resultsList">
         <div class="container">
-            <? debug($groups); ?>
+
+            <div id="groupsAndResults" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                    <?php foreach ($groups as $index => $group) { ?>
+                        <div class="item<?php if ($index == 0) {
+                            echo ' active';
+                        } ?>">
+                            <div class="carousel-title"><?= $group['label'] ?></div>
+                            <ul>
+                                <?php foreach ($group['content'] as $result) { ?>
+                                    <li>
+                                        <a href="<?php if ($result['type'] == 'organization') {
+                                            echo('/dane/krs_podmioty/' . $result['id']);
+                                        } elseif ($result['type'] == 'person') {
+                                            echo('/dane/krs_osoby/' . $result['id']);
+                                        } ?>" target="_self"><?php echo trim($result['nazwa']) ?>
+                                            <small>(<?php echo str_replace(' ', '&nbsp', $result['field_name']) ?>:&nbsp;<?php
+                                                if ($group['id'] == 'najnowsze_organizacje') {
+                                                    echo str_replace(' ', '&nbsp', $result['field_value']);
+                                                } elseif ($group['id'] == 'najwieksze_spolki') {
+                                                    echo number_format($result['field_value'], 2, ',', ' ');
+                                                }
+                                                ?>)
+                                            </small>
+                                        </a>
+                                    </li>
+                                <?php } ?>
+                            </ul>
+                        </div>
+                    <? } ?>
+                </div>
+
+                <ol class="carousel-indicators">
+                    <?php for ($i = 0; $i < count($groups); $i++) { ?>
+                        <li data-target="#groupsAndResults"
+                            data-slide-to="<?= $i ?>"<? if ($i == 0) { ?> class="active"<? } ?>>
+                        </li>
+                    <?php } ?>
+                </ol>
+
+                <a class="left carousel-control" href="#groupsAndResults" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                </a>
+                <a class="right carousel-control" href="#groupsAndResults" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right"></span>
+                </a>
+            </div>
         </div>
     </div>
 

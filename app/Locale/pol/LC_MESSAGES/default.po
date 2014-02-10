@@ -5,7 +5,7 @@ msgid "LC_COCKPITBAR_LOGOUT"
 msgstr "Wyloguj się"
 
 msgid "LC_MAINHEADER_TEXT"
-msgstr "<b>_moje</b>Państwo <span>to zestaw aplikacji, dzięki którym możesz kontrolować i wpływać na działania Twojego państwa.</span>"
+msgstr "<b>_moje</b>Państwo <span>to zestaw aplikacji, dzięki którym możesz kontrolować i&nbsp;wpływać na działania Twojego państwa.</span>"
 
 msgid "LC_MAINHEADER_GUIDE"
 msgstr "Więcej&nbsp;&raquo;"

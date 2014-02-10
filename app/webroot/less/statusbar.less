@@ -82,9 +82,46 @@
 
         ._mojePanstwoCockpitLogo {
             height: @globalHeight;
-            width: 138px;
+            width: 155px;
             padding-right: 20px;
+            padding-left: 25px;
             float: left;
+
+            &.firstTime {
+                /*HACK FOR BETA LOGO CHANGE*/
+                width: 345px;
+
+                > img {
+                    opacity: 0;
+                }
+
+                .morph {
+                    float: left;
+                    height: 35px;
+                    overflow: hidden;
+                    padding-top: 10px;
+                    margin-left: -20px;
+
+                    > small {
+                        font-family: "Lato", sans-serif;
+                        font-size: 11px;
+                        font-weight: 300;
+                        padding: 0 10px;
+                        vertical-align: bottom;
+                        color: #ccc;
+                    }
+                }
+                > p {
+                    float: left;
+                }
+            }
+
+            > img {
+                height: 50px;
+                left: 0;
+                top: 0;
+                position: absolute;
+            }
 
             h1, p {
                 font-family: "Lato", sans-serif;
@@ -240,6 +277,7 @@
                         & > li {
                             width: 3*(2*@iconSize);
                             float: left;
+                            display: none;
 
                             &._mojePanstwoCockpitMenuUpSubMenuListActive {
                                 display: block;
@@ -325,6 +363,7 @@
                             bottom: 0;
                             display: block;
                             border: none;
+                            background-color: #0078AC;
 
                             &._mojePanstwoCockpitMenuUpSubMenuControlsArrowLeft {
                                 left: -20px;

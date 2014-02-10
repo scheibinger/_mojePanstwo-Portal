@@ -12,3 +12,9 @@ msgstr "Posłowie w KRS"
 
 msgid "LC_KRS_POSLOWIE_BLOCK_LINK"
 msgstr "Zobacz szczegóły"
+
+msgid "LC_KRS_SEARCH_TITLE"
+msgstr "Wyniki"
+
+msgid "LC_KRS_SEARCH_LINK"
+msgstr "Zobacz więcej"
