@@ -15,6 +15,7 @@
                     href="/"></div>
                 <div id="_mojePanstwoCockpitMenuUpSubMenuTopArrow"></div>
                 <div id="_mojePanstwoCockpitMenuUpSubMenu">
+                    <div class="_mojePanstwoCockpitMenuUpSubMenuTitle">Aplikacje</div>
                     <?php if (!empty($applications['list'])) {
                         echo '<ul id="_mojePanstwoCockpitMenuUpSubMenuList"><li>';
                         foreach ($applications['list'] as $index => $app) {
@@ -68,11 +69,14 @@
                     }?>
                     <div id="_mojePanstwoCockpitMenuUpSubMenuControls">
                         <a class="_mojePanstwoCockpitMenuUpSubMenuControlsArrow _mojePanstwoCockpitMenuUpSubMenuControlsArrowLeft"
-                           href="javascript:void(0)" onclick="_mojePanstwoCockpitSlider.prevSlide();"><span>&lt;</span></a>
+                           href="javascript:void(0)" onclick="_mojePanstwoCockpitSlider.prevSlide();"><span
+                                class="glyphicon glyphicon-chevron-left"></span></a>
 
                         <p id="_mojePanstwoCockpitMenuUpSubMenuControlsList"></p>
+
                         <a class="_mojePanstwoCockpitMenuUpSubMenuControlsArrow _mojePanstwoCockpitMenuUpSubMenuControlsArrowRight"
-                           href="javascript:void(0)" onclick="_mojePanstwoCockpitSlider.nextSlide();"><span>&gt;</span></a>
+                           href="javascript:void(0)" onclick="_mojePanstwoCockpitSlider.nextSlide();"><span
+                                class="glyphicon glyphicon-chevron-right"></span></a>
                     </div>
                 </div>
             </div>

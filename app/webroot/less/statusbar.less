@@ -174,7 +174,7 @@
                     border-right: 10px solid transparent;
                     position: absolute;
                     top: 35px;
-                    left: 13px;
+                    left: 14px;
                     display: none;
                 }
 
@@ -183,7 +183,7 @@
                     @iconPadding: 20px;
 
                     cursor: normal;
-                    display: none;
+                    display: block;
                     float: left;
                     font-size: 14px;
                     left: 0;
@@ -193,7 +193,6 @@
                     position: absolute;
                     top: 100%;
                     z-index: 9999;
-                    overflow: hidden;
                     background-clip: padding-box;
                     background-color: @backgroundColorMenu;
                     border: 1px solid @backgroundColorMenu;
@@ -208,13 +207,28 @@
                     -webkit-border-top-right-radius: 0;
                     -o-border-top-left-radius: 0;
                     -o-border-top-right-radius: 0;
-                    
+
                     margin-left: -31px;
                     margin-top: 0;
-                    box-shadow: 0px 5px 10px #888888;
-                    -webkit-box-shadow: 0px 5px 10px #888888;
-                    -moz-box-shadow: 0px 5px 10px #888888;
-                    -o-box-shadow: 0px 5px 10px #888888;
+
+                    /*SLIDEDOWN EFFECT*/
+                    -webkit-transition: max-height .6s ease;
+                    -moz-transition: max-height .6s ease;
+                    -o-transition: max-height .6s ease;
+                    -ms-transition: max-height .6s ease;
+                    transition: max-height .6s ease;
+
+                    /* To hide by default, setting max-height and opacity = 0 */
+                    max-height: 0;
+                    opacity: 0;
+                    overflow: hidden;
+
+                    ._mojePanstwoCockpitMenuUpSubMenuTitle {
+                        font-family: "Lato", sans-serif;
+                        font-size: 14px;
+                        font-weight: 300;
+                        margin: 10px 0 -10px;
+                    }
 
                     #_mojePanstwoCockpitMenuUpSubMenuList {
                         width: 3*(2*@iconSize);
@@ -303,7 +317,7 @@
                             font-size: 20px;
                             font-weight: 700;
                             color: #ffffff;
-                            line-height: 14em;
+                            line-height: 245px;
                             text-align: center;
                             width: 30px;
                             height: 290px;
@@ -372,8 +386,8 @@
                                 &._mojePanstwoCockpitMenuUpSubMenuControlsListActive {
                                     background: none repeat scroll 0 0 #FFFFFF;
                                     opacity: 1;
+                                    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
                                 }
-
                             }
                         }
                     }
@@ -419,7 +433,7 @@
             ._mojePanstwoCockpitUserName {
                 float: left;
                 padding: 10px 0 8px;
-				
+
                 a {
                     color: #DFDFDF;
                     text-decoration: none;
@@ -430,12 +444,12 @@
                 float: left;
                 padding: 7px 10px 6px 0;
             }
-			
-			._mojePanstwoCockpitUserStreams {
-				 float: left;
+
+            ._mojePanstwoCockpitUserStreams {
+                float: left;
                 padding: 10px 0 0 15px;
-			}
-			
+            }
+
             &._mojePanstwoCockpitUserNameDropdown {
                 position: relative;
                 display: block;
