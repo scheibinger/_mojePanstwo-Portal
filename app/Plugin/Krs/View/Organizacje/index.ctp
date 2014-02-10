@@ -1,7 +1,7 @@
 <?php $this->Combinator->add_libs('css', $this->Less->css('krs', array('plugin' => 'Krs'))) ?>
 <?php $this->Combinator->add_libs('js', 'Krs.index.js') ?>
 
-<div<? if ($results) echo(' class="results"'); ?> id="krs">
+<div id="krs">
     <div class="header">
         <div class="container">
             <h1 class="col-xs-12 col-md-8 col-md-offset-2"><?= __d('krs', 'LC_KRS_HEADER') ?></h1>
@@ -22,7 +22,7 @@
     </div>
     <div class="resultsList">
         <div class="container">
-            <h2>Największe spółki publiczne:</h2>
+            <? debug($groups); ?>
         </div>
     </div>
 

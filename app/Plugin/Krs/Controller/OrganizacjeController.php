@@ -9,6 +9,11 @@ class OrganizacjeController extends AppController
 
     public function index()
     {
+    	
+    	$groups = $this->API->KRS()->getFeaturedOrganizationsByGroups();
+    	$this->set('groups', $groups);
+    	
+    	/*
         $org = @$this->params->query['org'];
         $osb = @$this->params->query['osb'];
         $this->set('org', $org);
@@ -56,6 +61,7 @@ class OrganizacjeController extends AppController
 
         $application = $this->getApplication();
         $this->set('title_for_layout', $application['Application']['name']);
+        */
 
     }
 
