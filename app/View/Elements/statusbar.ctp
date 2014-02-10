@@ -143,25 +143,34 @@
             ?>
 
             <div
-                class="_mojePanstwoCockpitUser <?php echo (count($streams) > 1) ? "_mojePanstwoCockpitUserNameDropdown" : null; ?>">
+                class="_mojePanstwoCockpitUser">
                 <div class="_mojePanstwoCockpitUserAvatar">
                     <img src="<?php echo $this->Session->read('Auth.User.photo_small'); ?>" class="img img-circle"/>
                 </div>
                 <div class="_mojePanstwoCockpitUserName">
                     <a href="<?php echo $this->Html->url(array('plugin' => 'paszport', 'controller' => 'users', 'action' => 'index')); ?>"><?php echo $this->Session->read('Auth.User.username'); ?></a>
                 </div>
-                <?php if (count($streams) > 1) { ?>
-                    <ul id="_mojePanstwoCockpitUserNameDropdownList">
+                <?php if (count($_STREAMS) > 1) { ?>
+                    
+                <div class="_mojePanstwoCockpitUserStreams">
+                	<form method="get" action="<?php echo $this->Html->url(array('plugin' => 'paszport', 'controller' => 'users', 'action' => 'switchstreams')); ?>">
+                	<select autocomplete="off" name="stream" onchange="this.form.submit()">
+                		<?php foreach( $_STREAMS as $stream ) { ?>
+                            <option <? if( $stream['selected'] ) {?>selected="selected" <? } ?>value="<?= $stream['id'] ?>"><?= $stream['name'] ?></option>
+                        <?php } ?>
+                	</select>
+                	</form>
+                </div>
+                    
+                    <? /*
+                    <ul class="_mojePanstwoCockpitUserNameDropdownList">
                         <li class="_mojePanstwoCockpitUserNameDropdownListStream">Streams
                             <ul class="_mojePanstwoCockpitUserNameDropdownListSubList">
-                                <?php foreach ($streams as $id => $name) { ?>
-                                    <li data-stream-id="<?php echo $id; ?>"><a
-                                            href="<?php echo $this->Html->url(array('plugin' => 'paszport', 'controller' => 'users', 'action' => 'switchstreams', $id)); ?>"><?php echo $name; ?></a>
-                                    </li>
-                                <?php } ?>
+                                
                             </ul>
                         </li>
                     </ul>
+                    */ ?>
                 <?php } ?>
             </div>
         <?php } ?>

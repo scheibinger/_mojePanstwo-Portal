@@ -95,7 +95,7 @@ $this->Dataobject->setObject( $object );
     </div>
     <?php if ($object->hasHighlights() && $object->getHlText()) { ?>
         <div class="row">
-            <div class="highlights alert alert-info">
+            <div class="text-highlights alert alert-info">
                 <?php echo $object->getHlText(); ?>
             </div>
         </div>

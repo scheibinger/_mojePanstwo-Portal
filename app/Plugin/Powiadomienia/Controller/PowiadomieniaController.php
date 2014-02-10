@@ -3,9 +3,15 @@
 class PowiadomieniaController extends PowiadomieniaAppController
 {
     public $components = array(
-        'RequestHandler',
+        'RequestHandler', 'Paginator'
     );
-
+	
+	public $uses = array('Powiadomienia.Dataobject');
+	
+	public $paginate = array(
+        'limit' => 20,
+    );
+    	
     public function beforeFilter()
     {
         parent::beforeFilter();
@@ -22,31 +28,27 @@ class PowiadomieniaController extends PowiadomieniaAppController
     public function index()
     {
 		
+		// FETCHING PHRASES	
+		
 		$phrases = $this->API->getPhrases();
 		$this->set('phrases', $phrases);
 		
-		$this->API->search();
-		$this->set('objects', $this->API->getObjects());
 		
+				
 		
-		/*
-        $this->data = ($this->data) ? $this->data : (isset($this->request->query['data'])) ? $this->request->query['data'] : null;
-        $data = $this->data;
-        $phrases = $this->requestAction(array(
-            'plugin' => 'powiadomienia',
-            'controller' => 'phrases',
-            'action' => 'index'
-        ), array('return', 'data' => $this->data));
-
-        $objects = $this->requestAction(array(
-            'plugin' => 'powiadomienia',
-            'controller' => 'dataobjects',
-            'action' => 'index'
-        ), array('return', 'data' => (isset($data['Dataobject'])) ? $data['Dataobject'] : null, 'extra' => $this->params->query));
-
-        $this->set('phrases', $phrases);
-        $this->set('objects', $objects);
-        */
+		// FETCHING OBJECTS
+				
+		$this->Paginator->settings = array(
+			'conditions' => array(
+				'keyword' => isset( $this->request->query['keyword'] ) ? $this->request->query['keyword'] : false,
+				'mode' => isset( $this->request->query['mode'] ) ? $this->request->query['mode'] : false,
+			),
+			'limit' => 20,
+			'paramType' => 'querystring',
+		);
+		
+        $objects = $this->Paginator->paginate('Dataobject');		
+		$this->set('objects', $objects);
 
     }
 

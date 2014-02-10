@@ -69,13 +69,17 @@
         ?>
     </header>
     <?php if ($this->Session->read('Message.flash.message')) { ?>
-        <div class="alert alert-info">
-            <div class="container"><?php echo $this->Session->flash(); ?></div>
+        <div class="flash-message">
+	        <div class="alert alert-info">
+	            <div class="container"><?php echo $this->Session->flash(); ?></div>
+	        </div>
         </div>
     <?php } ?>
     <?php if ($this->Session->read('Message.auth.message')) { ?>
-        <div class="alert alert-info">
-            <div class="container"><?php echo $this->Session->flash('auth'); ?></div>
+        <div class="flash-message">
+	        <div class="alert alert-info">
+	            <div class="container"><?php echo $this->Session->flash('auth'); ?></div>
+	        </div>
         </div>
     <?php } ?>
     <div id="_main">

@@ -10,33 +10,34 @@ class mpapiComponent extends Component
         if ($controller->Auth->loggedIn()) {
             $controller->API = $this->getAPI(array(
             	'user_id' => $controller->Auth->user('id'), 
-            	'stream_id' => $controller->Session->read('Stream.id'),
             ));
         } else {
             $controller->API = $this->getAPI();
         }
-        $params = array(
+
+        $data = $controller->API->Paszport()->info(array(
             'applications' => true,
-        );
-
-        $portalHeaderTemplate = Cache::read('portalHeader', 'short');
-        if (!$portalHeaderTemplate)
-            $params['portalHeader'] = true;
-
-        $data = $controller->API->Paszport()->info($params);
-
-        if ($data['user']) {
-            // to powodowało ciągłe regenerowanie sesji, co w efekcie nie jest najlepszym rozwiazaniem
-//            $controller->Auth->login($data['user']);
-            $controller->Session->write('Auth.User', $data['user']);
-            $controller->set('_USER', $data['user']);
-        } else {
-
-
+        ));
+		
+		
+	
+		// PROCESSING USER 
+		
+        if( $data['user'] )
+        {
+        	$this->User = $data['user'];
+            $controller->Session->write('Auth.User', $this->User);
+            $controller->set('_USER', $this->User);
         }
-        if ($data['applications']) {
+        
+        
+        
+        // PROCESSING APPLICATIONS 
+        
+        $applications = array();
+        if ($data['applications'])
+        {
 
-            $applications = array();
             $folders = array();
 
             foreach ($data['applications'] as $dapplication) {
@@ -59,37 +60,57 @@ class mpapiComponent extends Component
                 }
             }
 
-            $controller->Applications = $applications;
-            $controller->set('_APPLICATIONS', $applications);
-
         }
-
-        if ($data['portalHeaderTemplate']) {
-            $portalHeaderTemplate = $data['portalHeaderTemplate'];
-            Cache::write('portalHeader', $portalHeaderTemplate, 'short');
-        }
-
-        if ($controller->Auth->loggedIn()) {
-            foreach ($this->Session->read('Auth.User') as $field => $value) {
-                if (!is_array($value)) {
-                    $portalHeaderTemplate = preg_replace('/\{\%' . $field . '\%\}/', $value, $portalHeaderTemplate);
-                }
-            }
-        }
-
-        $controller->set('_PORTAL_HEADER', $portalHeaderTemplate);
-
+        
+        $controller->Applications = $applications;
+        $controller->set('_APPLICATIONS', $applications);
+        
+        $controller->set('_APPLICATION', $controller->getApplication());
+        
+        
+        
+        // PROCESSING STREAMS
+        
+		$streams = array();
+		if( isset($data['streams']) && !empty($data['streams']) )
+        {
+        	
+        	        	
+        	foreach( $data['streams'] as $id => $name )
+        	{
+        		$selected = ( $this->Session->read('Stream.id') == $id );
+        		$streams[] = array(
+        			'id' => $id,
+        			'name' => $name,
+        			'selected' => $selected,
+        		);
+        		        		
+        		if( $selected )
+        			$this->stream_id =$id;
+        			
+        	}
+        	
+        }        
+        
+        if( $this->Session->read('Stream.id') != $this->stream_id )
+        	$this->Session->write('Stream.id', $this->stream_id);
+        
+        $controller->API->setOptions(array(
+        	'stream_id' => $this->stream_id,
+        ));
+        	
+        $this->Streams = $streams;
+    	$controller->set('_STREAMS', $streams);    	
+        
     }
 
     public function getAPI( $options = array() )
     {
-    	
-    	if( !isset($options['user_id']) )
-    		$options['user_id'] = 0;
-    	
-    	if( !isset($options['stream_id']) )
-    		$options['stream_id'] = 1;
-    		    	
+    	$options = array_merge(array(
+        	'user_id' => SessionComponent::read('Auth.User.id'), 
+        	'stream_id' => SessionComponent::read('Stream.id'),
+        ), $options);
+    	    	
         require_once(MPAPI_path . 'loader.php');
         return new MP\API($options);
 

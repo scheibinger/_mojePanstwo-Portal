@@ -11,5 +11,7 @@ class PowiadomieniaAppController extends AppController
         $this->API = $this->API->Powiadomienia();
         parent::beforeFilter();
     }
-
+	
+	public $pagination = array();
+	
 }

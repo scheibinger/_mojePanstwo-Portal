@@ -12,13 +12,8 @@ class mpapiObjectsSource extends DataSource
 
     public function __construct($config)
     {
-
-        $this->API = mpapiComponent::getAPI(array(
-        	'user_id' => SessionComponent::read('Auth.User.id'), 
-        	'stream_id' => SessionComponent::read('Stream.id'),
-        ));
+        $this->API = mpapiComponent::getAPI();
         parent::__construct($config);
-
     }
 
     public function read(Model $model, $queryData = array(), $recursive = null)

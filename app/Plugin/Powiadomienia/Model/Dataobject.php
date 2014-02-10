@@ -1,38 +1,21 @@
 <?
-App::uses('SolrAppModel', 'Model');
-
-class Dataobject extends SolrAppModel
+class Dataobject extends AppModel
 {
-
+    public $pagination = array();
+    public $total = 0;
+    
     public function find($type = 'first', $queryData = array())
     {
-        $this->API = mpapiComponent::getApi(CakeSession::read('Auth.User.id'))->Powiadomienia();
-        if (isset($queryData['page']) && isset($queryData['limit'])) {
-            $queryData['offset'] = ($queryData['page'] - 1) * $queryData['limit'];
-            unset($queryData['page']);
-        }
+        $this->API = mpapiComponent::getApi()->Powiadomienia();
         $results = $this->API->search($queryData);
-        $results = $this->afterFind($results);
-        return $results;
-
+        
+        $this->pagination = $this->API->getPagination();        
+        return $this->API->getObjects();
     }
 
-    public function afterFind($results, $primary = false)
+	public function paginateCount($conditions = null, $recursive = 0, $extra = array())
     {
-
-        if (isset($results['pagination'])) {
-            $this->pagination = $results['pagination'];
-            $this->total = (isset($results['pagination']['total'])) ? $results['pagination']['total'] : 0;
-            unset($results['pagination']);
-
-        }
-
-        $this->facets = array();
-        if (isset($results['facets'])) {
-            $this->facets = $results['facets'];
-            unset($results['facets']);
-        }
-        return $results['objects'];
+        return $this->pagination['total'];
     }
 
 }

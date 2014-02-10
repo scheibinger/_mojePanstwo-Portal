@@ -73,8 +73,16 @@ class AppController extends Controller
 
     public $statusbarCrumbs = array();
     public $statusbarMode = false;
+    public $User = false;
     public $Applications = array();
-    public $portalHeaderTemplate = '';
+    public $Streams = array(
+    	array(
+    		'id' => 1,
+    		'name' => '_mojePaństwo - główne wydanie',
+    		'selected' => true,
+    	),
+    );
+    private $stream_id = 1;
 
     /**
      * Zwraca listę dostępnych aplikacji
@@ -104,13 +112,33 @@ class AppController extends Controller
         }
     }
 
+	public function getStream()
+	{
+		if( empty( $this->Streams ) )
+			return false;
+			
+		for( $i=0; $i<count( $this->Streams ); $i++ )
+			if( $this->Streams[$i]['id'] == $this->stream_id )
+				return $this->Streams[$i];
+		
+		return $this->Streams[0];
+	}
+	
+	public function getStreamId()
+	{
+		$stream = $this->getStream();
+		if( $stream && isset($stream['id']) )
+			return $stream['id'];
+			
+		return false;
+	}
+	
+	
     public function beforeFilter()
     {
         header('Access-Control-Allow-Origin: ' . $this->request->header('Origin'));
         header('Access-Control-Allow-Credentials: true');
-        if ($this->Auth->loggedIn() && !$this->Session->read('Stream.id')) {
-            $this->Session->write('Stream.id', 1);
-        }
+        
         # assigning translations for javascript use
         if ($this->params->plugin) {
             $path = ROOT . DS . APP_DIR . DS . 'Plugin' . DS . Inflector::camelize($this->params->plugin) . DS . 'Locale' . DS . Configure::read('Config.language') . DS . 'LC_MESSAGES' . DS . Inflector::underscore($this->params->plugin) . '.po';
@@ -130,10 +158,6 @@ class AppController extends Controller
 
         parent::beforeFilter();
         $this->Auth->allow();
-
-        if ($application = $this->getApplication()) {
-            $this->set('_APPLICATION', $application);
-        }
 
         $this->set('statusbarCrumbs', $this->statusbarCrumbs);
         $this->set('statusbarMode', $this->statusbarMode);
@@ -160,12 +184,5 @@ class AppController extends Controller
             }
         }
     */
-    
-	public function bdl_data_for_dimmensions()
-	{
-		
-		echo 'asdfg';
-		
-	}
 
 }
