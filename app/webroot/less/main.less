@@ -105,77 +105,77 @@ body > pre:first-child {
 
 .dataHighlights {
 
-	margin-top: 10px;
-	padding: 0 20px;
-	
-	.dataHighlight {
-		
-		padding: 5px;
-		overflow: auto;
-		
-		._label {
-			font-size: 11px;
-			margin: 0 0 3px;
-			color: #999;
-		}
-				
-		._value {
-			font-size: 12px;
-			margin: 0;
-			
-			img {
-				float: left;
-				margin-right: 5px;
-			}
-			
-			.add {
-				display: none;
-			}
-			
-		}
-		
-		.__autorzy_html_ul {
-			font-size: 12px;
-			margin: 0;
-		}
-	}
-	
-	&.inl {
-		.dataHighlight {
-			._label {
-				float: left;
-				margin-right: 10px;
-			}
-		}
-	}
+    margin-top: 10px;
+    padding: 0 20px;
+
+    .dataHighlight {
+
+        padding: 5px;
+        overflow: auto;
+
+        ._label {
+            font-size: 11px;
+            margin: 0 0 3px;
+            color: #999;
+        }
+
+        ._value {
+            font-size: 12px;
+            margin: 0;
+
+            img {
+                float: left;
+                margin-right: 5px;
+            }
+
+            .add {
+                display: none;
+            }
+
+        }
+
+        .__autorzy_html_ul {
+            font-size: 12px;
+            margin: 0;
+        }
+    }
+
+    &.inl {
+        .dataHighlight {
+            ._label {
+                float: left;
+                margin-right: 10px;
+            }
+        }
+    }
 }
 
 .form-control {
-	font-family: "Lato", sans-serif;
-	color: #222;
-	font-size: 14px;
+    font-family: "Lato", sans-serif;
+    color: #222;
+    font-size: 14px;
 }
 
 .mpanel {
-	background-color: #FFF;
+    background-color: #FFF;
 }
 
 .flash-message {
-	.alert {
-		padding: 8px 0 0 !important;
-		font-size: 16px !important;
-		font-weight: 300 !important;
-	}
-	
-	.alert-info {
-		background-color: #0078AC !important;
-		color: #FFF !important;
-	}
-	
-	.alert a, .alert .alert-link {
-		font-weight: 400 !important;
-		text-decoration: none !important;
-	}
+    .alert {
+        padding: 8px 0 0 !important;
+        font-size: 16px !important;
+        font-weight: 300 !important;
+    }
+
+    .alert-info {
+        background-color: #0078AC !important;
+        color: #FFF !important;
+    }
+
+    .alert a, .alert .alert-link {
+        font-weight: 400 !important;
+        text-decoration: none !important;
+    }
 }
 
 .col-lg-1.half {
@@ -302,6 +302,127 @@ body {
     width: 100%;
 }
 
+/* ADDITIONAL COCKPITBAR ACTION */
+/* SERACH BAR FOR PORTAL*/
+._mojePanstwoCockpitSearch {
+    float: left;
+    height: 40px;
+
+    ._mojePanstwoCockpitSearchContent {
+        display: inline-block;
+        position: relative;
+        vertical-align: middle;
+
+        ._mojePanstwoCockpitSearchContentButton {
+            &.active {
+                background-color: #3d3e42;
+            }
+
+            &._mojePanstwoCockpitIcons-search:before {
+                font-family: 'mojePanstwo';
+                content: "\e600";
+                speak: none;
+                font-style: normal;
+                font-weight: normal;
+                font-variant: normal;
+                text-transform: none;
+                line-height: 1;
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+            }
+        }
+
+        ._mojePanstwoCockpitSearchInput {
+            @backgroundInput: #3d3e42;
+
+            padding: 0;
+            background-color: @backgroundInput;
+            height: 60px;
+            left: 0;
+            position: fixed;
+            top: 40px;
+            z-index: 100;
+            width: 100%;
+            display: none;
+            -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=3, Direction=180, Color=@backgroundInput)"; /*IE 8*/
+            -moz-box-shadow: 0 3px 3px @backgroundInput; /*FF 3.5+*/
+            -webkit-box-shadow: 0 3px 3px @backgroundInput; /*Saf3-4, Chrome, iOS 4.0.2-4.2, Android 2.3+*/
+            box-shadow: 0 3px 3px @backgroundInput; /* FF3.5+, Opera 9+, Saf1+, Chrome, IE10 */
+            filter: progid:DXImageTransform.Microsoft.Shadow(Strength=3, Direction=162, Color=@backgroundInput); /*IE 5.5-7*/
+
+            &.focus, &.mainFocus {
+                .mainSearch .searchFor {
+                    background-color: #fff;
+
+                    input {
+                        background-color: #fff;
+                        color: #2f2f2f;
+                    }
+                    button {
+                        background: #0897d4;
+                    }
+                }
+            }
+
+            .searchFor {
+                @inputColor: #222222;
+                @inputSize: 43px;
+
+                font-family: "Lato", sans-serif;
+                border-radius: 5px;
+                -moz-border-radius: 5px;
+                -webkit-border-radius: 5px;
+                margin-top: 8px;
+                margin-bottom: 8px;
+                padding: 0;
+                height: 45px;
+                background-color: #ffffff;
+                border: 1px solid @backgroundInput;
+                position: relative;
+
+                input {
+                    width: 100%;
+                    height: @inputSize;
+                    float: left;
+                    border: none;
+                    font-size: 18px;
+                    color: @inputColor;
+                    background-color: #fff;
+                    font-weight: 400;
+
+                    &:focus {
+                        outline: none;
+                    }
+                }
+
+                button {
+                    width: @inputSize * 1.5;
+                    height: @inputSize;
+                    border: none;
+                    font-size: 28px;
+                    text-align: center;
+                    cursor: pointer;
+                    color: #FFF;
+                    padding: 3px;
+
+                    &:before {
+                        font-family: 'mojePanstwo';
+                        content: "\e600";
+                        speak: none;
+                        font-style: normal;
+                        font-weight: normal;
+                        font-variant: normal;
+                        text-transform: none;
+                        line-height: 1;
+                        -webkit-font-smoothing: antialiased;
+                        -moz-osx-font-smoothing: grayscale;
+                    }
+                }
+            }
+        }
+    }
+}
+
 /* FIRST STRUCTURE SETUP */
 #_wrapper {
     position: relative;
@@ -364,7 +485,7 @@ footer {
         text-align: right;
     }
 
-    .separator{
+    .separator {
         padding: 0 10px;
         text-align: center;
         color: darken(@footerColor, 15%);

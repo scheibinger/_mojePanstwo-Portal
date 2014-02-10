@@ -4,12 +4,6 @@
 
 <?php $this->Combinator->add_libs('js', 'Dane.dataobjectsslider') ?>
 
-<?php echo $this->element('appHeader', array('plugin' => 'Dane', 'q' => $q)); ?>
-
-
-
-
-
 <?php
 $di = 0;
 foreach ($channels as $data) {

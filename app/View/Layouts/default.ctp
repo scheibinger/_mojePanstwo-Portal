@@ -70,16 +70,16 @@
     </header>
     <?php if ($this->Session->read('Message.flash.message')) { ?>
         <div class="flash-message">
-	        <div class="alert alert-info">
-	            <div class="container"><?php echo $this->Session->flash(); ?></div>
-	        </div>
+            <div class="alert alert-info">
+                <div class="container"><?php echo $this->Session->flash(); ?></div>
+            </div>
         </div>
     <?php } ?>
     <?php if ($this->Session->read('Message.auth.message')) { ?>
         <div class="flash-message">
-	        <div class="alert alert-info">
-	            <div class="container"><?php echo $this->Session->flash('auth'); ?></div>
-	        </div>
+            <div class="alert alert-info">
+                <div class="container"><?php echo $this->Session->flash('auth'); ?></div>
+            </div>
         </div>
     <?php } ?>
     <div id="_main">
@@ -121,6 +121,7 @@ echo $this->Html->script('plugins/browserstate/history.js/scripts/bundled/html4+
 echo $this->Html->script('plugins/carhartl/jquery-cookie/jquery.cookie.js');
 
 $this->Combinator->add_libs('js', 'statusbar', false);
+$this->Combinator->add_libs('js', 'statusbar-portal', false);
 $this->Combinator->add_libs('js', 'main', false);
 
 /* BLOCK FOR SPECIAL SCRIPTS LIKE PROTOTYPE THAT CANNOT BE MERGE TO ONE FILE*/

@@ -7,14 +7,17 @@
             <h1 class="col-xs-12 col-md-8 col-md-offset-2"><?= __d('krs', 'LC_KRS_HEADER') ?></h1>
 
             <p class="col-xs-12 col-md-8 col-md-offset-2"><?= __d('krs', 'LC_KRS_HEADLINE') ?></p>
-			
-			<form action="/krs" method="get">
-	            <div class="searchKRS input-group col-xs-12 col-md-10 col-md-offset-1">
-		                <input type="text" class="form-control input-lg" name="q" placeholder="<?= __d('krs', 'LC_KRS_SEARCH_PLACEHOLDER') ?>">
-		                <input type="submit" value="Szukaj" style="display: none;" />
-	            </div>
+
+            <form action="/krs" method="get">
+                <div class="searchKRS input-group col-xs-12 col-md-10 col-md-offset-1">
+                    <input type="text" class="form-control input-lg" name="q"
+                           placeholder="<?= __d('krs', 'LC_KRS_SEARCH_PLACEHOLDER') ?>">
+                    <span class="input-group-btn">
+                        <button class="btn btn-success" type="submit" data-icon="&#xe600;"></button>
+                    </span>
+                </div>
             </form>
-            
+
         </div>
     </div>
     <div class="resultsList">
@@ -22,7 +25,7 @@
             <h2>Największe spółki publiczne:</h2>
         </div>
     </div>
-    
+
     <? /*
     <div class="poslowie">
         <div class="container">
@@ -112,5 +115,6 @@
             </div>
         </div>
     </div>
-    */ ?>
+    */
+    ?>
 </div>

@@ -35,7 +35,7 @@
                 font-weight: 300;
                 color: #ffffff;
             }
-                        
+
             p {
                 font-family: "Lato", sans-serif;
                 font-size: 16px;
@@ -51,32 +51,41 @@
                     font-family: "Lato", sans-serif;
                     font-size: 22px;
                     font-weight: 300;
-                    background: rgba(255, 255, 255, 0.15);
+
                     border: none;
                     color: #FFF;
                 }
-                
-                :focus {
-	                border: none;
-	                box-shadow: inherit;
-	                outline: inherit;
+                > input {
+                    background: rgba(255, 255, 255, 0.15);
                 }
-                
+
+                > span button {
+                    background-color: #4689B7;
+                }
+
+                &:focus {
+                    border: none;
+                    box-shadow: inherit;
+                    outline: inherit;
+                }
+
                 ::-webkit-input-placeholder {
-				   color: #F3F3F3;
-				}
-				
-				:-moz-placeholder { /* Firefox 18- */
-				   color: #F3F3F3;  
-				}
-				
-				::-moz-placeholder {  /* Firefox 19+ */
-				   color: #F3F3F3;  
-				}
-				
-				:-ms-input-placeholder {  
-				   color: #F3F3F3;  
-				}
+                    color: #F3F3F3;
+                }
+
+                :-moz-placeholder {
+                    /* Firefox 18- */
+                    color: #F3F3F3;
+                }
+
+                ::-moz-placeholder {
+                    /* Firefox 19+ */
+                    color: #F3F3F3;
+                }
+
+                :-ms-input-placeholder {
+                    color: #F3F3F3;
+                }
 
             }
         }
