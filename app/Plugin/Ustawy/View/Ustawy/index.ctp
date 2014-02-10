@@ -23,15 +23,15 @@
                         <a href="#search"><?php echo __d('ustawy', 'LC_USTAWY_WIECEJ_WYNIKI_WYSZUKIWANIA'); ?></a>
                     </li>
                     <li data-target="#ustawyCarousel" class="active" data-slide-to="1">
-                        <a href="dane/ustawy"
+                        <a href="/dane/ustawy"
                            target="_self"><?php echo __d('ustawy', 'LC_USTAWY_WIECEJ_NAJNOWSZE'); ?></a>
                     </li>
                     <li data-target="#ustawyCarousel" data-slide-to="2">
-                        <a href="dane/ustawy?typ_id[]=3"
+                        <a href="/dane/ustawy?typ_id[]=3"
                            target="_self"><?php echo __d('ustawy', 'LC_USTAWY_WIECEJ_KODEKSY'); ?></a>
                     </li>
                     <li data-target="#ustawyCarousel" data-slide-to="3">
-                        <a href="dane/ustawy?typ_id[]=2"
+                        <a href="/dane/ustawy?typ_id[]=2"
                            target="_self"><?php echo __d('ustawy', 'LC_USTAWY_WIECEJ_KONSTYTUCJE'); ?></a>
                     </li>
                 </ul>
