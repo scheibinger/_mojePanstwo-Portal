@@ -159,5 +159,4 @@ var highchartInit = function () {
             tableIndResults.find('.slide:hidden').show();
         }
     })
-})
-    (jQuery);
+})(jQuery);
