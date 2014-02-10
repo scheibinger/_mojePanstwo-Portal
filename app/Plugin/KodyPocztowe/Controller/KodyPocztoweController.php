@@ -73,11 +73,13 @@ class KodyPocztoweController extends KodyPocztoweAppController
     }
 	
 	public function adres()
-    {
+    {	
+    
+    	$api = $this->API->Dane();
+    	
 	    if( isset($this->request->params['ext']) && ($this->request->params['ext'] == 'json') )
 	    {
 	    	
-	    	$api = $this->API->Dane();
 	    	$search = array();
 			
 		    $q = @$this->request->query['q'];
@@ -148,6 +150,14 @@ class KodyPocztoweController extends KodyPocztoweAppController
 						
 		    $this->set('search', $search);
 		    $this->set('_serialize', array('search'));
+		    
+	    }
+	    elseif( isset($this->request->params['adres_id']) && $this->request->params['adres_id'] )
+	    {
+		    
+		    $adres = $api->getObject('kody_pocztowe_ulice', $this->request->params['adres_id']);
+		    $adres->loadLayer('kody');
+		    $this->set('adres', $adres);
 		    
 	    } else $this->redirect('/kody_pocztowe');
     }
