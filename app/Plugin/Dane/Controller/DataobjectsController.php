@@ -93,6 +93,9 @@ class DataobjectsController extends DaneAppController
             $this->set('menu', $this->menu);
             $this->set('menuMode', $this->menuMode);
             $this->set('title_for_layout', $title_for_layout);
+            
+            if( $this->Session->read('Auth.User.id') )
+		    	$this->API->Powiadomienia()->flagObject( $this->object->id );
 
 
         } else {
