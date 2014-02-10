@@ -12,8 +12,7 @@
                            placeholder="<?php echo __d('ustawy', 'LC_USTAWY_SZUKAJ_ORGANIZACJI'); ?>"
                            class="form-control input-lg">
 	                <span class="input-group-btn">
-	                      <input type="submit" class="btn btn-success input-lg"
-                                 value="<?= __d('ustawy', 'LC_USTAWY_SZUKAJ') ?>"/>
+	                      <button class="btn btn-success btn-lg" type="submit" data-icon="&#xe600;"></button>
 	                </span>
                 </div>
             </form>
