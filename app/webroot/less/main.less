@@ -315,7 +315,7 @@ body {
 
         ._mojePanstwoCockpitSearchContentButton {
             &.active {
-                background-color: #3d3e42;
+                color: #0078AC !important;
             }
 
             &._mojePanstwoCockpitIcons-search:before {
@@ -333,7 +333,7 @@ body {
         }
 
         ._mojePanstwoCockpitSearchInput {
-            @backgroundInput: #3d3e42;
+            @backgroundInput: #0078AC;
 
             padding: 0;
             background-color: @backgroundInput;
@@ -344,15 +344,9 @@ body {
             z-index: 100;
             width: 100%;
             display: none;
-            -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=3, Direction=180, Color=@backgroundInput)"; /*IE 8*/
-            -moz-box-shadow: 0 3px 3px @backgroundInput; /*FF 3.5+*/
-            -webkit-box-shadow: 0 3px 3px @backgroundInput; /*Saf3-4, Chrome, iOS 4.0.2-4.2, Android 2.3+*/
-            box-shadow: 0 3px 3px @backgroundInput; /* FF3.5+, Opera 9+, Saf1+, Chrome, IE10 */
-            filter: progid:DXImageTransform.Microsoft.Shadow(Strength=3, Direction=162, Color=@backgroundInput); /*IE 5.5-7*/
 
             &.focus, &.mainFocus {
                 .mainSearch .searchFor {
-                    background-color: #fff;
 
                     input {
                         background-color: #fff;
@@ -372,11 +366,10 @@ body {
                 border-radius: 5px;
                 -moz-border-radius: 5px;
                 -webkit-border-radius: 5px;
-                margin-top: 8px;
-                margin-bottom: 8px;
+                margin-top: 7px;
+                margin-bottom: 0;
                 padding: 0;
                 height: 45px;
-                background-color: #ffffff;
                 border: 1px solid @backgroundInput;
                 position: relative;
 
@@ -386,9 +379,22 @@ body {
                     float: left;
                     border: none;
                     font-size: 18px;
-                    color: @inputColor;
-                    background-color: #fff;
-                    font-weight: 400;
+                    color: #FFF;
+                    background-color: rgba(0, 0, 0, 0.1);
+                    font-weight: 300;
+                    
+                    &::-webkit-input-placeholder { /* WebKit browsers */
+					    color:    #CDE;
+					}
+					&:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+					    color:    #CDE;
+					}
+					&::-moz-placeholder { /* Mozilla Firefox 19+ */
+					    color:    #CDE;
+					}
+					&:-ms-input-placeholder { /* Internet Explorer 10+ */
+					    color:    #CDE;
+					}
 
                     &:focus {
                         outline: none;
