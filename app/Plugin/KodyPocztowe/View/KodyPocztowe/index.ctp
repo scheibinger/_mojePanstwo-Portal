@@ -7,11 +7,11 @@ $this->Combinator->add_libs('css', $this->Less->css('kody_pocztowe', array('plug
         echo 'hide';
     } ?>">
         <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
-            <div class="kodyPocztoweBlock col-xs-12 col-sm-6 pull-left">
+            <div class="kodyPocztoweBlock col-xs-12 col-sm-7 pull-left">
                 <div class="row">
-                    <p><?php echo __d('kody_pocztowe', "LC_KODY_POCZTOWE_ZNAM_ADRES"); ?></p>
-
                     <p><?php echo __d('kody_pocztowe', "LC_KODY_POCZTOWE_SZUKAM_KODU"); ?></p>
+
+                    <p><?php echo __d('kody_pocztowe', "LC_KODY_POCZTOWE_ZNAM_ADRES"); ?></p>
                 </div>
                 <div class="row">
                     <form action="/kody_pocztowe" method="get">
@@ -29,11 +29,11 @@ $this->Combinator->add_libs('css', $this->Less->css('kody_pocztowe', array('plug
                     </form>
                 </div>
             </div>
-            <div class="kodyPocztoweBlock col-xs-12 col-sm-6 pull-right">
+            <div class="kodyPocztoweBlock col-xs-12 col-sm-5 pull-right">
                 <div class="row">
-                    <p><?php echo __d('kody_pocztowe', "LC_KODY_POCZTOWE_ZNAM_KOD"); ?></p>
-
                     <p><?php echo __d('kody_pocztowe', "LC_KODY_POCZTOWE_SZUKAM_ADRESU"); ?></p>
+
+                    <p><?php echo __d('kody_pocztowe', "LC_KODY_POCZTOWE_ZNAM_KOD"); ?></p>
                 </div>
                 <div class="row">
                     <form action="/kody_pocztowe" method="get">

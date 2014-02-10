@@ -5,7 +5,7 @@ App::uses('Sanitize', 'Utility');
 class KodyPocztoweController extends KodyPocztoweAppController
 {
     public $uses = array('KodyPocztowe.KodPocztowy', 'Dane.Dataobject');
-    public $components = array('Session', 'Paginator');
+    public $components = array('Session', 'Paginator', 'RequestHandler');
 
     public function index()
     {
@@ -71,6 +71,85 @@ class KodyPocztoweController extends KodyPocztoweAppController
         $this->set('title_for_layout', $application['Application']['name']);
 
     }
-
+	
+	public function adres()
+    {
+	    if( isset($this->request->params['ext']) && ($this->request->params['ext'] == 'json') )
+	    {
+	    	
+	    	$api = $this->API->Dane();
+	    	$search = array();
+			
+		    $q = @$this->request->query['q'];
+		    if( $q )
+		    {
+			    $api->searchDataset('kody_pocztowe_ulice', array(
+			    	'conditions' => array(
+			    		'q' => $q . '*',
+			    	),
+			    	'limit' => 10,
+			    ));
+			    $objects = $api->getObjects();
+			    
+			    foreach( $objects as $obj )
+			    {
+			    				    	
+			    	$text = $obj->getData('miejscowosci.nazwa');
+			    	
+			    	switch( $obj->getData('typ_id') )
+			    	{
+				    	case '2':
+				    	{
+				    		$text .= ', ulica';
+					    	break;
+				    	}
+				    	case '3':
+				    	{
+				    		$text .= ', Plac';
+					    	break;
+				    	}
+				    	case '4':
+				    	{
+				    		$text .= ', Osiedle';
+					    	break;
+				    	}
+				    	case '5':
+				    	{
+				    		$text .= ', Aleja';
+					    	break;
+				    	}
+				    	case '6':
+				    	{
+				    		$text .= ', Skwer';
+					    	break;
+				    	}
+				    	case '7':
+				    	{
+				    		$text .= ', Wybrzerze';
+					    	break;
+				    	}
+			    	}
+			    	
+			    	if( $obj->getData('ulica') )
+				    	$text .= ' ' . $obj->getData('ulica');
+			    	
+			    	$s = array(
+			    		'id' => $obj->getId(),
+			    		'text' => $text,
+			    		'score' => @$obj->getLayer('score')['value'],
+			    	);
+			    	
+			    	if( $obj->getData('miejscowosci.nazwa') != $obj->getData('miejscowosci.nazwa_gminy') )
+			    		$s['desc'] = $obj->getData('miejscowosci.nazwa_gminy');
+			    	
+			    	$search[] =  $s;
+			    }
+			}
+						
+		    $this->set('search', $search);
+		    $this->set('_serialize', array('search'));
+		    
+	    } else $this->redirect('/kody_pocztowe');
+    }
 
 } 

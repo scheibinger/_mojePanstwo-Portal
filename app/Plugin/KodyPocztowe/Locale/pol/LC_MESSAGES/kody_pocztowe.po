@@ -1,20 +1,20 @@
 msgid "LC_KODY_POCZTOWE_ZNAM_ADRES"
-msgstr "Znam adres"
+msgstr "na podstawie adresu"
 
 msgid "LC_KODY_POCZTOWE_SZUKAM_KODU"
-msgstr "szukam kodu pocztowego"
+msgstr "Szukam kodu pocztowego"
 
 msgid "LC_KODY_POCZTOWE_WPISZ_MIEJSCOWOSC"
-msgstr "Wpisz miejscowość"
+msgstr "Wpisz adres"
 
 msgid "LC_KODY_POCZTOWE_WPISZ_ADRES"
 msgstr "Wpisz adres"
 
 msgid "LC_KODY_POCZTOWE_ZNAM_KOD"
-msgstr "Znam kod pocztowy"
+msgstr "na podstawie kodu pocztowego"
 
 msgid "LC_KODY_POCZTOWE_SZUKAM_ADRESU"
-msgstr "szukam adresu"
+msgstr "Szukam adresu"
 
 msgid "LC_KODY_POCZTOWE_WPISZ_KOD"
 msgstr "Wpisz kod pocztowy"
