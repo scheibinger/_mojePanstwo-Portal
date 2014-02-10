@@ -904,6 +904,9 @@ msgstr "Przyrost"
 msgid "LC_BDL_WSKAZNIKI_SEARCH_PLACEHOLDER"
 msgstr "Wpisz szukaną frazę..."
 
+msgid "LC_SEJMGLOSOWANIA_KLUBY_HEADER"
+msgstr "Wyniki klubowe"
+
 msgid "LC_SEJMGLOSOWANIA_KLUBY_NAZWAKLUBU"
 msgstr "Nazwa klubu"
 
@@ -927,3 +930,10 @@ msgstr "Wstrzymali się"
 
 msgid "LC_SEJMGLOSOWANIA_KLUBY_LICZBABUNTOW"
 msgstr "Liczba buntów"
+
+msgid "LC_SEJMGLOSOWANIA_INDYWIDUALNE_HEADER"
+msgstr "Wyniki indywidualne"
+
+
+msgid "LC_SEJMGLOSOWANIA_INDYWIDUALNE_HEADER_SEARCH_PLACEHOLDER"
+msgstr "Szukaj po imieniu bądź nazwisku..."

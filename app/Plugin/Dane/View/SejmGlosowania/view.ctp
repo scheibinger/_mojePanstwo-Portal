@@ -1,6 +1,6 @@
 <?php $this->Combinator->add_libs('js', 'highcharts/highcharts'); ?>
 <?php $this->Combinator->add_libs('js', 'highcharts/locals'); ?>
-<?php $this->Combinator->add_libs('js', 'Dane.highcharts-sejmglosowania'); ?>
+<?php $this->Combinator->add_libs('js', 'Dane.view-sejmglosowania'); ?>
 <?php $this->Combinator->add_libs('css', $this->Less->css('view-sejmglosowania', array('plugin' => 'Dane'))); ?>
 
 <?= $this->Element('dataobject/pageBegin') ?>
@@ -48,18 +48,30 @@ $dictionary = array(
             </div>
             <div class="col-md-8">
                 <div class="block">
-                    <h2>Wyniki klubowe</h2>
+                    <h2><?= __d('dane', 'LC_SEJMGLOSOWANIA_KLUBY_HEADER') ?></h2>
 
                     <table class="clubTable table">
+                        <colgroup>
+                            <col span="3">
+                            <col class="colSearch-4">
+                            <col class="colSearch-1">
+                            <col class="colSearch-2">
+                            <col class="colSearch-3">
+                            <col>
+                        </colgroup>
                         <thead>
                         <tr>
                             <th><?= __d('dane', 'LC_SEJMGLOSOWANIA_KLUBY_NAZWAKLUBU') ?></th>
                             <th><?= __d('dane', 'LC_SEJMGLOSOWANIA_KLUBY_LICZEBNOSCKLUBU') ?></th>
                             <th><?= __d('dane', 'LC_SEJMGLOSOWANIA_KLUBY_LICZBAGLOSUJACYCH') ?></th>
-                            <th><?= __d('dane', 'LC_SEJMGLOSOWANIA_KLUBY_NIEOBECNI') ?></th>
-                            <th><?= __d('dane', 'LC_SEJMGLOSOWANIA_KLUBY_ZA') ?></th>
-                            <th><?= __d('dane', 'LC_SEJMGLOSOWANIA_KLUBY_PRZECIW') ?></th>
-                            <th><?= __d('dane', 'LC_SEJMGLOSOWANIA_KLUBY_WSTRZYMALISIE') ?></th>
+                            <th class="searchableVote"
+                                data-search="4"><?= __d('dane', 'LC_SEJMGLOSOWANIA_KLUBY_NIEOBECNI') ?></th>
+                            <th class="searchableVote"
+                                data-search="1"><?= __d('dane', 'LC_SEJMGLOSOWANIA_KLUBY_ZA') ?></th>
+                            <th class="searchableVote"
+                                data-search="2"><?= __d('dane', 'LC_SEJMGLOSOWANIA_KLUBY_PRZECIW') ?></th>
+                            <th class="searchableVote"
+                                data-search="3"><?= __d('dane', 'LC_SEJMGLOSOWANIA_KLUBY_WSTRZYMALISIE') ?></th>
                             <th><?= __d('dane', 'LC_SEJMGLOSOWANIA_KLUBY_LICZBABUNTOW') ?></th>
                         </tr>
                         </thead>
@@ -75,10 +87,10 @@ $dictionary = array(
                                 </td>
                                 <td><?= $row['l'] ?></td>
                                 <td><?= $row['g'] ?></td>
-                                <td class="notVoted" data-glos-id="4"><?= $row['n'] ?></td>
-                                <td class="voteYes" data-glos-id="1"><?= $row['z'] ?></td>
-                                <td class="voteNo" data-glos-id="2"><?= $row['p'] ?></td>
-                                <td class="voteHold" data-glos-id="3"><?= $row['w'] ?></td>
+                                <td><?= $row['n'] ?></td>
+                                <td><?= $row['z'] ?></td>
+                                <td><?= $row['p'] ?></td>
+                                <td><?= $row['w'] ?></td>
                                 <td><?= $row['b'] ?></td>
                             </tr>
                         <? } ?>
@@ -90,30 +102,41 @@ $dictionary = array(
 
         <div class="col-md-12">
             <div class="block indywidualneTable">
-                <h2>Wyniki indywidualne</h2>
+                <h2><?= __d('dane', 'LC_SEJMGLOSOWANIA_INDYWIDUALNE_HEADER') ?></h2>
 
-                <? foreach ($object->getLayer('wynikiIndywidualne') as $person) { ?>
-                    <div class="slide col-xs-6 col-md-4">
-                        <div class="person">
-                            <div class="avatar">
-                                <img src="http://resources.sejmometr.pl/mowcy/a/0/<?= $person['poslowie']['id'] ?>.jpg"
-                                     alt="<?= $person['poslowie']['nazwa'] ?>" onerror="imgFixer(this);"/>
+                <div class="input-group searchName col-xs-12 col-md-6">
+                    <input type="text" class="form-control"
+                           placeholder="<?= __d('dane', 'LC_SEJMGLOSOWANIA_INDYWIDUALNE_HEADER_SEARCH_PLACEHOLDER') ?>">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="button" data-icon="&#xe601;"></button>
+                    </span>
+                </div>
+                <div class="results col-xs-12">
+                    <? foreach ($object->getLayer('wynikiIndywidualne') as $person) { ?>
+                        <div class="slide col-xs-6 col-md-4">
+                            <div class="person">
+                                <div class="avatar">
+                                    <img
+                                        src="http://resources.sejmometr.pl/mowcy/a/0/<?= $person['poslowie']['id'] ?>.jpg"
+                                        alt="<?= $person['poslowie']['nazwa'] ?>" onerror="imgFixer(this);"/>
+                                </div>
+                                <div class="info">
+                                    <a class="poselName" href="<?= $person['poslowie']['id'] ?>"
+                                       target="_self"><?= $person['poslowie']['nazwa'] ?></a>
+                                    <a class="clubName" href="<?= $person['kluby']['id'] ?>" target="_self"
+                                       title="<?= $person['kluby']['nazwa'] ?>"
+                                       data-club-id="<?= $person['kluby']['id'] ?>">
+                                        <img
+                                            src="http://resources.sejmometr.pl/s_kluby/<?= $person['kluby']['id'] ?>_a.png"
+                                            alt="<?= $person['kluby']['nazwa'] ?>"/>
+                                    </a>
+                                </div>
                             </div>
-                            <div class="info">
-                                <a class="poselName" href="<?= $person['poslowie']['id'] ?>"
-                                   target="_self"><?= $person['poslowie']['nazwa'] ?></a>
-                                <a class="clubName" href="<?= $person['kluby']['id'] ?>" target="_self"
-                                   title="<?= $person['kluby']['nazwa'] ?>">
-                                    <img src="http://resources.sejmometr.pl/s_kluby/<?= $person['kluby']['id'] ?>_a.png"
-                                         alt="<?= $person['kluby']['nazwa'] ?>"/>
-                                </a>
-                            </div>
+                            <div class="voted btn btn-default btn-glos-<?= $person['glosy']['glos_id'] ?>"
+                                 data-glos="<?= $person['glosy']['glos_id'] ?>"><?= $person['glosy']['glos_str'] ?></div>
                         </div>
-                        <div class="voted btn btn-default btn-glos-<?= $person['glosy']['glos_id'] ?>"
-                             data-glos="<?= $person['glosy']['glos_id'] ?>"><?= $person['glosy']['glos_str'] ?></div>
-                    </div>
-                <? } ?>
-                <? debug($object->getLayer('wynikiIndywidualne')); ?>
+                    <? } ?>
+                </div>
             </div>
         </div>
 
