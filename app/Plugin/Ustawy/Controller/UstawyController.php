@@ -72,5 +72,34 @@ class UstawyController extends AppController
         
 
     }
+    
+    public function search()
+    {
+	    if( isset($this->request->params['ext']) && ($this->request->params['ext'] == 'json') )
+	    {
+	    	
+	    	$api = $this->API->Dane();
+	    	$search = array();
+			
+		    $q = @$this->request->query['q'];
+		    if( $q )
+		    {
+			    $api->searchDataset('ustawy', array(
+			    	'conditions' => array(
+			    		'q' => $q,
+			    	),
+			    	'limit' => 10,
+			    ));
+			    $objects = $api->getObjects();
+			    
+			    foreach( $objects as $obj )
+			    	$search[] = $obj->getData();
+			}
+			    		    			
+		    $this->set('search', $search);
+		    $this->set('_serialize', array('search'));
+		    
+	    } else $this->redirect('/ustawy');
+    }
 
 } 
