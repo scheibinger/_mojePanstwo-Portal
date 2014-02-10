@@ -24,6 +24,10 @@ class CrawlerPagesController extends DataobjectsController
     		'id' => 'online',
     		'label' => 'Online',
     	),
+    	array(
+    		'id' => 'offline',
+    		'label' => 'Offline',
+    	),
     );
 
     public function view()
@@ -34,6 +38,18 @@ class CrawlerPagesController extends DataobjectsController
     public function online()
     {
         parent::_prepareView();        
+    }
+    
+    public function offline()
+    {
+        parent::_prepareView();
+    }
+    
+    public function iframe()
+    {
+        parent::_prepareView();
+        $offline = $this->object->loadLayer('offline');
+        echo $offline['html']; die();
     }
     
     public function careIt()
