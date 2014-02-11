@@ -6,7 +6,8 @@ class UstawyController extends AppController
         'Session',
         'RequestHandler'
     );
-
+	public $helpers = array('Dane.Dataobject');
+	
     public function index()
     {
 

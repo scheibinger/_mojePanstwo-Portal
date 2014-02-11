@@ -18,7 +18,7 @@
                                             $('<input>').attr({'type': 'text', 'name': 'q', 'placeholder': 'Szukaj w danych publicznych...'}).addClass('form-control input-lg')
                                         ).append(
                                             $('<span></span>').addClass('input-group-btn').append(
-                                                $('<button></button>').addClass('btn btn-success').attr('type', 'submit')
+                                                $('<button></button>').addClass('btn btn-link').attr('type', 'submit')
                                             )
                                         )
                                 )

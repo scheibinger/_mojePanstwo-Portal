@@ -23,7 +23,7 @@ msgid "LC_USTAWY_WIECEJ_NAJNOWSZE"
 msgstr "Najnowsze"
 
 msgid "LC_USTAWY_WIECEJ_KONSTYTUCJE"
-msgstr "Konstytucje"
+msgstr "Konstytucja"
 
 msgid "LC_USTAWY_WIECEJ_POZOSTALE"
 msgstr "Ustrojowe"

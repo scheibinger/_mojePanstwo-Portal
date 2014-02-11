@@ -34,8 +34,10 @@
 
                     resultsListUl.append(
                         $('<li></li>').append(function () {
-                            var link = jQuery('<a></a>').attr({'target': '_self', 'href': '/dane/ustawy/' + dataSearch['id'], 'title': data['tytul']})
-                            link.html(_mPHeart.translation.LC_USTAWY_TITLE_USTAWA + ' ' + dataSearch['tytul_skrocony'] + ' <small>' + _mPHeart.translation.LC_USTAWY_PUBLIKACJA + ': ' + dataSearch['data_publikacji'] + '</small>');
+                            var link = jQuery('<a></a>').attr({'target': '_self', 'href': '/dane/ustawy/' + dataSearch['id'], 'title': data['tytul']}).wrap('<p class="title"></p>')
+                            link.find('a').html(_mPHeart.translation.LC_USTAWY_TITLE_USTAWA + ' ' + dataSearch['tytul_skrocony']);
+                            link.append(
+                            $('<p></p>').addClass('subtitle').html('<small>' + _mPHeart.translation.LC_USTAWY_PUBLIKACJA + ': ' + dataSearch['data_publikacji'] + '</small>'));
                             $(this).append(link)
                         })
                     )

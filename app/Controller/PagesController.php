@@ -69,7 +69,27 @@ class PagesController extends AppController
         $this->set(compact('page', 'subpage', 'title_for_layout'));
 
         if ($page == 'home')
+        {
+            
             $this->statusbarMode = 'home';
+
+            $_folders = array();
+            for( $i=0; $i<count($this->Applications); $i++ )
+	            $folders[ $this->Applications[$i]['Application']['folder_id'] ][] = $this->Applications[$i]['Application'];
+			
+			$folders_dictionary = array_column($this->Applications, 'Folder');
+			// debug( $folders_dictionary ); die();
+			
+			if( !empty($_folders) )
+				foreach( $_folders as $folder_id => $folder_content )
+					$folders[] = $folder_content;
+			
+			
+            // debug( $folders );
+            
+			$this->set('folders', $folders);
+			
+        }
 
         try {
             $this->render(implode('/', $path));
