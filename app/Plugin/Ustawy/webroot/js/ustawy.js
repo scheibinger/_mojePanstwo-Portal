@@ -70,6 +70,8 @@
 
         shortcuts.find('li.results').addClass('active');
 
+        resultsListUl.html('');
+
         $.each(data.search, function () {
             var dataSearch = this;
 

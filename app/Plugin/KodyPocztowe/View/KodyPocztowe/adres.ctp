@@ -68,34 +68,68 @@ $this->Combinator->add_libs('js', 'KodyPocztowe.kody.js');
                    target="_self"><?= $adr['miejscowosci.nazwa'] ?></a>
             </div>
             <div class="col-xs-4">
-                <? if ($adr['typ_id'] > 1) {
-                    switch ($adr['typ_id']) {
-                        case '2':
-                            $label = __d('kody_pocztowe', 'LC_KODY_TABLE_ADRES_ULICA');
-                            break;
-                        case '3':
-                            $label = __d('kody_pocztowe', 'LC_KODY_TABLE_ADRES_PLAC');
-                            break;
-                        case '4':
-                            $label = __d('kody_pocztowe', 'LC_KODY_TABLE_ADRES_OSIEDLE');
-                            break;
-                        case '5':
-                            $label = __d('kody_pocztowe', 'LC_KODY_TABLE_ADRES_ALEJA');
-                            break;
-                        case '6':
-                            $label = __d('kody_pocztowe', 'LC_KODY_TABLE_ADRES_SKWER');
-                            break;
-                        case '7':
-                            $label = __d('kody_pocztowe', 'LC_KODY_TABLE_ADRES_WYBRZEZE');
-                            break;
-                    }
-                } ?>
-                <small><?= $label ?></small>
-                <p><?= $adr['ulica'] ?></p>
+                <? if (isset($adr['ulica']) && $adr['ulica'] != null) { ?>
+                    <? if ($adr['typ_id'] > 1) {
+                        switch ($adr['typ_id']) {
+                            case '2':
+                                $label = __d('kody_pocztowe', 'LC_KODY_TABLE_ADRES_ULICA');
+                                break;
+                            case '3':
+                                $label = __d('kody_pocztowe', 'LC_KODY_TABLE_ADRES_PLAC');
+                                break;
+                            case '4':
+                                $label = __d('kody_pocztowe', 'LC_KODY_TABLE_ADRES_OSIEDLE');
+                                break;
+                            case '5':
+                                $label = __d('kody_pocztowe', 'LC_KODY_TABLE_ADRES_ALEJA');
+                                break;
+                            case '6':
+                                $label = __d('kody_pocztowe', 'LC_KODY_TABLE_ADRES_SKWER');
+                                break;
+                            case '7':
+                                $label = __d('kody_pocztowe', 'LC_KODY_TABLE_ADRES_WYBRZEZE');
+                                break;
+                        }
+                    } ?>
+                    <small><?= $label ?></small>
+                    <p><?= $adr['ulica'] ?></p>
+                <? } ?>
             </div>
         <? } ?>
-
-        <? debug($adres->getLayer('kody')); ?>
-
+    </div>
+    <div class="kodyList col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+        <? if (count($adres->getLayer('kody')) > 0) {
+            $kody = $adres->getLayer('kody');
+            if (count($kody) == 1) {
+                foreach ($kody as $kod) {
+                    ?>
+                    <span class="center">
+                        <small><? if (isset($kod['numery'])) echo $kod['numery']; ?></small>
+                        <a href="/dane/kody_pocztowe/<?= $kod['kod_id'] ?>" target="_self"><?= $kod['kod'] ?></a>
+                    </span>
+                <?
+                }
+            } else {
+                ?>
+                <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+                    <table class="table">
+                        <? foreach ($kody as $kod) { ?>
+                            <tr>
+                                <td>
+                                    <small><? if (isset($kod['numery'])) {
+                                            echo $kod['numery'];
+                                        } ?></small>
+                                </td>
+                                <td>
+                                    <a href="/dane/kody_pocztowe/<?= $kod['kod_id'] ?>"
+                                       target="_self"><?= $kod['kod'] ?></a>
+                                </td>
+                            </tr>
+                        <? } ?>
+                    </table>
+                </div>
+            <?
+            }
+        } ?>
     </div>
 </div>
