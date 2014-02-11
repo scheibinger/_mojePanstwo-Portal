@@ -127,8 +127,8 @@ class KodyPocztoweController extends KodyPocztoweAppController
 				    	}
 				    	case '7':
 				    	{
-				    		$text .= ', Wybrzerze';
-					    	break;
+                            $text .= ', Wybrzeże';
+                            break;
 				    	}
 			    	}
 			    	

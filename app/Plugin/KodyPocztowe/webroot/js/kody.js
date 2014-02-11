@@ -31,4 +31,10 @@
             return false;
         }
     });
+
+    autocomplete.parents('form').on('submit', function (e) {
+        e.preventDefault();
+
+        window.location = '/kody_pocztowe/adres/' + $(this).find('.input.text > span').text();
+    })
 }(jQuery));

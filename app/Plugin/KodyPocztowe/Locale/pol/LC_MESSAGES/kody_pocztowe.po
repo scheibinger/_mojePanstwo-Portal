@@ -33,3 +33,27 @@ msgstr "Miejscowość w gminie"
 
 msgid "LC_KODY_POCZTOWE_GMINA"
 msgstr "gmina"
+
+msgid "LC_KODY_TABLE_ADRES_GMINA"
+msgstr "Gmina"
+
+msgid "LC_KODY_TABLE_ADRES_MIEJSCOWOSC"
+msgstr "Miejscowość"
+
+msgid "LC_KODY_TABLE_ADRES_ULICA"
+msgstr "Ulica"
+
+msgid "LC_KODY_TABLE_ADRES_PLAC"
+msgstr "Plac"
+
+msgid "LC_KODY_TABLE_ADRES_OSIEDLE"
+msgstr "Osiedle"
+
+msgid "LC_KODY_TABLE_ADRES_ALEJA"
+msgstr "Aleja"
+
+msgid "LC_KODY_TABLE_ADRES_SKWER"
+msgstr "Skwer"
+
+msgid "LC_KODY_TABLE_ADRES_WYBRZEZE"
+msgstr "Wybrzeże"

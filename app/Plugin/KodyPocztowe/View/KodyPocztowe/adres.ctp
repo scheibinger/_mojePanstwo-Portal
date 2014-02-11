@@ -54,35 +54,48 @@ $this->Combinator->add_libs('js', 'KodyPocztowe.kody.js');
 
 
 <div class="row full" id="display">
-    <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+    <div class="adresList col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+        <? if (count($adres->getData()) > 0) {
+            $adr = $adres->getData();?>
+            <div class="col-xs-4">
+                <small><?= __d('kody_pocztowe', 'LC_KODY_TABLE_ADRES_GMINA') ?></small>
+                <a href="/dane/gminy/<?= $adr['miejscowosci.gmina_id'] ?>"
+                   target="_self"><?= $adr['miejscowosci.nazwa_gminy'] ?></a>
+            </div>
+            <div class="col-xs-4">
+                <small><?= __d('kody_pocztowe', 'LC_KODY_TABLE_ADRES_MIEJSCOWOSC') ?></small>
+                <a href="/dane/miejscowosci/<?= $adr['miejscowosci.id'] ?>"
+                   target="_self"><?= $adr['miejscowosci.nazwa'] ?></a>
+            </div>
+            <div class="col-xs-4">
+                <? if ($adr['typ_id'] > 1) {
+                    switch ($adr['typ_id']) {
+                        case '2':
+                            $label = __d('kody_pocztowe', 'LC_KODY_TABLE_ADRES_ULICA');
+                            break;
+                        case '3':
+                            $label = __d('kody_pocztowe', 'LC_KODY_TABLE_ADRES_PLAC');
+                            break;
+                        case '4':
+                            $label = __d('kody_pocztowe', 'LC_KODY_TABLE_ADRES_OSIEDLE');
+                            break;
+                        case '5':
+                            $label = __d('kody_pocztowe', 'LC_KODY_TABLE_ADRES_ALEJA');
+                            break;
+                        case '6':
+                            $label = __d('kody_pocztowe', 'LC_KODY_TABLE_ADRES_SKWER');
+                            break;
+                        case '7':
+                            $label = __d('kody_pocztowe', 'LC_KODY_TABLE_ADRES_WYBRZEZE');
+                            break;
+                    }
+                } ?>
+                <small><?= $label ?></small>
+                <p><?= $adr['ulica'] ?></p>
+            </div>
+        <? } ?>
 
-        <? debug($adres->getData()); ?>
         <? debug($adres->getLayer('kody')); ?>
-
-        <? /*
-	                <? if (isset($adresy) && $adresy) { ?>
-	                    
-	                    <ul class="addresses col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
-	                        <? foreach ($adresy as $adres) { ?>
-	                            <li class="row">
-	                                <div class="col-sm-4 ulica">
-	                                    <?= $adres['Address']['ulica'] ?>
-	                                </div>
-	                                <div class="col-sm-6 numery">
-	                                    <?= $adres['Address']['numery'] ?>
-	                                </div>
-	                                <div class="col-sm-2 kod">
-	                                    <a class="kod"
-	                                       href="/dane/kody_pocztowe/<?= $adres['Address']['kod_id'] ?>"><?= $adres['Address']['kod'] ?></a>
-	                                </div>
-	                            </li>
-	                        <? } ?>
-	                    </ul>
-	                    
-	                <? } ?>
-	                
-	                */
-        ?>
 
     </div>
 </div>
