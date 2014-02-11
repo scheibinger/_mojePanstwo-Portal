@@ -88,13 +88,16 @@ class UstawyController extends AppController
 			    $api->searchDataset('ustawy', array(
 			    	'conditions' => array(
 			    		'q' => $q,
+			    		'status_id' => '1',
 			    	),
 			    	'limit' => 10,
 			    ));
 			    $objects = $api->getObjects();
 			    
 			    foreach( $objects as $obj )
-			    	$search[] = $obj->getData();
+			    	$search[] = array_merge($obj->getData(), array(
+			    		'data_slowna' => dataSlownie( $obj->getData('data_publikacji') ),
+			    	));
 			}
 			    		    			
 		    $this->set('search', $search);
