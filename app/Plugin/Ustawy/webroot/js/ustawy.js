@@ -79,7 +79,7 @@
                         $('<a></a>').attr({'target': '_self', 'href': '/dane/ustawy/' + dataSearch['id'], 'title': data['tytul']}).text(_mPHeart.translation.LC_USTAWY_TITLE_USTAWA + ' ' + dataSearch['tytul_skrocony'])
                     );
                     var subtitle = $('<p></p>').addClass('subtitle').append(
-                        $('<span></span>').text(_mPHeart.translation.LC_USTAWY_PUBLIKACJA + ': ' + dataSearch['data_publikacji'])
+                        $('<span></span>').html(_mPHeart.translation.LC_USTAWY_PUBLIKACJA + ' ' + dataSearch['data_slowna'])
                     );
                     $(this).append(title);
                     $(this).append(subtitle);

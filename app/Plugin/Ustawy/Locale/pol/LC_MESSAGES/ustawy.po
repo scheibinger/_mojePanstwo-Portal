@@ -38,7 +38,7 @@ msgid "LC_USTAWY_TITLE_USTAWA"
 msgstr "Ustawa"
 
 msgid "LC_USTAWY_PUBLIKACJA"
-msgstr "Opublikowano dnia"
+msgstr "z dnia"
 
 msgid "LC_USTAWY_NIEDAWNO_WESZLY_W_ZYCIE"
 msgstr "Niedawno weszły w życie"
