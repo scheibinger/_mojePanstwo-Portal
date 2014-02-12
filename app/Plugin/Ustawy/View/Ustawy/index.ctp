@@ -8,7 +8,7 @@
         <div class="col-xs-12 col-sm-8 col-sm-offset-2">
             <form class="searchInput" action="/ustawy">
                 <div class="input-group main_input">
-                    <input name="q" value="" type="text"
+                    <input name="q" value="" type="text" autocomplete="off"
                            placeholder="<?php echo __d('ustawy', 'LC_USTAWY_SZUKAJ_ORGANIZACJI'); ?>"
                            class="form-control input-lg">
 	                <span class="input-group-btn">

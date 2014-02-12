@@ -17,8 +17,13 @@
     searchInput.on('submit keyup', function (e) {
         var input = searchInput.find('input').val();
         e.preventDefault();
-
+		
+		console.log('keyup');
+		
         if (input != lastSearch) {
+        	
+        	$('#ustawyCarousel').carousel(0);
+        	
             window.clearTimeout(ustawaTime);
             ustawaTime = window.setTimeout(function () {
                 searchAjax(input);
@@ -27,6 +32,7 @@
     });
 
     function searchAjax(word) {
+        console.log('searchAjax');
         var input = searchInput.find('input').val();
 
         if (input.length >= searchMinLength) {
@@ -36,14 +42,18 @@
                     resultList(ustawyCache[word]);
                     return;
                 }
+                $('#_mojePanstwoCockpit').addClass('loading');
                 $.ajax({
                     type: "GET",
                     url: "/ustawy/search.json?q=" + input,
                     beforeSend: function () {
+                    	console.log('beforeSend');
                         if (resultsList.find('ul').length > 0)
                             resultsList.find('ul').animate({'opacity': '.2'}, animationTime);
                     },
                     success: function (data) {
+                    	$('#_mojePanstwoCockpit').removeClass('loading');
+                    	console.log('success');
                         ustawyCache[word] = data;
                         resultList(data);
                     }
@@ -89,7 +99,5 @@
             )
         });
         resultsListUl.animate({'opacity': '1'}, animationTime);
-
-        $('#ustawyCarousel').carousel(0);
     }
 }(jQuery));

@@ -10,7 +10,9 @@
                 response(cache[ term ]);
                 return;
             }
+            $('#_mojePanstwoCockpit').addClass('loading');
             $.getJSON("/kody_pocztowe/adres.json?q=" + request.term, function (data, status, xhr) {
+                $('#_mojePanstwoCockpit').removeClass('loading');
                 var results = $.map(data.search, function (item) {
                     return {
                         label: item.text,
