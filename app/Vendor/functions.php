@@ -116,3 +116,21 @@ function dataSlownie( $data )
 
     return '<span class="_ds" value="' . strip_tags($data) . '">' . $rok . ' ' . $___vars['miesiace']['celownik'][$miesiac] . ' ' . $dzien . ' r.</span>';
 }
+
+	
+
+if( !function_exists('startsWith') )
+{
+	function startsWith($haystack, $needle)
+	{
+	    return $needle === "" || stripos($haystack, $needle) === 0;
+	}
+}
+
+if( !function_exists('endsWith') )
+{
+	function endsWith($haystack, $needle)
+	{
+	    return $needle === "" || strtoupper(substr($haystack, -strlen($needle))) === strtoupper($needle);
+	}
+}

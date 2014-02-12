@@ -2,24 +2,27 @@
 <?php $this->Combinator->add_libs('js', 'Krs.index.js') ?>
 
 <div id="krs">
-    <div class="header">
-        <div class="container">
-            <h1 class="col-xs-12 col-md-8 col-md-offset-2"><?= __d('krs', 'LC_KRS_HEADER') ?></h1>
 
-            <p class="col-xs-12 col-md-8 col-md-offset-2"><?= __d('krs', 'LC_KRS_HEADLINE') ?></p>
+	<div class="appHeader">
+	    <div class="container innerContent">
+	        <h1><?php echo __d('krs', 'LC_KRS_HEADLINE'); ?></h1>
+	
+	        <div class="col-xs-12 col-sm-8 col-sm-offset-2">
+	            <form class="searchInput" class="searchKRSForm" action="/krs">
+	                <div class="searchKRS input-group main_input">
+	                    <input name="q" value="" type="text"
+	                           placeholder="<?php echo __d('krs', 'LC_KRS_SEARCH_PLACEHOLDER'); ?>"
+	                           class="form-control input-lg">
+		                <span class="input-group-btn">
+		                      <button class="btn btn-success btn-lg" type="submit" data-icon="&#xe600;"></button>
+		                </span>
+	                </div>
+	            </form>
+	        </div>
+	        
+	    </div>
+	</div>
 
-            <form class="searchKRSForm" action="/krs/search.json" method="get">
-            <div class="searchKRS input-group col-xs-12 col-md-10 col-md-offset-1">
-                    <input type="text" class="form-control input-lg" name="q"
-                           placeholder="<?= __d('krs', 'LC_KRS_SEARCH_PLACEHOLDER') ?>">
-                    <span class="input-group-btn">
-                        <button class="btn btn-success" type="submit" data-icon="&#xe600;"></button>
-                    </span>
-                </div>
-            </form>
-
-        </div>
-    </div>
     <div class="resultsList">
         <div class="container">
 
@@ -29,24 +32,62 @@
                         <div class="item<?php if ($index == 0) {
                             echo ' active';
                         } ?>">
-                            <div class="carousel-title"><?= $group['label'] ?></div>
+                            <h2 class="carousel-title"><?= $group['label'] ?></h2>
                             <ul>
-                                <?php foreach ($group['content'] as $result) { ?>
+                                <?php foreach ($group['content'] as $result)
+                                {
+	                                $title = trim($result['nazwa']);
+	                                $titleLen = strlen( $title );
+	                                
+	                                $strs = array(
+		                                'SPÓŁKA Z OGRANICZONĄ ODPOWIEDZIALNOŚCIĄ W LIKWIDACJI',
+	                                	'SPÓŁKA Z OGRANICZONĄ ODPOWIEDZIALNOŚCIĄ',
+		                            );
+	                                
+	                                foreach( $strs as $str )
+	                                {
+		                                if( endsWith($title, $str) )
+		                                {
+		                                	$title = substr($title, 0, $titleLen - strlen($str));
+		                                	break;
+		                                }
+		                            }
+		                            
+	                                	
+	                                $title = trim( $title );
+                                ?>
                                     <li>
-                                        <a href="<?php if ($result['type'] == 'organization') {
-                                            echo('/dane/krs_podmioty/' . $result['id']);
-                                        } elseif ($result['type'] == 'person') {
-                                            echo('/dane/krs_osoby/' . $result['id']);
-                                        } ?>" target="_self"><?php echo trim($result['nazwa']) ?>
-                                            <small>(<?php echo str_replace(' ', '&nbsp', $result['field_name']) ?>:&nbsp;<?php
-                                                if ($group['id'] == 'najnowsze_organizacje') {
-                                                    echo str_replace(' ', '&nbsp', $result['field_value']);
-                                                } elseif ($group['id'] == 'najwieksze_spolki') {
-                                                    echo number_format($result['field_value'], 2, ',', ' ');
-                                                }
-                                                ?>)
-                                            </small>
-                                        </a>
+                                        <p class="title">
+	                                        <a href="<?php if ($result['type'] == 'organization') {
+	                                            echo('/dane/krs_podmioty/' . $result['id']);
+	                                        } elseif ($result['type'] == 'person') {
+	                                            echo('/dane/krs_osoby/' . $result['id']);
+	                                        } ?>" target="_self"><?php echo $title ?>
+	                                        </a>
+                                        </p>
+                                        <p class="subtitle">
+                                        	<?
+                                        		
+                                        		$parts= array(
+                                        			$result['miejscowosc']
+                                        		);
+                                        		
+                                        		if( $result['kapital_zakladowy'] )
+                                        		{
+                                        			setlocale(LC_MONETARY, 'pl_PL');
+	                                        		$parts[] = money_format('%i', $result['kapital_zakladowy']);
+                                        		}
+                                        		
+                                        		$wiek = pl_wiek($result['data_rejestracji']);
+                                        		
+                                        		if( $wiek )
+                                        			$parts[] = pl_dopelniacz($wiek, 'rok', 'lata', 'lat');
+                                        		else
+                                        			$parts[] = $this->Czas->dataSlownie( $result['data_rejestracji'] );
+                                        		
+                                        		echo implode(' <span class="separator">|</span> ', $parts);                                  		
+			    							?>                                        	
+                                        </p>
                                     </li>
                                 <?php } ?>
                             </ul>

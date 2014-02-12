@@ -3,13 +3,14 @@
 
 <div id="home" class="container">
     <div class="header row">
-        <div class="col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
-            <h2>
+        <div class="col-md-12">
+            <h1>
                 <?php echo __('LC_MAINHEADER_TEXT') ?>
-            </h2>
+            </h1>
         </div>
     </div>
-
+	
+	<? /*
     <div class="globalSearch row">
         <div class="col-sm-10 col-md-8 col-md-offset-2 col-lg-6 col-sm-offset-1 col-md-offset-2 col-lg-offset-3">
 
@@ -26,12 +27,17 @@
 
         </div>
     </div>
-
-
+	*/ ?>
+	
+	
+	<? foreach( $folders as $folder )
+	{
+	?>
     <div class="apps row">
+		<? if($folder['folder']['name']) {?><div class="h2cont"><h2 class="col-lg-10 col-lg-offset-1"><? echo $folder['folder']['name']; ?>:</h2></div><?}?>
         <div class="col-md-12 col-lg-12">
             <ul class="row">
-                <?php foreach ($_APPLICATIONS as $key => $app) { ?>
+                <?php foreach ( $folder['apps'] as $key => $app ) { ?>
                     <li class="col-xs-5 col-sm-2<?php
                     if ($key % 2 == 0)
                         echo(' ' . 'col-xs-offset-1');
@@ -40,53 +46,23 @@
                     if ($key % 5 == 0)
                         echo(' ' . 'col-sm-offset-1');
                     ?>">
-                        <?php if ($app['Application']['type'] == 'app') { ?>
-                            <a class="appContruct" href="/<?= $app['Application']['slug'] ?>">
-                                <div class="appIcon">
-                                    <div class="innerIcon">
-                                        <img
-                                            src="/<?= $app['Application']['plugin'] ?>/icon/<?= $app['Application']['slug'] ?>.svg"
-                                            alt="<?= $app['Application']['name'] ?>"/>
-                                    </div>
-                                </div>
-                                <div class="appName">
-                                    <?= $app['Application']['name'] ?>
-                                </div>
-                            </a>
-                        <?php } else if ($app['Application']['type'] == 'folder') { ?>
-                            <div class="appContruct appFolder" data-folder-slug="/<?= $app['Application']['slug'] ?>">
-                                <div class="appIcon">
-                                    <div class="innerIcon">
-                                        <img src="/icon/folder.svg"
-                                             alt="<?= $app['Application']['name'] ?>"/>
-                                    </div>
-                                </div>
-                                <div class="appName">
-                                    <?= $app['Application']['name'] ?>
-                                </div>
-                                <ul class="appList">
-                                    <?php foreach ($app['Content'] as $key => $appList) { ?>
-                                        <li>
-                                            <a href="/<?= $appList['slug'] ?>">
-                                                <div class="appIcon">
-                                                    <div class="innerIcon">
-                                                        <img
-                                                            src="/<?= $appList['plugin'] ?>/icon/<?= $appList['slug'] ?>.svg"
-                                                            alt="<?= $appList['name'] ?>"/>
-                                                    </div>
-                                                </div>
-                                                <div class="appName">
-                                                    <?= $appList['name'] ?>
-                                                </div>
-                                            </a>
-                                        </li>
-                                    <?php } ?>
-                                </ul>
-                            </div>
-                        <? } ?>
+	                    <a class="appContruct" href="/<?= $app['slug'] ?>">
+	                        <div class="appIcon">
+	                            <div class="innerIcon">
+	                                <img
+	                                    src="/<?= $app['plugin'] ?>/icon/<?= $app['slug'] ?>.svg"
+	                                    alt="<?= $app['name'] ?>"/>
+	                            </div>
+	                        </div>
+	                        <div class="appName">
+	                            <?= $app['name'] ?>
+	                        </div>
+	                    </a>
                     </li>
                 <?php } ?>
             </ul>
         </div>
     </div>
+	<? } ?>
+
 </div>

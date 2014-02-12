@@ -73,20 +73,16 @@ class PagesController extends AppController
             
             $this->statusbarMode = 'home';
 
-            $_folders = array();
+            $folders = array();
             for( $i=0; $i<count($this->Applications); $i++ )
-	            $folders[ $this->Applications[$i]['Application']['folder_id'] ][] = $this->Applications[$i]['Application'];
-			
-			$folders_dictionary = array_column($this->Applications, 'Folder');
-			// debug( $folders_dictionary ); die();
-			
-			if( !empty($_folders) )
-				foreach( $_folders as $folder_id => $folder_content )
-					$folders[] = $folder_content;
-			
-			
-            // debug( $folders );
-            
+            {
+            	$folder_info = $this->Applications[$i]['Folder'];
+            	
+	            $folders[ $this->Applications[$i]['Application']['folder_id'] ]['folder'] = $folder_info;
+	            $folders[ $this->Applications[$i]['Application']['folder_id'] ]['apps'][] = $this->Applications[$i]['Application'];
+	            
+	        }
+		            
 			$this->set('folders', $folders);
 			
         }

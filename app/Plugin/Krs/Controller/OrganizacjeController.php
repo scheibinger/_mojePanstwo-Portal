@@ -10,7 +10,7 @@ class OrganizacjeController extends AppController
     public function index()
     {
     	
-    	$groups = $this->API->KRS()->getFeaturedOrganizationsByGroups();
+    	$groups = $this->API->KRS()->getFeaturedOrganizationsByGroups();    	
     	$this->set('groups', $groups);
 
     }

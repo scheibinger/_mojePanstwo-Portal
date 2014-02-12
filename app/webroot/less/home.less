@@ -17,17 +17,19 @@
     #home {
         font-family: "Lato", sans-serif;
         color: #ffffff;
+        padding-bottom: 1em;
 
-        .header h2 {
+        .header h1 {
             float: left;
-            font-size: 20px;
+            font-size: 19px;
             font-weight: 300;
             letter-spacing: 0.05em;
             line-height: 1.3em;
             text-align: center;
-            margin: 3em 0;
+            margin: 1em 0;
             color: #F3F3F3;
             padding: 0 20px;
+            width: 100%;
 
             strong {
                 font-weight: 700;
@@ -41,6 +43,23 @@
                 font-size: 18px;
                 font-weight: 400;
             }
+        }
+        
+        .h2cont {
+	        padding: 0 40px;
+        }
+        
+        h2 {
+	        font-size: 13px;
+            font-weight: 300;
+            letter-spacing: 0.05em;
+            line-height: 1.3em;
+            color: lighten(#218AB6, 30%);
+            border-bottom: 1px solid lighten(#218AB6, 0%);
+            padding: 0 0 5px 5px;
+            margin-bottom: 2em;
+            margin-top: 2em;
+            text-transform: uppercase;
         }
 
         .globalSearch {
@@ -118,13 +137,15 @@
         }
 
         .apps ul {
-            margin: 4em 0 0;
+            margin: 2em 0 0;
             padding: 0;
             list-style: none;
 
             li {
                 margin-bottom: 5em;
-                height: 145px;
+                height: 90px;
+                padding-left: 0;
+                padding-right: 0;
 
                 .appContruct {
                     &.appFolder {

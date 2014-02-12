@@ -103,7 +103,7 @@ $this->Combinator->add_libs('js', 'KodyPocztowe.kody.js');
             if (count($kody) == 1) {
                 foreach ($kody as $kod) {
                     ?>
-                    <span class="center">
+                    <span class="center theonlyone">
                         <small><? if (isset($kod['numery'])) echo $kod['numery']; ?></small>
                         <a href="/dane/kody_pocztowe/<?= $kod['kod_id'] ?>" target="_self"><?= $kod['kod'] ?></a>
                     </span>
