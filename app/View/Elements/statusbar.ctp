@@ -91,7 +91,7 @@
         </div>
 
         <div class="_mojePanstwoCockpitBreadcrumb _mojePanstwoCockpitBorderLeft">
-            <?php if (isset($applicationCurrent)) { ?>
+            <?php if (isset($applicationCurrent) && $applicationCurrent) { ?>
                 <a class="_mojePanstwoCockpitBreadcrumbMain"
                    href="/<?php echo $applicationCurrent['Application']['slug'] ?>">
                     <img
