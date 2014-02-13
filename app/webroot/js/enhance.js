@@ -34,6 +34,17 @@ function imgFixer(img) {
 
     return true;
 }
+/*FUNCTION CHECK IS ELEMENT IS VISIBLE AT SCREEN*/
+function isElementVisibled(elem) {
+    var docViewTop, docViewBottom, elemTop, elemBottom;
+
+    docViewTop = jQuery(window).scrollTop();
+    docViewBottom = docViewTop + jQuery(window).height();
+    elemTop = jQuery(elem).offset().top;
+    elemBottom = elemTop + jQuery(elem).height();
+
+    return ((elemBottom <= docViewBottom) && (elemTop >= docViewTop));
+}
 /*FUNCTION CUT TITLE TO SHORTER FORM WITH OPTION OF EXPANDING IT*/
 trimTitle = function () {
     jQuery('.trimTitle').each(function () {

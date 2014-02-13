@@ -1,15 +1,3 @@
-function isElementVisibled(elem) {
-    if (jQuery(elem).length) {
-        var docViewTop = jQuery(window).scrollTop();
-        var docViewBottom = docViewTop + jQuery(window).height();
-        var elemTop = jQuery(elem).offset().top;
-        var elemBottom = elemTop + jQuery(elem).height();
-        return ((elemBottom <= docViewBottom) && (elemTop >= docViewTop));
-    } else {
-        return false;
-    }
-}
-
 var intervalMain;
 
 (function () {
