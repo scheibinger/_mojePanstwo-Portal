@@ -18,8 +18,6 @@
         var input = searchInput.find('input').val();
         e.preventDefault();
 
-        console.log('keyup');
-
         if (input != lastSearch) {
 
             $('#ustawyCarousel').carousel(0);
@@ -32,14 +30,13 @@
     });
 
     function searchAjax(word) {
-        console.log('searchAjax');
         var input = searchInput.find('input').val();
 
         if (input.length >= searchMinLength) {
             if (word == input) {
                 lastSearch = input;
                 if (word in ustawyCache) {
-                    resultList(ustawyCache[word]);
+                    resultList(word, ustawyCache[word]);
                     return;
                 }
                 $('#_mojePanstwoCockpit').addClass('loading');
@@ -47,15 +44,13 @@
                     type: "GET",
                     url: "/ustawy/search.json?q=" + input,
                     beforeSend: function () {
-                        console.log('beforeSend');
                         if (resultsList.find('ul').length > 0)
                             resultsList.find('ul').animate({'opacity': '.2'}, animationTime);
                     },
                     success: function (data) {
                         $('#_mojePanstwoCockpit').removeClass('loading');
-                        console.log('success');
                         ustawyCache[word] = data;
-                        resultList(data);
+                        resultList(word, data);
                     }
                 });
             } else {
@@ -67,7 +62,7 @@
         }
     }
 
-    function resultList(data) {
+    function resultList(word, data) {
         var resultsListUl = resultsList.find('ul');
 
         if (resultsList.find('ul').length > 0 && resultsList.find('ul').css('opacity') == '1')
@@ -81,6 +76,12 @@
         shortcuts.find('li.results').addClass('active');
 
         resultsListUl.html('');
+
+        if (data.search.length == 0) {
+            resultsListUl.append(
+                jQuery('<li></li>').addClass('center').html(_mPHeart.translation.LC_USTAWY_BRAK_WYNIKOW + ': <strong>' + word + '</strong>')
+            )
+        }
 
         $.each(data.search, function () {
             var dataSearch = this;

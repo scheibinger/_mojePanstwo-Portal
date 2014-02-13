@@ -45,3 +45,6 @@ msgstr "Niedawno weszły w życie"
 
 msgid "LC_USTAWY_NIEDLUGO_WEJDA_W_ZYCIE"
 msgstr "Niedługo wejdą w życie"
+
+msgid "LC_USTAWY_BRAK_WYNIKOW"
+msgstr "Brak wyników dla szukanej frazy"
