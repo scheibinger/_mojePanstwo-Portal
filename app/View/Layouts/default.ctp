@@ -117,8 +117,8 @@ echo $this->Html->script('//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/i18n/j
 echo $this->Html->script('//netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js');
 
 /* PACKAGES FROM VENDOR */
-echo $this->Html->script('plugins/browserstate/history.js/scripts/bundled/html4+html5/jquery.history.js');
-echo $this->Html->script('plugins/carhartl/jquery-cookie/jquery.cookie.js');
+echo $this->Html->script('plugins/history.js/scripts/bundled/html4+html5/jquery.history.js');
+echo $this->Html->script('plugins/jquery-cookie/jquery.cookie.js');
 
 $this->Combinator->add_libs('js', 'statusbar', false);
 $this->Combinator->add_libs('js', 'statusbar-portal', false);

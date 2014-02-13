@@ -30,53 +30,12 @@
     "config": {
         "vendor-dir": "Vendor"
     },
-    "repositories": [
-        {
-            "type": "package",
-            "package": {
-                "name": "browserstate/history.js",
-                "version": "master",
-                "source": {
-                    "url": "https://github.com/browserstate/history.js",
-                    "type": "git",
-                    "reference": "master"
-                }
-            }
-        },
-        {
-            "type": "package",
-            "package": {
-                "name": "carhartl/jquery-cookie",
-                "version": "master",
-                "source": {
-                    "url": "https://github.com/carhartl/jquery-cookie",
-                    "type": "git",
-                    "reference": "master"
-                }
-            }
-        }
-    ],
     "require": {
         "slywalker/boost_cake": "*",
         "leafo/lessphp": "0.3.*@dev",
         "browserstate/history.js": "master",
         "carhartl/jquery-cookie": "master"
 
-    },
-    "scripts": {
-        "post-install-cmd": [
-            "Console/cake composer.c update"
-        ],
-        "post-update-cmd": [
-            "Console/cake composer.c self-update",
-            "if [ -d \"webroot/js/plugins/browserstate\" ] \nthen \nrm -R webroot/js/plugins/browserstate \nfi ",
-            "if [ -d \"Vendor/browserstate/\" ] \nthen \nmv Vendor/browserstate webroot/js/plugins/browserstate  \nfi",
-            "if [ -d \"Vendor/browserstate/\" ] \nthen \nrm -R Vendor/browserstate/ \nfi",
-
-            "if [ -d \"webroot/js/plugins/carhartl\" ] \nthen \nrm -R webroot/js/plugins/carhartl \nfi ",
-            "if [ -d \"Vendor/carhartl/\" ] \nthen \nmv Vendor/carhartl webroot/js/plugins/carhartl  \nfi",
-            "if [ -d \"Vendor/carhartl/\" ] \nthen \nrm -R Vendor/carhartl/ \nfi"
-        ]
     },
     "minimum-stability": "dev"
 }
