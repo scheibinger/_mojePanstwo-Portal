@@ -149,8 +149,9 @@ class DataobjectHelper extends AppHelper
                         continue;
                     $field_value = dataSlownie($field_value);
                 } elseif ($field_type == 'pln') {
-                    setlocale(LC_MONETARY, 'pl_PL');
-                    $field_value = money_format('%i', $field_value);
+                    //setlocale(LC_MONETARY, 'pl_PL');
+                    //$field_value = money_format('%i', $field_value);
+                    $field_value = number_format($field_value, 2, ',', ' ') . ' PLN';
                 } elseif ($field_type == 'integer') {
                     if (!$field_value)
                         continue;

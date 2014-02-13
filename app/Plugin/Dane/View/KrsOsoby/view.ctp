@@ -25,10 +25,9 @@ if ($organizacje = $object->getLayer('organizacje')) {
                             <p class="subtitle"><span
                                     class="normalizeText"><?= $organizacja['forma_prawna_str'] ?></span><? if ($kapitalZakladowy) { ?>
                                     <span class="separator">|</span> kapitał zakładowy: <?
-
-                                    setlocale(LC_MONETARY, 'pl_PL');
-                                    echo money_format('%i', $organizacja['kapital_zakladowy']);
-
+                                    //setlocale(LC_MONETARY, 'pl_PL');
+                                    //echo money_format('%i', $organizacja['kapital_zakladowy']);
+                                    echo number_format($organizacja['kapital_zakladowy'], 2, ',', ' ') . ' PLN';
                                 }?>
 
                                 <? if (!empty($organizacja['role']))

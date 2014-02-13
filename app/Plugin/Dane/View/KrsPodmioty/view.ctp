@@ -43,8 +43,9 @@
                                 }
                                 case 'pln':
                                 {
-                                    setlocale(LC_MONETARY, 'pl_PL');
-                                    echo money_format('%i', $indicator['value']);
+                                    //setlocale(LC_MONETARY, 'pl_PL');
+                                    //echo money_format('%i', $indicator['value']);
+                                    echo number_format($indicator['value'], 2, ',', ' ') . ' PLN';
                                     break;
                                 }
                             }
