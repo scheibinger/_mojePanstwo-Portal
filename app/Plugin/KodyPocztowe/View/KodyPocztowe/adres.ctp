@@ -17,7 +17,7 @@ $this->Combinator->add_libs('js', 'KodyPocztowe.kody.js');
                         <form action="/kody_pocztowe" method="get">
                             <div class="input-group">
                                 <?php
-                                echo $this->Form->input('miejscowosc', array('label' => false, 'class' => 'form-control input-lg', 'placeholder' => __d('kody_pocztowe', "LC_KODY_POCZTOWE_WPISZ_MIEJSCOWOSC"), 'id' => 'cityv', 'name' => 'mstr', 'value' => ''));
+                                echo $this->Form->input('miejscowosc', array('label' => false, 'class' => 'form-control input-lg', 'placeholder' => __d('kody_pocztowe', "LC_KODY_POCZTOWE_WPISZ_MIEJSCOWOSC"), 'id' => 'cityv', 'name' => 'mstr', 'value' => '', 'autocomplete' => 'off'));
                                 ?>
                                 <span class="input-group-btn">
 	                                <button class="btn btn-success btn-lg" type="submit"

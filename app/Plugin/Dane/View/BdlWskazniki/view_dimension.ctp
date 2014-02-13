@@ -80,9 +80,10 @@
                 <div class="input-group localDataSearch">
                     <span class="input-group-addon" data-icon="&#xe600;"></span>
                     <input type="text" class="form-control"
-                           placeholder="<?= __d('dane', 'LC_BDL_WSKAZNIKI_SEARCH_PLACEHOLDER') ?>">
+                           placeholder="<?= __d('dane', 'LC_BDL_WSKAZNIKI_SEARCH_PLACEHOLDER') ?>"
+                           autocomplete="off"/>
                     <button class="close"
-                            type="button" data-icon="&#xe605;">
+                            type="button" data-icon="&#xe605;"></button>
                 </div>
                 <table class="localDataTable table table-striped">
                     <thead>

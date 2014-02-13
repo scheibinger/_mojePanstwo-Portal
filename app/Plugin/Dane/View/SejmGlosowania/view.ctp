@@ -105,7 +105,7 @@ $dictionary = array(
                 <h2><?= __d('dane', 'LC_SEJMGLOSOWANIA_INDYWIDUALNE_HEADER') ?></h2>
 
                 <div class="input-group searchName col-xs-12 col-md-6">
-                    <input type="text" class="form-control"
+                    <input type="text" class="form-control" autocomplete="off"
                            placeholder="<?= __d('dane', 'LC_SEJMGLOSOWANIA_INDYWIDUALNE_HEADER_SEARCH_PLACEHOLDER') ?>">
                     <span class="input-group-btn">
                         <button class="btn btn-default" type="button" data-icon="&#xe601;"></button>
