@@ -76,11 +76,11 @@ class AppController extends Controller
     public $User = false;
     public $Applications = array();
     public $Streams = array(
-    	array(
-    		'id' => 1,
-    		'name' => '_mojePaństwo - główne wydanie',
-    		'selected' => true,
-    	),
+        array(
+            'id' => 1,
+            'name' => '_mojePaństwo - główne wydanie',
+            'selected' => true,
+        ),
     );
     private $stream_id = 1;
 
@@ -112,33 +112,33 @@ class AppController extends Controller
         }
     }
 
-	public function getStream()
-	{
-		if( empty( $this->Streams ) )
-			return false;
-			
-		for( $i=0; $i<count( $this->Streams ); $i++ )
-			if( $this->Streams[$i]['id'] == $this->stream_id )
-				return $this->Streams[$i];
-		
-		return $this->Streams[0];
-	}
-	
-	public function getStreamId()
-	{
-		$stream = $this->getStream();
-		if( $stream && isset($stream['id']) )
-			return $stream['id'];
-			
-		return false;
-	}
-	
-	
+    public function getStream()
+    {
+        if (empty($this->Streams))
+            return false;
+
+        for ($i = 0; $i < count($this->Streams); $i++)
+            if ($this->Streams[$i]['id'] == $this->stream_id)
+                return $this->Streams[$i];
+
+        return $this->Streams[0];
+    }
+
+    public function getStreamId()
+    {
+        $stream = $this->getStream();
+        if ($stream && isset($stream['id']))
+            return $stream['id'];
+
+        return false;
+    }
+
+
     public function beforeFilter()
     {
         header('Access-Control-Allow-Origin: ' . $this->request->header('Origin'));
         header('Access-Control-Allow-Credentials: true');
-        
+
         # assigning translations for javascript use
         if ($this->params->plugin) {
             $path = ROOT . DS . APP_DIR . DS . 'Plugin' . DS . Inflector::camelize($this->params->plugin) . DS . 'Locale' . DS . Configure::read('Config.language') . DS . 'LC_MESSAGES' . DS . Inflector::underscore($this->params->plugin) . '.po';

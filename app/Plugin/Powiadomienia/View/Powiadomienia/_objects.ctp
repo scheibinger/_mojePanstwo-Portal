@@ -6,7 +6,7 @@
                     <div class="powiadomienia">
                         <?php foreach ($objects as $object) {
                             echo $this->Dataobject->render($object, 'default', array(
-                            	'forceLabel' => true,
+                                'forceLabel' => true,
                             ));
                         } ?>
                     </div>
@@ -18,9 +18,9 @@
                 <?php } ?>
             </div>
         </div>
-		
-		
-        
+
+
+
         <? /*
         <div class="btn-toolbar">
             <div class="btn-group">
@@ -32,7 +32,8 @@
                 )); ?>
             </div>
         </div>
-        */ ?>
+        */
+        ?>
 
     </div>
 </div>

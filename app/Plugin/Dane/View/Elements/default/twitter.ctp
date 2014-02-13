@@ -1,10 +1,10 @@
-		<blockquote class="_">
-		    <?= $object->getData('html') ?>
-		</blockquote>
-		
-		<?= $this->Dataobject->highlights() ?>
-	
-	</div>
+<blockquote class="_">
+    <?= $object->getData('html') ?>
+</blockquote>
+
+<?= $this->Dataobject->highlights() ?>
+
+</div>
 </div>
 
 <div>

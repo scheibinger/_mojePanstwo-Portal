@@ -4,16 +4,16 @@
 <div class="innerContainer">
     <ul class="list-group list-dataobjects">
         <?
-	    	$bg = false;
-	    	foreach ($objects as $object) {
-	        	echo $this->Dataobject->render($object['Dataobject'], 'default', array(
-	        		'bg' => $bg,
-	        		'hlFields' => $dataBrowser->hlFields,
-            		'routes' => $dataBrowser->routes,
-	        	));
-	        	$bg = !$bg;
-			}
-		?>
+        $bg = false;
+        foreach ($objects as $object) {
+            echo $this->Dataobject->render($object['Dataobject'], 'default', array(
+                'bg' => $bg,
+                'hlFields' => $dataBrowser->hlFields,
+                'routes' => $dataBrowser->routes,
+            ));
+            $bg = !$bg;
+        }
+        ?>
     </ul>
 </div>
 

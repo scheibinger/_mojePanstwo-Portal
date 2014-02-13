@@ -9,11 +9,11 @@ if (in_array($object->getDataset(), array('rady_posiedzenia', 'rady_gmin_debaty'
     $object_content_sizes = array(2, 10);
 }
 
-$this->Dataobject->setObject( $object );
+$this->Dataobject->setObject($object);
 ?>
 <div class="objectRender col-md-12 <?= $object->getDataset() ?><? if ($bg) { ?> bg<? } ?>"
      oid="<?php echo $item['data']['id'] ?>">
-<div class="row">
+    <div class="row">
         <? if ($this->Dataobject->getDate()) { ?>
             <div class="formatDate col-md-1 dimmed">
                 <?php echo($this->Dataobject->getDate()); ?>
@@ -21,23 +21,23 @@ $this->Dataobject->setObject( $object );
         <? } ?>
         <div class="data col-md-<?= $this->Dataobject->getDate() ? '11' : '12' ?>">
             <div class="row">
-                <? if ($object->getThumbnailUrl( $thumbSize )) { ?>
+                <? if ($object->getThumbnailUrl($thumbSize)) { ?>
                     <div class="attachment col-md-<?= $object_content_sizes[0] ?> text-center">
                         <?php if ($object->getUrl() != false) { ?>
                         <a href="<?= $object->getUrl() ?>">
                             <?php } ?>
-                            <img onerror="imgFixer(this)" src="<?= $object->getThumbnailUrl( $thumbSize ) ?>"
+                            <img onerror="imgFixer(this)" src="<?= $object->getThumbnailUrl($thumbSize) ?>"
                                  alt="<?= strip_tags($object->getTitle()) ?>"/>
                             <?php if ($object->getUrl() != false) { ?>
                         </a>
                     <?php } ?>
                     </div>
                     <div class="content col-md-<?= $object_content_sizes[1] ?>">
-                        
-                        <? if( $object->force_hl_fields || $forceLabel ) { ?>
-                        <p class="header">
-                            <?= $object->getLabel(); ?>
-                        </p>
+
+                        <? if ($object->force_hl_fields || $forceLabel) { ?>
+                            <p class="header">
+                                <?= $object->getLabel(); ?>
+                            </p>
                         <? } ?>
 
                         <p class="title">
@@ -46,7 +46,7 @@ $this->Dataobject->setObject( $object );
                                 <?php } ?>
                                 <?= $object->getShortTitle() ?>
                                 <?php if ($object->getUrl() != false) { ?>
-                            </a> <? if($object->getTitleAddon()) echo '<small>' . $object->getTitleAddon() . '</small>'; ?>
+                            </a> <? if ($object->getTitleAddon()) echo '<small>' . $object->getTitleAddon() . '</small>'; ?>
                         <?php } ?>
                         </p>
                         <?
@@ -56,17 +56,17 @@ $this->Dataobject->setObject( $object );
                                 'object' => $object
                             ));
                         else
-	                        echo $this->Dataobject->highlights( $hlFields );
+                            echo $this->Dataobject->highlights($hlFields);
                         ?>
                     </div>
 
                 <? } else { ?>
                     <div class="content">
-                        
-                        <? if( $object->force_hl_fields || $forceLabel ) { ?>
-                        <p class="header">
-                            <?= $object->getLabel(); ?>
-                        </p>
+
+                        <? if ($object->force_hl_fields || $forceLabel) { ?>
+                            <p class="header">
+                                <?= $object->getLabel(); ?>
+                            </p>
                         <? } ?>
 
                         <p class="title">
@@ -75,7 +75,7 @@ $this->Dataobject->setObject( $object );
                                 <?php } ?>
                                 <?= $object->getShortTitle() ?>
                                 <?php if ($object->getUrl() != false){ ?>
-                            </a> <? if($object->getTitleAddon()) echo '<small>' . $object->getTitleAddon() . '</small>'; ?>
+                            </a> <? if ($object->getTitleAddon()) echo '<small>' . $object->getTitleAddon() . '</small>'; ?>
                         <?php } ?>
                         </p>
                         <?
@@ -85,7 +85,7 @@ $this->Dataobject->setObject( $object );
                                 'object' => $object
                             ));
                         else
-                        	echo $this->Dataobject->highlights( $hlFields );
+                            echo $this->Dataobject->highlights($hlFields);
                         ?>
 
                     </div>

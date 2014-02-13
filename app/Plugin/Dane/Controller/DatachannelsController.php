@@ -5,30 +5,29 @@ class DatachannelsController extends DaneAppController
 
     public function index()
     {
-    	
-    	$q = (string) @$this->request->query['q'];
-    	
-    	$queryData = array(
-        	'includeContent' => true,
-        );
-        
-        if( $q )
-        	$queryData['conditions']['q'] = $q;
-    	
-        $channels = $this->API->getDatachannels( $queryData );
-           
 
-        if( $q && !empty($channels) )
-        {
+        $q = (string)@$this->request->query['q'];
+
+        $queryData = array(
+            'includeContent' => true,
+        );
+
+        if ($q)
+            $queryData['conditions']['q'] = $q;
+
+        $channels = $this->API->getDatachannels($queryData);
+
+
+        if ($q && !empty($channels)) {
             foreach ($channels as &$ch) {
-				
-				$datachannel_count = 0;
-								
+
+                $datachannel_count = 0;
+
                 $facets = $ch['facets'];
                 if (!empty($facets)) {
-             
+
                     $facets = array_column($facets, 'params', 'field');
-                                 
+
                     if (array_key_exists('dataset', $facets) &&
                         isset($facets['dataset']['options']) &&
                         !empty($facets['dataset']['options'])

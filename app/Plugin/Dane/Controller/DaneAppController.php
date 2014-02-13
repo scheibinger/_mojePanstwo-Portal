@@ -20,7 +20,7 @@ class DaneAppController extends AppController
     public function beforeFilter()
     {
         parent::beforeFilter();
-        $this->API = $this->API->Dane();        
+        $this->API = $this->API->Dane();
     }
 
 }

@@ -7,7 +7,7 @@ class DataobjectsController extends DaneAppController
     public $components = array('Paginator');
     public $object = false;
     public $objectOptions = array(
-    	'hlFields' => false,
+        'hlFields' => false,
     );
     public $dataset = false;
     public $menu = array(
@@ -93,9 +93,9 @@ class DataobjectsController extends DaneAppController
             $this->set('menu', $this->menu);
             $this->set('menuMode', $this->menuMode);
             $this->set('title_for_layout', $title_for_layout);
-            
-            if( $this->Session->read('Auth.User.id') )
-		    	$this->API->Powiadomienia()->flagObject( $this->object->id );
+
+            if ($this->Session->read('Auth.User.id'))
+                $this->API->Powiadomienia()->flagObject($this->object->id);
 
 
         } else {

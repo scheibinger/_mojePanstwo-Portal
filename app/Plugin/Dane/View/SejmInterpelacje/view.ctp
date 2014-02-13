@@ -15,16 +15,17 @@
          data-document-id="<?php echo $document->getId(); ?>"
          data-dataset="<?php echo $dataset['Dataset']['alias']; ?>">
 
-        <?= $this->Element('toolbar', array(
-        	'left_column_width' => 9,
-        	'right_column_width' => 3,
+        <?=
+        $this->Element('toolbar', array(
+            'left_column_width' => 9,
+            'right_column_width' => 3,
         )); ?>
 
         <div class="document container">
             <div class="row">
                 <div class="content col-md-9">
                     <div class="canvas">
-                    <?php echo $document->loadHtml($documentPackage); ?>
+                        <?php echo $document->loadHtml($documentPackage); ?>
                     </div>
                     <div class="loadMoreDocumentContent <?php if ($document->getPackagesCount() > 1) {
                         echo 'show';
@@ -81,18 +82,18 @@
             <div class="content col-md-9">
                 <?php foreach ($teksty as $t) { ?>
                     <div class="block">
-	                    <?
-	                    	if ($wydarzenie['typ_id'] == 1 || $wydarzenie['typ_id'] == 3) {
-	                    ?>
-	                        <h2>
-	                        <small>Do:</small> <?php echo $t['funkcja_nazwa']; ?></h2>
-	                    <? } elseif( $wydarzenie['typ_id'] == 2 || $wydarzenie['typ_id'] == 4 ) { ?>
-	                    	<h2>
-	                        <small>Od:</small> <?php echo $wydarzenie['autor_str']; ?></h2>
-	                    <? } ?>
+                        <?
+                        if ($wydarzenie['typ_id'] == 1 || $wydarzenie['typ_id'] == 3) {
+                            ?>
+                            <h2>
+                                <small>Do:</small> <?php echo $t['funkcja_nazwa']; ?></h2>
+                        <? } elseif ($wydarzenie['typ_id'] == 2 || $wydarzenie['typ_id'] == 4) { ?>
+                            <h2>
+                                <small>Od:</small> <?php echo $wydarzenie['autor_str']; ?></h2>
+                        <? } ?>
                         <div class="html">
-                        <?php echo $t['html']; ?>
-	                    </div>
+                            <?php echo $t['html']; ?>
+                        </div>
                     </div>
                 <?php } ?>
             </div>

@@ -45,11 +45,13 @@
                     <form id="contact" method="post" class="form" role="form">
                         <div class="row">
                             <div class="col-xs-6 col-md-6 form-group">
-                                <input class="form-control" id="name" name="name" placeholder="<?= __('LC_CONTACTUS_PLACEHOLDER_NAME') ?>" type="text"
+                                <input class="form-control" id="name" name="name"
+                                       placeholder="<?= __('LC_CONTACTUS_PLACEHOLDER_NAME') ?>" type="text"
                                        required autofocus/>
                             </div>
                             <div class="col-xs-6 col-md-6 form-group">
-                                <input class="form-control" id="email" name="email" placeholder="<?= __('LC_CONTACTUS_PLACEHOLDER_EMAIL') ?>" type="email"
+                                <input class="form-control" id="email" name="email"
+                                       placeholder="<?= __('LC_CONTACTUS_PLACEHOLDER_EMAIL') ?>" type="email"
                                        required/>
                             </div>
                         </div>
@@ -58,7 +60,8 @@
 
                         <div class="row">
                             <div class="col-xs-12 col-md-12 form-group">
-                                <button class="btn btn-primary pull-right" type="submit"><?= __('LC_CONTACTUS_SEND') ?></button>
+                                <button class="btn btn-primary pull-right"
+                                        type="submit"><?= __('LC_CONTACTUS_SEND') ?></button>
                             </div>
                         </div>
                     </form>

@@ -83,10 +83,10 @@ class FilterHelper extends AppHelper
 
         // FILTERS
         foreach ($this->filters as $filter) {
-			
-			if( $filter['filter']['parent_field'] && !isset($this->request->query[ $filter['filter']['parent_field'] ] ) )
-				continue;
-			
+
+            if ($filter['filter']['parent_field'] && !isset($this->request->query[$filter['filter']['parent_field']]))
+                continue;
+
             $facet = $this->getFacets($filter['filter']['field']);
 
             if (($filter['filter']['typ_id'] == 1) && @empty($facet['params']['options'])) {

@@ -17,13 +17,13 @@
     searchInput.on('submit keyup', function (e) {
         var input = searchInput.find('input').val();
         e.preventDefault();
-		
-		console.log('keyup');
-		
+
+        console.log('keyup');
+
         if (input != lastSearch) {
-        	
-        	$('#ustawyCarousel').carousel(0);
-        	
+
+            $('#ustawyCarousel').carousel(0);
+
             window.clearTimeout(ustawaTime);
             ustawaTime = window.setTimeout(function () {
                 searchAjax(input);
@@ -47,13 +47,13 @@
                     type: "GET",
                     url: "/ustawy/search.json?q=" + input,
                     beforeSend: function () {
-                    	console.log('beforeSend');
+                        console.log('beforeSend');
                         if (resultsList.find('ul').length > 0)
                             resultsList.find('ul').animate({'opacity': '.2'}, animationTime);
                     },
                     success: function (data) {
-                    	$('#_mojePanstwoCockpit').removeClass('loading');
-                    	console.log('success');
+                        $('#_mojePanstwoCockpit').removeClass('loading');
+                        console.log('success');
                         ustawyCache[word] = data;
                         resultList(data);
                     }

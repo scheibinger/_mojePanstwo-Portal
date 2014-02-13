@@ -18,18 +18,18 @@ function _ucfirst($str)
         $w = strtoupper($w[0]) . $rest;
 
     }
-		
-	return str_replace(array(
-		' Z ',
-	), array(
-		' z ',
-	), implode(' ', $words));
+
+    return str_replace(array(
+        ' Z ',
+    ), array(
+        ' z ',
+    ), implode(' ', $words));
 
 }
 
-function pl_wiek( $data )
+function pl_wiek($data)
 {
-	$birthDate = explode("-", substr($data, 0, 10));
+    $birthDate = explode("-", substr($data, 0, 10));
     $age = (date("md", date("U", mktime(0, 0, 0, $birthDate[1], $birthDate[2], $birthDate[0]))) > date("md") ? ((date("Y") - $birthDate[0]) - 1) : (date("Y") - $birthDate[0]));
     return $age;
 }
@@ -85,29 +85,29 @@ if (!function_exists('array_column')) {
     }
 }
 
-function dataSlownie( $data )
+function dataSlownie($data)
 {
-	
-	$___vars = array(
-	    'miesiace' => array(
-	        'celownik' => array(
-	            1 => 'stycznia',
-	            2 => 'lutego',
-	            3 => 'marca',
-	            4 => 'kwietnia',
-	            5 => 'maja',
-	            6 => 'czerwca',
-	            7 => 'lipca',
-	            8 => 'sierpnia',
-	            9 => 'września',
-	            10 => 'października',
-	            11 => 'listopada',
-	            12 => 'grudnia',
-	        ),
-	    ),
-	);
-	
-	$parts = explode('-', substr($data, 0, 10));
+
+    $___vars = array(
+        'miesiace' => array(
+            'celownik' => array(
+                1 => 'stycznia',
+                2 => 'lutego',
+                3 => 'marca',
+                4 => 'kwietnia',
+                5 => 'maja',
+                6 => 'czerwca',
+                7 => 'lipca',
+                8 => 'sierpnia',
+                9 => 'września',
+                10 => 'października',
+                11 => 'listopada',
+                12 => 'grudnia',
+            ),
+        ),
+    );
+
+    $parts = explode('-', substr($data, 0, 10));
     if (count($parts) != 3) return $data;
 
     $rok = (int)$parts[2];
@@ -117,20 +117,17 @@ function dataSlownie( $data )
     return '<span class="_ds" value="' . strip_tags($data) . '">' . $rok . ' ' . $___vars['miesiace']['celownik'][$miesiac] . ' ' . $dzien . ' r.</span>';
 }
 
-	
 
-if( !function_exists('startsWith') )
-{
-	function startsWith($haystack, $needle)
-	{
-	    return $needle === "" || stripos($haystack, $needle) === 0;
-	}
+if (!function_exists('startsWith')) {
+    function startsWith($haystack, $needle)
+    {
+        return $needle === "" || stripos($haystack, $needle) === 0;
+    }
 }
 
-if( !function_exists('endsWith') )
-{
-	function endsWith($haystack, $needle)
-	{
-	    return $needle === "" || strtoupper(substr($haystack, -strlen($needle))) === strtoupper($needle);
-	}
+if (!function_exists('endsWith')) {
+    function endsWith($haystack, $needle)
+    {
+        return $needle === "" || strtoupper(substr($haystack, -strlen($needle))) === strtoupper($needle);
+    }
 }

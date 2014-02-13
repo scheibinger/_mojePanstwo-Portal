@@ -61,12 +61,14 @@
                                 $obj = $obj->getData();?>
                                 <li>
                                     <p class="title">
-                                    	<a href="/dane/ustawy/<?= $obj['id'] ?>"
-											target="_self"
-												title="<?= $obj['tytul'] ?>"><?= __d('ustawy', 'LC_USTAWY_TITLE_USTAWA') ?> <?= $obj['tytul_skrocony'] ?></a>
+                                        <a href="/dane/ustawy/<?= $obj['id'] ?>"
+                                           target="_self"
+                                           title="<?= $obj['tytul'] ?>"><?= __d('ustawy', 'LC_USTAWY_TITLE_USTAWA') ?> <?= $obj['tytul_skrocony'] ?></a>
                                     </p>
+
                                     <p class="subtitle">
-                                    	<span class="label label-warning"><?= $this->Czas->dataSlownie($obj['data_publikacji']) ?></span>
+                                        <span
+                                            class="label label-warning"><?= $this->Czas->dataSlownie($obj['data_publikacji']) ?></span>
                                     </p>
                                 </li>
                             <? } ?>
@@ -80,14 +82,16 @@
                             foreach ($data['niedlugo_wejda'] as $obj) {
                                 $obj = $obj->getData();?>
                                 <li>
-                                	<p class="title">
-                                    <a href="/dane/ustawy/<?= $obj['id'] ?>"
-                                       target="_self"
-                                       title="<?= $obj['tytul'] ?>"><?= __d('ustawy', 'LC_USTAWY_TITLE_USTAWA') ?> <?= $obj['tytul_skrocony'] ?></a>
-                                	</p>
-                                	<p class="subtitle">
-                                		<span class="label label-danger"><?= $this->Czas->dataSlownie($obj['data_publikacji']) ?></span>
-                                	</p>
+                                    <p class="title">
+                                        <a href="/dane/ustawy/<?= $obj['id'] ?>"
+                                           target="_self"
+                                           title="<?= $obj['tytul'] ?>"><?= __d('ustawy', 'LC_USTAWY_TITLE_USTAWA') ?> <?= $obj['tytul_skrocony'] ?></a>
+                                    </p>
+
+                                    <p class="subtitle">
+                                        <span
+                                            class="label label-danger"><?= $this->Czas->dataSlownie($obj['data_publikacji']) ?></span>
+                                    </p>
                                 </li>
                             <? } ?>
                         </ul>
@@ -96,19 +100,20 @@
             </div>
             <div class="item">
                 <div class="col-xs-12 col-sm-8 col-sm-offset-2">
-                    
+
                     <ul class="single bigger twocol">
                         <?
                         foreach ($data['kodeksy'] as $obj) {
                             $obj = $obj->getData();?>
                             <li>
                                 <p class="title">
-                                	<a href="/dane/ustawy/<?= $obj['id'] ?>" target="_self" title="<?= $obj['tytul'] ?>"><?= $obj['tytul_skrocony'] ?></a>
+                                    <a href="/dane/ustawy/<?= $obj['id'] ?>" target="_self"
+                                       title="<?= $obj['tytul'] ?>"><?= $obj['tytul_skrocony'] ?></a>
                                 </p>
                             </li>
                         <? } ?>
                     </ul>
-                
+
                 </div>
             </div>
             <div class="item">
@@ -118,9 +123,10 @@
                         foreach ($data['konstytucje'] as $obj) {
                             $obj = $obj->getData();?>
                             <li>
-                            	<p class="title">
-	                                <a href="/dane/ustawy/<?= $obj['id'] ?>" target="_self" title="<?= $obj['tytul'] ?>"><?= $obj['tytul_skrocony'] ?></a>
-                            	</p>
+                                <p class="title">
+                                    <a href="/dane/ustawy/<?= $obj['id'] ?>" target="_self"
+                                       title="<?= $obj['tytul'] ?>"><?= $obj['tytul_skrocony'] ?></a>
+                                </p>
                             </li>
                         <? } ?>
                     </ul>

@@ -16,15 +16,15 @@ class SejmPosiedzeniaPunktyController extends DataobjectsController
             'id' => 'view',
             'label' => 'Szukaj w tym punkcie',
         ),
-        
+
     );
 
     public function view()
     {
 
         parent::view();
-        
+
     }
 
-    
+
 } 

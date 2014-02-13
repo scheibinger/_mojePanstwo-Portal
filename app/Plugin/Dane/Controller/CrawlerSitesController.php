@@ -27,5 +27,5 @@ class CrawlerSitesController extends DataobjectsController
         ));
 
     }
-    
+
 } 

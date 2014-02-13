@@ -10,11 +10,11 @@ $number_format = array(
 
 ?>
 
-		<p class="line signature text-muted">
-		    <?= $object->getData('description'); ?>
-		</p>
-	
-	</div>
+<p class="line signature text-muted">
+    <?= $object->getData('description'); ?>
+</p>
+
+</div>
 </div>
 
 <div>
@@ -30,7 +30,7 @@ $number_format = array(
     $ord = @substr($this->request->query['order'], 0, stripos($this->request->query['order'], ' '));
 
     echo $this->Dataobject->highlights();
-    
+
     ?>
 
     <div>

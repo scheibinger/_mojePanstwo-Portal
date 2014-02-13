@@ -44,7 +44,7 @@ $this->Dataobject->setObject($object);
                                     <?php } ?>
                                     <?= $object->getShortTitle() ?>
                                     <?php if (($object->getUrl() != false) && !empty($this->request)) { ?>
-                                </a> <? if($object->getTitleAddon()) echo '<small>' . $object->getTitleAddon() . '</small>'; ?>
+                                </a> <? if ($object->getTitleAddon()) echo '<small>' . $object->getTitleAddon() . '</small>'; ?>
                             <?php } ?>
                             </h1>
                         <? } ?>
@@ -56,7 +56,7 @@ $this->Dataobject->setObject($object);
                                 'object' => $object
                             ));
                         else
-                        	echo $this->Dataobject->highlights( $hlFields );
+                            echo $this->Dataobject->highlights($hlFields);
                         ?>
                     </div>
 
@@ -73,7 +73,7 @@ $this->Dataobject->setObject($object);
                                 <?php } ?>
                                 <?= $object->getShortTitle() ?>
                                 <?php if ($object->getUrl() != false){ ?>
-                            </a> <? if($object->getTitleAddon()) echo '<small>' . $object->getTitleAddon() . '</small>'; ?>
+                            </a> <? if ($object->getTitleAddon()) echo '<small>' . $object->getTitleAddon() . '</small>'; ?>
                         <?php } ?>
                         </h1>
                         <?
@@ -83,7 +83,7 @@ $this->Dataobject->setObject($object);
                                 'object' => $object
                             ));
                         else
-                        	echo $this->Dataobject->highlights( $hlFields );
+                            echo $this->Dataobject->highlights($hlFields);
                         ?>
 
                     </div>

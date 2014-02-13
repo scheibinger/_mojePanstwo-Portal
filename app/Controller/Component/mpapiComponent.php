@@ -9,7 +9,7 @@ class mpapiComponent extends Component
 
         if ($controller->Auth->loggedIn()) {
             $controller->API = $this->getAPI(array(
-            	'user_id' => $controller->Auth->user('id'), 
+                'user_id' => $controller->Auth->user('id'),
             ));
         } else {
             $controller->API = $this->getAPI();
@@ -18,25 +18,21 @@ class mpapiComponent extends Component
         $data = $controller->API->Paszport()->info(array(
             'applications' => true,
         ));
-		
-		
-	
-		// PROCESSING USER 
-		
-        if( $data['user'] )
-        {
-        	$this->User = $data['user'];
+
+
+        // PROCESSING USER
+
+        if ($data['user']) {
+            $this->User = $data['user'];
             $controller->Session->write('Auth.User', $this->User);
             $controller->set('_USER', $this->User);
         }
-        
-        
-        
+
+
         // PROCESSING APPLICATIONS 
-        
+
         $applications = array();
-        if ($data['applications'])
-        {
+        if ($data['applications']) {
 
             $folders = array();
 
@@ -61,56 +57,53 @@ class mpapiComponent extends Component
             }
 
         }
-        
+
         $controller->Applications = $applications;
         $controller->set('_APPLICATIONS', $applications);
-        
+
         $controller->set('_APPLICATION', $controller->getApplication());
-        
-        
-        
+
+
         // PROCESSING STREAMS
-        
-		$streams = array();
-		if( isset($data['streams']) && !empty($data['streams']) )
-        {
-        	
-        	        	
-        	foreach( $data['streams'] as $id => $name )
-        	{
-        		$selected = ( $this->Session->read('Stream.id') == $id );
-        		$streams[] = array(
-        			'id' => $id,
-        			'name' => $name,
-        			'selected' => $selected,
-        		);
-        		        		
-        		if( $selected )
-        			$this->stream_id =$id;
-        			
-        	}
-        	
-        }        
-        
-        if( $this->Session->read('Stream.id') != $this->stream_id )
-        	$this->Session->write('Stream.id', $this->stream_id);
-        
+
+        $streams = array();
+        if (isset($data['streams']) && !empty($data['streams'])) {
+
+
+            foreach ($data['streams'] as $id => $name) {
+                $selected = ($this->Session->read('Stream.id') == $id);
+                $streams[] = array(
+                    'id' => $id,
+                    'name' => $name,
+                    'selected' => $selected,
+                );
+
+                if ($selected)
+                    $this->stream_id = $id;
+
+            }
+
+        }
+
+        if ($this->Session->read('Stream.id') != $this->stream_id )
+            $this->Session->write('Stream.id', $this->stream_id);
+
         $controller->API->setOptions(array(
-        	'stream_id' => $this->stream_id,
+            'stream_id' => $this->stream_id,
         ));
-        	
+
         $this->Streams = $streams;
-    	$controller->set('_STREAMS', $streams);    	
-        
+        $controller->set('_STREAMS', $streams);
+
     }
 
-    public function getAPI( $options = array() )
+    public function getAPI($options = array())
     {
-    	$options = array_merge(array(
-        	'user_id' => SessionComponent::read('Auth.User.id'), 
-        	'stream_id' => SessionComponent::read('Stream.id'),
+        $options = array_merge(array(
+            'user_id' => SessionComponent::read('Auth.User.id'),
+            'stream_id' => SessionComponent::read('Stream.id'),
         ), $options);
-    	    	
+
         require_once(MPAPI_path . 'loader.php');
         return new MP\API($options);
 

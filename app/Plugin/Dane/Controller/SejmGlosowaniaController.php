@@ -14,7 +14,7 @@ class SejmGlosowaniaController extends DataobjectsController
     public function view()
     {
         parent::_prepareView();
-        
+
         $this->object->loadLayer('wynikiKlubowe');
         $this->object->loadLayer('wynikiIndywidualne');
     }

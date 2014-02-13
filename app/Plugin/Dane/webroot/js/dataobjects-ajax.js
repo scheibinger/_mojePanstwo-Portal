@@ -270,15 +270,13 @@ var DataObjectesAjax = {
                 objects.find('.innerContainer').children().animate({
                     opacity: 0
                 }, delay, function () {
-                    
+
                     objects.find('.pagination').html('');
-                    
-                    if (tempContainer.find('.innerContainer ul.list-group').children().length == 0)
-                    {
+
+                    if (tempContainer.find('.innerContainer ul.list-group').children().length == 0) {
                         objects.find('.innerContainer').html('<p class="noResults">' + _mPHeart.translation.LC_DANE_BRAK_WYNIKOW + '</p>');
                     }
-                    else
-                    {
+                    else {
                         objects.find('.innerContainer').html(tempContainer.find('.innerContainer').html());
                     }
                     objects.find('.innerContainer').children().css('opacity', 0);
@@ -300,7 +298,7 @@ var DataObjectesAjax = {
 
                     DataObjectesAjax.sortingAddRemoveOptions();
                     DataObjectesAjax.specialCase();
-                    
+
                 });
 
                 /*ANIMATE SCROLL TO TOP OF PAGE*/

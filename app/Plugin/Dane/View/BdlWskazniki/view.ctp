@@ -12,35 +12,34 @@
 
             <?
             if (!empty($expanded_dimension)) {
-                foreach ($expanded_dimension['options'] as $option)
-                {
-                	if( isset($option['data']) )
-                	{
-            ?>
-										
-                    <div class="wskaznik" data-dim_id="<?= $option['data']['id'] ?>">
-                        <h2>
-                            <a href="<?= $this->here ?>/<?= $option['data']['id'] ?>"><?= trim($option['value']) ?></a>
-                        </h2>
+                foreach ($expanded_dimension['options'] as $option) {
+                    if (isset($option['data'])) {
+                        ?>
 
-                        <div class="stats">
-                            <div class="map">
-                                <a href="<?= $this->here ?>/<?= $option['data']['id'] ?>">
-                                    <img width="216" height="200"
-                                         src="http://resources.sejmometr.pl/bdl_wymiary_kombinacje/bdl_wymiary_kombinacje_<?= $option['data']['id'] ?>.png"
-                                         class="imageInside"/>
-                                </a>
-                            </div>
-                            <div class="charts">
-                                <div class="head">
-                                    <p class="vp">
-                                        <span class="v"><?= number_format($option['data']['lv'], 2, ',', ' ') ?></span>
-                                        <span class="u"><?= $option['data']['jednostka'] ?></span>
+                        <div class="wskaznik" data-dim_id="<?= $option['data']['id'] ?>">
+                            <h2>
+                                <a href="<?= $this->here ?>/<?= $option['data']['id'] ?>"><?= trim($option['value']) ?></a>
+                            </h2>
+
+                            <div class="stats">
+                                <div class="map">
+                                    <a href="<?= $this->here ?>/<?= $option['data']['id'] ?>">
+                                        <img width="216" height="200"
+                                             src="http://resources.sejmometr.pl/bdl_wymiary_kombinacje/bdl_wymiary_kombinacje_<?= $option['data']['id'] ?>.png"
+                                             class="imageInside"/>
+                                    </a>
+                                </div>
+                                <div class="charts">
+                                    <div class="head">
+                                        <p class="vp">
+                                            <span
+                                                class="v"><?= number_format($option['data']['lv'], 2, ',', ' ') ?></span>
+                                            <span class="u"><?= $option['data']['jednostka'] ?></span>
                                         <span
                                             class="y"><?= __d('dane', 'LC_BDL_WSKAZNIKI_LASTYEAR', array($option['data']['ly'])) ?></span>
-                                    </p>
+                                        </p>
 
-                                    <p class="fp">
+                                        <p class="fp">
                                         <span class="factor <? if (intval($option['data']['dv']) < 0) {
                                             echo "d";
                                         } else {
@@ -51,19 +50,19 @@
                                         <span class="i">
                                             <?= __d('dane', 'LC_BDL_WSKAZNIKI_PREVLASTYEAR', array($option['data']['ply'])) ?>
                                         </span>
-                                    </p>
-                                </div>
-                                <div class="chart">
-                                    <div class="progress progress-striped active">
-                                        <div class="progress-bar" role="progressbar" aria-valuenow="45"
-                                             aria-valuemin="0" aria-valuemax="100" style="width: 15%"></div>
+                                        </p>
+                                    </div>
+                                    <div class="chart">
+                                        <div class="progress progress-striped active">
+                                            <div class="progress-bar" role="progressbar" aria-valuenow="45"
+                                                 aria-valuemin="0" aria-valuemax="100" style="width: 15%"></div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                <?
-                	}
+                    <?
+                    }
                 }
             }
             ?>

@@ -4,12 +4,12 @@ App::uses('DataobjectsController', 'Dane.Controller');
 
 class RadyPosiedzeniaController extends DataobjectsController
 {
-	
-	public $menu = array();
-	public $objectOptions = array(
-		'hlFields' => array('gminy.rada_nazwa', 'numer'),
-	);
-	
+
+    public $menu = array();
+    public $objectOptions = array(
+        'hlFields' => array('gminy.rada_nazwa', 'numer'),
+    );
+
     public function view()
     {
 
@@ -27,9 +27,9 @@ class RadyPosiedzeniaController extends DataobjectsController
             */
             'hlFields' => array('numer_punktu', 'opis'),
             'routes' => array(
-            	'date' => false,
+                'date' => false,
             ),
         ));
-        
+
     }
 } 

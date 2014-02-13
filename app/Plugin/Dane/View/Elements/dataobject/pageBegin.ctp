@@ -17,17 +17,19 @@ $buttons = isset($objectOptions['buttons']) ? $objectOptions['buttons'] : array(
             <div class="row">
                 <div class="col-md-9">
                     <div class="objectPageHeader">
-                        <?= $this->Dataobject->render($object, 'page', array(
-                        	'hlFields' => $objectOptions['hlFields'],
+                        <?=
+                        $this->Dataobject->render($object, 'page', array(
+                            'hlFields' => $objectOptions['hlFields'],
                         )) ?>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <ul class="objectButtons">
-                    	<? foreach( $buttons as $button ) { ?>
-	                        <li><?= $this->Element('dataobject/buttons/' . $button, array(
-	                        	'base_url' => '/dane/' . $object->getDataset() . '/' . $object->getId(),
-	                        )); ?></li>
+                        <? foreach ($buttons as $button) { ?>
+                            <li><?=
+                                $this->Element('dataobject/buttons/' . $button, array(
+                                    'base_url' => '/dane/' . $object->getDataset() . '/' . $object->getId(),
+                                )); ?></li>
                         <? } ?>
                     </ul>
                 </div>

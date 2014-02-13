@@ -17,7 +17,7 @@ $number_format = array(
 
 <div>
 
-<?
+    <?
 
     $a2013 = array(
         'liczba_retweetow_wlasnych_2013',
@@ -27,8 +27,8 @@ $number_format = array(
     );
 
     $ord = @substr($this->request->query['order'], 0, stripos($this->request->query['order'], ' '));
-	
-	echo $this->Dataobject->highlights();
-	
-?>
+
+    echo $this->Dataobject->highlights();
+
+    ?>
 </div>

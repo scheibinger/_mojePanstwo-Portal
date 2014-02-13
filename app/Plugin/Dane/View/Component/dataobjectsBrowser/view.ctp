@@ -83,7 +83,8 @@ if ($__mode == 'object')
                                     ?>
                                     <optgroup data-special="result">
                                         <option<? if (isset($order['selected_direction'])) { ?> selected="selected"<? } ?>
-                                            value="<?= $order['sorting']['field'] ?> desc" title="<?= $order['sorting']['label'] ?>"><?= $order['sorting']['label'] ?>
+                                            value="<?= $order['sorting']['field'] ?> desc"
+                                            title="<?= $order['sorting']['label'] ?>"><?= $order['sorting']['label'] ?>
                                         </option>
                                     </optgroup>
                                 <?
@@ -91,10 +92,12 @@ if ($__mode == 'object')
                                     ?>
                                     <optgroup label="<?= $order['sorting']['label'] ?>">
                                         <option<? if (isset($order['selected_direction']) && $order['selected_direction'] == 'desc') { ?> selected="selected"<? } ?>
-                                            value="<?= $order['sorting']['field'] ?> desc" title="<?= $order['sorting']['label'] . ' (' . __d('dane', 'LC_DANE_SORTOWANIE_MALEJACO') . ')' ?>"><?= __d('dane', 'LC_DANE_SORTOWANIE_MALEJACO') ?>
+                                            value="<?= $order['sorting']['field'] ?> desc"
+                                            title="<?= $order['sorting']['label'] . ' (' . __d('dane', 'LC_DANE_SORTOWANIE_MALEJACO') . ')' ?>"><?= __d('dane', 'LC_DANE_SORTOWANIE_MALEJACO') ?>
                                         </option>
                                         <option<? if (isset($order['selected_direction']) && $order['selected_direction'] == 'asc') { ?> selected="selected"<? } ?>
-                                            value="<?= $order['sorting']['field'] ?> asc" title="<?= $order['sorting']['label'] . ' (' . __d('dane', 'LC_DANE_SORTOWANIE_ROSNACO') . ')' ?>"><?= __d('dane', 'LC_DANE_SORTOWANIE_ROSNACO') ?>
+                                            value="<?= $order['sorting']['field'] ?> asc"
+                                            title="<?= $order['sorting']['label'] . ' (' . __d('dane', 'LC_DANE_SORTOWANIE_ROSNACO') . ')' ?>"><?= __d('dane', 'LC_DANE_SORTOWANIE_ROSNACO') ?>
                                         </option>
                                     </optgroup>
                                 <?
@@ -120,21 +123,21 @@ if ($__mode == 'object')
 
                 <ul class="list-group list-dataobjects">
                     <?
-                    	$bg = false;
-                    	foreach ($objects as $object) {
-                        	echo $this->Dataobject->render($object['Dataobject'], 'default', array(
-                        		'bg' => $bg,
-                        		'hlFields' => $dataBrowser->hlFields,
-                        		'routes' => $dataBrowser->routes,
-                        	));
-                        	$bg = !$bg;
-						}
-					?>
+                    $bg = false;
+                    foreach ($objects as $object) {
+                        echo $this->Dataobject->render($object['Dataobject'], 'default', array(
+                            'bg' => $bg,
+                            'hlFields' => $dataBrowser->hlFields,
+                            'routes' => $dataBrowser->routes,
+                        ));
+                        $bg = !$bg;
+                    }
+                    ?>
                 </ul>
 
             <? } ?>
         </div>
-        
+
         <div class="col-xs-12">
             <ul class="pagination pagination-sm">
                 <?
@@ -148,7 +151,7 @@ if ($__mode == 'object')
                 ?>
             </ul>
         </div>
-        
+
     </div>
     </div>
 <? } ?>

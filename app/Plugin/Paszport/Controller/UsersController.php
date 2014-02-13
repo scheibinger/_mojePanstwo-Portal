@@ -57,9 +57,9 @@ class UsersController extends PaszportAppController
     {
         if ($this->request->is('post')) {
 
-            $data = $this->data;            
+            $data = $this->data;
             $user = $this->PassportApi->User()->login($this->data);
-                        
+
             if ($user['user']) {
                 $this->Auth->login($user['user']);
                 $this->redirect(array('action' => 'index'));
@@ -1115,20 +1115,17 @@ class UsersController extends PaszportAppController
 
     public function switchstreams()
     {
-        
-        if( ($user_id = $this->Auth->user('id')) && isset($this->request->query['stream']) )
-        {
-	        $data = $this->PassportApi->info();
-	        if( $data && ($streams = $data['streams']) )
-	        {
-		        if( array_key_exists($this->request->query['stream'], $streams) )
-		        {
-			        $this->Session->write('Stream.id', $this->request->query['stream']);
-			        $this->Session->setFlash('<p>Aktualny stream:<p><p>' . $streams[ $this->request->query['stream'] ] . '</p>');
-		        }
-	        }
+
+        if (($user_id = $this->Auth->user('id')) && isset($this->request->query['stream'])) {
+            $data = $this->PassportApi->info();
+            if ($data && ($streams = $data['streams'])) {
+                if (array_key_exists($this->request->query['stream'], $streams)) {
+                    $this->Session->write('Stream.id', $this->request->query['stream']);
+                    $this->Session->setFlash('<p>Aktualny stream:<p><p>' . $streams[$this->request->query['stream']] . '</p>');
+                }
+            }
         }
-            
+
         $this->redirect($this->referer(null, true));
     }
 }
