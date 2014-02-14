@@ -106,9 +106,9 @@
                         var link = jQuery('<a></a>').attr('target', '_self');
 
                         if (dataSearch['type'] == 'organization') {
-                            link.attr('href', '/dane/krs_podmioty/' + dataSearch['id'])
+                            link.attr({'href': '/dane/krs_podmioty/' + dataSearch['id'], 'class': 'icon organization'})
                         } else if (dataSearch['type'] == 'person') {
-                            link.attr('href', '/dane/krs_osoby/' + dataSearch['id'])
+                            link.attr({'href': '/dane/krs_osoby/' + dataSearch['id'], 'class': 'icon person'})
                         }
                         link.html(dataSearch['nazwa'] + ' <small>(' + dataSearch['field_name'] + ':&nbsp' + dataSearch['field_value'] + ')</small>');
                         $(this).append(link)

@@ -75,6 +75,32 @@
                                 text-align: center;
                                 width: 100%;
                             }
+
+                            .icon {
+                                &:before {
+                                    font-family: 'mojePanstwo';
+                                    speak: none;
+                                    font-style: normal;
+                                    font-weight: normal;
+                                    font-variant: normal;
+                                    text-transform: none;
+                                    line-height: 1;
+                                    -webkit-font-smoothing: antialiased;
+                                    -moz-osx-font-smoothing: grayscale;
+
+                                    font-size: 20px;
+                                }
+                                &.organization:before {
+                                    content: '\e60e';
+                                    color: #46B8DA;
+                                    padding-right: 5px;
+                                }
+                                &.person:before {
+                                    content: '\e60d';
+                                    color: #4CAE4C;
+                                    padding-right: 3px;
+                                }
+                            }
                         }
 
                         .carousel-title {
