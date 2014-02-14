@@ -7,7 +7,7 @@
         lastSearch = null,
         krsTime = null,
         krsCache = {},
-        searchMinLength = 2,
+        searchMinLength = 1,
         animSpeed = 200,
         ajaxDelay = 200;
 
@@ -16,6 +16,29 @@
         e.preventDefault();
 
         if (input != lastSearch) {
+            if (groupsAndResults.find('.carousel-inner .item.results').length == 0) {
+                var indicatorLast = groupsAndResults.find('.carousel-indicators li:last-child'),
+                    indicatorResults,
+                    itemResults = $('<div></div>');
+
+                itemResults.addClass('item results').append(
+                        jQuery('<div></div>').addClass('carousel-title').text(_mPHeart.translation.LC_KRS_SEARCH_TITLE)
+                    ).append(
+                        jQuery('<ul></ul>')
+                    ).append(
+                        jQuery('<div></div>').addClass('seeMore').append(
+                            jQuery('<a></a>').addClass('btn btn-info').attr({'href': '/dane/kanal/krs?q=' + input, 'target': '_self'}).text(_mPHeart.translation.LC_KRS_SEARCH_LINK)
+                        )
+                    );
+
+                indicatorResults = indicatorLast.clone().attr({'data-slide-to': indicatorLast.data('slide-to') + 1});
+
+                groupsAndResults.find('.carousel-inner .item:first-child').before(itemResults);
+                indicatorLast.after(indicatorResults);
+            }
+
+            $('#groupsAndResults').carousel(0);
+
             window.clearTimeout(krsTime);
             krsTime = window.setTimeout(function () {
                 searchAjax(input);
@@ -65,27 +88,6 @@
         if (groupsAndResults.find('.carousel-inner .item.results ul').length > 0 && groupsAndResults.find('.carousel-inner .item.results ul').css('opacity') == '1')
             groupsAndResults.find('.carousel-inner .item.results ul').animate({'opacity': '.2'}, animSpeed);
 
-        if (groupsAndResults.find('.carousel-inner .item.results').length == 0) {
-            var indicatorLast = groupsAndResults.find('.carousel-indicators li:last-child'),
-                indicatorResults,
-                itemResults = $('<div></div>');
-
-            itemResults.addClass('item results').append(
-                    jQuery('<div></div>').addClass('carousel-title').text(_mPHeart.translation.LC_KRS_SEARCH_TITLE)
-                ).append(
-                    jQuery('<ul></ul>')
-                ).append(
-                    jQuery('<div></div>').addClass('seeMore').append(
-                        jQuery('<a></a>').addClass('btn btn-info').attr({'href': '/dane/kanal/krs?q=' + word, 'target': '_self'}).text(_mPHeart.translation.LC_KRS_SEARCH_LINK)
-                    )
-                );
-
-            indicatorResults = indicatorLast.clone().attr({'data-slide-to': indicatorLast.data('slide-to') + 1});
-
-            groupsAndResults.find('.carousel-inner .item:first-child').before(itemResults);
-            indicatorLast.after(indicatorResults);
-        }
-
         var resultUl = groupsAndResults.find('.carousel-inner .item.results ul');
         resultUl.html('');
 
@@ -115,8 +117,6 @@
             });
         }
         resultUl.animate({'opacity': '1'}, animSpeed);
-
-        $('#groupsAndResults').carousel(0);
     }
 
     poslowieBlock.find('.link > a').click(function (e) {

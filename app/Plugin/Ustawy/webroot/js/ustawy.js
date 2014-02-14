@@ -2,7 +2,7 @@
     var ustawyCache = {},
         ustawaTime = null,
         lastSearch = null,
-        searchMinLength = 2,
+        searchMinLength = 1,
         shortcuts = $('#shortcuts'),
         searchInput = $('.appHeader .searchInput'),
         resultsList = $('#ustawyCarousel').find('.item.results'),
