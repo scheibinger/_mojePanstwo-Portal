@@ -138,7 +138,7 @@ if ($__mode == 'object')
             <? } ?>
         </div>
 
-        <div class="col-xs-12">
+        <div class="paginationList col-xs-12">
             <ul class="pagination pagination-sm">
                 <?
                 echo $this->Paginator->numbers(array(

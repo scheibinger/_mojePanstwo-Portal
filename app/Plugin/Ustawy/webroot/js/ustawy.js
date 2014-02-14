@@ -19,7 +19,6 @@
         e.preventDefault();
 
         if (input != lastSearch) {
-
             $('#ustawyCarousel').carousel(0);
 
             window.clearTimeout(ustawaTime);
@@ -36,21 +35,25 @@
             if (word == input) {
                 lastSearch = input;
                 if (word in ustawyCache) {
+                    searchInput.find('.btn').addClass('loading');
                     resultList(word, ustawyCache[word]);
                     return;
                 }
-                $('#_mojePanstwoCockpit').addClass('loading');
+
                 $.ajax({
                     type: "GET",
                     url: "/ustawy/search.json?q=" + input,
                     beforeSend: function () {
                         if (resultsList.find('ul').length > 0)
                             resultsList.find('ul').animate({'opacity': '.2'}, animationTime);
+                        searchInput.find('.btn').addClass('loading');
                     },
                     success: function (data) {
-                        $('#_mojePanstwoCockpit').removeClass('loading');
                         ustawyCache[word] = data;
                         resultList(word, data);
+                    },
+                    complete: function () {
+                        searchInput.find('.btn').removeClass('loading');
                     }
                 });
             } else {

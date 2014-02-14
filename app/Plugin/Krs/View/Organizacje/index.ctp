@@ -1,8 +1,7 @@
 <?php $this->Combinator->add_libs('css', $this->Less->css('krs', array('plugin' => 'Krs'))) ?>
-<?php $this->Combinator->add_libs('js', 'Krs.index.js') ?>
+<?php $this->Combinator->add_libs('js', 'Krs.krs.js') ?>
 
 <div id="krs">
-
     <div class="appHeader">
         <div class="container innerContent">
             <h1><?php echo __d('krs', 'LC_KRS_HEADLINE'); ?></h1>

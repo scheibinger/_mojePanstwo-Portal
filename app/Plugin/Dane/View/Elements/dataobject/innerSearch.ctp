@@ -56,7 +56,7 @@
                         echo $this->Dataobject->render($dataobject['Dataobject']);
                     } ?>
                 </ul>
-                <div class="col-xs-12 col-sm-6 col-sm-offset-3">
+                <div class="paginationList col-xs-12 col-sm-6 col-sm-offset-3">
                     <ul class="pagination pagination-sm">
                         <?php $this->Paginator->options(array('url' => array('plugin' => 'Dane', 'controller' => $this->params->controller, 'id' => $object->object_id, '?' => $this->request->query))); ?>
                         <?php echo $this->Paginator->numbers(array('tag' => 'li', 'currentTag' => 'a', 'currentClass' => 'active', 'separator' => false, 'escape' => false)); ?>

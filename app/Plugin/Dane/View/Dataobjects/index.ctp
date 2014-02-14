@@ -17,7 +17,7 @@
                         echo $this->Dataobject->render($object['Dataobject']);
                     } ?>
                 </ul>
-                <div class="col-md-6 col-md-offset-3">
+                <div class="paginationList col-md-6 col-md-offset-3">
                     <ul class="pagination pagination-sm">
                         <?php echo $this->Paginator->numbers(array('tag' => 'li', 'currentTag' => 'a', 'currentClass' => 'active', 'separator' => false, 'escape' => false)); ?>
                     </ul>

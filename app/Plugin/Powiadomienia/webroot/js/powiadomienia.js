@@ -13,8 +13,15 @@
                     /*RUN FUNCTION AT SEEN EACH ELEMENTS*/
                     console.log(newNotify, newNotify.attr('oid'));
 
-                    /*MARK SEEN ELEMENT AS READED TO NOT TRIGGER FUNCTION AGAIN AT SAME ELEMENT*/
-                    newNotify.addClass('readed');
+                    $.ajax({
+                        type: "GET",
+                        url: '/powiadomienia/flagObjects.json?mode=powiadomienia&action=read&oid=' + newNotify.attr('oid'),
+                        success: function (data) {
+                            /*MARK SEEN ELEMENT AS READED TO NOT TRIGGER FUNCTION AGAIN AT SAME ELEMENT*/
+                            if (data.status == "OK")
+                                newNotify.addClass('readed');
+                        }
+                    });
                 }
             });
 

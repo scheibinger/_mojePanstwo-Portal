@@ -4,12 +4,66 @@
         groupsAndResults = $('#groupsAndResults'),
         poslowieBlock = $('.poslowie .blockInfo'),
         poslowieAdditional = $('.poslowieDetails'),
+        lastSearch = null,
+        krsTime = null,
         krsCache = {},
-        animSpeed = 400;
+        searchMinLength = 2,
+        animSpeed = 200,
+        ajaxDelay = 200;
+
+    searchInput.on('submit keyup', function (e) {
+        var input = searchInput.find('input').val();
+        e.preventDefault();
+
+        if (input != lastSearch) {
+            window.clearTimeout(krsTime);
+            krsTime = window.setTimeout(function () {
+                searchAjax(input);
+            }, ajaxDelay);
+        }
+
+    });
+
+    function searchAjax(word) {
+        var input = searchInput.find('input').val();
+
+        if (input.length >= searchMinLength) {
+            if (word == input) {
+                lastSearch = input;
+                if (word in krsCache) {
+                    searchInput.find('.btn').addClass('loading');
+                    resultList(word, krsCache[word]);
+                    return;
+                }
+
+                $.ajax({
+                    type: "GET",
+                    url: "/krs/search.json?q=" + input,
+                    beforeSend: function () {
+                        if (groupsAndResults.find('.carousel-inner .item.results ul').length > 0)
+                            groupsAndResults.find('.carousel-inner .item.results ul').animate({'opacity': '.2'}, animSpeed);
+                        searchInput.find('.btn').addClass('loading');
+                    },
+                    success: function (data) {
+                        krsCache[input] = data;
+                        resultList(input, data);
+                    },
+                    complete: function () {
+                        searchInput.find('.btn').removeClass('loading');
+                    }
+                });
+            } else {
+                window.clearTimeout(krsTime);
+                krsTime = window.setTimeout(function () {
+                    searchAjax(input);
+                }, ajaxDelay);
+            }
+        }
+    }
 
     function resultList(word, data) {
         if (groupsAndResults.find('.carousel-inner .item.results ul').length > 0 && groupsAndResults.find('.carousel-inner .item.results ul').css('opacity') == '1')
-            groupsAndResults.find('.carousel-inner .item.results ul').animate({'opacity': '.2'}, 400);
+            groupsAndResults.find('.carousel-inner .item.results ul').animate({'opacity': '.2'}, animSpeed);
 
         if (groupsAndResults.find('.carousel-inner .item.results').length == 0) {
             var indicatorLast = groupsAndResults.find('.carousel-indicators li:last-child'),
@@ -60,33 +114,10 @@
                 )
             });
         }
-        resultUl.animate({'opacity': '1'}, 400);
+        resultUl.animate({'opacity': '1'}, animSpeed);
 
         $('#groupsAndResults').carousel(0);
     }
-
-    searchInput.on('submit', function (e) {
-        var input = searchInput.find('input').val();
-        e.preventDefault();
-
-        if (input in krsCache) {
-            resultList(input, krsCache[input]);
-            return;
-        }
-
-        $.ajax({
-            type: "GET",
-            url: "/krs/search.json?q=" + input,
-            beforeSend: function () {
-                if (groupsAndResults.find('.carousel-inner .item.results ul').length > 0)
-                    groupsAndResults.find('.carousel-inner .item.results ul').animate({'opacity': '.2'}, 400);
-            },
-            success: function (data) {
-                krsCache[input] = data;
-                resultList(input, data)
-            }
-        })
-    });
 
     poslowieBlock.find('.link > a').click(function (e) {
         e.preventDefault();

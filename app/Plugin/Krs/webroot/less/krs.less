@@ -24,8 +24,22 @@
 
             .main_input {
                 margin: 20px 0;
+
                 input {
                     font-size: 16px;
+                }
+
+                .btn {
+                    width: 45px;
+                    height: 45px;
+
+                    &.loading {
+                        background: url(../../img/loader/loading-small.png) center center no-repeat #5CB85C;
+
+                        &:before {
+                            content: ' ';
+                        }
+                    }
                 }
             }
         }
@@ -43,11 +57,11 @@
                     margin: 0 @sideSize;
 
                     .item {
-                        height: 375px;
+                        height: 475px;
 
                         &.results {
                             ul li {
-                                height: 42px;
+                                height: 50px;
                             }
                             span.center {
                                 float: left;
@@ -83,13 +97,13 @@
 
                             li {
                                 width: 50%;
-                                height: 50px;
-                                padding: 31px 22px;
+                                height: 70px;
+                                padding: 12px 22px;
                                 float: left;
 
                                 .title {
-                                    font-size: 18px;
-                                    margin-bottom: 7px;
+                                    font-size: 15px;
+                                    margin-bottom: 4px;
                                 }
 
                                 .subtitle {
@@ -108,6 +122,11 @@
                 .carousel-control {
                     width: @sideSize;
                     background: none;
+
+                    .icon-prev, .icon-next, .glyphicon-chevron-left, .glyphicon-chevron-right {
+                        height: 26px;
+                        margin-top: -20px; /*HALF OF HEIGHT + LITTLE MORE CAUSE OF H2 HEIGHT*/
+                    }
                 }
                 .carousel-indicators {
                     bottom: 0;
