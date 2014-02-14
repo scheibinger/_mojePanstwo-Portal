@@ -57,3 +57,6 @@ msgstr "Skwer"
 
 msgid "LC_KODY_TABLE_ADRES_WYBRZEZE"
 msgstr "Wybrzeże"
+
+msgid "LC_SEARCH_BRAK_WYNIKOW"
+msgstr "Brak wyników"

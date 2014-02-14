@@ -1,6 +1,7 @@
 (function ($) {
     var autocomplete = $("#cityv"),
-        cache = {};
+        autocompleteBtn = autocomplete.parents('form').find('.btn')
+    cache = {};
 
     autocomplete.autocomplete({
         minLength: 2,
@@ -10,26 +11,33 @@
                 response(cache[ term ]);
                 return;
             }
-            $('#_mojePanstwoCockpit').addClass('loading');
+            autocompleteBtn.addClass('loading');
             $.getJSON("/kody_pocztowe/adres.json?q=" + request.term, function (data, status, xhr) {
-                $('#_mojePanstwoCockpit').removeClass('loading');
+                autocompleteBtn.removeClass('loading');
                 var results = $.map(data.search, function (item) {
                     return {
                         label: item.text,
                         value: item.id
                     }
                 });
+                if (results.length == 0)
+                    results = [
+                        {label: _mPHeart.translation.LC_SEARCH_BRAK_WYNIKOW, value: null}
+                    ]
                 cache[ term ] = results;
                 response(results);
             });
         },
         focus: function (event, ui) {
-            autocomplete.val(ui.item.label);
+            if (ui.item.value !== null)
+                autocomplete.val(ui.item.label);
             return false;
         },
         select: function (event, ui) {
-            autocomplete.val(ui.item.label);
-            window.location = '/kody_pocztowe/adres/' + ui.item.value;
+            if (ui.item.value !== null) {
+                autocomplete.val(ui.item.label);
+                window.location = '/kody_pocztowe/adres/' + ui.item.value;
+            }
             return false;
         }
     });

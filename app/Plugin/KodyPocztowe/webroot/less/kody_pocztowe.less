@@ -70,7 +70,19 @@
                     border-top-right-radius: 0px;
                     border-bottom-right-radius: 0px;
                     border-bottom-left-radius: 5px;
+                }
 
+                .btn {
+                    width: 45px;
+                    height: 45px;
+
+                    &.loading {
+                        background: url(../../img/loader/search-loading.png) center center no-repeat #5CB85C;
+
+                        &:before {
+                            content: ' ';
+                        }
+                    }
                 }
             }
         }
