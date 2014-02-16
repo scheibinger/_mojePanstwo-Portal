@@ -8,6 +8,7 @@ class KrsPodmiotyController extends DataobjectsController
     public $helpers = array(
         'Time',
     );
+    public $components = array('RequestHandler');
 
     /*
     public $menuMode = 'vertical';
@@ -240,70 +241,16 @@ class KrsPodmiotyController extends DataobjectsController
 
     }
 
-    /*
-    public function reprezentacja()
+    public function graph()
     {
-
-        $this->_prepareView();
-        $this->object->loadLayer('reprezentacja');
-
+	    if( $this->request->params['ext']=='json' )
+	    {
+	    
+		    $this->_prepareView();
+		    $data = $this->object->loadLayer('graph');
+		    
+		    debug( $data );
+		    
+	    } else return false;	    
     }
-
-    public function nadzor()
-    {
-
-        $this->_prepareView();
-        $this->object->loadLayer('nadzor');
-
-    }
-
-    public function komitetZalozycielski()
-    {
-
-        $this->_prepareView();
-        $this->object->loadLayer('komitetZalozycielski');
-
-    }
-
-    public function zmianyUmow()
-    {
-
-        $this->_prepareView();
-        $this->object->loadLayer('zmianyUmow');
-
-    }
-
-    public function wspolnicy()
-    {
-
-        $this->_prepareView();
-        $this->object->loadLayer('wspolnicy');
-
-    }
-
-    public function oddzialy()
-    {
-
-        $this->_prepareView();
-        $this->object->loadLayer('oddzialy');
-
-    }
-
-    public function jedynyAkcjonariusz()
-    {
-
-        $this->_prepareView();
-        $this->object->loadLayer('jedynyAkcjonariusz');
-
-    }
-
-    public function emisjeAkcji()
-    {
-
-        $this->_prepareView();
-        $this->object->loadLayer('emisjeAkcji');
-
-    }
-    */
-
 }
