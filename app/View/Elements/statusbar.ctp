@@ -167,7 +167,7 @@
                     <div class="_mojePanstwoCockpitUserStreams">
                         <form method="get"
                               action="<?php echo $this->Html->url(array('plugin' => 'paszport', 'controller' => 'users', 'action' => 'switchstreams')); ?>">
-                            <select autocomplete="off" name="stream" onchange="this.form.submit()">
+                            <select class="selectpicker" autocomplete="off" name="stream" onchange="this.form.submit()">
                                 <?php foreach ($_STREAMS as $stream) { ?>
                                     <option <? if ($stream['selected']) { ?>selected="selected"
                                             <? } ?>value="<?= $stream['id'] ?>"><?= $stream['name'] ?></option>

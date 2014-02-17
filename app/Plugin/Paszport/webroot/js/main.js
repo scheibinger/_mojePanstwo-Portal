@@ -58,7 +58,3 @@ var lighterColor = function (color, ratio) {
 var darkerColor = function (color, ratio) {
     return changeColor(color, ratio, true);
 };
-
-$(document).ready(function () {
-    $('.selectpicker').selectpicker();
-});

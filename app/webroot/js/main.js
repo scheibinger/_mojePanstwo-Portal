@@ -115,14 +115,15 @@ jQuery.extend(jQuery.ui.dialog.prototype.options, {
     });
 })(jQuery);
 
-jQuery(function () {
+(function ($) {
     var carouselList,
-        modalPaszportLoginForm;
+        modalPaszportLoginForm,
+        selectPickers;
 
     /* STOP ALL BOOTSTRAP CAROUSEL */
-    if ((carouselList = jQuery('.carousel')).length > 0) {
+    if ((carouselList = $('.carousel')).length > 0) {
         carouselList.each(function () {
-            jQuery(this).carousel({
+            $(this).carousel({
                 interval: false
             });
         });
@@ -146,23 +147,23 @@ jQuery(function () {
             }
         },
         checkSizeMarker = null,
-        mPviewport = {
-            width: jQuery(document).width(),
-            height: jQuery(document).height()
+        _mPviewport = {
+            width: $(document).width(),
+            height: $(document).height()
         };
 
-    jQuery.each(sizeMarker, function (key, value) {
-        if (((value.min == undefined) ? true : mPviewport.width >= value.min) && ((value.max == undefined) ? true : mPviewport.width <= value.max))
+    $.each(sizeMarker, function (key, value) {
+        if (((value.min == undefined) ? true : _mPviewport.width >= value.min) && ((value.max == undefined) ? true : _mPviewport.width <= value.max))
             checkSizeMarker = key;
     });
 
-    mPviewport.sizeMarker = checkSizeMarker;
+    _mPviewport.sizeMarker = checkSizeMarker;
 
     /*HACK FOR BETA LOGO CHANGE*/
-    if (jQuery.cookie('_mPFirstTime') == null)
-        jQuery.cookie('_mPFirstTime', 1);
+    if ($.cookie('_mPFirstTime') == null)
+        $.cookie('_mPFirstTime', 1);
 
-    if ((jQuery.cookie('_mPViewport') == null) || (jQuery.cookie('_mPViewport') != checkSizeMarker)) {
+    if (($.cookie('_mPViewport') == null) || ($.cookie('_mPViewport') != checkSizeMarker)) {
         var rescaleOverlay = $('<div></div>').css({
                 'position': 'fixed',
                 'top': 0,
@@ -184,31 +185,35 @@ jQuery(function () {
                 'textAlign': 'center',
                 'fontSize': '25px'
             }).text("Rescaling..."),
-            _mPViewportReloadCookie = jQuery.cookie('_mPViewportReload'),
+            _mPViewportReloadCookie = $.cookie('_mPViewportReload'),
             _mPViewportReload = (_mPViewportReloadCookie == undefined || Number(_mPViewportReloadCookie) == "NaN" ) ? 1 : Number(_mPViewportReloadCookie) + 1;
 
         if (Number(_mPViewportReload) < 5) {
-            jQuery.cookie('_mPViewport', checkSizeMarker, { expires: 365, path: '/' });
-            jQuery.cookie('_mPViewportReload', _mPViewportReload, { expires: 1, path: '/' });
+            $.cookie('_mPViewport', checkSizeMarker, { expires: 365, path: '/' });
+            $.cookie('_mPViewportReload', _mPViewportReload, { expires: 1, path: '/' });
 
             $('body').append(rescaleOverlay).append(rescaleWindow);
             location.reload();
         } else {
-            jQuery.cookie('_mPViewport', 'lg', { expires: 365, path: '/' });
-            jQuery.removeCookie('_mPViewportReload');
+            $.cookie('_mPViewport', 'lg', { expires: 365, path: '/' });
+            $.removeCookie('_mPViewportReload');
         }
     } else {
-        jQuery.removeCookie('_mPViewportReload');
+        $.removeCookie('_mPViewportReload');
     }
 
     /*JS SHORTER TITLE FUNCTION*/
-    if (jQuery('.trimTitle').length > 0)
+    if ($('.trimTitle').length > 0)
         trimTitle();
 
     /*GLOBAL MODAL FOR LOGIN VIA PASZPORT PLUGIN*/
-    if ((modalPaszportLoginForm = jQuery('#modalPaszportLoginForm')).length > 0)
-        jQuery('#_mojePanstwoCockpit').find('a._mojePanstwoCockpitPowerButton._mojePanstwoCockpitIcons-login').click(function (e) {
+    if ((modalPaszportLoginForm = $('#modalPaszportLoginForm')).length > 0)
+        $('#_mojePanstwoCockpit').find('a._mojePanstwoCockpitPowerButton._mojePanstwoCockpitIcons-login').click(function (e) {
             e.preventDefault();
             modalPaszportLoginForm.modal('show');
         });
-});
+
+    /*GLOBAL BOOTSTRAP-SELECT FORM SELECTPICKER CLASS*/
+    if ((selectPickers = $('.selectpicker')).length > 0)
+        selectPickers.selectpicker();
+})(jQuery);

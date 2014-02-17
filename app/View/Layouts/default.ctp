@@ -30,6 +30,9 @@
     /* GLOBAL CSS FOR LOGIN FORM FOR PASZPORT PLUGIN*/
     $this->Combinator->add_libs('css', $this->Less->css('loginForm', array('plugin' => 'Paszport')), false);
 
+    /*BOOTSTRAP SELECT LOOKS LIKE BOOTSTRAP BUTTONS*/
+    echo $this->Html->css('../js/plugins/bootstrap-select/bootstrap-select.min.css');
+
     /* SOCIAL BUTTONS */
     echo $this->Html->css('//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css');
     $this->Combinator->add_libs('css', $this->Less->css('social-buttons'), false);
@@ -129,6 +132,7 @@ echo $this->Html->script('//netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap
 /* PACKAGES FROM VENDOR */
 echo $this->Html->script('plugins/history.js/scripts/bundled/html4+html5/jquery.history.js');
 echo $this->Html->script('plugins/jquery-cookie/jquery.cookie.js');
+echo $this->Html->script('plugins/bootstrap-select/bootstrap-select.min.js');
 
 $this->Combinator->add_libs('js', 'statusbar', false);
 $this->Combinator->add_libs('js', 'statusbar-portal', false);

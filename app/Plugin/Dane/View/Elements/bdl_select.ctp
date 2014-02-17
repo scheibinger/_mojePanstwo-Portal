@@ -1,7 +1,5 @@
-<?php $this->Combinator->add_libs('css', 'bootstrap-select'); ?>
 <?php $this->Combinator->add_libs('css', $this->Less->css('bdl-select', array('plugin' => 'Dane'))); ?>
 
-<?php $this->Combinator->add_libs('js', 'bootstrap-select'); ?>
 <?php $this->Combinator->add_libs('js', 'Dane.bdl-select'); ?>
 
 <div class="row">

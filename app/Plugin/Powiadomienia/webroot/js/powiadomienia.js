@@ -11,7 +11,6 @@
 
                 if (isElementVisibled(this)) {
                     /*RUN FUNCTION AT SEEN EACH ELEMENTS*/
-                    console.log(newNotify, newNotify.attr('oid'));
 
                     $.ajax({
                         type: "GET",
@@ -20,7 +19,16 @@
                             /*MARK SEEN ELEMENT AS READED TO NOT TRIGGER FUNCTION AGAIN AT SAME ELEMENT*/
                             if (data.status == "OK")
                                 newNotify.addClass('readed');
+                        },
+                        error: function () {
+                            var dataCount = (newNotify.data('count')) ? newNotify.data('count') + 1 : 1;
+
+                            newNotify.data('count', dataCount);
+
+                            if (newNotify.data('count') > 4)
+                                newNotify.addClass('readed');
                         }
+
                     });
                 }
             });
