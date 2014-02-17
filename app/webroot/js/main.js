@@ -146,17 +146,17 @@ jQuery(function () {
             }
         },
         checkSizeMarker = null,
-        viewport = this.viewport = {
+        mPviewport = {
             width: jQuery(document).width(),
             height: jQuery(document).height()
         };
 
     jQuery.each(sizeMarker, function (key, value) {
-        if (((value.min == undefined) ? true : viewport.width >= value.min) && ((value.max == undefined) ? true : viewport.width <= value.max))
+        if (((value.min == undefined) ? true : mPviewport.width >= value.min) && ((value.max == undefined) ? true : mPviewport.width <= value.max))
             checkSizeMarker = key;
     });
 
-    viewport.sizeMarker = checkSizeMarker;
+    mPviewport.sizeMarker = checkSizeMarker;
 
     /*HACK FOR BETA LOGO CHANGE*/
     if (jQuery.cookie('_mPFirstTime') == null)
