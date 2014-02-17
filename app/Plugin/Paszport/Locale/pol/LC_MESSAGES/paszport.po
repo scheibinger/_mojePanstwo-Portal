@@ -696,3 +696,6 @@ msgstr "Zaloguj się przez konto email"
 
 msgid "LC_PASZPORT_MODAL_LOGIN_REGISTER"
 msgstr "Wyrób paszport na Twoje konto email"
+
+msgid "LC_PASZPORT_FLASH_MESSAGE_SWITCH_STREAM"
+msgstr "Aktualny stream"

@@ -273,17 +273,45 @@ blockquote p {
     margin: 0;
 }
 
-.alert {
-    font-family: "Lato", sans-serif;
-    font-size: 14px;
-    font-weight: 400;
-    text-align: center;
-    padding: 5px 0;
+.flash-message {
+    @alertBackground: #263339;
+    @alertInnerShadow: darken(@alertBackground, 5%);
 
-    border-width: 0;
-    -moz-border-radius: 0px; /*Firefox*/
-    -webkit-border-radius: 0px; /*Safari, Chrome*/
-    border-radius: 0px;
+    background-color: lighten(@alertBackground, 5%);
+    overflow-x: hidden;
+
+    .alert {
+        border-width: 0;
+        -moz-border-radius: 0px; /*Firefox*/
+        -webkit-border-radius: 0px; /*Safari, Chrome*/
+        border-radius: 0px;
+        margin: 0 -10px;
+
+        -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=10, Direction=90, Color=@)"; /*IE 8*/
+        -moz-box-shadow: inset 0px 0px 10px @alertInnerShadow; /*FF 3.5+*/
+        -webkit-box-shadow: inset 0px 0px 10px @alertInnerShadow; /*Saf3-4, Chrome, iOS 4.0.2-4.2, Android 2.3+*/
+        box-shadow: inset 0px 0px 10px @alertInnerShadow; /* FF3.5+, Opera 9+, Saf1+, Chrome, IE10 */
+        filter: progid:DXImageTransform.Microsoft.Shadow(Strength=10, Direction=90, Color=@alertInnerShadow); /*IE 5.5-7*/
+
+        .container {
+            font-family: "Lato", sans-serif;
+            font-size: 14px;
+            font-weight: 300;
+            color: #ffffff;
+            text-align: center;
+            padding-top: 5px;
+            padding-bottom: 13px; /*5px + 8px from Boostrap !important(sic!) css for alerts*/
+
+            a, .alert-link {
+                text-decoration: none;
+                color: #EEEEEE;
+
+                &:hover {
+                    color: #FFFFFF;
+                }
+            }
+        }
+    }
 
 }
 
