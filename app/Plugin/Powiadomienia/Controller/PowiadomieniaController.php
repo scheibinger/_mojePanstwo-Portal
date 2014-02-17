@@ -46,12 +46,13 @@ class PowiadomieniaController extends PowiadomieniaAppController
 			$pagination = @$this->request->params['paging']['Dataobject'];
 	        
 	        $view = new View($this, false);
-			$view->set(compact('objects')); // set variables
-			$view->viewPath = 'Powiadomienia'; // render an element
-			$html = $view->render('_objects'); // get the rendered markup
-			
-	        
-	        $this->set('html', $html);
+            $view->set(compact('objects')); // set variables
+            $view->viewPath = 'Powiadomienia'; // render an element
+            $view->autoRender = false;
+            $html = $view->render('json', 'Powiadomienia.index'); //@TODO zmienić na Element a nie caly Layout
+
+
+            $this->set('html', $html);
 	        $this->set('pagination', $pagination);
 	        $this->set('_serialize', array('html', 'pagination'));
 			

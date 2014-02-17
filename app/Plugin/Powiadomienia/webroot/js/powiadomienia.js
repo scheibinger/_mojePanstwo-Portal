@@ -4,14 +4,13 @@
         checkTime = 3000;
 
     if (newNotification.find('.objectRender').length > 0) {
-        var intervalMain = setInterval(function () {
+        var newNotificationIntervalMain = setInterval(function () {
 
             $.each(newNotification.find('.objectRender:not(.readed)'), function () {
                 var newNotify = $(this);
 
                 if (isElementVisibled(this)) {
                     /*RUN FUNCTION AT SEEN EACH ELEMENTS*/
-
                     $.ajax({
                         type: "GET",
                         url: '/powiadomienia/flagObjects.json?mode=powiadomienia&action=read&oid=' + newNotify.attr('oid'),
@@ -35,7 +34,44 @@
 
             /*IS ALL ELEMENTS ARE READED - STOP FUNCTION*/
             if (newNotification.find('.objectRender:not(.readed)').length == 0)
-                clearInterval(intervalMain);
+                clearInterval(newNotificationIntervalMain);
         }, checkTime);
+    }
+
+    if (jQuery('.loadMoreContent').length) {
+        var loadMoreContentIntervalRunable = true,
+            loadMoreContent = jQuery('.dataContent .loadMoreContent'),
+            showData = jQuery('.dataContent .powiadomienia'),
+            loadMoreContentIntervalMain = null;
+
+        loadMoreContentIntervalMain = setInterval(function () {
+            if (isElementVisibled('.loadMoreContent') && loadMoreContentIntervalRunable) {
+                var page = Number(loadMoreContent.data('currentpage')) + 1;
+                loadMoreContentIntervalRunable = false;
+
+                jQuery.ajax({
+                    type: "GET",
+                    url: "powiadomienia/powiadomienia.json?page=" + page,
+                    beforeSend: function () {
+                        loadMoreContent.addClass('loading');
+                    },
+                    success: function (data) {
+                        loadMoreContent.removeClass('loading');
+                        showData.append(data.html);
+                        loadMoreContent.data('currentpage', data.pagination.page);
+                        if (data.pagination.page < data.pagination.pageCount) {
+                            loadMoreContentIntervalRunable = true;
+                        } else {
+                            clearInterval(loadMoreContentIntervalMain);
+                            loadMoreContent.remove();
+                        }
+                    },
+                    complete: function () {
+                        loadMoreContent.removeClass('loading');
+                    }
+                });
+            }
+
+        }, 1500);
     }
 }(jQuery));

@@ -10,6 +10,7 @@
                             ));
                         } ?>
                     </div>
+                    <div class="loadMoreContent" data-currentpage="1"></div>
                     <div class="loading"></div>
                 <?php } else { ?>
                     <div class="msg">
@@ -18,36 +19,5 @@
                 <?php } ?>
             </div>
         </div>
-
-
-
-        <? /*
-        <div class="btn-toolbar">
-            <div class="btn-group">
-                <?php $this->Paginator->options(array('url' => array('plugin' => 'powiadomienia', 'controller' => 'powiadomienia', '?' => $this->params->query))); ?>
-                <?php echo $this->Paginator->numbers(array(
-                    'tag' => 'button',
-                    'separator' => false,
-                    'class' => 'btn btn-default',
-                )); ?>
-            </div>
-        </div>
-        */
-        ?>
-
     </div>
-</div>
-
-<div class="col-xs-12">
-    <ul class="pagination pagination-sm">
-        <?
-        echo $this->Paginator->numbers(array(
-            'tag' => 'li',
-            'currentTag' => 'a',
-            'currentClass' => 'active',
-            'separator' => false,
-            'escape' => false,
-        ));
-        ?>
-    </ul>
 </div>
