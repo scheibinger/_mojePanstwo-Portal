@@ -2,8 +2,8 @@
 $this->Combinator->add_libs('css', $this->Less->css('kto_tu_rzadzi', array('plugin' => 'KtoTuRzadzi')));
 
 echo $this->Html->script('//maps.googleapis.com/maps/api/js?libraries=geometry&sensor=false', array('block' => 'scriptBlock'));
-echo $this->Html->script('scriptaculous/lib/prototype', array('block' => 'scriptBlock'));
-echo $this->Html->script('scriptaculous/src/scriptaculous', array('block' => 'scriptBlock'));
+echo $this->Html->script('plugins/scriptaculous/lib/prototype', array('block' => 'scriptBlock'));
+echo $this->Html->script('plugins/scriptaculous/src/scriptaculous', array('block' => 'scriptBlock'));
 
 $this->Combinator->add_libs('js', 'KtoTuRzadzi.kto_tu_rzadzi.js');
 ?>
