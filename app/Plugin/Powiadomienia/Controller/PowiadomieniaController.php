@@ -28,7 +28,7 @@ class PowiadomieniaController extends PowiadomieniaAppController
     public function index()
     {
 		
-		if( $this->request->params['ext'] == 'json' )
+		if( @$this->request->params['ext'] == 'json' )
 		{
 			
 			 // FETCHING OBJECTS
