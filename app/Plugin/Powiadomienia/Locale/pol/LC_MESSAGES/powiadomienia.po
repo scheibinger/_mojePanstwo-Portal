@@ -78,3 +78,6 @@ msgstr "Fraza <strong>%s</strong> szostała dodana do słów kluczowych"
 
 msgid "LC_POWIADOMIENIA_ZOSTALA_USUNIETA"
 msgstr "Fraza została usunięta"
+
+msgid "LC_POWIADOMIENIA_OPTIONS_AUTOCHECK_AS_READER"
+msgstr "Auto-oznaczanie jako przeczytane"

@@ -163,7 +163,6 @@
                     <a href="<?php echo $this->Html->url(array('plugin' => 'paszport', 'controller' => 'users', 'action' => 'index')); ?>"><?php echo $this->Session->read('Auth.User.username'); ?></a>
                 </div>
                 <?php if (count($_STREAMS) > 1) { ?>
-
                     <div class="_mojePanstwoCockpitUserStreams">
                         <form method="get"
                               action="<?php echo $this->Html->url(array('plugin' => 'paszport', 'controller' => 'users', 'action' => 'switchstreams')); ?>">
@@ -175,8 +174,8 @@
                             </select>
                         </form>
                     </div>
-
-                    <? /*
+                <?php } ?>
+                <? /*
                     <ul class="_mojePanstwoCockpitUserNameDropdownList">
                         <li class="_mojePanstwoCockpitUserNameDropdownListStream">Streams
                             <ul class="_mojePanstwoCockpitUserNameDropdownListSubList">
@@ -185,8 +184,7 @@
                         </li>
                     </ul>
                     */
-                    ?>
-                <?php } ?>
+                ?>
             </div>
         <?php } ?>
     </div>
