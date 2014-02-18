@@ -91,6 +91,7 @@ class UstawyController extends AppController
                 foreach ($objects as $obj)
                     $search[] = array_merge($obj->getData(), array(
                         'data_slowna' => dataSlownie($obj->getData('data_publikacji')),
+                        'hl' => $obj->getHlText(),
                     ));
             }
 
