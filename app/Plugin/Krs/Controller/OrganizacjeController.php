@@ -41,7 +41,6 @@ class OrganizacjeController extends AppController
             
             $this->set('html', $html);
             $this->set('_serialize', 'html');
-            // $this->RequestHandler->renderAs($this, 'json');
 
         } else $this->redirect('/krs');
     }
