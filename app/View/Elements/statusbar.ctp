@@ -156,8 +156,8 @@
 
             <div
                 class="_mojePanstwoCockpitUser">
-                <div class="_mojePanstwoCockpitUserAvatar">
-                    <img src="<?php echo $this->Session->read('Auth.User.photo_small'); ?>" class="img img-circle"/>
+                <div class="_mojePanstwoCockpitUserAvatar hidden">
+                <img src="<?php echo $this->Session->read('Auth.User.photo_small'); ?>" class="img img-circle"/>
                 </div>
                 <div class="_mojePanstwoCockpitUserName">
                     <a href="<?php echo $this->Html->url(array('plugin' => 'paszport', 'controller' => 'users', 'action' => 'index')); ?>"><?php echo $this->Session->read('Auth.User.username'); ?></a>
