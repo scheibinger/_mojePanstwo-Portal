@@ -1,7 +1,3 @@
-#powiadomienia.readed .objectRender {
-	background-color: white;
-}
-
 #powiadomienia {
     padding: 0;
     margin: 0;
@@ -28,14 +24,20 @@
         .dane {
             padding: 0;
 
-            .objectRender {
-                .content {
-                    padding: 0 15px 15px;
-                    overflow: hidden;
+            .powiadomienia {
+                &.readed .objectRender {
+                    background-color: white;
                 }
-                background-color: #FFFFE0;
-                &.readed {
-	                background-color: white;
+
+                .objectRender {
+                    .content {
+                        padding: 0 15px 15px;
+                        overflow: hidden;
+                    }
+                    background-color: #FFFFE0;
+                    &.readed {
+                        background-color: white;
+                    }
                 }
             }
         }
