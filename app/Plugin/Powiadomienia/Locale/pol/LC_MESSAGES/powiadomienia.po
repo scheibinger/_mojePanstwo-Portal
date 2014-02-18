@@ -80,4 +80,4 @@ msgid "LC_POWIADOMIENIA_ZOSTALA_USUNIETA"
 msgstr "Fraza została usunięta"
 
 msgid "LC_POWIADOMIENIA_OPTIONS_AUTOCHECK_AS_READER"
-msgstr "Auto-oznaczanie jako przeczytane"
+msgstr "Autooznaczanie jako przeczytane"

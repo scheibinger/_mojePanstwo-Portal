@@ -1,6 +1,6 @@
 <div class="tabsBlock">
-    <ul class="tabsList col-xs-9 col-sm-10">
-        <li data-mode="1"
+    <ul class="tabsList col-xs-12 col-sm-10 col-md-9">
+    <li data-mode="1"
             class="new<?php if (isset($this->request->query['mode']) == false || $this->request->query['mode'] == '1') echo ' s'; ?>"
             title="new">
             <a href="<?php
@@ -35,8 +35,8 @@
             echo ' hidden';
         } ?>" data-icon-after="&#xe604;"><?php echo __d('powiadomienia', "LC_POWIADOMIENIA_DANE_ALLREADED") ?></a>
     </ul>
-    <div class="additionalOptions col-xs-3 col-sm-2">
-        <label class="markReadAfterThreeSec">
+    <div class="additionalOptions hidden-xs col-sm-2 col-md-3">
+    <label class="markReadAfterThreeSec">
             <input type="checkbox"
                    id="markReadAfterThreeSec"/> <?php echo __d('powiadomienia', 'LC_POWIADOMIENIA_OPTIONS_AUTOCHECK_AS_READER') ?>
         </label>
