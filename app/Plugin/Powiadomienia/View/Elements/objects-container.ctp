@@ -3,8 +3,9 @@
         <div class="showResults">
             <div class="objects">
                 <?php if (true) { //@ TODO : przywrocic?>
-                    <div class="powiadomienia">
-                        <? echo $this->element('objects', array(
+                    <div
+                        class="powiadomienia<?php if (isset($this->request->query['mode']) && $this->request->query['mode'] == 2) echo(' readed'); ?>">
+                    <? echo $this->element('objects', array(
                         	'objects' => $objects,
                         )); ?>
                     </div>
