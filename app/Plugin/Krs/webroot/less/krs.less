@@ -57,49 +57,54 @@
                     margin: 0 @sideSize;
 
                     .item {
+                        
                         height: 475px;
 
-                        &.results {
-                            ul li {
-                                height: 50px;
-                            }
-                            span.center {
-                                float: left;
-                                font-size: 16px;
-                                margin: 10px 0 20px;
-                                text-align: center;
-                                width: 100%;
-                            }
-                            .seeMore {
-                                float: left;
-                                text-align: center;
-                                width: 100%;
-                            }
+                        ul li {
+                            height: 50px;
+                        }
+                        span.center {
+                            float: left;
+                            font-size: 16px;
+                            margin: 10px 0 20px;
+                            text-align: center;
+                            width: 100%;
+                        }
+                        .seeMore {
+                            float: left;
+                            text-align: center;
+                            width: 100%;
+                        }
 
-                            .icon {
-                                &:before {
-                                    font-family: 'mojePanstwo';
-                                    speak: none;
-                                    font-style: normal;
-                                    font-weight: normal;
-                                    font-variant: normal;
-                                    text-transform: none;
-                                    line-height: 1;
-                                    -webkit-font-smoothing: antialiased;
-                                    -moz-osx-font-smoothing: grayscale;
-
-                                    font-size: 20px;
-                                }
-                                &.organization:before {
-                                    content: '\e60e';
-                                    color: #46B8DA;
-                                    padding-right: 5px;
-                                }
-                                &.person:before {
-                                    content: '\e60d';
-                                    color: #4CAE4C;
-                                    padding-right: 3px;
-                                }
+                        .icon {
+                        
+                        	display: block;
+                        	
+                            &:before {
+                                font-family: 'mojePanstwo';
+                                speak: none;
+                                font-style: normal;
+                                font-weight: normal;
+                                font-variant: normal;
+                                text-transform: none;
+                                line-height: 1;
+                                -webkit-font-smoothing: antialiased;
+                                -moz-osx-font-smoothing: grayscale;
+                                font-size: 32px;
+                                float: left;
+                                margin-right: 5px;
+                                color: #BBB;
+                            }
+                            &:hover:before {
+	                            color: #0078AC;
+                            }
+                            &.organization:before {
+                                content: '\e60e';
+                                padding-right: 5px;
+                            }
+                            &.person:before {
+                                content: '\e60d';
+                                padding-right: 3px;
                             }
                         }
 
@@ -134,7 +139,7 @@
 
                                 .subtitle {
                                     font-size: 12px;
-                                    color: #AAA;
+                                    color: #999;
                                     margin-left: 5px;
 
                                     strong {
