@@ -44,11 +44,13 @@
     <div id="ustawyCarousel" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner">
             <div class="item results">
-                <div class="col-xs-12 col-sm-8 col-sm-offset-2">
-                    <h2><?= __d('ustawy', 'LC_USTAWY_WYNIKI_WYSZUKIWANIA') ?>:</h2>
-                    <ul class="bigger">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-8 col-sm-offset-2">
+                        <h2><?= __d('ustawy', 'LC_USTAWY_WYNIKI_WYSZUKIWANIA') ?>:</h2>
+                        <ul class="bigger">
 
-                    </ul>
+                        </ul>
+                    </div>
                 </div>
             </div>
             <div class="item active">
@@ -99,37 +101,40 @@
                 </div>
             </div>
             <div class="item">
-                <div class="col-xs-12 col-sm-8 col-sm-offset-2">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-8 col-sm-offset-2">
 
-                    <ul class="single bigger twocol">
-                        <?
-                        foreach ($data['kodeksy'] as $obj) {
-                            $obj = $obj->getData();?>
-                            <li>
-                                <p class="title">
-                                    <a href="/dane/ustawy/<?= $obj['id'] ?>" target="_self"
-                                       title="<?= $obj['tytul'] ?>"><?= $obj['tytul_skrocony'] ?></a>
-                                </p>
-                            </li>
-                        <? } ?>
-                    </ul>
-
+                        <ul class="single bigger twocol">
+                            <?
+                            foreach ($data['kodeksy'] as $obj) {
+                                $obj = $obj->getData();?>
+                                <li>
+                                    <p class="title">
+                                        <a href="/dane/ustawy/<?= $obj['id'] ?>" target="_self"
+                                           title="<?= $obj['tytul'] ?>"><?= $obj['tytul_skrocony'] ?></a>
+                                    </p>
+                                </li>
+                            <? } ?>
+                        </ul>
+                    </div>
                 </div>
             </div>
             <div class="item">
-                <div class="col-xs-12 col-sm-8 col-sm-offset-2">
-                    <ul class="single bigger">
-                        <?
-                        foreach ($data['konstytucje'] as $obj) {
-                            $obj = $obj->getData();?>
-                            <li>
-                                <p class="title">
-                                    <a href="/dane/ustawy/<?= $obj['id'] ?>" target="_self"
-                                       title="<?= $obj['tytul'] ?>"><?= $obj['tytul_skrocony'] ?></a>
-                                </p>
-                            </li>
-                        <? } ?>
-                    </ul>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-8 col-sm-offset-2">
+                        <ul class="single bigger">
+                            <?
+                            foreach ($data['konstytucje'] as $obj) {
+                                $obj = $obj->getData();?>
+                                <li>
+                                    <p class="title">
+                                        <a href="/dane/ustawy/<?= $obj['id'] ?>" target="_self"
+                                           title="<?= $obj['tytul'] ?>"><?= $obj['tytul_skrocony'] ?></a>
+                                    </p>
+                                </li>
+                            <? } ?>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>

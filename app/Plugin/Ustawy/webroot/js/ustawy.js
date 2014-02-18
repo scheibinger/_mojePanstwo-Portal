@@ -5,7 +5,8 @@
         searchMinLength = 1,
         shortcuts = $('#shortcuts'),
         searchInput = $('.appHeader .searchInput'),
-        resultsList = $('#ustawyCarousel').find('.item.results'),
+        ustawyCarousel = $('#ustawyCarousel'),
+        resultsList = ustawyCarousel.find('.item.results'),
         animationTime = 200,
         ajaxDelay = 200;
 
@@ -19,7 +20,7 @@
         e.preventDefault();
 
         if (input != lastSearch) {
-            $('#ustawyCarousel').carousel(0);
+            ustawyCarousel.carousel(0);
 
             window.clearTimeout(ustawaTime);
             ustawaTime = window.setTimeout(function () {
@@ -91,17 +92,28 @@
 
             resultsListUl.append(
                 $('<li></li>').append(function () {
-                    var title = $('<p></p>').addClass('title').append(
-                        $('<a></a>').attr({'target': '_self', 'href': '/dane/ustawy/' + dataSearch['id'], 'title': data['tytul']}).text(_mPHeart.translation.LC_USTAWY_TITLE_USTAWA + ' ' + dataSearch['tytul_skrocony'])
-                    );
-                    var subtitle = $('<p></p>').addClass('subtitle').append(
-                        $('<span></span>').html(_mPHeart.translation.LC_USTAWY_PUBLIKACJA + ' ' + dataSearch['data_slowna'])
-                    );
-                    $(this).append(title);
-                    $(this).append(subtitle);
+                    var header = $('<span></span>').addClass('resultHeader').append(
+                            $('<a></a>').attr({'target': '_self', 'href': '/dane/ustawy/' + dataSearch['id'], 'title': data['tytul'], 'class': 'title'}).text(_mPHeart.translation.LC_USTAWY_TITLE_USTAWA + ' ' + dataSearch['tytul_skrocony'])
+                        ).append(
+                            $('<span></span>').addClass('subtitle').html(_mPHeart.translation.LC_USTAWY_PUBLIKACJA + ' ' + dataSearch['data_slowna'])
+                        )
+                    var hl = $('<span></span>').addClass('highlight alert alert-info').html(dataSearch.hl)
+                    $(this).append(header);
+                    $(this).append(hl);
                 })
             )
         });
         resultsListUl.animate({'opacity': '1'}, animationTime);
+        ustawyCarousel.find('.carousel-inner').css('height', ustawyCarousel.find('.carousel-inner .item.results.active').outerHeight());
     }
+
+    ustawyCarousel.carousel();
+    ustawyCarousel.on('slide.bs.carousel', function () {
+        console.log(ustawyCarousel.find('.carousel-inner .item.active').outerHeight());
+        ustawyCarousel.find('.carousel-inner').css('height', ustawyCarousel.find('.carousel-inner .item.active').outerHeight());
+    });
+    ustawyCarousel.on('slid.bs.carousel', function () {
+        console.log(ustawyCarousel.find('.carousel-inner .item.active').outerHeight());
+        ustawyCarousel.find('.carousel-inner').css('height', ustawyCarousel.find('.carousel-inner .item.active').outerHeight());
+    });
 }(jQuery));

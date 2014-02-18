@@ -112,10 +112,10 @@
     groupsAndResults.carousel();
     groupsAndResults.on('slide.bs.carousel', function () {
         groupsAndResults.find('.carousel-inner').css('height', groupsAndResults.find('.carousel-inner .item.active').outerHeight());
-    })
+    });
     groupsAndResults.on('slid.bs.carousel', function () {
         groupsAndResults.find('.carousel-inner').css('height', groupsAndResults.find('.carousel-inner .item.active').outerHeight());
-    })
+    });
 
     /*poslowieBlock.find('.link > a').click(function (e) {
      e.preventDefault();
