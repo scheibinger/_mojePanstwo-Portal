@@ -14,7 +14,7 @@
                         /*RUN FUNCTION AT SEEN EACH ELEMENTS*/
                         $.ajax({
                             type: "GET",
-                            url: '/powiadomienia/flagObjects.json?mode=powiadomienia&action=read&oid=' + newNotify.attr('oid'),
+                            url: '/powiadomienia/flagObjects.json?mode=powiadomienia&action=read&id=' + newNotify.attr('gid'),
                             success: function (data) {
                                 /*MARK SEEN ELEMENT AS READED TO NOT TRIGGER FUNCTION AGAIN AT SAME ELEMENT*/
                                 if (data.status == "OK")

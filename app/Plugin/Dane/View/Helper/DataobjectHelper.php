@@ -101,6 +101,7 @@ class DataobjectHelper extends AppHelper
             'forceLabel' => $forceLabel,
             'file' => $this->object->getDataset(),
             'thumbSize' => $this->getThumbSize(),
+            'gid' => @$this->object->id,
         ), array('plugin' => 'Dane'));
     }
 
