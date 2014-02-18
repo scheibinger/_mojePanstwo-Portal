@@ -32,10 +32,7 @@
     },
     "require": {
         "slywalker/boost_cake": "*",
-        "leafo/lessphp": "0.3.*@dev",
-        "browserstate/history.js": "master",
-        "carhartl/jquery-cookie": "master"
-
+        "leafo/lessphp": "0.3.*@dev"
     },
     "minimum-stability": "dev"
 }
