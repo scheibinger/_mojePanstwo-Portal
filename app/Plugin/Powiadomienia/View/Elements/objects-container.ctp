@@ -5,8 +5,8 @@
                 <?php if (true) { //@ TODO : przywrocic?>
                     <div
                         class="powiadomienia<?php if (isset($this->request->query['mode']) && $this->request->query['mode'] == 2) echo(' readed'); ?>">
-                    <? echo $this->element('objects', array(
-                        	'objects' => $objects,
+                        <? echo $this->element('objects', array(
+                            'objects' => $objects,
                         )); ?>
                     </div>
                     <div class="loadMoreContent" data-currentpage="1"></div>

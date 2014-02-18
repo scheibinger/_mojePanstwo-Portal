@@ -243,14 +243,13 @@ class KrsPodmiotyController extends DataobjectsController
 
     public function graph()
     {
-	    if( $this->request->params['ext']=='json' )
-	    {
-	    
-		    $this->_prepareView();
-		    $data = $this->object->loadLayer('graph');
-		    
-		    debug( $data );
-		    
-	    } else return false;	    
+        if ($this->request->params['ext'] == 'json') {
+
+            $this->_prepareView();
+            $data = $this->object->loadLayer('graph');
+
+            debug($data);
+
+        } else return false;
     }
 }

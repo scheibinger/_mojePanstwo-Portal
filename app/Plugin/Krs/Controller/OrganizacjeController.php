@@ -27,18 +27,16 @@ class OrganizacjeController extends AppController
 
             $search = @$search['search'];
             $html = '';
-            
-            if( !empty($search) )
-            {
-            	$view = new View($this, false);
-	            foreach( $search as $result )
-	            {
-	            	$html .= $view->element('item', array(
-	            		'result' => $result,
-	            	));
-	            }
+
+            if (!empty($search)) {
+                $view = new View($this, false);
+                foreach ($search as $result) {
+                    $html .= $view->element('item', array(
+                        'result' => $result,
+                    ));
+                }
             }
-            
+
             $this->set('html', $html);
             $this->set('_serialize', 'html');
 

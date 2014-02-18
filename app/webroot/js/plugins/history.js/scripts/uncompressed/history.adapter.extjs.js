@@ -6,28 +6,28 @@
  */
 
 // Closure
-(function(window,undefined){
+(function (window, undefined) {
     "use strict";
 
     // Localise Globals
     var
-        History = window.History = window.History||{},
+        History = window.History = window.History || {},
         Ext = window.Ext;
 
     window.JSON = {
         stringify: Ext.JSON.encode,
         parse: Ext.JSON.decode
     };
-    
+
     // Check Existence
-    if ( typeof History.Adapter !== 'undefined' ) {
+    if (typeof History.Adapter !== 'undefined') {
         throw new Error('History.js Adapter has already been loaded...');
     }
 
     // Add the Adapter
     History.Adapter = {
         observables: {},
-        
+
         /**
          * History.Adapter.bind(el,event,callback)
          * @param {Element|string} el
@@ -36,9 +36,9 @@
          * @param {Object} scope
          * @return {void}
          */
-        bind: function(element,eventName,callback,scope){
+        bind: function (element, eventName, callback, scope) {
             Ext.EventManager.addListener(element, eventName, callback, scope);
-            
+
             //bind an observable to the element that will let us "trigger" events on it
             var id = Ext.id(element, 'history-'), observable = this.observables[id];
             if (!observable) {
@@ -55,7 +55,7 @@
          * @param {Object=} extra - a object of extra event data (optional)
          * @return {void}
          */
-        trigger: function(element,eventName,extra){
+        trigger: function (element, eventName, extra) {
             var id = Ext.id(element, 'history-'), observable = this.observables[id];
             if (observable) {
                 observable.fireEvent(eventName, extra);
@@ -69,7 +69,7 @@
          * @param {Object=} extra - a object of extra event data (optional)
          * @return {mixed}
          */
-        extractEventData: function(key,event,extra){
+        extractEventData: function (key, event, extra) {
             var result = (event && event.browserEvent && event.browserEvent[key]) || (extra && extra[key]) || undefined;
             return result;
         },
@@ -79,13 +79,13 @@
          * @param {function} callback
          * @return {void}
          */
-        onDomLoad: function(callback) {
+        onDomLoad: function (callback) {
             Ext.onReady(callback);
         }
     };
 
     // Try and Initialise History
-    if ( typeof History.init !== 'undefined' ) {
+    if (typeof History.init !== 'undefined') {
         History.init();
     }
 

@@ -20,24 +20,26 @@ test("Primitive types and constants", function () {
 
     // Nan usually doest not equal to Nan using the '==' operator.
     // Only isNaN() is able to do it.
-    equals(QUnit.equiv(0/0, 0/0), true, "NaN"); // NaN VS NaN
-    equals(QUnit.equiv(1/0, 2/0), true, "Infinity"); // Infinity VS Infinity
-    equals(QUnit.equiv(-1/0, 2/0), false, "-Infinity, Infinity"); // -Infinity VS Infinity
-    equals(QUnit.equiv(-1/0, -2/0), true, "-Infinity, -Infinity"); // -Infinity VS -Infinity
-    equals(QUnit.equiv(0/0, 1/0), false, "NaN, Infinity"); // Nan VS Infinity
-    equals(QUnit.equiv(1/0, 0/0), false, "NaN, Infinity"); // Nan VS Infinity
-    equals(QUnit.equiv(0/0, null), false, "NaN");
-    equals(QUnit.equiv(0/0, undefined), false, "NaN");
-    equals(QUnit.equiv(0/0, 0), false, "NaN");
-    equals(QUnit.equiv(0/0, false), false, "NaN");
-    equals(QUnit.equiv(0/0, function () {}), false, "NaN");
-    equals(QUnit.equiv(1/0, null), false, "NaN, Infinity");
-    equals(QUnit.equiv(1/0, undefined), false, "NaN, Infinity");
-    equals(QUnit.equiv(1/0, 0), false, "NaN, Infinity");
-    equals(QUnit.equiv(1/0, 1), false, "NaN, Infinity");
-    equals(QUnit.equiv(1/0, false), false, "NaN, Infinity");
-    equals(QUnit.equiv(1/0, true), false, "NaN, Infinity");
-    equals(QUnit.equiv(1/0, function () {}), false, "NaN, Infinity");
+    equals(QUnit.equiv(0 / 0, 0 / 0), true, "NaN"); // NaN VS NaN
+    equals(QUnit.equiv(1 / 0, 2 / 0), true, "Infinity"); // Infinity VS Infinity
+    equals(QUnit.equiv(-1 / 0, 2 / 0), false, "-Infinity, Infinity"); // -Infinity VS Infinity
+    equals(QUnit.equiv(-1 / 0, -2 / 0), true, "-Infinity, -Infinity"); // -Infinity VS -Infinity
+    equals(QUnit.equiv(0 / 0, 1 / 0), false, "NaN, Infinity"); // Nan VS Infinity
+    equals(QUnit.equiv(1 / 0, 0 / 0), false, "NaN, Infinity"); // Nan VS Infinity
+    equals(QUnit.equiv(0 / 0, null), false, "NaN");
+    equals(QUnit.equiv(0 / 0, undefined), false, "NaN");
+    equals(QUnit.equiv(0 / 0, 0), false, "NaN");
+    equals(QUnit.equiv(0 / 0, false), false, "NaN");
+    equals(QUnit.equiv(0 / 0, function () {
+    }), false, "NaN");
+    equals(QUnit.equiv(1 / 0, null), false, "NaN, Infinity");
+    equals(QUnit.equiv(1 / 0, undefined), false, "NaN, Infinity");
+    equals(QUnit.equiv(1 / 0, 0), false, "NaN, Infinity");
+    equals(QUnit.equiv(1 / 0, 1), false, "NaN, Infinity");
+    equals(QUnit.equiv(1 / 0, false), false, "NaN, Infinity");
+    equals(QUnit.equiv(1 / 0, true), false, "NaN, Infinity");
+    equals(QUnit.equiv(1 / 0, function () {
+    }), false, "NaN, Infinity");
 
     equals(QUnit.equiv(0, 0), true, "number");
     equals(QUnit.equiv(0, 1), false, "number");
@@ -98,13 +100,13 @@ test("Primitive types and constants", function () {
 
     equals(QUnit.equiv(new Object(), {}), true, "short annotation VS new annotation");
     equals(QUnit.equiv({}, new Object()), true, "short annotation VS new annotation");
-    equals(QUnit.equiv(new Object(), {a:1}), false, "short annotation VS new annotation");
-    equals(QUnit.equiv({a:1}, new Object()), false, "short annotation VS new annotation");
-    equals(QUnit.equiv({a:undefined}, new Object()), false, "short annotation VS new annotation");
-    equals(QUnit.equiv(new Object(), {a:undefined}), false, "short annotation VS new annotation");
+    equals(QUnit.equiv(new Object(), {a: 1}), false, "short annotation VS new annotation");
+    equals(QUnit.equiv({a: 1}, new Object()), false, "short annotation VS new annotation");
+    equals(QUnit.equiv({a: undefined}, new Object()), false, "short annotation VS new annotation");
+    equals(QUnit.equiv(new Object(), {a: undefined}), false, "short annotation VS new annotation");
 });
 
-test("Objects Basics.", function() {
+test("Objects Basics.", function () {
     equals(QUnit.equiv({}, {}), true);
     equals(QUnit.equiv({}, null), false);
     equals(QUnit.equiv({}, undefined), false);
@@ -118,28 +120,32 @@ test("Objects Basics.", function() {
     //      3) Their properties are the same (doesn't exists)
     equals(QUnit.equiv({}, []), false);
 
-    equals(QUnit.equiv({a:1}, {a:1}), true);
-    equals(QUnit.equiv({a:1}, {a:"1"}), false);
-    equals(QUnit.equiv({a:[]}, {a:[]}), true);
-    equals(QUnit.equiv({a:{}}, {a:null}), false);
-    equals(QUnit.equiv({a:1}, {}), false);
-    equals(QUnit.equiv({}, {a:1}), false);
+    equals(QUnit.equiv({a: 1}, {a: 1}), true);
+    equals(QUnit.equiv({a: 1}, {a: "1"}), false);
+    equals(QUnit.equiv({a: []}, {a: []}), true);
+    equals(QUnit.equiv({a: {}}, {a: null}), false);
+    equals(QUnit.equiv({a: 1}, {}), false);
+    equals(QUnit.equiv({}, {a: 1}), false);
 
     // Hard ones
-    equals(QUnit.equiv({a:undefined}, {}), false);
-    equals(QUnit.equiv({}, {a:undefined}), false);
+    equals(QUnit.equiv({a: undefined}, {}), false);
+    equals(QUnit.equiv({}, {a: undefined}), false);
     equals(QUnit.equiv(
         {
-            a: [{ bar: undefined }]
+            a: [
+                { bar: undefined }
+            ]
         },
         {
-            a: [{ bat: undefined }]
+            a: [
+                { bat: undefined }
+            ]
         }
     ), false);
 });
 
 
-test("Arrays Basics.", function() {
+test("Arrays Basics.", function () {
 
     equals(QUnit.equiv([], []), true);
 
@@ -157,190 +163,597 @@ test("Arrays Basics.", function() {
     // than {} with [] (note the order)
     equals(QUnit.equiv([], {}), false);
 
-    equals(QUnit.equiv([null],[]), false);
-    equals(QUnit.equiv([undefined],[]), false);
-    equals(QUnit.equiv([],[null]), false);
-    equals(QUnit.equiv([],[undefined]), false);
-    equals(QUnit.equiv([null],[undefined]), false);
-    equals(QUnit.equiv([[]],[[]]), true);
-    equals(QUnit.equiv([[],[],[]],[[],[],[]]), true);
+    equals(QUnit.equiv([null], []), false);
+    equals(QUnit.equiv([undefined], []), false);
+    equals(QUnit.equiv([], [null]), false);
+    equals(QUnit.equiv([], [undefined]), false);
+    equals(QUnit.equiv([null], [undefined]), false);
+    equals(QUnit.equiv([
+        []
+    ], [
+        []
+    ]), true);
+    equals(QUnit.equiv([
+        [],
+        [],
+        []
+    ], [
+        [],
+        [],
+        []
+    ]), true);
     equals(QUnit.equiv(
-                            [[],[],[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]],
-                            [[],[],[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]),
-                            true);
+        [
+            [],
+            [],
+            [
+                [
+                    [
+                        [
+                            [
+                                [
+                                    [
+                                        [
+                                            [
+                                                [
+                                                    [
+                                                        [
+                                                            [
+                                                                [
+                                                                    [
+                                                                        [
+                                                                            [
+                                                                                [
+                                                                                    [
+                                                                                        [
+                                                                                            [
+                                                                                                [
+                                                                                                    [
+                                                                                                        [
+                                                                                                            [
+                                                                                                                [
+                                                                                                                    [
+                                                                                                                        [
+                                                                                                                            [
+                                                                                                                                [
+                                                                                                                                    []
+                                                                                                                                ]
+                                                                                                                            ]
+                                                                                                                        ]
+                                                                                                                    ]
+                                                                                                                ]
+                                                                                                            ]
+                                                                                                        ]
+                                                                                                    ]
+                                                                                                ]
+                                                                                            ]
+                                                                                        ]
+                                                                                    ]
+                                                                                ]
+                                                                            ]
+                                                                        ]
+                                                                    ]
+                                                                ]
+                                                            ]
+                                                        ]
+                                                    ]
+                                                ]
+                                            ]
+                                        ]
+                                    ]
+                                ]
+                            ]
+                        ]
+                    ]
+                ]
+            ]
+        ],
+        [
+            [],
+            [],
+            [
+                [
+                    [
+                        [
+                            [
+                                [
+                                    [
+                                        [
+                                            [
+                                                [
+                                                    [
+                                                        [
+                                                            [
+                                                                [
+                                                                    [
+                                                                        [
+                                                                            [
+                                                                                [
+                                                                                    [
+                                                                                        [
+                                                                                            [
+                                                                                                [
+                                                                                                    [
+                                                                                                        [
+                                                                                                            [
+                                                                                                                [
+                                                                                                                    [
+                                                                                                                        [
+                                                                                                                            [
+                                                                                                                                [
+                                                                                                                                    []
+                                                                                                                                ]
+                                                                                                                            ]
+                                                                                                                        ]
+                                                                                                                    ]
+                                                                                                                ]
+                                                                                                            ]
+                                                                                                        ]
+                                                                                                    ]
+                                                                                                ]
+                                                                                            ]
+                                                                                        ]
+                                                                                    ]
+                                                                                ]
+                                                                            ]
+                                                                        ]
+                                                                    ]
+                                                                ]
+                                                            ]
+                                                        ]
+                                                    ]
+                                                ]
+                                            ]
+                                        ]
+                                    ]
+                                ]
+                            ]
+                        ]
+                    ]
+                ]
+            ]
+        ]),
+        true);
     equals(QUnit.equiv(
-                            [[],[],[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]],
-                            [[],[],[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]), // shorter
-                            false);
+        [
+            [],
+            [],
+            [
+                [
+                    [
+                        [
+                            [
+                                [
+                                    [
+                                        [
+                                            [
+                                                [
+                                                    [
+                                                        [
+                                                            [
+                                                                [
+                                                                    [
+                                                                        [
+                                                                            [
+                                                                                [
+                                                                                    [
+                                                                                        [
+                                                                                            [
+                                                                                                [
+                                                                                                    [
+                                                                                                        [
+                                                                                                            [
+                                                                                                                [
+                                                                                                                    [
+                                                                                                                        [
+                                                                                                                            [
+                                                                                                                                [
+                                                                                                                                    []
+                                                                                                                                ]
+                                                                                                                            ]
+                                                                                                                        ]
+                                                                                                                    ]
+                                                                                                                ]
+                                                                                                            ]
+                                                                                                        ]
+                                                                                                    ]
+                                                                                                ]
+                                                                                            ]
+                                                                                        ]
+                                                                                    ]
+                                                                                ]
+                                                                            ]
+                                                                        ]
+                                                                    ]
+                                                                ]
+                                                            ]
+                                                        ]
+                                                    ]
+                                                ]
+                                            ]
+                                        ]
+                                    ]
+                                ]
+                            ]
+                        ]
+                    ]
+                ]
+            ]
+        ],
+        [
+            [],
+            [],
+            [
+                [
+                    [
+                        [
+                            [
+                                [
+                                    [
+                                        [
+                                            [
+                                                [
+                                                    [
+                                                        [
+                                                            [
+                                                                [
+                                                                    [
+                                                                        [
+                                                                            [
+                                                                                [
+                                                                                    [
+                                                                                        [
+                                                                                            [
+                                                                                                [
+                                                                                                    [
+                                                                                                        [
+                                                                                                            [
+                                                                                                                [
+                                                                                                                    [
+                                                                                                                        [
+                                                                                                                            [
+                                                                                                                                []
+                                                                                                                            ]
+                                                                                                                        ]
+                                                                                                                    ]
+                                                                                                                ]
+                                                                                                            ]
+                                                                                                        ]
+                                                                                                    ]
+                                                                                                ]
+                                                                                            ]
+                                                                                        ]
+                                                                                    ]
+                                                                                ]
+                                                                            ]
+                                                                        ]
+                                                                    ]
+                                                                ]
+                                                            ]
+                                                        ]
+                                                    ]
+                                                ]
+                                            ]
+                                        ]
+                                    ]
+                                ]
+                            ]
+                        ]
+                    ]
+                ]
+            ]
+        ]), // shorter
+        false);
     equals(QUnit.equiv(
-                            [[],[],[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[{}]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]],
-                            [[],[],[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]), // deepest element not an array
-                            false);
+        [
+            [],
+            [],
+            [
+                [
+                    [
+                        [
+                            [
+                                [
+                                    [
+                                        [
+                                            [
+                                                [
+                                                    [
+                                                        [
+                                                            [
+                                                                [
+                                                                    [
+                                                                        [
+                                                                            [
+                                                                                [
+                                                                                    [
+                                                                                        [
+                                                                                            [
+                                                                                                [
+                                                                                                    [
+                                                                                                        [
+                                                                                                            [
+                                                                                                                [
+                                                                                                                    [
+                                                                                                                        [
+                                                                                                                            [
+                                                                                                                                [
+                                                                                                                                    {}
+                                                                                                                                ]
+                                                                                                                            ]
+                                                                                                                        ]
+                                                                                                                    ]
+                                                                                                                ]
+                                                                                                            ]
+                                                                                                        ]
+                                                                                                    ]
+                                                                                                ]
+                                                                                            ]
+                                                                                        ]
+                                                                                    ]
+                                                                                ]
+                                                                            ]
+                                                                        ]
+                                                                    ]
+                                                                ]
+                                                            ]
+                                                        ]
+                                                    ]
+                                                ]
+                                            ]
+                                        ]
+                                    ]
+                                ]
+                            ]
+                        ]
+                    ]
+                ]
+            ]
+        ],
+        [
+            [],
+            [],
+            [
+                [
+                    [
+                        [
+                            [
+                                [
+                                    [
+                                        [
+                                            [
+                                                [
+                                                    [
+                                                        [
+                                                            [
+                                                                [
+                                                                    [
+                                                                        [
+                                                                            [
+                                                                                [
+                                                                                    [
+                                                                                        [
+                                                                                            [
+                                                                                                [
+                                                                                                    [
+                                                                                                        [
+                                                                                                            [
+                                                                                                                [
+                                                                                                                    [
+                                                                                                                        [
+                                                                                                                            [
+                                                                                                                                [
+                                                                                                                                    []
+                                                                                                                                ]
+                                                                                                                            ]
+                                                                                                                        ]
+                                                                                                                    ]
+                                                                                                                ]
+                                                                                                            ]
+                                                                                                        ]
+                                                                                                    ]
+                                                                                                ]
+                                                                                            ]
+                                                                                        ]
+                                                                                    ]
+                                                                                ]
+                                                                            ]
+                                                                        ]
+                                                                    ]
+                                                                ]
+                                                            ]
+                                                        ]
+                                                    ]
+                                                ]
+                                            ]
+                                        ]
+                                    ]
+                                ]
+                            ]
+                        ]
+                    ]
+                ]
+            ]
+        ]), // deepest element not an array
+        false);
 
     // same multidimensional
     equals(QUnit.equiv(
-                            [1,2,3,4,5,6,7,8,9, [
-                                1,2,3,4,5,6,7,8,9, [
-                                    1,2,3,4,5,[
-                                        [6,7,8,9, [
-                                            [
-                                                1,2,3,4,[
-                                                    2,3,4,[
-                                                        1,2,[
-                                                            1,2,3,4,[
-                                                                1,2,3,4,5,6,7,8,9,[
-                                                                    0
-                                                                ],1,2,3,4,5,6,7,8,9
-                                                            ],5,6,7,8,9
-                                                        ],4,5,6,7,8,9
-                                                    ],5,6,7,8,9
-                                                ],5,6,7
-                                            ]
-                                        ]
-                                    ]
-                                ]
-                            ]]],
-                            [1,2,3,4,5,6,7,8,9, [
-                                1,2,3,4,5,6,7,8,9, [
-                                    1,2,3,4,5,[
-                                        [6,7,8,9, [
-                                            [
-                                                1,2,3,4,[
-                                                    2,3,4,[
-                                                        1,2,[
-                                                            1,2,3,4,[
-                                                                1,2,3,4,5,6,7,8,9,[
-                                                                    0
-                                                                ],1,2,3,4,5,6,7,8,9
-                                                            ],5,6,7,8,9
-                                                        ],4,5,6,7,8,9
-                                                    ],5,6,7,8,9
-                                                ],5,6,7
-                                            ]
-                                        ]
-                                    ]
-                                ]
-                            ]]]),
-                            true, "Multidimensional");
+        [1, 2, 3, 4, 5, 6, 7, 8, 9, [
+            1, 2, 3, 4, 5, 6, 7, 8, 9, [
+                1, 2, 3, 4, 5, [
+                    [6, 7, 8, 9, [
+                        [
+                            1, 2, 3, 4, [
+                            2, 3, 4, [
+                                1, 2, [
+                                    1, 2, 3, 4, [
+                                        1, 2, 3, 4, 5, 6, 7, 8, 9, [
+                                            0
+                                        ], 1, 2, 3, 4, 5, 6, 7, 8, 9
+                                    ], 5, 6, 7, 8, 9
+                                ], 4, 5, 6, 7, 8, 9
+                            ], 5, 6, 7, 8, 9
+                        ], 5, 6, 7
+                        ]
+                    ]
+                    ]
+                ]
+            ]]],
+        [1, 2, 3, 4, 5, 6, 7, 8, 9, [
+            1, 2, 3, 4, 5, 6, 7, 8, 9, [
+                1, 2, 3, 4, 5, [
+                    [6, 7, 8, 9, [
+                        [
+                            1, 2, 3, 4, [
+                            2, 3, 4, [
+                                1, 2, [
+                                    1, 2, 3, 4, [
+                                        1, 2, 3, 4, 5, 6, 7, 8, 9, [
+                                            0
+                                        ], 1, 2, 3, 4, 5, 6, 7, 8, 9
+                                    ], 5, 6, 7, 8, 9
+                                ], 4, 5, 6, 7, 8, 9
+                            ], 5, 6, 7, 8, 9
+                        ], 5, 6, 7
+                        ]
+                    ]
+                    ]
+                ]
+            ]]]),
+        true, "Multidimensional");
 
     // different multidimensional
     equals(QUnit.equiv(
-                            [1,2,3,4,5,6,7,8,9, [
-                                1,2,3,4,5,6,7,8,9, [
-                                    1,2,3,4,5,[
-                                        [6,7,8,9, [
-                                            [
-                                                1,2,3,4,[
-                                                    2,3,4,[
-                                                        1,2,[
-                                                            1,2,3,4,[
-                                                                1,2,3,4,5,6,7,8,9,[
-                                                                    0
-                                                                ],1,2,3,4,5,6,7,8,9
-                                                            ],5,6,7,8,9
-                                                        ],4,5,6,7,8,9
-                                                    ],5,6,7,8,9
-                                                ],5,6,7
-                                            ]
-                                        ]
-                                    ]
-                                ]
-                            ]]],
-                            [1,2,3,4,5,6,7,8,9, [
-                                1,2,3,4,5,6,7,8,9, [
-                                    1,2,3,4,5,[
-                                        [6,7,8,9, [
-                                            [
-                                                1,2,3,4,[
-                                                    2,3,4,[
-                                                        1,2,[
-                                                            '1',2,3,4,[                 // string instead of number
-                                                                1,2,3,4,5,6,7,8,9,[
-                                                                    0
-                                                                ],1,2,3,4,5,6,7,8,9
-                                                            ],5,6,7,8,9
-                                                        ],4,5,6,7,8,9
-                                                    ],5,6,7,8,9
-                                                ],5,6,7
-                                            ]
-                                        ]
-                                    ]
-                                ]
-                            ]]]),
-                            false, "Multidimensional");
+        [1, 2, 3, 4, 5, 6, 7, 8, 9, [
+            1, 2, 3, 4, 5, 6, 7, 8, 9, [
+                1, 2, 3, 4, 5, [
+                    [6, 7, 8, 9, [
+                        [
+                            1, 2, 3, 4, [
+                            2, 3, 4, [
+                                1, 2, [
+                                    1, 2, 3, 4, [
+                                        1, 2, 3, 4, 5, 6, 7, 8, 9, [
+                                            0
+                                        ], 1, 2, 3, 4, 5, 6, 7, 8, 9
+                                    ], 5, 6, 7, 8, 9
+                                ], 4, 5, 6, 7, 8, 9
+                            ], 5, 6, 7, 8, 9
+                        ], 5, 6, 7
+                        ]
+                    ]
+                    ]
+                ]
+            ]]],
+        [1, 2, 3, 4, 5, 6, 7, 8, 9, [
+            1, 2, 3, 4, 5, 6, 7, 8, 9, [
+                1, 2, 3, 4, 5, [
+                    [6, 7, 8, 9, [
+                        [
+                            1, 2, 3, 4, [
+                            2, 3, 4, [
+                                1, 2, [
+                                    '1', 2, 3, 4, [                 // string instead of number
+                                        1, 2, 3, 4, 5, 6, 7, 8, 9, [
+                                            0
+                                        ], 1, 2, 3, 4, 5, 6, 7, 8, 9
+                                    ], 5, 6, 7, 8, 9
+                                ], 4, 5, 6, 7, 8, 9
+                            ], 5, 6, 7, 8, 9
+                        ], 5, 6, 7
+                        ]
+                    ]
+                    ]
+                ]
+            ]]]),
+        false, "Multidimensional");
 
     // different multidimensional
     equals(QUnit.equiv(
-                            [1,2,3,4,5,6,7,8,9, [
-                                1,2,3,4,5,6,7,8,9, [
-                                    1,2,3,4,5,[
-                                        [6,7,8,9, [
-                                            [
-                                                1,2,3,4,[
-                                                    2,3,4,[
-                                                        1,2,[
-                                                            1,2,3,4,[
-                                                                1,2,3,4,5,6,7,8,9,[
-                                                                    0
-                                                                ],1,2,3,4,5,6,7,8,9
-                                                            ],5,6,7,8,9
-                                                        ],4,5,6,7,8,9
-                                                    ],5,6,7,8,9
-                                                ],5,6,7
-                                            ]
-                                        ]
-                                    ]
-                                ]
-                            ]]],
-                            [1,2,3,4,5,6,7,8,9, [
-                                1,2,3,4,5,6,7,8,9, [
-                                    1,2,3,4,5,[
-                                        [6,7,8,9, [
-                                            [
-                                                1,2,3,4,[
-                                                    2,3,[                   // missing an element (4)
-                                                        1,2,[
-                                                            1,2,3,4,[
-                                                                1,2,3,4,5,6,7,8,9,[
-                                                                    0
-                                                                ],1,2,3,4,5,6,7,8,9
-                                                            ],5,6,7,8,9
-                                                        ],4,5,6,7,8,9
-                                                    ],5,6,7,8,9
-                                                ],5,6,7
-                                            ]
-                                        ]
-                                    ]
-                                ]
-                            ]]]),
-                            false, "Multidimensional");
+        [1, 2, 3, 4, 5, 6, 7, 8, 9, [
+            1, 2, 3, 4, 5, 6, 7, 8, 9, [
+                1, 2, 3, 4, 5, [
+                    [6, 7, 8, 9, [
+                        [
+                            1, 2, 3, 4, [
+                            2, 3, 4, [
+                                1, 2, [
+                                    1, 2, 3, 4, [
+                                        1, 2, 3, 4, 5, 6, 7, 8, 9, [
+                                            0
+                                        ], 1, 2, 3, 4, 5, 6, 7, 8, 9
+                                    ], 5, 6, 7, 8, 9
+                                ], 4, 5, 6, 7, 8, 9
+                            ], 5, 6, 7, 8, 9
+                        ], 5, 6, 7
+                        ]
+                    ]
+                    ]
+                ]
+            ]]],
+        [1, 2, 3, 4, 5, 6, 7, 8, 9, [
+            1, 2, 3, 4, 5, 6, 7, 8, 9, [
+                1, 2, 3, 4, 5, [
+                    [6, 7, 8, 9, [
+                        [
+                            1, 2, 3, 4, [
+                            2, 3, [                   // missing an element (4)
+                                1, 2, [
+                                    1, 2, 3, 4, [
+                                        1, 2, 3, 4, 5, 6, 7, 8, 9, [
+                                            0
+                                        ], 1, 2, 3, 4, 5, 6, 7, 8, 9
+                                    ], 5, 6, 7, 8, 9
+                                ], 4, 5, 6, 7, 8, 9
+                            ], 5, 6, 7, 8, 9
+                        ], 5, 6, 7
+                        ]
+                    ]
+                    ]
+                ]
+            ]]]),
+        false, "Multidimensional");
 });
 
-test("Functions.", function() {
-    var f0 = function () {};
-    var f1 = function () {};
+test("Functions.", function () {
+    var f0 = function () {
+    };
+    var f1 = function () {
+    };
 
     // f2 and f3 have the same code, formatted differently
-    var f2 = function () {var i = 0;};
+    var f2 = function () {
+        var i = 0;
+    };
     var f3 = function () {
         var i = 0 // this comment and no semicoma as difference
     };
 
-    equals(QUnit.equiv(function() {}, function() {}), false, "Anonymous functions"); // exact source code
-    equals(QUnit.equiv(function() {}, function() {return true;}), false, "Anonymous functions");
+    equals(QUnit.equiv(function () {
+    }, function () {
+    }), false, "Anonymous functions"); // exact source code
+    equals(QUnit.equiv(function () {
+    }, function () {
+        return true;
+    }), false, "Anonymous functions");
 
     equals(QUnit.equiv(f0, f0), true, "Function references"); // same references
     equals(QUnit.equiv(f0, f1), false, "Function references"); // exact source code, different references
     equals(QUnit.equiv(f2, f3), false, "Function references"); // equivalent source code, different references
     equals(QUnit.equiv(f1, f2), false, "Function references"); // different source code, different references
-    equals(QUnit.equiv(function() {}, true), false);
-    equals(QUnit.equiv(function() {}, undefined), false);
-    equals(QUnit.equiv(function() {}, null), false);
-    equals(QUnit.equiv(function() {}, {}), false);
+    equals(QUnit.equiv(function () {
+    }, true), false);
+    equals(QUnit.equiv(function () {
+    }, undefined), false);
+    equals(QUnit.equiv(function () {
+    }, null), false);
+    equals(QUnit.equiv(function () {
+    }, {}), false);
 });
 
 
-test("Date instances.", function() {
+test("Date instances.", function () {
     // Date, we don't need to test Date.parse() because it returns a number.
     // Only test the Date instances by setting them a fix date.
     // The date use is midnight January 1, 1970
@@ -362,7 +775,7 @@ test("Date instances.", function() {
 });
 
 
-test("RegExp.", function() {
+test("RegExp.", function () {
     // Must test cases that imply those traps:
     // var a = /./;
     // a instanceof Object;        // Oops
@@ -438,16 +851,18 @@ test("RegExp.", function() {
 
     // typeof r1 is "function" in some browsers and "object" in others so we must cover this test
     var re = / /;
-    equals(QUnit.equiv(re, function () {}), false, "Regex internal");
+    equals(QUnit.equiv(re, function () {
+    }), false, "Regex internal");
     equals(QUnit.equiv(re, {}), false, "Regex internal");
 });
 
 
-test("Complex Objects.", function() {
+test("Complex Objects.", function () {
 
     function fn1() {
         return "fn1";
     }
+
     function fn2() {
         return "fn2";
     }
@@ -458,19 +873,25 @@ test("Complex Objects.", function() {
         {
             a: 1,
             b: null,
-            c: [{}],
+            c: [
+                {}
+            ],
             d: {
                 a: 3.14159,
                 b: false,
                 c: {
                     e: fn1,
-                    f: [[[]]],
+                    f: [
+                        [
+                            []
+                        ]
+                    ],
                     g: {
                         j: {
                             k: {
                                 n: {
                                     r: "r",
-                                    s: [1,2,3],
+                                    s: [1, 2, 3],
                                     t: undefined,
                                     u: 0,
                                     v: {
@@ -483,7 +904,7 @@ test("Complex Objects.", function() {
                                     }
                                 },
                                 q: [],
-                                p: 1/0,
+                                p: 1 / 0,
                                 o: 99
                             },
                             l: undefined,
@@ -504,14 +925,20 @@ test("Complex Objects.", function() {
         {
             a: 1,
             b: null,
-            c: [{}],
+            c: [
+                {}
+            ],
             d: {
                 b: false,
                 a: 3.14159,
                 c: {
                     d: 0,
                     e: fn1,
-                    f: [[[]]],
+                    f: [
+                        [
+                            []
+                        ]
+                    ],
                     g: {
                         j: {
                             k: {
@@ -519,7 +946,7 @@ test("Complex Objects.", function() {
                                     r: "r",
                                     t: undefined,
                                     u: 0,
-                                    s: [1,2,3],
+                                    s: [1, 2, 3],
                                     v: {
                                         w: {
                                             x: {
@@ -530,7 +957,7 @@ test("Complex Objects.", function() {
                                     }
                                 },
                                 o: 99,
-                                p: 1/0,
+                                p: 1 / 0,
                                 q: []
                             },
                             l: undefined,
@@ -553,20 +980,26 @@ test("Complex Objects.", function() {
         {
             a: 1,
             b: null,
-            c: [{}],
+            c: [
+                {}
+            ],
             d: {
                 a: 3.14159,
                 b: false,
                 c: {
                     d: 0,
                     e: fn1,
-                    f: [[[]]],
+                    f: [
+                        [
+                            []
+                        ]
+                    ],
                     g: {
                         j: {
                             k: {
                                 n: {
                                     //r: "r",   // different: missing a property
-                                    s: [1,2,3],
+                                    s: [1, 2, 3],
                                     t: undefined,
                                     u: 0,
                                     v: {
@@ -579,7 +1012,7 @@ test("Complex Objects.", function() {
                                     }
                                 },
                                 o: 99,
-                                p: 1/0,
+                                p: 1 / 0,
                                 q: []
                             },
                             l: undefined,
@@ -599,20 +1032,26 @@ test("Complex Objects.", function() {
         {
             a: 1,
             b: null,
-            c: [{}],
+            c: [
+                {}
+            ],
             d: {
                 a: 3.14159,
                 b: false,
                 c: {
                     d: 0,
                     e: fn1,
-                    f: [[[]]],
+                    f: [
+                        [
+                            []
+                        ]
+                    ],
                     g: {
                         j: {
                             k: {
                                 n: {
                                     r: "r",
-                                    s: [1,2,3],
+                                    s: [1, 2, 3],
                                     t: undefined,
                                     u: 0,
                                     v: {
@@ -625,7 +1064,7 @@ test("Complex Objects.", function() {
                                     }
                                 },
                                 o: 99,
-                                p: 1/0,
+                                p: 1 / 0,
                                 q: []
                             },
                             l: undefined,
@@ -648,20 +1087,26 @@ test("Complex Objects.", function() {
         {
             a: 1,
             b: null,
-            c: [{}],
+            c: [
+                {}
+            ],
             d: {
                 a: 3.14159,
                 b: false,
                 c: {
                     d: 0,
                     e: fn1,
-                    f: [[[]]],
+                    f: [
+                        [
+                            []
+                        ]
+                    ],
                     g: {
                         j: {
                             k: {
                                 n: {
                                     r: "r",
-                                    s: [1,2,3],
+                                    s: [1, 2, 3],
                                     t: undefined,
                                     u: 0,
                                     v: {
@@ -674,7 +1119,7 @@ test("Complex Objects.", function() {
                                     }
                                 },
                                 o: 99,
-                                p: 1/0,
+                                p: 1 / 0,
                                 q: []
                             },
                             l: undefined,
@@ -694,20 +1139,26 @@ test("Complex Objects.", function() {
         {
             a: 1,
             b: null,
-            c: [{}],
+            c: [
+                {}
+            ],
             d: {
                 a: 3.14159,
                 b: false,
                 c: {
                     d: 0,
                     e: fn1,
-                    f: [[[]]],
+                    f: [
+                        [
+                            []
+                        ]
+                    ],
                     g: {
                         j: {
                             k: {
                                 n: {
                                     r: "r",
-                                    s: [1,2,3],
+                                    s: [1, 2, 3],
                                     //t: undefined,                 // different: missing a property with an undefined value
                                     u: 0,
                                     v: {
@@ -720,7 +1171,7 @@ test("Complex Objects.", function() {
                                     }
                                 },
                                 o: 99,
-                                p: 1/0,
+                                p: 1 / 0,
                                 q: []
                             },
                             l: undefined,
@@ -743,20 +1194,26 @@ test("Complex Objects.", function() {
         {
             a: 1,
             b: null,
-            c: [{}],
+            c: [
+                {}
+            ],
             d: {
                 a: 3.14159,
                 b: false,
                 c: {
                     d: 0,
                     e: fn1,
-                    f: [[[]]],
+                    f: [
+                        [
+                            []
+                        ]
+                    ],
                     g: {
                         j: {
                             k: {
                                 n: {
                                     r: "r",
-                                    s: [1,2,3],
+                                    s: [1, 2, 3],
                                     t: undefined,
                                     u: 0,
                                     v: {
@@ -769,7 +1226,7 @@ test("Complex Objects.", function() {
                                     }
                                 },
                                 o: 99,
-                                p: 1/0,
+                                p: 1 / 0,
                                 q: []
                             },
                             l: undefined,
@@ -789,20 +1246,26 @@ test("Complex Objects.", function() {
         {
             a: 1,
             b: null,
-            c: [{}],
+            c: [
+                {}
+            ],
             d: {
                 a: 3.14159,
                 b: false,
                 c: {
                     d: 0,
                     e: fn1,
-                    f: [[[]]],
+                    f: [
+                        [
+                            []
+                        ]
+                    ],
                     g: {
                         j: {
                             k: {
                                 n: {
                                     r: "r",
-                                    s: [1,2,3],
+                                    s: [1, 2, 3],
                                     t: undefined,
                                     u: 0,
                                     v: {
@@ -815,7 +1278,7 @@ test("Complex Objects.", function() {
                                     }
                                 },
                                 o: 99,
-                                p: 1/0,
+                                p: 1 / 0,
                                 q: {}           // different was []
                             },
                             l: undefined,
@@ -838,7 +1301,7 @@ test("Complex Objects.", function() {
         a: [
             "string", null, 0, "1", 1, {
                 prop: null,
-                foo: [1,2,null,{}, [], [1,2,3]],
+                foo: [1, 2, null, {}, [], [1, 2, 3]],
                 bar: undefined
             }, 3, "Hey!", "Κάνε πάντα γνωρίζουμε ας των, μηχανής επιδιόρθωσης επιδιορθώσεις ώς μια. Κλπ ας"
         ],
@@ -851,7 +1314,7 @@ test("Complex Objects.", function() {
         a: [
             "string", null, 0, "1", 1, {
                 prop: null,
-                foo: [1,2,null,{}, [], [1,2,3]],
+                foo: [1, 2, null, {}, [], [1, 2, 3]],
                 bar: undefined
             }, 3, "Hey!", "Κάνε πάντα γνωρίζουμε ας των, μηχανής επιδιόρθωσης επιδιορθώσεις ώς μια. Κλπ ας"
         ],
@@ -864,7 +1327,7 @@ test("Complex Objects.", function() {
         a: [
             "string", null, 0, "1", 1, {
                 prop: null,
-                foo: [1,2,null,{}, [], [1,2,3,4]], // different: 4 was add to the array
+                foo: [1, 2, null, {}, [], [1, 2, 3, 4]], // different: 4 was add to the array
                 bar: undefined
             }, 3, "Hey!", "Κάνε πάντα γνωρίζουμε ας των, μηχανής επιδιόρθωσης επιδιορθώσεις ώς μια. Κλπ ας"
         ],
@@ -877,7 +1340,7 @@ test("Complex Objects.", function() {
         a: [
             "string", null, 0, "1", 1, {
                 prop: null,
-                foo: [1,2,null,{}, [], [1,2,3]],
+                foo: [1, 2, null, {}, [], [1, 2, 3]],
                 newprop: undefined, // different: newprop was added
                 bar: undefined
             }, 3, "Hey!", "Κάνε πάντα γνωρίζουμε ας των, μηχανής επιδιόρθωσης επιδιορθώσεις ώς μια. Κλπ ας"
@@ -891,7 +1354,7 @@ test("Complex Objects.", function() {
         a: [
             "string", null, 0, "1", 1, {
                 prop: null,
-                foo: [1,2,null,{}, [], [1,2,3]],
+                foo: [1, 2, null, {}, [], [1, 2, 3]],
                 bar: undefined
             }, 3, "Hey!", "Κάνε πάντα γνωρίζουμε ας των, μηχανής επιδιόρθωσης επιδιορθώσεις ώς μια. Κλπ α" // different: missing last char
         ],
@@ -904,7 +1367,7 @@ test("Complex Objects.", function() {
         a: [
             "string", null, 0, "1", 1, {
                 prop: null,
-                foo: [1,2,undefined,{}, [], [1,2,3]], // different: undefined instead of null
+                foo: [1, 2, undefined, {}, [], [1, 2, 3]], // different: undefined instead of null
                 bar: undefined
             }, 3, "Hey!", "Κάνε πάντα γνωρίζουμε ας των, μηχανής επιδιόρθωσης επιδιορθώσεις ώς μια. Κλπ ας"
         ],
@@ -917,7 +1380,7 @@ test("Complex Objects.", function() {
         a: [
             "string", null, 0, "1", 1, {
                 prop: null,
-                foo: [1,2,null,{}, [], [1,2,3]],
+                foo: [1, 2, null, {}, [], [1, 2, 3]],
                 bat: undefined // different: property name not "bar"
             }, 3, "Hey!", "Κάνε πάντα γνωρίζουμε ας των, μηχανής επιδιόρθωσης επιδιορθώσεις ώς μια. Κλπ ας"
         ],
@@ -941,193 +1404,380 @@ test("Complex Objects.", function() {
 });
 
 
-test("Complex Arrays.", function() {
+test("Complex Arrays.", function () {
 
     function fn() {
     }
 
     equals(QUnit.equiv(
-                [1, 2, 3, true, {}, null, [
-                    {
-                        a: ["", '1', 0]
-                    },
-                    5, 6, 7
-                ], "foo"],
-                [1, 2, 3, true, {}, null, [
-                    {
-                        a: ["", '1', 0]
-                    },
-                    5, 6, 7
-                ], "foo"]),
-            true);
+        [1, 2, 3, true, {}, null, [
+            {
+                a: ["", '1', 0]
+            },
+            5,
+            6,
+            7
+        ], "foo"],
+        [1, 2, 3, true, {}, null, [
+            {
+                a: ["", '1', 0]
+            },
+            5,
+            6,
+            7
+        ], "foo"]),
+        true);
 
     equals(QUnit.equiv(
-                [1, 2, 3, true, {}, null, [
-                    {
-                        a: ["", '1', 0]
-                    },
-                    5, 6, 7
-                ], "foo"],
-                [1, 2, 3, true, {}, null, [
-                    {
-                        b: ["", '1', 0]         // not same property name
-                    },
-                    5, 6, 7
-                ], "foo"]),
-            false);
+        [1, 2, 3, true, {}, null, [
+            {
+                a: ["", '1', 0]
+            },
+            5,
+            6,
+            7
+        ], "foo"],
+        [1, 2, 3, true, {}, null, [
+            {
+                b: ["", '1', 0]         // not same property name
+            },
+            5,
+            6,
+            7
+        ], "foo"]),
+        false);
 
-    var a = [{
-        b: fn,
-        c: false,
-        "do": "reserved word",
-        "for": {
-            ar: [3,5,9,"hey!", [], {
-                ar: [1,[
-                    3,4,6,9, null, [], []
-                ]],
-                e: fn,
-                f: undefined
-            }]
+    var a = [
+        {
+            b: fn,
+            c: false,
+            "do": "reserved word",
+            "for": {
+                ar: [3, 5, 9, "hey!", [], {
+                    ar: [1, [
+                        3, 4, 6, 9, null, [], []
+                    ]],
+                    e: fn,
+                    f: undefined
+                }]
+            },
+            e: 0.43445
         },
-        e: 0.43445
-    }, 5, "string", 0, fn, false, null, undefined, 0, [
-        4,5,6,7,8,9,11,22,33,44,55,"66", null, [], [[[[[3]]]], "3"], {}, 1/0
-    ], [], [[[], "foo", null, {
-        n: 1/0,
-        z: {
-            a: [3,4,5,6,"yep!", undefined, undefined],
-            b: {}
-        }
-    }, {}]]];
+        5,
+        "string",
+        0,
+        fn,
+        false,
+        null,
+        undefined,
+        0,
+        [
+            4, 5, 6, 7, 8, 9, 11, 22, 33, 44, 55, "66", null, [], [
+            [
+                [
+                    [
+                        [3]
+                    ]
+                ]
+            ],
+            "3"
+        ], {}, 1 / 0
+        ],
+        [],
+        [
+            [
+                [],
+                "foo",
+                null,
+                {
+                    n: 1 / 0,
+                    z: {
+                        a: [3, 4, 5, 6, "yep!", undefined, undefined],
+                        b: {}
+                    }
+                },
+                {}
+            ]
+        ]
+    ];
 
     equals(QUnit.equiv(a,
-            [{
+        [
+            {
                 b: fn,
                 c: false,
                 "do": "reserved word",
                 "for": {
-                    ar: [3,5,9,"hey!", [], {
-                        ar: [1,[
-                            3,4,6,9, null, [], []
+                    ar: [3, 5, 9, "hey!", [], {
+                        ar: [1, [
+                            3, 4, 6, 9, null, [], []
                         ]],
                         e: fn,
                         f: undefined
                     }]
                 },
                 e: 0.43445
-            }, 5, "string", 0, fn, false, null, undefined, 0, [
-                4,5,6,7,8,9,11,22,33,44,55,"66", null, [], [[[[[3]]]], "3"], {}, 1/0
-            ], [], [[[], "foo", null, {
-                n: 1/0,
-                z: {
-                    a: [3,4,5,6,"yep!", undefined, undefined],
-                    b: {}
-                }
-            }, {}]]]), true);
+            },
+            5,
+            "string",
+            0,
+            fn,
+            false,
+            null,
+            undefined,
+            0,
+            [
+                4, 5, 6, 7, 8, 9, 11, 22, 33, 44, 55, "66", null, [], [
+                [
+                    [
+                        [
+                            [3]
+                        ]
+                    ]
+                ],
+                "3"
+            ], {}, 1 / 0
+            ],
+            [],
+            [
+                [
+                    [],
+                    "foo",
+                    null,
+                    {
+                        n: 1 / 0,
+                        z: {
+                            a: [3, 4, 5, 6, "yep!", undefined, undefined],
+                            b: {}
+                        }
+                    },
+                    {}
+                ]
+            ]
+        ]), true);
 
     equals(QUnit.equiv(a,
-            [{
+        [
+            {
                 b: fn,
                 c: false,
                 "do": "reserved word",
                 "for": {
-                    ar: [3,5,9,"hey!", [], {
-                        ar: [1,[
-                            3,4,6,9, null, [], []
+                    ar: [3, 5, 9, "hey!", [], {
+                        ar: [1, [
+                            3, 4, 6, 9, null, [], []
                         ]],
                         e: fn,
                         f: undefined
                     }]
                 },
                 e: 0.43445
-            }, 5, "string", 0, fn, false, null, undefined, 0, [
-                4,5,6,7,8,9,11,22,33,44,55,"66", null, [], [[[[[2]]]], "3"], {}, 1/0    // different: [[[[[2]]]]] instead of [[[[[3]]]]]
-            ], [], [[[], "foo", null, {
-                n: 1/0,
-                z: {
-                    a: [3,4,5,6,"yep!", undefined, undefined],
-                    b: {}
-                }
-            }, {}]]]), false);
+            },
+            5,
+            "string",
+            0,
+            fn,
+            false,
+            null,
+            undefined,
+            0,
+            [
+                4, 5, 6, 7, 8, 9, 11, 22, 33, 44, 55, "66", null, [], [
+                [
+                    [
+                        [
+                            [2]
+                        ]
+                    ]
+                ],
+                "3"
+            ], {}, 1 / 0    // different: [[[[[2]]]]] instead of [[[[[3]]]]]
+            ],
+            [],
+            [
+                [
+                    [],
+                    "foo",
+                    null,
+                    {
+                        n: 1 / 0,
+                        z: {
+                            a: [3, 4, 5, 6, "yep!", undefined, undefined],
+                            b: {}
+                        }
+                    },
+                    {}
+                ]
+            ]
+        ]), false);
 
     equals(QUnit.equiv(a,
-            [{
+        [
+            {
                 b: fn,
                 c: false,
                 "do": "reserved word",
                 "for": {
-                    ar: [3,5,9,"hey!", [], {
-                        ar: [1,[
-                            3,4,6,9, null, [], []
+                    ar: [3, 5, 9, "hey!", [], {
+                        ar: [1, [
+                            3, 4, 6, 9, null, [], []
                         ]],
                         e: fn,
                         f: undefined
                     }]
                 },
                 e: 0.43445
-            }, 5, "string", 0, fn, false, null, undefined, 0, [
-                4,5,6,7,8,9,11,22,33,44,55,"66", null, [], [[[[[3]]]], "3"], {}, 1/0
-            ], [], [[[], "foo", null, {
-                n: -1/0,                                                                // different, -Infinity instead of Infinity
-                z: {
-                    a: [3,4,5,6,"yep!", undefined, undefined],
-                    b: {}
-                }
-            }, {}]]]), false);
+            },
+            5,
+            "string",
+            0,
+            fn,
+            false,
+            null,
+            undefined,
+            0,
+            [
+                4, 5, 6, 7, 8, 9, 11, 22, 33, 44, 55, "66", null, [], [
+                [
+                    [
+                        [
+                            [3]
+                        ]
+                    ]
+                ],
+                "3"
+            ], {}, 1 / 0
+            ],
+            [],
+            [
+                [
+                    [],
+                    "foo",
+                    null,
+                    {
+                        n: -1 / 0,                                                                // different, -Infinity instead of Infinity
+                        z: {
+                            a: [3, 4, 5, 6, "yep!", undefined, undefined],
+                            b: {}
+                        }
+                    },
+                    {}
+                ]
+            ]
+        ]), false);
 
     equals(QUnit.equiv(a,
-            [{
+        [
+            {
                 b: fn,
                 c: false,
                 "do": "reserved word",
                 "for": {
-                    ar: [3,5,9,"hey!", [], {
-                        ar: [1,[
-                            3,4,6,9, null, [], []
+                    ar: [3, 5, 9, "hey!", [], {
+                        ar: [1, [
+                            3, 4, 6, 9, null, [], []
                         ]],
                         e: fn,
                         f: undefined
                     }]
                 },
                 e: 0.43445
-            }, 5, "string", 0, fn, false, null, undefined, 0, [
-                4,5,6,7,8,9,11,22,33,44,55,"66", null, [], [[[[[3]]]], "3"], {}, 1/0
-            ], [], [[[], "foo", {                                                       // different: null is missing
-                n: 1/0,
-                z: {
-                    a: [3,4,5,6,"yep!", undefined, undefined],
-                    b: {}
-                }
-            }, {}]]]), false);
+            },
+            5,
+            "string",
+            0,
+            fn,
+            false,
+            null,
+            undefined,
+            0,
+            [
+                4, 5, 6, 7, 8, 9, 11, 22, 33, 44, 55, "66", null, [], [
+                [
+                    [
+                        [
+                            [3]
+                        ]
+                    ]
+                ],
+                "3"
+            ], {}, 1 / 0
+            ],
+            [],
+            [
+                [
+                    [],
+                    "foo",
+                    {                                                       // different: null is missing
+                        n: 1 / 0,
+                        z: {
+                            a: [3, 4, 5, 6, "yep!", undefined, undefined],
+                            b: {}
+                        }
+                    },
+                    {}
+                ]
+            ]
+        ]), false);
 
     equals(QUnit.equiv(a,
-            [{
+        [
+            {
                 b: fn,
                 c: false,
                 "do": "reserved word",
                 "for": {
-                    ar: [3,5,9,"hey!", [], {
-                        ar: [1,[
-                            3,4,6,9, null, [], []
+                    ar: [3, 5, 9, "hey!", [], {
+                        ar: [1, [
+                            3, 4, 6, 9, null, [], []
                         ]],
                         e: fn
-                                                                                // different: missing property f: undefined
+                        // different: missing property f: undefined
                     }]
                 },
                 e: 0.43445
-            }, 5, "string", 0, fn, false, null, undefined, 0, [
-                4,5,6,7,8,9,11,22,33,44,55,"66", null, [], [[[[[3]]]], "3"], {}, 1/0
-            ], [], [[[], "foo", null, {
-                n: 1/0,
-                z: {
-                    a: [3,4,5,6,"yep!", undefined, undefined],
-                    b: {}
-                }
-            }, {}]]]), false);
+            },
+            5,
+            "string",
+            0,
+            fn,
+            false,
+            null,
+            undefined,
+            0,
+            [
+                4, 5, 6, 7, 8, 9, 11, 22, 33, 44, 55, "66", null, [], [
+                [
+                    [
+                        [
+                            [3]
+                        ]
+                    ]
+                ],
+                "3"
+            ], {}, 1 / 0
+            ],
+            [],
+            [
+                [
+                    [],
+                    "foo",
+                    null,
+                    {
+                        n: 1 / 0,
+                        z: {
+                            a: [3, 4, 5, 6, "yep!", undefined, undefined],
+                            b: {}
+                        }
+                    },
+                    {}
+                ]
+            ]
+        ]), false);
 });
 
 
-test("Prototypal inheritance", function() {
+test("Prototypal inheritance", function () {
     function Gizmo(id) {
         this.id = id;
     }
@@ -1135,6 +1785,7 @@ test("Prototypal inheritance", function() {
     function Hoozit(id) {
         this.id = id;
     }
+
     Hoozit.prototype = new Gizmo();
 
     var gizmo = new Gizmo("ok");
@@ -1142,7 +1793,9 @@ test("Prototypal inheritance", function() {
 
     // Try this test many times after test on instances that hold function
     // to make sure that our code does not mess with last object constructor memoization.
-    equals(QUnit.equiv(function () {}, function () {}), false);
+    equals(QUnit.equiv(function () {
+    }, function () {
+    }), false);
 
     // Hoozit inherit from Gizmo
     // hoozit instanceof Hoozit; // true
@@ -1158,7 +1811,9 @@ test("Prototypal inheritance", function() {
     // Make sure this is still true !important
     // The reason for this is that I forgot to reset the last
     // caller to where it were called from.
-    equals(QUnit.equiv(function () {}, function () {}), false);
+    equals(QUnit.equiv(function () {
+    }, function () {
+    }), false);
 
     // Make sure this is still true !important
     equals(QUnit.equiv(hoozit, gizmo), true);
@@ -1172,18 +1827,24 @@ test("Prototypal inheritance", function() {
     equals(QUnit.equiv(hoozit, gizmo), false);
 
     // Make sure this is still true !important
-    equals(QUnit.equiv(function () {}, function () {}), false);
+    equals(QUnit.equiv(function () {
+    }, function () {
+    }), false);
 });
 
 
-test("Instances", function() {
-    function A() {}
+test("Instances", function () {
+    function A() {
+    }
+
     var a1 = new A();
     var a2 = new A();
 
     function B() {
-        this.fn = function () {};
+        this.fn = function () {
+        };
     }
+
     var b1 = new B();
     var b2 = new B();
 
@@ -1197,7 +1858,7 @@ test("Instances", function() {
     function Car(year) {
         var privateVar = 0;
         this.year = year;
-        this.isOld = function() {
+        this.isOld = function () {
             return year > 10;
         };
     }
@@ -1205,7 +1866,7 @@ test("Instances", function() {
     function Human(year) {
         var privateVar = 1;
         this.year = year;
-        this.isOld = function() {
+        this.isOld = function () {
             return year > 80;
         };
     }
@@ -1221,7 +1882,8 @@ test("Instances", function() {
 
     var same = {
         year: 30,
-        isOld: function () {}
+        isOld: function () {
+        }
     };
 
     equals(QUnit.equiv(car, car), true);
@@ -1231,7 +1893,7 @@ test("Instances", function() {
 });
 
 
-test("Complex Instances Nesting (with function value in literals and/or in nested instances)", function() {
+test("Complex Instances Nesting (with function value in literals and/or in nested instances)", function () {
     function A(fn) {
         this.a = {};
         this.fn = fn;
@@ -1239,10 +1901,13 @@ test("Complex Instances Nesting (with function value in literals and/or in neste
         this.o = {};
         this.fn1 = fn;
     }
+
     function B(fn) {
         this.fn = fn;
-        this.fn1 = function () {};
-        this.a = new A(function () {});
+        this.fn1 = function () {
+        };
+        this.a = new A(function () {
+        });
     }
 
     function fnOutside() {
@@ -1251,9 +1916,11 @@ test("Complex Instances Nesting (with function value in literals and/or in neste
     function C(fn) {
         function fnInside() {
         }
+
         this.x = 10;
         this.fn = fn;
-        this.fn1 = function () {};
+        this.fn1 = function () {
+        };
         this.fn2 = fnInside;
         this.fn3 = {
             a: true,
@@ -1264,10 +1931,12 @@ test("Complex Instances Nesting (with function value in literals and/or in neste
         // This function will be ignored.
         // Even if it is not visible for all instances (e.g. locked in a closures),
         // it is from a  property that makes part of an instance (e.g. from the C constructor)
-        this.b1 = new B(function () {});
+        this.b1 = new B(function () {
+        });
         this.b2 = new B({
             x: {
-                b2: new B(function() {})
+                b2: new B(function () {
+                })
             }
         });
     }
@@ -1275,9 +1944,11 @@ test("Complex Instances Nesting (with function value in literals and/or in neste
     function D(fn) {
         function fnInside() {
         }
+
         this.x = 10;
         this.fn = fn;
-        this.fn1 = function () {};
+        this.fn1 = function () {
+        };
         this.fn2 = fnInside;
         this.fn3 = {
             a: true,
@@ -1293,10 +1964,12 @@ test("Complex Instances Nesting (with function value in literals and/or in neste
         // This function will be ignored.
         // Even if it is not visible for all instances (e.g. locked in a closures),
         // it is from a  property that makes part of an instance (e.g. from the C constructor)
-        this.b1 = new B(function () {});
+        this.b1 = new B(function () {
+        });
         this.b2 = new B({
             x: {
-                b2: new B(function() {})
+                b2: new B(function () {
+                })
             }
         });
     }
@@ -1304,9 +1977,11 @@ test("Complex Instances Nesting (with function value in literals and/or in neste
     function E(fn) {
         function fnInside() {
         }
+
         this.x = 10;
         this.fn = fn;
-        this.fn1 = function () {};
+        this.fn1 = function () {
+        };
         this.fn2 = fnInside;
         this.fn3 = {
             a: true,
@@ -1317,46 +1992,59 @@ test("Complex Instances Nesting (with function value in literals and/or in neste
         // This function will be ignored.
         // Even if it is not visible for all instances (e.g. locked in a closures),
         // it is from a  property that makes part of an instance (e.g. from the C constructor)
-        this.b1 = new B(function () {});
+        this.b1 = new B(function () {
+        });
         this.b2 = new B({
             x: {
-                b1: new B({a: function() {}}),
-                b2: new B(function() {})
+                b1: new B({a: function () {
+                }}),
+                b2: new B(function () {
+                })
             }
         });
     }
 
 
-    var a1 = new A(function () {});
-    var a2 = new A(function () {});
+    var a1 = new A(function () {
+    });
+    var a2 = new A(function () {
+    });
     equals(QUnit.equiv(a1, a2), true);
 
     equals(QUnit.equiv(a1, a2), true); // different instances
 
-    var b1 = new B(function () {});
-    var b2 = new B(function () {});
+    var b1 = new B(function () {
+    });
+    var b2 = new B(function () {
+    });
     equals(QUnit.equiv(b1, b2), true);
 
-    var c1 = new C(function () {});
-    var c2 = new C(function () {});
+    var c1 = new C(function () {
+    });
+    var c2 = new C(function () {
+    });
     equals(QUnit.equiv(c1, c2), true);
 
-    var d1 = new D(function () {});
-    var d2 = new D(function () {});
+    var d1 = new D(function () {
+    });
+    var d2 = new D(function () {
+    });
     equals(QUnit.equiv(d1, d2), false);
 
-    var e1 = new E(function () {});
-    var e2 = new E(function () {});
+    var e1 = new E(function () {
+    });
+    var e2 = new E(function () {
+    });
     equals(QUnit.equiv(e1, e2), false);
 
 });
 
 
-test('object with references to self wont loop', function(){
+test('object with references to self wont loop', function () {
     var circularA = {
-        abc:null
+        abc: null
     }, circularB = {
-        abc:null
+        abc: null
     };
     circularA.abc = circularA;
     circularB.abc = circularB;
@@ -1371,25 +2059,29 @@ test('object with references to self wont loop', function(){
     equals(QUnit.equiv(circularA, circularB), false, "Should not repeat test on object (unambigous test)");
 });
 
-test('array with references to self wont loop', function(){
+test('array with references to self wont loop', function () {
     var circularA = [],
         circularB = [];
     circularA.push(circularA);
     circularB.push(circularB);
     equals(QUnit.equiv(circularA, circularB), true, "Should not repeat test on array (ambigous test)");
 
-    circularA.push( 'abc' );
-    circularB.push( 'abc' );
+    circularA.push('abc');
+    circularB.push('abc');
     equals(QUnit.equiv(circularA, circularB), true, "Should not repeat test on array (ambigous test)");
 
-    circularA.push( 'hello' );
-    circularB.push( 'goodbye' );
+    circularA.push('hello');
+    circularB.push('goodbye');
     equals(QUnit.equiv(circularA, circularB), false, "Should not repeat test on array (unambigous test)");
 });
 
-test('mixed object/array with references to self wont loop', function(){
-    var circularA = [{abc:null}],
-        circularB = [{abc:null}];
+test('mixed object/array with references to self wont loop', function () {
+    var circularA = [
+            {abc: null}
+        ],
+        circularB = [
+            {abc: null}
+        ];
     circularA[0].abc = circularA;
     circularB[0].abc = circularB;
 
@@ -1406,7 +2098,7 @@ test('mixed object/array with references to self wont loop', function(){
     equals(QUnit.equiv(circularA, circularB), false, "Should not repeat test on object/array (unambigous test)");
 });
 
-test("Test that must be done at the end because they extend some primitive's prototype", function() {
+test("Test that must be done at the end because they extend some primitive's prototype", function () {
     // Try that a function looks like our regular expression.
     // This tests if we check that a and b are really both instance of RegExp
     Function.prototype.global = true;
@@ -1414,8 +2106,10 @@ test("Test that must be done at the end because they extend some primitive's pro
     Function.prototype.ignoreCase = false;
     Function.prototype.source = "my regex";
     var re = /my regex/gm;
-    equals(QUnit.equiv(re, function () {}), false, "A function that looks that a regex isn't a regex");
+    equals(QUnit.equiv(re, function () {
+    }), false, "A function that looks that a regex isn't a regex");
     // This test will ensures it works in both ways, and ALSO especially that we can make differences
     // between RegExp and Function constructor because typeof on a RegExpt instance is "function"
-    equals(QUnit.equiv(function () {}, re), false, "Same conversely, but ensures that function and regexp are distinct because their constructor are different");
+    equals(QUnit.equiv(function () {
+    }, re), false, "Same conversely, but ensures that function and regexp are distinct because their constructor are different");
 });

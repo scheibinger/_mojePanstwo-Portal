@@ -85,16 +85,15 @@
     }
 
     function resultList(word, data) {
-                
+
         if (groupsAndResults.find('.carousel-inner .item.results ul').length > 0 && groupsAndResults.find('.carousel-inner .item.results ul').css('opacity') == '1')
             groupsAndResults.find('.carousel-inner .item.results ul').animate({'opacity': '.2'}, animSpeed);
 
         var resultUl = groupsAndResults.find('.carousel-inner .item.results ul');
         resultUl.html('');
-		
-		
-		
-        if( data == 0) {
+
+
+        if (data == 0) {
             resultUl.append(
                 jQuery('<span></span>').addClass('center').html(_mPHeart.translation.LC_KRS_BRAK_WYNIKOW + ': <strong>' + word + '</strong>')
             );

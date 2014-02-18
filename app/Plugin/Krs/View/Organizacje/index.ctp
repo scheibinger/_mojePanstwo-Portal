@@ -34,7 +34,7 @@
                             <h2 class="carousel-title"><?= $group['label'] ?></h2>
                             <ul>
                                 <?php foreach ($group['content'] as $result) echo $this->element('item', array(
-                                	'result' => $result,
+                                    'result' => $result,
                                 )); ?>
                             </ul>
                         </div>

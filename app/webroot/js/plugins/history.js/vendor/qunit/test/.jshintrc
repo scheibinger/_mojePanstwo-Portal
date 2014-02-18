@@ -1,9 +1,9 @@
 {
-	"predef": [
-		"QUnit"
-	],
+    "predef": [
+        "QUnit"
+    ],
 
-	"smarttabs": true,
+    "smarttabs": true,
 
-	"browser": true
+    "browser": true
 }

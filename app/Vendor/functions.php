@@ -134,19 +134,20 @@ if (!function_exists('endsWith')) {
 
 #    Output easy-to-read numbers
 #    by james at bandit.co.nz
-function number_format_h($n, $decimals = 0, $dec_point = '.', $thousands_sep = ' ') {
+function number_format_h($n, $decimals = 0, $dec_point = '.', $thousands_sep = ' ')
+{
     // first strip any formatting;
-    $n = (0+str_replace(",","",$n));
-    
+    $n = (0 + str_replace(",", "", $n));
+
     // is this a number?
-    if(!is_numeric($n)) return false;
-    
+    if (!is_numeric($n)) return false;
+
     // now filter it;
-    if($n>1000000000000000) return round(($n/1000000000000000),1).' Bld';
-    else if($n>1000000000000) return round(($n/1000000000000),1).' B';
-    else if($n>1000000000) return round(($n/1000000000),1).' Mld';
-    else if($n>1000000) return round(($n/1000000),1).' M';
-    else if($n>1000) return round(($n/1000),1).' k';
-    
+    if ($n > 1000000000000000) return round(($n / 1000000000000000), 1) . ' Bld';
+    else if ($n > 1000000000000) return round(($n / 1000000000000), 1) . ' B';
+    else if ($n > 1000000000) return round(($n / 1000000000), 1) . ' Mld';
+    else if ($n > 1000000) return round(($n / 1000000), 1) . ' M';
+    else if ($n > 1000) return round(($n / 1000), 1) . ' k';
+
     return number_format($n, $decimals, $dec_point, $thousands_sep);
 }
