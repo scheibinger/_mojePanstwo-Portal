@@ -1,5 +1,5 @@
 <?php $this->Combinator->add_libs('css', $this->Less->css('ustawy', array('plugin' => 'Ustawy'))) ?>
-<?php $this->Combinator->add_libs('js', 'ustawy.ustawy.js') ?>
+<?php $this->Combinator->add_libs('js', 'Ustawy.ustawy.js') ?>
 
 <div class="appHeader">
     <div class="container innerContent">

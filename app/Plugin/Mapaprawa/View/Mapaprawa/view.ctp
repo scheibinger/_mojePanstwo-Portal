@@ -3,8 +3,8 @@
 
 <?php $this->Combinator->add_libs('js', 'highcharts/highcharts'); ?>
 <?php $this->Combinator->add_libs('js', 'highcharts/locals'); ?>
-<?php $this->Combinator->add_libs('js', 'mapaprawa.highcharts-init'); ?>
-<?php $this->Combinator->add_libs('js', 'mapaprawa.mapaprawa-graph'); ?>
+<?php $this->Combinator->add_libs('js', 'Mapaprawa.highcharts-init'); ?>
+<?php $this->Combinator->add_libs('js', 'Mapaprawa.mapaprawa-graph'); ?>
 
 <?php echo $this->Html->script('//cdn.jsdelivr.net/raphael/2.1.0/raphael-min.js', array('block' => 'scriptBlock')); ?>
 <?php echo $this->Html->script('//cdn.jsdelivr.net/jsrender/1.0pre35/jsrender.min.js', array('block' => 'scriptBlock')); ?>
