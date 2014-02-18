@@ -90,5 +90,13 @@ class PowiadomieniaController extends PowiadomieniaAppController
         }
 
     }
+    
+    public function flagObjects()
+    {
+	    
+	    $this->set('status', 'OK');
+	    $this->set('_serialize', array('status'));
+	    
+    }
 
 }
