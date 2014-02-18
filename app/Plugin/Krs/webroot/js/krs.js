@@ -2,8 +2,8 @@
 (function ($) {
     var searchInput = $('.appHeader .searchInput'),
         groupsAndResults = $('#groupsAndResults'),
-        poslowieBlock = $('.poslowie .blockInfo'),
-        poslowieAdditional = $('.poslowieDetails'),
+    //poslowieBlock = $('.poslowie .blockInfo'),
+    //poslowieAdditional = $('.poslowieDetails'),
         lastSearch = null,
         krsTime = null,
         krsCache = {},
@@ -35,9 +35,12 @@
 
                 groupsAndResults.find('.carousel-inner .item:first-child').before(itemResults);
                 indicatorLast.after(indicatorResults);
+
+                groupsAndResults.find('.carousel-indicators.hidden').removeClass('hidden');
+                groupsAndResults.find('.carousel-control.hidden').removeClass('hidden');
             }
 
-            $('#groupsAndResults').carousel(0);
+            groupsAndResults.carousel(0);
 
             window.clearTimeout(krsTime);
             krsTime = window.setTimeout(function () {
@@ -92,7 +95,6 @@
         var resultUl = groupsAndResults.find('.carousel-inner .item.results ul');
         resultUl.html('');
 
-
         if (data == 0) {
             resultUl.append(
                 jQuery('<span></span>').addClass('center').html(_mPHeart.translation.LC_KRS_BRAK_WYNIKOW + ': <strong>' + word + '</strong>')
@@ -104,24 +106,33 @@
             resultUl.append(data);
         }
         resultUl.animate({'opacity': '1'}, animSpeed);
+        groupsAndResults.find('.carousel-inner').css('height', groupsAndResults.find('.carousel-inner .item.results.active').outerHeight());
     }
 
-    poslowieBlock.find('.link > a').click(function (e) {
-        e.preventDefault();
-
-        poslowieBlock.removeClass('active');
-        $(this).parents('.blockInfo').addClass('active');
-
-        if (poslowieAdditional.is(':hidden'))
-            poslowieAdditional.stop(true, true).slideDown();
-
-        poslowieAdditional.find('.container').animate({
-            opacity: 0
-        }, animSpeed, function () {
-            //@TODO: change content
-            poslowieAdditional.find('.container').animate({
-                opacity: 1
-            }, animSpeed);
-        })
+    groupsAndResults.carousel();
+    groupsAndResults.on('slide.bs.carousel', function () {
+        groupsAndResults.find('.carousel-inner').css('height', groupsAndResults.find('.carousel-inner .item.active').outerHeight());
     })
+    groupsAndResults.on('slid.bs.carousel', function () {
+        groupsAndResults.find('.carousel-inner').css('height', groupsAndResults.find('.carousel-inner .item.active').outerHeight());
+    })
+
+    /*poslowieBlock.find('.link > a').click(function (e) {
+     e.preventDefault();
+
+     poslowieBlock.removeClass('active');
+     $(this).parents('.blockInfo').addClass('active');
+
+     if (poslowieAdditional.is(':hidden'))
+     poslowieAdditional.stop(true, true).slideDown();
+
+     poslowieAdditional.find('.container').animate({
+     opacity: 0
+     }, animSpeed, function () {
+     //@TODO: change content
+     poslowieAdditional.find('.container').animate({
+     opacity: 1
+     }, animSpeed);
+     })
+     })*/
 }(jQuery));

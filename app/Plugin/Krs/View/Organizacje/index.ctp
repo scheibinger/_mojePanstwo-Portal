@@ -41,19 +41,21 @@
                     <? } ?>
                 </div>
 
-                <ol class="carousel-indicators">
-                    <?php for ($i = 0; $i < count($groups); $i++) { ?>
+                <ol class="carousel-indicators<?php if (count($groups) < 2) echo ' hidden' ?>">
+                <?php for ($i = 0; $i < count($groups); $i++) { ?>
                         <li data-target="#groupsAndResults"
                             data-slide-to="<?= $i ?>"<? if ($i == 0) { ?> class="active"<? } ?>>
                         </li>
                     <?php } ?>
                 </ol>
 
-                <a class="left carousel-control" href="#groupsAndResults" data-slide="prev">
-                    <span class="glyphicon glyphicon-chevron-left"></span>
+                <a class="left carousel-control<?php if (count($groups) < 2) echo ' hidden' ?>" href="#groupsAndResults"
+                   data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left"></span>
                 </a>
-                <a class="right carousel-control" href="#groupsAndResults" data-slide="next">
-                    <span class="glyphicon glyphicon-chevron-right"></span>
+                <a class="right carousel-control<?php if (count($groups) < 2) echo ' hidden' ?>"
+                   href="#groupsAndResults" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right"></span>
                 </a>
             </div>
         </div>

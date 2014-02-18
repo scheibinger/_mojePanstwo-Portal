@@ -47,65 +47,127 @@
         .resultsList {
             background-color: #FFFFFF;
             min-height: 250px;
+            -moz-transition: height .5s;
+            -ms-transition: height .5s;
+            -o-transition: height .5s;
+            -webkit-transition: height .5s;
+            transition: height .5s;
 
             #groupsAndResults {
-                @sideSize: 4%;
-                @innerSize: 92%;
+                @arrowsControlSize: 40px;
+                @indicatorsSize: 50px;
+
+                color: #555;
+                padding: 0 @arrowsControlSize;
+                margin: 0 0 @indicatorsSize 0;
+
+                .carousel-indicators {
+                    @colorMain: #AAA;
+
+                    margin-bottom: 0;
+                    bottom: -26px;
+
+                    li {
+                        border-color: @colorMain;
+                    }
+                    .active {
+                        background-color: @colorMain;
+                    }
+                }
+
+                .item .object {
+                    float: left;
+                    border-bottom: 1px solid #DDD;
+                    border-left: 1px solid #DDD;
+                    margin: 0;
+                    padding-top: 6px;
+                    padding-bottom: 12px;
+
+                    &:last-child {
+                        border-bottom: none
+                    }
+
+                    .objectRender {
+                        .formatDate {
+                            padding-right: 15px;
+
+                            > span {
+                                font-family: "Lato", sans-serif;
+                                font-size: 24px;
+                            }
+
+                        }
+
+                        .data {
+                            padding-left: 0;
+                        }
+                    }
+                }
 
                 .carousel-inner {
-                    width: @innerSize;
-                    margin: 0 @sideSize;
+                    background: #FFF;
+                    -moz-border-radius: 5px; /*Firefox*/
+                    -webkit-border-radius: 5px; /*Safari, Chrome*/
+                    border-radius: 5px;
+                    margin: 10px 0;
+                    z-index: 1;
+                    -webkit-transition: height .5s ease;
+                    -moz-transition: height .5s ease;
+                    -ms-transition: height .5s ease;
+                    -o-transition: height .5s ease;
+                    transition: height .5s ease;
 
-                    .item {
+                    > .item {
+                        margin: 0 0 -1px -1px;
+                        overflow: hidden;
 
-                        height: 475px;
+                        &.results {
+                            padding-bottom: 20px;
 
-                        ul li {
-                            height: 50px;
+                            .seeMore {
+                                float: left;
+                                text-align: center;
+                                width: 100%;
+                            }
+
+                            .icon {
+                                display: block;
+
+                                &:before {
+                                    font-family: 'mojePanstwo';
+                                    speak: none;
+                                    font-style: normal;
+                                    font-weight: normal;
+                                    font-variant: normal;
+                                    text-transform: none;
+                                    line-height: 1;
+                                    -webkit-font-smoothing: antialiased;
+                                    -moz-osx-font-smoothing: grayscale;
+                                    font-size: 32px;
+                                    float: left;
+                                    margin-right: 5px;
+                                    color: #BBB;
+                                }
+                                &:hover:before {
+                                    color: #0078AC;
+                                }
+                                &.organization:before {
+                                    content: '\e60e';
+                                    padding-right: 5px;
+                                }
+                                &.person:before {
+                                    content: '\e60d';
+                                    padding-right: 3px;
+                                }
+                            }
                         }
+
                         span.center {
                             float: left;
                             font-size: 16px;
                             margin: 10px 0 20px;
                             text-align: center;
                             width: 100%;
-                        }
-                        .seeMore {
-                            float: left;
-                            text-align: center;
-                            width: 100%;
-                        }
-
-                        .icon {
-
-                            display: block;
-
-                            &:before {
-                                font-family: 'mojePanstwo';
-                                speak: none;
-                                font-style: normal;
-                                font-weight: normal;
-                                font-variant: normal;
-                                text-transform: none;
-                                line-height: 1;
-                                -webkit-font-smoothing: antialiased;
-                                -moz-osx-font-smoothing: grayscale;
-                                font-size: 32px;
-                                float: left;
-                                margin-right: 5px;
-                                color: #BBB;
-                            }
-                            &:hover:before {
-                                color: #0078AC;
-                            }
-                            &.organization:before {
-                                content: '\e60e';
-                                padding-right: 5px;
-                            }
-                            &.person:before {
-                                content: '\e60d';
-                                padding-right: 3px;
-                            }
                         }
 
                         .carousel-title {
@@ -150,30 +212,35 @@
                         }
                     }
                 }
+
                 .carousel-control {
-                    width: @sideSize;
+                    width: @arrowsControlSize;
                     background: none;
+                    margin: 20px 0;
+                    font-size: 32px;
+                    color: #CCCCCC;
+                    text-shadow: 0 0 1px rgba(0, 0, 0, 0.6);
 
-                    .icon-prev, .icon-next, .glyphicon-chevron-left, .glyphicon-chevron-right {
-                        height: 26px;
-                        margin-top: -20px; /*HALF OF HEIGHT + LITTLE MORE CAUSE OF H2 HEIGHT*/
+                    &:hover span {
+                        color: #4183C4;
                     }
-                }
-                .carousel-indicators {
-                    bottom: 0;
-                    position: relative;
-                    margin-top: 25px;
 
-                    li {
-                        margin: 1px 2px;
+                    > span {
+                        width: 20px;
+                        height: 20px;
+                        margin-top: -10px;
+                        color: #999;
+                    }
 
-                        &, &.active {
-                            width: 10px;
-                            height: 10px;
+                    &.left {
+                        > span {
+                            margin-left: -14px;
                         }
+                    }
 
-                        &:first-child {
-                            margin-right: -2px;
+                    &.right {
+                        > span {
+                            margin-right: 0;
                         }
                     }
                 }
