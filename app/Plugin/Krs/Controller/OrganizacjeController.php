@@ -26,9 +26,22 @@ class OrganizacjeController extends AppController
                 $search = $this->API->KRS()->search($q);
 
             $search = @$search['search'];
-
-            $this->set('search', $search);
-            $this->set('_serialize', array('search'));
+            $html = '';
+            
+            if( !empty($search) )
+            {
+            	$view = new View($this, false);
+	            foreach( $search as $result )
+	            {
+	            	$html .= $view->element('item', array(
+	            		'result' => $result,
+	            	));
+	            }
+            }
+            
+            $this->set('html', $html);
+            $this->set('_serialize', 'html');
+            // $this->RequestHandler->renderAs($this, 'json');
 
         } else $this->redirect('/krs');
     }

@@ -9,7 +9,7 @@
             <div class="col-xs-12 col-sm-8 col-sm-offset-2">
                 <form class="searchInput" class="searchKRSForm" action="/krs">
                     <div class="searchKRS input-group main_input">
-                        <input name="q" value="" type="text"
+                        <input name="q" value="" autocomplete="off" type="text"
                                placeholder="<?php echo __d('krs', 'LC_KRS_SEARCH_PLACEHOLDER'); ?>"
                                class="form-control input-lg">
 		                <span class="input-group-btn">
@@ -33,60 +33,9 @@
                         } ?>">
                             <h2 class="carousel-title"><?= $group['label'] ?></h2>
                             <ul>
-                                <?php foreach ($group['content'] as $result) {
-                                    $title = trim($result['nazwa']);
-                                    $titleLen = strlen($title);
-
-                                    $strs = array(
-                                        'SPÓŁKA Z OGRANICZONĄ ODPOWIEDZIALNOŚCIĄ W LIKWIDACJI',
-                                        'SPÓŁKA Z OGRANICZONĄ ODPOWIEDZIALNOŚCIĄ',
-                                    );
-
-                                    foreach ($strs as $str) {
-                                        if (endsWith($title, $str)) {
-                                            $title = substr($title, 0, $titleLen - strlen($str));
-                                            break;
-                                        }
-                                    }
-
-
-                                    $title = trim($title);
-                                    ?>
-                                    <li>
-                                        <p class="title">
-                                            <a href="<?php if ($result['type'] == 'organization') {
-                                                echo('/dane/krs_podmioty/' . $result['id']);
-                                            } elseif ($result['type'] == 'person') {
-                                                echo('/dane/krs_osoby/' . $result['id']);
-                                            } ?>" target="_self"><?php echo $title ?>
-                                            </a>
-                                        </p>
-
-                                        <p class="subtitle">
-                                            <?
-
-                                            $parts = array(
-                                                $result['miejscowosc']
-                                            );
-
-                                            if ($result['kapital_zakladowy']) {
-                                                //setlocale(LC_MONETARY, 'pl_PL');
-                                                //$parts[] = money_format('%i', $result['kapital_zakladowy']);
-                                                $parts[] = number_format($result['kapital_zakladowy'], 2, ',', ' ') . ' PLN';
-                                            }
-
-                                            $wiek = pl_wiek($result['data_rejestracji']);
-
-                                            if ($wiek)
-                                                $parts[] = pl_dopelniacz($wiek, 'rok', 'lata', 'lat');
-                                            else
-                                                $parts[] = $this->Czas->dataSlownie($result['data_rejestracji']);
-
-                                            echo implode(' <span class="separator">|</span> ', $parts);
-                                            ?>
-                                        </p>
-                                    </li>
-                                <?php } ?>
+                                <?php foreach ($group['content'] as $result) echo $this->element('item', array(
+                                	'result' => $result,
+                                )); ?>
                             </ul>
                         </div>
                     <? } ?>

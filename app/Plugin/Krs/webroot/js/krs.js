@@ -85,13 +85,16 @@
     }
 
     function resultList(word, data) {
+                
         if (groupsAndResults.find('.carousel-inner .item.results ul').length > 0 && groupsAndResults.find('.carousel-inner .item.results ul').css('opacity') == '1')
             groupsAndResults.find('.carousel-inner .item.results ul').animate({'opacity': '.2'}, animSpeed);
 
         var resultUl = groupsAndResults.find('.carousel-inner .item.results ul');
         resultUl.html('');
-
-        if (data.search.length == 0) {
+		
+		
+		
+        if( data == 0) {
             resultUl.append(
                 jQuery('<span></span>').addClass('center').html(_mPHeart.translation.LC_KRS_BRAK_WYNIKOW + ': <strong>' + word + '</strong>')
             );
@@ -99,22 +102,7 @@
         } else {
             if (groupsAndResults.find('.results .seeMore').is(':hidden'))
                 groupsAndResults.find('.results .seeMore').show();
-            $.each(data.search, function () {
-                var dataSearch = this;
-                resultUl.append(
-                    $('<li></li>').append(function () {
-                        var link = jQuery('<a></a>').attr('target', '_self');
-
-                        if (dataSearch['type'] == 'organization') {
-                            link.attr({'href': '/dane/krs_podmioty/' + dataSearch['id'], 'class': 'icon organization'})
-                        } else if (dataSearch['type'] == 'person') {
-                            link.attr({'href': '/dane/krs_osoby/' + dataSearch['id'], 'class': 'icon person'})
-                        }
-                        link.html(dataSearch['nazwa'] + ' <small>(' + dataSearch['field_name'] + ':&nbsp' + dataSearch['field_value'] + ')</small>');
-                        $(this).append(link)
-                    })
-                )
-            });
+            resultUl.append(data);
         }
         resultUl.animate({'opacity': '1'}, animSpeed);
     }
