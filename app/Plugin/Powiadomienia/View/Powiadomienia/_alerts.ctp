@@ -37,8 +37,8 @@
     </ul>
     <div class="additionalOptions hidden-xs col-sm-2 col-md-3">
     <label class="markReadAfterThreeSec">
-            <input type="checkbox"
-                   id="markReadAfterThreeSec"/> <?php echo __d('powiadomienia', 'LC_POWIADOMIENIA_OPTIONS_AUTOCHECK_AS_READER') ?>
+        <input type="checkbox" autocomplete="off"
+               id="markReadAfterThreeSec"/> <?php echo __d('powiadomienia', 'LC_POWIADOMIENIA_OPTIONS_AUTOCHECK_AS_READER') ?>
         </label>
     </div>
 </div>

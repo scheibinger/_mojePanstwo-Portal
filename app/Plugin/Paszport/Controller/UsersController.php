@@ -1121,7 +1121,7 @@ class UsersController extends PaszportAppController
             if ($data && ($streams = $data['streams'])) {
                 if (array_key_exists($this->request->query['stream'], $streams)) {
                     $this->Session->write('Stream.id', $this->request->query['stream']);
-                    $this->Session->setFlash(__d('paszport', 'LC_PASZPORT_FLASH_MESSAGE_SWITCH_STREAM') . ':<br>' . $streams[$this->request->query['stream']]);
+                    $this->Session->setFlash(__d('paszport', 'LC_PASZPORT_FLASH_MESSAGE_SWITCH_STREAM', true) . ': ' . $streams[$this->request->query['stream']], 'flash', array('class' => 'alert-success'));
                 }
             }
         }
