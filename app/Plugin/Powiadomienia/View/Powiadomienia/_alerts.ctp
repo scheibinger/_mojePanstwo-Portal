@@ -43,4 +43,6 @@
     </div>
 </div>
 
-<? include('_objects.ctp'); ?>
+<? echo $this->element('objects-container', array(
+	'objects' => $objects,
+)); ?>

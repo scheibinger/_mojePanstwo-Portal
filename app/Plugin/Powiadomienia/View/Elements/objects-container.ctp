@@ -4,11 +4,9 @@
             <div class="objects">
                 <?php if (true) { //@ TODO : przywrocic?>
                     <div class="powiadomienia">
-                        <?php foreach ($objects as $object) {
-                            echo $this->Dataobject->render($object, 'default', array(
-                                'forceLabel' => true,
-                            ));
-                        } ?>
+                        <? echo $this->element('objects', array(
+                        	'objects' => $objects,
+                        )); ?>
                     </div>
                     <div class="loadMoreContent" data-currentpage="1"></div>
                     <div class="loading"></div>

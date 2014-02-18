@@ -47,14 +47,21 @@ class PowiadomieniaController extends PowiadomieniaAppController
 	        
 	        $view = new View($this, false);
             $view->set(compact('objects')); // set variables
-            $view->viewPath = 'Powiadomienia'; // render an element
-            $view->autoRender = false;
-            $html = $view->render('json', 'Powiadomienia.index'); //@TODO zmienić na Element a nie caly Layout
-
-
+            
+            
+            $html = '';
+            if( !empty($objects) )
+            {
+            	$view = new View($this, false);
+	            $html = $view->element('objects', array(
+            		'objects' => $objects,
+            	));
+            }
+            
             $this->set('html', $html);
-	        $this->set('pagination', $pagination);
-	        $this->set('_serialize', array('html', 'pagination'));
+            $this->set('pagination', $pagination);
+            $this->set('_serialize', array('html', 'pagination'));
+         
 			
 		}
 		else
@@ -82,6 +89,14 @@ class PowiadomieniaController extends PowiadomieniaAppController
         
         }
 
+    }
+    
+    public function flagObjects()
+    {
+	    
+	    $this->set('status', 'OK');
+	    $this->set('_serialize', array('status'));
+	    
     }
 
 }
