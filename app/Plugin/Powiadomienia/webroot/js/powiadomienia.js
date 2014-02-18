@@ -59,9 +59,9 @@
                     },
                     success: function (data) {
                         loadMoreContent.removeClass('loading');
-                        showData.append(data.html);
-                        loadMoreContent.data('currentpage', data.pagination.page);
-                        if (data.pagination.page < data.pagination.pageCount) {
+                        if (data.html) {
+                            loadMoreContent.data('currentpage', page);
+                            showData.append(data.html);
                             loadMoreContentIntervalRunable = true;
                         } else {
                             clearInterval(loadMoreContentIntervalMain);
