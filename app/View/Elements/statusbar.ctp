@@ -23,68 +23,70 @@
                     href="/"></div>
                 <div id="_mojePanstwoCockpitMenuUpSubMenuTopArrow"></div>
                 <div id="_mojePanstwoCockpitMenuUpSubMenu">
-                    <div class="_mojePanstwoCockpitMenuUpSubMenuTitle">Aplikacje</div>
-                    <?php if (!empty($applications['list'])) {
-                        echo '<ul id="_mojePanstwoCockpitMenuUpSubMenuList"><li>';
-                        foreach ($applications['list'] as $index => $app) {
-                            if (($index % $applications['perPage'] == 0) && ($index != 0))
-                                echo '</li><li>';
+                    <div id="_mojePanstwoCockpitMenuUpSubMenuContent">
+                        <div class="_mojePanstwoCockpitMenuUpSubMenuTitle">Aplikacje</div>
+                        <?php if (!empty($applications['list'])) {
+                            echo '<ul id="_mojePanstwoCockpitMenuUpSubMenuList"><li>';
+                            foreach ($applications['list'] as $index => $app) {
+                                if (($index % $applications['perPage'] == 0) && ($index != 0))
+                                    echo '</li><li>';
 
-                            if ($app['Application']['type'] == 'app') {
-                                ?>
-                                <a class="appContruct" href="/<?= $app['Application']['slug'] ?>">
-                                    <div class="_mojePanstwoCockpitMenuUpSubMenuListIcon">
-                                        <div class="_mojePanstwoCockpitMenuUpSubMenuListIconInner">
-                                            <img
-                                                src="/<?= $app['Application']['plugin'] ?>/icon/<?= $app['Application']['slug'] ?>.svg"
-                                                alt="<?= $app['Application']['name'] ?>"/>
+                                if ($app['Application']['type'] == 'app') {
+                                    ?>
+                                    <a class="appContruct" href="/<?= $app['Application']['slug'] ?>">
+                                        <div class="_mojePanstwoCockpitMenuUpSubMenuListIcon">
+                                            <div class="_mojePanstwoCockpitMenuUpSubMenuListIconInner">
+                                                <img
+                                                    src="/<?= $app['Application']['plugin'] ?>/icon/<?= $app['Application']['slug'] ?>.svg"
+                                                    alt="<?= $app['Application']['name'] ?>"/>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div
-                                        class="_mojePanstwoCockpitMenuUpSubMenuListName"><?= $app['Application']['name'] ?></div>
-                                </a>
-                            <?php } else if ($app['Application']['type'] == 'folder') { ?>
-                                <div class="appContruct appFolder"
-                                     data-folder-slug="/<?= $app['Application']['slug'] ?>">
-                                    <div class="_mojePanstwoCockpitMenuUpSubMenuListIcon">
-                                        <div class="_mojePanstwoCockpitMenuUpSubMenuListIconInner">
-                                            <img src="/icon/folder.svg" alt="<?= $app['Application']['name'] ?>"/>
+                                        <div
+                                            class="_mojePanstwoCockpitMenuUpSubMenuListName"><?= $app['Application']['name'] ?></div>
+                                    </a>
+                                <?php } else if ($app['Application']['type'] == 'folder') { ?>
+                                    <div class="appContruct appFolder"
+                                         data-folder-slug="/<?= $app['Application']['slug'] ?>">
+                                        <div class="_mojePanstwoCockpitMenuUpSubMenuListIcon">
+                                            <div class="_mojePanstwoCockpitMenuUpSubMenuListIconInner">
+                                                <img src="/icon/folder.svg" alt="<?= $app['Application']['name'] ?>"/>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div
-                                        class="_mojePanstwoCockpitMenuUpSubMenuListName"><?= $app['Application']['name'] ?></div>
-                                    <ul class="appList">
-                                        <?php foreach ($app['Content'] as $key => $appList) { ?>
-                                            <li>
-                                                <a href="/<?= $appList['slug'] ?>">
-                                                    <div class="appIcon">
-                                                        <div class="innerIcon">
-                                                            <img
-                                                                src="/<?= $appList['plugin'] ?>/icon/<?= $appList['slug'] ?>.svg"
-                                                                alt="<?= $appList['name'] ?>"/>
+                                        <div
+                                            class="_mojePanstwoCockpitMenuUpSubMenuListName"><?= $app['Application']['name'] ?></div>
+                                        <ul class="appList">
+                                            <?php foreach ($app['Content'] as $key => $appList) { ?>
+                                                <li>
+                                                    <a href="/<?= $appList['slug'] ?>">
+                                                        <div class="appIcon">
+                                                            <div class="innerIcon">
+                                                                <img
+                                                                    src="/<?= $appList['plugin'] ?>/icon/<?= $appList['slug'] ?>.svg"
+                                                                    alt="<?= $appList['name'] ?>"/>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="appName"><?= $appList['name'] ?></div>
-                                                </a>
-                                            </li>
-                                        <?php } ?>
-                                    </ul>
-                                </div>
-                            <?php
+                                                        <div class="appName"><?= $appList['name'] ?></div>
+                                                    </a>
+                                                </li>
+                                            <?php } ?>
+                                        </ul>
+                                    </div>
+                                <?php
+                                }
                             }
-                        }
-                        echo '</li></ul>';
-                    }?>
-                    <div id="_mojePanstwoCockpitMenuUpSubMenuControls">
-                        <a class="_mojePanstwoCockpitMenuUpSubMenuControlsArrow _mojePanstwoCockpitMenuUpSubMenuControlsArrowLeft"
-                           href="javascript:void(0)" onclick="_mojePanstwoCockpitSlider.prevSlide();"><span
-                                class="glyphicon glyphicon-chevron-left"></span></a>
+                            echo '</li></ul>';
+                        }?>
+                        <div id="_mojePanstwoCockpitMenuUpSubMenuControls">
+                            <a class="_mojePanstwoCockpitMenuUpSubMenuControlsArrow _mojePanstwoCockpitMenuUpSubMenuControlsArrowLeft"
+                               href="javascript:void(0)" onclick="_mojePanstwoCockpitSlider.prevSlide();"><span
+                                    class="glyphicon glyphicon-chevron-left"></span></a>
 
-                        <p id="_mojePanstwoCockpitMenuUpSubMenuControlsList"></p>
+                            <p id="_mojePanstwoCockpitMenuUpSubMenuControlsList"></p>
 
-                        <a class="_mojePanstwoCockpitMenuUpSubMenuControlsArrow _mojePanstwoCockpitMenuUpSubMenuControlsArrowRight"
-                           href="javascript:void(0)" onclick="_mojePanstwoCockpitSlider.nextSlide();"><span
-                                class="glyphicon glyphicon-chevron-right"></span></a>
+                            <a class="_mojePanstwoCockpitMenuUpSubMenuControlsArrow _mojePanstwoCockpitMenuUpSubMenuControlsArrowRight"
+                               href="javascript:void(0)" onclick="_mojePanstwoCockpitSlider.nextSlide();"><span
+                                    class="glyphicon glyphicon-chevron-right"></span></a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -166,8 +168,9 @@
                     <div class="_mojePanstwoCockpitUserStreams">
                         <form method="get"
                               action="<?php echo $this->Html->url(array('plugin' => 'paszport', 'controller' => 'users', 'action' => 'switchstreams')); ?>">
-                            <select class="selectpicker" autocomplete="off" name="stream" onchange="this.form.submit()">
-                                <?php foreach ($_STREAMS as $stream) { ?>
+                            <select class="selectpicker" autocomplete="off" name="stream" onchange="this.form.submit()"
+                                >
+                            <?php foreach ($_STREAMS as $stream) { ?>
                                     <option <? if ($stream['selected']) { ?>selected="selected"
                                             <? } ?>value="<?= $stream['id'] ?>"><?= $stream['name'] ?></option>
                                 <?php } ?>

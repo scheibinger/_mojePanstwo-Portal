@@ -31,13 +31,22 @@
 
     appMenu.after(searchEngine);
 
+    searchEngineInput = $('._mojePanstwoCockpitSearchInput');
+
     (searchEngineButton = searchEngine.find('._mojePanstwoCockpitSearchContentButton')).click(function (e) {
         e.preventDefault();
-        if ((searchEngineInput = $('._mojePanstwoCockpitSearchInput')).is(':hidden')) {
+        if (searchEngineInput.is(':hidden')) {
             searchEngineButton.addClass('active');
             searchEngineInput.stop(true, true).slideDown(400);
             $('#_main').stop(true, true).animate({'marginTop': '75px'}, 400);
         } else {
+            searchEngineButton.removeClass('active');
+            searchEngineInput.stop(true, true).slideUp(400);
+            $('#_main').stop(true, true).animate({'marginTop': '0'}, 400);
+        }
+    });
+    cockpit.find('._mojePanstwoCockpitMenuUp ._mojePanstwoCockpitMenuUpContentButton').click(function () {
+        if (searchEngineInput.is(':visible')) {
             searchEngineButton.removeClass('active');
             searchEngineInput.stop(true, true).slideUp(400);
             $('#_main').stop(true, true).animate({'marginTop': '0'}, 400);
