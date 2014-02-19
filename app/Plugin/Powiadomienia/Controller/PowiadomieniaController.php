@@ -27,26 +27,27 @@ class PowiadomieniaController extends PowiadomieniaAppController
 
     public function index()
     {
-
+		
+		// echo "index"; die();
+		// FETCHING OBJECTS
+        $queryData = array(
+            'conditions' => array(
+                'keyword' => isset($this->request->query['keyword']) ? $this->request->query['keyword'] : false,
+                'mode' => isset($this->request->query['mode']) ? $this->request->query['mode'] : false,
+            ),
+            'limit' => 20,
+            'paramType' => 'querystring',
+        );
+        
+        $objects = $this->API->search($queryData);
+        
+        debug($objects); die();
+        $this->set('objects', $objects);
+        
+		
         if (@$this->request->params['ext'] == 'json') {
 
-            // FETCHING OBJECTS
-
-            $this->Paginator->settings = array(
-                'conditions' => array(
-                    'keyword' => isset($this->request->query['keyword']) ? $this->request->query['keyword'] : false,
-                    'mode' => isset($this->request->query['mode']) ? $this->request->query['mode'] : false,
-                ),
-                'limit' => 20,
-                'paramType' => 'querystring',
-            );
-
-            $objects = $this->Paginator->paginate('Dataobject');
-            $pagination = @$this->request->params['paging']['Dataobject'];
-
             $view = new View($this, false);
-            $view->set(compact('objects')); // set variables
-
 
             $html = '';
             if (!empty($objects)) {
@@ -57,31 +58,13 @@ class PowiadomieniaController extends PowiadomieniaAppController
             }
 
             $this->set('html', $html);
-            $this->set('pagination', $pagination);
-            $this->set('_serialize', array('html', 'pagination'));
+            $this->set('_serialize', 'html');
 
 
         } else {
 
-            // FETCHING PHRASES
-
             $phrases = $this->API->getPhrases();
             $this->set('phrases', $phrases);
-
-
-            // FETCHING OBJECTS
-
-            $this->Paginator->settings = array(
-                'conditions' => array(
-                    'keyword' => isset($this->request->query['keyword']) ? $this->request->query['keyword'] : false,
-                    'mode' => isset($this->request->query['mode']) ? $this->request->query['mode'] : false,
-                ),
-                'limit' => 20,
-                'paramType' => 'querystring',
-            );
-
-            $objects = $this->Paginator->paginate('Dataobject');
-            $this->set('objects', $objects);
 
         }
 
