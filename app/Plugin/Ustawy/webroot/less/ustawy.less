@@ -48,6 +48,7 @@
 
         #shortcuts {
             margin: 1.5em 0;
+            position: relative;
 
             ul {
                 list-style: none;
@@ -64,21 +65,25 @@
                     a {
                         color: #157AB5;
                     }
+                }
+            }
 
-                    &.active:before {
-                        @size: 20px;
+            .shortcutArrow {
+                @size: 20px;
 
-                        content: ' ';
-                        width: 0;
-                        height: 0;
-                        border-bottom: @size solid #ffffff;
-                        border-left: (@size/2)+5 solid transparent;
-                        border-right: (@size/2)+5 solid transparent;
-                        position: absolute;
-                        bottom: -15px;
-                        left: 50%;
-                        margin-left: -((@size/2)+5);
-                    }
+                width: @size;
+                height: @size;
+                position: absolute;
+                top: -10000px;
+                left: 0;
+
+                &:before {
+                    content: ' ';
+                    width: 0;
+                    height: 0;
+                    border-bottom: @size solid #ffffff;
+                    border-left: (@size/2)+5 solid transparent;
+                    border-right: (@size/2)+5 solid transparent;
                 }
             }
         }

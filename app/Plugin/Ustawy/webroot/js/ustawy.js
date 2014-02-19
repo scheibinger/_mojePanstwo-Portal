@@ -4,15 +4,30 @@
         lastSearch = null,
         searchMinLength = 1,
         shortcuts = $('#shortcuts'),
+        shortcutArrow = {
+            active: shortcuts.find('ul li.active'),
+            arrow: shortcuts.find('.shortcutArrow'),
+            arrowSize: shortcuts.find('.shortcutArrow').outerWidth() / 2,
+            duration: 400
+        },
         searchInput = $('.appHeader .searchInput'),
         ustawyCarousel = $('#ustawyCarousel'),
         resultsList = ustawyCarousel.find('.item.results'),
         animationTime = 200,
         ajaxDelay = 200;
 
+    shortcuts.find('.shortcutArrow').css({
+        'top': '5px',
+        'left': shortcutArrow.active.position().left + (shortcutArrow.active.outerWidth() / 2) - shortcutArrow.arrowSize
+    });
+
     shortcuts.find('li').click(function () {
+        shortcutArrow.active = $(this);
         shortcuts.find('li.active').removeClass('active');
         $(this).addClass('active');
+        shortcutArrow.arrow.animate({
+            'left': $(this).position().left + ($(this).outerWidth() / 2) - shortcutArrow.arrowSize
+        }, shortcutArrow.duration)
     });
 
     searchInput.on('submit keyup', function (e) {
@@ -30,7 +45,9 @@
     });
 
     function searchAjax(word) {
-        var input = searchInput.find('input').val();
+        var input = searchInput.find('input').val(),
+            resultsItem = shortcuts.find('ul li.results');
+        ;
 
         if (input.length >= searchMinLength) {
             if (word == input) {
@@ -48,6 +65,12 @@
                         if (resultsList.find('ul').length > 0)
                             resultsList.find('ul').animate({'opacity': '.2'}, animationTime);
                         searchInput.find('.btn').addClass('loading');
+
+                        if (resultsItem.is(':visible')) {
+                            shortcutArrow.arrow.animate({
+                                'left': resultsItem.position().left + (resultsItem.outerWidth() / 2) - shortcutArrow.arrowSize
+                            }, {duration: shortcutArrow.duration, queue: false});
+                        }
                     },
                     success: function (data) {
                         ustawyCache[word] = data;
@@ -67,17 +90,25 @@
     }
 
     function resultList(word, data) {
-        var resultsListUl = resultsList.find('ul');
+        var resultsListUl = resultsList.find('ul'),
+            resultsItem = shortcuts.find('ul li.results');
 
-        if (resultsList.find('ul').length > 0 && resultsList.find('ul').css('opacity') == '1')
+        if (resultsList.find('ul').length > 0 && resultsList.find('ul').css('opacity') == '1') {
             resultsList.find('ul').animate({'opacity': '.2'}, animationTime);
+        }
+
+        if (resultsItem.is(':hidden')) {
+            resultsItem.removeClass('hidden');
+            shortcutArrow.arrow.css({
+                'left': shortcuts.find('ul li.active').position().left + (shortcuts.find('ul li.active').outerWidth() / 2) - shortcutArrow.arrowSize
+            });
+            shortcutArrow.arrow.animate({
+                'left': resultsItem.position().left + (resultsItem.outerWidth() / 2) - shortcutArrow.arrowSize
+            }, {duration: shortcutArrow.duration, queue: false});
+        }
 
         shortcuts.find('li.active').removeClass('active');
-
-        if (shortcuts.find('li.results').is(':hidden'))
-            shortcuts.find('li.results').removeClass('hidden');
-
-        shortcuts.find('li.results').addClass('active');
+        resultsItem.addClass('active');
 
         resultsListUl.html('');
 
@@ -96,8 +127,8 @@
                             $('<a></a>').attr({'target': '_self', 'href': '/dane/ustawy/' + dataSearch['id'], 'title': data['tytul'], 'class': 'title'}).text(_mPHeart.translation.LC_USTAWY_TITLE_USTAWA + ' ' + dataSearch['tytul_skrocony'])
                         ).append(
                             $('<span></span>').addClass('subtitle').html(_mPHeart.translation.LC_USTAWY_PUBLIKACJA + ' ' + dataSearch['data_slowna'])
-                        )
-                    var hl = $('<span></span>').addClass('highlight alert alert-info').html(dataSearch.hl)
+                        );
+                    var hl = $('<span></span>').addClass('highlight alert alert-info').html(dataSearch.hl);
                     $(this).append(header);
                     $(this).append(hl);
                 })
@@ -109,11 +140,9 @@
 
     ustawyCarousel.carousel();
     ustawyCarousel.on('slide.bs.carousel', function () {
-        console.log(ustawyCarousel.find('.carousel-inner .item.active').outerHeight());
         ustawyCarousel.find('.carousel-inner').css('height', ustawyCarousel.find('.carousel-inner .item.active').outerHeight());
     });
     ustawyCarousel.on('slid.bs.carousel', function () {
-        console.log(ustawyCarousel.find('.carousel-inner .item.active').outerHeight());
         ustawyCarousel.find('.carousel-inner').css('height', ustawyCarousel.find('.carousel-inner .item.active').outerHeight());
     });
 }(jQuery));

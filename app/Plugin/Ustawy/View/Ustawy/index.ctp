@@ -35,6 +35,7 @@
                            target="_self"><?php echo __d('ustawy', 'LC_USTAWY_WIECEJ_KONSTYTUCJE'); ?></a>
                     </li>
                 </ul>
+                <div class="shortcutArrow"></div>
             </div>
         </div>
     </div>
