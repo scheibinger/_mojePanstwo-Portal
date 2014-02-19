@@ -3,6 +3,7 @@
 <?php $this->Combinator->add_libs('css', $this->Less->css('dataobjectslider', array('plugin' => 'Dane'))) ?>
 
 <?php $this->Combinator->add_libs('js', 'Dane.dataobjectsslider') ?>
+<?php $this->Combinator->add_libs('js', 'Dane.dane') ?>
 
 <?php
 $di = 0;
