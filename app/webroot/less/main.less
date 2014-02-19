@@ -161,51 +161,95 @@ body > pre:first-child {
 }
 
 .flash-message {
-    @alertBackground: #263339;
-    @alertInnerShadow: darken(@alertBackground, 5%);
-
-    background-color: lighten(@alertBackground, 5%);
-    overflow-x: hidden;
-
     .alert {
+        @color: #FFFFFF;
+
         border-width: 0;
         -moz-border-radius: 0px; /*Firefox*/
         -webkit-border-radius: 0px; /*Safari, Chrome*/
         border-radius: 0px;
-        margin: 0 -10px;
         padding: 0;
         font-size: 16px;
         font-weight: 300;
-
-        -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=10, Direction=90, Color=@)"; /*IE 8*/
-        -moz-box-shadow: inset 0px 0px 10px @alertInnerShadow; /*FF 3.5+*/
-        -webkit-box-shadow: inset 0px 0px 10px @alertInnerShadow; /*Saf3-4, Chrome, iOS 4.0.2-4.2, Android 2.3+*/
-        box-shadow: inset 0px 0px 10px @alertInnerShadow; /* FF3.5+, Opera 9+, Saf1+, Chrome, IE10 */
-        filter: progid:DXImageTransform.Microsoft.Shadow(Strength=10, Direction=90, Color=@alertInnerShadow); /*IE 5.5-7*/
+        background-color: #0078AC;
+        color: @color;
 
         .container {
             font-family: "Lato", sans-serif;
             font-size: 14px;
             font-weight: 300;
-            color: #ffffff;
             text-align: center;
             padding-top: 13px;
             padding-bottom: 13px;
 
             a, .alert-link {
                 text-decoration: none;
-                color: #EEEEEE;
+                color: darken(@color, 5%);
 
                 &:hover {
-                    color: #FFFFFF;
+                    color: @color;
                 }
             }
         }
-    }
+        &.alert-info {
+            @color: #3A87AD;
 
-    .alert-info {
-        background-color: #0078AC;
-        color: #FFF;
+            background-color: #D9EDF7;
+            border-color: #BCE8F1;
+            color: @color;
+
+            a, .alert-link {
+                color: darken(@color, 5%);
+
+                &:hover {
+                    color: @color;
+                }
+            }
+        }
+        &.alert-success {
+            @color: #468847;
+
+            background-color: #DFF0D8;
+            border-color: #D6E9C6;
+            color: @color;
+
+            a, .alert-link {
+                color: darken(@color, 5%);
+
+                &:hover {
+                    color: @color;
+                }
+            }
+        }
+        &.alert-warning {
+            @color: #C09853;
+            background-color: #FCF8E3;
+            border-color: #FAEBCC;
+            color: @color;
+
+            a, .alert-link {
+                color: darken(@color, 5%);
+
+                &:hover {
+                    color: @color;
+                }
+            }
+        }
+        &.alert-error, &.alert-danger {
+            @color: #B94A48;
+
+            background-color: #F2DEDE;
+            border-color: #EBCCD1;
+            color: @color;
+
+            a, .alert-link {
+                color: darken(@color, 5%);
+
+                &:hover {
+                    color: @color;
+                }
+            }
+        }
     }
 
     .alert a, .alert .alert-link {
