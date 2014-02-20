@@ -18,7 +18,7 @@ class DataobjectsBrowserComponent extends Component
     public $excludeFilters = array();
 
     public $components = array(
-        'Paginator'
+        'Paginator', 'RequestsHandler'
     );
 
     public $helpers = array(
@@ -426,19 +426,33 @@ class DataobjectsBrowserComponent extends Component
         $controller->set(compact('objects', 'pagination', 'orders', 'filters', 'total', 'facets', 'page', 'title_for_layout', 'conditions', 'switchers', 'q'));
 
         $controller->set('dataBrowser', $this);
+		$controller->view = $this->getViewPath();
+		
+		if (@$controller->request->params['ext'] == 'json')
+		{
+			
+			$view = new View($controller, false);
+			
 
-
-        $path = App::path('View', 'Dane');
-        $path = $path[0] . $controller->viewPath . '/' . $controller->view . '.ctp';
-
-        if (file_exists($path))
-            $controller->set('originalViewPath', $path);
-
-
-        if (strtolower($controller->request->ext) == 'json')
-            $controller->view = $this->getJSONPath();
-        else
-            $controller->view = $this->getViewPath();
+            
+            
+            $controller->set('header', $view->element('DataobjectsBrowser/header', compact('pagination', 'orders', 'page')));
+            $controller->set('filters', $view->element('DataobjectsBrowser/filters', compact('filters', 'switchers', 'facets', 'page')));
+            $controller->set('objects', $view->element('DataobjectsBrowser/objects', compact('objects')));
+            $controller->set('pagination', $view->element('DataobjectsBrowser/pagination'));
+            $controller->set('_serialize', array('header', 'filters', 'objects', 'pagination'));
+		
+		}
+		else
+		{
+			
+			$path = App::path('View', 'Dane');
+	        $path = $path[0] . $controller->viewPath . '/' . $controller->view . '.ctp';
+	
+	        if (file_exists($path))
+	            $controller->set('originalViewPath', $path);
+			
+		}
 
     }
 
@@ -448,14 +462,6 @@ class DataobjectsBrowserComponent extends Component
 
         $path = App::path('View', 'Dane');
         return $path[0] . '/Component/dataobjectsBrowser/view.ctp';
-
-    }
-
-    public function getJSONPath()
-    {
-
-        $path = App::path('View', 'Dane');
-        return $path[0] . '/Component/dataobjectsBrowser/json.ctp';
 
     }
 

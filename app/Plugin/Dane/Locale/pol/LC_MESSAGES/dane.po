@@ -716,10 +716,10 @@ msgid "LC_GMINY_ZAMOWIENIA_PUBLICZNE"
 msgstr "Zamówienia publiczne"
 
 msgid "LC_DANE_BDL_GRUPY_DLA_KATEGORII"
-msgstr "Grupy dla kategorii: %s"
+msgstr "Grupy w tej kategorii"
 
 msgid "LC_DANE_BDL_WSKAZNIKI_W_GRUPIE"
-msgstr "Wskazniki w grupie: %s"
+msgstr "Wskazniki w tej grupie"
 
 msgid "LC_DANE_WSKAZNIKI_W_GMINIE"
 msgstr "Wskaźniki w gminie %s"
