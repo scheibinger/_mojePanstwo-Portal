@@ -13,6 +13,7 @@ class DataobjectsBrowserComponent extends Component
     public $showTitle = false;
     public $titleTag = 'h2';
     public $hlFields = false;
+    public $hlFieldsPush = false;
     public $routes = array();
 
     public $excludeFilters = array();
@@ -50,6 +51,9 @@ class DataobjectsBrowserComponent extends Component
 
         if (isset($settings['hlFields']))
             $this->hlFields = $settings['hlFields'];
+            
+        if (isset($settings['hlFieldsPush']))
+            $this->hlFieldsPush = $settings['hlFieldsPush'];
 
         if (isset($settings['routes']))
             $this->routes = $settings['routes'];
@@ -252,6 +256,7 @@ class DataobjectsBrowserComponent extends Component
             if (isset($order['field'])) {
                 foreach ($orders as &$_order) {
                     if ($_order['sorting']['field'] == $order['field']) {
+                    	$this->hlFieldsPush = $order['field'];
                         $_order['selected_direction'] = $order['direction'];
                         $order_selected = true;
                         break;
@@ -392,7 +397,10 @@ class DataobjectsBrowserComponent extends Component
         if (!$order_selected && !empty($order))
             foreach ($orders as &$o)
                 if ($o['sorting']['field'] == $order['field'])
+                {
+                    $this->hlFieldsPush = $order['field'];
                     $o['selected_direction'] = $order['direction'];
+                }
 
 
         if (!empty($order))
@@ -423,6 +431,7 @@ class DataobjectsBrowserComponent extends Component
             'titleTag' => $this->titleTag,
             'noResultsTitle' => $this->noResultsTitle,
         );
+                
         $controller->set(compact('objects', 'pagination', 'orders', 'filters', 'total', 'facets', 'page', 'title_for_layout', 'conditions', 'switchers', 'q'));
 
         $controller->set('dataBrowser', $this);

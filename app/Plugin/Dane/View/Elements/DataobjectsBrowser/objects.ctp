@@ -11,6 +11,7 @@ if (empty($objects)) {
             echo $this->Dataobject->render($object['Dataobject'], 'default', array(
                 'bg' => $bg,
                 'hlFields' => $dataBrowser->hlFields,
+                'hlFieldsPush' => $dataBrowser->hlFieldsPush,
                 'routes' => $dataBrowser->routes,
             ));
             $bg = !$bg;

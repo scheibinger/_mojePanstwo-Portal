@@ -77,6 +77,7 @@ class DataobjectHelper extends AppHelper
         // debug( $object->getData() );
         $bg = isset($options['bg']) ? $options['bg'] : false;
         $hlFields = isset($options['hlFields']) ? $options['hlFields'] : false;
+        $hlFieldsPush = isset($options['hlFieldsPush']) ? $options['hlFieldsPush'] : false;
         $routes = isset($options['routes']) ? $options['routes'] : array();
         $forceLabel = isset($options['forceLabel']) ? $options['forceLabel'] : false;
 
@@ -91,13 +92,14 @@ class DataobjectHelper extends AppHelper
                 $theme = 'default';
         }
         */
-
+				
         return $this->_View->element($theme, array(
             'item' => $this->object->getObject(),
             'object' => $this->object,
             'theme' => $theme,
             'bg' => $bg,
             'hlFields' => $hlFields,
+            'hlFieldsPush' => $hlFieldsPush,
             'forceLabel' => $forceLabel,
             'file' => $this->object->getDataset(),
             'thumbSize' => $this->getThumbSize(),
@@ -105,11 +107,11 @@ class DataobjectHelper extends AppHelper
         ), array('plugin' => 'Dane'));
     }
 
-    public function highlights($fields = false)
+    public function highlights($fields = false, $fieldsPush = false)
     {
-
+				
         $output = '';
-        $fields = $this->object->getHiglightedFields($fields);
+        $fields = $this->object->getHiglightedFields($fields, $fieldsPush);
 
         $fields_count = count($fields);
         if ($fields_count) {

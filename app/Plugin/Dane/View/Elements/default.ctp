@@ -53,10 +53,12 @@ $this->Dataobject->setObject($object);
                         if ($file_exists)
                             echo $this->element('Dane.' . $theme . '/' . $object->getDataset(), array(
                                 'item' => $item,
-                                'object' => $object
+                                'object' => $object,
+                                'hlFields' => $hlFields,
+                                'hlFieldsPush' => $hlFieldsPush,
                             ));
                         else
-                            echo $this->Dataobject->highlights($hlFields);
+                            echo $this->Dataobject->highlights($hlFields, $hlFieldsPush);
                         ?>
                     </div>
 
@@ -82,10 +84,12 @@ $this->Dataobject->setObject($object);
                         if ($file_exists)
                             echo $this->element('Dane.' . $theme . '/' . $object->getDataset(), array(
                                 'item' => $item,
-                                'object' => $object
+                                'object' => $object,
+                                'hlFields' => $hlFields,
+                                'hlFieldsPush' => $hlFieldsPush,
                             ));
                         else
-                            echo $this->Dataobject->highlights($hlFields);
+                            echo $this->Dataobject->highlights($hlFields, $hlFieldsPush);
                         ?>
 
                     </div>
