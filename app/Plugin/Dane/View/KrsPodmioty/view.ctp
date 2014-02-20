@@ -146,13 +146,6 @@
     <? } ?>
     </div>
 	
-	<div class="graph block">
-		<h2>Powiązania</h2>
-		<div class="content">
-			http://mojepanstwo/dane/krs_podmioty/114/graph.json
-		</div>
-	</div>
-	
     <? if ($object->getData('cel_dzialania')) { ?>
         <div class="dzialanie block">
             <h2>Cel działania</h2>
