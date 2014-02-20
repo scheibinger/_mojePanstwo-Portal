@@ -27,7 +27,7 @@
                         <div class="_mojePanstwoCockpitMenuUpSubMenuTitle">Aplikacje</div>
                         <?php if (!empty($applications['list'])) {
                             echo '<ul id="_mojePanstwoCockpitMenuUpSubMenuList"><li>';
-                            foreach ($applications['list'] as $index => $app) {
+                            foreach ($applications['list'] as $index => $app) { if( $app['home']=='1' ) {
                                 if (($index % $applications['perPage'] == 0) && ($index != 0))
                                     echo '</li><li>';
 
@@ -75,7 +75,7 @@
                                 }
                             }
                             echo '</li></ul>';
-                        }?>
+                        } }?>
                         <div id="_mojePanstwoCockpitMenuUpSubMenuControls">
                             <a class="_mojePanstwoCockpitMenuUpSubMenuControlsArrow _mojePanstwoCockpitMenuUpSubMenuControlsArrowLeft"
                                href="javascript:void(0)" onclick="_mojePanstwoCockpitSlider.prevSlide();"><span

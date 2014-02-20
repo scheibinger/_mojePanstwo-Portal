@@ -39,7 +39,7 @@
                 </div><? } ?>
             <div class="col-md-12 col-lg-12">
                 <ul class="row">
-                    <?php foreach ($folder['apps'] as $key => $app) { ?>
+                    <?php foreach ($folder['apps'] as $key => $app) { if($app['home']=='1') { ?>
                         <li class="col-xs-5 col-sm-2<?php
                         if ($key % 2 == 0)
                             echo(' ' . 'col-xs-offset-1');
@@ -61,7 +61,7 @@
                                 </div>
                             </a>
                         </li>
-                    <?php } ?>
+                    <?php } } ?>
                 </ul>
             </div>
         </div>
