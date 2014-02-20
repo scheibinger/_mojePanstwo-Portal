@@ -235,7 +235,7 @@ class KrsPodmiotyController extends DataobjectsController
 
         @$this->set('dzialalnosci', $dzialalnosci);
 
-
+				
         $this->set('_menu', $menu);
 
 
@@ -248,7 +248,8 @@ class KrsPodmiotyController extends DataobjectsController
             $this->_prepareView();
             $data = $this->object->loadLayer('graph');
 
-            debug($data);
+            $this->set('data', $data);
+            $this->set('_serialize', 'data');
 
         } else return false;
     }
