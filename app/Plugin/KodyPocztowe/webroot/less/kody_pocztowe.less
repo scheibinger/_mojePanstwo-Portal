@@ -88,6 +88,17 @@
         }
     }
 
+    #display {
+        &:before, &:after {
+            content: " ";
+            display: table;
+        }
+
+        &:after {
+            clear: both;
+        }
+    }
+
     .adresList {
         margin-top: 30px;
 
