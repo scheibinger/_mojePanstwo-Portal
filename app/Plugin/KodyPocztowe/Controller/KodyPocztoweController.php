@@ -131,10 +131,12 @@ class KodyPocztoweController extends KodyPocztoweAppController
                     if ($obj->getData('ulica'))
                         $text .= ' ' . $obj->getData('ulica');
 
+                    $score = @$obj->getLayer('score');
+					
                     $s = array(
                         'id' => $obj->getId(),
                         'text' => $text,
-                        'score' => @$obj->getLayer('score')['value'],
+                        'score' => @$score['value'],
                     );
 
                     if ($obj->getData('miejscowosci.nazwa') != $obj->getData('miejscowosci.nazwa_gminy'))

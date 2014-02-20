@@ -39,9 +39,8 @@ class PowiadomieniaController extends PowiadomieniaAppController
             'paramType' => 'querystring',
         );
         
-        $objects = $this->API->search($queryData);
-        
-        debug($objects); die();
+        $this->API->search($queryData);
+        $objects = $this->API->getObjects();
         $this->set('objects', $objects);
         
 		

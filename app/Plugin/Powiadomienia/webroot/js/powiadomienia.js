@@ -59,9 +59,9 @@
                     },
                     success: function (data) {
                         loadMoreContent.removeClass('loading');
-                        if (data.html) {
+                        if (data) {
                             loadMoreContent.data('currentpage', page);
-                            showData.append(data.html);
+                            showData.append(data);
                             loadMoreContentIntervalRunable = true;
                         } else {
                             clearInterval(loadMoreContentIntervalMain);
