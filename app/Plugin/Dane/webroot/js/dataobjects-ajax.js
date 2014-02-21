@@ -117,10 +117,10 @@ var DataObjectesAjax = {
         sorting.find('.sortingName').addClass('hidden');
 
         /*CREATE DROPDOWN MENU STRUCTURE*/
-        var sortingChoosed = (sorting.find('#DatasetSort option:selected').length > 0) ? sorting.find('#DatasetSort option:selected').attr('title') : sorting.find('#DatasetSort option:first').attr('title');
+        var sortingChosen = (sorting.find('#DatasetSort option:selected').length > 0) ? sorting.find('#DatasetSort option:selected') : sorting.find('#DatasetSort option:first');
         sorting.find('#DatasetSort').before(
                 jQuery('<div></div>').addClass('sortingGroup btn-group pull-right').append(
-                        jQuery('<button></button>').addClass('DatasetSort btn btn-default btn-sm').attr({'data-toggle': 'dropdown', 'type': 'button'}).text(sortingChoosed)
+                        jQuery('<button></button>').addClass('DatasetSort btn btn-default btn-sm').attr({'data-toggle': 'dropdown', 'type': 'button'}).text(sortingChosen.attr('title'))
                     ).append(
                         jQuery('<button></button>').addClass('DatasetDirection btn btn-default btn-sm').attr({'data-toggle': 'dropdown', 'type': 'button'}).append(
                             jQuery('<span></span>').addClass('glyphicon glyphicon-chevron-down')
@@ -152,6 +152,7 @@ var DataObjectesAjax = {
                                 )
                             }
                         });
+                        ul.find('li a[value="' + sortingChosen.val() + '"]').addClass('active');
                         jQuery(this).append(ul);
 
                         DataObjectesAjax.sortingAddRemoveOptions();
