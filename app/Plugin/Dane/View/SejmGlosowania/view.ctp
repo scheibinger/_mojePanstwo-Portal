@@ -117,7 +117,7 @@ $dictionary = array(
                             <div class="person">
                                 <div class="avatar">
                                     <img
-                                        src="http://resources.sejmometr.pl/mowcy/a/0/<?= $person['poslowie']['id'] ?>.jpg"
+                                        src="http://resources.sejmometr.pl/mowcy/a/0/<?= $person['mowcy']['mowca_id'] ?>.jpg"
                                         alt="<?= $person['poslowie']['nazwa'] ?>" onerror="imgFixer(this);"/>
                                 </div>
                                 <div class="info">
