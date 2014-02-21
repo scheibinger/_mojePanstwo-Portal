@@ -65,7 +65,8 @@ class DataobjectsController extends DaneAppController
                         'label' => 'Powiązania',
                     );
                 }
-
+			
+			
             $this->set('object', $this->object);
             $this->set('objectOptions', $this->objectOptions);
 

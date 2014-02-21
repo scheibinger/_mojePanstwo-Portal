@@ -77,6 +77,7 @@ class DataobjectHelper extends AppHelper
         // debug( $object->getData() );
         $bg = isset($options['bg']) ? $options['bg'] : false;
         $hlFields = isset($options['hlFields']) ? $options['hlFields'] : false;
+        $bigTitle = isset($options['bigTitle']) ? $options['bigTitle'] : false;
         $hlFieldsPush = isset($options['hlFieldsPush']) ? $options['hlFieldsPush'] : false;
         $routes = isset($options['routes']) ? $options['routes'] : array();
         $forceLabel = isset($options['forceLabel']) ? $options['forceLabel'] : false;
@@ -100,6 +101,7 @@ class DataobjectHelper extends AppHelper
             'bg' => $bg,
             'hlFields' => $hlFields,
             'hlFieldsPush' => $hlFieldsPush,
+            'bigTitle' => $bigTitle,
             'forceLabel' => $forceLabel,
             'file' => $this->object->getDataset(),
             'thumbSize' => $this->getThumbSize(),

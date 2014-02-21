@@ -4,8 +4,9 @@ App::uses('DataobjectsController', 'Dane.Controller');
 
 class GminyController extends DataobjectsController
 {
-    public $menu = array(
-        array(
+	
+	/*
+	 array(
             'label' => 'LC_DANE_START',
             'id' => 'view',
         ),
@@ -25,9 +26,9 @@ class GminyController extends DataobjectsController
             'label' => 'LC_DANE_MAPA',
             'id' => 'map',
         ),
-    );
-
-    public $menuMode = 'vertical';
+    */
+	
+    public $menu = array();
 
     public $helpers = array(
         'Number' => array(
@@ -37,13 +38,68 @@ class GminyController extends DataobjectsController
 
     public function view()
     {
-
-        parent::_prepareView();
-        $url = 'http://sejmometr.pl/gminy/' . $this->object->getId();
-        $this->redirect($url);
-        die();
-
+		
         parent::view();
+        $menu = array(
+	    	array(
+	    		'id' => 'rada',
+	    		'label' => 'Rada gminy',
+	    	),
+	    	/*
+	    	array(
+	    		'id' => 'wskazniki',
+	    		'label' => 'Wskaźniki',
+	    	),
+	    	*/
+	    	array(
+	    		'id' => 'zamowienia_publiczne',
+	    		'label' => 'Zamówienia publiczne',
+	    	),
+	    	array(
+	    		'id' => 'dotacje_unijne',
+	    		'label' => 'Dotacje unijne',
+	    	),
+	    	array(
+	    		'id' => 'organizacje',
+	    		'label' => 'Organizacje w gminie',
+	    	),
+	    );
+	    
+        $this->set('_menu', $menu);
+        
+        $this->object->loadLayer('rada_komitety');
+        
+        
+        $this->API->searchDataset('zamowienia_publiczne', array(
+            'limit' => 12,
+            'conditions' => array(
+                'gmina_id' => $this->object->getId(),
+            ),
+        ));
+        $this->set('zamowienia', $this->API->getObjects());
+                
+        $this->API->searchDataset('dotacje_ue', array(
+            'limit' => 12,
+            'conditions' => array(
+                'gmina_id' => $this->object->getId(),
+            ),
+        ));
+        $this->set('dotacje_ue', $this->API->getObjects());
+        
+        $this->API->searchDataset('krs_podmioty', array(
+            'limit' => 12,
+            'conditions' => array(
+                'gmina_id' => $this->object->getId(),
+            ),
+        ));
+        $this->set('organizacje', $this->API->getObjects());
+        
+        
+        
+        
+        
+        
+        /*
         $wskazniki = $this->object->loadLayer('wskazniki');
         $rada_komitety = $this->object->loadLayer('rada_komitety');
         $wskazniki = array_slice($wskazniki, 0, 5, true);
@@ -91,19 +147,26 @@ class GminyController extends DataobjectsController
 
 
         $this->set(compact('wskazniki', 'rada_komitety'));
+        */
+        
+        
     }
 
     public function radni()
     {
         parent::_prepareView();
-
-        $title_for_layout = 'Radni gminy ' . $this->object->getData('nazwa');
-        $this->innerSearch('radni_gmin', array('gmina_id' => $this->object->object_id), array(
-            'searchTitle' => $title_for_layout,
+        $this->dataobjectsBrowserView(array(
+            'source' => 'gminy.radni:' . $this->object->getId(),
+            'dataset' => 'radni_gmin',
+            'title' => 'Radni gminy',
+            'noResultsTitle' => 'Brak radnych dla tej gminy',
+            'excludeFilters' => array(
+                'gmina_id', 'gminy.powiat_id', 'gminy.wojewodztwo_id'
+            ),
+            'hlFields' => array('rady_gmin_komitety.nazwa', 'liczba_glosow', 'procent_glosow_w_okregu', 'oswiadczenie_id'),
         ));
-
-        $this->set('title_for_layout', $title_for_layout);
     }
+    
 
     public function wskazniki()
     {
@@ -116,26 +179,46 @@ class GminyController extends DataobjectsController
         ));
     }
 
-    public function zamowienia_publiczne()
+    public function zamowienia()
     {
         parent::_prepareView();
-
-        $title_for_layout = 'Zamówienia publiczne na terenie gminy ' . $this->object->getData('nazwa');
-        $this->innerSearch('zamowienia_publiczne', array('gmina_id' => $this->object->getId()), array(
-            'searchTitle' => $title_for_layout,
+        $this->dataobjectsBrowserView(array(
+            'source' => 'gminy.zamowienia_publiczne:' . $this->object->getId(),
+            'dataset' => 'zamowienia_publiczne',
+            'title' => 'Zamówienia publiczne',
+            'noResultsTitle' => 'Brak zamówień dla tej gminy',
+            'excludeFilters' => array(
+                'gmina_id',
+            ),
         ));
-        $this->set('title_for_layout', $title_for_layout);
     }
-
-    public function rady_gmin_debaty()
+    
+    public function organizacje()
     {
         parent::_prepareView();
-
-        $title_for_layout = 'Debaty podczas wszystkich posiedzeń rady gminy ' . $this->object->getData('nazwa');
-        $this->innerSearch('rady_gmin_debaty', array('rady_gmin_posiedzenia.gmina_id' => $this->object->getId()), array(
-            'searchTitle' => $title_for_layout,
+        $this->dataobjectsBrowserView(array(
+            'source' => 'gminy.organizacje:' . $this->object->getId(),
+            'dataset' => 'krs_podmioty',
+            'title' => 'Organizacje',
+            'noResultsTitle' => 'Brak organizacji w tej gminie',
+            'excludeFilters' => array(
+                'gmina_id',
+            ),
         ));
-        $this->set('title_for_layout', $title_for_layout);
+    }
+    
+    public function dotacje_ue()
+    {
+        parent::_prepareView();
+        $this->dataobjectsBrowserView(array(
+            'source' => 'gminy.dotacje_ue:' . $this->object->getId(),
+            'dataset' => 'dotacje_ue',
+            'title' => 'Dotacje unijne',
+            'noResultsTitle' => 'Brak dotacji dla tej gminy',
+            'excludeFilters' => array(
+                'gmina_id',
+            ),
+        ));
     }
 
     public function rady_gmin_wystapienia()

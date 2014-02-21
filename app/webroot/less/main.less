@@ -42,13 +42,30 @@ body > pre:first-child {
 
 .block {
     padding: 10px 20px;
-
+	
+	.block-header {
+		display: inline-block;
+		width: 100%;
+	}
+	
+	&.bg, &.bg .object {
+		background-color: #FAFAFA;
+		.dataobjectsSlider .carousel .carousel-inner {
+			background-color: #FAFAFA;
+		}
+	}
+	
     h2 {
-        font-weight: 300;
+        font-family: Lato;
+	    font-size: 22px;
+	    font-weight: 400;
+	    margin-top: 5px;
     }
 
     h3 {
-        font-weight: 300;
+        font-family: Lato;
+	    font-size: 18px;
+	    font-weight: 300;
 
         .label {
             font-weight: bold;

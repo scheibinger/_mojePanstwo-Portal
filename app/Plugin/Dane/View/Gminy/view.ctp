@@ -1,7 +1,167 @@
 <?php $this->Combinator->add_libs('css', $this->Less->css('view-gminy', array('plugin' => 'Dane'))); ?>
 <?php $this->Combinator->add_libs('css', $this->Less->css('dataobjectslider', array('plugin' => 'Dane'))) ?>
 
-<?php echo $this->Element('dataobject/pageBegin'); ?>
+<?= $this->Element('dataobject/pageBegin'); ?>
+
+
+    <div class="gminy row">
+    	
+    	<div class="col-md-2">
+        	<div class="objectMenu vertical">
+            	<ul class="nav nav-pills nav-stacked row">
+                	<li class="active">
+                    	<a href="#info" class="normalizeText">Info</a>
+						</li>
+	                <? foreach ($_menu as $m) { ?>
+	                    <li>
+	                        <a class="normalizeText" href="#<?= $m['id'] ?>"><?= $m['label'] ?></a>
+	                    </li>
+	                <? } ?>
+	            </ul>
+	        </div>
+	    </div>
+
+	    <div class="col-md-10">
+		    <div class="objectsPageContent main">
+			    <div class="object">
+			
+			        <div class="profile_baner" data-adres="<?= urlencode($object->getData('adres')) ?>">
+			            
+			            <div class="bg">
+			                <img
+			                    src="http://maps.googleapis.com/maps/api/staticmap?center=<?= urlencode($object->getData('adres')) ?>&markers=<?= urlencode($object->getData('adres')) ?>&zoom=13&sensor=false&size=640x140&scale=2&feature:road"/>
+			
+			                <div class="content">
+			                
+			                	<?
+			                		$adres = $object->getData('adres');
+			                		$adres = preg_replace('/([0-9]{2})\-([0-9]{3})/i', "<br/>$1-$2", $adres);
+			                	?>
+			                	
+			                    <h2><?= $object->getData('nazwa_urzedu') ?></h2>
+			                    <p><?= $adres ?></p>
+			                    <button class="btn btn-info"><?= __d('dane', 'LC_DANE_VIEW_KRSPODMIOTY_OTWORZ_MAPE') ?></button>
+			                </div>
+			            </div>
+			            
+			            <div id="googleMap">
+			                <script>
+			                    var googleMapAdres = '<?= $object->getData('adres') ?>';
+			                </script>
+			            </div>
+			            
+			        </div> <!-- profile_baner END -->
+					
+					
+					<div class="block bg">
+						
+						<div class="block-header">
+							<h2 class="pull-left"><?php echo __d('dane', 'LC_GMINY_WYNIKI_WYBOROW'); ?></h2>
+							<a class="btn btn-default btn-sm pull-right" href="/dane/gminy/<?= $object->getId() ?>/radni">Zobacz wszystkich radnych</a>
+						</div>
+	
+			            <div class="content wynikiWyborow">
+			                <?php foreach ($object->getLayer('rada_komitety') as $rada) { ?>
+			                    <div class="wynik">
+			                            <a href="/dane/gminy/<?= $object->getId() ?>/radni?komitet_id=<?= $rada['pl_gminy_radni']['komitet_id'] ?>">
+			                                <?php echo $rada['pkw_komitety']['nazwa']; ?>
+			                            </a> 
+			                            <small><?php echo $rada['percent']; ?>%</small>
+			
+			                        <div class="progress">
+			                            <div class="progress-bar progress-bar-default" role="progressbar" aria-valuenow="73.3"
+			                                 aria-valuemin="0" aria-valuemax="100"
+			                                 style="width: <?php echo $rada['percent']; ?>%">
+			                            </div>
+			                        </div>
+			                    </div>
+			                <?php } ?>
+			            </div>
+					</div>
+					
+					
+					<div class="block">
+					
+						<div class="block-header">
+							<h2 class="pull-left">Zamówienia publiczne</h2>
+							<a class="btn btn-default btn-sm pull-right" href="/dane/gminy/<?= $object->getId() ?>/zamowienia">Zobacz wszystkie</a>
+						</div>
+						
+						<div class="content">
+							<div class="dataobjectsSliderRow row">
+		                        <div class="col-xs-12">
+                                    <?php echo $this->dataobjectsSlider->render($zamowienia, array(
+                                        'perGroup' => 3,
+                                        'rowNumber' => 1
+                                    )) ?>
+                                </div>
+                            </div>
+						</div>
+					</div>
+					
+					
+					
+					<div class="block bg">
+						
+						<div class="block-header">
+							<h2 class="pull-left">Dotacje unijne</h2>
+							<a class="btn btn-default btn-sm pull-right" href="/dane/gminy/<?= $object->getId() ?>/dotacje_ue">Zobacz wszystkie</a>
+						</div>
+
+						<div class="content">
+							<div class="dataobjectsSliderRow row">
+		                        <div class="col-xs-12">
+                                    <?php echo $this->dataobjectsSlider->render($dotacje_ue, array(
+                                        'perGroup' => 3,
+                                        'rowNumber' => 1
+                                    )) ?>
+                                </div>
+                            </div>
+						</div>
+					</div>
+					
+					
+					
+					<div class="block">
+						
+						<div class="block-header">
+							<h2 class="pull-left">Organizacje w tej gminie</h2>
+							<a class="btn btn-default btn-sm pull-right" href="/dane/gminy/<?= $object->getId() ?>/organizacje">Zobacz wszystkie</a>
+						</div>
+
+						<div class="content">
+							<div class="dataobjectsSliderRow row">
+		                        <div class="col-xs-12">
+                                    <?php echo $this->dataobjectsSlider->render($organizacje, array(
+                                        'perGroup' => 3,
+                                        'rowNumber' => 1
+                                    )) ?>
+                                </div>
+                            </div>
+						</div>
+					</div>
+					
+					
+                        
+					
+					
+					
+			    </div> <!-- object END -->
+		    </div> <!-- objectsPageContent END -->
+	    </div>
+    </div>
+
+<?= $this->Element('dataobject/pageEnd'); ?>
+
+
+
+
+
+
+
+
+
+<?php /* echo $this->Element('dataobject/pageBegin'); ?>
     <div class="object">
         <? $wsk_groups = array_chunk($wskazniki, 5); ?>
         <div class="wskazniki">
@@ -73,27 +233,7 @@
                 )); ?>
             </div>
 
-            <h2><?php echo __d('dane', 'LC_GMINY_WYNIKI_WYBOROW'); ?></h2>
-
-            <div class="wynikiWyborow">
-                <?php foreach ($rada_komitety as $rada) { ?>
-                    <div class="wynik">
-                        <strong>
-                            <a href="/dane/gminy/<?= $object->getId() ?>/radni?komitet_id=<?= $rada['pl_gminy_radni']['komitet_id'] ?>">
-                                <?php echo $rada['pkw_komitety']['nazwa']; ?>
-                            </a>
-                            <small>(<?php echo $rada['percent']; ?>%)</small>
-                        </strong>
-
-                        <div class="progress">
-                            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="73.3"
-                                 aria-valuemin="0" aria-valuemax="100"
-                                 style="width: <?php echo $rada['percent']; ?>%">
-                            </div>
-                        </div>
-                    </div>
-                <?php } ?>
-            </div>
+            
 
             <? if ($object->getId() == '903') { ?>
                 <div class="jumbotron">
@@ -132,4 +272,4 @@
         </div>
     </div>
 <? } ?>
-<?php echo $this->Element('dataobject/pageEnd'); ?>
+<?php echo $this->Element('dataobject/pageEnd'); */ ?>
