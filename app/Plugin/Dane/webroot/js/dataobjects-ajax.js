@@ -33,7 +33,7 @@ var DataObjectesAjax = {
             var State = History.getState(); // Note: We are using History.getState() instead of event.state
 
             if (State.data.page == "Dane") {
-                DataObjectesAjax.ajaxReload(State.data.filters);
+                DataObjectesAjax.ajaxReload(State.data.filters, State.data.focusInput);
             }
         });
     },
@@ -207,7 +207,7 @@ var DataObjectesAjax = {
     /*GATHER FILTER OPTION AND SEND RELOAD AJAX REQUEST*/
     objectsReload: function () {
         var formSerialize = jQuery('#DatasetViewForm').serialize();
-        History.pushState({ filters: formSerialize + '&search=web', reloadForm: 'object', page: "Dane" }, jQuery(document).find("title").html(), "?" + formSerialize + '&search=web');
+        History.pushState({ filters: formSerialize + '&search=web', reloadForm: 'object', page: "Dane", focusInput: $('.dataBrowser input:focus').attr('id') }, jQuery(document).find("title").html(), "?" + formSerialize + '&search=web');
     },
     /*GATHER SORT AND FILTER OPTION AND SEND RELOAD AJAX REQUEST*/
     pageReload: function (target) {
@@ -215,7 +215,7 @@ var DataObjectesAjax = {
         History.pushState({ filters: paginationSerialize + '&search=web', reloadForm: 'page', page: "Dane" }, jQuery(document).find("title").html(), "?" + paginationSerialize + '&search=web');
     },
     /*AJAX REQUEST AND RELOAD FILTER/RESULT CONTENT*/
-    ajaxReload: function (formActualFilters) {
+    ajaxReload: function (formActualFilters, focusInput) {
         var main = jQuery('.dataBrowser'),
             filters = main.find('.dataFilters'),
             objects = main.find('.dataObjects'),
@@ -250,7 +250,7 @@ var DataObjectesAjax = {
             },
             complete: function (status) {
                 var modalBackground,
-                    tempContainer = jQuery('<div></div>').html(status.responseText);
+                    data = JSON.parse(status.responseText);
 
                 /*REMOVE MODAL BACKGROUND*/
                 if ((modalBackground = jQuery('.modal-backdrop')).length > 0) {
@@ -263,29 +263,28 @@ var DataObjectesAjax = {
                 main.find('.loadingTwirl').remove();
 
                 /*RELOAD FILTERS CONTENT WITH DATA FROM AJAX*/
-                filters.html(tempContainer.find('#hiddenFilters').html());
+                $('.update-filters').replaceWith(data.filters);
                 filtersController();
 
+                /*RELOAD HEADER CONTENT WITH DATA FROM AJAX*/
+                $('.update-header').html(data.header).end().find('.DatasetSort').hide();
+                DataObjectesAjax.sorting();
+
                 /*CHANGE PAGINATION LIST*/
-                objects.find('.paginationList').replaceWith(tempContainer.find('.paginationList'));
+                $('.update-pagination').html(data.pagination);
 
                 /*RELOAD OBJECT CONTENT WITH DATA FROM AJAX*/
                 objects.find('.innerContainer').children().animate({
                     opacity: 0
                 }, delay, function () {
-                    if (tempContainer.find('.innerContainer ul.list-group').children().length == 0) {
-                        objects.find('.innerContainer').html('<p class="noResults">' + _mPHeart.translation.LC_DANE_BRAK_WYNIKOW + '</p>');
+                    if (data.objects == '') {
+                        objects.find('.update-objects').html('<p class="noResults">' + _mPHeart.translation.LC_DANE_BRAK_WYNIKOW + '</p>');
                     } else {
-                        objects.find('.innerContainer').html(tempContainer.find('.innerContainer').html());
+                        objects.find('.update-objects').html(data.objects);
                     }
-                    objects.find('.innerContainer').children().css('opacity', 0);
-
-                    objects.find('.innerContainer').children().animate({
+                    objects.find('.innerContainer').children().css('opacity', 0).animate({
                         opacity: 1
                     }, { duration: delay });
-
-                    /*UPDATE ACTUAL TOTAL RESULTS*/
-                    objects.find('.dataInfo .dataStats strong').text(tempContainer.find('#objectstatus').text());
 
                     /*RELOAD ASSIGNED FUNCTIONS*/
                     DataObjectesAjax.sniffFromClick();
@@ -294,10 +293,10 @@ var DataObjectesAjax = {
                     DataObjectesAjax.datepickerForInputs();
                     DataObjectesAjax.removeHiddenInput();
                     DataObjectesAjax.buttonSearchWithoutPhrase();
+                    DataObjectesAjax.setCaretAtEnd(focusInput);
 
                     DataObjectesAjax.sortingAddRemoveOptions();
                     DataObjectesAjax.specialCase();
-
                 });
 
                 /*ANIMATE SCROLL TO TOP OF PAGE*/
@@ -306,6 +305,28 @@ var DataObjectesAjax = {
                 }, 800);
             }
         });
+    },
+    setCaretAtEnd: function (elemId) {
+        var elem = document.getElementById(elemId),
+            elemLen = elem.value.length;
+        // For IE Only
+        if (document.selection) {
+            // Set focus
+            elem.focus();
+            // Use IE Ranges
+            var oSel = document.selection.createRange();
+            // Reset position to 0 & then set at end
+            oSel.moveStart('character', -elemLen);
+            oSel.moveStart('character', elemLen);
+            oSel.moveEnd('character', 0);
+            oSel.select();
+        }
+        else if (elem.selectionStart || elem.selectionStart == '0') {
+            // Firefox/Chrome
+            elem.selectionStart = elemLen;
+            elem.selectionEnd = elemLen;
+            elem.focus();
+        } // if
     },
     /*IN SOME OF VIEW WE LOAD ADDITIONAL JS SO WE HAVE TO REINIT IT AFTER AJAX RELOAD RESULTS*/
     specialCase: function () {
