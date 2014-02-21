@@ -1,6 +1,15 @@
 $(document).ready(function () {
     var autoscrollBlocker = false,
-        spisTresci = $('#spis_tresci');
+        spisTresci = $('#spis_tresci'),
+        searchEngineInput = $('._mojePanstwoCockpitSearchInput'),
+        searchOutput = (searchEngineInput.is(':visible') ? 60 : 0),
+        searchEngineHeight = searchEngineInput.css('height');
+
+    $('._mojePanstwoCockpitSearchContent').find('._mojePanstwoCockpitSearchContentButton').addClass('active')
+        .end()
+        .find('._mojePanstwoCockpitSearchInput').show();
+    $('#_main').css({'marginTop': searchEngineHeight});
+    spisTresci.addClass('searchDisplay');
 
     $("#tagsCloud").cloud({
         hwratio: .3,
@@ -24,7 +33,7 @@ $(document).ready(function () {
     $(window).scroll(function () {
         var securePadding = 20,
             windscroll = $(window).scrollTop(),
-            headerFixed = $('header').outerHeight(),
+            headerFixed = $('header').outerHeight() + searchOutput,
             mainMenuFixed = spisTresci.find('> div').outerHeight(),
             fromBottom = $(document).height() - ($(window).scrollTop() + $(window).height());
         if (!autoscrollBlocker) {
@@ -60,4 +69,18 @@ $(document).ready(function () {
         var background = $(this).find('.profile-header-inner');
         background.css('background-image', background.data("background-image"));
     });
+
+    $('._mojePanstwoCockpitSearchContentButton').click(function () {
+        if ($(this).hasClass('active')) {
+            searchOutput = searchEngineHeight;
+            spisTresci.find('>div').animate({'marginTop': searchEngineHeight}, 400, function () {
+                spisTresci.addClass('searchDisplay');
+                spisTresci.find('>div').css('marginTop', 0);
+            });
+        } else {
+            searchOutput = 0;
+            spisTresci.removeClass('searchDisplay');
+            spisTresci.find('>div').css('marginTop', '60px').animate({'marginTop': 0}, 400);
+        }
+    })
 });

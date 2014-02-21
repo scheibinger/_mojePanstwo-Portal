@@ -36,7 +36,6 @@
     (searchEngineButton = searchEngine.find('._mojePanstwoCockpitSearchContentButton')).click(function (e) {
         e.preventDefault();
         var searchEngineHeight = searchEngineInput.css('height');
-        console.log(searchEngineHeight);
 
         if (searchEngineInput.is(':hidden')) {
             searchEngineButton.addClass('active');
