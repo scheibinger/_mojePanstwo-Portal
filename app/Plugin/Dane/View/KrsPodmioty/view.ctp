@@ -1,7 +1,15 @@
 <?= $this->Element('dataobject/pageBegin'); ?>
 
+<?php
+echo $this->Html->script('Dane.arbor/lib/arbor', array('block' => 'scriptBlock'));
+echo $this->Html->script('Dane.arbor/lib/arbor-tween', array('block' => 'scriptBlock'));
+echo $this->Html->script('Dane.arbor/lib/arbor-graphic', array('block' => 'scriptBlock'));
+?>
+
 <?php $this->Combinator->add_libs('css', $this->Less->css('view-krspodmioty', array('plugin' => 'Dane'))); ?>
 <?php $this->Combinator->add_libs('js', 'Dane.view-krspodmioty'); ?>
+
+
 
     <div class="krsPodmioty row">
     <div class="col-md-2">
@@ -145,14 +153,15 @@
     <? } ?>
     <? } ?>
     </div>
-	
-	<div class="graph block">
-		<h2>Powiązania</h2>
-		<div class="content">
-			http://mojepanstwo/dane/krs_podmioty/114/graph.json
-		</div>
-	</div>
-	
+
+    <div class="graph block">
+        <h2>Powiązania</h2>
+
+        <canvas id="connectionGraph" class="col-xs-12">
+            http://mojepanstwo/dane/krs_podmioty/114/graph.json
+        </canvas>
+    </div>
+
     <? if ($object->getData('cel_dzialania')) { ?>
         <div class="dzialanie block">
             <h2>Cel działania</h2>

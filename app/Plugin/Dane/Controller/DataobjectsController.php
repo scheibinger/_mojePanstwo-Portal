@@ -4,7 +4,7 @@ class DataobjectsController extends DaneAppController
 {
 
     public $helpers = array('Paginator');
-    public $components = array('Paginator');
+    public $components = array('Paginator', 'RequestHandler');
     public $object = false;
     public $objectOptions = array(
         'hlFields' => false,
@@ -65,7 +65,8 @@ class DataobjectsController extends DaneAppController
                         'label' => 'Powiązania',
                     );
                 }
-
+			
+			
             $this->set('object', $this->object);
             $this->set('objectOptions', $this->objectOptions);
 

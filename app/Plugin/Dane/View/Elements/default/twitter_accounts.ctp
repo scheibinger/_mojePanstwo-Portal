@@ -19,18 +19,6 @@ $number_format = array(
 
 <div>
 
-    <?
-
-    $a2013 = array(
-        'liczba_retweetow_wlasnych_2013',
-        'liczba_tweetow_wlasnych_2013',
-        'liczba_wzmianek_rts_2013',
-        'liczba_odpowiedzi_rts_2013'
-    );
-    $ord = @substr($this->request->query['order'], 0, stripos($this->request->query['order'], ' '));
-
-    echo $this->Dataobject->highlights();
-
-    ?>
+    <? echo $this->Dataobject->highlights($hlFields, $hlFieldsPush); ?>
 
     <div>

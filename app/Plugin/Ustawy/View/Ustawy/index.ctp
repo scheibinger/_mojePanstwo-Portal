@@ -93,7 +93,7 @@
 
                                     <p class="subtitle">
                                         <span
-                                            class="label label-danger"><?= $this->Czas->dataSlownie($obj['data_publikacji']) ?></span>
+                                            class="label label-danger"><?= $this->Czas->dataSlownie($obj['data_wejscia_w_zycie']) ?></span>
                                     </p>
                                 </li>
                             <? } ?>

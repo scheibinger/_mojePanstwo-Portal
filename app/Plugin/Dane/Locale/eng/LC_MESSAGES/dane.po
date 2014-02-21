@@ -693,3 +693,6 @@ msgstr "Wyśrodkuj"
 
 msgid "LC_RADYGMINDEBATY_WYSTAPIENIA"
 msgstr "Wystąpienia"
+
+msgid "LC_POSLOWIE_W_KLUBIE"
+msgstr "Posłowie w tym klubie"
