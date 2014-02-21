@@ -9,10 +9,26 @@ function initialize() {
         },
         map = new google.maps.Map(document.getElementById('googleMap'), mapOptions),
         geocoder = new google.maps.Geocoder(),
-        contentString = '<div id="googleMapsContent">' + googleMapAdres + '<a href="https://maps.google.com/maps?daddr=' + googleMapAdres.replace(/ /g, '+') + '&t=m" target="_blank" class="btn btn-info">Dojazd</a></div>',
-        infowindow = new google.maps.InfoWindow({
-            content: contentString
-        });
+        contentString = document.createElement("div");
+    contentString.innerHTML = googleMapAdres + '<a href="https://maps.google.com/maps?daddr=' + googleMapAdres.replace(/ /g, '+') + '&t=m" target="_blank" class="btn btn-info">Dojazd</a>';
+    contentString.id = "googleMapsContent";
+    contentString.style.width = "360px";
+
+    /*GETTING HEIGHT OF CONTENT*/
+    var contentStringHeightTemp = contentString.cloneNode(true);
+    contentStringHeightTemp.style.visibility = "hidden";
+    document.body.appendChild(contentStringHeightTemp);
+
+    /*ADDING HEIGHT TO ORIGIN NODE*/
+    contentString.style.height = contentStringHeightTemp.clientHeight;
+
+    /*REMOVING CLONED NODE*/
+    var element = document.getElementById("googleMapsContent");
+    element.parentNode.removeChild(element);
+
+    infowindow = new google.maps.InfoWindow({
+        content: contentString
+    });
 
     geocoder.geocode({ 'address': googleMapAdres}, function (results, status) {
         if (status == google.maps.GeocoderStatus.OK) {
@@ -48,7 +64,9 @@ function loadScript() {
 
 $(document).ready(function () {
     var banner = $('.profile_baner'),
-        menu = $('.objectsPageContent .objectMenu');
+        menu = $('.objectsPageContent .objectMenu'),
+        menuAutoScroll = true,
+        headerHeight = $('header').outerHeight();
 
     if (banner.length > 0) {
         banner.find('.bg img').css('width', banner.width() + 'px');
@@ -70,11 +88,33 @@ $(document).ready(function () {
             padding = 10;
         event.preventDefault();
 
-        jQuery('body, html').animate({
-            scrollTop: jQuery(target).offset().top - jQuery('header').outerHeight() - padding
-        }, 800);
-    });
+        menuAutoScroll = false;
+        menu.find('li.active').removeClass('active');
+        jQuery(this).parent('li').addClass('active');
 
+        jQuery('body, html').stop(true, true).animate({
+            scrollTop: jQuery(target).offset().top - jQuery('header').outerHeight() - padding
+        }, 800, function () {
+            menuAutoScroll = true;
+        });
+    });
+    $(window).scroll(function () {
+        if (menuAutoScroll) {
+            var windscroll = $(window).scrollTop(),
+                searchHeight = ($('._mojePanstwoCockpitSearchInput:visible') ? $('._mojePanstwoCockpitSearchInput').outerHeight() : 0);
+            if (windscroll >= 100) {
+                $('.objectsPageContent .object > .block').each(function (i) {
+                    if ($(this).position().top <= windscroll + headerHeight + searchHeight + 60) {
+                        menu.find('li.active').removeClass('active');
+                        menu.find('li').eq(i).addClass('active');
+                    }
+                });
+            } else {
+                menu.find('li.active').removeClass('active');
+                menu.find('li:first').addClass('active');
+            }
+        }
+    }).scroll();
 
 });
 
@@ -150,14 +190,12 @@ $(document).ready(function () {
                 var children = $.map(sys.getEdgesFrom(newSection), function (edge) {
                     return edge.target;
                 });
-
+                console.log(parent, children);
             },
             _initMouseHandling: function () {
                 selected = null;
                 nearest = null;
                 var dragged = null;
-
-                var _section = null;
 
                 var handler = {
                     moved: function (e) {
@@ -179,6 +217,10 @@ $(document).ready(function () {
 
                         if (dragged && dragged.node !== null) dragged.node.fixed = true;
 
+                        $(canvas).unbind('mousemove', handler.moved);
+                        $(canvas).bind('mousemove', handler.dragged);
+                        $(window).bind('mouseup', handler.dropped);
+
                     },
                     dragged: function (e) {
                         var pos = $(canvas).offset();
@@ -188,10 +230,6 @@ $(document).ready(function () {
                         if (dragged !== null && dragged.node !== null) {
                             dragged.node.p = sys.fromScreen(s)
                         }
-
-                        $(canvas).unbind('mousemove', handler.moved);
-                        $(canvas).bind('mousemove', handler.dragged);
-                        $(window).bind('mouseup', handler.dropped);
                     },
 
                     dropped: function () {
@@ -223,7 +261,7 @@ $(document).ready(function () {
             type: "GET",
             beforeSend: function () {
                 sys = arbor.ParticleSystem();
-                sys.parameters({stiffness: 900, repulsion: 2000, gravity: true, dt: 0.015})
+                sys.parameters({stiffness: 900, repulsion: 2000, gravity: true, dt: 0.015});
                 sys.renderer = Renderer("#connectionGraph");
             },
             success: function (data) {
