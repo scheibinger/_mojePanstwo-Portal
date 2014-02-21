@@ -60,12 +60,14 @@
                 float: left;
 
                 .slide {
-                    @paddingSize: 10px;
+                    @paddingSize: 15px;
                     @imgSize: 90px;
 
-                    padding-top: @paddingSize;
-                    padding-bottom: @paddingSize;
-                    margin-bottom: 10px;
+                    padding: @paddingSize;
+
+                    &:nth-child(even) {
+                        background-color: #f7f7f7;
+                    }
 
                     .person {
                         width: 70%;
