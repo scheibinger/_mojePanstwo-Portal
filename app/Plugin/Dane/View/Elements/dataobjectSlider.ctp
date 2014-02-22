@@ -6,8 +6,21 @@ $file_exists = file_exists($file);
 $title_truncate_length = 120;
 ?>
 <div class="objectRender col-md-12 <?php echo $object->getDataset() ?>" oid="<?php echo $item['data']['id'] ?>">
+<?
+	if( $file_exists ) {
+	
+		echo $this->element('Dane.' . $theme . '/' . $object->getDataset(), array(
+            'item' => $item,
+            'object' => $object
+        ));
+        
+    }
+    else
+    {
+?>    		
+ 
     <div class="row">
-
+		
         <? if ($object->getThumbnailUrl()) { ?>
             <div class="attachment col-md-4">
                 <a href="<?= $object->getUrl() ?>">
@@ -45,15 +58,9 @@ $title_truncate_length = 120;
                        title="<?= strip_tags($object->getTitle()) ?>"><?= $this->Text->truncate($object->getShortTitle(), $title_truncate_length) ?></a>
                 </p>
 
-                <?
-                if ($file_exists)
-                    echo $this->element('Dane.' . $theme . '/' . $object->getDataset(), array(
-                        'item' => $item,
-                        'object' => $object
-                    ));
-                ?>
             </div>
         <? } ?>
 
     </div>
+    <? } ?>
 </div>

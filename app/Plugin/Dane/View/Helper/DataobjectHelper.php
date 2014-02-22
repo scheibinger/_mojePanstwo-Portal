@@ -238,7 +238,7 @@ class DataobjectHelper extends AppHelper
 
         if (($field_type == 'date') && !isset($field_options['format'])) {
             if ($field_value == '0000-00-00')
-                continue;
+                return false;
             $field_value = dataSlownie($field_value);
         } elseif ($field_type == 'pln') {
             $field_value = (float) $field_value;
@@ -247,14 +247,14 @@ class DataobjectHelper extends AppHelper
             $field_value = number_format_h($field_value, 2, ',', ' ') . ' PLN';
         } elseif ($field_type == 'integer') {
             if (!$field_value)
-                continue;
+                return false;
             else
                 $field_value = number_format($field_value, 0, '', ' ');
         } elseif ($field_type == 'percent') {
             $field_value .= '%';
         } elseif ($field_type == 'duration') {
             if (!$field_value)
-                continue;
+                return false;
             else
                 $field_value = number_format($field_value, 0, '', ' ') . 'm';
         }

@@ -446,7 +446,7 @@ body {
 
         ._mojePanstwoCockpitSearchInput {
             @backgroundInput: #0078AC;
-
+			
             padding: 0;
             background-color: @backgroundInput;
             height: 60px;
@@ -457,7 +457,12 @@ body {
             width: 100%;
             display: none;
             border-bottom: 1px solid #263339;
-
+			
+			> .container {
+				padding-left: 0;
+				padding-right: 0;
+			}
+			
             &.focus, &.mainFocus {
                 .mainSearch .searchFor {
 
@@ -474,7 +479,7 @@ body {
 
             .searchFor {
                 @inputColor: #222222;
-                @inputSize: 43px;
+                @inputSize: 40px;
 
                 font-family: "Lato", sans-serif;
                 border-radius: 5px;
@@ -496,6 +501,7 @@ body {
                     color: #000;
                     background-color: #FFF;
                     font-weight: 300;
+                    margin-top: 2px;
 
                     &::-webkit-input-placeholder {
                         /* WebKit browsers */
