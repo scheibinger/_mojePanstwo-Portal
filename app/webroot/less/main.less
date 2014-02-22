@@ -42,6 +42,15 @@ body > pre:first-child {
 
 .block {
     padding: 20px 20px 0;
+    
+    &.nosidepadding {
+	    padding-left: 0;
+	    padding-right: 0;
+    }
+    
+    &.bottompadding {
+	    padding-bottom: 20px;
+    }
 	
 	.block-header {
 		display: inline-block;
@@ -96,8 +105,15 @@ body > pre:first-child {
     }
     
     .textBlock {
-	    padding: 0 20px;
-	    margin-bottom: 20px;
+	    padding: 0 20px 20px;
+    }
+    
+    ul {
+    	list-style: none;
+    	padding: 0;
+		li {
+			padding: 3px 10px;
+		}
     }
 }
 
@@ -208,6 +224,8 @@ body > pre:first-child {
 
 .mpanel {
     background-color: #FFF;
+    display: inline-block;
+    width: 100%;
 }
 
 .flash-message {
