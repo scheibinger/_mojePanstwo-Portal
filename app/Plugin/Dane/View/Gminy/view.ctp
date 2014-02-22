@@ -89,7 +89,7 @@
 						
 						<div class="content">
 							<div class="dataobjectsSliderRow row">
-		                        <div class="col-xs-12">
+		                        <div>
                                     <?php echo $this->dataobjectsSlider->render($zamowienia, array(
                                         'perGroup' => 3,
                                         'rowNumber' => 1
@@ -110,7 +110,7 @@
 
 						<div class="content">
 							<div class="dataobjectsSliderRow row">
-		                        <div class="col-xs-12">
+		                        <div>
                                     <?php echo $this->dataobjectsSlider->render($dotacje_ue, array(
                                         'perGroup' => 3,
                                         'rowNumber' => 1
@@ -131,7 +131,7 @@
 
 						<div class="content">
 							<div class="dataobjectsSliderRow row">
-		                        <div class="col-xs-12">
+		                        <div>
                                     <?php echo $this->dataobjectsSlider->render($organizacje, array(
                                         'perGroup' => 3,
                                         'rowNumber' => 1

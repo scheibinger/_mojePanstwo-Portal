@@ -29,38 +29,8 @@
         $adres .= ', ' . $object->getData('adres_miejscowosc');
         $adres .= ', Polska';
         ?>
-
-        <div id="info" class="indicators">
-            <? foreach ($indicators as $indicator) { ?>
-                <div class="indicator col-lg-3">
-                    <p class="_value"><?
-                        if (isset($indicator['format'])) {
-                            switch ($indicator['format']) {
-                                case 'date':
-                                {
-                                    echo $this->Czas->dataSlownie($indicator['value']);
-                                    break;
-                                }
-                                case 'pln':
-                                {
-                                    //setlocale(LC_MONETARY, 'pl_PL');
-                                    //echo money_format('%i', $indicator['value']);
-                                    echo number_format($indicator['value'], 2, ',', ' ') . ' PLN';
-                                    break;
-                                }
-                            }
-
-                        } else {
-                            echo $indicator['value'];
-                        }
-                        ?></p>
-
-                    <p class="_label"><?= $indicator['label'] ?></p>
-                </div>
-            <? } ?>
-        </div>
-
-        <div class="profile_baner" data-adres="<?= urlencode($adres) ?>">
+		
+		 <div class="profile_baner" data-adres="<?= urlencode($adres) ?>">
             <div class="bg">
                 <img
                     src="http://maps.googleapis.com/maps/api/staticmap?center=<?= urlencode($adres) ?>&markers=<?= urlencode($adres) ?>&zoom=15&sensor=false&size=640x140&scale=2&feature:road"/>
@@ -82,12 +52,18 @@
                 </script>
             </div>
         </div>
+        
+        <div class="block">
+            <?php echo $this->Dataobject->hlTableForObject($object, array(
+				'krs', 'nip', 'regon', 'data_rejestracji', 'data_dokonania_wpisu', 'email', 'www', 'wartosc_czesc_kapitalu_wplaconego', 'wartosc_kapital_docelowy', 'wartosc_kapital_zakladowy', 'wartosc_nominalna_akcji', 'wartosc_nominalna_podwyzszenia_kapitalu', 'forma_prawna_str', 'oznaczenie_sadu', 'sygnatura_akt', 'wczesniejsza_rejestracja_str'
+			), 3); ?>
+        </div>       
 
         <? if ($object->getData('sposob_reprezentacji')) { ?>
-            <div class="reprezentacja block">
+            <div class="reprezentacja block bg">
                 <h2>Sposób reprezentacji</h2>
 
-                <div class="content normalizeText">
+                <div class="content normalizeText textBlock">
                     <?= $object->getData('sposob_reprezentacji') ?>
                 </div>
             </div>
@@ -147,7 +123,7 @@
     </div>
 	
     <? if ($object->getData('cel_dzialania')) { ?>
-        <div class="dzialanie block">
+        <div class="dzialanie block bg">
             <h2>Cel działania</h2>
 
             <div class="content normalizeText">
@@ -157,7 +133,7 @@
     <? } ?>
 
     <? if ($dzialalnosci) { ?>
-        <div class="dzialalnosci block">
+        <div class="dzialalnosci block bg">
             <h2 id="<?= $dzialalnosci['idTag'] ?>"><?= $dzialalnosci['title'] ?></h2>
 
             <div class="content normalizeText">
