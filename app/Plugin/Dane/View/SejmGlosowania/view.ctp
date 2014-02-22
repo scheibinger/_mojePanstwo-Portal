@@ -40,66 +40,65 @@ $dictionary = array(
     <div class="object glosowanie_stats">
 
         <div class="row">
-            <div class="col-md-4 sejm_glosowania">
-                <p class="wynikGlosowania <?= $dictionary[$object->getData('wynik_id')][1]; ?> label"><?= $dictionary[$object->getData('wynik_id')][0]; ?></p>
+            <div class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-3 sejm_glosowania">
+            <p class="wynikGlosowania <?= $dictionary[$object->getData('wynik_id')][1]; ?> label"><?= $dictionary[$object->getData('wynik_id')][0]; ?></p>
 
                 <div class="highchart" data-wynikiKlubowe='<?= json_encode($chartData) ?>'></div>
 
             </div>
-            <div class="col-md-8">
-                <div class="block">
-                    <h2><?= __d('dane', 'LC_SEJMGLOSOWANIA_KLUBY_HEADER') ?></h2>
+        </div>
+        <div class="col-xs-12">
+            <div class="block">
+                <h2><?= __d('dane', 'LC_SEJMGLOSOWANIA_KLUBY_HEADER') ?></h2>
 
-                    <table class="clubTable table">
-                        <colgroup>
-                            <col span="3">
-                            <col class="colSearch-4">
-                            <col class="colSearch-1">
-                            <col class="colSearch-2">
-                            <col class="colSearch-3">
-                            <col>
-                        </colgroup>
-                        <thead>
+                <table class="clubTable table">
+                    <colgroup>
+                        <col span="3">
+                        <col class="colSearch-4">
+                        <col class="colSearch-1">
+                        <col class="colSearch-2">
+                        <col class="colSearch-3">
+                        <col>
+                    </colgroup>
+                    <thead>
+                    <tr>
+                        <th><?= __d('dane', 'LC_SEJMGLOSOWANIA_KLUBY_NAZWAKLUBU') ?></th>
+                        <th><?= __d('dane', 'LC_SEJMGLOSOWANIA_KLUBY_LICZEBNOSCKLUBU') ?></th>
+                        <th><?= __d('dane', 'LC_SEJMGLOSOWANIA_KLUBY_LICZBAGLOSUJACYCH') ?></th>
+                        <th class="searchableVote"
+                            data-search="4"><?= __d('dane', 'LC_SEJMGLOSOWANIA_KLUBY_NIEOBECNI') ?></th>
+                        <th class="searchableVote"
+                            data-search="1"><?= __d('dane', 'LC_SEJMGLOSOWANIA_KLUBY_ZA') ?></th>
+                        <th class="searchableVote"
+                            data-search="2"><?= __d('dane', 'LC_SEJMGLOSOWANIA_KLUBY_PRZECIW') ?></th>
+                        <th class="searchableVote"
+                            data-search="3"><?= __d('dane', 'LC_SEJMGLOSOWANIA_KLUBY_WSTRZYMALISIE') ?></th>
+                        <th><?= __d('dane', 'LC_SEJMGLOSOWANIA_KLUBY_LICZBABUNTOW') ?></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <? foreach ($object->getLayer('wynikiKlubowe') as $row) { ?>
                         <tr>
-                            <th><?= __d('dane', 'LC_SEJMGLOSOWANIA_KLUBY_NAZWAKLUBU') ?></th>
-                            <th><?= __d('dane', 'LC_SEJMGLOSOWANIA_KLUBY_LICZEBNOSCKLUBU') ?></th>
-                            <th><?= __d('dane', 'LC_SEJMGLOSOWANIA_KLUBY_LICZBAGLOSUJACYCH') ?></th>
-                            <th class="searchableVote"
-                                data-search="4"><?= __d('dane', 'LC_SEJMGLOSOWANIA_KLUBY_NIEOBECNI') ?></th>
-                            <th class="searchableVote"
-                                data-search="1"><?= __d('dane', 'LC_SEJMGLOSOWANIA_KLUBY_ZA') ?></th>
-                            <th class="searchableVote"
-                                data-search="2"><?= __d('dane', 'LC_SEJMGLOSOWANIA_KLUBY_PRZECIW') ?></th>
-                            <th class="searchableVote"
-                                data-search="3"><?= __d('dane', 'LC_SEJMGLOSOWANIA_KLUBY_WSTRZYMALISIE') ?></th>
-                            <th><?= __d('dane', 'LC_SEJMGLOSOWANIA_KLUBY_LICZBABUNTOW') ?></th>
+                            <td class="club" data-club-id="<?= $row['klub_id'] ?>">
+                                <? if ($row['klub_id'] != '7') { ?>
+                                    <img src="http://resources.sejmometr.pl/s_kluby/<?= $row['klub_id'] ?>_a.png"
+                                         alt="<?= $row['klub_nazwa'] ?>"/>
+                                <? } ?>
+                                <strong><?= $row['klub_nazwa'] ?></strong>
+                            </td>
+                            <td><?= $row['l'] ?></td>
+                            <td><?= $row['g'] ?></td>
+                            <td><?= $row['n'] ?></td>
+                            <td><?= $row['z'] ?></td>
+                            <td><?= $row['p'] ?></td>
+                            <td><?= $row['w'] ?></td>
+                            <td><?= $row['b'] ?></td>
                         </tr>
-                        </thead>
-                        <tbody>
-                        <? foreach ($object->getLayer('wynikiKlubowe') as $row) { ?>
-                            <tr>
-                                <td class="club" data-club-id="<?= $row['klub_id'] ?>">
-                                    <? if ($row['klub_id'] != '7') { ?>
-                                        <img src="http://resources.sejmometr.pl/s_kluby/<?= $row['klub_id'] ?>_a.png"
-                                             alt="<?= $row['klub_nazwa'] ?>"/>
-                                    <? } ?>
-                                    <strong><?= $row['klub_nazwa'] ?></strong>
-                                </td>
-                                <td><?= $row['l'] ?></td>
-                                <td><?= $row['g'] ?></td>
-                                <td><?= $row['n'] ?></td>
-                                <td><?= $row['z'] ?></td>
-                                <td><?= $row['p'] ?></td>
-                                <td><?= $row['w'] ?></td>
-                                <td><?= $row['b'] ?></td>
-                            </tr>
-                        <? } ?>
-                        </tbody>
-                    </table>
-                </div>
+                    <? } ?>
+                    </tbody>
+                </table>
             </div>
         </div>
-
         <div class="col-md-12">
             <div class="block indywidualneTable">
                 <h2><?= __d('dane', 'LC_SEJMGLOSOWANIA_INDYWIDUALNE_HEADER') ?></h2>

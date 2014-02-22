@@ -27,53 +27,59 @@
                         <div class="_mojePanstwoCockpitMenuUpSubMenuTitle">Aplikacje</div>
                         <?php if (!empty($applications['list'])) {
                             echo '<ul id="_mojePanstwoCockpitMenuUpSubMenuList"><li>';
-                            foreach ($applications['list'] as $index => $app) { if( $app['Application']['home']=='1' ) {
-                                if (($index % $applications['perPage'] == 0) && ($index != 0))
-                                    echo '</li><li>';
+                            $appCount = 0;
+                            foreach ($applications['list'] as $app) {
+                                if ($app['Application']['home'] == '1') {
+                                    if (($appCount % $applications['perPage'] == 0) && ($appCount != 0))
+                                        echo '</li><li>';
 
-                                if ($app['Application']['type'] == 'app') {
-                                    ?>
-                                    <a class="appContruct" href="/<?= $app['Application']['slug'] ?>">
-                                        <div class="_mojePanstwoCockpitMenuUpSubMenuListIcon">
-                                            <div class="_mojePanstwoCockpitMenuUpSubMenuListIconInner">
-                                                <img
-                                                    src="/<?= $app['Application']['plugin'] ?>/icon/<?= $app['Application']['slug'] ?>.svg"
-                                                    alt="<?= $app['Application']['name'] ?>"/>
+                                    if ($app['Application']['type'] == 'app') {
+                                        ?>
+                                        <a class="appContruct <?= $appCount ?>"
+                                           href="/<?= $app['Application']['slug'] ?>">
+                                            <div class="_mojePanstwoCockpitMenuUpSubMenuListIcon">
+                                                <div class="_mojePanstwoCockpitMenuUpSubMenuListIconInner">
+                                                    <img
+                                                        src="/<?= $app['Application']['plugin'] ?>/icon/<?= $app['Application']['slug'] ?>.svg"
+                                                        alt="<?= $app['Application']['name'] ?>"/>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div
-                                            class="_mojePanstwoCockpitMenuUpSubMenuListName"><?= $app['Application']['name'] ?></div>
-                                    </a>
-                                <?php } else if ($app['Application']['type'] == 'folder') { ?>
-                                    <div class="appContruct appFolder"
-                                         data-folder-slug="/<?= $app['Application']['slug'] ?>">
-                                        <div class="_mojePanstwoCockpitMenuUpSubMenuListIcon">
-                                            <div class="_mojePanstwoCockpitMenuUpSubMenuListIconInner">
-                                                <img src="/icon/folder.svg" alt="<?= $app['Application']['name'] ?>"/>
+                                            <div
+                                                class="_mojePanstwoCockpitMenuUpSubMenuListName"><?= $app['Application']['name'] ?></div>
+                                        </a>
+                                    <?php } else if ($app['Application']['type'] == 'folder') { ?>
+                                        <div class="appContruct appFolder"
+                                             data-folder-slug="/<?= $app['Application']['slug'] ?>">
+                                            <div class="_mojePanstwoCockpitMenuUpSubMenuListIcon">
+                                                <div class="_mojePanstwoCockpitMenuUpSubMenuListIconInner">
+                                                    <img src="/icon/folder.svg"
+                                                         alt="<?= $app['Application']['name'] ?>"/>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div
-                                            class="_mojePanstwoCockpitMenuUpSubMenuListName"><?= $app['Application']['name'] ?></div>
-                                        <ul class="appList">
-                                            <?php foreach ($app['Content'] as $key => $appList) { ?>
-                                                <li>
-                                                    <a href="/<?= $appList['slug'] ?>">
-                                                        <div class="appIcon">
-                                                            <div class="innerIcon">
-                                                                <img
-                                                                    src="/<?= $appList['plugin'] ?>/icon/<?= $appList['slug'] ?>.svg"
-                                                                    alt="<?= $appList['name'] ?>"/>
+                                            <div
+                                                class="_mojePanstwoCockpitMenuUpSubMenuListName"><?= $app['Application']['name'] ?></div>
+                                            <ul class="appList">
+                                                <?php foreach ($app['Content'] as $key => $appList) { ?>
+                                                    <li>
+                                                        <a href="/<?= $appList['slug'] ?>">
+                                                            <div class="appIcon">
+                                                                <div class="innerIcon">
+                                                                    <img
+                                                                        src="/<?= $appList['plugin'] ?>/icon/<?= $appList['slug'] ?>.svg"
+                                                                        alt="<?= $appList['name'] ?>"/>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="appName"><?= $appList['name'] ?></div>
-                                                    </a>
-                                                </li>
-                                            <?php } ?>
-                                        </ul>
-                                    </div>
-                                <?php
+                                                            <div class="appName"><?= $appList['name'] ?></div>
+                                                        </a>
+                                                    </li>
+                                                <?php } ?>
+                                            </ul>
+                                        </div>
+                                    <?php
+                                    }
+                                    $appCount++;
                                 }
-                            } }
+                            }
                             echo '</li></ul>';
                         }?>
                         <div id="_mojePanstwoCockpitMenuUpSubMenuControls">

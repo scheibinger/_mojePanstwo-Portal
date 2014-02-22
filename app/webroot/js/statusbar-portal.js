@@ -35,10 +35,12 @@
 
     (searchEngineButton = searchEngine.find('._mojePanstwoCockpitSearchContentButton')).click(function (e) {
         e.preventDefault();
+        var searchEngineHeight = searchEngineInput.css('height');
+
         if (searchEngineInput.is(':hidden')) {
             searchEngineButton.addClass('active');
             searchEngineInput.stop(true, true).slideDown(400);
-            $('#_main').stop(true, true).animate({'marginTop': '75px'}, 400);
+            $('#_main').stop(true, true).animate({'marginTop': searchEngineHeight}, 400);
         } else {
             searchEngineButton.removeClass('active');
             searchEngineInput.stop(true, true).slideUp(400);

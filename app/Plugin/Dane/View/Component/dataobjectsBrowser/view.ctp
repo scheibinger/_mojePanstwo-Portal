@@ -29,28 +29,28 @@ if ($__mode == 'object')
 } else {
     ?>
 
-    <div class="row update-filters">
-		<? echo $this->element('DataobjectsBrowser/filters', array(
-			'filters' => $filters,
-			'switchers' => $switchers,
-			'facets' => $facets,
-			'page' => $page,
-		)); ?>
+    <div class="row">
+        <? echo $this->element('DataobjectsBrowser/filters', array(
+            'filters' => $filters,
+            'switchers' => $switchers,
+            'facets' => $facets,
+            'page' => $page,
+        )); ?>
     </div>
-    
+
     <div class="col-xs-12 col-sm-9 dataObjects">
-        
+
         <div class="dataInfo update-header">
-        	<? echo $this->element('DataobjectsBrowser/header', array(
-        		'pagination' => $pagination,
-        		'orders' => $orders,
-        		'page' => $page,
-        	)); ?>
+            <? echo $this->element('DataobjectsBrowser/header', array(
+                'pagination' => $pagination,
+                'orders' => $orders,
+                'page' => $page,
+            )); ?>
         </div>
-        
+
         <div class="innerContainer update-objects">
             <? echo $this->element('DataobjectsBrowser/objects', array(
-            	'objects' => $objects,
+                'objects' => $objects,
             )); ?>
         </div>
 

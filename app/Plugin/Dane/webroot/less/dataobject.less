@@ -147,20 +147,10 @@ blockquote {
                 input {
                     color: @colorLabel;
 
-                    &::-webkit-input-placeholder {
-                        /* WebKit browsers */
-                        color: @colorLabel;
-                    }
-                    &:-moz-placeholder {
-                        /* Mozilla Firefox 4 to 18 */
-                        color: @colorLabel;
-                    }
-                    &::-moz-placeholder {
-                        /* Mozilla Firefox 19+ */
-                        color: @colorLabel;
-                    }
+                    &::-webkit-input-placeholder,
+                    &:-moz-placeholder,
+                    &::-moz-placeholder,
                     &:-ms-input-placeholder {
-                        /* Internet Explorer 10+ */
                         color: @colorLabel;
                     }
                 }
@@ -448,6 +438,10 @@ blockquote {
 
                                     &:hover {
                                         text-decoration: underline;
+                                    }
+
+                                    &.active {
+                                        color: #000000;
                                     }
                                 }
                             }

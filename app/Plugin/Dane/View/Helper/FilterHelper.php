@@ -33,7 +33,7 @@ class FilterHelper extends AppHelper
         // SEARCH
 
         $out .= '<li class="form-group filter innerSearch">';
-        $out .= '<input type="text" class="form-control" autocomplete="off" name="q" placeholder="' . __d('dane', __('LC_DANE_SEARCH')) . '" data-icon-after="&#xe600;" value="' . ((isset($this->params->query['q'])) ? htmlspecialchars($this->params->query['q']) : '') . '"/>';
+        $out .= '<input id="innerSearch" type="text" class="form-control" autocomplete="off" name="q" placeholder="' . __d('dane', __('LC_DANE_SEARCH')) . '" data-icon-after="&#xe600;" value="' . ((isset($this->params->query['q'])) ? htmlspecialchars($this->params->query['q']) : '') . '"/>';
         $out .= '</li>';
 
 
