@@ -208,7 +208,7 @@ var DataObjectesAjax = {
     /*GATHER FILTER OPTION AND SEND RELOAD AJAX REQUEST*/
     objectsReload: function () {
         var formSerialize = jQuery('#DatasetViewForm').serialize();
-        History.pushState({ filters: formSerialize + '&search=web', reloadForm: 'object', page: "Dane", focusInput: $('.dataBrowser input:focus').attr('id') }, jQuery(document).find("title").html(), "?" + formSerialize + '&search=web');
+        History.pushState({ filters: formSerialize + '&search=web', reloadForm: 'object', page: "Dane", focusInput: $('.dataBrowser input[type="text"]:focus').attr('id') }, jQuery(document).find("title").html(), "?" + formSerialize + '&search=web');
     },
     /*GATHER SORT AND FILTER OPTION AND SEND RELOAD AJAX REQUEST*/
     pageReload: function (target) {
@@ -294,10 +294,12 @@ var DataObjectesAjax = {
                     DataObjectesAjax.datepickerForInputs();
                     DataObjectesAjax.removeHiddenInput();
                     DataObjectesAjax.buttonSearchWithoutPhrase();
-                    DataObjectesAjax.setCaretAtEnd(focusInput);
 
                     DataObjectesAjax.sortingAddRemoveOptions();
                     DataObjectesAjax.specialCase();
+
+                    if (focusInput !== undefined)
+                        DataObjectesAjax.setCaretAtEnd(focusInput);
                 });
 
                 /*ANIMATE SCROLL TO TOP OF PAGE*/
