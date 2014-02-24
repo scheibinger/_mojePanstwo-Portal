@@ -74,13 +74,16 @@ class DataobjectHelper extends AppHelper
 
     public function render($object, $theme = 'default', $options = array())
     {
-        // debug( $object->getData() );
+    	
+    	// debug( $object->getData() );
+    	
         $bg = isset($options['bg']) ? $options['bg'] : false;
         $hlFields = isset($options['hlFields']) ? $options['hlFields'] : false;
         $bigTitle = isset($options['bigTitle']) ? $options['bigTitle'] : false;
         $hlFieldsPush = isset($options['hlFieldsPush']) ? $options['hlFieldsPush'] : false;
         $routes = isset($options['routes']) ? $options['routes'] : array();
         $forceLabel = isset($options['forceLabel']) ? $options['forceLabel'] : false;
+        $file = isset($options['file']) ? $options['file'] : false;
 
         $this->setObject($object);
         if (!empty($routes))
@@ -106,12 +109,14 @@ class DataobjectHelper extends AppHelper
             'file' => $this->object->getDataset(),
             'thumbSize' => $this->getThumbSize(),
             'gid' => @$this->object->id,
+            'file' => $file,
+            'options' => $options,
         ), array('plugin' => 'Dane'));
     }
 
     public function highlights($fields = false, $fieldsPush = false)
     {
-				
+		
         $output = '';
         $fields = $this->object->getHiglightedFields($fields, $fieldsPush);
 
@@ -219,7 +224,7 @@ class DataobjectHelper extends AppHelper
 		return $this->hlTable($data, $col_width);
 	}
 	
-	public function getHTMLForField($field, $field_params, $options)
+	public function getHTMLForField($field, $field_params, $options = array())
 	{
 				
 		$output = '';
@@ -257,6 +262,9 @@ class DataobjectHelper extends AppHelper
                 return false;
             else
                 $field_value = number_format($field_value, 0, '', ' ') . 'm';
+        } elseif( $field_type == 'vote' )
+        {
+	        $field_value = '<div class="voted btn btn-default btn-glos-' . $field_value . '" data-glos="' . $field_value . '">' . $this->voted($field_value) . '</div>';
         }
 
 
@@ -357,12 +365,15 @@ class DataobjectHelper extends AppHelper
             if (!is_array($field_value) && stripos($field_value, $field_label) === 0)
                 $field_value = trim(substr($field_value, strlen($field_label)));
 
-            $output .= '<div class="dataHighlight col-md-' . $col_width . '"';
+            $output .= '<div class="dataHighlight';
+            if( $col_width )
+	            $output .= ' col-md-' . $col_width;
+            $output .= '"';
             if( $hidden )
             	$output .= ' style="display: none;"';
             $output .= '>';
 
-            if ($field_label && !isset($field_options['hide']))
+            if ($field_label && !isset($field_options['hide']) && $field_type!='vote' )
                 $output .= '<p class="_label">' . $field_label . ':</p>';
 
             $output .= '<p class="_value';
@@ -392,6 +403,17 @@ class DataobjectHelper extends AppHelper
             $this->thumbnail_sizes_map[$this->object->getDataset()] :
             '1';
 
+    }
+    
+    public function voted($i)
+    {
+	    switch( $i )
+	    {
+		    case 1: return 'Za';
+		    case 2: return 'Przeciw';
+		    case 3: return 'Wstrzymanie';
+		    case 4: return 'Nieobecność';
+	    }
     }
 
 } 

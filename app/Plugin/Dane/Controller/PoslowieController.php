@@ -9,52 +9,71 @@ class PoslowieController extends DataobjectsController
         'RequestHandler',
     );
 
-    public $menuMode = 'horizontal';
-    public $menu = array(
-        array(
-            'id' => 'view',
-            'label' => 'LC_DANE_INFORMACJE',
-        ),
-        array(
-            'id' => 'aktywnosci',
-            'label' => 'Aktywności w Sejmie',
-        ),
-        array(
-            'id' => 'glosowania',
-            'label' => 'Wyniki głosowań',
-        ),
-        /*
-        array(
-            'id' => 'wspolpracownicy',
-            'label' => 'LC_DANE_WSPOLPRACOWNICY',
-        ),
-        array(
-            'id' => 'komisje',
-            'label' => 'LC_DANE_KOMISJE',
-        ),
-        array(
-            'id' => 'rejestrkorzysci',
-            'label' => 'LC_DANE_REJESTR_KORZYSCI',
-        ),
-        array(
-            'id' => 'oswiadczeniamajatkowe',
-            'label' => 'LC_DANE_OSWIADCZENIA_MAJATKOWE',
-        ),
-        */
-    );
+    public $menu = array();
 
     public function view()
     {
-
-        parent::_prepareView();
-        $url = 'http://sejmometr.pl/poslowie/' . $this->object->getId();
-        $this->redirect($url);
-        die();
-
+        
         parent::view();
-        $this->set('info', $this->object->loadLayer('info'));
-        $this->set('krs', $this->object->loadLayer('krs'));
-        $this->set('stats', $this->object->loadLayer('stat'));
+		
+		$menu = array(
+			array(
+				'id' => 'wystapienia',
+				'label' => 'Wystąpienia w Sejmie',
+			),
+			array(
+				'id' => 'interpelacje',
+				'label' => 'Interpelacje',
+			),
+			array(
+				'id' => 'wystapienia',
+				'label' => 'Projekty ustaw',
+			),
+			array(
+				'id' => 'glosowania',
+				'label' => 'Wyniki głosowań',
+			),
+		);
+		
+					
+		$this->API->searchDataset('sejm_wystapienia', array(
+            'limit' => 9,
+            'conditions' => array(
+                'ludzie.id' => $this->object->getData('ludzie.id'),
+            ),
+        ));
+        $this->set('wystapienia', $this->API->getObjects());
+        
+        $this->API->searchDataset('sejm_interpelacje', array(
+            'limit' => 9,
+            'conditions' => array(
+                'posel_id' => $this->object->getId(),
+            ),
+        ));
+        $this->set('interpelacje', $this->API->getObjects());
+        
+        $this->API->searchDataset('legislacja_projekty_ustaw', array(
+            'limit' => 9,
+            'conditions' => array(
+                'posel_id' => $this->object->getId(),
+            ),
+        ));
+        $this->set('projekty_ustaw', $this->API->getObjects());
+        
+        $this->API->searchDataset('poslowie_glosy', array(
+            'limit' => 9,
+            'conditions' => array(
+                'posel_id' => $this->object->getId(),
+            ),
+        ));
+        $this->set('glosowania', $this->API->getObjects());
+		
+		
+        // $this->set('info', $this->object->loadLayer('info'));
+        // $this->set('krs', $this->object->loadLayer('krs'));
+        // $this->set('stats', $this->object->loadLayer('stat'));
+        
+        $this->set('_menu', $menu);
     }
 
     public function aktywnosci()
@@ -65,13 +84,49 @@ class PoslowieController extends DataobjectsController
             'source' => 'poslowie.aktywnosci:' . $this->object->getId(),
         ));
     }
-
+	
+	public function wystapienia()
+    {
+        parent::_prepareView();
+        $this->dataobjectsBrowserView(array(
+            'source' => 'poslowie.wystapienia:' . $this->object->getId(),
+            'dataset' => 'sejm_wystapienia',
+            'title' => 'Wystąpienia w Sejmie',
+            'noResultsTitle' => 'Brak wystąpień',
+            'hlFields' => array('sejm_debaty.tytul'),
+        ));
+    }
+    
+    public function interpelacje()
+    {
+        parent::_prepareView();
+        $this->dataobjectsBrowserView(array(
+            'source' => 'poslowie.interpelacje:' . $this->object->getId(),
+            'dataset' => 'sejm_interpelacje',
+            'title' => 'Interpelacje',
+            'noResultsTitle' => 'Brak interpelacji',
+        ));
+    }
+    
+    public function projekty_ustaw()
+    {
+        parent::_prepareView();
+        $this->dataobjectsBrowserView(array(
+            'source' => 'poslowie.projekty_ustaw:' . $this->object->getId(),
+            'dataset' => 'legislacja_projekty_ustaw',
+            'title' => 'Złożone projekty ustaw',
+            'noResultsTitle' => 'Brak projektów',
+        ));
+    }
+	
     public function glosowania()
     {
         parent::_prepareView();
         $this->dataobjectsBrowserView(array(
             'source' => 'poslowie.glosowania:' . $this->object->getId(),
             'dataset' => 'poslowie_glosy',
+            'title' => 'Wyniki głosowań',
+            'noResultsTitle' => 'Brak wyników głosowań',
         ));
     }
 

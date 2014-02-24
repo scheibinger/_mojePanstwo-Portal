@@ -20,12 +20,12 @@ $this->Dataobject->setObject($object);
         <? } ?>
         <div class="data col-md-<?= $this->Dataobject->getDate() ? '11' : '12' ?>">
             <div class="row">
-                <? if ($object->getThumbnailUrl('1')) { ?>
+                <? if ($object->getThumbnailUrl($thumbSize)) { ?>
                     <div class="attachment col-md-<?= $object_content_sizes[0] ?> text-center">
                         <?php if ($object->getUrl() != false) { ?>
                         <a href="<?= $object->getUrl() ?>">
                             <?php } ?>
-                            <img onerror="imgFixer(this)" src="<?= $object->getThumbnailUrl('1') ?>"
+                            <img onerror="imgFixer(this)" src="<?= $object->getThumbnailUrl($thumbSize) ?>"
                                  alt="<?= strip_tags($object->getTitle()) ?>"/>
                             <?php if ($object->getUrl() != false) { ?>
                         </a>

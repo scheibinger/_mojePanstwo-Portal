@@ -2,7 +2,7 @@
 $rand = 'carousel-' . rand();
 $perGroupSet = (isset($options['perGroup'])) ? $options['perGroup'] : 4;
 $rowNumber = (isset($options['rowNumber'])) ? $options['rowNumber'] : 2;
-$slidertheme = (isset($options['theme'])) ? $options['theme'] : 'dataobjectSlider';
+$slidertheme = 'dataobjectSlider';
 if (isset($_COOKIE["_mPViewport"])) {
     $cookie = $_COOKIE["_mPViewport"];
 
@@ -38,7 +38,7 @@ $perGroupSize = ($rowNumber == 1) ? floor(12 / $perGroup) : (($perGroup <= $rowN
                             if (($index % $perGroup == 0) && ($index != 0))
                                 echo '</div><div class="item">';
 
-                            echo '<div class="object col-xs-' . $perGroupSize . '">' . $this->Dataobject->render($object, $slidertheme) . '</div>';
+                            echo '<div class="object col-xs-' . $perGroupSize . '">' . $this->Dataobject->render($object, $slidertheme, $options) . '</div>';
                         }
                     } ?>
                 </div>

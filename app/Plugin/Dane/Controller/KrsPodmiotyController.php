@@ -9,7 +9,10 @@ class KrsPodmiotyController extends DataobjectsController
         'Time',
     );
     public $components = array('RequestHandler');
-
+	public $objectOptions = array(
+		'hlFields' => array(),
+	);
+	
     /*
     public $menuMode = 'vertical';
     protected function prepareMenu()

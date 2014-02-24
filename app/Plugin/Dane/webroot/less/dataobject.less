@@ -25,6 +25,7 @@
 blockquote {
     font-family: "Lato", sans-serif;
     font-weight: 400;
+    color: #000;
 
     small {
         font-size: 12px;
@@ -35,7 +36,7 @@ blockquote {
         font-size: 16px;
         line-height: 1.2em;
 
-        &.opis {
+        &.opis, &.m {
             color: #999999;
             text-align: center;
             font-size: 14px;
@@ -749,7 +750,7 @@ blockquote {
                 font-style: italic;
                 font-size: 13px;
                 line-height: 1.3em;
-                padding: 10px 10px 0;
+                padding: 0 10px;
             }
 
             &.desc {
@@ -824,5 +825,31 @@ blockquote {
 
     .modal-header {
         border-bottom: 0;
+    }
+}
+
+.voted {
+    color: #121212;
+    font-family: "Lato", sans-serif;
+    font-weight: 400;
+    cursor: default;
+	font-size: 14px;
+	padding: 3px 8px;
+	min-width: 90px;
+	margin-top: 5px;
+
+    &.btn-glos-1 {
+        background-color: #5CB85C;
+        border-color: #4CAE4C;
+        color: #FFFFFF;
+    }
+    &.btn-glos-2 {
+        background-color: #D9534F;
+        border-color: #D43F3A;
+        color: #FFFFFF;
+    }
+    &.btn-glos-3 {
+        background-color: #EBEBEB;
+        border-color: #ADADAD;
     }
 }

@@ -94,7 +94,9 @@
 		                        <div>
                                     <?php echo $this->dataobjectsSlider->render($zamowienia, array(
                                         'perGroup' => 3,
-                                        'rowNumber' => 1
+                                        'rowNumber' => 1,
+                                        'labelMode' => 'none',
+                                        'dfFields' => array('data_publikacji'),
                                     )) ?>
                                 </div>
                             </div>
@@ -115,7 +117,9 @@
 		                        <div>
                                     <?php echo $this->dataobjectsSlider->render($dotacje_ue, array(
                                         'perGroup' => 3,
-                                        'rowNumber' => 1
+                                        'rowNumber' => 1,
+                                        'labelMode' => 'none',
+                                        'dfFields' => array('data_podpisania'),
                                     )) ?>
                                 </div>
                             </div>

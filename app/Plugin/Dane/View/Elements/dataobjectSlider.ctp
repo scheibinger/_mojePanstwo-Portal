@@ -1,25 +1,30 @@
-<?
-$path = App::path('Plugin');
-$file = $path[0] . '/Dane/View/Elements/' . $theme . '/' . $object->getDataset() . '.ctp';
-$file_exists = file_exists($file);
-
-$title_truncate_length = 120;
+<?	
+	
+	$path = App::path('Plugin');
+		
+	$element = ( isset($file) && $file ) ? 
+		$file : 
+		$object->getDataset();
+		
+	$element_exists = $element ? 
+		file_exists( $path[0] . '/Dane/View/Elements/' . $theme . '/' . $element . '.ctp' ) : 
+		false;
+		
 ?>
 <div class="objectRender col-md-12 <?php echo $object->getDataset() ?>" oid="<?php echo $item['data']['id'] ?>">
-<?
-	if( $file_exists ) {
+	<div class="row">
 	
-		echo $this->element('Dane.' . $theme . '/' . $object->getDataset(), array(
+<?
+	if( $element_exists ) {	
+		echo $this->element('Dane.' . $theme . '/' . $element, array(
             'item' => $item,
-            'object' => $object
-        ));
-        
+            'object' => $object,
+            'options' => $options,
+        ));     
     }
     else
     {
-?>    		
- 
-    <div class="row">
+?>    		    
 		
         <? if ($object->getThumbnailUrl()) { ?>
             <div class="attachment col-md-4">
@@ -31,36 +36,26 @@ $title_truncate_length = 120;
                 </a>
             </div>
             <div class="content col-md-8">
-                <p class="header">
-                    <?= $object->getLabel(); ?>
-                </p>
-
-                <p class="title">
-                    <a href="<?= $object->getUrl() ?>"
-                       title="<?= strip_tags($object->getTitle()) ?>"><?= $this->Text->truncate($object->getShortTitle(), $title_truncate_length) ?></a>
-                </p>
-
-                <? if ($file_exists)
-                    echo $this->element('Dane.' . $theme . '/' . $object->getDataset(), array(
-                        'item' => $item,
-                        'object' => $object
-                    ));
-                ?>
+                
+                <?php echo $this->element('dataobjectSlider/_content', array(
+                	'object' => $object,
+		            'options' => $options,
+                )); ?>
+                
             </div>
         <? } else { ?>
             <div class="content col-md-12">
-                <p class="header">
-                    <?= $object->getLabel(); ?>
-                </p>
-
-                <p class="title">
-                    <a href="<?= $object->getUrl() ?>"
-                       title="<?= strip_tags($object->getTitle()) ?>"><?= $this->Text->truncate($object->getShortTitle(), $title_truncate_length) ?></a>
-                </p>
+                
+                <?php echo $this->element('dataobjectSlider/_content', array(
+                	'object' => $object,
+		            'options' => $options,
+                )); ?>
 
             </div>
         <? } ?>
 
-    </div>
+    
     <? } ?>
+    
+    </div>
 </div>
