@@ -17,10 +17,9 @@ $buttons = isset($objectOptions['buttons']) ? $objectOptions['buttons'] : array(
             <div class="row">
                 <div class="col-md-9">
                     <div class="objectPageHeader">
-                        <?=
-                        $this->Dataobject->render($object, 'page', array(
-                            'hlFields' => $objectOptions['hlFields'],
-                        )) ?>
+                        <?php                                           
+	                        echo $this->Dataobject->render($object, 'page', $objectOptions);
+                        ?>
                     </div>
                 </div>
                 <div class="col-md-3">

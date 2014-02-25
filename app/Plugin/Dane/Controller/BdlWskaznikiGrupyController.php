@@ -5,7 +5,11 @@ App::uses('DataobjectsController', 'Dane.Controller');
 class BdlWskaznikiGrupyController extends DataobjectsController
 {
     public $menu = array();
-
+	
+	public $objectOptions = array(
+    	'bigTitle' => true,
+    );
+	
     public function view()
     {
         parent::_prepareView();
