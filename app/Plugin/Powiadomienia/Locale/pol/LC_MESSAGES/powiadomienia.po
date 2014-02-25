@@ -68,7 +68,10 @@ msgid "LC_POWIADOMIENIA_JS_NOTIFY_TRY_SEARCH"
 msgstr "Przeszukaj dane publiczne dla tego słowa"
 
 msgid "LC_POWIADOMIENIA_PERMISSION_HEADLINE"
-msgstr "Aby skorzystać z funkcji powiadomień, musisz się zalogować."
+msgstr "Dzięki aplikacji Powiadomienia możesz skonfigurować swoją listę słów kluczowych i otrzymywać powiadomienia o nowych danych publicznych zawierających wybrane słowa."
+
+msgid "LC_POWIADOMIENIA_PERMISSION_HEADLINE_SECOND"
+msgstr "Zaloguj się aby skorzystać z tej aplikacji."
 
 msgid "LC_POWIADOMIENIA_PERMISSION_LOGIN"
 msgstr "Zaloguj się"

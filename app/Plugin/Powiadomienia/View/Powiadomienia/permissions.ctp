@@ -1,18 +1,21 @@
-<?php $this->Combinator->add_libs('css', $this->Less->css('permissions', array('plugin' => 'Powiadomienia'))); ?>
-<div class="container permissions">
-    <div class="image col-sm-12 col-md-2">
-        <?php echo $this->Html->image('Powiadomienia.ups.png'); ?>
-    </div>
-    <div class="information col-sm-12 col-md-10">
-        <p class="text-center lead text-info">
-            <strong><?php echo __d('powiadomienia', 'LC_POWIADOMIENIA_PERMISSION_HEADLINE'); ?></strong>
-        </p>
+<?php $this->Combinator->add_libs('css', $this->Less->css('missing')) ?>
 
-        <p class="text-center">
-            <a href="<?php echo $this->Html->url(array('plugin' => 'paszport', 'controller' => 'pages', 'action' => 'home')); ?>"
-               class="btn btn-primary btn-lg">
-                <?php echo __d('powiadomienia', 'LC_POWIADOMIENIA_PERMISSION_LOGIN'); ?>
-            </a>
-        </p>
+<div class="container">
+    <div class="informationBlock needLogin col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+        <div class="col-xs-12 information">
+            <div class="info col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+                <i class="icon" data-icon="&#xe60f;"></i>
+
+                <p class="lead text-info"><?php echo __d('powiadomienia', 'LC_POWIADOMIENIA_PERMISSION_HEADLINE'); ?></p>
+
+                <p class="lead text-info"><?php echo __d('powiadomienia', 'LC_POWIADOMIENIA_PERMISSION_HEADLINE_SECOND'); ?></p>
+            </div>
+            <p class="text-center">
+                <a href="<?php echo $this->Html->url(array('plugin' => 'paszport', 'controller' => 'pages', 'action' => 'home')); ?>"
+                   class="btn btn-primary btn-lg">
+                    <?php echo __d('powiadomienia', 'LC_POWIADOMIENIA_PERMISSION_LOGIN'); ?>
+                </a>
+            </p>
+        </div>
     </div>
 </div>
