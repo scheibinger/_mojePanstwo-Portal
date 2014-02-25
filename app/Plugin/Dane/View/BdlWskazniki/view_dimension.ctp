@@ -38,6 +38,7 @@
                                 </p>
 
                                 <p class="fp">
+                                    <?php if (isset($option['data']['dv']) && isset($option['data']['ply'])) { ?>
                                         <span class="factor <? if (intval($option['data']['dv']) < 0) {
                                             echo "d";
                                         } else {
@@ -48,6 +49,7 @@
                                         <span class="i">
                                             <?= __d('dane', 'LC_BDL_WSKAZNIKI_PREVLASTYEAR', array($option['data']['ply'])) ?>
                                         </span>
+                                    <?php } ?>
                                 </p>
                             </div>
                             <div class="chart" data-chart-background="#EEEEEE">
@@ -70,7 +72,7 @@
                     <li<? if (isset($level['selected'])) {
                         $menuSelect = $level['id']; ?> class="active" <? } ?>>
                         <a href="/dane/bdl_wskazniki/<?= $object->getId() . DS . $option['data']['id'] . DS . $level['id'] ?>">
-                        <?= $level["label"] ?>
+                            <?= $level["label"] ?>
                         </a>
                     </li>
                 <? } ?>

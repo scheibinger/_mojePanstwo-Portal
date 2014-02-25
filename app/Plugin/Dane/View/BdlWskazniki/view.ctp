@@ -40,16 +40,18 @@
                                         </p>
 
                                         <p class="fp">
-                                        <span class="factor <? if (intval($option['data']['dv']) < 0) {
-                                            echo "d";
-                                        } else {
-                                            echo "u";
-                                        } ?>">
-                                            <?= $option['data']['dv'] ?> %
-                                        </span>
-                                        <span class="i">
-                                            <?= __d('dane', 'LC_BDL_WSKAZNIKI_PREVLASTYEAR', array($option['data']['ply'])) ?>
-                                        </span>
+                                            <?php if (isset($option['data']['dv']) && isset($option['data']['ply'])) { ?>
+                                                <span class="factor <? if (intval($option['data']['dv']) < 0) {
+                                                    echo "d";
+                                                } else {
+                                                    echo "u";
+                                                } ?>">
+                                                    <?= $option['data']['dv'] ?> %
+                                                </span>
+                                                <span class="i">
+                                                    <?= __d('dane', 'LC_BDL_WSKAZNIKI_PREVLASTYEAR', array($option['data']['ply'])) ?>
+                                                </span>
+                                            <?php } ?>
                                         </p>
                                     </div>
                                     <div class="chart">
