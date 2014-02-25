@@ -1,0 +1,35 @@
+msgid "LC_MOJA_GMINA_HEADLINE"
+msgstr "Sprawy publiczne w Twojej gminie"
+
+msgid "LC_MOJA_GMINA_SUBHEADLINE"
+msgstr "Aby zacząć, zlokalizuj się lub wskaż województwo"
+
+msgid "LC_MOJA_GMINA_LOCALIZATOR"
+msgstr "Zlokalizuj mnie"
+
+msgid "LC_MOJA_GMINA_POSITION_NOT_AVAILABLE"
+msgstr "Twoja przeglądarka nie obsługuje lokalizowania."
+
+msgid "LC_MOJA_GMINA_POSITION_LAT"
+msgstr "Szerokość geograficzna"
+
+msgid "LC_MOJA_GMINA_POSITION_LAN"
+msgstr "Długość geograficzna"
+
+msgid "LC_MOJA_GMINA_POSITION_GMINA"
+msgstr "Wybierz swoją gminę"
+
+msgid "LC_MOJA_GMINA_POSITION_CANNOT_GMINA"
+msgstr "Nie można ustalić gmin wokół Ciebie. Spróbj skorzystać z mapy."
+
+msgid "LC_MOJA_GMINA_POSITION_CANNOT_POSITION"
+msgstr "Nie można ustalić Twojej pozycji."
+
+msgid "LC_MOJA_GMINA_POSITION_CANNOT_BROWSER"
+msgstr "Twoja przeglądarka nie zezwoliła na przesłanie pozycji."
+
+msgid "LC_MOJA_GMINA_POSITION_CANNOT_TEMPORARY"
+msgstr "Chwilowo nie można ustalić Twojej pozycji."
+
+msgid "LC_MOJA_GMINA_POSITION_CANNOT_LIMIT"
+msgstr "Przekroczono dozwolony limit czasu na pobieranie pozycji. Spróbuj jeszcze raz."

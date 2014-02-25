@@ -110,7 +110,7 @@ CakePlugin::loadAll(
         'Expandable' => array('routes' => false, 'bootstrap' => false),
         'Upload' => array('routes' => false, 'bootstrap' => false),
         'Api' => array('routes' => true, 'bootstrap' => false),
-        'KtoTuRzadzi' => array('routes' => true, 'bootstrap' => false),
+        'MojaGmina' => array('routes' => true, 'bootstrap' => false),
         'Powiadomienia' => array('routes' => true, 'bootstrap' => false),
         'PanstwoInternet' => array('routes' => true, 'bootstrap' => false),
         'OAuth' => array('bootstrap' => false, 'routes' => true),
