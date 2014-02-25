@@ -415,19 +415,38 @@ body {
 }
 
 /* ADDITIONAL COCKPITBAR ACTION */
-/* SERACH BAR FOR PORTAL*/
+/* SEARCH BAR FOR PORTAL*/
 ._mojePanstwoCockpitSearch {
     float: left;
     height: 40px;
 
     ._mojePanstwoCockpitSearchContent {
+        @backgroundInput: #0078AC;
+
         display: inline-block;
         position: relative;
         vertical-align: middle;
 
         ._mojePanstwoCockpitSearchContentButton {
+            position: relative;
+
             &.active {
                 color: #0078AC !important;
+
+                &:after {
+                    @size: 6px;
+
+                    content: ' ';
+                    width: 0;
+                    height: 0;
+                    border-left: @size solid transparent;
+                    border-right: @size solid transparent;
+                    border-bottom: @size solid @backgroundInput;
+                    position: absolute;
+                    bottom: 0;
+                    left: 50%;
+                    margin-left: -@size;
+                }
             }
 
             &._mojePanstwoCockpitIcons-search:before {
@@ -445,8 +464,6 @@ body {
         }
 
         ._mojePanstwoCockpitSearchInput {
-            @backgroundInput: #0078AC;
-			
             padding: 0;
             background-color: @backgroundInput;
             height: 60px;
@@ -462,20 +479,6 @@ body {
 				padding-left: 0;
 				padding-right: 0;
 			}
-			
-            &.focus, &.mainFocus {
-                .mainSearch .searchFor {
-
-                    input {
-                        background-color: #fff;
-                        color: #2f2f2f;
-                    }
-                    button {
-                        background: #0897d4;
-                        text-decoration: none;
-                    }
-                }
-            }
 
             .searchFor {
                 @inputColor: #222222;
@@ -501,22 +504,11 @@ body {
                     color: #000;
                     background-color: #FFF;
                     font-weight: 300;
-                    margin-top: 2px;
 
-                    &::-webkit-input-placeholder {
-                        /* WebKit browsers */
-                        color: #444;
-                    }
-                    &:-moz-placeholder {
-                        /* Mozilla Firefox 4 to 18 */
-                        color: #444;
-                    }
-                    &::-moz-placeholder {
-                        /* Mozilla Firefox 19+ */
-                        color: #444;
-                    }
+                    &::-webkit-input-placeholder,
+                    &:-moz-placeholder,
+                    &::-moz-placeholder,
                     &:-ms-input-placeholder {
-                        /* Internet Explorer 10+ */
                         color: #444;
                     }
 
@@ -532,8 +524,9 @@ body {
                     font-size: 28px;
                     text-align: center;
                     cursor: pointer;
-                    color: #FFF;
+                    color: @backgroundInput;
                     padding: 3px;
+                    background-color: #FFFFFF;
 
                     &:before {
                         font-family: 'mojePanstwo';

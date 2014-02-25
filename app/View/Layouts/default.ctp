@@ -132,17 +132,9 @@ echo $this->Html->script('//netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap
 /* PACKAGES FROM VENDOR */
 echo $this->Html->script('plugins/history.js/scripts/bundled/html4+html5/jquery.history.js');
 echo $this->Html->script('plugins/jquery-cookie/jquery.cookie.js');
-echo $this->Html->script('plugins/bootstrap-select/bootstrap-select.min.js');
+echo $this->Html->script('plugins/bootstrap-select/bootstrap-select.min.js'); ?>
 
-$this->Combinator->add_libs('js', 'statusbar', false);
-$this->Combinator->add_libs('js', 'statusbar-portal', false);
-$this->Combinator->add_libs('js', 'main', false);
-
-/* BLOCK FOR SPECIAL SCRIPTS LIKE PROTOTYPE THAT CANNOT BE MERGE TO ONE FILE*/
-echo $this->fetch('scriptBlock');
-?>
-
-<?php /*PHP DATA FOR JS: TRANSLATION, FB_APP ID */ ?>
+<?php /*PHP DATA FOR JS */ ?>
 <script type="text/javascript">
     var _mPHeart = {
         translation: jQuery.parseJSON('<?php echo json_encode($translation); ?>'),
@@ -155,9 +147,22 @@ echo $this->fetch('scriptBlock');
         language: {
             twoDig: "<?php switch (Configure::read('Config.language')) { case 'pol': echo "pl"; break; case 'eng': echo "en"; break; }  ?>",
             threeDig: "<?php echo Configure::read('Config.language'); ?>"
+        },
+        globalSearch: {
+            phrase: "<?php echo @$q ?>",
+            placeholder: 'Szukaj w danych publicznych...'
         }
     }
 </script>
+
+<?php
+$this->Combinator->add_libs('js', 'statusbar', false);
+$this->Combinator->add_libs('js', 'statusbar-portal', false);
+$this->Combinator->add_libs('js', 'main', false);
+
+/* BLOCK FOR SPECIAL SCRIPTS LIKE PROTOTYPE THAT CANNOT BE MERGE TO ONE FILE*/
+echo $this->fetch('scriptBlock');
+?>
 
 <?php echo $this->Combinator->scripts('js'); ?>
 

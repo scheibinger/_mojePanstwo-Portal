@@ -15,10 +15,10 @@
                             $('<form></form>').attr({'action': '/dane', 'method': 'GET'}).append(
                                 $('<div></div>').addClass('col-md-12 searchFor').append(
                                     $('<div></div>').addClass('input-group').append(
-                                            $('<input>').attr({'type': 'text', 'name': 'q', 'placeholder': 'Szukaj w danych publicznych...'}).addClass('form-control input-lg')
+                                            $('<input>').attr({'type': 'text', 'name': 'q', 'placeholder': _mPHeart.globalSearch.placeholder, 'value': _mPHeart.globalSearch.phrase}).addClass('form-control input-lg')
                                         ).append(
                                             $('<span></span>').addClass('input-group-btn').append(
-                                                $('<button></button>').addClass('btn btn-link').attr('type', 'submit')
+                                                $('<button></button>').addClass('btn').attr('type', 'submit')
                                             )
                                         )
                                 )
