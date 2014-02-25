@@ -901,6 +901,15 @@ msgstr "Rok"
 msgid "LC_BDL_WSKAZNIKI_PRZYROST"
 msgstr "Przyrost"
 
+msgid "LC_BDL_WSKAZNIKI_SEARCH_PLACEHOLDER_WOJEWODZTWA"
+msgstr "Szukaj województwa..."
+
+msgid "LC_BDL_WSKAZNIKI_SEARCH_PLACEHOLDER_POWIAT"
+msgstr "Szukaj powiatu..."
+
+msgid "LC_BDL_WSKAZNIKI_SEARCH_PLACEHOLDER_GMINY"
+msgstr "Szukaj gminy..."
+
 msgid "LC_BDL_WSKAZNIKI_SEARCH_PLACEHOLDER"
 msgstr "Wpisz szukaną frazę..."
 

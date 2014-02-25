@@ -67,8 +67,9 @@
         <div class="menu col-md-3">
             <ul class="nav nav-pills nav-stacked">
                 <? foreach ($dimension['levels'] as $level) { ?>
-                    <li<? if (isset($level['selected'])) { ?> class="active" <? } ?>>
-                        <a href="/dane/bdl_wskazniki/<?= $object->getId() . DS . $option['data']['id'] . DS . $level['id'] ?>">
+                    <li<? if (isset($level['selected'])) {
+                        $menuSelect = $level['id']; ?> class="active" <? } ?>>
+                    <a href="/dane/bdl_wskazniki/<?= $object->getId() . DS . $option['data']['id'] . DS . $level['id'] ?>">
                             <?= $level["label"] ?>
                         </a>
                     </li>
@@ -80,7 +81,20 @@
                 <div class="input-group localDataSearch">
                     <span class="input-group-addon" data-icon="&#xe600;"></span>
                     <input type="text" class="form-control"
-                           placeholder="<?= __d('dane', 'LC_BDL_WSKAZNIKI_SEARCH_PLACEHOLDER') ?>"
+                           placeholder="<?php switch ($menuSelect) {
+                               case 'wojewodztwa':
+                                   echo __d('dane', 'LC_BDL_WSKAZNIKI_SEARCH_PLACEHOLDER_WOJEWODZTWA');
+                                   break;
+                               case 'powiaty':
+                                   echo __d('dane', 'LC_BDL_WSKAZNIKI_SEARCH_PLACEHOLDER_POWIAT');
+                                   break;
+                               case 'gminy':
+                                   echo __d('dane', 'LC_BDL_WSKAZNIKI_SEARCH_PLACEHOLDER_GMINY');
+                                   break;
+                               default:
+                                   echo __d('dane', 'LC_BDL_WSKAZNIKI_SEARCH_PLACEHOLDER');
+                                   break;
+                           } ?>"
                            autocomplete="off"/>
                     <button class="close"
                             type="button" data-icon="&#xe605;"></button>
