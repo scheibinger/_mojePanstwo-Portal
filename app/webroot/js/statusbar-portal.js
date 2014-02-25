@@ -1,6 +1,6 @@
 (function ($) {
     var cockpit = $('#_mojePanstwoCockpit'),
-        appMenu = cockpit.find('._mojePanstwoCockpitMenuUp'),
+        cockpitLogo = cockpit.find('._mojePanstwoCockpitLogo'),
         searchEngine = $('<div></div>'),
         searchEngineButton,
         searchEngineInput;
@@ -29,7 +29,7 @@
             )
     );
 
-    appMenu.after(searchEngine);
+    cockpitLogo.after(searchEngine);
 
     searchEngineInput = $('._mojePanstwoCockpitSearchInput');
 
