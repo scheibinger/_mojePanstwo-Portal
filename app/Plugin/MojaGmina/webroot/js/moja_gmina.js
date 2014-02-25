@@ -11,7 +11,6 @@ var Localizer = Class.create({
 
     initialize: function () {
         this.nav = window.navigator;
-        $('localizeMe').observe('click', this.request_position.bind(this));
     },
 
     /*FUNCTION CREATE MODAL DIALOG WITH AUTO-SEARCH OF USER LOCATION*/
@@ -52,11 +51,11 @@ var Localizer = Class.create({
         });
     },
 
-    /*RETURN INFORAMATION WITH USER LOCATION*/
+    /*RETURN INFORMATION WITH USER LOCATION*/
     success_callback: function (position) {
         var that = this;
 
-        this.localizerObj.coordinates.update('<p><span class="label">' + _mPHeart.translation.LC_MOJA_GMINA_RZADZI_POSITION_LAT + ':</span> <span class="value">' + position.coords.latitude + '&deg;</span></p><p><span class="label">' + _mPHeart.translation.LC_MOJA_GMINA_RZADZI_POSITION_LAN + ':</span> <span class="value">' + position.coords.longitude + '&deg;</span></p>').appear({duration: .3});
+        this.localizerObj.coordinates.update('<p><span class="label">' + _mPHeart.translation.LC_MOJA_GMINA_POSITION_LAT + ':</span> <span class="value">' + position.coords.latitude + '&deg;</span></p><p><span class="label">' + _mPHeart.translation.LC_MOJA_GMINA_POSITION_LAN + ':</span> <span class="value">' + position.coords.longitude + '&deg;</span></p>').appear({duration: .3});
 
         jQuery.get('/moja_gmina/geo/resolve/' + position.coords.latitude + '/' + position.coords.longitude + '.json', function (data) {
             that.localizerObj.content.removeClassName('loading');
@@ -69,34 +68,34 @@ var Localizer = Class.create({
                 that.gminy_ul = new Element('ul', {className: 'ul'});
 
                 for (var i = 0; i < that.gminy.length; i++) {
-                    var li = new Element('li').update('<p class="nazwa"><a href="/gminy/' + that.gminy[i][Object.keys(that.gminy[i])[0]]['gmina_id'] + '">' + that.gminy[i][Object.keys(that.gminy[i])[0]]['gmina_nazwa'] + '</a></p><p class="opis">' + that.gminy[i][Object.keys(that.gminy[i])[1]]['gmina_typ'] + '</p>');
+                    var li = new Element('li').update('<p class="nazwa"><a href="/dane/gminy/' + that.gminy[i][Object.keys(that.gminy[i])[0]]['gmina_id'] + '">' + that.gminy[i][Object.keys(that.gminy[i])[0]]['gmina_nazwa'] + '</a></p><p class="opis">' + that.gminy[i][Object.keys(that.gminy[i])[1]]['gmina_typ'] + '</p>');
                     that.gminy_ul.insert(li);
                 }
 
-                var h = new Element('h2').update(_mPHeart.translation.LC_MOJA_GMINA_RZADZI_POSITION_GMINA + ':');
+                var h = new Element('h2').update(_mPHeart.translation.LC_MOJA_GMINA_POSITION_GMINA + ':');
                 that.localizerObj.content.insert(that.gminy_div.insert(h).insert(that.gminy_ul));
 
                 that.gminy_div.appear({duration: .3});
 
-            } else that.localizerObj.display.update(_mPHeart.translation.LC_MOJA_GMINA_RZADZI_POSITION_CANNOT_GMINA);
+            } else that.localizerObj.display.update(_mPHeart.translation.LC_MOJA_GMINA_POSITION_CANNOT_GMINA);
         });
     },
 
     /*RETURN ERRORS FORM LOCACTION SYSTEM*/
     error_callback: function (error) {
-        var strMessage = _mPHeart.translation.LC_MOJA_GMINA_RZADZI_POSITION_CANNOT_POSITION;
+        var strMessage = _mPHeart.translation.LC_MOJA_GMINA_POSITION_CANNOT_POSITION;
         switch (error.code) {
 
             case error.PERMISSION_DENIED:
-                strMessage = _mPHeart.translation.LC_MOJA_GMINA_RZADZI_POSITION_CANNOT_BROWSER;
+                strMessage = _mPHeart.translation.LC_MOJA_GMINA_POSITION_CANNOT_BROWSER;
                 break;
 
             case error.POSITION_UNAVAILABLE:
-                strMessage = _mPHeart.translation.LC_MOJA_GMINA_RZADZI_POSITION_CANNOT_TEMPORARY;
+                strMessage = _mPHeart.translation.LC_MOJA_GMINA_POSITION_CANNOT_TEMPORARY;
                 break;
 
             case error.TIMEOUT:
-                strMessage = _mPHeart.translation.LC_MOJA_GMINA_RZADZI_POSITION_CANNOT_LIMIT;
+                strMessage = _mPHeart.translation.LC_MOJA_GMINA_POSITION_CANNOT_LIMIT;
                 break;
 
             default:
@@ -179,7 +178,7 @@ var PLBrowser = Class.create({
         },
         /*LOAD NEXT LEVEL OF GOOGLE DATA*/
         add_level: function (params) {
-                        
+
             var l = params.l;
 
             if (Number(l) == 2 && this.layers.length > 1) {
@@ -295,18 +294,29 @@ var PLBrowser = Class.create({
 
         /*LOAD ADDITIONAL DATA DEPENDING OF PREVIOUS LAYERS (ZOOM)*/
         add_level_get_data: function (layer, map_info) {
-            
-            if( layer.l==1 )
-            {
-	            
-	            map_info.insert('<form action="/moja_gmina"><div class="input-group"><input name="q" type="text" class="form-control"><input type="submit" style="display: none;" /></div></form><p><span>lub</span></p><p><button class="btn btn-success" id="localizeMe" data-icon="&#xe607;">Zlokalizuj mnie</button></p><p><span>lub</span></p>');
-	            
-            }
-            
             var ajaxUrl,
                 that = this;
 
             layer.items_loaded = false;
+
+            if (layer.l == 1) {
+
+                var firstBlock = new Element('div', {'class': 'mainPart'});
+                firstBlock.insert({
+                    top: new Element('form', {'action': '/moja_gmina', 'class': 'gminaSearch'}).insert({
+                        top: new Element('input', {'name': 'q', 'type': 'text', 'placeholder': _mPHeart.translation.LC_MOJA_GMINA_SZUKAJ_GMINY, 'class': 'form-control'}),
+                        bottom: new Element('button', {'type': 'submit', 'class': 'hidden'})
+                    })
+                }).insert({
+                    bottom: new Element('div', {'class': 'or'}).insert({top: new Element('span', {'class': 'middle'}).update(_mPHeart.translation.LC_MOJA_GMINA_SZUKAJ_GMINY_OR)})
+                }).insert({
+                    bottom: new Element('button', {'class': 'btn btn-success', 'id': 'localizeMe'}).update(_mPHeart.translation.LC_MOJA_GMINA_LOCALIZEME)
+                }).insert({
+                    bottom: new Element('div', {'class': 'or'}).insert({top: new Element('span', {'class': 'middle'}).update(_mPHeart.translation.LC_MOJA_GMINA_SZUKAJ_GMINY_OR)})
+                });
+
+                map_info.insert(firstBlock);
+            }
 
             switch (Number(layer.l)) {
                 case 1:
@@ -335,7 +345,7 @@ var PLBrowser = Class.create({
 
         /*LOAD EFFECT AFTER LOADING ADDITIONAL DATA*/
         add_level_get_data_callback: function (layer, map_info) {
-                        
+
             var offset = 0,
                 that = this,
                 name = Object.keys(layer.data),
@@ -528,8 +538,61 @@ var PLBrowser = Class.create({
 
 /* END OF PROTOTYPE */
 
-var plBrowser;
+var plBrowser, localizer;
 jQuery(document).ready(function () {
     plBrowser = new PLBrowser();
-        // localizer = new Localizer();
+    localizer = new Localizer();
+
+    jQuery('#localizeMe').click(function () {
+        localizer.request_position()
+    });
+
+    var autocomplete = jQuery(".gminaSearch input"),
+        cache = {};
+
+    autocomplete.autocomplete({
+        minLength: 2,
+        source: function (request, response) {
+            console.log(request.term);
+            var term = request.term;
+            if (term in cache) {
+                response(cache[ term ]);
+                return;
+            }
+            jQuery.getJSON("/moja_gmina/search.json?q=" + request.term, function (data, status, xhr) {
+                var results = jQuery.map(data, function (item) {
+                    return {
+                        name: item.nazwa,
+                        label: item.nazwa + " (" + item.typ + ")",
+                        value: item.id
+                    }
+                });
+                if (results.length == 0)
+                    results = [
+                        {label: _mPHeart.translation.LC_MOJA_GMINA_SEARCH_BRAK_WYNIKOW, value: null}
+                    ]
+                cache[ term ] = results;
+                response(results);
+            });
+        },
+        focus: function (event, ui) {
+            if (ui.item.value !== null)
+                autocomplete.val(ui.item.name);
+            return false;
+        },
+        select: function (event, ui) {
+            if (ui.item.value !== null) {
+                autocomplete.val(ui.item.name);
+                window.location = '/dane/gminy/' + ui.item.value;
+            }
+            return false;
+        }
+    });
+
+    /*autocomplete.parents('form').on('submit', function (e) {
+     e.preventDefault();
+
+     window.location = '/dane/gminy/' + jQuery(this).find('.input.text > span').text();
+     })*/
+
 });

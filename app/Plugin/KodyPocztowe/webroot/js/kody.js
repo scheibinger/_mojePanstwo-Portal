@@ -1,7 +1,7 @@
 (function ($) {
     var autocomplete = $("#cityv"),
-        autocompleteBtn = autocomplete.parents('form').find('.btn')
-    cache = {};
+        autocompleteBtn = autocomplete.parents('form').find('.btn'),
+        cache = {};
 
     autocomplete.autocomplete({
         minLength: 2,

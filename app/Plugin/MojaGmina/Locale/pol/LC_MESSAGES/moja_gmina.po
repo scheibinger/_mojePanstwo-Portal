@@ -33,3 +33,15 @@ msgstr "Chwilowo nie można ustalić Twojej pozycji."
 
 msgid "LC_MOJA_GMINA_POSITION_CANNOT_LIMIT"
 msgstr "Przekroczono dozwolony limit czasu na pobieranie pozycji. Spróbuj jeszcze raz."
+
+msgid "LC_MOJA_GMINA_SZUKAJ_GMINY"
+msgstr "Szukaj gminy..."
+
+msgid "LC_MOJA_GMINA_SZUKAJ_GMINY_OR"
+msgstr "lub"
+
+msgid "LC_MOJA_GMINA_LOCALIZEME"
+msgstr "Zlokalizuj mnie"
+
+msgid "LC_MOJA_GMINA_SEARCH_BRAK_WYNIKOW"
+msgstr "Brak wyników"
