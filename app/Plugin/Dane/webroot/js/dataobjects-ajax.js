@@ -241,8 +241,9 @@ var DataObjectesAjax = {
             location.href = redirectUrl;
 
         jQuery.ajax({
+            type: 'GET',
             url: formAction + '.json?' + formActualFilters,
-            dataType: 'GET',
+            dataType: 'JSON',
             beforeSend: function () {
                 main.append(jQuery('<div></div>').addClass('loadingTwirl'));
                 objects.find('.innerContainer').children().animate({
@@ -251,7 +252,7 @@ var DataObjectesAjax = {
             },
             complete: function (status) {
                 var modalBackground,
-                    data = JSON.parse(status.responseText);
+                    data = status.responseJSON;
 
                 /*REMOVE MODAL BACKGROUND*/
                 if ((modalBackground = jQuery('.modal-backdrop')).length > 0) {
