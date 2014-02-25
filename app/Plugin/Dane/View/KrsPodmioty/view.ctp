@@ -1,9 +1,9 @@
 <?= $this->Element('dataobject/pageBegin'); ?>
 
 <?php
-echo $this->Html->script('Dane.arbor/lib/arbor', array('block' => 'scriptBlock'));
+/*echo $this->Html->script('Dane.arbor/lib/arbor', array('block' => 'scriptBlock'));
 echo $this->Html->script('Dane.arbor/lib/arbor-tween', array('block' => 'scriptBlock'));
-echo $this->Html->script('Dane.arbor/lib/arbor-graphic', array('block' => 'scriptBlock'));
+echo $this->Html->script('Dane.arbor/lib/arbor-graphic', array('block' => 'scriptBlock'));*/
 ?>
 
 <?php $this->Combinator->add_libs('css', $this->Less->css('view-krspodmioty', array('plugin' => 'Dane'))); ?>
@@ -130,13 +130,13 @@ echo $this->Html->script('Dane.arbor/lib/arbor-graphic', array('block' => 'scrip
     <? } ?>
     </div>
 
-    <div class="graph block">
+    <!--<div class="graph block">
         <h2>Powiązania</h2>
 
         <canvas id="connectionGraph" class="col-xs-12">
             http://mojepanstwo/dane/krs_podmioty/114/graph.json
         </canvas>
-    </div>
+    </div>-->
 
     <? if ($object->getData('cel_dzialania')) { ?>
         <div class="dzialanie block bg">
