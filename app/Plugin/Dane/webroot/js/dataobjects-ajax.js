@@ -278,7 +278,7 @@ var DataObjectesAjax = {
                 objects.find('.innerContainer').children().animate({
                     opacity: 0
                 }, delay, function () {
-                    if (data.objects == '') {
+                    if (data.objects == null) {
                         objects.find('.update-objects').html('<p class="noResults">' + _mPHeart.translation.LC_DANE_BRAK_WYNIKOW + '</p>');
                     } else {
                         objects.find('.update-objects').html(data.objects);
