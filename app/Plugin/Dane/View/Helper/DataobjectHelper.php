@@ -74,7 +74,9 @@ class DataobjectHelper extends AppHelper
 
     public function render($object, $theme = 'default', $options = array())
     {
-    	    	
+    	
+    	// debug( $object->getData() );
+    	  	
         $bg = isset($options['bg']) ? $options['bg'] : false;
         $hlFields = isset($options['hlFields']) ? $options['hlFields'] : false;
         $bigTitle = isset($options['bigTitle']) ? $options['bigTitle'] : false;

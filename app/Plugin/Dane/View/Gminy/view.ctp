@@ -55,6 +55,83 @@
 			        </div> <!-- profile_baner END -->
 					
 					
+					
+					
+					<?
+					if( $object->getId() == 903 )
+					{
+					?>
+					
+					<div class="block">
+					
+						<div class="block-header">
+							<h2 class="pull-left">Posiedzenia rady miasta</h2>
+							<a class="btn btn-default btn-sm pull-right" href="/dane/gminy/<?= $object->getId() ?>/posiedzenia">Zobacz wszystkie</a>
+						</div>
+						
+						<div class="content">
+							<div class="dataobjectsSliderRow row">
+		                        <div>
+                                    <?php echo $this->dataobjectsSlider->render($rady_posiedzenia, array(
+                                        'perGroup' => 3,
+                                        'rowNumber' => 1,
+                                        'labelMode' => 'none',
+                                        'file' => 'rady_posiedzenia-gminy',
+                                    )) ?>
+                                </div>
+                            </div>
+						</div>
+					</div>
+					
+					<div class="block bg">
+					
+						<div class="block-header">
+							<h2 class="pull-left">Najnowsze prawo lokalne</h2>
+							<a class="btn btn-default btn-sm pull-right" href="/dane/gminy/<?= $object->getId() ?>/prawo">Zobacz wszystkie</a>
+						</div>
+						
+						<div class="content">
+							<div class="dataobjectsSliderRow row">
+		                        <div>
+                                    <?php echo $this->dataobjectsSlider->render($prawo_lokalne, array(
+                                        'perGroup' => 3,
+                                        'rowNumber' => 1,
+                                        'descriptionMode' => 'none',
+                                    )) ?>
+                                </div>
+                            </div>
+						</div>
+					</div>
+					
+					<div class="block">
+					
+						<div class="block-header">
+							<h2 class="pull-left">Materiały na posiedzenia rady miasta</h2>
+							<a class="btn btn-default btn-sm pull-right" href="/dane/gminy/<?= $object->getId() ?>/druki">Zobacz wszystkie</a>
+						</div>
+						
+						<div class="content">
+							<div class="dataobjectsSliderRow row">
+		                        <div>
+                                    <?php echo $this->dataobjectsSlider->render($rady_druki, array(
+                                        'perGroup' => 3,
+                                        'rowNumber' => 1,
+                                        'labelMode' => 'none',
+                                        // 'dfFields' => array('data_publikacji'),
+                                    )) ?>
+                                </div>
+                            </div>
+						</div>
+					</div>					
+					
+										
+						
+					<?
+					}
+					?>
+					
+	
+					
 					<div class="block bg">
 						
 						<div class="block-header">
@@ -68,7 +145,7 @@
 			                            <a href="/dane/gminy/<?= $object->getId() ?>/radni?komitet_id=<?= $rada['pl_gminy_radni']['komitet_id'] ?>">
 			                                <?php echo $rada['pkw_komitety']['nazwa']; ?>
 			                            </a> 
-			                            <small><?php echo $rada['percent']; ?>%</small>
+			                            <small><?php echo pl_dopelniacz($rada[0]['count'], 'radny', 'radnych', 'radnych'); ?></small>
 			
 			                        <div class="progress">
 			                            <div class="progress-bar progress-bar-default" role="progressbar" aria-valuenow="73.3"
@@ -79,6 +156,20 @@
 			                    </div>
 			                <?php } ?>
 			            </div>
+			            
+			            <?
+			            if( $object->getId() == 903 )
+						{
+						?>
+						
+						<div class="darczyncy">
+							<a class="btn btn-default" href="/dane/gminy/903/darczyncy">Lista wpłat dla komitetów wyborczych</a>
+						</div>
+						
+						<?
+						}
+						?>
+			            
 					</div>
 					
 					

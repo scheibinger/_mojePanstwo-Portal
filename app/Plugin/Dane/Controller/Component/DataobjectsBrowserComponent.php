@@ -61,21 +61,24 @@ class DataobjectsBrowserComponent extends Component
 
         $add_source_params = array();
         $source_params = array();
-        $source_parts = explode(' ', $settings['source']);
-        foreach ($source_parts as $part) {
-
-            $p = strpos($part, ':');
-            if ($p !== false) {
-                $key = substr($part, 0, $p);
-                $value = substr($part, $p + 1);
-
-                $source_params[$key] = $value;
-
-                if (($key != 'dataset') && ($key != 'datachannel'))
-                    $add_source_params[$key] = $value;
-            }
-
-
+        
+        if( isset($settings['source']) )
+        {
+	        $source_parts = explode(' ', $settings['source']);
+	        foreach ($source_parts as $part) {
+	
+	            $p = strpos($part, ':');
+	            if ($p !== false) {
+	                $key = substr($part, 0, $p);
+	                $value = substr($part, $p + 1);
+	
+	                $source_params[$key] = $value;
+	
+	                if (($key != 'dataset') && ($key != 'datachannel'))
+	                    $add_source_params[$key] = $value;
+	            }
+	
+	        }
         }
 
         $this->source = $add_source_params;

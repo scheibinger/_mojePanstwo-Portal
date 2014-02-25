@@ -51,8 +51,7 @@ $this->Dataobject->setObject($object);
                                 <?php } ?>
                                 <?= $shortTitle ?>
                                 <?php if ($object->getUrl() != false) { ?>
-                            </a> <? if ($object->getTitleAddon()) echo '<small>' . $object->getTitleAddon() . '</small>'; ?>
-                        <?php } ?>
+                            </a> <? } if ($object->getTitleAddon()) echo '<small>' . $object->getTitleAddon() . '</small>'; ?>
                         </p>
                         <?
                         if ($file_exists)
@@ -82,8 +81,7 @@ $this->Dataobject->setObject($object);
                                 <?php } ?>
                                 <?= $shortTitle ?>
                                 <?php if ($object->getUrl() != false){ ?>
-                            </a> <? if ($object->getTitleAddon()) echo '<small>' . $object->getTitleAddon() . '</small>'; ?>
-                        <?php } ?>
+                            </a> <?} if ($object->getTitleAddon()) echo '<small>' . $object->getTitleAddon() . '</small>'; ?>
                         </p>
                         <?
                         if ($file_exists)
