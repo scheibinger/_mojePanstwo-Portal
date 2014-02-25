@@ -25,6 +25,7 @@ class DataobjectsBrowserComponent extends Component
     public $helpers = array(
         'Number',
         'Dane.Filter',
+        'Dane.Dataobject',
     );
 
     public function __construct($collection, $settings = array())
@@ -432,28 +433,28 @@ class DataobjectsBrowserComponent extends Component
             'noResultsTitle' => $this->noResultsTitle,
         );
                 
-        $controller->set(compact('objects', 'pagination', 'orders', 'filters', 'total', 'facets', 'page', 'title_for_layout', 'conditions', 'switchers', 'q'));
-
-        $controller->set('dataBrowser', $this);
-		$controller->view = $this->getViewPath();
+		$controller->set(compact('conditions', 'objects', 'pagination', 'orders', 'filters', 'total', 'facets', 'page', 'title_for_layout', 'switchers', 'q'));
+		$controller->set('dataBrowser', $this);
+		
 		
 		if (@$controller->request->params['ext'] == 'json')
 		{
 			
-			$view = new View($controller, false);
-			
-
+			$view = new View($controller, false);	
             
-            
-            $controller->set('header', $view->element('DataobjectsBrowser/header', compact('pagination', 'orders', 'page')));
-            $controller->set('filters', $view->element('DataobjectsBrowser/filters', compact('filters', 'switchers', 'facets', 'page')));
             $controller->set('objects', $view->element('DataobjectsBrowser/objects', compact('objects')));
+            $controller->set('header', $view->element('DataobjectsBrowser/header', compact('pagination', 'orders', 'page')));
+            $controller->set('filters', $view->element('DataobjectsBrowser/filters', compact('filters', 'switchers', 'facets', 'page')));            
             $controller->set('pagination', $view->element('DataobjectsBrowser/pagination'));
-            $controller->set('_serialize', array('header', 'filters', 'objects', 'pagination'));
+            $controller->set('_serialize', array('objects', 'header', 'filters', 'pagination'));
 		
 		}
 		else
 		{
+			
+			
+	
+			$controller->view = $this->getViewPath();
 			
 			$path = App::path('View', 'Dane');
 	        $path = $path[0] . $controller->viewPath . '/' . $controller->view . '.ctp';

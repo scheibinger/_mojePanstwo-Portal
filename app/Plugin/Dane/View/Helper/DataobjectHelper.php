@@ -74,9 +74,7 @@ class DataobjectHelper extends AppHelper
 
     public function render($object, $theme = 'default', $options = array())
     {
-    	
-    	// debug( $object->getData() );
-    	
+    	    	
         $bg = isset($options['bg']) ? $options['bg'] : false;
         $hlFields = isset($options['hlFields']) ? $options['hlFields'] : false;
         $bigTitle = isset($options['bigTitle']) ? $options['bigTitle'] : false;
@@ -84,7 +82,8 @@ class DataobjectHelper extends AppHelper
         $routes = isset($options['routes']) ? $options['routes'] : array();
         $forceLabel = isset($options['forceLabel']) ? $options['forceLabel'] : false;
         $file = isset($options['file']) ? $options['file'] : false;
-
+		
+		
         $this->setObject($object);
         if (!empty($routes))
             $object->addRoutes($routes);
@@ -96,8 +95,8 @@ class DataobjectHelper extends AppHelper
                 $theme = 'default';
         }
         */
-				
-        return $this->_View->element($theme, array(
+		
+		$params = array(
             'item' => $this->object->getObject(),
             'object' => $this->object,
             'theme' => $theme,
@@ -111,15 +110,15 @@ class DataobjectHelper extends AppHelper
             'gid' => @$this->object->id,
             'file' => $file,
             'options' => $options,
-        ), array('plugin' => 'Dane'));
+        );
+        return $this->_View->element($theme, $params, array('plugin' => 'Dane'));
     }
 
     public function highlights($fields = false, $fieldsPush = false)
     {
-		
         $output = '';
         $fields = $this->object->getHiglightedFields($fields, $fieldsPush);
-
+		
         $fields_count = count($fields);
         if ($fields_count) {
 
@@ -142,7 +141,7 @@ class DataobjectHelper extends AppHelper
             $output .= '">';
 
             foreach ($fields as $field => $field_params) {
-				
+								
 				$output .= $this->getHTMLForField($field, $field_params, array(
 					'col_width' => $col_width,
 				));
@@ -266,8 +265,7 @@ class DataobjectHelper extends AppHelper
         {
 	        $field_value = '<div class="voted btn btn-default btn-glos-' . $field_value . '" data-glos="' . $field_value . '">' . $this->voted($field_value) . '</div>';
         }
-
-
+		
         if (isset($field_options['format'])) {
             switch ($field_options['format']) {
                 case 'wiek':
@@ -284,7 +282,8 @@ class DataobjectHelper extends AppHelper
                 }
             }
         }
-
+        
+        
 
         if (isset($field_options['dictionary'])) {
             if (is_array($field_value)) {
@@ -296,27 +295,29 @@ class DataobjectHelper extends AppHelper
             }
         }
 
-
+		
         if (isset($field_options['truncate'])) {
-
-            $base_part = substr($field_value, 0, $field_options['truncate']);
-            $add_part = substr($field_value, $field_options['truncate']);
-            $field_value = '<span class="base">' . $base_part . '</span>';
+			
+			
+            $base_part = mb_substr($field_value, 0, $field_options['truncate']);                      
+            $add_part = mb_substr($field_value, $field_options['truncate']);                        
+            $field_value = '<span class="base">' . $base_part . '</span>';                     
+            
             if ($add_part)
                 $field_value .= ' <a href="#" onclick="return false;">...</a><span class="add">' . $add_part . '</span>';
 
         }
-
+        
 
         if (isset($field_options['img']))
             if (preg_match_all('/\{\$(.*?)\}/i', $field_options['img'], $matches))
                 for ($m = 0; $m < count($matches[0]); $m++)
                     $field_value = '<img src="' . str_replace($matches[0][$m], $this->object->getData($matches[1][$m]), $field_options['img']) . '" /> ' . $field_value;
-
-
+		
+		
         if (isset($field_options['normalizeText']) && $field_options['normalizeText'])
             $normalizeText = true;
-
+		
 
         if (isset($field_options['link'])) {
             if (is_array($field_options['link']) && isset($field_options['link']['dataset']) && isset($field_options['link']['object_id'])) {
@@ -324,7 +325,7 @@ class DataobjectHelper extends AppHelper
                 if (is_array($field_value)) {
                     for ($f = 0; $f < count($field_value); $f++) {
                         $object_id = ($field_options['link']['object_id'][0] == '$') ?
-                            $this->object->getData(substr($field_options['link']['object_id'], 1)) :
+                            $this->object->getData(mb_substr($field_options['link']['object_id'], 1)) :
                             $field_options['link']['object_id'];
 
                         $object_id = @$object_id[$f];
@@ -334,7 +335,7 @@ class DataobjectHelper extends AppHelper
                     }
                 } else {
                     $object_id = ($field_options['link']['object_id'][0] == '$') ?
-                        $this->object->getData(substr($field_options['link']['object_id'], 1)) :
+                        $this->object->getData(mb_substr($field_options['link']['object_id'], 1)) :
                         $field_options['link']['object_id'];
 
                     $href = '/dane/' . $field_options['link']['dataset'] . '/' . $object_id;
@@ -344,7 +345,7 @@ class DataobjectHelper extends AppHelper
 
             } elseif (is_array($field_options['link']) && $field_options['link']['href']) {
                 $href = ($field_options['link']['href'][0] == '$') ?
-                    $this->object->getData(substr($field_options['link']['href'], 1)) :
+                    $this->object->getData(mb_substr($field_options['link']['href'], 1)) :
                     $field_options['link']['href'];
 
                 $_field_value = $field_value;
@@ -355,15 +356,15 @@ class DataobjectHelper extends AppHelper
                 $field_value .= ' href="' . $href . '">' . $_field_value . '</a>';
             }
         }
-
+		
+		
         if (isset($field_options['dopelniacz']))
             $field_value = pl_dopelniacz($field_value, $field_options['dopelniacz'][0], $field_options['dopelniacz'][1], $field_options['dopelniacz'][2]);
-
-
+		
         if (!empty($field_value)) {
 
             if (!is_array($field_value) && stripos($field_value, $field_label) === 0)
-                $field_value = trim(substr($field_value, strlen($field_label)));
+                $field_value = trim(mb_substr($field_value, strlen($field_label)));
 
             $output .= '<div class="dataHighlight';
             if( $col_width )
@@ -391,7 +392,7 @@ class DataobjectHelper extends AppHelper
             $output .= '</p></div>';
 
         }
-        
+                
         return $output;
 		
 	}
