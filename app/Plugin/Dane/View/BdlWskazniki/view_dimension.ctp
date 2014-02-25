@@ -69,8 +69,8 @@
                 <? foreach ($dimension['levels'] as $level) { ?>
                     <li<? if (isset($level['selected'])) {
                         $menuSelect = $level['id']; ?> class="active" <? } ?>>
-                    <a href="/dane/bdl_wskazniki/<?= $object->getId() . DS . $option['data']['id'] . DS . $level['id'] ?>">
-                            <?= $level["label"] ?>
+                        <a href="/dane/bdl_wskazniki/<?= $object->getId() . DS . $option['data']['id'] . DS . $level['id'] ?>">
+                        <?= $level["label"] ?>
                         </a>
                     </li>
                 <? } ?>
@@ -130,7 +130,7 @@
                             <td>
                                 <div class="holder">
                                     <a class="sortOption"
-                                       href="<?= $this->here ?>/<?= $local['local_id'] ?>"><?= $local['local_name'] ?></a>
+                                       href="#<?= $local['local_id'] ?>"><?= $local['local_name'] ?></a>
 
                                     <div class="wskaznikChart">
                                         <div class="progress progress-striped active">
