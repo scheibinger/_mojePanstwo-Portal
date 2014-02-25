@@ -37,7 +37,7 @@ $this->Dataobject->setObject($object);
                         </p>
 
                         <? if ($object->getShortTitle()) { ?>
-                            <h1 class="title trimTitle" title="<?= htmlspecialchars($object->getShortTitle()) ?>"
+                            <h1 class="title trimTitle<? if( $bigTitle ){?> big<?}?>" title="<?= htmlspecialchars($object->getShortTitle()) ?>"
                                 data-trimlength="200">
                                 <?php if (($object->getUrl() != false) && !empty($this->request)) { ?>
                                 <a href="<?= $object->getUrl() ?>" title="<?= strip_tags($object->getTitle()) ?>">
@@ -66,7 +66,7 @@ $this->Dataobject->setObject($object);
                             <?= $object->getLabel(); ?>
                         </p>
 
-                        <h1 class="title">
+                        <h1 class="title<? if( $bigTitle ){?> big<?}?>">
                             <?php if ($object->getUrl() != false){ ?>
                             <a class="trimTitle" href="<?= $object->getUrl() ?>"
                                title="<?= strip_tags($object->getTitle()) ?>">
