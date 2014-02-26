@@ -9,3 +9,4 @@ Router::connect('/register', array('plugin' => 'paszport', 'controller' => 'user
 
 Router::redirect('/zaloguj', array('plugin' => 'paszport', 'controller' => 'users', 'action' => 'login'));
 Router::redirect('/logowanie', array('plugin' => 'paszport', 'controller' => 'users', 'action' => 'login'));
+Router::redirect('/paszport/users/failed', array('plugin' => 'paszport', 'controller' => 'users', 'action' => 'login'));
