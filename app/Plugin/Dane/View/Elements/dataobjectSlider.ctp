@@ -37,7 +37,7 @@
             </div>
             <div class="content col-md-8">
                 
-                <?php echo $this->element('dataobjectSlider/_content', array(
+                <?php echo $this->element('Dane.dataobjectSlider/_content', array(
                 	'object' => $object,
 		            'options' => $options,
                 )); ?>
@@ -46,7 +46,7 @@
         <? } else { ?>
             <div class="content col-md-12">
                 
-                <?php echo $this->element('dataobjectSlider/_content', array(
+                <?php echo $this->element('Dane.dataobjectSlider/_content', array(
                 	'object' => $object,
 		            'options' => $options,
                 )); ?>

@@ -2,7 +2,7 @@
 		
 	$title_truncate_length = 120;
 	
-	echo $this->element('dataobjectSlider/_header', array(
+	echo $this->element('Dane.dataobjectSlider/_header', array(
 		'object' => $object,
 		'options' => $options,
 	));
