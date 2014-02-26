@@ -143,8 +143,8 @@
                 </a>
             <?php } else { ?>
                 <a class="_mojePanstwoCockpitPowerButton _mojePanstwoCockpitIcons _mojePanstwoCockpitIcons-login _mojePanstwoCockpitBorderLeft"
-                   href="<?php echo $this->Html->url(array('plugin' => 'paszport', 'controller' => 'pages', 'action' => 'home')); ?>">
-                    <span><?php echo __('LC_COCKPITBAR_LOGIN'); ?></span>
+                   href="<?php echo $this->Html->url(array('plugin' => 'paszport', 'controller' => 'users', 'action' => 'login')); ?>">
+                <span><?php echo __('LC_COCKPITBAR_LOGIN'); ?></span>
                 </a>
             <?php } ?>
         </div>
