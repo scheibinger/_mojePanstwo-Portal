@@ -101,7 +101,7 @@ class DataobjectsBrowserComponent extends Component
 
     public function beforeRender(Controller $controller)
     {
-
+				
         $q = '';
         $conditions = array();
         $order = array();
@@ -456,15 +456,14 @@ class DataobjectsBrowserComponent extends Component
 		else
 		{
 			
-			
-	
-			$controller->view = $this->getViewPath();
-			
+
 			$path = App::path('View', 'Dane');
-	        $path = $path[0] . $controller->viewPath . '/' . $controller->view . '.ctp';
+	        $path = $path[0] . $controller->viewPath . '/' . $controller->view . '.ctp';	        
+	        $controller->view = $this->getViewPath();
 	
 	        if (file_exists($path))
 	            $controller->set('originalViewPath', $path);
+			
 			
 		}
 
