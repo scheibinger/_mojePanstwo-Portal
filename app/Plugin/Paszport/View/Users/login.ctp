@@ -24,7 +24,7 @@
                     </div>
                     <div class="logInVia col-xs-12 col-sm-8 col-sm-offset-2">
                         <div class="content">
-                            <?php echo $this->Html->link('<i class="fa fa-facebook"></i>' . __d('paszport', 'LC_PASZPORT_LOGIN'), array('action' => 'fblogin'), array('class' => 'btn btn-facebook btn-md', 'target' => '_blank', 'escape' => false)); ?>
+                            <?php echo $this->Html->link('<i class="fa fa-facebook"></i>' . __d('paszport', 'LC_PASZPORT_LOGIN'), array('plugin' => 'paszport', 'controller' => 'users', 'action' => 'fblogin'), array('class' => 'btn btn-facebook btn-md', 'target' => '_blank', 'escape' => false)); ?>
                         </div>
                     </div>
                 </div>
