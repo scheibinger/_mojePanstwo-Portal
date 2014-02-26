@@ -16,7 +16,7 @@ class AppExceptionRenderer extends ExceptionRenderer {
 	    {
 		    		    
 		    $url = '/dane/' . $this->controller->request->url;
-		    $this->controller->redirect( $url );
+		    $this->controller->redirect($url, 301);
 		    
 	    }
 	    else parent::render();
