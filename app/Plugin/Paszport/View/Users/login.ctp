@@ -4,14 +4,18 @@
 <?php echo $this->Session->flash('auth', array('element' => 'alert')); ?>
 
 <div class="main">
-    <div class="content">
+    <div class="header">
         <div class="container">
             <div class="row">
                 <div class="col-xs-10 col-xs-offset-1 text-center">
                     <h1><?php echo __d('paszport', 'LC_PASZPORT_PROJECT_MOTTO'); ?></h1>
                 </div>
             </div>
-            <div class="row userHelper logInAccount">
+        </div>
+    </div>
+    <div class="content">
+        <div class="container">
+        <div class="row userHelper logInAccount">
                 <?php echo $this->Form->create('User', array('action' => 'login')); ?>
                 <div class="row">
                     <div class="or nomargin col-xs-12 col-sm-10 col-md-6 col-sm-offset-1 col-md-offset-3">

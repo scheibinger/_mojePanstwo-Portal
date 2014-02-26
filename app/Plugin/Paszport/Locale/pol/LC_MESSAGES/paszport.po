@@ -714,3 +714,6 @@ msgstr "Zaloguj się aby korzystać z rozszerzonych możliwości _mojego<strong>
 
 msgid "LC_PASZPORT_HOME_LOGIN"
 msgstr "Zaloguj się"
+
+msgid "LC_PASZPORT_FORGET_EMAIL_PLACEHOLDER"
+msgstr "Podaj adres email..."
