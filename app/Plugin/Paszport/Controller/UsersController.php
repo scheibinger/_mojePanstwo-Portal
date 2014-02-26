@@ -23,7 +23,7 @@ class UsersController extends PaszportAppController
     public function beforeFilter()
     {
         parent::beforeFilter();
-        $this->Auth->allow(array('login', 'add', 'gate', 'ping', 'forgot', 'reset', 'fblogin', 'externalgate', 'import', 'externalfblogin', 'twitterlogin', 'twitter', 'failed', 'client'));
+        $this->Auth->allow(array('login', 'add', 'gate', 'ping', 'forgot', 'reset', 'fblogin', 'externalgate', 'import', 'externalfblogin', 'twitterlogin', 'twitter', 'client'));
         $this->Auth->deny(array('index'));
         $this->OAuth->deny('me');
         if ($this->params->action == 'login' && $this->Auth->loggedIn()) {
@@ -65,7 +65,7 @@ class UsersController extends PaszportAppController
                 $this->redirect(array('action' => 'index'));
             } else {
                 $this->Session->setFlash(__d('paszport', 'LC_PASZPORT_LOGIN_FAILED'), 'alert', array('class' => 'alert-error'), 'auth');
-                $this->redirect(array('action' => 'failed'));
+                $this->redirect(array('action' => 'login'));
             }
         }
         $this->set('title_for_layout', __d('paszport', 'LC_PASZPORT_LOGIN', true));
@@ -671,7 +671,7 @@ class UsersController extends PaszportAppController
                 $this->data = array('status' => 500, 'error' => 4, 'response' => 'Not enough params');
             } else {
                 $this->Session->setFlash(__d('paszport', 'LC_PASZPORT_GATE_FAILURE', true), 'alert', array('class' => 'alert-error'));
-                $this->redirect(array('controller' => 'users', 'action' => 'failed'));
+                $this->redirect(array('controller' => 'users', 'action' => 'login'));
             }
         }
         if ($this->request->isPost()) {
@@ -686,7 +686,7 @@ class UsersController extends PaszportAppController
                     $this->data = array('status' => 500, 'error' => 3, 'response' => 'Service not found');
                 } else {
                     $this->Session->setFlash(__d('paszport', 'LC_PASZPORT_GATE_FAILURE', true), 'alert', array('class' => 'alert-error'));
-                    $this->redirect(array('controller' => 'users', 'action' => 'failed'));
+                    $this->redirect(array('controller' => 'users', 'action' => 'login'));
                 }
                 return false;
             }
@@ -748,7 +748,7 @@ class UsersController extends PaszportAppController
                     $this->data = array('status' => 500, 'error' => 3, 'response' => 'Service not found');
                 } else {
                     $this->Session->setFlash(__d('paszport', 'LC_PASZPORT_GATE_FAILURE', true), 'alert', array('class' => 'alert-error'));
-                    $this->redirect(array('controller' => 'users', 'action' => 'failed'));
+                    $this->redirect(array('controller' => 'users', 'action' => 'login'));
                 }
                 return false;
             }
@@ -812,7 +812,7 @@ class UsersController extends PaszportAppController
                     $this->data = array('status' => 500, 'error' => 2, 'response' => 'User not found');
                 } else {
                     $this->Session->setFlash(__d('paszport', 'LC_PASZPORT_PASSWORD_INCORRECT', true), 'alert', array('class' => 'alert-error'));
-                    $this->redirect(array('controller' => 'users', 'action' => 'failed'));
+                    $this->redirect(array('controller' => 'users', 'action' => 'login'));
                 }
             }
         } else {
@@ -1026,14 +1026,7 @@ class UsersController extends PaszportAppController
     }
 
 
-    public function failed()
-    {
-        if ($this->Auth->loggedIn()) {
-            $this->redirect(array('action' => 'index'));
-        }
-        $this->set('title_for_layout', __d('paszport', 'LC_PASZPORT_LOGIN', true));
-
-    }
+    
 
     //@TODO
     public function twitterlogin($callback = null)
