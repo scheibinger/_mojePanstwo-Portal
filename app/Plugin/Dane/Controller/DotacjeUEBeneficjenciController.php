@@ -2,7 +2,7 @@
 
 App::uses('DataobjectsController', 'Dane.Controller');
 
-class DotacjeUEBeneficjenciController extends DataobjectsController
+class DotacjeUeBeneficjenciController extends DataobjectsController
 {
 	
     public function view()

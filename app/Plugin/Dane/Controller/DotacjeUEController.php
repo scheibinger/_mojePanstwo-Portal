@@ -2,7 +2,7 @@
 
 App::uses('DataobjectsController', 'Dane.Controller');
 
-class DotacjeUEController extends DataobjectsController
+class DotacjeUeController extends DataobjectsController
 {
     public $menu = array();
 	public $objectOptions = array(
