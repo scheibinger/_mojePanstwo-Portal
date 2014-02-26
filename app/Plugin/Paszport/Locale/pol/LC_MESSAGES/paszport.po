@@ -594,7 +594,13 @@ msgstr "Klucz API usunięto pomyślnie"
 msgid "LC_PASZPORT_INSTITUTION"
 msgstr "Instytucja"
 
+msgid "LC_INSTITUTION"
+msgstr "Instytucja"
+
 msgid "LC_PASZPORT_PERSONAL"
+msgstr "Osoba"
+
+msgid "LC_PERSONAL"
 msgstr "Osoba"
 
 #: LOGS
@@ -699,3 +705,12 @@ msgstr "Wyrób paszport na Twoje konto email"
 
 msgid "LC_PASZPORT_FLASH_MESSAGE_SWITCH_STREAM"
 msgstr "Aktualny stream"
+
+msgid "LC_PASZPORT_HOME_HEADLINE"
+msgstr "Dzięki aplikacji Paszport możesz spersonalizować swoje osobiste konto jak również uzyskać dostęp do rozszerzonych opcji oferowanych przez pozostałe aplikacje."
+
+msgid "LC_PASZPORT_HOME_HEADLINE_SECOND"
+msgstr "Zaloguj się aby korzystać z rozszerzonych możliwości _mojego<strong>Państwa</strong>"
+
+msgid "LC_PASZPORT_HOME_LOGIN"
+msgstr "Zaloguj się"

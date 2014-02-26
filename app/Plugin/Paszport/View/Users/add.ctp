@@ -6,8 +6,8 @@
 <div class="main">
     <div class="header">
         <div class="container">
-            <div class="row">
-                <h1><?php echo __d('paszport', "LC_PASZPORT_CREATE_MOTTO") ?></h1>
+            <div class="row text-center">
+            <h1><?php echo __d('paszport', "LC_PASZPORT_CREATE_MOTTO") ?></h1>
             </div>
         </div>
     </div>

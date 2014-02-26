@@ -6,8 +6,8 @@
 <div class="main">
     <div class="header">
         <div class="container">
-            <div class="row">
-                <h1><?php echo __d('paszport', "LC_PASZPORT_PASSWORD_FORGOT_MOTTO") ?></h1>
+            <div class="row text-center">
+            <h1><?php echo __d('paszport', "LC_PASZPORT_PASSWORD_FORGOT_MOTTO") ?></h1>
             </div>
         </div>
     </div>
@@ -20,8 +20,8 @@
             </div>
             <?php echo $this->Form->create('User', array('action' => 'forgot')); ?>
             <div class="row">
-                <div class="col-xs-12 col-sm-5 col-md-4 col-sm-offset-1 col-md-offset-2 form-group">
-                    <?php echo $this->Form->input('User.email', array('class' => 'input-xlarge form-control', 'type' => 'email', 'label' => __d('paszport', " ", true), 'data-validation-required-message' => __d('paszport', "LC_PASZPORT_EMAIL_REQUIRED", true), 'autocomplete' => 'off', 'required' => 'required', 'data-validation-email-message' => __d('paszport', "LC_PASZPORT_NOT_A_VALID_EMAIL", true), 'after' => '<span class="help-block"></span>')); ?>
+                <div class="col-xs-12 col-sm-6 col-md-4 col-sm-offset-3 col-md-offset-4 form-group">
+                <?php echo $this->Form->input('User.email', array('class' => 'input-xlarge form-control', 'type' => 'email', 'label' => __d('paszport', " ", true), 'data-validation-required-message' => __d('paszport', "LC_PASZPORT_EMAIL_REQUIRED", true), 'autocomplete' => 'off', 'required' => 'required', 'data-validation-email-message' => __d('paszport', "LC_PASZPORT_NOT_A_VALID_EMAIL", true), 'after' => '<span class="help-block"></span>')); ?>
                 </div>
             </div>
             <div class="row">
