@@ -2,7 +2,7 @@
 
 <?php echo $this->Element('dataobject/pageBegin'); ?>
     <div class="col-md-12 row">
-        <div class="object">
+        <div class="object mpanel">
             <?php foreach ($stenogram['wystapienia'] as $wpis) { ?>
 
                 <a class="wystapienie" href="/dane/sejm_wystapienia/<?= $wpis['id'] ?>">

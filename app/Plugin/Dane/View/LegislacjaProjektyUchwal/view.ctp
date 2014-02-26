@@ -76,7 +76,7 @@
 							<?php foreach ($object->layers['related']['groups'] as $group) { ?>
 					            <div class="block">
 					
-					                <h2 class="panel-title"><?php echo $group['title']; ?></h2>
+					                <h2><?php echo $group['title']; ?></h2>
 					
 					                <div class="content">
 					                    <?

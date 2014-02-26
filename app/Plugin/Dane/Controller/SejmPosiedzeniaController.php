@@ -11,6 +11,9 @@ class SejmPosiedzeniaController extends DataobjectsController
     public $uses = array(
         'Dane.Dataobject',
     );
+    public $objectOptions = array(
+    	'bigTitle' => true,
+    );
 
     public function view()
     {
