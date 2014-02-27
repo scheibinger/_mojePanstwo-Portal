@@ -5,12 +5,6 @@ $(document).ready(function () {
         searchOutput = (searchEngineInput.is(':visible') ? 60 : 0),
         searchEngineHeight = searchEngineInput.css('height');
 
-    $('._mojePanstwoCockpitSearchContent').find('._mojePanstwoCockpitSearchContentButton').addClass('active')
-        .end()
-        .find('._mojePanstwoCockpitSearchInput').show();
-    $('#_main').css({'marginTop': searchEngineHeight});
-    spisTresci.addClass('searchDisplay');
-
     $("#tagsCloud").cloud({
         hwratio: .3,
         fog: .4
