@@ -48,7 +48,7 @@
                 <div class="row">
                     <div class="or col-xs-12 col-sm-10 col-sm-offset-1">
                         <span class="middle">
-                            <?php echo $this->Html->link(__d('paszport', 'LC_PASZPORT_MODAL_LOGIN_REGISTER', true), array('controller' => 'users', 'action' => 'add'), array('class' => 'register', 'autocomplete' => 'off', 'target' => '_self')); ?>
+                            <?php echo $this->Html->link(__d('paszport', 'LC_PASZPORT_MODAL_LOGIN_REGISTER', true), array('plugin' => 'paszport', 'controller' => 'users', 'action' => 'add'), array('class' => 'register', 'autocomplete' => 'off', 'target' => '_self')); ?>
                         </span>
                     </div>
                 </div>
