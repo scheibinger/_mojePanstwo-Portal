@@ -11,7 +11,7 @@
                 <p class="lead text-info"><?php echo __d('powiadomienia', 'LC_POWIADOMIENIA_PERMISSION_HEADLINE_SECOND'); ?></p>
             </div>
             <p class="text-center">
-                <a href="<?php echo $this->Html->url(array('plugin' => 'paszport', 'controller' => 'pages', 'action' => 'home')); ?>"
+                <a href="<?php echo $this->Html->url(array('plugin' => 'paszport', 'controller' => 'users', 'action' => 'login')); ?>"
                    class="btn btn-primary btn-lg">
                     <?php echo __d('powiadomienia', 'LC_POWIADOMIENIA_PERMISSION_LOGIN'); ?>
                 </a>
