@@ -202,6 +202,17 @@ jQuery.extend(jQuery.ui.dialog.prototype.options, {
         $.removeCookie('_mPViewportReload');
     }
 
+    /*COOKIE LAW*/
+    var cookieLaw;
+
+    if ((cookieLaw = $('.cookieLaw')).length > 0) {
+        cookieLaw.find('.btn').click(function () {
+            cookieLaw.slideUp();
+            $.cookie('_mPCookieLaw', 1);
+        })
+    }
+
+
     /*JS SHORTER TITLE FUNCTION*/
     if ($('.trimTitle').length > 0)
         trimTitle();
