@@ -44,7 +44,11 @@
                                            value="<?php echo $phrase['Phrase']['id']; ?>" <?php echo (isset($this->data['Dataobject']['ids']) && $this->data['Dataobject']['ids'] == $phrase['Phrase']['id']) ? 'checked' : null; ?>/>
                                     <label for="PowiadomieniaFrazaId<?php echo $index ?>">
                                         <a class="wrap"
-                                           href="<?php echo $this->Html->url(array("controller" => "powiadomienia", "action" => "index", "?" => array("keyword" => $phrase['Phrase']['id'], "mode" => (isset($this->request->query['mode'])) ? $this->request->query['mode'] : null))) ?>"
+                                            <?php if (isset($this->request->query['keyword']) && ($this->request->query['keyword'] == $phrase['Phrase']['id'])) { ?>
+                                                href="<?php echo $this->Html->url(array("controller" => "powiadomienia", "action" => "index", "?" => array("mode" => (isset($this->request->query['mode'])) ? $this->request->query['mode'] : null))) ?>"
+                                            <?php } else { ?>
+                                                href="<?php echo $this->Html->url(array("controller" => "powiadomienia", "action" => "index", "?" => array("keyword" => $phrase['Phrase']['id'], "mode" => (isset($this->request->query['mode'])) ? $this->request->query['mode'] : null))) ?>"
+                                            <?php } ?>
                                            target="_self">
                                             <?php echo $phrase['Phrase']['q']; ?>
                                         </a>
