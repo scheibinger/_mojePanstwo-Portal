@@ -149,7 +149,7 @@ echo $this->Html->script('plugins/bootstrap-select/bootstrap-select.min.js'); ?>
             threeDig: "<?php echo Configure::read('Config.language'); ?>"
         },
         globalSearch: {
-            phrase: "<?php echo @$q ?>",
+            phrase: '<?php echo @htmlspecialchars($q) ?>',
             placeholder: 'Szukaj w danych publicznych...'
         }
     }

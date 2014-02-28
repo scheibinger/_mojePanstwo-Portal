@@ -15,7 +15,7 @@
                             $('<form></form>').attr({'action': '/dane', 'method': 'GET'}).append(
                                 $('<div></div>').addClass('col-md-12 searchFor').append(
                                     $('<div></div>').addClass('input-group').append(
-                                            $('<input>').attr({'type': 'text', 'name': 'q', 'placeholder': _mPHeart.globalSearch.placeholder, 'value': _mPHeart.globalSearch.phrase}).addClass('form-control input-lg')
+                                            $('<input>').attr({'type': 'text', 'name': 'q', 'placeholder': _mPHeart.globalSearch.placeholder, 'value': $("<div/>").html(_mPHeart.globalSearch.phrase).text()}).addClass('form-control input-lg')
                                         ).append(
                                             $('<span></span>').addClass('input-group-btn').append(
                                                 $('<button></button>').addClass('btn').attr('type', 'submit')
