@@ -34,6 +34,9 @@ Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'
 Router::connect('/docs/:id', array('controller' => 'docs', 'action' => 'view'), array('id' => '[0-9]+'));
 Router::connect('/docs/:doc_id-:package_id', array('controller' => 'docs', 'action' => 'viewPackage'), array('doc_id' => '[0-9]+', 'package_id' => '[0-9]+'));
 
+Router::parseExtensions('rss','xml');
+Router::connect('/sitemap', array('controller' => 'sitemaps', 'action' => 'index')); 
+
 /**
  * Load all plugin routes. See the CakePlugin documentation on
  * how to customize the loading of plugin routes.

@@ -1,5 +1,7 @@
 <?php
 
+Router::parseExtensions('json');
+
 Router::connect(
     '/moja_gmina/search',
     array(
@@ -9,5 +11,10 @@ Router::connect(
     )
 );
 
-Router::mapResources('MojaGmina.geo');
-Router::parseExtensions();
+Router::connect(
+    '/moja_gmina/geo/:action',
+    array(
+    	'plugin' => 'MojaGmina',
+    	'controller' => 'Geo',
+    )
+);
