@@ -82,7 +82,7 @@ class BdlWskaznikiController extends DataobjectsController
 
                 if (empty($dimension)) {
 
-                    $data_for_dimmensions = $this->API->BDL()->getDataForDimmesions($params_dimmensions);
+                    $data_for_dimmensions = $this->API->BDL()->getDataForDimmesions($params_dimmensions, $this->object->getId());
                     if (!empty($data_for_dimmensions))
                         foreach ($data_for_dimmensions as $data)
                             foreach ($expanded_dimension['options'] as &$option)
