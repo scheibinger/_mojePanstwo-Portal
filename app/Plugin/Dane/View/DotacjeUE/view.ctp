@@ -10,7 +10,9 @@
 		<?
 			echo $this->Dataobject->hlTableForObject($object, array(
 				'beneficjent_nazwa', 'forma_prawna_str'
-			), 6);
+			), array(
+				'col_width' => 6,
+			));
 		?>
 		</div>
 	</div>
@@ -34,7 +36,9 @@
 		<?
 			echo $this->Dataobject->hlTableForObject($object, array(
 				'data_podpisania', 'data_utworzenia_ksi', 'data_rozpoczecia', 'data_zakonczenia',
-			), 3);
+			), array(
+				'col_width' => 3,
+			));
 		?>
 		</div>
 	</div>

@@ -157,14 +157,16 @@ class DataobjectHelper extends AppHelper
 
     }
 	
-	public function hlTable($data, $col_width = 3)
+	public function hlTable($data, $options = array())
 	{
-		
+				
 		if( empty($data) )
 			return '';
 			
 		$output = '<div class="dataHighlights normal">';
 		$index = 0;
+		if( !isset($options['col_width']) )
+			$options['col_width'] = 3;
 		
 		foreach( $data as $d )
 		{
@@ -174,10 +176,9 @@ class DataobjectHelper extends AppHelper
 			$value = $d['value'];
 			
 			$d['type'] = $d['options']['type'];
-			$html = $this->getHTMLForField($id, $d, array(
-				'col_width' => $col_width,
+			$html = $this->getHTMLForField($id, $d, array_merge($options, array(
 				'hidden' => ($index >= 4),
-			));
+			)));
 			
 			if( $html )
 			{
@@ -191,7 +192,7 @@ class DataobjectHelper extends AppHelper
 		return $output;		
 	}
 	
-	public function hlTableForObject($object, $fields, $col_width = 3)
+	public function hlTableForObject($object, $fields, $options = array())
 	{
 		$data = array();
 		if( empty($fields) )
@@ -204,30 +205,29 @@ class DataobjectHelper extends AppHelper
 			if( $schema )
 			{
 				
-				$options = array(
+				$data_options = array(
 					'type' => isset($schema[2]) ? $schema[2] : 'string',
 				);
 				
 				if( !empty($schema[3]) && is_array($schema[3]) )
-					$options = array_merge($options, $schema[3]);
+					$data_options = array_merge($data_options, $schema[3]);
 				
 				$data[] = array(
 					'id' => $field,
 					'label' => $schema[1],
 					'value' => $object->getData( $field ),
-					'options' => $options,
+					'options' => $data_options,
 				);	
 				
 			}
 		
 		}
 		
-		return $this->hlTable($data, $col_width);
+		return $this->hlTable($data, $options);
 	}
 	
 	public function getHTMLForField($field, $field_params, $options = array())
 	{
-				
 		$output = '';
 		$normalizeText = false;
 		$col_width = isset( $options['col_width'] ) ? $options['col_width'] : 4;
