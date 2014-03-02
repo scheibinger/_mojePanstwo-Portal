@@ -21,7 +21,9 @@
 		<?
 			echo $this->Dataobject->hlTableForObject($object, array(
 				'wartosc_ogolem', 'wartosc_wydatki_kwalifikowane', 'wartosc_dofinansowanie', 'wartosc_dofinansowanie_ue',
-			), 3);
+			), array(
+				'col_width' => 3,
+			));
 		?>
 		</div>
 	</div>

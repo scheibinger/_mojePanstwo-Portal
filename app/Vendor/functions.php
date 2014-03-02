@@ -151,3 +151,8 @@ function number_format_h($n, $decimals = 0, $dec_point = '.', $thousands_sep = '
 
     return number_format($n, $decimals, $dec_point, $thousands_sep);
 }
+
+function atomTime( $inp )
+{
+	return date('Y-m-d\TH:i:s\Z', strtotime( $inp ));
+}

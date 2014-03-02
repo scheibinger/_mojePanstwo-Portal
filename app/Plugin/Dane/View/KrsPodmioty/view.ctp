@@ -63,8 +63,11 @@ echo $this->Html->script('Dane.arbor/lib/arbor-graphic', array('block' => 'scrip
         
         <div class="block">
             <?php echo $this->Dataobject->hlTableForObject($object, array(
-				'krs', 'nip', 'regon', 'data_rejestracji', 'data_dokonania_wpisu', 'email', 'www', 'wartosc_czesc_kapitalu_wplaconego', 'wartosc_kapital_docelowy', 'wartosc_kapital_zakladowy', 'wartosc_nominalna_akcji', 'wartosc_nominalna_podwyzszenia_kapitalu', 'forma_prawna_str', 'oznaczenie_sadu', 'sygnatura_akt', 'wczesniejsza_rejestracja_str'
-			), 3); ?>
+				'krs', 'nip', 'regon', 'wartosc_czesc_kapitalu_wplaconego', 'wartosc_kapital_docelowy', 'wartosc_kapital_zakladowy', 'wartosc_nominalna_akcji', 'wartosc_nominalna_podwyzszenia_kapitalu', 'data_rejestracji', 'data_dokonania_wpisu', 'email', 'www', 'forma_prawna_str', 'oznaczenie_sadu', 'sygnatura_akt', 'wczesniejsza_rejestracja_str'
+			), array(
+				'col_width' => 3,
+				'display' => 'firstRow',
+			)); ?>
         </div>       
 
         <? if ($object->getData('sposob_reprezentacji')) { ?>

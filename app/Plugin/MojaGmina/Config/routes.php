@@ -1,7 +1,4 @@
 <?php
-
-Router::parseExtensions('json');
-
 Router::connect(
     '/moja_gmina/search',
     array(

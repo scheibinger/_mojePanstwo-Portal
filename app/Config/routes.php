@@ -34,7 +34,7 @@ Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'
 Router::connect('/docs/:id', array('controller' => 'docs', 'action' => 'view'), array('id' => '[0-9]+'));
 Router::connect('/docs/:doc_id-:package_id', array('controller' => 'docs', 'action' => 'viewPackage'), array('doc_id' => '[0-9]+', 'package_id' => '[0-9]+'));
 
-Router::parseExtensions('rss','xml','json');
+Router::parseExtensions('rss','xml','json', 'html');
 Router::connect('/sitemap', array('controller' => 'sitemaps', 'action' => 'index')); 
 
 /**

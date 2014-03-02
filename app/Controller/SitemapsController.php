@@ -8,12 +8,24 @@ class SitemapsController extends AppController{
 
     function index (){     
         
-        $objects = array();
-        $this->set('objects', $objects);
+        $sitemapindex = array(
+        	'xmlns:' => 'http://www.sitemaps.org/schemas/sitemap/0.9',
+        	'sitemap' => array(
+        		array(
+        			'loc' => 'http://' . PORTAL_DOMAIN . '/sitemap1.xml.gz',
+					'lastmod' => atomTime('2014-03-01 09:00:00'),
+				),
+	        	array(
+	        		'loc' => 'http://' . PORTAL_DOMAIN . '/sitemap1.xml.gz',
+					'lastmod' => atomTime('2014-03-01 09:00:00'),
+	        	),
+        	),
+        );
+		        
         
-        $this->set('_serialize', array('objects'));
-        
+        $this->set('sitemapindex', $sitemapindex);
+        $this->set('_serialize', array('sitemapindex'));
 		Configure::write ('debug', 0); 
     
     } 
-} 
+}

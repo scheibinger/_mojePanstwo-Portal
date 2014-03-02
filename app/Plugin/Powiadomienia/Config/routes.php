@@ -5,4 +5,3 @@ Router::connect('/powiadomienia/uprawnienia', array('plugin' => 'powiadomienia',
 Router::connect('/powiadomienia/flagObjects', array('plugin' => 'powiadomienia', 'controller' => 'powiadomienia', 'action' => 'flagObjects'));
 Router::mapResources('dataobjects');
 Router::mapResources('phrases');
-Router::parseExtensions();
