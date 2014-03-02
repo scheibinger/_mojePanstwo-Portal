@@ -11,6 +11,7 @@ class KrsPodmiotyController extends DataobjectsController
     public $components = array('RequestHandler');
 	public $objectOptions = array(
 		'hlFields' => array(),
+		'bigTitle' => true,
 	);
 	
     /*

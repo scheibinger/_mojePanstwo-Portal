@@ -92,9 +92,9 @@ echo $this->Html->script('Dane.arbor/lib/arbor-graphic', array('block' => 'scrip
             <div class="col-lg-<?= $column_width ?>">
                 <div class="block small">
                     <h2 id="<?= $organ['idTag'] ?>" class="normalizeText"><?= $organ['title'] ?></h2>
-                    <? if (isset($organ['label']) && $organ['label']) { ?>
+                    <? /* if (isset($organ['label']) && $organ['label']) { ?>
                         <p class="label label-primary"><?= $organ['label'] ?></p>
-                    <? } ?>
+                    <? } */ ?>
 
                     <? if ($organ['content']) { ?>
                     <div class="list-group less-borders">
