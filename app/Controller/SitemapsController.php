@@ -4,8 +4,8 @@ class SitemapsController extends AppController{
     var $name = 'Sitemaps'; 
     var $uses = array('Post', 'Info'); 
     var $helpers = array('Time'); 
-    var $components = array('RequestHandler'); 
-
+	var $components = array('RequestHandler');
+	
     function index() {
         
         $limit = 50000;
@@ -20,6 +20,7 @@ class SitemapsController extends AppController{
         	),
         );
 		
+		$this->layout = 'sitemap';
 		
 		$api = mpapiComponent::getApi()->Dane();
         $datasets = $api->getDatasets();
@@ -39,12 +40,8 @@ class SitemapsController extends AppController{
 	        
         }
 		
-		
-		   
-        
-        $this->set('sitemap', $sitemapindex['sitemap']);
-        $this->set('_serialize', 'sitemap');
-        $this->set('_rootNode', 'sitemapindex');
+		// $this->view = 'sitemap';
+        $this->set('data', $sitemapindex['sitemap']);
 		Configure::write ('debug', 0); 
     
     }
@@ -66,13 +63,11 @@ class SitemapsController extends AppController{
         foreach( $map as $item )
         	$urlset['url'][] = array(
     			'loc' => 'http://' . PORTAL_DOMAIN . '/dane/' . $dataset . '/' . $item,
-				'changefreq' => 'monthly',
+				'changefreq' => 'daily',
 				'priority' => 0.8,
 			);
 		
-		$this->set('url', $urlset['url']);
-        $this->set('_serialize', 'url');
-        $this->set('_rootNode', 'urlset');
+		$this->set('data', $urlset['url']);
 		Configure::write ('debug', 0); 
 		
     }
@@ -88,13 +83,11 @@ class SitemapsController extends AppController{
         foreach( $this->Applications as $item )
         	$urlset['url'][] = array(
     			'loc' => 'http://' . PORTAL_DOMAIN . '/' . $item['Application']['plugin'],
-				'changefreq' => 'monthly',
+				'changefreq' => 'daily',
 				'priority' => 0.8,
 			);
 		
-		$this->set('url', $urlset['url']);
-        $this->set('_serialize', 'url');
-        $this->set('_rootNode', 'urlset');
+		$this->set('data', $urlset['url']);
 		Configure::write ('debug', 0); 
 		
     }
