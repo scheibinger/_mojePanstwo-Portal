@@ -42,8 +42,9 @@ class SitemapsController extends AppController{
 		
 		   
         
-        $this->set('sitemapindex', $sitemapindex);
-        $this->set('_serialize', array('sitemapindex'));
+        $this->set('sitemap', $sitemapindex['sitemap']);
+        $this->set('_serialize', 'sitemap');
+        $this->set('_rootNode', 'sitemapindex');
 		Configure::write ('debug', 0); 
     
     }
@@ -69,8 +70,9 @@ class SitemapsController extends AppController{
 				'priority' => 0.8,
 			);
 		
-		$this->set('urlset', $urlset);
-        $this->set('_serialize', array('urlset'));
+		$this->set('url', $urlset['url']);
+        $this->set('_serialize', 'url');
+        $this->set('_rootNode', 'urlset');
 		Configure::write ('debug', 0); 
 		
     }
@@ -90,8 +92,9 @@ class SitemapsController extends AppController{
 				'priority' => 0.8,
 			);
 		
-		$this->set('urlset', $urlset);
-        $this->set('_serialize', array('urlset'));
+		$this->set('url', $urlset['url']);
+        $this->set('_serialize', 'url');
+        $this->set('_rootNode', 'urlset');
 		Configure::write ('debug', 0); 
 		
     }
