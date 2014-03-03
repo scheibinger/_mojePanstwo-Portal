@@ -6,26 +6,94 @@ class SitemapsController extends AppController{
     var $helpers = array('Time'); 
     var $components = array('RequestHandler'); 
 
-    function index (){     
+    function index() {
         
+        $limit = 50000;
+             
         $sitemapindex = array(
         	'xmlns:' => 'http://www.sitemaps.org/schemas/sitemap/0.9',
         	'sitemap' => array(
         		array(
-        			'loc' => 'http://' . PORTAL_DOMAIN . '/sitemap1.xml.gz',
-					'lastmod' => atomTime('2014-03-01 09:00:00'),
+        			'loc' => 'http://' . PORTAL_DOMAIN . '/sitemaps/general.xml',
+					'lastmod' => atomTime(),
 				),
-	        	array(
-	        		'loc' => 'http://' . PORTAL_DOMAIN . '/sitemap1.xml.gz',
-					'lastmod' => atomTime('2014-03-01 09:00:00'),
-	        	),
         	),
         );
-		        
+		
+		
+		$api = mpapiComponent::getApi()->Dane();
+        $datasets = $api->getDatasets();
+                
+        foreach( $datasets['datasets'] as $item )
+        {
+
+	        $dataset = $item['Dataset'];
+	        $count = $dataset['count'];
+	        $pages = ceil( $count / $limit );
+	        
+	        for( $p=1; $p<$pages+1; $p++ )
+		        $sitemapindex['sitemap'][] = array(
+			        'loc' => 'http://' . PORTAL_DOMAIN . '/sitemaps/' . $dataset['base_alias'] . '-' . $p . '.xml',
+					'lastmod' => atomTime(),
+		        );
+	        
+        }
+		
+		
+		   
         
         $this->set('sitemapindex', $sitemapindex);
         $this->set('_serialize', array('sitemapindex'));
 		Configure::write ('debug', 0); 
     
-    } 
+    }
+    
+    function dataset() {
+	    
+	    $dataset = $this->request->params['dataset'];
+	    $page = $this->request->params['page'];
+	    
+	    $api = mpapiComponent::getApi()->Dane();
+	    $map = $api->getDatasetMap($dataset, $page);
+	    
+	    
+	    $urlset = array(
+        	'xmlns:' => 'http://www.sitemaps.org/schemas/sitemap/0.9',
+        	'url' => array(),
+        );
+        
+        foreach( $map as $item )
+        	$urlset['url'][] = array(
+    			'loc' => 'http://' . PORTAL_DOMAIN . '/dane/' . $dataset . '/' . $item,
+				'changefreq' => 'monthly',
+				'priority' => 0.8,
+			);
+		
+		$this->set('urlset', $urlset);
+        $this->set('_serialize', array('urlset'));
+		Configure::write ('debug', 0); 
+		
+    }
+    
+    function general() {
+	    	    
+	    
+	    $urlset = array(
+        	'xmlns:' => 'http://www.sitemaps.org/schemas/sitemap/0.9',
+        	'url' => array(),
+        );
+        
+        foreach( $this->Applications as $item )
+        	$urlset['url'][] = array(
+    			'loc' => 'http://' . PORTAL_DOMAIN . '/' . $item['Application']['plugin'],
+				'changefreq' => 'monthly',
+				'priority' => 0.8,
+			);
+		
+		$this->set('urlset', $urlset);
+        $this->set('_serialize', array('urlset'));
+		Configure::write ('debug', 0); 
+		
+    }
+    
 }

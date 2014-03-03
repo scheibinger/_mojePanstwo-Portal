@@ -36,6 +36,7 @@ Router::connect('/docs/:doc_id-:package_id', array('controller' => 'docs', 'acti
 
 Router::parseExtensions('rss','xml','json', 'html');
 Router::connect('/sitemap', array('controller' => 'sitemaps', 'action' => 'index')); 
+Router::connect('/sitemaps/:dataset-:page', array('controller' => 'sitemaps', 'action' => 'dataset')); 
 
 /**
  * Load all plugin routes. See the CakePlugin documentation on
