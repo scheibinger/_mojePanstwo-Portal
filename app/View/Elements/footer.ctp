@@ -25,8 +25,6 @@
             ?>
         </div>
         <div class="col-lg-4 pull-right">
-            <?php echo __('LC_FOOTER_COPYRIGHTS') ?>
-            <span class="separator">|</span>
             <a href="http://epf.org.pl" target="_blank">
                 <?php echo __('LC_FOOTER_EPF') ?>
             </a>
