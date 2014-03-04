@@ -1,0 +1,101 @@
+#aboutUs .content {
+    @marginSpace: 4em;
+
+    margin-top: @marginSpace;
+    margin-bottom: @marginSpace;
+    padding: 1em 3em 2em 3em;
+    background-color: #ffffff;
+    font-family: "Lato", sans-serif;
+    display: inline-block;
+
+    > .block {
+        width: 100%;
+        float: left;
+        padding: 0;
+    }
+
+    .mainContent {
+        h2 {
+            color: #2F2F2F;
+            font-size: 16px;
+            font-weight: 600;
+            margin: 40px 0 15px;
+
+            &:first-child {
+                margin-top: 20px;
+            }
+        }
+        p {
+            padding: 5px 0px;
+        }
+        #epf_logo {
+            margin: 0 0 10px;
+        }
+        .sideContent {
+            min-height: 620px;
+            padding-top: 78px;
+        }
+    }
+
+    .fundatorzy {
+        padding-left: 20px;
+        padding-right: 20px;
+
+        #fundatorzy {
+            p.info {
+                margin-bottom: 10px;
+            }
+            #logotypy {
+                margin-top: 5px;
+
+                a {
+                    margin: 0 10px;
+                    outline: none;
+                }
+                &:first-child {
+                    margin-left: 0;
+                }
+                &:last-child {
+                    margin-right: 0;
+                }
+                img {
+                    background: white url(/img/partnerzy/fundatorzy_logosy.png) no-repeat 0 0;
+                    margin: 10px;
+
+                    &.batory {
+                        background-position: -61px -35px;
+                        width: 61px;
+                        height: 45px;
+
+                        &:hover {
+                            background-position: 0 -35px;
+                        }
+                    }
+
+                    &.osi {
+                        background-position: -145px 0;
+                        width: 145px;
+                        height: 35px;
+                        top: -5px;
+                        position: relative;
+
+                        &:hover {
+                            background-position: 0 0;
+                        }
+                    }
+                    &.mysociety {
+                        background-position: -122px -53px;
+                        width: 91px;
+                        height: 18px;
+                        top: -10px;
+                        position: relative;
+
+                        &:hover {
+                            background-position: -122px -35px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

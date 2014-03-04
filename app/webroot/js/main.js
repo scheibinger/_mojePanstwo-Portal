@@ -9,7 +9,6 @@
     }
 })(window);
 
-
 /* REDEFINE JQUERY UI DIALOG DEFAULT OPTIONS*/
 jQuery.extend(jQuery.ui.dialog.prototype.options, {
     modal: true,
@@ -212,7 +211,6 @@ jQuery.extend(jQuery.ui.dialog.prototype.options, {
         })
     }
 
-
     /*JS SHORTER TITLE FUNCTION*/
     if ($('.trimTitle').length > 0)
         trimTitle();
@@ -227,4 +225,21 @@ jQuery.extend(jQuery.ui.dialog.prototype.options, {
     /*GLOBAL BOOTSTRAP-SELECT FORM SELECTPICKER CLASS*/
     if ((selectPickers = $('.selectpicker')).length > 0)
         selectPickers.selectpicker();
+
+    /*FACEBOOK FB-ROOT*/
+    if ($('#fb-root').length > 0 && $('#facebook-jssdk').length == 0) {
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s);
+            js.id = id;
+            if (_mPHeart.language.twoDig == 'pl')
+                js.src = "//connect.facebook.net/pl_PL/all.js#xfbml=1&appId=";
+            else {
+                js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=";
+            }
+            js.src += _mPHeart.social.facebook.id;
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    }
 })(jQuery);
