@@ -8,9 +8,9 @@
             <div class="mainContent block">
                 <div class="col-xs-12 col-md-8">
                     <div class="sector">
-                        <a target="_blank" href="http://epf.org.pl">
+                        <a target="_blank" href="http://epf.org.pl" >
                             <img id="epf_logo" src="http://epf.org.pl/img/logo.svg" alt="Logotyp Fundacji ePaństwo"
-                                 width="90%"/>
+                                 width="40%"/>
                         </a>
 
                         <p>Wydawcą portalu mojePaństwo jest <a href="http://epf.org.pl" target="_blank">Fundacja
@@ -36,15 +36,14 @@
                             href="https://github.com/" taget="_blank">GitHub</a> w postaci trzech repozytoriów:</p>
                     <ul>
                         <li><a href="https://github.com/epforgpl/_mojePanstwo-Portal" target="_blank">Portal</a> - jest
-                            głównym kodem źródłowym serwisu. Odpowiada za obsługę i wizualizacyje wszelkich aplikacji
-                            dostępnych w portalu jak i za działanie samego portalu
+                            głównym kodem źródłowym serwisu. Odpowiada za obsługę i wizualizacje wszelkich aplikacji
+                            dostępnych w portalu. Działa w oparciu o środowisko CakePHP 2.x.
                         </li>
                         <li><a href="https://github.com/epforgpl/_mojePanstwo-API-Client-PHP" target="_blank">API Client
-                                PHP</a> - jest interfejsem API łączącym Serwer API wraz Portalem odpowiedzialnym za
-                            przesyłanie danych z jednego do drugiego i z powrotem
+                                PHP</a> - jest interfejsem API, działającym w środowisku PHP, za pośrednictwem którego Portal łączy się z Serwerem danych.
                         </li>
-                        <li><a href="https://github.com/epforgpl/_mojePanstwo-API-Server" target="_blank">API Serwer</a>
-                            - jest pierwszym elemenetem odpowiedzialnym za wyciąganie, sortowanie, itp zebranych danych
+                        <li><a href="https://github.com/epforgpl/_mojePanstwo-API-Server" target="_blank">API Server</a>
+                            - jest Serwerem danych, z którego korzysta Portal.
                         </li>
                     </ul>
 
@@ -77,7 +76,7 @@
 
                 <div class="sideContent hidden-xs hidden-sm col-md-4">
                     <div class="fb-like-box" data-href="http://www.facebook.com/sejmometr"
-                         data-width="100%"
+                         data-width="90%"
                          data-height="540" data-show-faces="true" data-stream="true" data-border-color="#FFFFFF"
                          data-header="true"></div>
                 </div>
