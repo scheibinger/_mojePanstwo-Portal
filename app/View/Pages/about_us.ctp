@@ -30,19 +30,19 @@
 
                     <h2>O portalu:</h2>
 
-                    <p>_mojePaństwo, jako następca serwisu sejmometr.pl, jest zestawem aplikacji, dzięki którym możesz
+                    <p>_mojePaństwo to następca serwisu sejmometr.pl. Jest zestawem aplikacji, dzięki którym możesz
                         kontrolować i wpływać na działania Twojego państwa. Serwis mojePaństwo jest projektem Open
-                        Source, w którym każdy może wziąć udział nad pracami. Kod żródłowy dostępny jest w serwisie <a
+                        Source, w którym każdy może wziąć udział. Kod żródłowy oraz system zgłaszania błędów i propozycji (issues) dostępny jest w serwisie <a
                             href="https://github.com/" taget="_blank">GitHub</a> w postaci trzech repozytoriów:</p>
                     <ul>
-                        <li><a href="https://github.com/epforgpl/_mojePanstwo-Portal" target="_blank">Portal</a> - jest
+                        <li><a href="https://github.com/epforgpl/_mojePanstwo-Portal" target="_blank">_mojePanstwo Portal</a> - jest
                             głównym kodem źródłowym serwisu. Odpowiada za obsługę i wizualizacje wszelkich aplikacji
                             dostępnych w portalu. Działa w oparciu o środowisko CakePHP 2.x.
                         </li>
-                        <li><a href="https://github.com/epforgpl/_mojePanstwo-API-Client-PHP" target="_blank">API Client
-                                PHP</a> - jest interfejsem API, działającym w środowisku PHP, za pośrednictwem którego Portal łączy się z Serwerem danych.
+                        <li><a href="https://github.com/epforgpl/_mojePanstwo-API-Client-PHP" target="_blank">_mojePanstwo API Client
+                                PHP</a> - jest klientem działającym w środowisku PHP, za pośrednictwem którego Portal łączy się z Serwerem danych.
                         </li>
-                        <li><a href="https://github.com/epforgpl/_mojePanstwo-API-Server" target="_blank">API Server</a>
+                        <li><a href="https://github.com/epforgpl/_mojePanstwo-API-Server" target="_blank">_mojePanstwo API Server</a>
                             - jest Serwerem danych, z którego korzysta Portal.
                         </li>
                     </ul>
