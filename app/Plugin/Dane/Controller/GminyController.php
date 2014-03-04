@@ -282,6 +282,19 @@ class GminyController extends DataobjectsController
         parent::_prepareView();
         $this->set('spat', $this->object->loadLayer('enspat'));
     }
+    
+    
+    public function zamowienia_publiczne()
+    {
+	    
+	    $url = '/dane/gminy/' . $this->request->params['id'] . '/zamowienia';
+		
+		if( !empty($this->request->query) )
+			$url .= '?' . http_build_query( $this->request->query );
+		
+	    $this->redirect( $url );	    
+	    
+    }
 
 
 
