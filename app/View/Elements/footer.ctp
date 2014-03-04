@@ -1,4 +1,4 @@
-<?php if (!($_COOKIE['_mPCookieLaw'])) { ?>
+<?php if (!(isset($_COOKIE['_mPCookieLaw']) && ($_COOKIE['_mPCookieLaw']))) { ?>
     <div class="cookieLaw">
         <div class="container">
             <div class="row col-xs-12 col-sm-10">
