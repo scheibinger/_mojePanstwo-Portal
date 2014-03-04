@@ -5,9 +5,7 @@
 
 <?= $this->Element('dataobject/pageBegin'); ?>
 
-
     <div class="gminy row">
-
     	<div class="col-md-2">
         	<div class="objectMenu vertical">
             	<ul class="nav nav-pills nav-stacked row">
@@ -26,20 +24,15 @@
 	    <div class="col-md-10">
 		    <div class="objectsPageContent main">
 			    <div class="object">
-			
 			        <div id="info" class="profile_baner" data-adres="<?= urlencode($object->getData('adres')) ?>">
-			            
 			            <div class="bg">
 			                <img
 			                    src="http://maps.googleapis.com/maps/api/staticmap?center=<?= urlencode($object->getData('adres')) ?>&markers=<?= urlencode($object->getData('adres')) ?>&zoom=13&sensor=false&size=640x140&scale=2&feature:road"/>
-			
 			                <div class="content">
-			                
 			                	<?
 			                		$adres = $object->getData('adres');
 			                		$adres = preg_replace('/([0-9]{2})\-([0-9]{3})/i', "<br/>$1-$2", $adres);
 			                	?>
-			                	
 			                    <h2><?= $object->getData('nazwa_urzedu') ?></h2>
 			                    <p><?= $adres ?></p>
 			                    <button class="btn btn-info"><?= __d('dane', 'LC_DANE_VIEW_KRSPODMIOTY_OTWORZ_MAPE') ?></button>
@@ -51,20 +44,11 @@
 			                    var googleMapAdres = '<?= $object->getData('adres') ?>';
 			                </script>
 			            </div>
-			            
 			        </div> <!-- profile_baner END -->
-					
-					
-					
-					
-					<?
-					if( $object->getId() == 903 )
-					{
-					?>
-					
-					<div class="block">
-					
-						<div class="block-header">
+
+                    <? if ($object->getId() == 903) { ?>
+                        <div id="rada" class="block">
+                        <div class="block-header">
 							<h2 class="pull-left">Posiedzenia rady miasta</h2>
 							<a class="btn btn-default btn-sm pull-right" href="/dane/gminy/<?= $object->getId() ?>/posiedzenia">Zobacz wszystkie</a>
 						</div>
@@ -82,10 +66,9 @@
                             </div>
 						</div>
 					</div>
-					
-					<div class="block bg">
-					
-						<div class="block-header">
+
+                        <div id="prawo" class="block bg">
+                        <div class="block-header">
 							<h2 class="pull-left">Najnowsze prawo lokalne</h2>
 							<a class="btn btn-default btn-sm pull-right" href="/dane/gminy/<?= $object->getId() ?>/prawo">Zobacz wszystkie</a>
 						</div>
@@ -102,10 +85,9 @@
                             </div>
 						</div>
 					</div>
-					
-					<div class="block">
-					
-						<div class="block-header">
+
+                        <div id="materialy" class="block">
+                        <div class="block-header">
 							<h2 class="pull-left">Materiały na posiedzenia rady miasta</h2>
 							<a class="btn btn-default btn-sm pull-right" href="/dane/gminy/<?= $object->getId() ?>/druki">Zobacz wszystkie</a>
 						</div>
@@ -122,19 +104,12 @@
                                 </div>
                             </div>
 						</div>
-					</div>					
-					
-										
-						
-					<?
-					}
-					?>
-					
-	
-					
-					<div class="block bg">
-						
-						<div class="block-header">
+					</div>
+
+                    <? } ?>
+
+                    <div id="rada" class="block bg">
+                        <div class="block-header">
 							<h2 class="pull-left"><?php echo __d('dane', 'LC_GMINY_WYNIKI_WYBOROW'); ?></h2>
 							<a class="btn btn-default btn-sm pull-right" href="/dane/gminy/<?= $object->getId() ?>/radni">Zobacz wszystkich radnych</a>
 						</div>
@@ -156,27 +131,18 @@
 			                    </div>
 			                <?php } ?>
 			            </div>
-			            
-			            <?
-			            if( $object->getId() == 903 )
-						{
-						?>
-						
-						<div class="darczyncy">
-							<a class="btn btn-default" href="/dane/gminy/903/darczyncy">Lista wpłat dla komitetów wyborczych</a>
-						</div>
-						
-						<?
-						}
-						?>
-			            
-					</div>
-					
-					
-					<div class="block">
-					
-						<div class="block-header">
-							<h2 class="pull-left">Zamówienia publiczne</h2>
+
+                        <? if ($object->getId() == 903) { ?>
+                            <div class="darczyncy">
+                                <a class="btn btn-default" href="/dane/gminy/903/darczyncy">Lista wpłat dla komitetów
+                                    wyborczych</a>
+                            </div>
+                        <? } ?>
+                    </div>
+
+                    <div id="zamowienia_publiczne" class="block">
+                        <div class="block-header">
+                        <h2 class="pull-left">Zamówienia publiczne</h2>
 							<a class="btn btn-default btn-sm pull-right" href="/dane/gminy/<?= $object->getId() ?>/zamowienia">Zobacz wszystkie</a>
 						</div>
 						
@@ -193,12 +159,9 @@
                             </div>
 						</div>
 					</div>
-					
-					
-					
-					<div class="block bg">
-						
-						<div class="block-header">
+
+                    <div id="dotacje_unijne" class="block bg">
+                    <div class="block-header">
 							<h2 class="pull-left">Dotacje unijne</h2>
 							<a class="btn btn-default btn-sm pull-right" href="/dane/gminy/<?= $object->getId() ?>/dotacje_ue">Zobacz wszystkie</a>
 						</div>
@@ -216,12 +179,9 @@
                             </div>
 						</div>
 					</div>
-					
-					
-					
-					<div class="block">
-						
-						<div class="block-header">
+
+                    <div id="organizacje" class="block">
+                    <div class="block-header">
 							<h2 class="pull-left">Organizacje w tej gminie</h2>
 							<a class="btn btn-default btn-sm pull-right" href="/dane/gminy/<?= $object->getId() ?>/organizacje">Zobacz wszystkie</a>
 						</div>
@@ -237,7 +197,6 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
                 <!-- object END -->
             </div>
@@ -267,14 +226,6 @@
     </div>
 
 <?= $this->Element('dataobject/pageEnd'); ?>
-
-
-
-
-
-
-
-
 
 <?php /* echo $this->Element('dataobject/pageBegin'); ?>
     <div class="object">
