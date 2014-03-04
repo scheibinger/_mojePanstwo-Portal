@@ -206,8 +206,13 @@ jQuery.extend(jQuery.ui.dialog.prototype.options, {
 
     if ((cookieLaw = $('.cookieLaw')).length > 0) {
         cookieLaw.find('.btn').click(function () {
-            cookieLaw.slideUp();
-            $.cookie('_mPCookieLaw', 1);
+            cookieLaw.animate({
+                bottom: '-100px',
+                right: '-100px'
+            }, function () {
+                cookieLaw.remove();
+                $.cookie('_mPCookieLaw', 1);
+            });
         })
     }
 

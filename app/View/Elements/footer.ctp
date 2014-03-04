@@ -1,12 +1,8 @@
 <?php if (!(isset($_COOKIE['_mPCookieLaw']) && ($_COOKIE['_mPCookieLaw']))) { ?>
     <div class="cookieLaw">
         <div class="container">
-            <div class="row col-xs-8 col-sm-4 col-sm-offset-3">
-                <p>Strona korzysta z plików cookies</p>
-            </div>
-            <div class="row col-xs-4 col-sm-2 text-center">
-            <button class="btn btn-default btn-sm">Rozumiem</button>
-            </div>
+            <p>Strona korzysta z plików cookies</p>
+            <button class="btn btn-default btn-xs pull-right">Rozumiem</button>
         </div>
     </div>
 <?php } ?>

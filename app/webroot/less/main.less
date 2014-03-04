@@ -580,24 +580,33 @@ body {
 }
 
 .cookieLaw {
+    @size: 120px;
+
     position: fixed;
     bottom: 0;
-    left: 0;
-    padding: 10px 0;
+    right: 0;
     z-index: 100;
-    width: 100%;
-    height: 40px;
+
     background-color: rgba(34, 34, 34, .7);
+    height: @size;
+    width: @size;
+    -moz-border-radius: 150px 0 0 0;
+    border-radius: 150px 0 0 0;
 
-    p {
-        color: #ffffff;
-        padding-top: 4px;
-        font-size: 12px;
-        text-align: center;
-    }
+    .container {
+        width: @size;
+        padding: 30px 10px 10px 35px;
+        font-size: 11px;
 
-    .btn {
-        margin-top: -4px;
+        p {
+            color: #ffffff;
+            padding-top: 4px;
+            text-align: right;
+        }
+
+        .btn {
+            margin-top: -4px;
+        }
     }
 }
 
