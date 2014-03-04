@@ -5,7 +5,7 @@
             <img src="/img/beta.png"/>
             <?php if (isset($_COOKIE['_mPFirstTime']) && ($_COOKIE['_mPFirstTime'] == '1')) { ?>
                 <div class="morph">
-                    <img height="18" src="http://sejmometr.pl/assets/img/logo.png">
+                    <img height="18" src="/img/sejmometr-logo.png">
                     <small>zmienia się w</small>
                 </div>
             <?php } ?>
