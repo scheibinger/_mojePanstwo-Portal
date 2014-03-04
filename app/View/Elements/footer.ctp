@@ -1,12 +1,11 @@
 <?php if (!(isset($_COOKIE['_mPCookieLaw']) && ($_COOKIE['_mPCookieLaw']))) { ?>
     <div class="cookieLaw">
         <div class="container">
-            <div class="row col-xs-12 col-sm-10">
-                <p>Strona korzysta z plików cookies w celu realizacji usług. Możesz określić warunki przechowywania lub
-                    dostępu do plików cookies w Twojej przeglądarce.</p>
+            <div class="row col-xs-8 col-sm-4 col-sm-offset-3">
+                <p>Strona korzysta z plików cookies</p>
             </div>
-            <div class="row col-xs-12 col-sm-2 text-center">
-                <button class="btn btn-default btn-sm">Rozumiem</button>
+            <div class="row col-xs-4 col-sm-2 text-center">
+            <button class="btn btn-default btn-sm">Rozumiem</button>
             </div>
         </div>
     </div>

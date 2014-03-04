@@ -56,7 +56,7 @@ msgid "LC_REPORTBUG_EMAIL_SUBMIT"
 msgstr "Wyślij zgłoszenie"
 
 msgid "LC_FOOTER_ABOUT_US"
-msgstr "O nas"
+msgstr "O portalu"
 
 msgid "LC_FOOTER_REGULATIONS"
 msgstr "Regulamin"
