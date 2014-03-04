@@ -28,6 +28,26 @@
                         </p>
                     </div>
 
+                    <h2>O portalu:</h2>
+
+                    <p>_mojePaństwo, jako następca serwisu sejmometr.pl, jest zestawem aplikacji, dzięki którym możesz
+                        kontrolować i wpływać na działania Twojego państwa. Serwis mojePaństwo jest projektem Open
+                        Source, w którym każdy może wziąć udział nad pracami. Kod żródłowy dostępny jest w serwisie <a
+                            href="https://github.com/" taget="_blank">GitHub</a> w postaci trzech repozytoriów:</p>
+                    <ul>
+                        <li><a href="https://github.com/epforgpl/_mojePanstwo-Portal" target="_blank">Portal</a> - jest
+                            głównym kodem źródłowym serwisu. Odpowiada za obsługę i wizualizacyje wszelkich aplikacji
+                            dostępnych w portalu jak i za działanie samego portalu
+                        </li>
+                        <li><a href="https://github.com/epforgpl/_mojePanstwo-API-Client-PHP" target="_blank">API Client
+                                PHP</a> - jest interfejsem API łączącym Serwer API wraz Portalem odpowiedzialnym za
+                            przesyłanie danych z jednego do drugiego i z powrotem
+                        </li>
+                        <li><a href="https://github.com/epforgpl/_mojePanstwo-API-Server" target="_blank">API Serwer</a>
+                            - jest pierwszym elemenetem odpowiedzialnym za wyciąganie, sortowanie, itp zebranych danych
+                        </li>
+                    </ul>
+
                     <h2>Wykorzystywanie danych:</h2>
 
                     <div class="sector">
