@@ -74,9 +74,9 @@ class DataobjectHelper extends AppHelper
 
     public function render($object, $theme = 'default', $options = array())
     {
-    	
-    	// debug( $object->getData() );
-    	  	
+
+        // debug( $object->getData() );
+
         $bg = isset($options['bg']) ? $options['bg'] : false;
         $hlFields = isset($options['hlFields']) ? $options['hlFields'] : false;
         $bigTitle = isset($options['bigTitle']) ? $options['bigTitle'] : false;
@@ -84,8 +84,8 @@ class DataobjectHelper extends AppHelper
         $routes = isset($options['routes']) ? $options['routes'] : array();
         $forceLabel = isset($options['forceLabel']) ? $options['forceLabel'] : false;
         $file = isset($options['file']) ? $options['file'] : false;
-		
-		
+
+
         $this->setObject($object);
         if (!empty($routes))
             $object->addRoutes($routes);
@@ -97,8 +97,8 @@ class DataobjectHelper extends AppHelper
                 $theme = 'default';
         }
         */
-		
-		$params = array(
+
+        $params = array(
             'item' => $this->object->getObject(),
             'object' => $this->object,
             'theme' => $theme,
@@ -120,7 +120,7 @@ class DataobjectHelper extends AppHelper
     {
         $output = '';
         $fields = $this->object->getHiglightedFields($fields, $fieldsPush);
-		
+
         $fields_count = count($fields);
         if ($fields_count) {
 
@@ -143,10 +143,10 @@ class DataobjectHelper extends AppHelper
             $output .= '">';
 
             foreach ($fields as $field => $field_params) {
-								
-				$output .= $this->getHTMLForField($field, $field_params, array(
-					'col_width' => $col_width,
-				));
+
+                $output .= $this->getHTMLForField($field, $field_params, array(
+                    'col_width' => $col_width,
+                ));
 
             }
 
@@ -156,83 +156,86 @@ class DataobjectHelper extends AppHelper
         return $output;
 
     }
-	
-	public function hlTable($data, $options = array())
-	{
-				
-		if( empty($data) )
-			return '';
-			
-		$output = '<div class="dataHighlights normal">';
-		$index = 0;
-		if( !isset($options['col_width']) )
-			$options['col_width'] = 3;
-		
-		foreach( $data as $d )
-		{
-						
-			$id = $d['id'];
-			$label = $d['label'];
-			$value = $d['value'];
-			
-			$d['type'] = $d['options']['type'];
-			$html = $this->getHTMLForField($id, $d, array_merge($options, array(
-				'hidden' => ($index >= 4),
-			)));
-			
-			if( $html )
-			{
-				$output .= $html;
-				$index++;
-			}
-		}
-		
-		$output .= '</div>';
-		
-		return $output;		
-	}
-	
-	public function hlTableForObject($object, $fields, $options = array())
-	{
-		$data = array();
-		if( empty($fields) )
-			return '';
-				
-		foreach( $fields as $field )
-		{
-		
-			$schema = $object->getSchemaForFieldname( $field );
-			if( $schema )
-			{
-				
-				$data_options = array(
-					'type' => isset($schema[2]) ? $schema[2] : 'string',
-				);
-				
-				if( !empty($schema[3]) && is_array($schema[3]) )
-					$data_options = array_merge($data_options, $schema[3]);
-				
-				$data[] = array(
-					'id' => $field,
-					'label' => $schema[1],
-					'value' => $object->getData( $field ),
-					'options' => $data_options,
-				);	
-				
-			}
-		
-		}
-		
-		return $this->hlTable($data, $options);
-	}
-	
-	public function getHTMLForField($field, $field_params, $options = array())
-	{
-		$output = '';
-		$normalizeText = false;
-		$col_width = isset( $options['col_width'] ) ? $options['col_width'] : 4;
-		$hidden = isset( $options['hidden'] ) ? $options['hidden'] : false;
-		
+
+    public function hlTable($data, $options = array())
+    {
+
+        if (empty($data))
+            return '';
+
+        $output = '<div class="dataHighlights normal">';
+        $index = 0;
+        $limit = 4;
+        if (!isset($options['col_width']))
+            $options['col_width'] = 3;
+
+        foreach ($data as $d) {
+
+            $id = $d['id'];
+            $label = $d['label'];
+            $value = $d['value'];
+
+            $d['type'] = $d['options']['type'];
+            $html = $this->getHTMLForField($id, $d, array_merge($options, array(
+                'hidden' => ($index >= $limit),
+            )));
+
+            if ($html) {
+                $output .= $html;
+                $index++;
+            }
+        }
+
+        $output .= '</div>';
+        if ($index >= $limit) {
+            $output .= '<div class="row dataHighlightsOptions">';
+            $output .= '<button class="btn btn-info btn-sm showMore pull-right">' . __d('dane', 'LC_DANE_BDL_WSKAZNIKI_POKAZ_WIECEJ') . '</button>';
+            $output .= '<button class="btn btn-info btn-sm showLess hidden pull-right">' . __d('dane', 'LC_DANE_BDL_WSKAZNIKI_POKAZ_MNIEJ') . '</button>';
+            $output .= '</div>';
+        }
+
+        return $output;
+    }
+
+    public function hlTableForObject($object, $fields, $options = array())
+    {
+        $data = array();
+        if (empty($fields))
+            return '';
+
+        foreach ($fields as $field) {
+
+            $schema = $object->getSchemaForFieldname($field);
+            if ($schema) {
+
+                $data_options = array(
+                    'type' => isset($schema[2]) ? $schema[2] : 'string',
+                );
+
+                if (!empty($schema[3]) && is_array($schema[3]))
+                    $data_options = array_merge($data_options, $schema[3]);
+
+                $data[] = array(
+                    'id' => $field,
+                    'label' => $schema[1],
+                    'value' => $object->getData($field),
+                    'options' => $data_options,
+                );
+
+            }
+
+        }
+
+        return $this->hlTable($data, $options);
+    }
+
+    public function getHTMLForField($field, $field_params, $options = array())
+    {
+        $output = '';
+        $normalizeText = false;
+        $col_width = isset($options['col_width']) ? $options['col_width'] : 4;
+        $hidden = isset($options['hidden']) ? $options['hidden'] : false;
+
         $field_label = $field_params['label'];
         $field_value = $field_params['value'];
         $field_options = (isset($field_params['options']) && is_array($field_params['options'])) ? $field_params['options'] : array();
@@ -247,9 +250,9 @@ class DataobjectHelper extends AppHelper
                 return false;
             $field_value = dataSlownie($field_value);
         } elseif ($field_type == 'pln') {
-            $field_value = (float) $field_value;
-            if( !$field_value )
-            	return false;
+            $field_value = (float)$field_value;
+            if (!$field_value)
+                return false;
             $field_value = number_format_h($field_value, 2, ',', ' ') . ' PLN';
         } elseif ($field_type == 'integer') {
             if (!$field_value)
@@ -263,11 +266,10 @@ class DataobjectHelper extends AppHelper
                 return false;
             else
                 $field_value = number_format($field_value, 0, '', ' ') . 'm';
-        } elseif( $field_type == 'vote' )
-        {
-	        $field_value = '<div class="voted btn btn-default btn-glos-' . $field_value . '" data-glos="' . $field_value . '">' . $this->voted($field_value) . '</div>';
+        } elseif ($field_type == 'vote') {
+            $field_value = '<div class="voted btn btn-default btn-glos-' . $field_value . '" data-glos="' . $field_value . '">' . $this->voted($field_value) . '</div>';
         }
-		
+
         if (isset($field_options['format'])) {
             switch ($field_options['format']) {
                 case 'wiek':
@@ -284,8 +286,7 @@ class DataobjectHelper extends AppHelper
                 }
             }
         }
-        
-        
+
 
         if (isset($field_options['dictionary'])) {
             if (is_array($field_value)) {
@@ -297,29 +298,29 @@ class DataobjectHelper extends AppHelper
             }
         }
 
-		
+
         if (isset($field_options['truncate'])) {
-			
-			
-            $base_part = mb_substr($field_value, 0, $field_options['truncate']);                      
-            $add_part = mb_substr($field_value, $field_options['truncate']);                        
-            $field_value = '<span class="base">' . $base_part . '</span>';                     
-            
+
+
+            $base_part = mb_substr($field_value, 0, $field_options['truncate']);
+            $add_part = mb_substr($field_value, $field_options['truncate']);
+            $field_value = '<span class="base">' . $base_part . '</span>';
+
             if ($add_part)
                 $field_value .= ' <a href="#" onclick="return false;">...</a><span class="add">' . $add_part . '</span>';
 
         }
-        
+
 
         if (isset($field_options['img']))
             if (preg_match_all('/\{\$(.*?)\}/i', $field_options['img'], $matches))
                 for ($m = 0; $m < count($matches[0]); $m++)
                     $field_value = '<img src="' . str_replace($matches[0][$m], $this->object->getData($matches[1][$m]), $field_options['img']) . '" /> ' . $field_value;
-		
-		
+
+
         if (isset($field_options['normalizeText']) && $field_options['normalizeText'])
             $normalizeText = true;
-		
+
 
         if (isset($field_options['link'])) {
             if (is_array($field_options['link']) && isset($field_options['link']['dataset']) && isset($field_options['link']['object_id'])) {
@@ -358,25 +359,25 @@ class DataobjectHelper extends AppHelper
                 $field_value .= ' href="' . $href . '">' . $_field_value . '</a>';
             }
         }
-		
-		
+
+
         if (isset($field_options['dopelniacz']))
             $field_value = pl_dopelniacz($field_value, $field_options['dopelniacz'][0], $field_options['dopelniacz'][1], $field_options['dopelniacz'][2]);
-		
+
         if (!empty($field_value)) {
 
             if (!is_array($field_value) && stripos($field_value, $field_label) === 0)
                 $field_value = trim(mb_substr($field_value, strlen($field_label)));
 
             $output .= '<div class="dataHighlight';
-            if( $col_width )
-	            $output .= ' col-md-' . $col_width;
+            if ($col_width)
+                $output .= ' col-md-' . $col_width;
+            if ($hidden)
+                $output .= ' secondRow';
             $output .= '"';
-            if( $hidden )
-            	$output .= ' style="display: none;"';
             $output .= '>';
 
-            if ($field_label && !isset($field_options['hide']) && $field_type!='vote' )
+            if ($field_label && !isset($field_options['hide']) && $field_type != 'vote')
                 $output .= '<p class="_label">' . $field_label . ':</p>';
 
             $output .= '<p class="_value';
@@ -394,11 +395,11 @@ class DataobjectHelper extends AppHelper
             $output .= '</p></div>';
 
         }
-                
+
         return $output;
-		
-	}
-	
+
+    }
+
     private function getThumbSize()
     {
 
@@ -407,16 +408,19 @@ class DataobjectHelper extends AppHelper
             '1';
 
     }
-    
+
     public function voted($i)
     {
-	    switch( $i )
-	    {
-		    case 1: return 'Za';
-		    case 2: return 'Przeciw';
-		    case 3: return 'Wstrzymanie';
-		    case 4: return 'Nieobecność';
-	    }
+        switch ($i) {
+            case 1:
+                return 'Za';
+            case 2:
+                return 'Przeciw';
+            case 3:
+                return 'Wstrzymanie';
+            case 4:
+                return 'Nieobecność';
+        }
     }
 
 } 

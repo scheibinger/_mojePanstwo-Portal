@@ -62,11 +62,13 @@ function loadScript() {
     document.body.appendChild(script);
 }
 
-$(document).ready(function () {
-    var banner = $('.profile_baner'),
-        menu = $('.objectsPageContent .objectMenu'),
+jQuery(document).ready(function () {
+    var banner = jQuery('.profile_baner'),
+        menu = jQuery('.objectsPageContent .objectMenu'),
         menuAutoScroll = true,
-        headerHeight = $('header').outerHeight();
+        headerHeight = jQuery('header').outerHeight(),
+        sys = null,
+        dataHighlightsOptions = jQuery('.dataHighlightsOptions');
 
     if (banner.length > 0) {
         banner.find('.bg img').css('width', banner.width() + 'px');
@@ -98,13 +100,30 @@ $(document).ready(function () {
             menuAutoScroll = true;
         });
     });
-    $(window).scroll(function () {
+
+    if (dataHighlightsOptions.length > 0) {
+        var dataHighlights = jQuery('.dataHighlights');
+
+        dataHighlightsOptions.find('.btn').click(function () {
+            if (jQuery(this).hasClass('showMore')) {
+                dataHighlightsOptions.find('.showMore').addClass('hidden');
+                dataHighlightsOptions.find('.showLess').removeClass('hidden');
+                dataHighlights.find('.secondRow').show();
+            } else if (jQuery(this).hasClass('showLess')) {
+                dataHighlightsOptions.find('.showLess').addClass('hidden');
+                dataHighlightsOptions.find('.showMore').removeClass('hidden');
+                dataHighlights.find('.secondRow').hide();
+            }
+        })
+    }
+
+    jQuery(window).scroll(function () {
         if (menuAutoScroll) {
-            var windscroll = $(window).scrollTop(),
-                searchHeight = ($('._mojePanstwoCockpitSearchInput:visible') ? $('._mojePanstwoCockpitSearchInput').outerHeight() : 0);
+            var windscroll = jQuery(window).scrollTop(),
+                searchHeight = (jQuery('._mojePanstwoCockpitSearchInput:visible') ? jQuery('._mojePanstwoCockpitSearchInput').outerHeight() : 0);
             if (windscroll >= 100) {
-                $('.objectsPageContent .object > .block').each(function (i) {
-                    if ($(this).position().top <= windscroll + headerHeight + searchHeight + 60) {
+                jQuery('.objectsPageContent .object > .block').each(function (i) {
+                    if (jQuery(this).position().top <= windscroll + headerHeight + searchHeight + 60) {
                         menu.find('li.active').removeClass('active');
                         menu.find('li').eq(i).addClass('active');
                     }
@@ -116,6 +135,27 @@ $(document).ready(function () {
         }
     }).scroll();
 
+    /*jQuery.ajax({
+     url: "graph.json",
+     type: "GET",
+     beforeSend: function () {
+     sys = arbor.ParticleSystem();
+     sys.parameters({stiffness: 900, repulsion: 2000, gravity: true, dt: 0.015});
+     sys.renderer = Renderer("#connectionGraph");
+     },
+     success: function (data) {
+     jQuery.each(data.nodes, function () {
+     if (this.label == 'podmiot') {
+     sys.addNode(this.id, {'color': 'blue', 'shape': 'dot', 'label': this.label, 'data': this.data, radius: .3});
+     } else if (this.label == 'osoba') {
+     sys.addNode(this.id, {'color': 'green', 'shape': 'dot', 'label': this.label, 'data': this.data, radius: .3});
+     }
+     });
+     jQuery.each(data.relationships, function () {
+     sys.addEdge(this.start, this.end, {'data': this.data});
+     });
+     }
+     });*/
 });
 
 (function ($) {
@@ -250,33 +290,6 @@ $(document).ready(function () {
             }
         };
 
-        return that
+        return that;
     };
-
-    $(document).ready(function () {
-        var sys = null;
-
-        $.ajax({
-            url: "graph.json",
-            type: "GET",
-            beforeSend: function () {
-                sys = arbor.ParticleSystem();
-                sys.parameters({stiffness: 900, repulsion: 2000, gravity: true, dt: 0.015});
-                sys.renderer = Renderer("#connectionGraph");
-            },
-            success: function (data) {
-                $.each(data.nodes, function () {
-                    if (this.label == 'podmiot') {
-                        sys.addNode(this.id, {'color': 'blue', 'shape': 'dot', 'label': this.label, 'data': this.data, radius: .3});
-                    } else if (this.label == 'osoba') {
-                        sys.addNode(this.id, {'color': 'green', 'shape': 'dot', 'label': this.label, 'data': this.data, radius: .3});
-                    }
-                });
-                $.each(data.relationships, function () {
-                    sys.addEdge(this.start, this.end, {'data': this.data});
-                });
-            }
-        });
-    })
-})
-    (jQuery);
+})(jQuery);

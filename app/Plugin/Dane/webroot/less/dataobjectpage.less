@@ -100,6 +100,72 @@
                 background-color: #FFF;
                 overflow: auto;
             }
+
+            .dataHighlights {
+                margin-top: 10px;
+                padding: 0 20px;
+                display: inline-block;
+                width: 100%;
+
+                &.normal .dataHighlight {
+                    ._label {
+                        font-size: 13px;
+                    }
+                    ._value {
+                        font-size: 16px;
+                    }
+                }
+
+                .dataHighlight {
+                    padding: 5px;
+                    overflow: auto;
+                    margin-bottom: 20px;
+
+                    &.secondRow {
+                        display: none;
+                    }
+
+                    ._label {
+                        font-size: 11px;
+                        margin: 0 0 3px;
+                        color: #999;
+                        font-family: Lato;
+                    }
+
+                    ._value {
+                        font-size: 12px;
+                        margin: 0;
+
+                        img {
+                            float: left;
+                            margin-right: 5px;
+                        }
+
+                        .add {
+                            display: none;
+                        }
+
+                    }
+
+                    .__autorzy_html_ul {
+                        font-size: 12px;
+                        margin: 0;
+                    }
+                }
+
+                &.inl {
+                    .dataHighlight {
+                        ._label {
+                            float: left;
+                            margin-right: 10px;
+                        }
+                    }
+                }
+            }
+            .dataHighlightsOptions {
+                padding-bottom: 20px;
+                margin: 0;
+            }
         }
     }
 }
@@ -146,22 +212,25 @@
         margin: 10px 0;
     }
 }
+
 .dataobjectsSlider {
-	.carousel .carousel-inner {margin: 0;}
-	.carousel .item .object {
-		padding-top: 0;
-		padding-bottom: 0;
-		.objectRender {
-			padding-top: 0;
-			padding-bottom: 0;
-			.content {
-				padding-top: 0;
-				padding-bottom: 0;
-			}
-		}
-	}
-	
-	.objectRender .attachment img {
-		margin-top: 5px;
-	}
+    .carousel .carousel-inner {
+        margin: 0;
+    }
+    .carousel .item .object {
+        padding-top: 0;
+        padding-bottom: 0;
+        .objectRender {
+            padding-top: 0;
+            padding-bottom: 0;
+            .content {
+                padding-top: 0;
+                padding-bottom: 0;
+            }
+        }
+    }
+
+    .objectRender .attachment img {
+        margin-top: 5px;
+    }
 }

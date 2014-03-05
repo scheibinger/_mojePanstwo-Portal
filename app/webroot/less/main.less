@@ -59,7 +59,8 @@ body > pre:first-child {
 	
 	&.bg {
 		background-color: #FAFAFA;
-		.object {
+
+        .object {
 			background-color: #FAFAFA;
 		}
 		.list-group-item {
@@ -152,70 +153,6 @@ body > pre:first-child {
     }
 }
 
-.objectsPageWindow .dataHighlights .dataHighlight {
-	margin-bottom: 20px;
-}
-.dataHighlights {
-
-    margin-top: 10px;
-    padding: 0 20px;
-    display: inline-block;
-    width: 100%;
-	
-    .dataHighlight {
-
-        padding: 5px;
-        overflow: auto;
-
-        ._label {
-            font-size: 11px;
-            margin: 0 0 3px;
-            color: #999;
-            font-family: Lato;
-        }
-
-        ._value {
-            font-size: 12px;
-            margin: 0;
-
-            img {
-                float: left;
-                margin-right: 5px;
-            }
-
-            .add {
-                display: none;
-            }
-
-        }
-
-        .__autorzy_html_ul {
-            font-size: 12px;
-            margin: 0;
-        }
-    }
-
-    &.inl {
-        .dataHighlight {
-            ._label {
-                float: left;
-                margin-right: 10px;
-            }
-        }
-    }
-}
-
-.dataHighlights.normal {
-	.dataHighlight {
-		._label {
-			font-size: 13px;
-		}
-		._value {
-			font-size: 16px;
-		}
-	}
-}
-
 .form-control {
     font-family: "Lato", sans-serif;
     color: #222;
@@ -260,17 +197,15 @@ body > pre:first-child {
             }
         }
         &.alert-info {
-            @color: #3A87AD;
-
             background-color: #0078AC;
             border-color: #BCE8F1;
-            color: #FFF;
+            color: #FFFFFF;
 
             a, .alert-link {
-                color: #EEE;
+                color: #EEEEEE;
 
                 &:hover {
-                    color: #FFF;
+                    color: #FFFFFF;
                 }
             }
         }

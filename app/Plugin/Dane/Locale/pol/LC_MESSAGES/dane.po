@@ -721,6 +721,12 @@ msgstr "Grupy w tej kategorii"
 msgid "LC_DANE_BDL_WSKAZNIKI_W_GRUPIE"
 msgstr "Wskazniki w tej grupie"
 
+msgid "LC_DANE_BDL_WSKAZNIKI_POKAZ_WIECEJ"
+msgstr "Pokaż więcej"
+
+msgid "LC_DANE_BDL_WSKAZNIKI_POKAZ_MNIEJ"
+msgstr "Pokaż mniej"
+
 msgid "LC_DANE_WSKAZNIKI_W_GMINIE"
 msgstr "Wskaźniki w gminie %s"
 
