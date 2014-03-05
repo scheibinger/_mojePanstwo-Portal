@@ -112,11 +112,14 @@ class DataobjectsController extends DaneAppController
 		
 		parent::beforeRender();
 		
-		$this->set('_dataset', $this->object->getDataset());
-        $this->set('_object_id', $this->object->getId());
-        $this->set('_data', $this->object->getData());
-        $this->set('_layers', $this->object->layers);
-        $this->set('_serialize', array('_dataset', '_object_id', '_data', '_layers'));
+		if( is_object( $this->object ) )
+		{
+			$this->set('_dataset', $this->object->getDataset());
+	        $this->set('_object_id', $this->object->getId());
+	        $this->set('_data', $this->object->getData());
+	        $this->set('_layers', $this->object->layers);
+	        $this->set('_serialize', array('_dataset', '_object_id', '_data', '_layers'));
+        }
 	}
 	
     protected function innerSearch($dataset, $initalConditions = array(), $options = array())

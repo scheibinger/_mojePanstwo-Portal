@@ -32,7 +32,7 @@
 
                     <p>_mojePaństwo to następca serwisu sejmometr.pl. Jest zestawem aplikacji, dzięki którym możesz
                         kontrolować i wpływać na działania Twojego państwa. Serwis mojePaństwo jest projektem Open
-                        Source, w którym każdy może wziąć udział. Kod żródłowy oraz system zgłaszania błędów i propozycji (issues) dostępny jest w serwisie <a
+                        Source, w którym każdy może wziąć udział. Kod źródłowy oraz system zgłaszania błędów i propozycji (issues) dostępny jest w serwisie <a
                             href="https://github.com/" taget="_blank">GitHub</a> w postaci trzech repozytoriów:</p>
                     <ul>
                         <li><a href="https://github.com/epforgpl/_mojePanstwo-Portal" target="_blank">_mojePanstwo Portal</a> - jest
@@ -56,7 +56,7 @@
                                                                 title="Ustawa z dnia 4 lutego 1994 r. o prawie autorskim i prawach pokrewnych."
                                                                 href="/dane/prawo/51613">prawem autorskim</a> utwór.
                             Starania Fundacji dotyczace
-                            strukturalizacji danych mogą też powodować, że korzystający z portalu Sejmometr będą
+                            strukturalizacji danych mogą też powodować, że korzystający z portalu _mojePaństwo będą
                             korzystali z bazy danych, o której mowa w <a target="_self"
                                                                          title="Ustawa z dnia 27 lipca 2001 r. o ochronie baz danych"
                                                                          href="/dane/prawo/1777">ustawie
