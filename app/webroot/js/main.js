@@ -205,10 +205,15 @@ jQuery.extend(jQuery.ui.dialog.prototype.options, {
     var cookieLaw;
 
     if ((cookieLaw = $('.cookieLaw')).length > 0) {
+        $(window).scroll(function () {
+            if ($(window).scrollTop() + 40 > $(document).height() - $(window).height()) {
+                $('.cookieLaw').css('bottom', ($(window).scrollTop() + 40) - ($(document).height() - $(window).height()) - 1);
+            }
+        });
         cookieLaw.find('.btn').click(function () {
             cookieLaw.animate({
                 bottom: '-100px',
-                right: '-100px'
+                left: '-100px'
             }, function () {
                 cookieLaw.remove();
                 $.cookie('_mPCookieLaw', 1);

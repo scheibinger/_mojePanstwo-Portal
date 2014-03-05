@@ -584,24 +584,24 @@ body {
 
     position: fixed;
     bottom: 0;
-    right: 0;
-    z-index: 100;
+    left: 0;
+    z-index: 0;
 
     background-color: rgba(34, 34, 34, .7);
     height: @size;
     width: @size;
-    -moz-border-radius: 150px 0 0 0;
-    border-radius: 150px 0 0 0;
+    -moz-border-radius: 0 150px 0 0;
+    border-radius: 0 150px 0 0;
 
     .container {
         width: @size;
-        padding: 30px 10px 10px 35px;
+        padding: 30px 35px 10px 10px;
         font-size: 11px;
 
         p {
             color: #ffffff;
             padding-top: 4px;
-            text-align: right;
+            text-align: left;
         }
 
         .btn {
