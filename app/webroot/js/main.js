@@ -202,12 +202,17 @@ jQuery.extend(jQuery.ui.dialog.prototype.options, {
     }
 
     /*COOKIE LAW*/
-    var cookieLaw;
+    var cookieLaw,
+        cookieLawStart = ($(window).scrollTop() + 40) - ($(document).height() - $(window).height()) - 1;
 
     if ((cookieLaw = $('.cookieLaw')).length > 0) {
+        cookieLaw.css('bottom', (cookieLawStart >= 0 ? cookieLawStart : 0));
+
         $(window).scroll(function () {
             if ($(window).scrollTop() + 40 > $(document).height() - $(window).height()) {
-                $('.cookieLaw').css('bottom', ($(window).scrollTop() + 40) - ($(document).height() - $(window).height()) - 1);
+                cookieLaw.css('bottom', ($(window).scrollTop() + 40) - ($(document).height() - $(window).height()) - 1);
+            } else {
+                cookieLaw.css('bottom', 0);
             }
         });
         cookieLaw.find('.btn').click(function () {
