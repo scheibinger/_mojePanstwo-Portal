@@ -176,9 +176,13 @@ class DataobjectHelper extends AppHelper
             $value = $d['value'];
 
             $d['type'] = $d['options']['type'];
-            $html = $this->getHTMLForField($id, $d, array_merge($options, array(
-                'hidden' => ($index >= $limit),
-            )));
+            if ($options['display'] == 'firstRow') {
+                $html = $this->getHTMLForField($id, $d, array_merge($options, array(
+                    'hidden' => ($index >= $limit),
+                )));
+            } else {
+                $html = $this->getHTMLForField($id, $d, $options);
+            }
 
             if ($html) {
                 $output .= $html;
@@ -187,7 +191,7 @@ class DataobjectHelper extends AppHelper
         }
 
         $output .= '</div>';
-        if ($index >= $limit) {
+        if (($options['display'] == 'firstRow') && $index >= $limit) {
             $output .= '<div class="row dataHighlightsOptions">';
             $output .= '<button class="btn btn-info btn-sm showMore pull-right">' . __d('dane', 'LC_DANE_BDL_WSKAZNIKI_POKAZ_WIECEJ') . '</button>';
             $output .= '<button class="btn btn-info btn-sm showLess hidden pull-right">' . __d('dane', 'LC_DANE_BDL_WSKAZNIKI_POKAZ_MNIEJ') . '</button>';
