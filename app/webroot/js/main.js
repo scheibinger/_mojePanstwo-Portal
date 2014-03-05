@@ -218,7 +218,7 @@ jQuery.extend(jQuery.ui.dialog.prototype.options, {
         cookieLaw.find('.btn').click(function () {
             cookieLaw.animate({
                 bottom: '-100px',
-                left: '-100px'
+                right: '-100px'
             }, function () {
                 cookieLaw.remove();
                 $.cookie('_mPCookieLaw', 1);

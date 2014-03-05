@@ -516,27 +516,29 @@ body {
 
 .cookieLaw {
     @size: 120px;
+    @border: 150px 0 0 0;
 
     position: fixed;
     bottom: 0;
-    left: 0;
+    right: 0;
     z-index: 0;
 
     background-color: rgba(34, 34, 34, .7);
     height: @size;
     width: @size;
-    -moz-border-radius: 0 150px 0 0;
-    border-radius: 0 150px 0 0;
+    -moz-border-radius: @border;
+    -webkit-border-radius: @border;
+    border-radius: @border;
 
     .container {
         width: @size;
-        padding: 30px 35px 10px 10px;
+        padding: 30px 10px 10px 35px;
         font-size: 11px;
 
         p {
             color: #ffffff;
             padding-top: 4px;
-            text-align: left;
+            text-align: right;
         }
 
         .btn {
