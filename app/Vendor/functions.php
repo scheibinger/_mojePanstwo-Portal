@@ -87,34 +87,54 @@ if (!function_exists('array_column')) {
 
 function dataSlownie($data)
 {
+	
+	$timestamp = strtotime( $data );
+	$data = date('Y-m-d', $timestamp);
+	
+	if( $data == date('Y-m-d', strtotime($timestamp)) ) // TODAY
+	{
+		
+		$str = 'dziś';
+		
+	}
+	else
+	{
 
-    $___vars = array(
-        'miesiace' => array(
-            'celownik' => array(
-                1 => 'stycznia',
-                2 => 'lutego',
-                3 => 'marca',
-                4 => 'kwietnia',
-                5 => 'maja',
-                6 => 'czerwca',
-                7 => 'lipca',
-                8 => 'sierpnia',
-                9 => 'września',
-                10 => 'października',
-                11 => 'listopada',
-                12 => 'grudnia',
-            ),
-        ),
-    );
+	
+	    $___vars = array(
+	        'miesiace' => array(
+	            'celownik' => array(
+	                1 => 'stycznia',
+	                2 => 'lutego',
+	                3 => 'marca',
+	                4 => 'kwietnia',
+	                5 => 'maja',
+	                6 => 'czerwca',
+	                7 => 'lipca',
+	                8 => 'sierpnia',
+	                9 => 'września',
+	                10 => 'października',
+	                11 => 'listopada',
+	                12 => 'grudnia',
+	            ),
+	        ),
+	    );
+	
+	    $parts = explode('-', substr($data, 0, 10));
+	    if (count($parts) != 3) return $data;
+	
+	    $dzien = (int)$parts[2];
+	    $miesiac = (int)$parts[1];
+	    $rok = (int)$parts[0];
+	    
+	    
+	    $str = $dzien . ' ' . $___vars['miesiace']['celownik'][$miesiac] . ' ' . $rok . ' r.';
 
-    $parts = explode('-', substr($data, 0, 10));
-    if (count($parts) != 3) return $data;
+	}
+	
 
-    $rok = (int)$parts[2];
-    $miesiac = (int)$parts[1];
-    $dzien = (int)$parts[0];
-
-    return '<span class="_ds" value="' . strip_tags($data) . '">' . $rok . ' ' . $___vars['miesiace']['celownik'][$miesiac] . ' ' . $dzien . ' r.</span>';
+    return '<span class="_ds" value="' . strip_tags($data) . '">' . $str . '</span>';
+    
 }
 
 
