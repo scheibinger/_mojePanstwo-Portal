@@ -278,22 +278,18 @@ jQuery(document).ready(function () {
             var input = jQuery(this).val();
 
             if (input != '') {
-                wskaznikiTable.find('tr').slideUp();
-                wskaznikiTable.find('td:contains(' + input + ')').each(function () {
-                    jQuery(this).parents('tr').slideDown();
-                });
-                wskaznikiTable.find('[data-ay-sort-weight*="' + input + '"]').each(function () {
-                    jQuery(this).parents('tr').slideDown();
-                });
+                wskaznikiTable.find('tr').hide();
+                wskaznikiTable.find('td:contains(' + input + ')').parent().show();
+                wskaznikiTable.find('[data-ay-sort-weight*="' + input + '"]').parent().show();
             } else {
-                wskaznikiTable.find('tr:hidden').slideDown();
+                wskaznikiTable.find('tr:hidden').show();
             }
         });
 
         jQuery('.localDataSearch .btn').click(function (e) {
             e.preventDefault();
             jQuery('.localDataSearch input').val('');
-            wskaznikiTable.find('tr:hidden').slideDown();
+            wskaznikiTable.find('tr:hidden').show();
         });
     }
 })
