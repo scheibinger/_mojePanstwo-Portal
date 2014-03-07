@@ -145,18 +145,20 @@ jQuery(document).ready(function () {
                 'osoba': "#0000FF"
             },
             size: {
-                'links': 150,
+                'linksLength': 150,
+                'linksWidth': 1,
                 'nodes': 50
             }
         };
-        d3Data.force = d3.layout.force().linkDistance(d3Data.size.links).linkStrength(2).size([d3Data.width, d3Data.height]);
+        d3Data.force = d3.layout.force().charge(-120).linkDistance(d3Data.size.linksLength + d3Data.size.nodes).linkStrength(2).size([d3Data.width, d3Data.height]);
         d3Data.svg = d3.select("#connectionGraph").append("svg").attr("width", d3Data.width).attr("height", d3Data.height);
 
         d3.json(connectionGraph.data('id') + "/graph.json", function (error, results) {
             var graph = results._layers.graph;
 
             var nodes = graph.nodes.slice(),
-                links = [];
+                links = [],
+                linkNodes = [];
 
             graph.relationships.forEach(function (link) {
                 var s = jQuery.grep(nodes, function (e) {
@@ -166,10 +168,15 @@ jQuery(document).ready(function () {
                         return e.id == link.end;
                     })[0];
                 links.push({source: s, target: t});
+                linkNodes.push({
+                    source: s,
+                    target: t
+                });
             });
 
             d3Data.force
-                .nodes(nodes)
+                //.nodes(nodes)
+                .nodes(graph.nodes.concat(linkNodes))
                 .links(links)
                 .start();
 
@@ -177,28 +184,39 @@ jQuery(document).ready(function () {
                 .data(links)
                 .enter().append("line")
                 .attr("class", "link")
-                .style({"stroke-width": 1, 'stroke': d3Data.color.links});
+                .style({"stroke-width": d3Data.size.linksWidth, 'stroke': d3Data.color.links});
+
+            var linkNode = d3Data.svg.selectAll(".linkAntiOverlap")
+                .data(linkNodes)
+                .enter().append("circle")
+                .attr("class", "linkAntiOverlap")
+                .attr("r", d3Data.size.linksWidth)
+                .style("fill", d3Data.color.links);
 
             var node = d3Data.svg.selectAll(".node")
-                    .data(nodes)
-                    .enter().append("g")
-                    .attr("class", "node")
-                    .attr("transform", function (d) {
-                        return "translate(" + d.x + "," + d.y + ")";
-                    })
-            //.call(d3Data.force.drag)
-                ;
+                .data(nodes)
+                .enter().append("g")
+                .attr("class", "node")
+                .attr("transform", function (d) {
+                    return "translate(" + d.x + "," + d.y + ")";
+                })
+                .call(d3Data.force.drag);
 
             node.append("circle")
+                .attr('class', 'nodeCircle')
                 .attr("r", d3Data.size.nodes)
+                .style("stroke", function (d) {
+                    return d3Data.color[d.label]
+                })
                 .style("fill", function (d) {
                     return d3Data.color[d.label]
                 });
 
             node.append("text")
-                .attr("dy", ".3em")
                 .attr('class', 'nodeText')
+                .attr("dy", ".3em")
                 .style("text-anchor", "middle")
+                .style("font-size", "9px")
                 .text(function (d) {
                     var name = '';
                     if (d.label == 'podmiot')
@@ -210,9 +228,10 @@ jQuery(document).ready(function () {
                 .style("fill-opacity", 1);
 
             d3Data.force.on("tick", function () {
-                link.attr("x1", function (d) {
-                    return d.source.x;
-                })
+                link
+                    .attr("x1", function (d) {
+                        return d.source.x;
+                    })
                     .attr("y1", function (d) {
                         return d.source.y;
                     })
@@ -223,11 +242,17 @@ jQuery(document).ready(function () {
                         return d.target.y;
                     });
 
-                node.attr("cx", function (d) {
-                    return d.x;
-                })
+                node
+                    .attr("transform", function (d) {
+                        return "translate(" + d.x + "," + d.y + ")";
+                    });
+
+                linkNode
+                    .attr("cx", function (d) {
+                        return d.x = (d.source.x + d.target.x) * 0.5;
+                    })
                     .attr("cy", function (d) {
-                        return d.y;
+                        return d.y = (d.source.y + d.target.y) * 0.5;
                     });
             });
         });
