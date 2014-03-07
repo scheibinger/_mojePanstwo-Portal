@@ -150,7 +150,9 @@ jQuery(document).ready(function () {
                 'nodes': 50
             }
         };
-        d3Data.force = d3.layout.force().charge(-120).linkDistance(d3Data.size.linksLength + d3Data.size.nodes).linkStrength(2).size([d3Data.width, d3Data.height]);
+        d3Data.force = d3.layout.force().charge(function (d, i) {
+            return i ? 0 : -2000;
+        }).linkDistance(d3Data.size.linksLength + d3Data.size.nodes).linkStrength(2).size([d3Data.width, d3Data.height]);
         d3Data.svg = d3.select("#connectionGraph").append("svg").attr("width", d3Data.width).attr("height", d3Data.height);
 
         d3.json(connectionGraph.data('id') + "/graph.json", function (error, results) {
@@ -159,6 +161,10 @@ jQuery(document).ready(function () {
             var nodes = graph.nodes.slice(),
                 links = [],
                 linkNodes = [];
+
+            var root = nodes[0];
+            root.radius = 0;
+            root.fixed = true;
 
             graph.relationships.forEach(function (link) {
                 var s = jQuery.grep(nodes, function (e) {
@@ -175,7 +181,6 @@ jQuery(document).ready(function () {
             });
 
             d3Data.force
-                //.nodes(nodes)
                 .nodes(graph.nodes.concat(linkNodes))
                 .links(links)
                 .start();
@@ -190,7 +195,7 @@ jQuery(document).ready(function () {
                 .data(linkNodes)
                 .enter().append("circle")
                 .attr("class", "linkAntiOverlap")
-                .attr("r", d3Data.size.linksWidth)
+                .attr("r", d3Data.size.linksWidth / 2)
                 .style("fill", d3Data.color.links);
 
             var node = d3Data.svg.selectAll(".node")
@@ -201,6 +206,14 @@ jQuery(document).ready(function () {
                     return "translate(" + d.x + "," + d.y + ")";
                 })
                 .call(d3Data.force.drag);
+
+            node.append("title")
+                .text(function (d) {
+                    if (d.label == 'podmiot')
+                        return d.data.nazwa;
+                    else if (d.label == 'osoba')
+                        return d.data.imiona + ' ' + d.data.nazwisko;
+                });
 
             node.append("circle")
                 .attr('class', 'nodeCircle')
@@ -217,17 +230,31 @@ jQuery(document).ready(function () {
                 .attr("dy", ".3em")
                 .style("text-anchor", "middle")
                 .style("font-size", "9px")
+                .style("fill", "#ffffff")
                 .text(function (d) {
-                    var name = '';
+                    var name, nameBegin, nameEnd;
+
                     if (d.label == 'podmiot')
                         name = d.data.nazwa;
                     else if (d.label == 'osoba')
                         name = d.data.imiona + ' ' + d.data.nazwisko;
-                    return name.substring(0, d3Data.size.nodes / 3);
-                })
-                .style("fill-opacity", 1);
+
+                    nameBegin = name.substring(0, Math.floor(d3Data.size.nodes / 4));
+                    nameEnd = name.substring(Math.floor(d3Data.size.nodes / 4));
+
+                    return nameBegin + nameEnd.substring(0, nameEnd.indexOf(' '));
+                });
 
             d3Data.force.on("tick", function () {
+                var q = d3.geom.quadtree(nodes),
+                    i = 0,
+                    n = nodes.length;
+
+                while (++i < n) {
+                    q.visit(collide(nodes[i]));
+                    /*TODO: check if node or direct circle*/
+                }
+
                 link
                     .attr("x1", function (d) {
                         return d.source.x;
@@ -255,6 +282,42 @@ jQuery(document).ready(function () {
                         return d.y = (d.source.y + d.target.y) * 0.5;
                     });
             });
+
+            d3Data.svg.on("mousemove", function () {
+                var p1 = d3.svg.mouse(this);
+                root.px = p1[0];
+                root.py = p1[1];
+                d3Data.force.resume();
+            });
+
+            function collide(node) {
+                var r = node.radius + 16,
+                    nx1 = node.x - r,
+                    nx2 = node.x + r,
+                    ny1 = node.y - r,
+                    ny2 = node.y + r;
+                return function (quad, x1, y1, x2, y2) {
+                    if (quad.point && (quad.point !== node)) {
+                        var x = node.x - quad.point.x,
+                            y = node.y - quad.point.y,
+                            l = Math.sqrt(x * x + y * y),
+                            r = node.radius + quad.point.radius;
+                        if (l < r) {
+                            l = (l - r) / l * .5;
+                            node.x -= x *= l;
+                            node.y -= y *= l;
+                            quad.point.x += x;
+                            quad.point.y += y;
+                        }
+                    }
+                    return x1 > nx2
+                        || x2 < nx1
+                        || y1 > ny2
+                        || y2 < ny1;
+                };
+            }
         });
+
+
     }
 });
