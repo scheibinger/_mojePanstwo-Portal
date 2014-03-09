@@ -2,7 +2,7 @@
     <div class="cookieLaw">
         <div class="container">
             <p>Strona korzysta z plików cookies</p>
-            <button class="btn btn-default btn-xs pull-right">Rozumiem</button>
+            <button class="btn btn-success btn-xs pull-right">Rozumiem</button>
         </div>
     </div>
 <?php } ?>
