@@ -153,6 +153,53 @@ body > pre:first-child {
     }
 }
 
+.dataHighlights {
+
+	margin-top: 10px;
+	padding: 0 20px;
+
+	.dataHighlight {
+
+		padding: 5px;
+		overflow: auto;
+
+		._label {
+			font-size: 11px;
+			margin: 0 0 3px;
+			color: #999;
+		}
+
+		._value {
+			font-size: 12px;
+			margin: 0;
+
+			img {
+				float: left;
+				margin-right: 5px;
+			}
+
+			.add {
+				display: none;
+			}
+
+		}
+
+		.__autorzy_html_ul {
+			font-size: 12px;
+			margin: 0;
+		}
+	}
+
+	&.inl {
+		.dataHighlight {
+			._label {
+				float: left;
+				margin-right: 10px;
+			}
+		}
+	}
+}
+
 .form-control {
     font-family: "Lato", sans-serif;
     color: #222;
