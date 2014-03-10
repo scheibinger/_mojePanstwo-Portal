@@ -87,8 +87,12 @@ if (!function_exists('array_column')) {
 
 function dataSlownie($data)
 {
-	
+		
 	$timestamp = strtotime( $data );
+	if( !$timestamp )
+		return false;
+	
+	
 	$data = date('Y-m-d', $timestamp);
 	
 	if( $data == date('Y-m-d', strtotime($timestamp)) ) // TODAY

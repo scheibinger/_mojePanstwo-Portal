@@ -1,3 +1,5 @@
+<?php $this->Combinator->add_libs('css', $this->Less->css('view-legislacja', array('plugin' => 'Dane'))); ?>
+
 <?= $this->Element('dataobject/pageBegin'); ?>
 
 
@@ -50,6 +52,7 @@
                         <? } ?>
 
                     </div>
+                   
                     <div class="col-lg-6">
 
                         <? if ($object->getData('opis')) { ?>
@@ -69,7 +72,7 @@
 
                     </div>
 
-                    <div class="col-lg-9">
+                    <div class="col-lg-11">
 
                         <?php foreach ($object->layers['related']['groups'] as $group) { ?>
                             <div class="block">
