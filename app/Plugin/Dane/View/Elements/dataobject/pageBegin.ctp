@@ -64,6 +64,9 @@ $buttons = isset($objectOptions['buttons']) ? $objectOptions['buttons'] : array(
 
                                             <?= $this->Element('dataobject/pageMenu'); ?>
                                             <div
-                                                class="objectsPageContent main<? if (isset($showRelated) && $showRelated) { ?> hide<? } ?>">
+                                                class="objectsPageContent main">
                                                 <? } ?>
 					
+												<?php echo $this->Element('dataobject/pageRelated', array(
+													'showRelated' => isset($showRelated) ? (boolean) $showRelated : false,
+												)); ?>

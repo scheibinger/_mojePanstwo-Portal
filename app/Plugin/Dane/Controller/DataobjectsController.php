@@ -39,9 +39,9 @@ class DataobjectsController extends DaneAppController
 
     public function related()
     {
-        $this->view = 'view';
-        $this->set('showRelated', true);
-        return $this->view();
+	    $this->_prepareView();
+		$this->set('showRelated', true);
+        $this->view = '/Dataobjects/related';
     }
 
     public function _prepareView()
@@ -55,6 +55,7 @@ class DataobjectsController extends DaneAppController
 
 
             $this->object->loadRelated();
+                        
             if ($this->object->hasRelated())
                 foreach ($this->menu as $item) {
                     if ($item['id'] == 'related') {
@@ -65,8 +66,7 @@ class DataobjectsController extends DaneAppController
                         'label' => 'Powiązania',
                     );
                 }
-			
-			
+						
             $this->set('object', $this->object);
             $this->set('objectOptions', $this->objectOptions);
 
