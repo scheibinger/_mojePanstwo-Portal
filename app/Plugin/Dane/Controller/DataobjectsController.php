@@ -64,6 +64,7 @@ class DataobjectsController extends DaneAppController
                     $this->menu[] = array(
                         'id' => 'related',
                         'label' => 'Powiązania',
+                        'icon' => 'related',
                     );
                 }
 						

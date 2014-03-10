@@ -16,6 +16,7 @@ abstract class DocsObjectsController extends DataobjectsController
             array(
                 'id' => 'view',
                 'label' => 'LC_DANE_DOKUMENT',
+                'icon' => 'document',
             )
         ), $this->menu);
         parent::beforeFilter();
