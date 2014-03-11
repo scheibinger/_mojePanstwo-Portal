@@ -16,7 +16,7 @@ if (in_array($object->getDataset(), array('rady_posiedzenia', 'rady_gmin_debaty'
 
 $this->Dataobject->setObject($object);
 ?>
-<div class="objectRender col-md-12 <?= $object->getDataset() ?><? if ($bg) { ?> bg<? } ?>"
+<div class="objectRender"
      oid="<?php echo $item['data']['id'] ?>" gid="<?php echo $gid ?>">
     <div class="row">
         <? if ($this->Dataobject->getDate()) { ?>

@@ -28,9 +28,10 @@
 			    <div class="object">
 			    
 			    	<div class="block-group">
-			    
+						
+						<? if( $wystapienia ) {?>
 	                    <div id="wystapienia" class="block">
-	                    <div class="block-header">
+		                    <div class="block-header">
 								<h2 class="pull-left">Wystąpienia w Sejmie</h2>
 								<a class="btn btn-default btn-sm pull-right" href="/dane/poslowie/<?= $object->getId() ?>/wystapienia">Zobacz wszystkie</a>
 							</div>
@@ -48,9 +49,11 @@
 		                        </div>
 							</div>
 				    	</div>
-	
-	                    <div id="interpelacje" class="block bg">
-	                    <div class="block-header">
+				    	<? } ?>
+						
+						<? if( $interpelacje ) {?>
+	                    <div id="interpelacje" class="block">
+		                    <div class="block-header">
 								<h2 class="pull-left">Interpelacje</h2>
 								<a class="btn btn-default btn-sm pull-right" href="/dane/poslowie/<?= $object->getId() ?>/interpelacje">Zobacz wszystkie</a>
 							</div>
@@ -68,9 +71,11 @@
 		                        </div>
 							</div>
 				    	</div>
-	
+				    	<? } ?>
+						
+						<? if( $projekty_ustaw ) {?>
 	                    <div id="wystapienia" class="block">
-	                    <div class="block-header">
+		                    <div class="block-header">
 								<h2 class="pull-left">Podpisane projekty ustaw</h2>
 								<a class="btn btn-default btn-sm pull-right" href="/dane/poslowie/<?= $object->getId() ?>/projekty_ustaw">Zobacz wszystkie</a>
 							</div>
@@ -89,9 +94,11 @@
 							</div>
 				    	
 				    	</div>
+				    	<? } ?>
 	
-	                    <div id="glosowania" class="block bg">
-	                    <div class="block-header">
+						<? if( $glosowania ) {?>
+	                    <div id="glosowania" class="block">
+		                    <div class="block-header">
 								<h2 class="pull-left">Wyniki głosowań</h2>
 								<a class="btn btn-default btn-sm pull-right" href="/dane/poslowie/<?= $object->getId() ?>/glosowania">Zobacz wszystkie</a>
 							</div>
@@ -110,6 +117,7 @@
 		                        </div>
 							</div>
 				    	</div>
+				    	<? } ?>
 			    	
 			    	</div>
 			    	
