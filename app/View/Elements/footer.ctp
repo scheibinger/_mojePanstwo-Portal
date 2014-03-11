@@ -11,6 +11,8 @@
         <div class="col-lg-4 pull-left">
             <?php echo $this->Html->link(__('LC_FOOTER_ABOUT_US'), '/oportalu', array('target' => '_self')); ?>
             <span class="separator">|</span>
+            <?php echo $this->Html->link(__('LC_FOOTER_API'), 'http://api.mojepanstwo.localhost', array('target' => '_self')); ?>
+            <span class="separator">|</span>
             <?php echo $this->Html->link(__('LC_FOOTER_REGULATIONS'), '/regulamin', array('target' => '_self')); ?>
             <span class="separator">|</span>
             <?php echo $this->Html->link(__('LC_FOOTER_REPORT_BUG'), '/zglosblad', array('target' => '_self')); ?>

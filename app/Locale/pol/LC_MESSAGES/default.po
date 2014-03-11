@@ -58,6 +58,9 @@ msgstr "Wyślij zgłoszenie"
 msgid "LC_FOOTER_ABOUT_US"
 msgstr "O portalu"
 
+msgid "LC_FOOTER_API"
+msgstr "API"
+
 msgid "LC_FOOTER_REGULATIONS"
 msgstr "Regulamin"
 
