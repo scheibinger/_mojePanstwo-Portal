@@ -22,7 +22,7 @@
 
                 margin-bottom: 5px;
                 padding: 0;
-				
+
             }
         }
     }
@@ -42,9 +42,31 @@
         padding-bottom: 20px;
         overflow: hidden;
 
-        .objectMenu.horizontal {
-            .nav-stacked > li {
+        .objectMenu {
+            &.horizontal .nav-stacked > li {
                 float: left;
+            }
+            .nav .icon {
+                & > a:before {
+                    float: left;
+                    padding-top: 2px;
+                    padding-right: 5px;
+                    font-family: 'mojePanstwo';
+                    speak: none;
+                    font-style: normal;
+                    font-weight: normal;
+                    font-variant: normal;
+                    text-transform: none;
+                    line-height: 1;
+                    -webkit-font-smoothing: antialiased;
+                    -moz-osx-font-smoothing: grayscale;
+                }
+                &.view > a:before {
+                    content: '\e610';
+                }
+                &.related > a:before {
+                    content: '\e611';
+                }
             }
         }
 
@@ -237,27 +259,26 @@
 }
 
 .related_div {
-	ul {
-		list-style: none;
-	}
-	li {
-		list-style: none;
-	}
+    ul {
+        list-style: none;
+    }
+    li {
+        list-style: none;
+    }
 }
 
-
 .objectMenu {
-	
-	&.horizontal {
-	
-		.nav > li > a {
-			padding: 10px 25px 11px;
-		}
-		
-		.nav-pills > .active > a, .nav-pills > .active > a:hover {
-	    	background-color: #FFF;
-	    	color: #444;
-		}
-	
-	}
+
+    &.horizontal {
+
+        .nav > li > a {
+            padding: 10px 25px 11px;
+        }
+
+        .nav-pills > .active > a, .nav-pills > .active > a:hover {
+            background-color: #FFF;
+            color: #444;
+        }
+
+    }
 }
