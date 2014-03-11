@@ -136,9 +136,11 @@ function dataSlownie($data)
 
 	}
 	
+	/*
 	$time_str = @substr($_data, 11, 5);
 	if( $time_str )
 		$str .= ' ' . $time_str;
+	*/
 	
 
     return '<span class="_ds" value="' . strip_tags($data) . '">' . $str . '</span>';
