@@ -87,18 +87,18 @@ if (!function_exists('array_column')) {
 
 function dataSlownie($data)
 {
-		
+	$_data = $data;
+	
 	$timestamp = strtotime( $data );
 	if( !$timestamp )
 		return false;
 	
+	$data = date('Y-m-d', $timestamp);	
 	
-	$data = date('Y-m-d', $timestamp);
-	
-	if( $data == date('Y-m-d', strtotime($timestamp)) ) // TODAY
+	if( $data == date('Y-m-d', time()) ) // TODAY
 	{
 		
-		$str = 'dziś';
+		$str = 'dzisiaj';
 		
 	}
 	else
@@ -135,6 +135,10 @@ function dataSlownie($data)
 	    $str = $dzien . ' ' . $___vars['miesiace']['celownik'][$miesiac] . ' ' . $rok . ' r.';
 
 	}
+	
+	$time_str = @substr($_data, 11, 5);
+	if( $time_str )
+		$str .= ' ' . $time_str;
 	
 
     return '<span class="_ds" value="' . strip_tags($data) . '">' . $str . '</span>';
