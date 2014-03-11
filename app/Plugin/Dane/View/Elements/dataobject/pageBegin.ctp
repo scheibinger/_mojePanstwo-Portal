@@ -9,7 +9,7 @@ $buttons = isset($objectOptions['buttons']) ? $objectOptions['buttons'] : array(
 <?php $this->Combinator->add_libs('css', $this->Less->css('dataobjectpage', array('plugin' => 'Dane'))) ?>
 <?php $this->Combinator->add_libs('css', $this->Less->css('naglosnij', array('plugin' => 'Dane'))) ?>
 
-<?php $this->Combinator->add_libs('js', 'Dane.naglosnij'); ?>
+<?php $this->Combinator->add_libs('js', array('Dane.naglosnij', 'Dane.related-tabs')); ?>
 <div class="objectsPage">
 
     <div class="objectPageHeaderContainer">
@@ -17,8 +17,8 @@ $buttons = isset($objectOptions['buttons']) ? $objectOptions['buttons'] : array(
             <div class="row">
                 <div class="col-md-9">
                     <div class="objectPageHeader">
-                        <?php                                           
-	                        echo $this->Dataobject->render($object, 'page', $objectOptions);
+                        <?php
+                        echo $this->Dataobject->render($object, 'page', $objectOptions);
                         ?>
                     </div>
                 </div>
@@ -37,36 +37,36 @@ $buttons = isset($objectOptions['buttons']) ? $objectOptions['buttons'] : array(
     </div>
 
 
-    <? if ($menuMode == 'vertical') { ?>
+<? if ($menuMode == 'vertical') { ?>
     <div class="objectsPageWindow">
-        <div class="container">
-            <div class="row">
+    <div class="container">
+    <div class="row">
 
 
-                <? if (count($menu)) { ?>
-                <div class="col-md-2">
-                    <?= $this->Element('dataobject/pageMenu'); ?>
-                </div>
-                <div class="col-md-10">
-                    <?= $this->Element('dataobject/pageRelated'); ?>
-                    <div class="objectsPageContent main<? if (isset($showRelated) && $showRelated) { ?> hide<? } ?>">
-                        <? } else { ?>
-                        <div class="col-md-12">
-                            <?= $this->Element('dataobject/pageRelated'); ?>
-                            <div
-                                class="objectsPageContent main<? if (isset($showRelated) && $showRelated) { ?> hide<? } ?>">
-                                <? } ?>
+    <? if (count($menu)) { ?>
+    <div class="col-md-2">
+        <?= $this->Element('dataobject/pageMenu'); ?>
+    </div>
+    <div class="col-md-10">
+    <?= $this->Element('dataobject/pageRelated'); ?>
+    <div class="objectsPageContent main<? if (isset($showRelated) && $showRelated) { ?> hide<? } ?>">
+    <? } else { ?>
+    <div class="col-md-12">
+    <?= $this->Element('dataobject/pageRelated'); ?>
+    <div
+        class="objectsPageContent main<? if (isset($showRelated) && $showRelated) { ?> hide<? } ?>">
+    <? } ?>
 
-                                <? } elseif ($menuMode == 'horizontal') { ?>
-                                <div class="objectsPageWindow">
-                                    <div class="container">
-                                        <div class="row">
+    <? } elseif ($menuMode == 'horizontal') { ?>
+    <div class="objectsPageWindow">
+    <div class="container">
+    <div class="row">
 
-                                            <?= $this->Element('dataobject/pageMenu'); ?>
-                                            <div
-                                                class="objectsPageContent main">
-                                                <? } ?>
-					
-												<?php echo $this->Element('dataobject/pageRelated', array(
-													'showRelated' => isset($showRelated) ? (boolean) $showRelated : false,
-												)); ?>
+    <?= $this->Element('dataobject/pageMenu'); ?>
+    <div
+        class="objectsPageContent main">
+<? } ?>
+
+<?php echo $this->Element('dataobject/pageRelated', array(
+    'showRelated' => isset($showRelated) ? (boolean)$showRelated : false,
+)); ?>
