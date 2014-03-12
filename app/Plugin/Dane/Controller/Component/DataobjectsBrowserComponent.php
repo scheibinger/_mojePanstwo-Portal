@@ -2,7 +2,8 @@
 
 class DataobjectsBrowserComponent extends Component
 {
-
+	
+	public $settings = array();
     public $source = array();
     public $title = false;
     public $noResultsTitle = false;
@@ -32,7 +33,9 @@ class DataobjectsBrowserComponent extends Component
     {
 
         parent::__construct($collection, $settings);
-
+		
+		$this->settings = $settings;
+			
         if (isset($settings['title'])) {
             $this->showTitle = true;
             $this->title = $settings['title'];
@@ -165,8 +168,12 @@ class DataobjectsBrowserComponent extends Component
             $conditions['_source'] = implode(' ', $source_parts);
 
         }
-
-        $query_keys = array_keys($controller->request->query);
+		
+		if( !isset($controller->request->query['order']) && isset($this->settings['order']) )
+	        $controller->request->query['order'] = $this->settings['order'];
+		
+        $query_keys = array_keys($controller->request->query);        
+	    	                
         foreach ($query_keys as $key) {
 
             $value = $controller->request->query[$key];
