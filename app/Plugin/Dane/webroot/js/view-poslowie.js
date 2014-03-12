@@ -1,7 +1,8 @@
 jQuery(document).ready(function () {
     var menu = $('.objectsPageContent .objectMenu'),
         menuAutoScroll = true,
-        headerHeight = $('header').outerHeight();
+        headerHeight = $('header').outerHeight(),
+        timelineEmbed;
 
     /*STICKY MENU*/
     menu.attr('id', 'stickyMenu').css('width', menu.outerWidth() + 'px');
@@ -40,14 +41,16 @@ jQuery(document).ready(function () {
         }
     }).scroll();
 
-    createStoryJS({
-        start_at_end: true,
-        width: "100%",
-        height: '500',
-        source: jQuery("#timeline-embed").data("source") + '/timeline.json',
-        embed_id: 'timeline-embed',
-        css: '/css/timelinejs/timeline.css',
-        js: '/js/timelinejs/timeline-min.js',
-        lang: _mPHeart.language.twoDig
-    });
+    if ((timelineEmbed = jQuery("#timeline-embed")).length > 0) {
+        createStoryJS({
+            start_at_end: true,
+            width: "100%",
+            height: '500',
+            source: timelineEmbed.data("source") + '/timeline.json',
+            embed_id: 'timeline-embed',
+            css: '/css/timelinejs/timeline.css',
+            js: '/js/timelinejs/timeline-min.js',
+            lang: _mPHeart.language.twoDig
+        });
+    }
 });
