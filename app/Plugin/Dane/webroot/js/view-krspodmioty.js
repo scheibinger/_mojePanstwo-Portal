@@ -165,7 +165,8 @@ jQuery(document).ready(function () {
                 linkNodes = [];
 
             /*SIZE SETTING*/
-            d3Data.height = (d3Data.size.nodes * nodes.length);
+            var newHeight = (d3Data.size.nodes * nodes.length) * .7;
+            d3Data.height = (newHeight > d3Data.height) ? newHeight : d3Data.height;
             d3Data.force.size([d3Data.width, d3Data.height]);
             d3Data.svg.attr("width", d3Data.width).attr("height", d3Data.height);
 
