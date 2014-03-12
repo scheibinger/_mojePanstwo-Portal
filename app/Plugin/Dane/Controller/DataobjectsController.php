@@ -113,7 +113,7 @@ class DataobjectsController extends DaneAppController
 		
 		parent::beforeRender();
 		
-		if( is_object( $this->object ) )
+		if( is_object( $this->object ) && !$this->request->is('ajax') )
 		{
 			$this->set('_dataset', $this->object->getDataset());
 	        $this->set('_object_id', $this->object->getId());
