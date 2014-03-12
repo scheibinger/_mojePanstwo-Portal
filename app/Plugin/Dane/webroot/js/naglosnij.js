@@ -39,42 +39,7 @@ jQuery(document).ready(function () {
         }();
 
         /* ShoutIt on Facebook - loading Facebook JS*/
-        !function () {
-            var js = document.createElement("script"),
-                fjs = document.getElementsByTagName("script")[0];
-
-            if (document.getElementById("facebook-jssdk")) {
-                return;
-            }
-
-            js.id = "facebook-jssdk";
-
-            switch (jQuery('body').data('lang')) {
-                case 'pol':
-                    js.src = "//connect.facebook.net/pl_PL/all.js";
-                    break;
-                case 'eng':
-                    js.src = "//connect.facebook.net/en_EN/all.js";
-                    break;
-                default:
-                    js.src = "//connect.facebook.net/pl_PL/all.js";
-                    break;
-            }
-
-            fjs.parentNode.insertBefore(js, fjs);
-
-            window.fbAsyncInit = function () {
-                FB.init({
-                        "appId": _mPHeart.social.facebook.id,
-                        "status": true,
-                        "cookie": true,
-                        "oauth": true,
-                        "xfbml": true}
-                );
-                FB.Canvas.setSize();
-                FBApiInit = true;
-            };
-        }();
+        /* Added global at main.js */
 
         /* Make visibilty shoutIt Button*/
         shoutItBox.removeClass('hide');

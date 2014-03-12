@@ -241,20 +241,35 @@ jQuery.extend(jQuery.ui.dialog.prototype.options, {
     if ((selectPickers = $('.selectpicker')).length > 0)
         selectPickers.selectpicker();
 
-    /*FACEBOOK FB-ROOT*/
+    /*FACEBOOK API - ONLY WHEN DIV ID:FB-ROOT EXIST*/
     if ($('#fb-root').length > 0 && $('#facebook-jssdk').length == 0) {
-        (function (d, s, id) {
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) return;
-            js = d.createElement(s);
-            js.id = id;
-            if (_mPHeart.language.twoDig == 'pl')
-                js.src = "//connect.facebook.net/pl_PL/all.js#xfbml=1&appId=";
-            else {
-                js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=";
-            }
-            js.src += _mPHeart.social.facebook.id;
-            fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));
+        var js = document.createElement("script"),
+            fjs = document.getElementsByTagName("script")[0];
+
+        if (document.getElementById("facebook-jssdk")) {
+            return;
+        }
+
+        js.id = "facebook-jssdk";
+
+        if (_mPHeart.language.twoDig == 'pl')
+            js.src = "//connect.facebook.net/pl_PL/all.js";
+        else {
+            js.src = "//connect.facebook.net/en_US/all.js";
+        }
+
+        fjs.parentNode.insertBefore(js, fjs);
+
+        window.fbAsyncInit = function () {
+            FB.init({
+                "appId": _mPHeart.social.facebook.id,
+                "status": true,
+                "cookie": true,
+                "oauth": true,
+                "xfbml": true
+            });
+            FB.Canvas.setSize();
+            FBApiInit = true;
+        };
     }
 })(jQuery);

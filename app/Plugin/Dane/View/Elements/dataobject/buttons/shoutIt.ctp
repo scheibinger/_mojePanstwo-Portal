@@ -4,6 +4,7 @@
 
     <div class="shoutItContent">
         <div class="facebookBox">
+            <div id="fb-root"></div>
             <div class="fb-like" data-href="<?php echo Router::url($this->here, true); ?>"
                  data-send="false"
                  data-layout="button_count"
