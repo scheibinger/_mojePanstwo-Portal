@@ -147,7 +147,7 @@ jQuery(document).ready(function () {
                 'osoba': "#0000FF"
             },
             size: {
-                'linksLength': 70,
+                'linksLength': 100,
                 'linksWidth': 1,
                 'nodes': 50
             }
@@ -211,8 +211,11 @@ jQuery(document).ready(function () {
                     return "translate(" + d.x + "," + d.y + ")";
                 })
                 .call(d3Data.force.drag)
-                .on('mousedown', function (d) {
-                    detailInfo(d)
+                .on('mousemove', function (d) {
+                    d.fixed = true;
+                })
+                .on('dblclick', function (d) {
+                    detailInfo(d);
                 });
 
             node.append("title")
@@ -347,8 +350,6 @@ jQuery(document).ready(function () {
                 connectionGraph.find('.dataContent .btn').click(function () {
                     connectionGraph.find('.dataContent').remove();
                 });
-
-                node.fixed = true;
             }
         });
     }
