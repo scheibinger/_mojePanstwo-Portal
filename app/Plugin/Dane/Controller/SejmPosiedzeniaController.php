@@ -14,112 +14,107 @@ class SejmPosiedzeniaController extends DataobjectsController
     public $objectOptions = array(
         'bigTitle' => true,
     );
-
-    public $hlmap = array(
-        array(
-            'id' => 'liczba_wystapien',
-            'label' => 'Wystąpienia',
-            'href' => 'wystapienia',
-        ),
-        array(
-            'id' => 'liczba_glosowan',
-            'label' => 'Głosowania',
-            'href' => 'glosowania',
-        ),
-        array(
-            'id' => 'liczba_punktow',
-            'label' => 'Punkty porządku dziennego',
-            'href' => 'punkty',
-        ),
-        array(
-            'id' => 'liczba_przyjetych_ustaw',
-            'label' => 'Przyjęte ustawy',
-            'href' => 'przyjete_ustawy',
-        ),
-        array(
-            'id' => 'liczba_odrzuconych_ustaw',
-            'label' => 'Odrzucone ustawy',
-            'href' => 'odrzucone_ustawy',
-        ),
-        array(
-            'id' => 'liczba_przyjetych_uchwal',
-            'label' => 'Przyjęte uchwały',
-            'href' => 'przyjete_uchwaly',
-        ),
-        array(
-            'id' => 'liczba_odrzuconych_uchwal',
-            'label' => 'Odrzucone uchwały',
-            'href' => 'odrzucone_uchwaly',
-        ),
-        array(
-            'id' => 'liczba_ratyfikowanych_umow',
-            'label' => 'Ratyfikowane umowy międzynarodowe',
-            'href' => 'ratyfikowane_umowy',
-        ),
-        array(
-            'id' => 'liczba_odrzuconych_umow',
-            'label' => 'Odrzucone umowy międzynarodowe',
-            'href' => 'odrzucone_umowy',
-        ),
-        array(
-            'id' => 'liczba_przyjetych_sprawozdan_kontrolnych',
-            'label' => 'Przyjęte sprawozdania kontrolne',
-            'href' => 'przyjete_sprawozdania_kontrolne',
-        ),
-        array(
-            'id' => 'liczba_odrzuconych_sprawozdan_kontrolnych',
-            'label' => 'Odrzucone sprawozdania kontrolne',
-            'href' => 'odrzucone_sprawozdania_kontrolne',
-        ),
-        array(
-            'id' => 'liczba_przyjetych_referendow',
-            'label' => 'Przyjęte wnioski o referenda',
-            'href' => 'przyjete_referenda',
-        ),
-        array(
-            'id' => 'liczba_odrzuconych_referendow',
-            'label' => 'Odrzucone wnioski o referenda',
-            'href' => 'odrzucone_referenda',
-        ),
-        array(
-            'id' => 'liczba_przyjetych_powolan_odwolan',
-            'label' => 'Przyjęte powołania / odwołania',
-            'href' => 'przyjete_powolania_odwolania',
-        ),
-        array(
-            'id' => 'liczba_odrzuconych_powolan_odwolan',
-            'label' => 'Odrzucone powołania / odwołania',
-            'href' => 'odrzucone_powolania_odwolania',
-        ),
-        array(
-            'id' => 'liczba_przyjetych_zmian_komisji',
-            'label' => 'Przyjęte zmiany w składach komisji',
-            'href' => 'przyjete_zmiany_komisji',
-        ),
-        array(
-            'id' => 'liczba_odrzuconych_zmian_komisji',
-            'label' => 'Odrzucone zmiany w składach komisji',
-            'href' => 'odrzucone_zmiany_komisji',
-        ),
-        array(
-            'id' => 'liczba_przyjetych_inne',
-            'label' => 'Przyjęte inne dokumenty',
-            'href' => 'przyjete_inne',
-        ),
-        array(
-            'id' => 'liczba_odrzuconych_inne',
-            'label' => 'Odrzucone inne dokumenty',
-            'href' => 'odrzucone_inne',
-        ),
-    );
-
-
-
-
-
-
-
-
+	
+	public $hlmap = array(
+		array(
+			'id' => 'liczba_wystapien',
+			'label' => 'Wystąpienia',
+			'href' => 'wystapienia',
+		),
+		array(
+			'id' => 'liczba_glosowan',
+			'label' => 'Głosowania',
+			'href' => 'glosowania',
+		),
+		array(
+			'id' => 'liczba_punktow',
+			'label' => 'Punkty porządku dziennego',
+			'href' => 'punkty',
+		),
+		array(
+			'id' => 'liczba_przyjetych_ustaw',
+			'label' => 'Przyjęte ustawy',
+			'href' => 'projekty?c=przyjete_ustawy',
+		),
+		array(
+			'id' => 'liczba_odrzuconych_ustaw',
+			'label' => 'Odrzucone ustawy',
+			'href' => 'projekty?c=odrzucone_ustawy',
+		),
+		array(
+			'id' => 'liczba_przyjetych_uchwal',
+			'label' => 'Przyjęte uchwały',
+			'href' => 'projekty?c=przyjete_uchwaly',
+		),
+		array(
+			'id' => 'liczba_odrzuconych_uchwal',
+			'label' => 'Odrzucone uchwały',
+			'href' => 'projekty?c=odrzucone_uchwaly',
+		),
+		array(
+			'id' => 'liczba_ratyfikowanych_umow',
+			'label' => 'Ratyfikowane umowy międzynarodowe',
+			'href' => 'projekty?c=ratyfikowane_umowy',
+		),
+		array(
+			'id' => 'liczba_odrzuconych_umow',
+			'label' => 'Odrzucone umowy międzynarodowe',
+			'href' => 'projekty?c=odrzucone_umowy',
+		),
+		array(
+			'id' => 'liczba_przyjetych_sprawozdan_kontrolnych',
+			'label' => 'Przyjęte sprawozdania kontrolne',
+			'href' => 'projekty?c=przyjete_sprawozdania_kontrolne',
+		),
+		array(
+			'id' => 'liczba_odrzuconych_sprawozdan_kontrolnych',
+			'label' => 'Odrzucone sprawozdania kontrolne',
+			'href' => 'projekty?c=odrzucone_sprawozdania_kontrolne',
+		),
+		array(
+			'id' => 'liczba_przyjetych_referendow',
+			'label' => 'Przyjęte wnioski o referenda',
+			'href' => 'projekty?c=przyjete_referenda',
+		),
+		array(
+			'id' => 'liczba_odrzuconych_referendow',
+			'label' => 'Odrzucone wnioski o referenda',
+			'href' => 'projekty?c=odrzucone_referenda',
+		),
+		array(
+			'id' => 'liczba_przyjetych_powolan_odwolan',
+			'label' => 'Przyjęte powołania / odwołania',
+			'href' => 'projekty?c=przyjete_powolania_odwolania',
+		),
+		array(
+			'id' => 'liczba_odrzuconych_powolan_odwolan',
+			'label' => 'Odrzucone powołania / odwołania',
+			'href' => 'projekty?c=odrzucone_powolania_odwolania',
+		),
+		array(
+			'id' => 'liczba_przyjetych_zmian_komisji',
+			'label' => 'Przyjęte zmiany w składach komisji',
+			'href' => 'projekty?c=przyjete_zmiany_komisji',
+		),
+		array(
+			'id' => 'liczba_odrzuconych_zmian_komisji',
+			'label' => 'Odrzucone zmiany w składach komisji',
+			'href' => 'projekty?c=odrzucone_zmiany_komisji',
+		),
+		array(
+			'id' => 'liczba_przyjetych_inne',
+			'label' => 'Przyjęte inne dokumenty',
+			'href' => 'projekty?c=przyjete_inne',
+		),
+		array(
+			'id' => 'liczba_odrzuconych_inne',
+			'label' => 'Odrzucone inne dokumenty',
+			'href' => 'projekty?c=odrzucone_inne',
+		),
+	);
+	
+	
+	
     public function view()
     {
 
@@ -195,6 +190,21 @@ class SejmPosiedzeniaController extends DataobjectsController
             'order' => 'kolejnosc asc',
         ));
 
+    }
+    
+    public function glosowania()
+    {
+
+        parent::view();
+        $this->dataobjectsBrowserView(array(
+            'source' => 'sejm_posiedzenia.glosowania:' . $this->object->getId(),
+            'dataset' => 'sejm_glosowania',
+            'title' => 'Głosowania',
+            'noResultsTitle' => 'Brak głosowań',
+            'order' => 'numer asc',        
+            'hlFields' => array('numer', 'wynik_id'),
+        ));
+        
     }
 
     public function punkty()
