@@ -136,7 +136,7 @@ echo $this->Html->script('Dane.d3/d3', array('block' => 'scriptBlock'));
         <h2>Powiązania</h2>
 
         <div id="connectionGraph" class="col-xs-12" data-id="<?php echo $object->getId() ?>">
-        http://mojepanstwo/dane/krs_podmioty/114/graph.json
+            <script>var connectionGraphObject = <?php echo json_encode($object) ?>;</script>
         </div>
     </div>
 

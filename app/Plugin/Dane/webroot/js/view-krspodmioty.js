@@ -1,4 +1,4 @@
-/*global googleMapAdres: true*/
+/*global googleMapAdres: true, connectionGraphObject*/
 
 function initialize() {
     //SETTING DEFAULT CENTER TO GOOGLE MAP AT POLAND//
@@ -140,20 +140,21 @@ jQuery(document).ready(function () {
             'width': connectionGraph.outerWidth(),
             'height': 500,
             'color': {
+                'mainNode': '#999999',
                 'links': '#333333',
                 'podmiot': "#FF0000",
                 'osoba': "#0000FF"
             },
             size: {
-                'linksLength': 150,
+                'linksLength': 70,
                 'linksWidth': 1,
                 'nodes': 50
             }
         };
         d3Data.force = d3.layout.force().charge(function (d, i) {
             return i ? 0 : -2000;
-        }).linkDistance(d3Data.size.linksLength + d3Data.size.nodes).linkStrength(2).size([d3Data.width, d3Data.height]);
-        d3Data.svg = d3.select("#connectionGraph").append("svg").attr("width", d3Data.width).attr("height", d3Data.height);
+        }).linkDistance(d3Data.size.linksLength + d3Data.size.nodes).linkStrength(2);
+        d3Data.svg = d3.select("#connectionGraph").append("svg");
 
         d3.json(connectionGraph.data('id') + "/graph.json", function (error, results) {
             var graph = results._layers.graph;
@@ -162,9 +163,15 @@ jQuery(document).ready(function () {
                 links = [],
                 linkNodes = [];
 
+            /*Size setting*/
+            d3Data.height = (d3Data.size.nodes * nodes.length);
+            d3Data.force.size([d3Data.width, d3Data.height]);
+            d3Data.svg.attr("width", d3Data.width).attr("height", d3Data.height);
+
             var root = nodes[0];
-            root.radius = 0;
             root.fixed = true;
+            root.x = (d3Data.width / 2);
+            root.y = (d3Data.height / 2);
 
             graph.relationships.forEach(function (link) {
                 var s = jQuery.grep(nodes, function (e) {
@@ -174,10 +181,7 @@ jQuery(document).ready(function () {
                         return e.id == link.end;
                     })[0];
                 links.push({source: s, target: t});
-                linkNodes.push({
-                    source: s,
-                    target: t
-                });
+                linkNodes.push({source: s, target: t});
             });
 
             d3Data.force
@@ -205,7 +209,10 @@ jQuery(document).ready(function () {
                 .attr("transform", function (d) {
                     return "translate(" + d.x + "," + d.y + ")";
                 })
-                .call(d3Data.force.drag);
+                .call(d3Data.force.drag)
+                .on('mousedown', function (d) {
+                    detailInfo(d)
+                });
 
             node.append("title")
                 .text(function (d) {
@@ -219,10 +226,16 @@ jQuery(document).ready(function () {
                 .attr('class', 'nodeCircle')
                 .attr("r", d3Data.size.nodes)
                 .style("stroke", function (d) {
-                    return d3Data.color[d.label]
+                    if (d.id == root.id)
+                        return d3Data.color['mainNode']
+                    else
+                        return d3Data.color[d.label]
                 })
                 .style("fill", function (d) {
-                    return d3Data.color[d.label]
+                    if (d.id == root.id)
+                        return d3Data.color['mainNode']
+                    else
+                        return d3Data.color[d.label]
                 });
 
             node.append("text")
@@ -250,11 +263,6 @@ jQuery(document).ready(function () {
                     i = 0,
                     n = nodes.length;
 
-                while (++i < n) {
-                    q.visit(collide(nodes[i]));
-                    /*TODO: check if node or direct circle*/
-                }
-
                 link
                     .attr("x1", function (d) {
                         return d.source.x;
@@ -281,29 +289,29 @@ jQuery(document).ready(function () {
                     .attr("cy", function (d) {
                         return d.y = (d.source.y + d.target.y) * 0.5;
                     });
-            });
 
-            d3Data.svg.on("mousemove", function () {
-                var p1 = d3.svg.mouse(this);
-                root.px = p1[0];
-                root.py = p1[1];
-                d3Data.force.resume();
+                while (++i < n) {
+                    q.visit(collide(nodes[i]));
+                }
             });
 
             function collide(node) {
-                var r = node.radius + 16,
+                var alpha = .5,
+                    nodePadding = 20,
+                    r = d3Data.size.nodes + 20,
                     nx1 = node.x - r,
                     nx2 = node.x + r,
                     ny1 = node.y - r,
                     ny2 = node.y + r;
+
                 return function (quad, x1, y1, x2, y2) {
                     if (quad.point && (quad.point !== node)) {
                         var x = node.x - quad.point.x,
                             y = node.y - quad.point.y,
                             l = Math.sqrt(x * x + y * y),
-                            r = node.radius + quad.point.radius;
+                            r = 2 * d3Data.size.nodes + nodePadding;
                         if (l < r) {
-                            l = (l - r) / l * .5;
+                            l = (l - r) / l * alpha;
                             node.x -= x *= l;
                             node.y -= y *= l;
                             quad.point.x += x;
@@ -316,8 +324,11 @@ jQuery(document).ready(function () {
                         || y2 < ny1;
                 };
             }
+
+            function detailInfo(node) {
+                console.log(node.data);
+                node.fixed = true;
+            }
         });
-
-
     }
 });
