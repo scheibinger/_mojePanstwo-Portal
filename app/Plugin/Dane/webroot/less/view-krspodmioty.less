@@ -83,6 +83,39 @@
             float: left;
         }
 
+        .graph {
+            position: relative;
+
+            .node {
+                cursor: pointer;
+            }
+
+            .dataContent {
+                position: absolute;
+                top: 10px;
+                right: 0;
+                z-index: 1;
+                background-color: #ffffff;
+                font-family: "Lato", sans-serif;
+                font-size: 12px;
+                font-weight: 400;
+                color: #000000;
+                padding: 5px;
+                border: 1px solid #eeeeee;
+                -moz-border-radius: 5px;
+                -webkit-border-radius: 5px;
+                border-radius: 5px;
+
+                .btn {
+                    margin-bottom: 10px;
+                }
+                .table {
+                    margin: 0;
+                }
+            }
+
+        }
+
         .block.small {
             padding: 10px 5px;
         }

@@ -138,9 +138,10 @@ jQuery(document).ready(function () {
     if (connectionGraph.length > 0) {
         var d3Data = {
             'width': connectionGraph.outerWidth(),
-            'height': 500,
+            'height': 500, /*DEFAULT HEIGHT SETTING*/
             'color': {
-                'mainNode': '#999999',
+                'mainFill': '#888888',
+                'mainStroke': '#666666',
                 'links': '#333333',
                 'podmiot': "#FF0000",
                 'osoba': "#0000FF"
@@ -163,7 +164,7 @@ jQuery(document).ready(function () {
                 links = [],
                 linkNodes = [];
 
-            /*Size setting*/
+            /*SIZE SETTING*/
             d3Data.height = (d3Data.size.nodes * nodes.length);
             d3Data.force.size([d3Data.width, d3Data.height]);
             d3Data.svg.attr("width", d3Data.width).attr("height", d3Data.height);
@@ -225,17 +226,18 @@ jQuery(document).ready(function () {
             node.append("circle")
                 .attr('class', 'nodeCircle')
                 .attr("r", d3Data.size.nodes)
+                .style("stroke-width", 2)
                 .style("stroke", function (d) {
                     if (d.id == root.id)
-                        return d3Data.color['mainNode']
+                        return d3Data.color['mainStroke'];
                     else
-                        return d3Data.color[d.label]
+                        return d3Data.color[d.label];
                 })
                 .style("fill", function (d) {
                     if (d.id == root.id)
-                        return d3Data.color['mainNode']
+                        return d3Data.color['mainFill'];
                     else
-                        return d3Data.color[d.label]
+                        return d3Data.color[d.label];
                 });
 
             node.append("text")
@@ -326,7 +328,26 @@ jQuery(document).ready(function () {
             }
 
             function detailInfo(node) {
-                console.log(node.data);
+                connectionGraph.find('.dataContent').remove();
+
+                var dataContent = jQuery('<div></div>').addClass('dataContent').css('width', d3Data.width / 2);
+                dataContent.append(jQuery('<button></button>').addClass('btn btn-xs pull-right').text('x'));
+                dataContent.append(jQuery('<table></table>').addClass('table table-striped'));
+
+                jQuery.each(node.data, function (label, value) {
+                    var tr = jQuery('<tr></tr>');
+
+                    tr.append(jQuery('<td></td>').text(label));
+                    tr.append(jQuery('<td></td>').text(value));
+                    dataContent.find('table').append(tr);
+                });
+
+                connectionGraph.append(dataContent);
+
+                connectionGraph.find('.dataContent .btn').click(function () {
+                    connectionGraph.find('.dataContent').remove();
+                });
+
                 node.fixed = true;
             }
         });
