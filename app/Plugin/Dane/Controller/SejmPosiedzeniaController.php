@@ -14,219 +14,151 @@ class SejmPosiedzeniaController extends DataobjectsController
     public $objectOptions = array(
     	'bigTitle' => true,
     );
+	
+	public $hlmap = array(
+		array(
+			'id' => 'liczba_wystapien',
+			'label' => 'Wystąpienia',
+			'href' => 'wystapienia',
+		),
+		array(
+			'id' => 'liczba_glosowan',
+			'label' => 'Głosowania',
+			'href' => 'glosowania',
+		),
+		array(
+			'id' => 'liczba_punktow',
+			'label' => 'Punkty porządku dziennego',
+			'href' => 'punkty',
+		),
+		array(
+			'id' => 'liczba_przyjetych_ustaw',
+			'label' => 'Przyjęte ustawy',
+			'href' => 'przyjete_ustawy',
+		),
+		array(
+			'id' => 'liczba_odrzuconych_ustaw',
+			'label' => 'Odrzucone ustawy',
+			'href' => 'odrzucone_ustawy',
+		),
+		array(
+			'id' => 'liczba_przyjetych_uchwal',
+			'label' => 'Przyjęte uchwały',
+			'href' => 'przyjete_uchwaly',
+		),
+		array(
+			'id' => 'liczba_odrzuconych_uchwal',
+			'label' => 'Odrzucone uchwały',
+			'href' => 'odrzucone_uchwaly',
+		),
+		array(
+			'id' => 'liczba_ratyfikowanych_umow',
+			'label' => 'Ratyfikowane umowy międzynarodowe',
+			'href' => 'ratyfikowane_umowy',
+		),
+		array(
+			'id' => 'liczba_odrzuconych_umow',
+			'label' => 'Odrzucone umowy międzynarodowe',
+			'href' => 'odrzucone_umowy',
+		),
+		array(
+			'id' => 'liczba_przyjetych_sprawozdan_kontrolnych',
+			'label' => 'Przyjęte sprawozdania kontrolne',
+			'href' => 'przyjete_sprawozdania_kontrolne',
+		),
+		array(
+			'id' => 'liczba_odrzuconych_sprawozdan_kontrolnych',
+			'label' => 'Odrzucone sprawozdania kontrolne',
+			'href' => 'odrzucone_sprawozdania_kontrolne',
+		),
+		array(
+			'id' => 'liczba_przyjetych_referendow',
+			'label' => 'Przyjęte wnioski o referenda',
+			'href' => 'przyjete_referenda',
+		),
+		array(
+			'id' => 'liczba_odrzuconych_referendow',
+			'label' => 'Odrzucone wnioski o referenda',
+			'href' => 'odrzucone_referenda',
+		),
+		array(
+			'id' => 'liczba_przyjetych_powolan_odwolan',
+			'label' => 'Przyjęte powołania / odwołania',
+			'href' => 'przyjete_powolania_odwolania',
+		),
+		array(
+			'id' => 'liczba_odrzuconych_powolan_odwolan',
+			'label' => 'Odrzucone powołania / odwołania',
+			'href' => 'odrzucone_powolania_odwolania',
+		),
+		array(
+			'id' => 'liczba_przyjetych_zmian_komisji',
+			'label' => 'Przyjęte zmiany w składach komisji',
+			'href' => 'przyjete_zmiany_komisji',
+		),
+		array(
+			'id' => 'liczba_odrzuconych_zmian_komisji',
+			'label' => 'Odrzucone zmiany w składach komisji',
+			'href' => 'odrzucone_zmiany_komisji',
+		),
+		array(
+			'id' => 'liczba_przyjetych_inne',
+			'label' => 'Przyjęte inne dokumenty',
+			'href' => 'przyjete_inne',
+		),
+		array(
+			'id' => 'liczba_odrzuconych_inne',
+			'label' => 'Odrzucone inne dokumenty',
+			'href' => 'odrzucone_inne',
+		),
+	);
+	
+	
+		
 
+			
+			
+	
+	
     public function view()
     {
 		
 		parent::view();
 		
+		
+		
+		
+		// PREPARING HIGHLIGHTS TABLE
+		
 		$hldata = array();
+		foreach( $this->hlmap as $item )
+		{
+			if( $this->object->getData( $item['id'] ) )
+			{
+				
+				$options = array(
+					'type' => 'integer',
+				);
+				
+				if( isset($item['href']) && $item['href'] )
+					$options['link'] = array(
+						'href' => '/dane/sejm_posiedzenia/' . $this->object->getId() . '/' . $item['href'],
+					);
+				
+				$hldata[] = array(
+					'id' => $item['id'],
+					'label' => $item['label'],
+					'value' => $this->object->getData( $item['id'] ),
+					'options' => $options,
+				);
+			}
+		}
 		
-		if( $this->object->getData('liczba_wystapien') )
-			$hldata[] = array(
-				'id' => 'liczba_wystapien',
-				'label' => 'Liczba wystąpień',
-				'value' => $this->object->getData('liczba_wystapien'),
-				'options' => array(
-					'type' => 'integer',
-					'link' => array(
-						'href' => '/dane/sejm_posiedzenia/' . $this->object->getId() . '/wystapienia',
-					),
-				),
-			);
-			
-		if( $this->object->getData('liczba_glosowan') )
-			$hldata[] = array(
-				'id' => 'liczba_glosowan',
-				'label' => 'Liczba głosowań',
-				'value' => $this->object->getData('liczba_glosowan'),
-				'options' => array(
-					'type' => 'integer',
-					'link' => array(
-						'href' => '/dane/sejm_posiedzenia/' . $this->object->getId() . '/glosowania',
-					),
-				),
-			);
-		
-		if( $this->object->getData('liczba_punktow') )
-			$hldata[] = array(
-				'id' => 'liczba_punktow',
-				'label' => 'Liczba punktów porządku',
-				'value' => $this->object->getData('liczba_punktow'),
-				'options' => array(
-					'type' => 'integer',
-					'link' => array(
-						'href' => '/dane/sejm_posiedzenia/' . $this->object->getId() . '/punkty',
-					),
-				),
-			);
-			
-		if( $this->object->getData('liczba_przyjetych_ustaw') )
-			$hldata[] = array(
-				'id' => 'liczba_przyjetych_ustaw',
-				'label' => 'Liczba przyjętych ustaw',
-				'value' => $this->object->getData('liczba_przyjetych_ustaw'),
-				'options' => array(
-					'type' => 'integer',
-				),
-			);
-			
-		if( $this->object->getData('liczba_odrzuconych_ustaw') )
-			$hldata[] = array(
-				'id' => 'liczba_odrzuconych_ustaw',
-				'label' => 'Liczba odrzuconych ustaw',
-				'value' => $this->object->getData('liczba_odrzuconych_ustaw'),
-				'options' => array(
-					'type' => 'integer',
-				),
-			);
-			
-		if( $this->object->getData('liczba_przyjetych_uchwal') )
-			$hldata[] = array(
-				'id' => 'liczba_przyjetych_uchwal',
-				'label' => 'Liczba przyjętych uchwał',
-				'value' => $this->object->getData('liczba_przyjetych_uchwal'),
-				'options' => array(
-					'type' => 'integer',
-				),
-			);
-			
-		if( $this->object->getData('liczba_odrzuconych_uchwal') )
-			$hldata[] = array(
-				'id' => 'liczba_odrzuconych_uchwal',
-				'label' => 'Liczba odrzuconych uchwał',
-				'value' => $this->object->getData('liczba_odrzuconych_uchwal'),
-				'options' => array(
-					'type' => 'integer',
-				),
-			);
-			
-		if( $this->object->getData('liczba_odrzuconych_umow') )
-			$hldata[] = array(
-				'id' => 'liczba_odrzuconych_umow',
-				'label' => 'Liczba odrzuconych umów międzynarodowych',
-				'value' => $this->object->getData('liczba_odrzuconych_umow'),
-				'options' => array(
-					'type' => 'integer',
-				),
-			);
-			
-		if( $this->object->getData('liczba_ratyfikowanych_umow') )
-			$hldata[] = array(
-				'id' => 'liczba_ratyfikowanych_umow',
-				'label' => 'Liczba ratyfikowanych umów międzynarodowych',
-				'value' => $this->object->getData('liczba_ratyfikowanych_umow'),
-				'options' => array(
-					'type' => 'integer',
-				),
-			);
-			
-		if( $this->object->getData('liczba_przyjetych_sprawozdan_kontrolnych') )
-			$hldata[] = array(
-				'id' => 'liczba_przyjetych_sprawozdan_kontrolnych',
-				'label' => 'Liczba przyjętych sprawozdań kontrolnych',
-				'value' => $this->object->getData('liczba_przyjetych_sprawozdan_kontrolnych'),
-				'options' => array(
-					'type' => 'integer',
-				),
-			);
-			
-		if( $this->object->getData('liczba_odrzuconych_sprawozdan_kontrolnych') )
-			$hldata[] = array(
-				'id' => 'liczba_odrzuconych_sprawozdan_kontrolnych',
-				'label' => 'Liczba przyjętych sprawozdań kontrolnych',
-				'value' => $this->object->getData('liczba_odrzuconych_sprawozdan_kontrolnych'),
-				'options' => array(
-					'type' => 'integer',
-				),
-			);
-			
-		if( $this->object->getData('liczba_przyjetych_referendow') )
-			$hldata[] = array(
-				'id' => 'liczba_przyjetych_referendow',
-				'label' => 'Liczba przyjętych wniosków o referenda',
-				'value' => $this->object->getData('liczba_przyjetych_referendow'),
-				'options' => array(
-					'type' => 'integer',
-				),
-			);
-			
-		if( $this->object->getData('liczba_odrzuconych_referendow') )
-			$hldata[] = array(
-				'id' => 'liczba_odrzuconych_referendow',
-				'label' => 'Liczba odrzuconych wniosków o referenda',
-				'value' => $this->object->getData('liczba_odrzuconych_referendow'),
-				'options' => array(
-					'type' => 'integer',
-				),
-			);
-			
-		if( $this->object->getData('liczba_przyjetych_powolan_odwolan') )
-			$hldata[] = array(
-				'id' => 'liczba_przyjetych_powolan_odwolan',
-				'label' => 'Liczba przyjętych powołań / odwołań',
-				'value' => $this->object->getData('liczba_przyjetych_powolan_odwolan'),
-				'options' => array(
-					'type' => 'integer',
-				),
-			);
-			
-		if( $this->object->getData('liczba_odrzuconych_powolan_odwolan') )
-			$hldata[] = array(
-				'id' => 'liczba_odrzuconych_powolan_odwolan',
-				'label' => 'Liczba odrzuconych powołań / odwołań',
-				'value' => $this->object->getData('liczba_odrzuconych_powolan_odwolan'),
-				'options' => array(
-					'type' => 'integer',
-				),
-			);
-			
-		if( $this->object->getData('liczba_przyjetych_zmian_komisji') )
-			$hldata[] = array(
-				'id' => 'liczba_przyjetych_zmian_komisji',
-				'label' => 'Liczba przyjętych zmian w składach komisji',
-				'value' => $this->object->getData('liczba_przyjetych_zmian_komisji'),
-				'options' => array(
-					'type' => 'integer',
-				),
-			);
-			
-		if( $this->object->getData('liczba_odrzuconych_zmian_komisji') )
-			$hldata[] = array(
-				'id' => 'liczba_odrzuconych_zmian_komisji',
-				'label' => 'Liczba przyjętych zmian w składach komisji',
-				'value' => $this->object->getData('liczba_odrzuconych_zmian_komisji'),
-				'options' => array(
-					'type' => 'integer',
-				),
-			);
-			
-		if( $this->object->getData('liczba_przyjetych_inne') )
-			$hldata[] = array(
-				'id' => 'liczba_przyjetych_inne',
-				'label' => 'Liczba przyjętych innych dokumentów',
-				'value' => $this->object->getData('liczba_przyjetych_inne'),
-				'options' => array(
-					'type' => 'integer',
-				),
-			);
-			
-		if( $this->object->getData('liczba_odrzuconych_inne') )
-			$hldata[] = array(
-				'id' => 'liczba_odrzuconych_inne',
-				'label' => 'Liczba odrzuconych innych dokumentów',
-				'value' => $this->object->getData('liczba_odrzuconych_inne'),
-				'options' => array(
-					'type' => 'integer',
-				),
-			);
-			
-		
-		
+
 	
 
-
-
+		// PREPARE MENU
+		
 		$menu = array(
 			array(
 				'id' => 'punkty',
@@ -260,8 +192,7 @@ class SejmPosiedzeniaController extends DataobjectsController
             'dataset' => 'sejm_wystapienia',
             'title' => 'Wystąpienia',
             'noResultsTitle' => 'Brak wystąpień',
-            // 'hlFields' => array('numer', 'liczba_debat', 'liczba_wystapien', 'liczba_glosowan'),
-            // 'order' => 'numer asc',        
+            'order' => 'kolejnosc asc',        
         ));
         
     }
