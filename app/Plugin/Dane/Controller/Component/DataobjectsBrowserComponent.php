@@ -55,7 +55,7 @@ class DataobjectsBrowserComponent extends Component
 
         if (isset($settings['hlFields']))
             $this->hlFields = $settings['hlFields'];
-            
+
         if (isset($settings['hlFieldsPush']))
             $this->hlFieldsPush = $settings['hlFieldsPush'];
 
@@ -64,24 +64,23 @@ class DataobjectsBrowserComponent extends Component
 
         $add_source_params = array();
         $source_params = array();
-        
-        if( isset($settings['source']) )
-        {
-	        $source_parts = explode(' ', $settings['source']);
-	        foreach ($source_parts as $part) {
-	
-	            $p = strpos($part, ':');
-	            if ($p !== false) {
-	                $key = substr($part, 0, $p);
-	                $value = substr($part, $p + 1);
-	
-	                $source_params[$key] = $value;
-	
-	                if (($key != 'dataset') && ($key != 'datachannel'))
-	                    $add_source_params[$key] = $value;
-	            }
-	
-	        }
+
+        if (isset($settings['source'])) {
+            $source_parts = explode(' ', $settings['source']);
+            foreach ($source_parts as $part) {
+
+                $p = strpos($part, ':');
+                if ($p !== false) {
+                    $key = substr($part, 0, $p);
+                    $value = substr($part, $p + 1);
+
+                    $source_params[$key] = $value;
+
+                    if (($key != 'dataset') && ($key != 'datachannel'))
+                        $add_source_params[$key] = $value;
+                }
+
+            }
         }
 
         $this->source = $add_source_params;
@@ -104,7 +103,7 @@ class DataobjectsBrowserComponent extends Component
 
     public function beforeRender(Controller $controller)
     {
-				
+
         $q = '';
         $conditions = array();
         $order = array();
@@ -267,7 +266,7 @@ class DataobjectsBrowserComponent extends Component
             if (isset($order['field'])) {
                 foreach ($orders as &$_order) {
                     if ($_order['sorting']['field'] == $order['field']) {
-                    	$this->hlFieldsPush = $order['field'];
+                        $this->hlFieldsPush = $order['field'];
                         $_order['selected_direction'] = $order['direction'];
                         $order_selected = true;
                         break;
@@ -407,8 +406,7 @@ class DataobjectsBrowserComponent extends Component
 
         if (!$order_selected && !empty($order))
             foreach ($orders as &$o)
-                if ($o['sorting']['field'] == $order['field'])
-                {
+                if ($o['sorting']['field'] == $order['field']) {
                     $this->hlFieldsPush = $order['field'];
                     $o['selected_direction'] = $order['direction'];
                 }
@@ -417,8 +415,7 @@ class DataobjectsBrowserComponent extends Component
         if (!empty($order))
             $queryData['order'] = $order['str'];
 
-		
-		
+
         $this->Paginator->settings = $queryData;
         $objects = $this->Paginator->paginate('Dataobject');
 
@@ -443,36 +440,33 @@ class DataobjectsBrowserComponent extends Component
             'titleTag' => $this->titleTag,
             'noResultsTitle' => $this->noResultsTitle,
         );
-                
-		$controller->set(compact('conditions', 'objects', 'pagination', 'orders', 'filters', 'total', 'facets', 'page', 'title_for_layout', 'switchers', 'q'));
-		$controller->set('dataBrowser', $this);
-		
-		
-		if (@$controller->request->params['ext'] == 'json')
-		{
-			
-			$view = new View($controller, false);	
-            
+
+        $controller->set(compact('conditions', 'objects', 'pagination', 'orders', 'filters', 'total', 'facets', 'page', 'title_for_layout', 'switchers', 'q'));
+        $controller->set('dataBrowser', $this);
+
+
+        if (@$controller->request->params['ext'] == 'json') {
+
+            $view = new View($controller, false);
+
             $controller->set('objects', $view->element('DataobjectsBrowser/objects', compact('objects')));
             $controller->set('header', $view->element('DataobjectsBrowser/header', compact('pagination', 'orders', 'page')));
-            $controller->set('filters', $view->element('DataobjectsBrowser/filters', compact('filters', 'switchers', 'facets', 'page')));            
+            $controller->set('filters', $view->element('DataobjectsBrowser/filters', compact('filters', 'switchers', 'facets', 'page')));
             $controller->set('pagination', $view->element('DataobjectsBrowser/pagination'));
             $controller->set('_serialize', array('objects', 'header', 'filters', 'pagination'));
-		
-		}
-		else
-		{
-			
 
-			$path = App::path('View', 'Dane');
-	        $path = $path[0] . $controller->viewPath . '/' . $controller->view . '.ctp';	        
-	        $controller->view = $this->getViewPath();
-	
-	        if (file_exists($path))
-	            $controller->set('originalViewPath', $path);
-			
-			
-		}
+        } else {
+
+
+            $path = App::path('View', 'Dane');
+            $path = $path[0] . $controller->viewPath . '/' . $controller->view . '.ctp';
+            $controller->view = $this->getViewPath();
+
+            if (file_exists($path))
+                $controller->set('originalViewPath', $path);
+
+
+        }
 
     }
 

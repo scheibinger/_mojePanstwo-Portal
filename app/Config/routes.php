@@ -40,9 +40,9 @@ Router::connect('/zglosblad', array('controller' => 'pages', 'action' => 'displa
 Router::connect('/kontakt', array('controller' => 'pages', 'action' => 'display', 'contact_us'));
 
 
-Router::parseExtensions('rss','xml','json', 'html');
-Router::connect('/sitemap', array('controller' => 'sitemaps', 'action' => 'index')); 
-Router::connect('/sitemaps/:dataset-:page', array('controller' => 'sitemaps', 'action' => 'dataset')); 
+Router::parseExtensions('rss', 'xml', 'json', 'html');
+Router::connect('/sitemap', array('controller' => 'sitemaps', 'action' => 'index'));
+Router::connect('/sitemaps/:dataset-:page', array('controller' => 'sitemaps', 'action' => 'dataset'));
 
 /**
  * Load all plugin routes. See the CakePlugin documentation on

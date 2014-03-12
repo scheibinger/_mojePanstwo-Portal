@@ -15,7 +15,7 @@
     </div>
     <div class="content">
         <div class="container">
-        <div class="row userHelper logInAccount">
+            <div class="row userHelper logInAccount">
                 <?php echo $this->Form->create('User', array('action' => 'login')); ?>
                 <div class="row">
                     <div class="or nomargin col-xs-12 col-sm-10 col-md-6 col-sm-offset-1 col-md-offset-3">

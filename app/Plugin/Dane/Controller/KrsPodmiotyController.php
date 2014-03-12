@@ -9,11 +9,11 @@ class KrsPodmiotyController extends DataobjectsController
         'Time',
     );
     public $components = array('RequestHandler');
-	public $objectOptions = array(
-		'hlFields' => array(),
-		'bigTitle' => true,
-	);
-	
+    public $objectOptions = array(
+        'hlFields' => array(),
+        'bigTitle' => true,
+    );
+
     /*
     public $menuMode = 'vertical';
     protected function prepareMenu()
@@ -239,7 +239,7 @@ class KrsPodmiotyController extends DataobjectsController
 
         @$this->set('dzialalnosci', $dzialalnosci);
 
-				
+
         $this->set('_menu', $menu);
 
 

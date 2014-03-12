@@ -5,17 +5,17 @@ App::uses('DataobjectsController', 'Dane.Controller');
 class ZamowieniaPubliczneController extends DataobjectsController
 {
     public $menu = array();
-	public $objectOptions = array(
-		'hlFields' => array(),
-	);
-	
+    public $objectOptions = array(
+        'hlFields' => array(),
+    );
+
     public function view()
     {
 
         parent::view();
         $details = $this->object->loadLayer('details');
         $fields = $details['ZamowieniaPubliczne'];
-		
+
 
         $przedmiot = str_replace(array("\n", "\r", "\t"), ' ', $fields['przedmiot']);
         $przedmiot = preg_replace('/(\s+)/i', ' ', $przedmiot);

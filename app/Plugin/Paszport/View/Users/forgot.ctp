@@ -7,7 +7,7 @@
     <div class="header">
         <div class="container">
             <div class="row text-center">
-            <h1><?php echo __d('paszport', "LC_PASZPORT_PASSWORD_FORGOT_MOTTO") ?></h1>
+                <h1><?php echo __d('paszport', "LC_PASZPORT_PASSWORD_FORGOT_MOTTO") ?></h1>
             </div>
         </div>
     </div>
@@ -15,7 +15,7 @@
         <div class="container userHelper forgotPassword">
             <div class="row">
                 <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3 text-center">
-                <?php echo __d('paszport', "LC_PASZPORT_FORGOT_PASSWORD_EVANGELION"); ?>
+                    <?php echo __d('paszport', "LC_PASZPORT_FORGOT_PASSWORD_EVANGELION"); ?>
                 </div>
             </div>
             <?php echo $this->Form->create('User', array('action' => 'forgot')); ?>

@@ -5,16 +5,16 @@ App::uses('DataobjectsController', 'Dane.Controller');
 class LegislacjaProjektyUchwalController extends DataobjectsController
 {
     public $menu = array();
-    
+
     public $objectOptions = array(
-    	'hlFields' => array('status_str'),
+        'hlFields' => array('status_str'),
     );
 
     public function view()
     {
-    
+
         parent::view();
-        
+
         if ($this->object->getData('typ_id') == '2' && stripos($this->here, '/legislacja_projekty_ustaw') === 0) {
             $this->redirect(array('plugin' => 'Dane', 'controller' => 'legislacja_projekty_uchwal', 'id' => $this->request->params->id), '301');
         } elseif ($this->object->getData('nadrzedny_projekt_id') && ($this->object->getData('typ_id') == '1' || $this->object->getData('typ_id') == '2')) {
@@ -24,20 +24,20 @@ class LegislacjaProjektyUchwalController extends DataobjectsController
                 $this->redirect(array('plugin' => 'Dane', 'controller' => 'legislacja_projekty_uchwal', 'id' => $this->object->getData('nadrzedny_projekt_id')), '301');
         }
 
-		$menu = array();
-		
-		$related = $this->object->getLayer('related');
-		$groups = $related['groups'];
-		
-		foreach( $groups as $group )
-			$menu[] = array(
-				'id' => $group['id'],
-				'label' => $group['title'],
-			);
+        $menu = array();
 
-		
-		$this->set('_menu', $menu);
-		
+        $related = $this->object->getLayer('related');
+        $groups = $related['groups'];
+
+        foreach ($groups as $group)
+            $menu[] = array(
+                'id' => $group['id'],
+                'label' => $group['title'],
+            );
+
+
+        $this->set('_menu', $menu);
+
     }
-    
+
 } 

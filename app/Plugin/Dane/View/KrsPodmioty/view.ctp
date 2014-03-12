@@ -37,8 +37,8 @@ echo $this->Html->script('Dane.arbor/lib/arbor-graphic', array('block' => 'scrip
         $adres .= ', ' . $object->getData('adres_miejscowosc');
         $adres .= ', Polska';
         ?>
-		
-		 <div class="profile_baner" data-adres="<?= urlencode($adres) ?>">
+
+        <div class="profile_baner" data-adres="<?= urlencode($adres) ?>">
             <div class="bg">
                 <img
                     src="http://maps.googleapis.com/maps/api/staticmap?center=<?= urlencode($adres) ?>&markers=<?= urlencode($adres) ?>&zoom=15&sensor=false&size=640x140&scale=2&feature:road"/>
@@ -60,15 +60,15 @@ echo $this->Html->script('Dane.arbor/lib/arbor-graphic', array('block' => 'scrip
                 </script>
             </div>
         </div>
-        
+
         <div class="block">
             <?php echo $this->Dataobject->hlTableForObject($object, array(
-				'krs', 'nip', 'regon', 'wartosc_czesc_kapitalu_wplaconego', 'wartosc_kapital_docelowy', 'wartosc_kapital_zakladowy', 'wartosc_nominalna_akcji', 'wartosc_nominalna_podwyzszenia_kapitalu', 'data_rejestracji', 'data_dokonania_wpisu', 'email', 'www', 'forma_prawna_str', 'oznaczenie_sadu', 'sygnatura_akt', 'wczesniejsza_rejestracja_str'
-			), array(
-				'col_width' => 3,
-				'display' => 'firstRow',
-			)); ?>
-        </div>       
+                'krs', 'nip', 'regon', 'wartosc_czesc_kapitalu_wplaconego', 'wartosc_kapital_docelowy', 'wartosc_kapital_zakladowy', 'wartosc_nominalna_akcji', 'wartosc_nominalna_podwyzszenia_kapitalu', 'data_rejestracji', 'data_dokonania_wpisu', 'email', 'www', 'forma_prawna_str', 'oznaczenie_sadu', 'sygnatura_akt', 'wczesniejsza_rejestracja_str'
+            ), array(
+                'col_width' => 3,
+                'display' => 'firstRow',
+            )); ?>
+        </div>
 
         <? if ($object->getData('sposob_reprezentacji')) { ?>
             <div class="reprezentacja block bg">
@@ -94,7 +94,8 @@ echo $this->Html->script('Dane.arbor/lib/arbor-graphic', array('block' => 'scrip
                     <h2 id="<?= $organ['idTag'] ?>" class="normalizeText"><?= $organ['title'] ?></h2>
                     <? /* if (isset($organ['label']) && $organ['label']) { ?>
                         <p class="label label-primary"><?= $organ['label'] ?></p>
-                    <? } */ ?>
+                    <? } */
+                    ?>
 
                     <? if ($organ['content']) { ?>
                     <div class="list-group less-borders">

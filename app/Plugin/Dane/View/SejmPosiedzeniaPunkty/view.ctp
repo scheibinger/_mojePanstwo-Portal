@@ -3,16 +3,14 @@
 
 <?php echo $this->Element('dataobject/pageBegin'); ?>
     <div class="object">
-        
-        
-        
-        
+
+
         <div class="block">
-		
-			<h2>Debaty w tym punkcie</h2>
-			
-			<div class="content">
-				<div class="dataobjectsSliderRow debaty row">
+
+            <h2>Debaty w tym punkcie</h2>
+
+            <div class="content">
+                <div class="dataobjectsSliderRow debaty row">
                     <div>
                         <?php echo $this->dataobjectsSlider->render($debaty, array(
                             'perGroup' => 4,
@@ -23,12 +21,10 @@
                         )) ?>
                     </div>
                 </div>
-			</div>
-			
-		</div>
-        
-        
-        
-        
+            </div>
+
+        </div>
+
+
     </div>
 <?php echo $this->Element('dataobject/pageEnd'); ?>

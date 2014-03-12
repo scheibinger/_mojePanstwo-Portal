@@ -136,18 +136,16 @@ class AppController extends Controller
 
     public function beforeFilter()
     {
-    	
-    	if( defined('PORTAL_DOMAIN') )
-    	{
-	    	$pieces = parse_url(Router::url('/', true));
-			if( $pieces['host'] != PORTAL_DOMAIN )
-			{
-			    $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
-	    		$this->redirect($protocol . PORTAL_DOMAIN . $this->here, 301);	    	
-	    	}
-    	}
-    	
-  
+
+        if (defined('PORTAL_DOMAIN')) {
+            $pieces = parse_url(Router::url('/', true));
+            if ($pieces['host'] != PORTAL_DOMAIN) {
+                $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
+                $this->redirect($protocol . PORTAL_DOMAIN . $this->here, 301);
+            }
+        }
+
+
         header('Access-Control-Allow-Origin: ' . $this->request->header('Origin'));
         header('Access-Control-Allow-Credentials: true');
 
