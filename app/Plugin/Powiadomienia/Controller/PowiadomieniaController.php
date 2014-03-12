@@ -27,9 +27,9 @@ class PowiadomieniaController extends PowiadomieniaAppController
 
     public function index()
     {
-		
-		// echo "index"; die();
-		// FETCHING OBJECTS
+
+        // echo "index"; die();
+        // FETCHING OBJECTS
         $queryData = array(
             'conditions' => array(
                 'keyword' => isset($this->request->query['keyword']) ? $this->request->query['keyword'] : false,
@@ -38,12 +38,12 @@ class PowiadomieniaController extends PowiadomieniaAppController
             'limit' => 20,
             'paramType' => 'querystring',
         );
-        
+
         $this->API->search($queryData);
         $objects = $this->API->getObjects();
         $this->set('objects', $objects);
-        
-		
+
+
         if (@$this->request->params['ext'] == 'json') {
 
             $view = new View($this, false);

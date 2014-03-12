@@ -16,7 +16,7 @@ $this->Combinator->add_libs('js', 'MojaGmina.moja_gmina.js');
     </div>
 
     <div class="locationBrowser dataContent content col-xs-12">
-        <div class="mapsContent col-md-12 col-lg-10 col-lg-offset-1">            
+        <div class="mapsContent col-md-12 col-lg-10 col-lg-offset-1">
             <div id="PLBrowser"></div>
         </div>
     </div>

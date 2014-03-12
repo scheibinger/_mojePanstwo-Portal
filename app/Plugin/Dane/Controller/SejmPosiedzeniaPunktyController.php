@@ -13,20 +13,18 @@ class SejmPosiedzeniaPunktyController extends DataobjectsController
 
         parent::view();
         $debaty = array();
-        
-        if(
-        	( $related = $this->object->getLayer('related') ) && 
-        	( isset($related['groups']) ) &&
-        	( !empty($related['groups']) )
-        )
-        {
-	        foreach( $related['groups'] as $group )
-	        {
-	        	if( $group['id'] == 'debaty' )
-	        		$debaty = $group['objects'];
-	        }
-	    }
-	        		
+
+        if (
+            ($related = $this->object->getLayer('related')) &&
+            (isset($related['groups'])) &&
+            (!empty($related['groups']))
+        ) {
+            foreach ($related['groups'] as $group) {
+                if ($group['id'] == 'debaty')
+                    $debaty = $group['objects'];
+            }
+        }
+
         $this->set('debaty', $debaty);
 
     }

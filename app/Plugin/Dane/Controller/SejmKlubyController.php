@@ -5,8 +5,8 @@ App::uses('DataobjectsController', 'Dane.Controller');
 class SejmKlubyController extends DataobjectsController
 {
 
-	public $menu = array();
-	
+    public $menu = array();
+
     public function view()
     {
         parent::_prepareView();

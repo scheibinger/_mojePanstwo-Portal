@@ -54,7 +54,7 @@ $this->Combinator->add_libs('js', 'KodyPocztowe.kody.js');
 
 
 <div id="display">
-<div class="adresList col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+    <div class="adresList col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
         <? if (count($adres->getData()) > 0) {
             $adr = $adres->getData();?>
             <div class="col-xs-4">

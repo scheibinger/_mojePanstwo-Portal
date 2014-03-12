@@ -1,16 +1,18 @@
 .permissions {
-  font-family: "Lato", sans-serif;
-  margin-top: 40px;
-  background: #FFFFFF;
-  padding: 50px;
-  border: 1px solid #FFFFFF;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-  border-radius: 5px;
+    font-family: "Lato", sans-serif;
+    margin-top: 40px;
+    background: #FFFFFF;
+    padding: 50px;
+    border: 1px solid #FFFFFF;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
 }
+
 .permissions .image {
-  text-align: center;
+    text-align: center;
 }
+
 .permissions .information {
-  padding-top: 20px;
+    padding-top: 20px;
 }

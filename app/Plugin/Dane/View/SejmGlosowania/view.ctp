@@ -41,7 +41,7 @@ $dictionary = array(
 
         <div class="row">
             <div class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-3 sejm_glosowania">
-            <p class="wynikGlosowania <?= $dictionary[$object->getData('wynik_id')][1]; ?> label"><?= $dictionary[$object->getData('wynik_id')][0]; ?></p>
+                <p class="wynikGlosowania <?= $dictionary[$object->getData('wynik_id')][1]; ?> label"><?= $dictionary[$object->getData('wynik_id')][0]; ?></p>
 
                 <div class="highchart" data-wynikiKlubowe='<?= json_encode($chartData) ?>'></div>
 

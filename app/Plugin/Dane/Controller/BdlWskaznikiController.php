@@ -8,7 +8,7 @@ class BdlWskaznikiController extends DataobjectsController
     public $menu = array();
     public $components = array('RequestHandler');
     public $objectOptions = array(
-    	'bigTitle' => true,
+        'bigTitle' => true,
     );
 
     private function _view($dimension = array())

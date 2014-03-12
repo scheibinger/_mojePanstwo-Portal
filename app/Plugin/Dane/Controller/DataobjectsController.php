@@ -39,8 +39,8 @@ class DataobjectsController extends DaneAppController
 
     public function related()
     {
-	    $this->_prepareView();
-		$this->set('showRelated', true);
+        $this->_prepareView();
+        $this->set('showRelated', true);
         $this->view = '/Dataobjects/related';
     }
 
@@ -55,7 +55,7 @@ class DataobjectsController extends DaneAppController
 
 
             $this->object->loadRelated();
-                        
+
             if ($this->object->hasRelated())
                 foreach ($this->menu as $item) {
                     if ($item['id'] == 'related') {
@@ -67,7 +67,7 @@ class DataobjectsController extends DaneAppController
                         'icon' => 'related',
                     );
                 }
-						
+
             $this->set('object', $this->object);
             $this->set('objectOptions', $this->objectOptions);
 
@@ -95,7 +95,7 @@ class DataobjectsController extends DaneAppController
             $this->set('menu', $this->menu);
             $this->set('menuMode', $this->menuMode);
             $this->set('title_for_layout', $title_for_layout);
-            
+
 
             if ($this->Session->read('Auth.User.id'))
                 $this->API->Powiadomienia()->flagObject($this->object->id);
@@ -107,22 +107,21 @@ class DataobjectsController extends DaneAppController
 
         }
     }
-	
-	public function beforeRender()
-	{
-		
-		parent::beforeRender();
-		
-		if( is_object( $this->object ) )
-		{
-			$this->set('_dataset', $this->object->getDataset());
-	        $this->set('_object_id', $this->object->getId());
-	        $this->set('_data', $this->object->getData());
-	        $this->set('_layers', $this->object->layers);
-	        $this->set('_serialize', array('_dataset', '_object_id', '_data', '_layers'));
+
+    public function beforeRender()
+    {
+
+        parent::beforeRender();
+
+        if (is_object($this->object)) {
+            $this->set('_dataset', $this->object->getDataset());
+            $this->set('_object_id', $this->object->getId());
+            $this->set('_data', $this->object->getData());
+            $this->set('_layers', $this->object->layers);
+            $this->set('_serialize', array('_dataset', '_object_id', '_data', '_layers'));
         }
-	}
-	
+    }
+
     protected function innerSearch($dataset, $initalConditions = array(), $options = array())
     {
         $alias = $dataset;

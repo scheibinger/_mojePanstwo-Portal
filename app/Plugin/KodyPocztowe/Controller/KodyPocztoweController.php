@@ -132,7 +132,7 @@ class KodyPocztoweController extends KodyPocztoweAppController
                         $text .= ' ' . $obj->getData('ulica');
 
                     $score = @$obj->getLayer('score');
-					
+
                     $s = array(
                         'id' => $obj->getId(),
                         'text' => $text,

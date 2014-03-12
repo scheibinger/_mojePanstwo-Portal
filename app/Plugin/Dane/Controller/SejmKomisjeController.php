@@ -5,7 +5,7 @@ App::uses('DataobjectsController', 'Dane.Controller');
 class SejmKomisjeController extends DataobjectsController
 {
     public $menu = array();
-	
+
     public function view()
     {
         parent::_prepareView();

@@ -1,18 +1,22 @@
 <?php
 
-class DummySource extends DataSource {
+class DummySource extends DataSource
+{
 
-    function connect() {
+    function connect()
+    {
         $this->connected = true;
         return $this->connected;
     }
 
-    function disconnect() {
+    function disconnect()
+    {
         $this->connected = false;
         return !$this->connected;
     }
 
-    function isConnected() {
+    function isConnected()
+    {
 
         return true;
     }

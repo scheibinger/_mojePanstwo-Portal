@@ -4,9 +4,9 @@ App::uses('DataobjectsController', 'Dane.Controller');
 
 class GminyController extends DataobjectsController
 {
-	
-	/*
-	 array(
+
+    /*
+     array(
             'label' => 'LC_DANE_START',
             'id' => 'view',
         ),
@@ -27,7 +27,7 @@ class GminyController extends DataobjectsController
             'id' => 'map',
         ),
     */
-	
+
     public $menu = array();
 
     public $helpers = array(
@@ -35,45 +35,45 @@ class GminyController extends DataobjectsController
             'className' => 'Dane.NumberPlus',
         ),
     );
-    
+
     public $objectOptions = array(
-    	'bigTitle' => true,
+        'bigTitle' => true,
     );
 
     public function view()
     {
-		
+
         parent::view();
         $menu = array(
-	    	array(
-	    		'id' => 'rada',
-	    		'label' => 'Rada gminy',
-	    	),
-	    	/*
-	    	array(
-	    		'id' => 'wskazniki',
-	    		'label' => 'Wskaźniki',
-	    	),
-	    	*/
-	    	array(
-	    		'id' => 'zamowienia_publiczne',
-	    		'label' => 'Zamówienia publiczne',
-	    	),
-	    	array(
-	    		'id' => 'dotacje_unijne',
-	    		'label' => 'Dotacje unijne',
-	    	),
-	    	array(
-	    		'id' => 'organizacje',
-	    		'label' => 'Organizacje w gminie',
-	    	),
-	    );
-	    
+            array(
+                'id' => 'rada',
+                'label' => 'Rada gminy',
+            ),
+            /*
+            array(
+                'id' => 'wskazniki',
+                'label' => 'Wskaźniki',
+            ),
+            */
+            array(
+                'id' => 'zamowienia_publiczne',
+                'label' => 'Zamówienia publiczne',
+            ),
+            array(
+                'id' => 'dotacje_unijne',
+                'label' => 'Dotacje unijne',
+            ),
+            array(
+                'id' => 'organizacje',
+                'label' => 'Organizacje w gminie',
+            ),
+        );
+
         $this->set('_menu', $menu);
-        
+
         $this->object->loadLayer('rada_komitety');
-        
-        
+
+
         $this->API->searchDataset('zamowienia_publiczne', array(
             'limit' => 12,
             'conditions' => array(
@@ -81,7 +81,7 @@ class GminyController extends DataobjectsController
             ),
         ));
         $this->set('zamowienia', $this->API->getObjects());
-                
+
         $this->API->searchDataset('dotacje_ue', array(
             'limit' => 12,
             'conditions' => array(
@@ -89,7 +89,7 @@ class GminyController extends DataobjectsController
             ),
         ));
         $this->set('dotacje_ue', $this->API->getObjects());
-        
+
         $this->API->searchDataset('krs_podmioty', array(
             'limit' => 12,
             'conditions' => array(
@@ -97,55 +97,48 @@ class GminyController extends DataobjectsController
             ),
         ));
         $this->set('organizacje', $this->API->getObjects());
-        
-        
-        
-        if( $this->object->getId() == 903 )
-        {
-	        
-	        // PRZEJRZYSTY KRAKÓW
-	        
-	        $this->API->searchDataset('rady_druki', array(
-	            'limit' => 12,
-	            'conditions' => array(
-	                'gmina_id' => $this->object->getId(),
-	            ),
-	        ));
-	        $this->set('rady_druki', $this->API->getObjects());
-	        
-	        
-	        $this->API->searchDataset('rady_posiedzenia', array(
-	            'limit' => 12,
-	            'conditions' => array(
-	                'gmina_id' => $this->object->getId(),
-	            ),
-	        ));
-	        $this->set('rady_posiedzenia', $this->API->getObjects());
-	        
-	        
-	        
-	        $this->API->searchDataset('prawo_lokalne', array(
-	            'limit' => 12,
-	            'conditions' => array(
-	                'gmina_id' => $this->object->getId(),
-	            ),
-	        ));
-	        $this->set('prawo_lokalne', $this->API->getObjects());
-	        
+
+
+        if ($this->object->getId() == 903) {
+
+            // PRZEJRZYSTY KRAKÓW
+
+            $this->API->searchDataset('rady_druki', array(
+                'limit' => 12,
+                'conditions' => array(
+                    'gmina_id' => $this->object->getId(),
+                ),
+            ));
+            $this->set('rady_druki', $this->API->getObjects());
+
+
+            $this->API->searchDataset('rady_posiedzenia', array(
+                'limit' => 12,
+                'conditions' => array(
+                    'gmina_id' => $this->object->getId(),
+                ),
+            ));
+            $this->set('rady_posiedzenia', $this->API->getObjects());
+
+
+            $this->API->searchDataset('prawo_lokalne', array(
+                'limit' => 12,
+                'conditions' => array(
+                    'gmina_id' => $this->object->getId(),
+                ),
+            ));
+            $this->set('prawo_lokalne', $this->API->getObjects());
+
         }
-        
-        
-        
-        
-        
-        
+
+
         /*
         $wskazniki = $this->object->loadLayer('wskazniki');
         $rada_komitety = $this->object->loadLayer('rada_komitety');
         $wskazniki = array_slice($wskazniki, 0, 5, true);
 		*/
 
-        
+
     }
 
 
@@ -159,8 +152,8 @@ class GminyController extends DataobjectsController
             'hlFields' => $hl_fields = array('numer', 'liczba_debat'),
         ));
     }
-    
-    
+
+
     public function prawo()
     {
         parent::_prepareView();
@@ -171,8 +164,8 @@ class GminyController extends DataobjectsController
             // 'hlFields' => $hl_fields = array('numer', 'liczba_debat'),
         ));
     }
-    
-    
+
+
     public function druki()
     {
         parent::_prepareView();
@@ -183,8 +176,8 @@ class GminyController extends DataobjectsController
             // 'hlFields' => $hl_fields = array('numer', 'liczba_debat'),
         ));
     }
-    
-    
+
+
     public function radni()
     {
         parent::_prepareView();
@@ -199,18 +192,18 @@ class GminyController extends DataobjectsController
             'hlFields' => array('rady_gmin_komitety.nazwa', 'liczba_glosow', 'procent_glosow_w_okregu', 'oswiadczenie_id'),
         ));
     }
-    
-    
+
+
     public function darczyncy()
     {
         parent::_prepareView();
         $this->dataobjectsBrowserView(array(
             'dataset' => 'wybory_darczyncy',
             'title' => 'Wpłaty na komitety wyborcze',
-            'noResultsTitle' => 'Brak danych',            
+            'noResultsTitle' => 'Brak danych',
         ));
     }
-      
+
 
     public function wskazniki()
     {
@@ -236,7 +229,7 @@ class GminyController extends DataobjectsController
             ),
         ));
     }
-    
+
     public function organizacje()
     {
         parent::_prepareView();
@@ -250,7 +243,7 @@ class GminyController extends DataobjectsController
             ),
         ));
     }
-    
+
     public function dotacje_ue()
     {
         parent::_prepareView();
@@ -282,23 +275,22 @@ class GminyController extends DataobjectsController
         parent::_prepareView();
         $this->set('spat', $this->object->loadLayer('enspat'));
     }
-    
-    
+
+
     public function zamowienia_publiczne()
     {
-	    
-	    $url = '/dane/gminy/' . $this->request->params['id'] . '/zamowienia';
-		
-		if( !empty($this->request->query) )
-			$url .= '?' . http_build_query( $this->request->query );
-		
-	    $this->redirect( $url );	    
-	    
+
+        $url = '/dane/gminy/' . $this->request->params['id'] . '/zamowienia';
+
+        if (!empty($this->request->query))
+            $url .= '?' . http_build_query($this->request->query);
+
+        $this->redirect($url);
+
     }
 
 
-
-	/*
+    /*
     public function prepareMenu()
     {
         if ($this->object->getId() == '903') {

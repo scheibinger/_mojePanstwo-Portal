@@ -4,9 +4,9 @@ $path = App::path('Plugin');
 $file = $path[0] . '/Dane/View/Elements/' . $theme . '/' . $object->getDataset() . '.ctp';
 $file_exists = file_exists($file);
 
-$shortTitle = ( isset($options['forceTitle']) ) ?
-	$options['forceTitle'] : 
-	$object->getShortTitle();
+$shortTitle = (isset($options['forceTitle'])) ?
+    $options['forceTitle'] :
+    $object->getShortTitle();
 
 if (in_array($object->getDataset(), array('rady_posiedzenia', 'rady_gmin_debaty', 'rady_gmin_wystapienia'))) {
     $object_content_sizes = array(3, 9);
@@ -51,7 +51,9 @@ $this->Dataobject->setObject($object);
                                 <?php } ?>
                                 <?= $shortTitle ?>
                                 <?php if ($object->getUrl() != false) { ?>
-                            </a> <? } if ($object->getTitleAddon()) echo '<small>' . $object->getTitleAddon() . '</small>'; ?>
+                            </a> <?
+                        }
+                        if ($object->getTitleAddon()) echo '<small>' . $object->getTitleAddon() . '</small>'; ?>
                         </p>
                         <?
                         if ($file_exists)
@@ -81,7 +83,9 @@ $this->Dataobject->setObject($object);
                                 <?php } ?>
                                 <?= $shortTitle ?>
                                 <?php if ($object->getUrl() != false){ ?>
-                            </a> <?} if ($object->getTitleAddon()) echo '<small>' . $object->getTitleAddon() . '</small>'; ?>
+                            </a> <?
+                        }
+                        if ($object->getTitleAddon()) echo '<small>' . $object->getTitleAddon() . '</small>'; ?>
                         </p>
                         <?
                         if ($file_exists)

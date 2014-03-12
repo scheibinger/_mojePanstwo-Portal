@@ -52,7 +52,7 @@
                         <? } ?>
 
                     </div>
-                   
+
                     <div class="col-lg-6">
 
                         <? if ($object->getData('opis')) { ?>

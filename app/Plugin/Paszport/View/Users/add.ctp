@@ -7,7 +7,7 @@
     <div class="header">
         <div class="container">
             <div class="row text-center">
-            <h1><?php echo __d('paszport', "LC_PASZPORT_CREATE_MOTTO") ?></h1>
+                <h1><?php echo __d('paszport', "LC_PASZPORT_CREATE_MOTTO") ?></h1>
             </div>
         </div>
     </div>
@@ -78,7 +78,7 @@
             </div>
             <div class="row last">
                 <div class="col-xs-8 col-sm-6 col-md-4 col-xs-offset-2 col-sm-offset-3 col-md-offset-4 text-center">
-                <?php echo $this->Form->submit(__d('paszport', 'LC_PASZPORT_REGISTER_BUTTON'), array('class' => 'btn btn-primary btn-lg')); ?>
+                    <?php echo $this->Form->submit(__d('paszport', 'LC_PASZPORT_REGISTER_BUTTON'), array('class' => 'btn btn-primary btn-lg')); ?>
                 </div>
             </div>
             <?php echo $this->Form->end(); ?>

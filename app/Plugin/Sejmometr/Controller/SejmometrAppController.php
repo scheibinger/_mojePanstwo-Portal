@@ -3,6 +3,5 @@
 class SejmometrAppController extends AppController
 {
 
-    
 
 }

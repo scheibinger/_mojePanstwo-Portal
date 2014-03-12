@@ -1026,8 +1026,6 @@ class UsersController extends PaszportAppController
     }
 
 
-    
-
     //@TODO
     public function twitterlogin($callback = null)
     {

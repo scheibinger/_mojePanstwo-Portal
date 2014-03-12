@@ -8,11 +8,11 @@ class KrsOsobyController extends DataobjectsController
     public $helpers = array(
         'Time',
     );
-	
-	public $objectOptions = array(
-		'hlFields' => array(),
-	);
-	
+
+    public $objectOptions = array(
+        'hlFields' => array(),
+    );
+
     public function view()
     {
         parent::view();
