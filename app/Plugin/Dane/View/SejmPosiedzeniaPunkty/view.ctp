@@ -5,7 +5,7 @@
     <div class="object">
 
 
-        <div class="block">
+        <div class="block spacing">
 
             <h2>Debaty w tym punkcie</h2>
 
@@ -24,6 +24,15 @@
             </div>
 
         </div>
+        
+        <div class="wynik">
+	        <div class="alert alert-info">
+			  <h4><?= $object->getData('opis'); ?></h4>
+			</div>
+        </div>
+        
+        
+        <?= $this->element('dataobject/pageRelated'); ?>
 
 
     </div>

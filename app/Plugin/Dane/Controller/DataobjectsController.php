@@ -17,6 +17,7 @@ class DataobjectsController extends DaneAppController
         ),
     );
     public $menuMode = 'horizontal';
+    public $autoRelated = true;
 
     public function index()
     {
@@ -38,8 +39,12 @@ class DataobjectsController extends DaneAppController
     }
 
     public function related()
-    {
+    {    	
         $this->_prepareView();
+        
+        if( !$this->autoRelated )
+        	$this->object->loadRelated();
+        
         $this->set('showRelated', true);
         $this->view = '/Dataobjects/related';
     }
@@ -53,21 +58,26 @@ class DataobjectsController extends DaneAppController
 
         if (is_object($this->object)) {
 
-
-            $this->object->loadRelated();
-
-            if ($this->object->hasRelated())
-                foreach ($this->menu as $item) {
-                    if ($item['id'] == 'related') {
-                        break;
-                    }
-                    $this->menu[] = array(
-                        'id' => 'related',
-                        'label' => 'Powiązania',
-                        'icon' => 'related',
-                    );
-                }
-
+			
+			if( $this->autoRelated )
+			{
+            
+	            $this->object->loadRelated();
+	
+	            if ($this->object->hasRelated())
+	                foreach ($this->menu as $item) {
+	                    if ($item['id'] == 'related') {
+	                        break;
+	                    }
+	                    $this->menu[] = array(
+	                        'id' => 'related',
+	                        'label' => 'Powiązania',
+	                        'icon' => 'related',
+	                    );
+	                }
+			
+			}
+			
             $this->set('object', $this->object);
             $this->set('objectOptions', $this->objectOptions);
 

@@ -15,6 +15,7 @@ if (in_array($object->getDataset(), array('rady_posiedzenia', 'rady_gmin_debaty'
 }
 
 $this->Dataobject->setObject($object);
+
 ?>
 <div class="objectRender"
      oid="<?php echo $item['data']['id'] ?>" gid="<?php echo $gid ?>">
@@ -66,6 +67,13 @@ $this->Dataobject->setObject($object);
                         else
                             echo $this->Dataobject->highlights($hlFields, $hlFieldsPush);
                         ?>
+                        
+                        <? if( $object->getDescription() ){?>
+                        <div class="description">
+                        	<?= $object->getDescription() ?>
+                        </div>
+                        <?}?>
+                        
                     </div>
 
                 <? } else { ?>

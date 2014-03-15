@@ -3,11 +3,12 @@
     $groups = $related['groups']; ?>
 
 
-    <div class="mpanel related_div"<? if (!$showRelated) { ?> style="display: none;"<? } ?>>
+    <div class="mpanel related_div"<? if( isset($showRelated) && !$showRelated ) { ?> style="display: none;"<? } ?>>
         <div class="col-lg-9">
             <ul>
                 <? foreach ($groups as $group) { ?>
-                    <li class="related_li <?= $group['id'] ?>">
+                	<? if( isset($group['objects']) && !empty($group['objects']) ) {?>
+                    <li name="<?= $group['id'] ?>" class="related_li <?= $group['id'] ?>">
 
                         <div class="block">
                             <h2 class="underline"><?= $group['title'] ?>:</h2>
@@ -31,6 +32,7 @@
                         </div>
 
                     </li>
+                    <? } ?>
                 <? } ?>
             </ul>
         </div>

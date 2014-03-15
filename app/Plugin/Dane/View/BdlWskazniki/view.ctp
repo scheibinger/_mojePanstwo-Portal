@@ -25,7 +25,7 @@
                                 <div class="map">
                                     <a href="<?= $this->here ?>/<?= $option['data']['id'] ?>">
                                         <img width="216" height="200"
-                                             src="http://resources.sejmometr.pl/bdl_wymiary_kombinacje/bdl_wymiary_kombinacje_<?= $option['data']['id'] ?>.png"
+                                             src="http://resources.sds.tiktalik.com/BDL_wymiary_kombinacje/<?= $object->getId() ?>.png"
                                              class="imageInside"/>
                                     </a>
                                 </div>
