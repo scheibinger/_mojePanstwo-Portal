@@ -422,6 +422,11 @@ class DataobjectsBrowserComponent extends Component
 
 
         $pagination = $controller->Dataobject->pagination;
+        $pagination['page'] = (int) @$controller->request->query['page'];
+        if( !$pagination['page'] )
+        	$pagination['page'] = 1;
+        	
+        
         $facets = $controller->Dataobject->facets;
 
 
