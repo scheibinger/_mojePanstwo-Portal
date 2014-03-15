@@ -14,6 +14,17 @@ var filtersController = function () {
         filters.find('.filter').each(function () {
             var filter;
 
+            if (jQuery(this).hasClass('innerSearch')) {
+                var innerSearch = jQuery(this);
+
+                innerSearch.keypress(function (e) {
+                    if (e.which == 13) {
+                        if (innerSearch.length > 0)
+                            innerSearch.parents('form').submit();
+                    }
+                });
+            }
+
             /*HIDE OPTIONS OVER LIMIT*/
             if ((filter = jQuery(this).find('.options')).length) {
                 var filterChecked = filter.find('li input:checked'),
