@@ -28,7 +28,7 @@ if (!isset($right_column_width))
                     <?php } ?>
                     <div class="docDownload">
                         <a class="btn btn-default"
-                           href="//sejmometr.pl/doc/<?php echo $document->getId(); ?>"><?php echo __d('dane', 'LC_DANE_TOOLBAR_DOWNLOAD'); ?></a>
+                           href="/doc/<?php echo $document->getId(); ?>"><?php echo __d('dane', 'LC_DANE_TOOLBAR_DOWNLOAD'); ?></a>
                     </div>
                 </div>
             </div>
