@@ -14,6 +14,7 @@ if (isset($objects)) {
                     'hlFields' => $dataBrowser->hlFields,
                     'hlFieldsPush' => $dataBrowser->hlFieldsPush,
                     'routes' => $dataBrowser->routes,
+                    'forceLabel' => ($page['mode'] == 'datachannel'),
                 ));
                 $bg = !$bg;
             }

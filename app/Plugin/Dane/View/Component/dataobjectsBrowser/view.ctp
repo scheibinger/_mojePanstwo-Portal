@@ -51,6 +51,7 @@ if ($__mode == 'object')
         <div class="innerContainer update-objects">
             <? echo $this->element('DataobjectsBrowser/objects', array(
                 'objects' => $objects,
+                'page' => $page,
             )); ?>
         </div>
 
