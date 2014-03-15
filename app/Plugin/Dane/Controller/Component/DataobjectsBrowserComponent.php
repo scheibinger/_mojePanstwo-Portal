@@ -113,7 +113,8 @@ class DataobjectsBrowserComponent extends Component
         $filters = array();
         $switchers = array();
         $orders = array();
-
+		
+		$controller->mode = 'dataobjectsBrowser';
 
         if (
             isset($controller->request->query['dataset']) &&
@@ -445,15 +446,26 @@ class DataobjectsBrowserComponent extends Component
         $controller->set('dataBrowser', $this);
 
 
-        if (@$controller->request->params['ext'] == 'json') {
-
-            $view = new View($controller, false);
-
-            $controller->set('objects', $view->element('DataobjectsBrowser/objects', compact('objects')));
-            $controller->set('header', $view->element('DataobjectsBrowser/header', compact('pagination', 'orders', 'page')));
-            $controller->set('filters', $view->element('DataobjectsBrowser/filters', compact('filters', 'switchers', 'facets', 'page')));
-            $controller->set('pagination', $view->element('DataobjectsBrowser/pagination'));
-            $controller->set('_serialize', array('objects', 'header', 'filters', 'pagination'));
+        if( @$controller->request->params['ext'] == 'json') {
+						
+			if( $controller->request->is('ajax') )
+			{
+			
+	            $view = new View($controller, false);
+	
+	            $controller->set('objects', $view->element('DataobjectsBrowser/objects', compact('objects')));
+	            $controller->set('header', $view->element('DataobjectsBrowser/header', compact('pagination', 'orders', 'page')));
+	            $controller->set('filters', $view->element('DataobjectsBrowser/filters', compact('filters', 'switchers', 'facets', 'page')));
+	            $controller->set('pagination', $view->element('DataobjectsBrowser/pagination'));
+	            $controller->set('_serialize', array('objects', 'header', 'filters', 'pagination'));
+            
+            }
+            else
+            {
+				
+	            $controller->set('_serialize', array('pagination', 'objects'));
+		            
+            }
 
         } else {
 

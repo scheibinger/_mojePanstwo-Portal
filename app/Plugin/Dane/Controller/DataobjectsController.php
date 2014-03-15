@@ -18,6 +18,7 @@ class DataobjectsController extends DaneAppController
     );
     public $menuMode = 'horizontal';
     public $autoRelated = true;
+    public $mode = false;
 
     public function index()
     {
@@ -123,7 +124,7 @@ class DataobjectsController extends DaneAppController
 		
 		parent::beforeRender();
 		
-		if( is_object( $this->object ) && !$this->request->is('ajax') )
+		if( is_object( $this->object ) && !$this->request->is('ajax') && !$this->mode )
 		{
 			$this->set('_dataset', $this->object->getDataset());
 	        $this->set('_object_id', $this->object->getId());
@@ -131,76 +132,6 @@ class DataobjectsController extends DaneAppController
 	        $this->set('_layers', $this->object->layers);
 	        $this->set('_serialize', array('_dataset', '_object_id', '_data', '_layers'));
         }
-    }
-
-    protected function innerSearch($dataset, $initalConditions = array(), $options = array())
-    {
-        $alias = $dataset;
-        $this->menuMode = 'none';
-        $conditions = (isset($this->request->query)) ? $this->request->query : $this->data;
-        $conditions = array_merge($conditions, $initalConditions);
-        if (isset($initalConditions['fields'])) {
-            $fields = $initalConditions['fields'];
-            unset($initalConditions['fields']);
-        } else {
-            $fields = null;
-        }
-        $sortings = array();
-        $dataset = array();
-        $filters = array();
-        if (!is_null($alias)) {
-            if (!is_array($alias)) {
-                // ŁADOWANIE INFORMACJI O DATASET'CIE
-                $data = $this->API->getDataset($alias);
-                $dataset = $data['Dataset'];
-                $conditions['dataset'] = $dataset['alias'];
-                // ŁADOWANIE SORTOWAŃ
-                $sortings = $this->API->getDatasetSortings($dataset['alias']);
-
-                // ŁADOWANIE FILTRÓW
-                $filters = $this->API->getDatasetFilters($dataset['alias'], array('exclude' => $this->params->controller));
-
-            } else {
-                $conditions['dataset'] = $alias;
-            }
-
-            // ŁADOWANIE OBIEKTÓW
-            $this->loadModel('Dane.Dataobject');
-
-            $queryData = array(
-                'conditions' => $conditions,
-                'paramType' => 'querystring',
-                'facets' => true,
-            );
-            if (!is_null($fields)) {
-                $queryData['fields'] = $fields;
-            }
-            $this->paginate = $queryData;
-            $dataobjects = $this->Paginator->paginate('Dataobject');
-            $pagination = $this->Dataobject->pagination;
-            $facets = $this->Dataobject->facets;
-            $total = $this->Dataobject->total;
-            if (isset($this->request->query)) {
-                $this->data = array('Dataset' => $this->request->query);
-            }
-
-            $searchTitle = isset($options['searchTitle']) ? $options['searchTitle'] : false;
-
-            $this->set(compact('dataobjects', 'pagination', 'sortings', 'filters', 'total', 'facets', 'dataset', 'conditions', 'searchTitle'));
-            $this->view = 'Dataobjects/innerSearch';
-        }
-        $this->set('menuMode', $this->menuMode);
-    }
-
-    protected function externalRedir($name = null, $id = null)
-    {
-        if (is_null($name)) {
-            $name = $this->name;
-        }
-        if (is_null($id)) {
-            $id = $this->params->id;
-        }
-        $this->redirect('http://sejmometr.pl/' . Inflector::underscore($name) . '/' . $id, '302');
     }
 
     protected function prepareMenu()
