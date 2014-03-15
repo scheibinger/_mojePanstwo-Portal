@@ -32,6 +32,7 @@ Router::connect('/', array('controller' => 'pages', 'action' => 'display', 'home
  */
 Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
 Router::connect('/docs/:id', array('controller' => 'docs', 'action' => 'view'), array('id' => '[0-9]+'));
+Router::connect('/doc/:id', array('controller' => 'docs', 'action' => 'download'), array('id' => '[0-9]+'));
 Router::connect('/docs/:doc_id-:package_id', array('controller' => 'docs', 'action' => 'viewPackage'), array('doc_id' => '[0-9]+', 'package_id' => '[0-9]+'));
 
 Router::connect('/oportalu', array('controller' => 'pages', 'action' => 'display', 'about_us'));

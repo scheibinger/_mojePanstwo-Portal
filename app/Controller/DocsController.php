@@ -7,13 +7,21 @@ class DocsController extends AppController
 
     public function view()
     {
-
+		
         $doc = new MP\Document($this->request->params['id']);
         $this->set('doc', $doc->getData());
         $this->set('_serialize', 'doc');
 
     }
-
+	
+	public function download()
+	{
+		
+		$doc = new MP\Document($this->request->params['id']);
+		$this->redirect( $doc->getUrl() );
+		
+	}
+	
     public function viewPackage()
     {
 
