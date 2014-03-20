@@ -17,9 +17,17 @@ if ($object->getDescription()) {
     if (isset($options['descriptionMode']) && ($options['descriptionMode'] == 'none')) {
     } else {
         ?>
-        <p class="description">
-            <?= $this->Text->truncate($object->getDescription(), 200) ?>
-        </p>
+        </div>
+    </div>
+        
+        
+        
+    <div class="row description">
+        <?= $this->Text->truncate($object->getDescription(), 200) ?>
+    </div>
+        
+    <div>
+    	<div>
     <?
     }
 }
