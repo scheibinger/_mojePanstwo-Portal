@@ -62,7 +62,7 @@ class SejmometrController extends SejmometrAppController
 	            'startDate' => $startDate,
 	            'endDate' => $stopDate,
 	            'headline' => '#' . $object->getData('numer'),
-	            'text' => '<p>Poseł wziął udział w debacie Sejmowej</p>',
+	            'text' => '<p>Statystyki posiedzenia</p>',
 	            'classname' => 'klasa',
 	            'asset' => array(
 	                'media' => 'http://resources.sejmometr.pl/sejm_komunikaty/img/' . $object->getData('komunikat_id') . '-0.jpg',

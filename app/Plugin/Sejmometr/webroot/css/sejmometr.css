@@ -9,11 +9,13 @@
 #_wrapper h1 strong {
   font-weight: 400;
 }
-#_wrapper h2 {
-  font-family: "Lato", sans-serif;
-  font-size: 18px;
-  font-weight: 400;
-  text-align: center;
+#_wrapper .dataobjectsSliderRow h2 {
+  font-size: 26px;
+  margin: 20px 55px 5px !important;
+  text-align: left;
+}
+#_wrapper .dataobjectsSliderRow h2 a {
+  color: #222;
 }
 #_wrapper .innerContent {
   text-align: center;
@@ -92,4 +94,12 @@
 #_wrapper .searchDiv {
   margin: 35px 0 20px;
   overflow: auto;
+}
+.vco-slider .slider-item .content .content-container .text {
+  vertical-align: top !important;
+  width: 60% !important;
+  max-width: 60% !important;
+}
+.vco-slider .slider-item .content .content-container {
+  width: 100% !important;
 }
