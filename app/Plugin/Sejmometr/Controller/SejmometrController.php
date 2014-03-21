@@ -3,7 +3,7 @@
 class SejmometrController extends SejmometrAppController
 {
 	
-	public $helpers = array('Dane.dataobjectsSlider', 'Dane.Dataobject');
+	public $helpers = array('Dane.dataobjectsSlider', 'Dane.Dataobject', 'Dane.Filter');
 	public $components = array('RequestHandler');
 	
     public function index()
@@ -76,6 +76,18 @@ class SejmometrController extends SejmometrAppController
         $this->set('data', $output);
         $this->set('_serialize', 'data');
 	    
+    }
+    
+    public function szukaj()
+    {
+	    
+	    $this->API = $this->API->Dane();
+	    $this->dataBrowser = $this->Components->load('Dane.DataobjectsBrowser', array(
+            'source' => 'app:3',
+            'title' => 'Szukaj w pracach Sejmu',
+            'noResultsTitle' => 'Brak wyników',
+        ));
+	    	    
     }
 
 }

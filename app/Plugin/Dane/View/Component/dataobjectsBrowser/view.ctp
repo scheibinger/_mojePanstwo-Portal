@@ -15,7 +15,7 @@ if (isset($object) && method_exists($object, 'getId') && $object->getId())
 
 <?
 if ($__mode == 'object')
-    echo $this->Element('dataobject/pageBegin');
+    echo $this->element('Dane.dataobject/pageBegin');
 ?>
 
 <div class="container dataBrowser">
@@ -30,7 +30,7 @@ if ($__mode == 'object')
     ?>
 
     <div class="row">
-        <? echo $this->element('DataobjectsBrowser/filters', array(
+        <? echo $this->element('Dane.DataobjectsBrowser/filters', array(
             'filters' => $filters,
             'switchers' => $switchers,
             'facets' => $facets,
@@ -41,7 +41,7 @@ if ($__mode == 'object')
     <div class="col-xs-12 col-sm-9 dataObjects">
 
         <div class="dataInfo update-header">
-            <? echo $this->element('DataobjectsBrowser/header', array(
+            <? echo $this->element('Dane.DataobjectsBrowser/header', array(
                 'pagination' => $pagination,
                 'orders' => $orders,
                 'page' => $page,
@@ -49,14 +49,14 @@ if ($__mode == 'object')
         </div>
 
         <div class="innerContainer update-objects">
-            <? echo $this->element('DataobjectsBrowser/objects', array(
+            <? echo $this->element('Dane.DataobjectsBrowser/objects', array(
                 'objects' => $objects,
                 'page' => $page,
             )); ?>
         </div>
 
         <div class="paginationList col-xs-12 update-pagination">
-            <? echo $this->element('DataobjectsBrowser/pagination'); ?>
+            <? echo $this->element('Dane.DataobjectsBrowser/pagination'); ?>
         </div>
 
     </div>
@@ -66,5 +66,5 @@ if ($__mode == 'object')
 
 <?
 if ($__mode == 'object')
-    echo $this->Element('dataobject/pageEnd');
+    echo $this->Element('Dane.dataobject/pageEnd');
 ?>

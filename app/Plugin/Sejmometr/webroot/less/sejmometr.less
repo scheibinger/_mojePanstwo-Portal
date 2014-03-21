@@ -1,9 +1,93 @@
 #_wrapper {
-    font-family: "Lato", sans-serif;
+
+    .appHeader {
+        background-color: #EEE;
+    }
 
     h1 {
-        font-weight: 400;
+        font-family: "Lato", sans-serif;
+        font-size: 26px;
+        font-weight: 300;
+
+        strong {
+            font-weight: 400;
+        }
     }
+
+    h2 {
+        font-family: "Lato", sans-serif;
+        font-size: 18px;
+        font-weight: 400;
+        text-align: center;
+    }
+
+    .innerContent {
+        text-align: center;
+
+        .main_input {
+            margin: 20px 0 10px;
+
+            input {
+                font-size: 16px;
+            }
+
+            .btn {
+                width: 45px;
+                height: 45px;
+
+                &.loading {
+                    background: url(../../img/loader/search-loading.png) center center no-repeat #5CB85C;
+
+                    &:before {
+                        content: ' ';
+                    }
+                }
+            }
+        }
+
+        #shortcuts {
+            margin: 1.5em 0;
+            position: relative;
+
+            ul {
+                list-style: none;
+                padding: 0;
+                margin: 0;
+
+                li {
+                    padding: 10px;
+                    font-weight: 300;
+                    font-size: 16px;
+                    display: inline;
+                    position: relative;
+
+                    a {
+                        color: #157AB5;
+                    }
+                }
+            }
+
+            .shortcutArrow {
+                @size: 30px;
+
+                width: @size;
+                height: @size;
+                position: absolute;
+                top: -10000px;
+                left: 0;
+
+                &:before {
+                    content: ' ';
+                    width: 0;
+                    height: 0;
+                    border-bottom: 20px solid #ffffff;
+                    border-left: 15px solid transparent;
+                    border-right: 15px solid transparent;
+                }
+            }
+        }
+    }
+   
 	
 	.dataobjectsSliderRow {
 	    h2 {
@@ -38,4 +122,13 @@
         overflow: auto;
     }
 
+}
+
+
+
+
+#_wrapper {
+    
+
+    
 }

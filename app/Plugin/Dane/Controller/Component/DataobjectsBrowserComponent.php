@@ -97,6 +97,8 @@ class DataobjectsBrowserComponent extends Component
         } elseif (isset($source_params['datachannel']) && !empty($source_params['datachannel'])) {
             $this->mode = 'datachannel';
             $this->tag = $source_params['datachannel'];
+        } else {
+	        $this->mode = '*';
         }
 
     }
@@ -458,10 +460,10 @@ class DataobjectsBrowserComponent extends Component
 			
 	            $view = new View($controller, false);
 	
-	            $controller->set('objects', $view->element('DataobjectsBrowser/objects', compact('objects')));
-	            $controller->set('header', $view->element('DataobjectsBrowser/header', compact('pagination', 'orders', 'page')));
-	            $controller->set('filters', $view->element('DataobjectsBrowser/filters', compact('filters', 'switchers', 'facets', 'page')));
-	            $controller->set('pagination', $view->element('DataobjectsBrowser/pagination'));
+	            $controller->set('objects', $view->element('Dane.DataobjectsBrowser/objects', compact('objects')));
+	            $controller->set('header', $view->element('Dane.DataobjectsBrowser/header', compact('pagination', 'orders', 'page')));
+	            $controller->set('filters', $view->element('Dane.DataobjectsBrowser/filters', compact('filters', 'switchers', 'facets', 'page')));
+	            $controller->set('pagination', $view->element('Dane.DataobjectsBrowser/pagination'));
 	            $controller->set('_serialize', array('objects', 'header', 'filters', 'pagination'));
             
             }

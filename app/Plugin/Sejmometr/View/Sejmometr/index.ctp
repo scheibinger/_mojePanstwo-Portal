@@ -8,51 +8,71 @@
 
 
 <div id="sejmometr">
-
-    <div id="timeline-embed" data-source="1"></div>
-
-
-   <div class="container">
 	
-		<? /*
-	    <div class="searchDiv">
-	        <div class="col-lg-10 col-lg-offset-1">
-	            <form action="/dane/zamowienia_publiczne">
-	                <div class="input-group main_input">
-	                    <input name="q" type="text"
-	                           placeholder="<?= __d('zamowienia_publiczne', 'LC_SEARCH_ALL_TENDERS') ?>"
-	                           class="form-control input-lg">
-					            <span class="input-group-btn">
-					                  <input type="submit" class="btn btn-success input-lg" value="<?= __('LC_SEARCH') ?>"/>
-					            </span>
-	                </div>
-	            </form>
-	        </div>
-	    </div>
-	    */ ?>
+	<div class="innerContent col-xs-12 col-sm-8 col-sm-offset-2">
+        
+        <form class="searchInput" action="/sejmometr/szukaj">
+            <div class="input-group main_input">
+                <input name="q" value="" type="text" autocomplete="off"
+                       placeholder="Szukaj w pracach Sejmu..."
+                       class="form-control input-lg">
+                <span class="input-group-btn">
+                      <button class="btn btn-success btn-lg" type="submit" data-icon="&#xe600;"></button>
+                </span>
+            </div>
+        </form>
+        
+        <div id="shortcuts">
+            <ul>
+                <li>
+                    <a href="/dane/legislacja_projekty_ustaw">Projekty ustaw</a>
+                </li>
+                <li>
+                    <a href="/dane/sejm_druki">Druki sejmowe</a>
+                </li>
+                <li>
+                    <a href="/dane/poslowie" target="_self">Posłowie</a>
+                </li>
+                <li>
+                    <a href="/dane/sejm_kluby" target="_self">Kluby parlamentarne</a>
+                </li>
+                <li>
+                    <a href="/dane/sejm_interpelacje" target="_self">Interpelacje</a>
+                </li>
+            </ul>
+        </div>
+    
+    </div>
 	
-	    <div class="dataobjectsSliderRow">
-	        <div class="row header">
-	            <div class="col-xs-12 col-sm-6 left">
-	                <h2>
-	                    <a href="#">Projekty przyjęte na ostatnim posiedzeniu</a>
-	                </h2>
-	            </div>
-	            <div class="col-xs-6 col-xs-offset-6 col-sm-6 col-sm-offset-0 right">
+	<div id="timeline-embed" data-source="1"></div>
 	
-	            </div>
-	        </div>
-	        <div class="blockContent">
-	            <?
-					$group = $posiedzenie->getRelatedGroup('przyjete_ustawy');
-					echo $this->dataobjectsSlider->render($group['objects'], array(
-						'rowNumber' => 1,
-						'perGroup' => 3,
-					));
+	
+	<div class="container">
+		
+		<div class="dataobjectsSliderRow">
+			
+			<div class="row header">
+				<div class="col-xs-12 col-sm-6 left">
+					<h2>
+						<a href="#">Projekty przyjęte na ostatnim posiedzeniu</a>
+					</h2>
+				</div>
+				<div class="col-xs-6 col-xs-offset-6 col-sm-6 col-sm-offset-0 right"></div>
+			</div>
+		
+			<div class="blockContent">
+				<?
+				$group = $posiedzenie->getRelatedGroup('przyjete_ustawy');
+				echo $this->dataobjectsSlider->render($group['objects'], array(
+				'rowNumber' => 1,
+				'perGroup' => 3,
+				));
 				?>	
-	        </div>
-	    </div>
-   </div>
+			</div>
+			
+		</div>
+			
+	</div>
 </div>
 
 
