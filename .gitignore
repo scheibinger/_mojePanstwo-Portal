@@ -16,10 +16,6 @@ app/[Cc]onfig/database.php
 /app/Vendor/autoload.php
 /app/Vendor/composer
 /app/Vendor/leafo
-/app/Vendor/browserstate
-/app/Vendor/carhartl
-/app/webroot/js/plugins/browserstate
-/app/webroot/js/plugins/carhartl
 /app/Config/constants.php
 /app/tmp/*.log.*
 /app/tmp/cake*

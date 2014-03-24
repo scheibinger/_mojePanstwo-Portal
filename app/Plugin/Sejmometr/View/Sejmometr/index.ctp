@@ -6,9 +6,7 @@
 <?php $this->Combinator->add_libs('js', 'highcharts/locals'); ?>
 
 <?php $this->Combinator->add_libs('js', 'Sejmometr.sejmometr.js'); ?>
-
-
-<?php echo $this->Html->script('timelinejs/storyjs-embed.js', array('block' => 'scriptBlock')); ?>
+<?php echo $this->Html->script('../plugins/TimelineJS/build/js/storyjs-embed.js', array('block' => 'scriptBlock')); ?>
 
 
 

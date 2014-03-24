@@ -5,8 +5,8 @@ $this->Combinator->add_libs('css', $this->Less->css('view-twitteraccounts', arra
 /*
 $this->Combinator->add_libs('css', $this->Less->css('view-twitteraccounts', array('plugin' => 'Dane')));
 $this->Combinator->add_libs('css', $this->Less->css('dataobjectslider', array('plugin' => 'Dane')));
-$this->Combinator->add_libs('js', 'highcharts/highcharts');
-$this->Combinator->add_libs('js', 'highcharts/locals');
+$this->Combinator->add_libs('js', '../plugins/highcharts/js/highcharts');
+$this->Combinator->add_libs('js', '../plugins/highcharts/locals');
 $this->Combinator->add_libs('js', 'Dane.highcharts-twitter-accounts');
 $this->Combinator->add_libs('js', 'Dane.view-twitter-accounts');
 $this->Combinator->add_libs('js', 'Dane.dataobjectsslider');
@@ -53,8 +53,8 @@ $chart_data = $object->getLayer('followers_chart');
 		 height: 500,
 		 source: '<?= $object->getId() ?>/timeline.json',
 		 embed_id: 'timeline-embed',
-		 css: '/css/timelinejs/timeline.css',
-	     js: '/js/timelinejs/timeline-min.js',
+		 css: '/plugins/TimelineJS/build/css/timeline.css',
+	     js: '/plugins/TimelineJS/build/js/timeline-min.js',
 	     
 	}
 	</script>

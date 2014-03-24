@@ -1,8 +1,8 @@
 <?php $this->Combinator->add_libs('css', $this->Less->css('htmlexDocMain')); ?>
 <?php $this->Combinator->add_libs('css', $this->Less->css('mapaprawa', array('plugin' => 'Mapaprawa'))) ?>
 
-<?php $this->Combinator->add_libs('js', 'highcharts/highcharts'); ?>
-<?php $this->Combinator->add_libs('js', 'highcharts/locals'); ?>
+<?php $this->Combinator->add_libs('js', '../plugins/highcharts/js/highcharts'); ?>
+<?php $this->Combinator->add_libs('js', '../plugins/highcharts/locals'); ?>
 <?php $this->Combinator->add_libs('js', 'Mapaprawa.highcharts-init'); ?>
 <?php $this->Combinator->add_libs('js', 'Mapaprawa.mapaprawa-graph'); ?>
 

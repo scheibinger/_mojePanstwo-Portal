@@ -3,7 +3,7 @@
 <?
 $this->Combinator->add_libs('css', $this->Less->css('view-poslowie', array('plugin' => 'Dane')));
 $this->Combinator->add_libs('js', 'Dane.view-poslowie.js');
-echo $this->Html->script('timelinejs/storyjs-embed.js', array('block' => 'scriptBlock'));
+echo $this->Html->script('../plugins/TimelineJS/build/js/storyjs-embed.js', array('block' => 'scriptBlock'));
 
 function progress($statMin, $statMax, $poselGlobalStat, $poselTargetStat, $numberType = '')
 {

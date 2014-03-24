@@ -31,7 +31,7 @@
     $this->Combinator->add_libs('css', $this->Less->css('loginForm', array('plugin' => 'Paszport')), false);
 
     /*BOOTSTRAP SELECT LOOKS LIKE BOOTSTRAP BUTTONS*/
-    echo $this->Html->css('../js/plugins/bootstrap-select/bootstrap-select.min.css');
+    echo $this->Html->css('../plugins/bootstrap-select/bootstrap-select.min.css');
 
     /* SOCIAL BUTTONS */
     echo $this->Html->css('//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css');
@@ -106,13 +106,20 @@
 
 <?php /* GOOGLE ANALYTIC */ ?>
 <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    (function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function () {
+            (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date();
+        a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
 
-  ga('create', 'UA-37679118-4', 'mojepanstwo.pl');
-  ga('send', 'pageview');
+    ga('create', 'UA-37679118-4', 'mojepanstwo.pl');
+    ga('send', 'pageview');
 
 </script>
 
@@ -124,9 +131,9 @@ echo $this->Html->script('//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/i18n/j
 echo $this->Html->script('//netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js');
 
 /* PACKAGES FROM VENDOR */
-echo $this->Html->script('plugins/history.js/scripts/bundled/html4+html5/jquery.history.js');
-echo $this->Html->script('plugins/jquery-cookie/jquery.cookie.js');
-echo $this->Html->script('plugins/bootstrap-select/bootstrap-select.min.js'); ?>
+echo $this->Html->script('../plugins/browserstate/history.js/scripts/bundled/html4+html5/jquery.history.js');
+echo $this->Html->script('../plugins/carhartl/jquery-cookie/jquery.cookie.js');
+echo $this->Html->script('../plugins/bootstrap-select/bootstrap-select.min.js'); ?>
 
 <?php /*PHP DATA FOR JS */ ?>
 <script type="text/javascript">

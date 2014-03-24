@@ -48,8 +48,8 @@ jQuery(document).ready(function () {
             height: '500',
             source: timelineEmbed.data("source") + '/timeline.json',
             embed_id: 'timeline-embed',
-            css: '/css/timelinejs/timeline.css',
-            js: '/js/timelinejs/timeline-min.js',
+            css: '/plugins/TimelineJS/build/css/timeline.css',
+            js: '/plugins/TimelineJS/build/js/timeline-min.js',
             lang: _mPHeart.language.twoDig
         });
     }
