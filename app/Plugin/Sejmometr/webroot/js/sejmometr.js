@@ -8,8 +8,7 @@ jQuery(document).ready(function () {
             embed_id: 'timeline-embed',
             css: '/plugins/TimelineJS/build/css/timeline-2rows.css',
             js: '/plugins/TimelineJS/build/js/timeline-2rows.js',
-            lang: _mPHeart.language.twoDig,
-
+            lang: _mPHeart.language.twoDig
         });
     }
 })
