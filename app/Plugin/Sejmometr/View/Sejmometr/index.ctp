@@ -1,7 +1,13 @@
 <?php $this->Combinator->add_libs('css', $this->Less->css('dataobject', array('plugin' => 'Dane'))) ?>
 <?php $this->Combinator->add_libs('css', $this->Less->css('dataobjectslider', array('plugin' => 'Dane'))) ?>
 <?php $this->Combinator->add_libs('css', $this->Less->css('sejmometr', array('plugin' => 'Sejmometr'))) ?>
+
+<?php $this->Combinator->add_libs('js', 'highcharts/highcharts'); ?>
+<?php $this->Combinator->add_libs('js', 'highcharts/locals'); ?>
+
 <?php $this->Combinator->add_libs('js', 'Sejmometr.sejmometr.js'); ?>
+
+
 <?php echo $this->Html->script('timelinejs/storyjs-embed.js', array('block' => 'scriptBlock')); ?>
 
 
@@ -45,44 +51,66 @@
 
             </div>
         </div>
-
-        <div class="container">
-            <div class="posiedzenie">
-                <div class="row">
-                    <h2><a href="/sejm_posiedzenia">Posiedzenia Sejmu</a></h2>
-                </div>
-            </div>
-        </div>
+		
+		<div class="mpanel">
+	        <div class="container">
+	            <div class="posiedzenie">
+	                <div class="row">
+	                    <h2><a href="/sejm_posiedzenia">Posiedzenia Sejmu</a></h2>
+	                </div>
+	            </div>
+	        </div>
+		</div>
 
         <div id="timeline-embed" data-source="1"></div>
 
+		
+		<div class="mpanel">
+			<div class="container">
 
-        <div class="container">
-
-            <div class="dataobjectsSliderRow">
-
-                <div class="row header">
+	            <div class="dataobjectsSliderRow">
+	
+	                <div class="row header">
+	                    <div class="col-xs-12 col-sm-8 left">
+	                        <h2>
+	                            <a href="#">Najnowsze projekty ustaw</a>
+	                        </h2>
+	                    </div>
+	                    <div class="col-xs-4 col-xs-offset-4 col-sm-4 col-sm-offset-0 right"></div>
+	                </div>
+	
+	                <div class="blockContent">
+	                    <?
+	                    $group = $posiedzenie->getRelatedGroup('przyjete_ustawy');
+	                    echo $this->dataobjectsSlider->render($group['objects'], array(
+	                        'rowNumber' => 1,
+	                        'perGroup' => 3,
+	                    ));
+	                    ?>
+	                </div>
+	
+	            </div>
+	            
+            
+	            <div class="row header">
                     <div class="col-xs-12 col-sm-8 left">
                         <h2>
-                            <a href="#">Najnowsze projekty ustaw</a>
+                            <a href="#">Autorzy projektów w Sejmie</a>
                         </h2>
                     </div>
                     <div class="col-xs-4 col-xs-offset-4 col-sm-4 col-sm-offset-0 right"></div>
                 </div>
-
+                
                 <div class="blockContent">
-                    <?
-                    $group = $posiedzenie->getRelatedGroup('przyjete_ustawy');
-                    echo $this->dataobjectsSlider->render($group['objects'], array(
-                        'rowNumber' => 1,
-                        'perGroup' => 3,
-                    ));
-                    ?>
+                	<div id="sejm_projekty_chart"></div>
                 </div>
-
-            </div>
-
-        </div>
+            
+	            
+	
+	        </div>
+		</div>
+		
+        
     </div>
 
 

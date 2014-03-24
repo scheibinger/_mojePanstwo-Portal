@@ -89,5 +89,16 @@ class SejmometrController extends SejmometrAppController
         ));
 	    	    
     }
+    
+    public function autorzy_projektow()
+    {
+	    
+	    $this->API = $this->API->Sejmometr();
+	    $data = $this->API->autorzy_projektow();
+	    
+	    $this->set('data', $data);
+	    $this->set('_serialize', 'data');
+	    
+    }
 
 }
