@@ -6,9 +6,11 @@ jQuery(document).ready(function () {
             height: '500',
             source: '/sejmometr/posiedzenia_timeline.json',
             embed_id: 'timeline-embed',
-            css: '/css/timelinejs/timeline.css',
-            js: '/js/timelinejs/timeline-min.js',
-            lang: _mPHeart.language.twoDig
+            css: '/plugins/TimelineJS/build/css/timeline-2rows.css',
+            js: '/plugins/TimelineJS/build/js/timeline-2rows.js',
+            lang: _mPHeart.language.twoDig,
+
         });
     }
-});
+})
+;

@@ -1,5 +1,5 @@
-<?php $this->Combinator->add_libs('js', 'highcharts/highcharts'); ?>
-<?php $this->Combinator->add_libs('js', 'highcharts/locals'); ?>
+<?php $this->Combinator->add_libs('js', '../plugins/highcharts/js/highcharts'); ?>
+<?php $this->Combinator->add_libs('js', '../plugins/highcharts/locals'); ?>
 <?php $this->Combinator->add_libs('js', 'Dane.view-sejmglosowania'); ?>
 <?php $this->Combinator->add_libs('css', $this->Less->css('view-sejmglosowania', array('plugin' => 'Dane'))); ?>
 

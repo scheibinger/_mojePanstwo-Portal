@@ -2,9 +2,8 @@
 <?php $this->Combinator->add_libs('css', $this->Less->css('dataobjectslider', array('plugin' => 'Dane'))) ?>
 <?php $this->Combinator->add_libs('css', $this->Less->css('zamowienia', array('plugin' => 'ZamowieniaPubliczne'))) ?>
 
-<?php $this->Combinator->add_libs('js', 'highcharts/highstock'); ?>
-<?php $this->Combinator->add_libs('js', 'highcharts/locals'); ?>
-<?php $this->Combinator->add_libs('js', 'highcharts/module/exporting'); ?>
+<?php $this->Combinator->add_libs('js', '../plugins/highstock/js/highstock'); ?>
+<?php $this->Combinator->add_libs('js', '../plugins/highstock/locals'); ?>
 <?php $this->Combinator->add_libs('js', 'ZamowieniaPubliczne.zamowieniapubliczne') ?>
 <?php $this->Combinator->add_libs('js', 'Dane.dataobjectsslider') ?>
 

@@ -1,7 +1,7 @@
 <?= $this->Dataobject->highlights() ?>
 
-<?php $this->Combinator->add_libs('js', 'highcharts/highcharts'); ?>
-<?php $this->Combinator->add_libs('js', 'highcharts/locals'); ?>
+<?php $this->Combinator->add_libs('js', '../plugins/highcharts/js/highcharts'); ?>
+<?php $this->Combinator->add_libs('js', '../plugins/highcharts/locals'); ?>
 <?php $this->Combinator->add_libs('js', 'Dane.highcharts-sejmglosowania'); ?>
 
 <?

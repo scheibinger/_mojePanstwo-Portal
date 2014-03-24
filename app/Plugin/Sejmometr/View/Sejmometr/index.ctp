@@ -2,7 +2,7 @@
 <?php $this->Combinator->add_libs('css', $this->Less->css('dataobjectslider', array('plugin' => 'Dane'))) ?>
 <?php $this->Combinator->add_libs('css', $this->Less->css('sejmometr', array('plugin' => 'Sejmometr'))) ?>
 <?php $this->Combinator->add_libs('js', 'Sejmometr.sejmometr.js'); ?>
-<?php echo $this->Html->script('timelinejs/storyjs-embed.js', array('block' => 'scriptBlock')); ?>
+<?php echo $this->Html->script('../plugins/TimelineJS/build/js/storyjs-embed.js', array('block' => 'scriptBlock')); ?>
 
 
 

@@ -2,8 +2,8 @@
 <?php $this->Combinator->add_libs('css', $this->Less->css('frazy', array('plugin' => 'Powiadomienia'))); ?>
 <?php $this->Combinator->add_libs('css', $this->Less->css('dane', array('plugin' => 'Powiadomienia'))); ?>
 <?php $this->Combinator->add_libs('css', $this->Less->css('dataobject', array('plugin' => 'Dane'))); ?>
-<?php echo $this->Html->script('plugins/scriptaculous/lib/prototype', array('block' => 'scriptBlock')); ?>
-<?php echo $this->Html->script('plugins/scriptaculous/src/scriptaculous', array('block' => 'scriptBlock')); ?>
+<?php echo $this->Html->script('../plugins/scriptaculous/lib/prototype', array('block' => 'scriptBlock')); ?>
+<?php echo $this->Html->script('../plugins/scriptaculous/src/scriptaculous', array('block' => 'scriptBlock')); ?>
 <?php $this->Combinator->add_libs('js', 'Powiadomienia.powiadomienia.js'); ?>
 
 <div id="powiadomienia">
