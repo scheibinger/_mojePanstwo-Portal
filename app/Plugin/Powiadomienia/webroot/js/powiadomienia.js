@@ -49,15 +49,24 @@
 
                 if (input.val().length >= 2) {
                     console.log(encodeURI(input.val()));
-                    /*$.ajax({
-                     data: input.val(),
-                     beforeSend: function () {
-                     btn.addClass('loading');
-                     },
-                     complete: function () {
-                     btn.removeClass('loading')
-                     }
-                     })*/
+                    $.ajax({
+                        url: "/",
+                        data: {
+                            add: input.val()
+                        },
+                        type: "POST",
+                        dataType: "json",
+                        beforeSend: function () {
+                            btn.addClass('loading');
+                        },
+                        success: function (res) {
+                            console.log(res)
+                            jQuery('#addPhraseModal').modal('hide');
+                        },
+                        complete: function () {
+                            btn.removeClass('loading')
+                        }
+                    });
                 }
             }
         })
@@ -106,6 +115,19 @@
         } else {
             clearInterval(newNotificationIntervalMain);
         }
+    });
+
+    $('.additionalOptions .markAllAsRead').click(function () {
+        $.ajax({
+            url: "/",
+            data: {},
+            type: "POST",
+            dataType: "json",
+            success: function (res) {
+                console.log(res)
+                $('.dataContent .objectRender').addClass('.readed');
+            }
+        });
     });
 
     optionsMarkAsRead();

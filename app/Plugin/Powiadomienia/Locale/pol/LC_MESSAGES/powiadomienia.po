@@ -87,3 +87,9 @@ msgstr "Fraza została usunięta"
 
 msgid "LC_POWIADOMIENIA_OPTIONS_AUTOCHECK_AS_READER"
 msgstr "Autooznaczanie jako przeczytane"
+
+msgid "LC_POWIADOMIENIA_OPTIONS_MARK_ALL_READED"
+msgstr "Oznacz wszystko jako przeczytane"
+
+msgid "LC_POWIADOMIENIA_OPTIONS_MARK_ALL_READED_KEYWORD"
+msgstr "Oznacz słowo kluczowe jako przeczytane"

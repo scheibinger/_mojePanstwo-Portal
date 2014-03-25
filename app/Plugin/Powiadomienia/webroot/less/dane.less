@@ -124,8 +124,8 @@
                     }
 
                     a {
-                        &:after {
-                            margin-left: 10px;
+                        &:before {
+                            margin-right: 10px;
                         }
 
                         small {
@@ -172,28 +172,9 @@
                 }
 
                 &.read a {
-                    &:after {
-                        margin-left: 10px;
+                    &:before {
+                        margin-right: 10px;
                     }
-                }
-            }
-
-            .notifyAllRead {
-                float: right;
-                margin-top: 10px;
-                margin-right: 10px;
-                background-color: #F0F0F0;
-                border: 1px solid #CCCCCC;
-                border-radius: 3px;
-                color: #666666;
-                cursor: pointer;
-                display: block;
-                font-size: 13px;
-                font-weight: 400;
-                padding: 5px 10px;
-
-                &:after {
-                    margin-left: 10px;
                 }
             }
         }
@@ -206,14 +187,25 @@
             margin-top: 10px;
             text-align: right;
 
-            label {
-                font-weight: 300;
-                cursor: pointer;
-            }
+            .options {
+                display: block;
+                float: right;
 
-            input {
-                margin-right: 2px;
-                outline: none;
+                > ul > li > a {
+                    font-weight: 300;
+
+                    &.markReadAfterThreeSecContent {
+                        label {
+                            cursor: pointer;
+                            font-weight: 300;
+                        }
+
+                        input {
+                            margin-right: 2px;
+                            outline: none;
+                        }
+                    }
+                }
             }
         }
     }
@@ -262,7 +254,7 @@
             }
         }
     }
-    
+
     .objectRender .text-highlights {
         margin: 5px 30px 10px;
     }

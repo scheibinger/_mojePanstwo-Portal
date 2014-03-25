@@ -5,7 +5,7 @@
             title="new">
             <a href="<?php
             echo $this->Html->url(array("controller" => "powiadomienia", "action" => "index", "?" => array("mode" => "1", "keyword" => (isset($this->request->query['keyword'])) ? $this->request->query['keyword'] : null))) ?>"
-               data-icon-after="&#xe602;"><?php echo __d('powiadomienia', "LC_POWIADOMIENIA_DANE_NEW") ?>
+               data-icon="&#xe602;"><?php echo __d('powiadomienia', "LC_POWIADOMIENIA_DANE_NEW") ?>
                 <?php
                 /*
                 * @TODO: fix this or remove permamently
@@ -28,17 +28,30 @@
             class="read<?php if (isset($this->request->query['mode']) && $this->request->query['mode'] == '2') echo ' s'; ?>"
             title="read">
             <a href="<?php echo $this->Html->url(array("controller" => "powiadomienia", "action" => "index", "?" => array("mode" => "2", "keyword" => (isset($this->request->query['keyword'])) ? $this->request->query['keyword'] : null))) ?>"
-               data-icon-after="&#xe603;"><?php echo __d('powiadomienia', "LC_POWIADOMIENIA_DANE_READ") ?></a>
+               data-icon="&#xe603;"><?php echo __d('powiadomienia', "LC_POWIADOMIENIA_DANE_READ") ?></a>
             <?php /* <input type="submit" name="data[Dataobject][visited]" value="1"/> */ ?>
         </li>
-        <a class="notifyAllRead<?php if (true) { //@TODO : przywrocic
-            echo ' hidden';
-        } ?>" data-icon-after="&#xe604;"><?php echo __d('powiadomienia', "LC_POWIADOMIENIA_DANE_ALLREADED") ?></a>
     </ul>
     <div class="additionalOptions hidden-xs col-sm-2 col-md-3">
-        <label class="markReadAfterThreeSec">
-            <input type="checkbox" autocomplete="off"
-                   id="markReadAfterThreeSec"/> <?php echo __d('powiadomienia', 'LC_POWIADOMIENIA_OPTIONS_AUTOCHECK_AS_READER') ?>
-        </label>
+        <div class="btn-group options show">
+            <button data-toggle="dropdown"
+                    class="btn btn-success btn-xs dropdown-toggle pull-right"
+                    data-icon="&#xe612;">
+            </button>
+            <ul class="dropdown-menu pull-right">
+                <li>
+                    <a class="markReadAfterThreeSecContent" href="#">
+                        <label class="markReadAfterThreeSec">
+                            <input type="checkbox" autocomplete="off"
+                                   id="markReadAfterThreeSec"/><?php echo __d('powiadomienia', 'LC_POWIADOMIENIA_OPTIONS_AUTOCHECK_AS_READER') ?>
+                        </label>
+                    </a>
+                </li>
+                <li>
+                    <a class="markAllAsRead"
+                       href="#"><?php echo (isset($this->request->query['keyword'])) ? __d('powiadomienia', 'LC_POWIADOMIENIA_OPTIONS_MARK_ALL_READED_KEYWORD') : __d('powiadomienia', 'LC_POWIADOMIENIA_OPTIONS_MARK_ALL_READED') ?></a>
+                </li>
+            </ul>
+        </div>
     </div>
 </div>
