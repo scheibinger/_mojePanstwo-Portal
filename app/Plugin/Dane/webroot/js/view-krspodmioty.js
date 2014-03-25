@@ -149,11 +149,12 @@ jQuery(document).ready(function () {
             size: {
                 'linksLength': 100,
                 'linksWidth': 1,
-                'nodes': 50
+                'linkText': '8px',
+                'nodes': 50,
+                'nodeText': '10px'
             }
         };
 
-        /*http://jsfiddle.net/qqGDG/*/
         d3Data.force = d3.layout.force()
             .charge(-2000)
             .linkDistance(d3Data.size.linksLength + d3Data.size.nodes)
@@ -179,7 +180,7 @@ jQuery(document).ready(function () {
                 .attr("width", d3Data.width)
                 .attr("height", d3Data.height);
 
-            /*Add call's*/
+            /*ADD CALLS*/
             d3Data.force
                 .on("tick", tick);
             d3Data.svg
@@ -221,6 +222,7 @@ jQuery(document).ready(function () {
                 .append("path")
                 .attr("d", "M0,-5L10,0L0,5");
 
+            /*CREATE LINE*/
             var path = d3Data.svg.append("g").selectAll("path")
                 .data(links)
                 .enter().append("path")
@@ -228,17 +230,7 @@ jQuery(document).ready(function () {
                 .attr("marker-end", "url(#arrow)")
                 .style({"fill": "none", "stroke-width": d3Data.size.linksWidth, 'stroke': d3Data.color.links});
 
-            var pathText = d3Data.svg.append("g").selectAll("text")
-                .data(links)
-                .enter().append("text")
-                .attr('class', 'pathText')
-                .style("text-anchor", "middle")
-                .style("font-size", "9px")
-                .style("fill", "#000")
-                .text(function (d) {
-                    return d.label;
-                });
-
+            /*CREATE CIRCLE*/
             var circle = d3Data.svg.append("g").selectAll("circle")
                 .data(nodes)
                 .enter().append("circle")
@@ -258,38 +250,81 @@ jQuery(document).ready(function () {
                         return d3Data.color[d.label];
                 })
                 .call(d3Data.force.drag)
-                .on('mousemove', function(d){
+                .on('mousemove', function (d) {
                     d.fixed = true;
                 })
                 .on('dblclick', function (d) {
                     detailInfo(d);
                 });
 
+            /*CREATE SHADOW UNDER LINE TEXT*/
+            var pathTextShadow = d3Data.svg.append("g").selectAll("text")
+                .data(links)
+                .enter().append("text")
+                .attr('class', 'pathTextShadow')
+                .style("text-anchor", "middle")
+                .style("font-size", d3Data.size.linkText)
+                .style("stroke", "white")
+                .style("stroke-width", "2px")
+                .style("opacity", '0.9')
+                .text(function (d) {
+                    return d.label;
+                });
+
+            /*CREATE LINE TEXT*/
+            var pathText = d3Data.svg.append("g").selectAll("text")
+                .data(links)
+                .enter().append("text")
+                .attr('class', 'pathText')
+                .style("text-anchor", "middle")
+                .style("font-size", d3Data.size.linkText)
+                .style("fill", "#000")
+                .text(function (d) {
+                    return d.label;
+                });
+
+            /*CREATE CIRCLE TEXT*/
             var circleText = d3Data.svg.append("g").selectAll("text")
                 .data(nodes)
                 .enter().append("text")
                 .attr('class', 'circleText')
-                .attr("y", ".31em")
                 .style("text-anchor", "middle")
-                .style("font-size", "9px")
+                .style("font-size", d3Data.size.nodeText)
                 .style("fill", "#ffffff")
-                .text(function (d) {
-                    var name, nameBegin, nameEnd;
+                .each(function (d) {
+                    var name, nameBegin, nameEnd, lines,
+                        limit = Math.floor(d3Data.size.nodes / 1.5),
+                        width = d3Data.size.nodes / 3,
+                        regex = '.{1,' + width + '}(\\s|$)' + ('|\\S+?(\\s|$)'),
+                        separate = 14;
 
                     if (d.label == 'podmiot')
                         name = d.data.nazwa;
                     else if (d.label == 'osoba')
                         name = d.data.imiona + ' ' + d.data.nazwisko;
 
-                    nameBegin = name.substring(0, Math.floor(d3Data.size.nodes / 4));
-                    nameEnd = name.substring(Math.floor(d3Data.size.nodes / 4));
+                    nameBegin = name.substring(0, limit);
+                    nameEnd = name.substring(limit);
 
-                    return nameBegin + nameEnd.substring(0, nameEnd.indexOf(' '));
+                    name = nameBegin + nameEnd.substring(0, nameEnd.indexOf(' '));
+
+                    lines = name.match(RegExp(regex, 'g')).join('\n').split('\n');
+
+                    for (var i = 0; i < lines.length; i++) {
+                        d3.select(this)
+                            .append("tspan")
+                            .attr('x', 0)
+                            .attr('y', (lines.length == 1) ? 0 : (-Math.floor((separate / 5) * lines.length)) + (separate * i))
+                            .text(lines[i]);
+                    }
                 });
 
             function tick() {
                 path.attr("d", function (d) {
                     return "M" + d.source.x + "," + d.source.y + "A" + 0 + "," + 0 + " 0 0,1 " + d.target.x + "," + d.target.y;
+                });
+                pathTextShadow.attr("transform", function (d) {
+                    return "translate(" + (d.source.x + d.target.x) / 2 + "," + (d.source.y + d.target.y) / 2 + ")";
                 });
                 pathText.attr("transform", function (d) {
                     return "translate(" + (d.source.x + d.target.x) / 2 + "," + (d.source.y + d.target.y) / 2 + ")";
@@ -309,132 +344,6 @@ jQuery(document).ready(function () {
                     q.visit(collide(nodes[i]));
                 }
             }
-
-
-            /*var link = container.selectAll("g.link")
-             .data(links)
-             .enter().append("svg:g")
-             .attr("class", "link");
-
-             link.append("svg:line")
-             .attr("class", "linkLine")
-             .attr('id', function (d) {
-             return 'label-' + d.id
-             })
-             .style({"stroke-width": d3Data.size.linksWidth, 'stroke': d3Data.color.links})
-             .attr("x1", function (d) {
-             return d.source.x;
-             })
-             .attr("y1", function (d) {
-             return d.source.y;
-             })
-             .attr("x2", function (d) {
-             return d.target.x;
-             })
-             .attr("y2", function (d) {
-             return d.target.y;
-             });
-
-             link.append("svg:text")
-             .attr("class", "linkText")
-             .attr("dx", function (d) {
-             return (d.source.x + d.target.x) / 2;
-             })
-             .attr("dy", function (d) {
-             return (d.source.y + d.target.y) / 2;
-             })
-             .text(function (d) {
-             return d.label
-             });
-
-             var node = container.selectAll("g.node")
-             .data(nodes)
-             .enter().append("svg:g")
-             .attr("class", "node")
-             .attr("transform", function (d) {
-             return "translate(" + d.x + "," + d.y + ")";
-             })
-             .call(d3Data.force.drag)
-             .on('mousemove', function (d) {
-             d.fixed = true;
-             })
-             .on('dblclick', function (d) {
-             detailInfo(d);
-             });
-
-             node.append("svg:circle")
-             .attr('class', 'nodeCircle')
-             .attr("r", d3Data.size.nodes)
-             .style("stroke-width", 2)
-             .style("stroke", function (d) {
-             if (d.id == root.id)
-             return d3Data.color['mainStroke'];
-             else
-             return d3Data.color[d.label];
-             })
-             .style("fill", function (d) {
-             if (d.id == root.id)
-             return d3Data.color['mainFill'];
-             else
-             return d3Data.color[d.label];
-             });
-
-             node.append("svg:text")
-             .attr('class', 'nodeText')
-             .attr("dy", ".3em")
-             .style("text-anchor", "middle")
-             .style("font-size", "9px")
-             .style("fill", "#ffffff")
-             .text(function (d) {
-             var name, nameBegin, nameEnd;
-
-             if (d.label == 'podmiot')
-             name = d.data.nazwa;
-             else if (d.label == 'osoba')
-             name = d.data.imiona + ' ' + d.data.nazwisko;
-
-             nameBegin = name.substring(0, Math.floor(d3Data.size.nodes / 4));
-             nameEnd = name.substring(Math.floor(d3Data.size.nodes / 4));
-
-             return nameBegin + nameEnd.substring(0, nameEnd.indexOf(' '));
-             });
-
-             d3Data.force.on("tick", function () {
-             var q = d3.geom.quadtree(nodes),
-             i = 0,
-             n = nodes.length;
-
-             link.select('.linkLine')
-             .attr("x1", function (d) {
-             return d.source.x;
-             })
-             .attr("y1", function (d) {
-             return d.source.y;
-             })
-             .attr("x2", function (d) {
-             return d.target.x;
-             })
-             .attr("y2", function (d) {
-             return d.target.y;
-             });
-
-             link.select('.linkText')
-             .attr("dx", function (d) {
-             return (d.source.x + d.target.x) / 2;
-             })
-             .attr("dy", function (d) {
-             return (d.source.y + d.target.y) / 2;
-             });
-
-             node
-             .attr("transform", function (d) {
-             return "translate(" + d.x + "," + d.y + ")";
-             });
-
-             while (++i < n) {
-             q.visit(collide(nodes[i]));
-             }
-             });*/
 
             function collide(node) {
                 var alpha = .5,
