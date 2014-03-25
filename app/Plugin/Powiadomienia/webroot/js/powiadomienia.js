@@ -2,7 +2,8 @@
     var dataContent = $('.dataContent'),
         newNotification = dataContent.find('.objects .powiadomienia'),
         checkTime = 3000,
-        newNotificationIntervalMain;
+        newNotificationIntervalMain,
+        addNewPhrase;
 
     function optionsMarkAsRead() {
         if (newNotification.find('.objectRender').length > 0 && $('.additionalOptions .markReadAfterThreeSec input').is(':checked')) {
@@ -38,6 +39,28 @@
                     clearInterval(newNotificationIntervalMain);
             }, checkTime);
         }
+    }
+
+    if ((addNewPhrase = $('#addPhraseModal')).length > 0) {
+        addNewPhrase.find('.addNewPhrase .btn').click(function () {
+            if (!$(this).hasClass('loading')) {
+                var btn = addNewPhrase.find('.addNewPhrase .btn'),
+                    input = addNewPhrase.find('.addNewPhrase input');
+
+                if (input.val().length >= 2) {
+                    console.log(encodeURI(input.val()));
+                    /*$.ajax({
+                     data: input.val(),
+                     beforeSend: function () {
+                     btn.addClass('loading');
+                     },
+                     complete: function () {
+                     btn.removeClass('loading')
+                     }
+                     })*/
+                }
+            }
+        })
     }
 
     if (jQuery('.loadMoreContent').length) {

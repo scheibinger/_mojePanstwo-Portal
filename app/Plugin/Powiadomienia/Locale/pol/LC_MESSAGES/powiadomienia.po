@@ -5,7 +5,10 @@ msgid "LC_POWIADOMIENIA_FRAZY_NOKEYWORDS"
 msgstr "Brak słów kluczowych"
 
 msgid "LC_POWIADOMIENIA_FRAZY_DODAJ_FRAZE"
-msgstr "Dodaj słowo kluczowe..."
+msgstr "Dodawanie słowa kluczowego"
+
+msgid "LC_POWIADOMIENIA_FRAZY_DODAJ_FRAZE_PLACEHOLDER"
+msgstr "Wpisz interesujące cie słowo..."
 
 msgid "LC_POWIADOMIENIA_DANE_NEW"
 msgstr "Nowe powiadomienia"

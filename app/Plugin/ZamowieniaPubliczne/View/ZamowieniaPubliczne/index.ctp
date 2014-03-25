@@ -29,7 +29,7 @@
                            placeholder="<?= __d('zamowienia_publiczne', 'LC_SEARCH_ALL_TENDERS') ?>"
                            class="form-control input-lg">
 				            <span class="input-group-btn">
-				                  <input type="submit" class="btn btn-success input-lg" value="<?= __('LC_SEARCH') ?>"/>
+                                  <button class="btn btn-success btn-lg" type="submit" data-icon="&#xe600;"></button>
 				            </span>
                 </div>
             </form>
