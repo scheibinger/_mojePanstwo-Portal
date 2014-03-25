@@ -37,6 +37,7 @@ class PowiadomieniaController extends PowiadomieniaAppController
             ),
             'limit' => 20,
             'paramType' => 'querystring',
+            'page' => isset($this->request->query['page']) ? $this->request->query['page'] : 1,
         );
 
         $this->API->search($queryData);
@@ -45,8 +46,6 @@ class PowiadomieniaController extends PowiadomieniaAppController
 
 
         if (@$this->request->params['ext'] == 'json') {
-
-            $view = new View($this, false);
 
             $html = '';
             if (!empty($objects)) {

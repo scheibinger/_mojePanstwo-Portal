@@ -42,7 +42,3 @@
         </label>
     </div>
 </div>
-
-<? echo $this->element('objects-container', array(
-    'objects' => $objects,
-)); ?>

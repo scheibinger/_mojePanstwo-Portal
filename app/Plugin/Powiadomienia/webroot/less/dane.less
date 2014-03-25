@@ -2,7 +2,26 @@
     @heightTabs: 48px;
     @background: #F3F3F3;
 
-    padding-left: 0;
+    padding: 0;
+
+    .powiadomienia {
+        &.readed .objectRender {
+            background-color: #FFFFFF;
+        }
+
+        .objectRender {
+            background-color: #FFFFE0;
+
+            &.readed {
+                background-color: #FFFFFF;
+            }
+
+            .content {
+                padding: 0 15px 15px;
+                overflow: hidden;
+            }
+        }
+    }
 
     .tabsBlock {
         width: 100%;
@@ -245,7 +264,7 @@
     }
     
     .objectRender .text-highlights {
-	    margin: 5px 30px 10px;
+        margin: 5px 30px 10px;
     }
 }
 
