@@ -45,7 +45,7 @@
                                     href="<?php echo $this->Html->url(array("controller" => "powiadomienia", "action" => "index", "?" => array("keyword" => $phrase['Phrase']['id'], "mode" => (isset($this->request->query['mode'])) ? $this->request->query['mode'] : null))) ?>"
                                 <?php } ?>
                                target="_self">
-                                <?php echo htmlentities($phrase['Phrase']['q']); ?>
+                                <?php echo $phrase['Phrase']['q']; ?>
                             </a>
 
                             <div class="count">
