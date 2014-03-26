@@ -5,7 +5,7 @@ class PhrasesController extends PowiadomieniaAppController
 {
     public $uses = array();
     public $components = array(
-        'Session',
+        'Session', 'RequestHandler',
     );
 
     public function index()
@@ -19,12 +19,29 @@ class PhrasesController extends PowiadomieniaAppController
             $this->redirect(array('controller' => 'powiadomienia', 'action' => 'index'));
         }
     }
-
+	
+	public function add()
+	{
+		
+		$status = false;
+		
+		if( isset($this->request->data['add']) )
+		{
+			
+			$status = $this->API->addPhrase( $this->request->data['add'] );
+			
+		}
+		
+		$this->set('status', $status);
+		$this->set('_serialize', 'status');
+		
+	}
+	
     public function remove($id = null)
     {
         if (!is_null($id)) {
             $this->API->removePhrase($id);
-            $this->Session->setFlash(__d('powiadomienia', 'LC_POWIADOMIENIA_FRAZA_ZOSTALA_USUNIETA', true));
+            // $this->Session->setFlash(__d('powiadomienia', 'LC_POWIADOMIENIA_FRAZA_ZOSTALA_USUNIETA', true));
             $this->redirect(array('controller' => 'powiadomienia', 'action' => 'index'));
         } else {
             throw new BadRequestException(__d('powiadomienia', 'LC_POWIADOMIENIA_BRAK_ID_DO_USUNIECIA', true));

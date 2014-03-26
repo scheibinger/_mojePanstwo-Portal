@@ -50,7 +50,7 @@
                 if (input.val().length >= 2) {
                     console.log(encodeURI(input.val()));
                     $.ajax({
-                        url: "/",
+                        url: "/powiadomienia/phrases/add.json",
                         data: {
                             add: input.val()
                         },
@@ -62,6 +62,8 @@
                         success: function (res) {
                             console.log(res)
                             jQuery('#addPhraseModal').modal('hide');
+                            // TODO: dorobić odświerzanie samej warstwy z frazami, a nie przełodowanie całej strony
+                            location.reload();
                         },
                         complete: function () {
                             btn.removeClass('loading')
