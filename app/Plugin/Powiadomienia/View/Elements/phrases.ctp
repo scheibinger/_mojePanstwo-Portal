@@ -2,7 +2,7 @@
     <label><?php echo __d('powiadomienia', "LC_POWIADOMIENIA_FRAZY_USER") ?>:</label>
     <button class="btn btn-success btn-sm addphrase pull-right" data-toggle="modal" data-target="#addPhraseModal">+
     </button>
-    <div class="modal fade" id="addPhraseModal" tabindex="-1" role="dialog"
+    <div class="modal fade" id="addPhraseModal" role="dialog"
          aria-labelledby="<?php echo __d('powiadomienia', 'LC_POWIADOMIENIA_FRAZY_DODAJ_FRAZE') ?>" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -16,9 +16,10 @@
                         <input type="text" class="form-control" value=""
                                placeholder="<?php echo __d('powiadomienia', 'LC_POWIADOMIENIA_FRAZY_DODAJ_FRAZE_PLACEHOLDER') ?>">
                         <span class="input-group-btn">
-                            <button class="btn btn-success" type="submit" data-icon="&#xe600;"></button>
+                            <button class="btn btn-success" type="submit">+</button>
                         </span>
                     </div>
+                    <div class="error alert alert-warning hide"></div>
                 </div>
                 <?php /* <div class="modal-footer"></div> */ ?>
             </div>

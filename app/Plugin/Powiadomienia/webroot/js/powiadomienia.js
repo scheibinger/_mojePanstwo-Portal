@@ -42,35 +42,52 @@
     }
 
     if ((addNewPhrase = $('#addPhraseModal')).length > 0) {
-        addNewPhrase.find('.addNewPhrase .btn').click(function () {
-            if (!$(this).hasClass('loading')) {
-                var btn = addNewPhrase.find('.addNewPhrase .btn'),
-                    input = addNewPhrase.find('.addNewPhrase input');
+        var addNewPhraseSubmit = function () {
+            var btn = addNewPhrase.find('.addNewPhrase .btn'),
+                input = addNewPhrase.find('.addNewPhrase input');
 
-                if (input.val().length >= 2) {
-                    console.log(encodeURI(input.val()));
-                    $.ajax({
-                        url: "/powiadomienia/phrases/add.json",
-                        data: {
-                            add: input.val()
-                        },
-                        type: "POST",
-                        dataType: "json",
-                        beforeSend: function () {
-                            btn.addClass('loading');
-                        },
-                        success: function (res) {
-                            console.log(res)
+            if (input.val().length >= 2) {
+                console.log(encodeURI(input.val()));
+                $.ajax({
+                    url: "/powiadomienia/phrases/add.json",
+                    data: {
+                        add: input.val()
+                    },
+                    type: "POST",
+                    dataType: "json",
+                    beforeSend: function () {
+                        btn.addClass('loading');
+                        addNewPhrase.find('.error').addClass('hide');
+                    },
+                    success: function (res) {
+                        if (res == true) {
                             jQuery('#addPhraseModal').modal('hide');
                             // TODO: dorobić odświerzanie samej warstwy z frazami, a nie przełodowanie całej strony
                             location.reload();
-                        },
-                        complete: function () {
-                            btn.removeClass('loading')
+                        } else {
+                            addNewPhrase.find('.error').removeClass('hide').text(_mPHeart.translation.LC_POWIADOMIENIA_JS_AJAX_ERROR);
                         }
-                    });
-                }
+                    },
+                    complete: function () {
+                        btn.removeClass('loading')
+                    }
+                });
+            } else {
+                addNewPhrase.find('.error').removeClass('hide').text(_mPHeart.translation.LC_POWIADOMIENIA_JS_PHRASE_AT_LEASE_2_CHARS);
             }
+        };
+
+        addNewPhrase.find('.addNewPhrase .btn').click(function () {
+            if (!$(this).hasClass('loading')) {
+                addNewPhraseSubmit();
+            }
+        });
+        jQuery('#addPhraseModal').on('shown.bs.modal', function () {
+            jQuery('.addNewPhrase input').val('').focus().keyup(function (e) {
+                if (e.keyCode == '13') {
+                    addNewPhraseSubmit();
+                }
+            });
         })
     }
 

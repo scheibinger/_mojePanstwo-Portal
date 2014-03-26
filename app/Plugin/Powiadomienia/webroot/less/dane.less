@@ -191,6 +191,17 @@
                 display: block;
                 float: right;
 
+                > .btn {
+                    @size: 30px;
+                    @fontSize: 15px;
+
+                    margin-top: -6px;
+                    font-size: @fontSize;
+                    line-height: @fontSize;
+                    width: @size;
+                    height: @size;
+                }
+
                 > ul > li > a {
                     font-weight: 300;
 
@@ -258,16 +269,16 @@
     }
 
     .objectRender {
-    	padding-left: 15px;
-    	padding-right: 15px;
-    	
-    	margin-bottom: 10px;
-    	border-bottom-color: #DDD;
-    	
-    	.text-highlights {
-        	margin: 5px 15px 10px;
-		}
-	}
+        padding-left: 15px;
+        padding-right: 15px;
+
+        margin-bottom: 10px;
+        border-bottom-color: #DDD;
+
+        .text-highlights {
+            margin: 5px 15px 10px;
+        }
+    }
 }
 
 .powiadomienia .content.dane {

@@ -8,7 +8,7 @@ msgid "LC_POWIADOMIENIA_FRAZY_DODAJ_FRAZE"
 msgstr "Dodawanie słowa kluczowego"
 
 msgid "LC_POWIADOMIENIA_FRAZY_DODAJ_FRAZE_PLACEHOLDER"
-msgstr "Wpisz interesujące cie słowo..."
+msgstr "Wpisz interesujące Cię słowo..."
 
 msgid "LC_POWIADOMIENIA_DANE_NEW"
 msgstr "Nowe powiadomienia"
@@ -32,7 +32,7 @@ msgid "LC_POWIADOMIENIA_JS_CONFIRM_DELETING"
 msgstr "Czy na pewno chcesz usunąć to słowo kluczowe?"
 
 msgid "LC_POWIADOMIENIA_JS_PHRASE_AT_LEASE_2_CHARS"
-msgstr "Słowo kluczowe musi mieć conajmniej 2 znaki."
+msgstr "Słowo kluczowe musi mieć co najmniej 2 znaki."
 
 msgid "LC_POWIADOMIENIA_JS_PHRASE_EXIST"
 msgstr "To słowo kluczowe jest już na Twojej liście."
@@ -93,3 +93,5 @@ msgstr "Oznacz wszystko jako przeczytane"
 
 msgid "LC_POWIADOMIENIA_OPTIONS_MARK_ALL_READED_KEYWORD"
 msgstr "Oznacz słowo kluczowe jako przeczytane"
+
+
