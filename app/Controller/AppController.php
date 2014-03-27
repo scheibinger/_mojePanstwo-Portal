@@ -145,9 +145,8 @@ class AppController extends Controller
             }
         }
 
-
-        header('Access-Control-Allow-Origin: ' . $this->request->header('Origin'));
-        header('Access-Control-Allow-Credentials: true');
+        $this->response->header('Access-Control-Allow-Origin', $this->request->header('Origin'));
+        $this->response->header('Access-Control-Allow-Credentials' , true);
 
         # assigning translations for javascript use
         if ($this->params->plugin) {
