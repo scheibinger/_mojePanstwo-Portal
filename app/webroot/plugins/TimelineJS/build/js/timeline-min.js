@@ -193,7 +193,7 @@ if (typeof VMM != "undefined") {
     };
     VMM.getJSON = function (e, t, n) {
         if (typeof jQuery != "undefined") {
-            jQuery.ajaxSetup({timeout: 3e3});
+            jQuery.ajaxSetup({timeout: 3e4});
             if (VMM.Browser.browser == "Explorer" && parseInt(VMM.Browser.version, 10) >= 7 && window.XDomainRequest) {
                 trace("IE JSON");
                 var r = e;
