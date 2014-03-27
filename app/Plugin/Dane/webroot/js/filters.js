@@ -132,6 +132,28 @@ var filtersController = function () {
             modalFilter.modal('show');
 
         });
+
+        /*DATE FILTERS*/
+        filters.find('.daysButton button').click(function () {
+            var that = jQuery(this),
+                parent = that.parents('.filter');
+
+            if (!that.hasClass('disabled')) {
+                if (that.hasClass('single')) {
+                    parent.find('.daysButton .single').addClass('disabled');
+                    parent.find('.daysButton .multi').removeClass('disabled');
+
+                    parent.find('.daysSingle').removeClass('hide');
+                    parent.find('.daysMulti').addClass('hide');
+                } else if (that.hasClass('multi')) {
+                    parent.find('.daysButton .single').removeClass('disabled');
+                    parent.find('.daysButton .multi').addClass('disabled');
+
+                    parent.find('.daysSingle').addClass('hide');
+                    parent.find('.daysMulti').removeClass('hide');
+                }
+            }
+        })
     }
 };
 

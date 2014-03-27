@@ -22,6 +22,21 @@ msgstr "Przebieg prac"
 msgid "LC_DANE_ODPOWIEDZI"
 msgstr "Odpowiedzi"
 
+msgid "LC_DANE_FILTER_DAYBUTTON_SINGLE"
+msgstr "Dnia"
+
+msgid "LC_DANE_FILTER_DAYS_SINGLE_PLACEHOLDER"
+msgstr "Podaj datę..."
+
+msgid "LC_DANE_FILTER_DAYS_MULTI_FROM_PLACEHOLDER"
+msgstr "Od dnia..."
+
+msgid "LC_DANE_FILTER_DAYS_MULTI_TILL_PLACEHOLDER"
+msgstr "Do dnia..."
+
+msgid "LC_DANE_FILTER_DAYBUTTON_MULTI"
+msgstr "Od-Do"
+
 msgid "LC_DANE_TOOLBAR_LOADEDALLDOC"
 msgstr "Załadowano cały dokument"
 

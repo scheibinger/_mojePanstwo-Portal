@@ -42,19 +42,40 @@ var DataObjectesAjax = {
         var buttonExistance = jQuery('<span></span>').addClass('searchWithoutPhrase glyphicon glyphicon-remove'),
             filters = jQuery('#filters');
 
-        filters.find('.filter input[type="text"]').each(function () {
-            if (jQuery(this).val() != '') {
-                var inputParent = jQuery(this).parent();
+        filters.find('.filter input[type="text"]:not(".hide")').each(function () {
+            var that = jQuery(this);
 
-                if (inputParent.find('.searchWithoutPhrase').length == 0) {
-                    inputParent.append(buttonExistance.clone());
+            if (that.val() != '') {
+                var inputParent = that.parent();
+
+                if (inputParent.find('.searchWithoutPhrase[data-connect="' + that.attr('name') + '"]').length == 0) {
+                    inputParent.append(buttonExistance.clone().data('connect', that.attr('name')).css('top', Math.floor(that.position().top) + 10));
                 }
             }
         });
 
         filters.find('.searchWithoutPhrase').each(function () {
             jQuery(this).click(function () {
-                jQuery(this).parent().find('input[type="text"]').val('');
+                var that = jQuery(this),
+                    parent = that.parent(),
+                    date;
+
+                parent.find('input[name="' + that.data('connect') + '"]').val('');
+
+                if (parent.hasClass('daysMulti')) {
+                    var from = parent.find('.multi.from').val(),
+                        till = parent.find('.multi.till').val();
+
+                    if (from !== '' || till !== '')
+                        date = "[" + ((from !== '') ? from : "*") + "TO" + ((till !== '') ? till : "*") + "]";
+                    else
+                        date = null;
+                } else {
+                    date = null;
+                }
+
+                parent.parent().find('> .dates').val(date);
+
                 setTimeout(DataObjectesAjax.objectsReload, 5);
             });
         });
@@ -91,13 +112,34 @@ var DataObjectesAjax = {
         })
     },
     datepickerForInputs: function () {
-        var filters = jQuery('.dataBrowser').find('.dataFilters');
+        var filters = jQuery('.dataBrowser').find('.dataFilters'),
+            dateRegex = new RegExp('\\[');
 
         jQuery.datepicker.setDefaults({
             'dateFormat': 'yy-mm-dd',
             'changeMonth': true,
             'changeYear': true,
-            'onSelect': function () {
+            'onSelect': function (date) {
+                var that = this,
+                    there = jQuery(that),
+                    parent = there.parent();
+
+                if (parent.hasClass('daysMulti')) {
+                    var option = there.hasClass('from') ? "minDate" : "maxDate";
+                    var instance = there.data("datepicker");
+                    var rangeDate = jQuery.datepicker.parseDate(instance.settings.dateFormat || jQuery.datepicker._defaults.dateFormat, date, instance.settings);
+
+                    parent.find('.jquery-datepicker.multi').not(that).datepicker("option", option, rangeDate);
+
+                    var from = jQuery('input[name="' + there.data('main') + 'DaysMultiFrom"]').val(),
+                        till = jQuery('input[name="' + there.data('main') + 'DaysMultiTill"]').val();
+
+                    date = "[" + ((from !== '') ? from : "*") + "TO" + ((till !== '') ? till : "*") + "]";
+
+                }
+
+                jQuery('input[name="' + there.data('main') + '"]').val(date);
+
                 setTimeout(DataObjectesAjax.objectsReload, 5);
             }
         });
@@ -105,6 +147,49 @@ var DataObjectesAjax = {
         filters.find('.jquery-datepicker').each(function () {
             jQuery(this).datepicker();
         })
+
+        filters.find('.dates').each(function () {
+            var that = jQuery(this),
+                parents = that.parents('.filter'),
+                d = that.val(),
+                from = jQuery('input[name="' + that.attr('name') + 'DaysMultiFrom' + '"].multi.from'),
+                till = jQuery('input[name="' + that.attr('name') + 'DaysMultiTill' + '"].multi.till');
+
+            if (dateRegex.exec(d) != null) {
+                d = d.substring(1, d.length - 1);
+                d = d.split('TO');
+                if (d[0] != '*') {
+                    from.val(d[0]);
+
+                    /*SET MINDATE FOR TILL INPUT*/
+                    var instanceFrom = from.data("datepicker");
+                    var rangeDataFrom = jQuery.datepicker.parseDate(instanceFrom.settings.dateFormat || jQuery.datepicker._defaults.dateFormat, d[0], instanceFrom.settings);
+                    parents.find('.daysMulti > input.till').datepicker("option", 'minDate', rangeDataFrom);
+                }
+                if (d[1] != '*') {
+                    till.val(d[1]);
+
+                    /*SET MAXDATE FOR FROM INPUT*/
+                    var instanceTill = till.data("datepicker");
+                    var rangeDataTill = jQuery.datepicker.parseDate(instanceTill.settings.dateFormat || jQuery.datepicker._defaults.dateFormat, d[1], instanceTill.settings);
+                    parents.find('.daysMulti > input.from').datepicker("option", 'maxDate', rangeDataTill);
+                }
+
+                parents.find('.daysButton .single').removeClass('disabled');
+                parents.find('.daysButton .multi').addClass('disabled');
+
+                parents.find('.daysSingle').addClass('hide');
+                parents.find('.daysMulti').removeClass('hide');
+            } else {
+                jQuery('input[name="' + that.attr('name') + 'DaysSingle' + '"]').val(d);
+
+                parents.find('.daysButton .single').addClass('disabled');
+                parents.find('.daysButton .multi').removeClass('disabled');
+
+                parents.find('.daysSingle').removeClass('hide');
+                parents.find('.daysMulti').addClass('hide');
+            }
+        });
     },
     /*REDESIGN SORTING OPTION AND ADD AJAX REQUEST*/
     sorting: function () {
@@ -198,16 +283,37 @@ var DataObjectesAjax = {
             DataObjectesAjax.pageReload(event.target);
         });
     },
+    /*REORGANIZATE SERIALIZED FORM WITH REMOVING NOT NEEDED BLANK FIELDS + FORMATED DATES RANGE*/
+    reorganizationSerialize: function (serialArray) {
+        var formNewSerialize = [];
+
+        /*FILTER REORGANIZATE + DATE INPUT FORMAT*/
+        jQuery.grep(serialArray, function (n) {
+            if ((n.name.match('DaysSingle') == null) && (n.name.match('DaysMultiFrom') == null) && (n.name.match('DaysMultiTill') == null)) {
+                if (n.value !== '')
+                    formNewSerialize.push(n.name + '=' + n.value)
+            }
+        });
+
+        formNewSerialize = formNewSerialize.join('&');
+
+        return formNewSerialize;
+    },
     /*CLICKING ARROW SEND AJAX + CHANGE ARROW DIRECTION*/
     sortingReload: function () {
-        var formSerialize = jQuery('#DatasetViewForm').serialize(),
+        var formSerialize = jQuery('#DatasetViewForm').serializeArray(),
             sortSerialize = 'order=' + jQuery(".DatasetSort").data("sort");
+
+        formSerialize = DataObjectesAjax.reorganizationSerialize(formSerialize);
 
         History.pushState({ filters: formSerialize + '&' + sortSerialize + '&search=web', reloadForm: 'sorting', page: "Dane" }, jQuery(document).find("title").html(), "?" + formSerialize + '&' + sortSerialize + '&search=web');
     },
     /*GATHER FILTER OPTION AND SEND RELOAD AJAX REQUEST*/
     objectsReload: function () {
-        var formSerialize = jQuery('#DatasetViewForm').serialize();
+        var formSerialize = jQuery('#DatasetViewForm').serializeArray();
+
+        formSerialize = DataObjectesAjax.reorganizationSerialize(formSerialize);
+
         History.pushState({ filters: formSerialize + '&search=web', reloadForm: 'object', page: "Dane", focusInput: $('.dataBrowser input[type="text"]:focus').attr('id') }, jQuery(document).find("title").html(), "?" + formSerialize + '&search=web');
     },
     /*GATHER SORT AND FILTER OPTION AND SEND RELOAD AJAX REQUEST*/
@@ -242,7 +348,7 @@ var DataObjectesAjax = {
 
         jQuery.ajax({
             type: 'GET',
-            url: formAction + '.json?' + formActualFilters,
+            url: formAction + '.json?' + paramArray,
             dataType: 'JSON',
             beforeSend: function () {
                 main.append(jQuery('<div></div>').addClass('loadingTwirl'));
