@@ -11,66 +11,115 @@ jQuery(document).ready(function () {
             lang: _mPHeart.language.twoDig
         });
     }
-});
 
-
-
-$(document).ready(function() {
-	$.ajax({
-		url: '/sejmometr/autorzy_projektow.json',
-		type: 'GET',
-		async: true,
-		dataType: "json",
-		success: function (data) {
-			console.log('gotData', data);
-			displayChart(data);
-		}
-	});
+    if (jQuery('#sejm_projekty_chart').length > 0) {
+        $.ajax({
+            url: '/sejmometr/autorzy_projektow.json',
+            type: 'GET',
+            async: true,
+            dataType: "json",
+            success: function (data) {
+                displayChart(data);
+            }
+        });
+    }
 });
 
 
 function displayChart(data) {
-    
     var colors = Highcharts.getOptions().colors,
-        categories = ['MSIE', 'Firefox', 'Chrome'],
-        name = 'Browser brands';
+        mainData = {
+            const: {
+                name: 'Autorzy projektów w Sejmie',
+                colors: Highcharts.getOptions().colors,
+                total: 0
+            },
+            kategoriaData: [
+                {
+                    name: 'Poselskie',
+                    count: 0,
+                    color: colors[1]
+                },
+                {
+                    name: 'Komisyjne',
+                    count: 0,
+                    color: colors[2]
+                },
+                {
+                    name: 'Rządowe',
+                    count: 0,
+                    color: colors[3]
+                },
+                {
+                    name: 'Inne',
+                    count: 0,
+                    color: colors[4]
+                }
+            ],
+            autorzyRawData: {
+                poselskie: [],
+                komisyjne: [],
+                rzadowe: [],
+                inne: []
+            },
+            autorzyData: []
+        };
 
-
-    // Build the data arrays
-    var browserData = [];
-    var versionsData = [];
     for (var i = 0; i < data.length; i++) {
+        var brightness = 0.2 - (i / data.length) / 5,
+            collectInnerData, collectOuterData;
 
-        // add browser data
-        browserData.push({
-            name: categories[i],
-            y: data[i].y,
-            color: data[i].color
-        });
-
-        // add version data
-        for (var j = 0; j < data[i].drilldown.data.length; j++) {
-            var brightness = 0.2 - (j / data[i].drilldown.data.length) / 5 ;
-            versionsData.push({
-                name: data[i].drilldown.categories[j],
-                y: data[i].drilldown.data[j],
-                color: Highcharts.Color(data[i].color).brighten(brightness).get()
-            });
+        if (data[i].typ_id == '1') {
+            collectInnerData = mainData.kategoriaData[0];
+            collectOuterData = mainData.autorzyRawData.poselskie;
+        } else if (data[i].typ_id == '2') {
+            collectInnerData = mainData.kategoriaData[1];
+            collectOuterData = mainData.autorzyRawData.komisyjne;
+        } else if (data[i].typ_id == '3') {
+            collectInnerData = mainData.kategoriaData[2];
+            collectOuterData = mainData.autorzyRawData.rzadowe;
+        } else if (data[i].typ_id == '4') {
+            collectInnerData = mainData.kategoriaData[3];
+            collectOuterData = mainData.autorzyRawData.inne;
         }
+
+        mainData.const.total += Number(data[i].count);
+
+        collectInnerData.count += Number(data[i].count);
+
+        collectOuterData.push({
+            name: data[i].nazwa,
+            count: Number(data[i].count),
+            color: Highcharts.Color(collectInnerData.color).brighten(brightness).get()
+        });
     }
 
-    // Create the chart
-    $('#sejm_projekty_chart').highcharts({
+    for (var j = 0; j < mainData.kategoriaData.length; j++) {
+        mainData.kategoriaData[j].y = Math.round(((mainData.kategoriaData[j].count / mainData.const.total) * 100) * 100) / 100;
+    }
+
+    jQuery.each(mainData.autorzyRawData, function () {
+        for (var k = 0; k < this.length; k++) {
+            mainData.autorzyData.push({
+                name: this[k].name,
+                count: this[k].count,
+                y: Math.round(((this[k].count / mainData.const.total) * 100) * 100) / 100,
+                color: this[k].color
+            });
+        }
+    });
+
+    jQuery('#sejm_projekty_chart').highcharts({
         chart: {
             type: 'pie',
             height: 500
         },
         title: {
-            text: ''
+            text: mainData.const.name
         },
         yAxis: {
             title: {
-                text: 'Total percent market share'
+                text: ''
             }
         },
         plotOptions: {
@@ -80,30 +129,34 @@ function displayChart(data) {
             }
         },
         tooltip: {
-    	    valueSuffix: '%'
+            pointFormat: 'Ilość projektów: <b>{point.count}</b>'
         },
-        series: [{
-            name: 'Browsers',
-            data: browserData,
-            size: '60%',
-            dataLabels: {
-                formatter: function() {
-                    return this.y > 5 ? this.point.name : null;
-                },
-                color: 'white',
-                distance: -30
-            }
-        }, {
-            name: 'Versions',
-            data: versionsData,
-            size: '80%',
-            innerSize: '60%',
-            dataLabels: {
-                formatter: function() {
-                    // display only if larger than 1
-                    return this.y > 1 ? '<b>'+ this.point.name +':</b> '+ this.y +'%'  : null;
+        series: [
+            {
+                name: 'Kategoria',
+                data: mainData.kategoriaData,
+                size: '60%',
+                dataLabels: {
+                    formatter: function () {
+                        return this.y > 5 ? this.point.name : null;
+                    },
+                    color: 'white',
+                    distance: -50
                 }
+            },
+            {
+                name: 'Autorzy',
+                data: mainData.autorzyData,
+                size: '80%',
+                innerSize: '60%',
+                dataLabels: {
+                    formatter: function () {
+                        // display only if larger than 1
+                        return this.y > 1 ? '<b>' + this.point.name + ':</b> ' + this.point.count : null;
+                    }
+                }
+
             }
-        }]
+        ]
     });
-};
+}
