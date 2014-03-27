@@ -15,11 +15,11 @@ jQuery(document).ready(function () {
         $(window).on('DATAREADY', function(){
 	        
 	        $('.vco-navigation').on("UPDATE", function() {
-			    console.log('timeline.js event', 'UPDATE');
+			    prepare_slide( window.timelinejs_current_slide );
 			});
 			
 			$('.vco-navigation').on("LOADED", function() {
-			    console.log('timeline.js event', 'LOADED');
+			    prepare_slide( window.timelinejs_current_slide );
 			});
 	        
         });
@@ -27,11 +27,24 @@ jQuery(document).ready(function () {
     }
 });
 
-
-var onJSONP_Data = function()
+var prepare_slide = function(current_slide)
 {
-
-	console.log('onJSONP_Data');
+	
+	var slide_div = $('.slider-item-container').children()[ current_slide ];
+	if( !slide_div.hasClass('prepared') )
+	{
+		
+		slide_div.addClass('prepared');
+		
+		var title_element = $($('.slider-item-container').children()[63]).find('h3');
+		var title_element_text = title_element.text();
+		
+		if( title_element_text[0] == '#' )
+		{
+			// podmieniamy tytuł
+		}
+		
+	}
 
 }
 
