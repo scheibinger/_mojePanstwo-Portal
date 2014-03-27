@@ -1,5 +1,6 @@
 jQuery(document).ready(function () {
     if ((timelineEmbed = jQuery("#timeline-embed")).length > 0) {
+        
         createStoryJS({
             start_at_end: true,
             width: "100%",
@@ -10,11 +11,32 @@ jQuery(document).ready(function () {
             js: '/plugins/TimelineJS/build/js/timeline-2rows.js',
             lang: _mPHeart.language.twoDig
         });
+        
+        $(window).on('DATAREADY', function(){
+	        
+	        $('.vco-navigation').on("UPDATE", function() {
+			    console.log('timeline.js event', 'UPDATE');
+			});
+			
+			$('.vco-navigation').on("LOADED", function() {
+			    console.log('timeline.js event', 'LOADED');
+			});
+	        
+        });
+        
     }
 });
 
 
+var onJSONP_Data = function()
+{
 
+	console.log('onJSONP_Data');
+
+}
+
+
+/*
 $(document).ready(function() {
 	$.ajax({
 		url: '/sejmometr/autorzy_projektow.json',
@@ -107,3 +129,4 @@ function displayChart(data) {
         }]
     });
 };
+*/
