@@ -140,11 +140,10 @@ jQuery(document).ready(function () {
                 'width': connectionGraph.outerWidth(),
                 'height': 500, /*DEFAULT HEIGHT SETTING*/
                 'color': {
-                    'mainFill': '#888888',
-                    'mainStroke': '#666666',
+                    'mainFill': '#278DCD',
                     'links': '#333333',
-                    'podmiot': "#FF0000",
-                    'osoba': "#009DE0"
+                    'podmiot': "#6CACD8",
+                    'osoba': "#24333A"
                 },
                 size: {
                     'distance': 45,
@@ -193,7 +192,6 @@ jQuery(document).ready(function () {
                 var root = nodes[0];
                 root.fixed = true;
                 root.x = (d3Data.width / 2);
-                //root.y = (d3Data.height / 2);
                 root.y = ((root.label == 'podmiot') ? d3Data.size.nodesPodmiot : d3Data.size.nodesOsoba) + 10;
 
                 graph.relationships.forEach(function (link) {
@@ -250,10 +248,7 @@ jQuery(document).ready(function () {
                     })
                     .style("stroke-width", 2)
                     .style("stroke", function (d) {
-                        if (d.id == root.id)
-                            return d3Data.color['mainStroke'];
-                        else
-                            return d3Data.color[d.label];
+                        return d3Data.color[d.label];
                     })
                     .style("fill", function (d) {
                         if (d.id == root.id)
@@ -318,8 +313,10 @@ jQuery(document).ready(function () {
                         nameEnd = name.substring(limit);
 
                         name = nameBegin + nameEnd.substring(0, nameEnd.indexOf(' '));
-                        lines = name.match(RegExp(regex, 'g')).join('\n').split('\n');
 
+                        if (d.id == root.id) name = name.toUpperCase();
+
+                        lines = name.match(RegExp(regex, 'g')).join('\n').split('\n');
 
                         for (var i = 0; i < lines.length; i++) {
                             var y = ( (lines.length % 2 == 0) ? ((d3Data.size.nodeTextSeparate / 2) + d3Data.size.nodeTextBox) : (d3Data.size.nodeTextBox / 2)) - ( (Math.floor(lines.length / 2)) * (d3Data.size.nodeTextBox + d3Data.size.nodeTextSeparate) ) + ( i * (d3Data.size.nodeTextBox + d3Data.size.nodeTextSeparate) );
