@@ -146,8 +146,8 @@ jQuery(document).ready(function () {
                     'osoba': "#24333A"
                 },
                 size: {
-                    'distance': 45,
-                    'linksLength': 100,
+                    'distance': 50,
+                    'linksLength': 80,
                     'linksWidth': 1,
                     'linkText': '8px',
                     'nodesPodmiot': 50,
@@ -158,6 +158,7 @@ jQuery(document).ready(function () {
                 }
             };
 
+            d3Data.size.borderPadding = ((d3Data.size.nodesPodmiot > d3Data.size.nodesOsoba) ? d3Data.size.nodesPodmiot : d3Data.size.nodesOsoba) + 10;
             d3Data.force = d3.layout.force()
                 .charge(-2000)
                 .linkDistance(d3Data.size.linksLength + d3Data.size.distance)
@@ -176,7 +177,7 @@ jQuery(document).ready(function () {
                     .on("zoom", zoomed);
 
                 /*SIZE SETTING*/
-                var newHeight = (((d3Data.size.nodesPodmiot > d3Data.size.nodesOsoba) ? d3Data.size.nodesPodmiot : d3Data.size.nodesOsoba) * nodes.length);
+                var newHeight = (((d3Data.size.nodesPodmiot > d3Data.size.nodesOsoba) ? d3Data.size.nodesPodmiot : d3Data.size.nodesOsoba) * nodes.length) * .8;
                 d3Data.height = (newHeight > d3Data.height) ? newHeight : d3Data.height;
                 d3Data.force.size([d3Data.width, d3Data.height]);
                 d3Data.svg
@@ -237,7 +238,7 @@ jQuery(document).ready(function () {
                 var circle = d3Data.svg.append("g").selectAll("circle")
                     .data(nodes)
                     .enter().append("circle")
-                    .attr('class', 'circle')
+                    .attr('class', 'circleBottom')
                     .attr("r", function (d) {
                         if (d.label == "podmiot") {
                             return d3Data.size.nodesPodmiot;
@@ -255,13 +256,6 @@ jQuery(document).ready(function () {
                             return d3Data.color['mainFill'];
                         else
                             return d3Data.color[d.label];
-                    })
-                    .call(d3Data.force.drag)
-                    .on('mousemove', function (d) {
-                        d.fixed = true;
-                    })
-                    .on('dblclick', function (d) {
-                        detailInfo(d);
                     });
 
                 /*CREATE SHADOW UNDER LINE TEXT*/
@@ -335,20 +329,83 @@ jQuery(document).ready(function () {
                         }
                     });
 
+                /*CREATE CIRCLE*/
+                var circleDump = d3Data.svg.append("g").selectAll("circle")
+                    .data(nodes)
+                    .enter().append("circle")
+                    .attr('class', 'circle')
+                    .attr("r", function (d) {
+                        if (d.label == "podmiot") {
+                            return d3Data.size.nodesPodmiot + 4;
+                        }
+                        else if (d.label == "osoba") {
+                            return d3Data.size.nodesOsoba + 4;
+                        }
+                    })
+                    .style('fill-opacity', 0)
+                    .call(d3Data.force.drag)
+                    .on('mousemove', function (d) {
+                        d.fixed = true;
+                    })
+                    .on('dblclick', function (d) {
+                        detailInfo(d);
+                    });
+
+                function bouncyBordersX(axis) {
+                    if (axis < d3Data.size.borderPadding) axis = d3Data.size.borderPadding + Math.floor((Math.random() * 10) + 1);
+                    if (axis > d3Data.width - d3Data.size.borderPadding) axis = d3Data.width - d3Data.size.borderPadding - Math.floor((Math.random() * 10) + 1);
+
+                    return axis;
+                }
+
+                function bouncyBordersY(axis) {
+                    if (axis < d3Data.size.borderPadding * 2) axis = d3Data.size.borderPadding * 2 + Math.floor((Math.random() * 10) + 1);
+                    if (axis > d3Data.height - d3Data.size.borderPadding) axis = d3Data.height - d3Data.size.borderPadding - Math.floor((Math.random() * 10) + 1);
+
+                    return axis;
+                }
+
                 function tick() {
                     path.attr("d", function (d) {
+                        d.source.x = bouncyBordersX(d.source.x);
+                        d.source.y = bouncyBordersY(d.source.y);
+                        d.target.x = bouncyBordersX(d.target.x);
+                        d.target.y = bouncyBordersY(d.target.y);
+
                         return "M" + d.source.x + "," + d.source.y + "A" + 0 + "," + 0 + " 0 0,1 " + d.target.x + "," + d.target.y;
                     });
                     pathTextShadow.attr("transform", function (d) {
+                        d.source.x = bouncyBordersX(d.source.x);
+                        d.source.y = bouncyBordersY(d.source.y);
+                        d.target.x = bouncyBordersX(d.target.x);
+                        d.target.y = bouncyBordersY(d.target.y);
+
                         return "translate(" + (d.source.x + d.target.x) / 2 + "," + (d.source.y + d.target.y) / 2 + ")";
                     });
                     pathText.attr("transform", function (d) {
+                        d.source.x = bouncyBordersX(d.source.x);
+                        d.source.y = bouncyBordersY(d.source.y);
+                        d.target.x = bouncyBordersX(d.target.x);
+                        d.target.y = bouncyBordersY(d.target.y);
+
                         return "translate(" + (d.source.x + d.target.x) / 2 + "," + (d.source.y + d.target.y) / 2 + ")";
                     });
                     circle.attr("transform", function (d) {
+                        d.x = bouncyBordersX(d.x);
+                        d.y = bouncyBordersY(d.y);
+
                         return "translate(" + d.x + "," + d.y + ")";
                     });
                     circleText.attr("transform", function (d) {
+                        d.x = bouncyBordersX(d.x);
+                        d.y = bouncyBordersY(d.y);
+
+                        return "translate(" + d.x + "," + d.y + ")";
+                    });
+                    circleDump.attr("transform", function (d) {
+                        d.x = bouncyBordersX(d.x);
+                        d.y = bouncyBordersY(d.y);
+
                         return "translate(" + d.x + "," + d.y + ")";
                     });
 
@@ -363,30 +420,30 @@ jQuery(document).ready(function () {
 
                 function collide(node) {
                     var alpha = .5,
-                        nodePadding = 20,
-                        r = (node.label == "podmiot") ? d3Data.size.nodesPodmiot : d3Data.size.nodesOsoba,
+                        nodePadding = 10,
+                        r = (node.label == "podmiot") ? d3Data.size.nodesPodmiot : d3Data.size.nodesOsoba;
 
-                        nx1 = node.x - r - (nodePadding / 2),
-                        nx2 = node.x + r + (nodePadding / 2),
-                        ny1 = node.y - r - (nodePadding / 2),
-                        ny2 = node.y + r + (nodePadding / 2);
+                    var nx1 = node.x - r - nodePadding,
+                        nx2 = node.x + r + nodePadding,
+                        ny1 = node.y - r - nodePadding,
+                        ny2 = node.y + r + nodePadding;
 
                     return function (quad, x1, y1, x2, y2) {
+
                         if (quad.point && (quad.point !== node)) {
                             var x = node.x - quad.point.x,
                                 y = node.y - quad.point.y,
                                 l = Math.sqrt(x * x + y * y),
-                                r = (2 * r) + nodePadding;
+                                r = (2 * r) + (2 * nodePadding);
                             if (l < r) {
                                 l = (l - r) / l * alpha;
                                 node.x -= x *= l;
                                 node.y -= y *= l;
+
                                 quad.point.x += x;
                                 quad.point.y += y;
                             }
                         }
-
-                        console.log(x1, x2, y1, y2);
 
                         return x1 > nx2
                             || x2 < nx1
