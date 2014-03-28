@@ -57,19 +57,29 @@ class SejmometrController extends SejmometrAppController
             $stopDate = $object->getData('data_stop');
             $dateParts = explode('-', $stopDate);
             $stopDate = $dateParts[0] . ',' . $dateParts[1] . ',' . $dateParts[2];
-						
-	        $output['timeline']['date'][] = array(
+
+            if (!$object->getData('komunikat_id')) {
+                $asset = array( /*IMAGE DONT EXIST - DEFAULT IMG*/
+                    'media' => '/Sejmometr/img/default.jpg',
+                    'thumbnail' => '/Sejmometr/img/default-thumbnail.jpg',
+                    'credit' => '',
+                );
+            } else {
+                $asset = array( /*PATH TO EXIST IMAGES*/
+                    'media' => 'http://resources.sejmometr.pl/sejm_komunikaty/img/' . $object->getData('komunikat_id') . '-0.jpg',
+                    'thumbnail' => 'http://resources.sejmometr.pl/sejm_komunikaty/img/' . $object->getData('komunikat_id') . '-1.jpg',
+                    'credit' => '® Kancelaria Sejmu',
+                );
+            }
+
+            $output['timeline']['date'][] = array(
 	            'startDate' => $startDate,
 	            'endDate' => $stopDate,
 	            'headline' => '#' . $object->getData('numer'),
 	            'text' => '<p>Statystyki posiedzenia</p>',
 	            'classname' => 'klasa',
-	            'asset' => array(
-	                'media' => 'http://resources.sejmometr.pl/sejm_komunikaty/img/' . $object->getData('komunikat_id') . '-0.jpg',
-	                'thumbnail' => 'http://resources.sejmometr.pl/sejm_komunikaty/img/' . $object->getData('komunikat_id') . '-1.jpg',
-	                'credit' => '® Kancelaria Sejmu',
-	            ),
-	        );
+                'asset' => $asset,
+            );
         
         }
         
