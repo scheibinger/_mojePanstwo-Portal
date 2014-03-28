@@ -217,7 +217,7 @@ jQuery(document).ready(function () {
                         return d;
                     })
                     .attr("viewBox", "0 -5 10 10")
-                    .attr("refX", ((d3Data.size.nodesPodmiot > d3Data.size.nodesOsoba) ? d3Data.size.nodesPodmiot : d3Data.size.nodesOsoba) + 18)
+                    .attr("refX", ((d3Data.size.nodesPodmiot > d3Data.size.nodesOsoba) ? d3Data.size.nodesPodmiot : d3Data.size.nodesOsoba) + 20)
                     .attr("refY", 0)
                     .attr("markerWidth", 8)
                     .attr("markerHeight", 8)
@@ -301,7 +301,7 @@ jQuery(document).ready(function () {
                     .each(function (d) {
                         var name, nameBegin, nameEnd, lines,
                             limit = Math.floor((d.label == "podmiot") ? d3Data.size.nodesPodmiot : d3Data.size.nodesOsoba),
-                            width = ((d.label == "podmiot") ? d3Data.size.nodesPodmiot : d3Data.size.nodesOsoba) / 3,
+                            width = Math.floor(((d.label == "podmiot") ? d3Data.size.nodesPodmiot : d3Data.size.nodesOsoba) / 2.5),
                             regex = '.{1,' + width + '}(\\s|$)' + ('|\\S+?(\\s|$)');
 
                         if (d.label == 'podmiot')
@@ -311,7 +311,6 @@ jQuery(document).ready(function () {
 
                         nameBegin = name.substring(0, limit);
                         nameEnd = name.substring(limit);
-
                         name = nameBegin + nameEnd.substring(0, nameEnd.indexOf(' '));
 
                         if (d.id == root.id) name = name.toUpperCase();
@@ -386,6 +385,8 @@ jQuery(document).ready(function () {
                                 quad.point.y += y;
                             }
                         }
+
+                        console.log(x1, x2, y1, y2);
 
                         return x1 > nx2
                             || x2 < nx1
