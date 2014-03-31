@@ -58,7 +58,7 @@ function displayChart(data) {
     var colors = Highcharts.getOptions().colors,
         mainData = {
             const: {
-                name: 'Autorzy projektów w Sejmie',
+                name: '',
                 colors: Highcharts.getOptions().colors,
                 total: 0
             },
@@ -66,12 +66,12 @@ function displayChart(data) {
                 {
                     name: 'Poselskie',
                     count: 0,
-                    color: colors[1]
+                    color: colors[4]
                 },
                 {
                     name: 'Komisyjne',
                     count: 0,
-                    color: colors[2]
+                    color: colors[1]
                 },
                 {
                     name: 'Rządowe',
@@ -81,7 +81,7 @@ function displayChart(data) {
                 {
                     name: 'Inne',
                     count: 0,
-                    color: colors[4]
+                    color: colors[2]
                 }
             ],
             autorzyRawData: {
@@ -140,7 +140,7 @@ function displayChart(data) {
     jQuery('#sejm_projekty_chart').highcharts({
         chart: {
             type: 'pie',
-            height: 500
+            height: 600
         },
         title: {
             text: mainData.const.name

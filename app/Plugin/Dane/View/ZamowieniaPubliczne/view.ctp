@@ -1,4 +1,6 @@
 <?php $this->Combinator->add_libs('css', $this->Less->css('view-zamowieniapubliczne', array('plugin' => 'Dane'))); ?>
+<?php $this->Combinator->add_libs('js', 'Dane.view-zamowieniapubliczne'); ?>
+
 
 <?= $this->Element('dataobject/pageBegin'); ?>
 
@@ -34,6 +36,10 @@
                     </div>
 
                 <? } ?>
+                
+                <div id="source" class="block">
+                	
+                </div>
 
             </div>
 
@@ -86,3 +92,10 @@
 ?>
 
 <?= $this->Element('dataobject/pageEnd'); ?>
+
+<script type="text/javascript">
+	var zamowienie = {
+		ogloszenie_nr: '<?= $object->getData('ogloszenie_nr') ?>',
+		data: '<?= $object->getDate() ?>'
+	};
+</script>
