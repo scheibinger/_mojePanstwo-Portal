@@ -544,7 +544,7 @@ if (typeof VMM != 'undefined') {
     VMM.getJSON = function (url, data, callback) {
         if (typeof( jQuery ) != 'undefined') {
             jQuery.ajaxSetup({
-                timeout: 3000
+                timeout: 30000
             });
             /* CHECK FOR IE
              ================================================== */
@@ -5716,6 +5716,9 @@ if (typeof VMM != 'undefined' && typeof VMM.Slider == 'undefined') {
          goToSlide(n, ease, duration);
          ================================================== */
         function goToSlide(n, ease, duration, fast, firstrun) {
+            
+            window.timelinejs_current_slide = n; // #hack
+            
             var _ease = config.ease,
                 _duration = config.duration,
                 is_last = false,
