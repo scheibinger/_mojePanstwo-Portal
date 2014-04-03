@@ -128,6 +128,12 @@ msgstr ""
 msgid "LC_PASZPORT_EMAIL_MUST_BE_UNIQUE"
 msgstr "Adres e-mail już istnieje w serwisie"
 
+msgid "LC_PASZPORT_USERNAME_MUST_BE_UNIQUE"
+msgstr "Nazwa użytkownika już istnieje w serwisie"
+
+msgid "LC_PASZPORT_ALPHANUMERIC"
+msgstr "Dozwolone są wylacznie litery i cyfry"
+
 #: Model/User.php:21
 #: View/Users/add.ctp:29
 #: View/Users/index.ctp:32

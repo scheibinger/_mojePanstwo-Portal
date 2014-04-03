@@ -418,7 +418,15 @@ class UsersController extends PaszportAppController
                 $this->redirect(array('action' => 'login'));
             } else {
                 $this->Session->setFlash(__d('paszport', 'LC_PASZPORT_REGISTRATION_FAILED'), 'alert', array('class' => 'alert-error'));
-                $this->User->validationErrors = $user['errors'];
+
+                $this->loadModel('Paszport.User');
+                $__p = function($translation_key) {
+                    return __d('paszport', $translation_key);
+                };
+
+                foreach($user['errors'] as $key => $err_list) {
+                    $this->User->validationErrors[$key] = array_map($__p, $err_list);
+                }
             }
         }
         $languages = $this->PassportApi->findAsList('languages', array('fields' => array('id', 'label')));
