@@ -160,7 +160,8 @@ jQuery(document).ready(function () {
 
             d3Data.size.borderPadding = ((d3Data.size.nodesPodmiot > d3Data.size.nodesOsoba) ? d3Data.size.nodesPodmiot : d3Data.size.nodesOsoba) + 10;
             d3Data.force = d3.layout.force()
-                .charge(-2000)
+                .gravity(0.1)
+                .charge(-900)
                 .linkDistance(d3Data.size.linksLength + d3Data.size.distance)
                 .linkStrength(2);
 
@@ -193,7 +194,7 @@ jQuery(document).ready(function () {
                 var root = nodes[0];
                 root.fixed = true;
                 root.x = (d3Data.width / 2);
-                root.y = ((root.label == 'podmiot') ? d3Data.size.nodesPodmiot : d3Data.size.nodesOsoba) + 10;
+                root.y = ((root.label == 'podmiot') ? d3Data.size.nodesPodmiot : d3Data.size.nodesOsoba) + 20;
 
                 graph.relationships.forEach(function (link) {
                     var s = jQuery.grep(nodes, function (e) {
@@ -352,15 +353,15 @@ jQuery(document).ready(function () {
                     });
 
                 function bouncyBordersX(axis) {
-                    if (axis < d3Data.size.borderPadding) axis = d3Data.size.borderPadding + Math.floor((Math.random() * 10) + 1);
-                    if (axis > d3Data.width - d3Data.size.borderPadding) axis = d3Data.width - d3Data.size.borderPadding - Math.floor((Math.random() * 10) + 1);
+                    if (axis < d3Data.size.borderPadding) axis = d3Data.size.borderPadding + Math.floor((Math.random() * 20) - 10);
+                    if (axis > d3Data.width - d3Data.size.borderPadding) axis = d3Data.width - d3Data.size.borderPadding - Math.floor((Math.random() * 20) - 10);
 
                     return axis;
                 }
 
                 function bouncyBordersY(axis) {
-                    if (axis < d3Data.size.borderPadding * 2) axis = d3Data.size.borderPadding * 2 + Math.floor((Math.random() * 10) + 1);
-                    if (axis > d3Data.height - d3Data.size.borderPadding) axis = d3Data.height - d3Data.size.borderPadding - Math.floor((Math.random() * 10) + 1);
+                    if (axis < d3Data.size.borderPadding) axis = d3Data.size.borderPadding * 2 + Math.floor((Math.random() * 20) + 10);
+                    if (axis > d3Data.height - d3Data.size.borderPadding) axis = d3Data.height - d3Data.size.borderPadding - Math.floor((Math.random() * 20) - 10);
 
                     return axis;
                 }
