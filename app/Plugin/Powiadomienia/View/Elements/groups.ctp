@@ -1,7 +1,7 @@
 <div class="keywords">
-    <label><?php echo __d('powiadomienia', "LC_POWIADOMIENIA_FRAZY_USER") ?>:</label>
-    <button class="btn btn-success btn-sm addphrase pull-right" data-toggle="modal" data-target="#addPhraseModal">+
-    </button>
+    <label><?php echo __d('powiadomienia', "LC_POWIADOMIENIA_GRUPY_USER") ?>:</label>
+    <!--<button class="btn btn-success btn-sm addphrase pull-right" data-toggle="modal" data-target="#addPhraseModal">+
+    </button>-->
     <div class="modal fade" id="addPhraseModal" role="dialog"
          aria-labelledby="<?php echo __d('powiadomienia', 'LC_POWIADOMIENIA_FRAZY_DODAJ_FRAZE') ?>" aria-hidden="true">
         <div class="modal-dialog">
@@ -29,35 +29,35 @@
         <?php if ($groups) {
             foreach ($groups as $index => $group) {
                 ?>
-                <li class="<?php if (isset($this->request->query['keyword']) == false || $this->request->query['keyword'] == $phrase['Phrase']['id']) echo 's'; ?><?php if ($phrase['UserPhrase']['alerts_unread_count']) { ?> nonzero<?php } ?>"
-                    data-id="<?php echo $phrase['Phrase']['id']; ?>"
-                    title="<?php echo str_replace('"', '', $phrase['Phrase']['q']); ?>">
+                <li class="<?php if (isset($this->request->query['group_id']) == false || $this->request->query['group_id'] == $group['PowiadomieniaGroup']['id']) echo 's'; ?><?php if ($group['PowiadomieniaGroup']['alerts_unread_count']) { ?> nonzero<?php } ?>"
+                    data-id="<?php echo $group['PowiadomieniaGroup']['id']; ?>"
+                    title="<?php echo str_replace('"', '', $group['PowiadomieniaGroup']['title']); ?>">
                     <div class="inner radio-inline">
                         <input type="radio" name="data[Dataobject][ids]"
                                id="PowiadomieniaFrazaId<?php echo $index ?>"
-                               value="<?php echo $phrase['Phrase']['id']; ?>"
-                            <?php echo (isset($this->data['Dataobject']['ids']) && $this->data['Dataobject']['ids'] == $phrase['Phrase']['id']) ? 'checked' : null; ?>/>
+                               value="<?php echo $group['PowiadomieniaGroup']['id']; ?>"
+                            <?php echo (isset($this->data['Dataobject']['ids']) && $this->data['Dataobject']['ids'] == $group['PowiadomieniaGroup']['id']) ? 'checked' : null; ?>/>
                         <label for="PowiadomieniaFrazaId<?php echo $index ?>">
                             <a class="wrap"
-                                <?php if (isset($this->request->query['keyword']) && ($this->request->query['keyword'] == $phrase['Phrase']['id'])) { ?>
+                                <?php if (isset($this->request->query['group_id']) && ($this->request->query['group_id'] == $group['PowiadomieniaGroup']['id'])) { ?>
                                     href="<?php echo $this->Html->url(array("controller" => "powiadomienia", "action" => "index", "?" => array("mode" => (isset($this->request->query['mode'])) ? $this->request->query['mode'] : null))) ?>"
                                 <?php } else { ?>
-                                    href="<?php echo $this->Html->url(array("controller" => "powiadomienia", "action" => "index", "?" => array("keyword" => $phrase['Phrase']['id'], "mode" => (isset($this->request->query['mode'])) ? $this->request->query['mode'] : null))) ?>"
+                                    href="<?php echo $this->Html->url(array("controller" => "powiadomienia", "action" => "index", "?" => array("group_id" => $group['PowiadomieniaGroup']['id'], "mode" => (isset($this->request->query['mode'])) ? $this->request->query['mode'] : null))) ?>"
                                 <?php } ?>
                                target="_self">
-                                <?php echo $phrase['Phrase']['q']; ?>
+                                <?php echo $group['PowiadomieniaGroup']['title']; ?>
                             </a>
 
                             <div class="count">
                                 <span
-                                    class="badge<?php if ($phrase['UserPhrase']['alerts_unread_count'] > 0) { ?> nonzero<?php } ?>">
-                                    <?= $phrase['UserPhrase']['alerts_unread_count']; ?>
+                                    class="badge<?php if ($group['PowiadomieniaGroup']['alerts_unread_count'] > 0) { ?> nonzero<?php } ?>">
+                                    <?= $group['PowiadomieniaGroup']['alerts_unread_count']; ?>
                                 </span>
                             </div>
                             <a href="<?php echo $this->Html->url(array(
                             	'controller' => 'phrases',
                             	'action' => 'remove', 
-                            	$phrase['Phrase']['id']
+                            	$group['PowiadomieniaGroup']['id']
                             )); ?>"
                                class="delete pull-right"
                                data-icon="&#xe601;">
@@ -69,7 +69,7 @@
             }
         } ?>
 
-        <span class="nokeywords<?php if ($phrases != null) {
+        <span class="nokeywords<?php if ($groups != null) {
             echo ' hidden';
         } ?>"><?php echo __d('powiadomienia', "LC_POWIADOMIENIA_FRAZY_NOKEYWORDS") ?><span>
 

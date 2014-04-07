@@ -1,5 +1,5 @@
-msgid "LC_POWIADOMIENIA_FRAZY_USER"
-msgstr "Twoje słowa kluczowe"
+msgid "LC_POWIADOMIENIA_GRUPY_USER"
+msgstr "Twoje grupy powiadomień"
 
 msgid "LC_POWIADOMIENIA_FRAZY_NOKEYWORDS"
 msgstr "Brak słów kluczowych"

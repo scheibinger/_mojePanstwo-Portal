@@ -67,7 +67,7 @@
                     font-size: 18px;
                     font-weight: 300;
                     padding: 15px 30px;
-                    color: @color;
+                    color: fade(@colorHighlight, 50%);
                 }
 
                 > input {
@@ -109,7 +109,11 @@
                     background: #ffffff;
 
                     a {
-                        color: @colorHighlight;
+                        color: #969696;
+                    }
+                    
+                    a:before {
+                        color: #DD5600;
                     }
                 }
 
@@ -287,7 +291,7 @@
 
 @media (min-width: 1155px) {
     #powiadomienia .dane .tabsBlock .additionalOptions {
-        margin-top: 20px;
+        margin-top: 15px;
     }
 }
 

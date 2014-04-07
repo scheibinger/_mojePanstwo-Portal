@@ -32,7 +32,7 @@ class PowiadomieniaController extends PowiadomieniaAppController
         // FETCHING OBJECTS
         $queryData = array(
             'conditions' => array(
-                'keyword' => isset($this->request->query['keyword']) ? $this->request->query['keyword'] : false,
+                'group_id' => isset($this->request->query['group_id']) ? $this->request->query['group_id'] : false,
                 'mode' => isset($this->request->query['mode']) ? $this->request->query['mode'] : false,
             ),
             'limit' => 20,
@@ -40,7 +40,7 @@ class PowiadomieniaController extends PowiadomieniaAppController
             'page' => isset($this->request->query['page']) ? $this->request->query['page'] : 1,
         );
 
-        $this->API->search($queryData);
+        $this->API->_search($queryData);
         $objects = $this->API->getObjects();
         $this->set('objects', $objects);
 
@@ -61,8 +61,8 @@ class PowiadomieniaController extends PowiadomieniaAppController
 
         } else {
 
-            $phrases = $this->API->getPhrases();
-            $this->set('phrases', $phrases);
+            $groups = $this->API->getGroups();
+            $this->set('groups', $groups);
 
         }
 

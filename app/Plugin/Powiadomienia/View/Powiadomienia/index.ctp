@@ -28,7 +28,7 @@
 
         <div class="frazy col-xs-12 col-md-3 pull-left">
 
-            <?php echo $this->element('Powiadomienia.phrases', array('phrases' => $phrases)); ?>
+            <?php echo $this->element('Powiadomienia.groups', array('groups' => $groups)); ?>
 
         </div>
         <div class="dane col-xs-12 col-md-9 pull-right">
