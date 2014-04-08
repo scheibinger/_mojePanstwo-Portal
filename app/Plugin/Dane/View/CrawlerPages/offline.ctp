@@ -4,13 +4,14 @@
 <div class="offline_content mpanel">
 <?php
 	$html = $offline['html'];
+	$html = str_replace(array("\n", "\r", "\t"), '', $html);
 	
-	$tags_to_strip = array('script', 'style', 'link');
+	$tags_to_strip = array('script', 'style', 'link', 'meta', 'head', 'title');
 	
 	foreach ($tags_to_strip as $tag)  
 	{ 
-	    $html = preg_replace("/<\/?" . $tag . "(.|\s)*?>/", '', $html); 
-	
+		$html=preg_replace('/<'.$tag.'[^>]*>(.*?)<\/'.$tag.'/i', '', $html);
+		$html=preg_replace('/<'.$tag.'[^>]*\>/i', '', $html);
 	} 
 
 	echo $html;
