@@ -111,13 +111,10 @@ a.wrap {
                     cursor: pointer;
 
                     > div.inner {
-                        .count {
-                            visibility: hidden;
-                        }
-                        .delete {
+                        .options {
                             visibility: visible;
                         }
-                        .delete:hover {
+                        .options:hover {
                             &:before {
                                 color: #de3339;
                             }
@@ -156,7 +153,7 @@ a.wrap {
 
                     label {
                         cursor: pointer;
-                        padding: 10px 40px 10px 10px;
+                        padding: 10px 45px 10px 15px;
                         color: #0783B8;
                         font-size: 13px;
                         font-weight: 400;
@@ -192,18 +189,18 @@ a.wrap {
                             }
                         }
 
-                        .delete {
+                        .options {
                             position: absolute;
                             top: 50%;
-                            right: 15px;
-                            margin-top: -11px;
+                            left: -6px;
+                            margin-top: -14px;
                             padding: 5px;
                             display: block;
                             float: right;
                             visibility: hidden;
 
                             &:before {
-                                color: #c6c6c6;
+                                color: lighten(#2F2F2F, 25%);
                                 text-shadow: 0 0 2px #FFFFFF;
                             }
                         }
@@ -237,6 +234,72 @@ a.wrap {
                 height: 30px;
             }
 
+        }
+    }
+}
+
+#frazyModalBox {
+    &.modal.in .modal-dialog {
+        transform: translate(0px, 40px);
+    }
+
+    .visibledNone {
+        visibility: hidden;
+    }
+    .modal-header {
+        .edit.modal-title textarea {
+            color: #555555;
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font-size: 18px;
+            font-weight: 400;
+            margin-left: -6px;
+            margin-top: -5px;
+            padding: 3px;
+            width: 95%;
+        }
+    }
+    .modal-body {
+        .loading {
+            background: url(../../img/loader/ajax-loader-square-blue.gif) center center no-repeat;
+            width: 100%;
+            height: 20px;
+            display: block;
+            margin: 15px 0 10px;
+        }
+
+        .datasets, .keywords {
+            margin: 5px 1%;
+            width: 98%;
+
+            .checkbox {
+                font-size: 12px;
+                line-height: 20px;
+            }
+        }
+
+        hr {
+            margin-top: 5px;
+        }
+    }
+    .modal-footer {
+        .btn {
+            &.loading {
+                background-image: url(../../img/loader/search-loading.png);
+                background-position: center center;
+                background-repeat: no-repeat;
+                line-height: 5em;
+                height: 34px;
+
+                &.delete {
+                    background-color: #D9534F;
+                }
+                &.duplicate {
+                    background-color: #5BC0DE;
+                }
+                &.save {
+                    background-color: #428BCA;
+                }
+            }
         }
     }
 }

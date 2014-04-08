@@ -54,14 +54,7 @@
                                     <?= $phrase['UserPhrase']['alerts_unread_count']; ?>
                                 </span>
                             </div>
-                            <a href="<?php echo $this->Html->url(array(
-                            	'controller' => 'phrases',
-                            	'action' => 'remove', 
-                            	$phrase['Phrase']['id']
-                            )); ?>"
-                               class="delete pull-right"
-                               data-icon="&#xe601;">
-                            </a>
+                            <a href="#options" class="options" data-icon="&#xe612;"></a>
                         </label>
                     </div>
                 </li>

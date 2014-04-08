@@ -54,13 +54,7 @@
                                     <?= $group['PowiadomieniaGroup']['alerts_unread_count']; ?>
                                 </span>
                             </div>
-                            <a href="<?php echo $this->Html->url(array(
-                            	'controller' => 'phrases',
-                            	'action' => 'remove', 
-                            	$group['PowiadomieniaGroup']['id']
-                            )); ?>"
-                               class="delete pull-right"
-                               data-icon="&#xe601;">
+                            <a href="#options" class="options" data-icon="&#xe612;">
                             </a>
                         </label>
                     </div>
