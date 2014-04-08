@@ -273,12 +273,15 @@
 
         loadMoreContentIntervalMain = setInterval(function () {
             if (isElementVisibled('.loadMoreContent') && loadMoreContentIntervalRunable) {
-                var page = Number(loadMoreContent.data('currentpage')) + 1;
+                var page = Number(loadMoreContent.data('currentpage')) + 1,
+                    groupId = (loadMoreContent.data('groupid') !== '') ? '&groupid=' + Number(loadMoreContent.data('groupid')) : '',
+                    mode = '&mode=' + Number(loadMoreContent.data('mode'));
+
                 loadMoreContentIntervalRunable = false;
 
                 jQuery.ajax({
                     type: "GET",
-                    url: "powiadomienia/powiadomienia.json?page=" + page,
+                    url: "powiadomienia/powiadomienia.json?page=" + page + mode + groupId,
                     beforeSend: function () {
                         loadMoreContent.addClass('loading');
                     },
