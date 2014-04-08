@@ -70,3 +70,13 @@ $buttons = isset($objectOptions['buttons']) ? $objectOptions['buttons'] : array(
 <?php echo $this->Element('dataobject/pageRelated', array(
     'showRelated' => isset($showRelated) ? (boolean)$showRelated : false,
 )); ?>
+
+
+<?php if( isset($_ALERT_QUERIES) )
+{
+	
+	
+	// debug( $_ALERT_QUERIES);
+	
+	
+}?>
