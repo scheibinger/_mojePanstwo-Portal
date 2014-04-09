@@ -41,9 +41,12 @@ $this->Dataobject->setObject($object);
                     <div class="content col-md-<?= $object_content_sizes[1] ?>">
 						
 						<? if($alertsButtons) {?>
-							<div class="alertsButtons">
-								<input class="read" type="button" value="Przeczytane" /><input class="unread" type="button" value="Nieprzeczytane" />
-							</div>
+                            <div class="alertsButtons pull-right">
+                                <input class="btn btn-sm read" type="button"
+                                       value="<?php echo __d('powiadomienia', 'LC_POWIADOMIENIA_OPTIONS_ALERT_BUTTON_READ'); ?>"/>
+                                <input class="btn btn-sm unread" type="button"
+                                       value="<?php echo __d('powiadomienia', 'LC_POWIADOMIENIA_OPTIONS_ALERT_BUTTON_UNREAD'); ?>"/>
+                            </div>
 						<? } ?>
 												
                         <? if ($object->force_hl_fields || $forceLabel) { ?>

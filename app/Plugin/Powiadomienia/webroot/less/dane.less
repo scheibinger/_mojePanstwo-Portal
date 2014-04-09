@@ -5,15 +5,35 @@
     padding: 0;
 
     .powiadomienia {
-        &.readed .objectRender {
-            background-color: #FFFFFF;
-        }
-
         .objectRender {
             background-color: #FFFFE0;
 
             &.readed {
                 background-color: #FFFFFF;
+
+                .alertsButtons {
+                    .read {
+                        display: block;
+                    }
+                    .unread {
+                        display: none;
+                    }
+                }
+            }
+
+            .alertsButtons {
+                .read {
+                    border-color: #999999;
+                    background-color: #999999;
+                    color: #FFFFFF;
+                    display: none;
+                }
+                .unread {
+                    border-color: #DD5600;
+                    background-color: #DD5600;
+                    color: #FFFFFF;
+                    display: block;
+                }
             }
 
             .content {

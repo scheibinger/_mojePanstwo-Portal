@@ -5,38 +5,56 @@
         newNotificationIntervalMain,
         addNewPhrase,
         phraseContent,
+        alertsButtons,
         tryNumbers = 4;
+
+    function _changeMarkStatus(newNotify, mode) {
+        $.ajax({
+            type: "GET",
+            url: '/powiadomienia/flagObjects.json?action=' + mode + '&id=' + newNotify.attr('gid'),
+            beforeSend: function () {
+                newNotify.find('.alertsButtons > input').addClass('disabled');
+            },
+            success: function (data) {
+                /*MARK SEEN ELEMENT AS READED TO NOT TRIGGER FUNCTION AGAIN AT SAME ELEMENT*/
+                if (data.status == "OK") {
+                    if (mode == 'read') {
+                        newNotify.removeClass('unreaded').addClass('readed')
+                        newNotify.find('.alertsButtons .unread').hide();
+                        newNotify.find('.alertsButtons .read').show();
+                    } else {
+                        newNotify.removeClass('readed').addClass('unreaded');
+                        newNotify.find('.alertsButtons .read').hide();
+                        newNotify.find('.alertsButtons .unread').show();
+                    }
+
+                    $.each(data.groups_alerts_counts, function () {
+                        var badge = $('.keywords').find('li[data-id="' + this.id + '"]').find('.badge');
+
+                        (Number(this.alerts_unread_count) == 0) ? badge.removeClass('nonzero') : badge.addClass('nonzero');
+                        badge.text(Number(this.alerts_unread_count));
+                    })
+                }
+            },
+            error: function () {
+                var dataCount = (newNotify.data('count')) ? newNotify.data('count') + 1 : 1;
+                newNotify.data('count', dataCount);
+                if (newNotify.data('count') > tryNumbers)
+                    newNotify.addClass('readed');
+            },
+            complete: function () {
+                newNotify.find('.alertsButtons > input').removeClass('disabled');
+            }
+        });
+    }
 
     function optionsMarkAsRead() {
         if (newNotification.find('.objectRender').length > 0 && $('.additionalOptions .markReadAfterThreeSec input').is(':checked')) {
             newNotificationIntervalMain = setInterval(function () {
                 $.each(newNotification.find('.objectRender:not(.readed)'), function () {
-                    var newNotify = $(this);
                     if (isElementVisibled(this)) {
                         /*RUN FUNCTION AT SEEN EACH ELEMENTS*/
-                        $.ajax({
-                            type: "GET",
-                            url: '/powiadomienia/flagObjects.json?mode=powiadomienia&action=read&id=' + newNotify.attr('gid'),
-                            success: function (data) {
-                                /*MARK SEEN ELEMENT AS READED TO NOT TRIGGER FUNCTION AGAIN AT SAME ELEMENT*/
-                                if (data.status == "OK") {
-                                    newNotify.addClass('readed');
-
-                                    $.each(data.groups_alerts_counts, function () {
-                                        var badge = $('.keywords').find('li[data-id="' + this.id + '"]').find('.badge');
-
-                                        (Number(this.alerts_unread_count) == 0) ? badge.removeClass('nonzero') : badge.addClass('nonzero');
-                                        badge.text(Number(this.alerts_unread_count));
-                                    })
-                                }
-                            },
-                            error: function () {
-                                var dataCount = (newNotify.data('count')) ? newNotify.data('count') + 1 : 1;
-                                newNotify.data('count', dataCount);
-                                if (newNotify.data('count') > tryNumbers)
-                                    newNotify.addClass('readed');
-                            }
-                        });
+                        _changeMarkStatus($(this), 'read');
                     }
                 });
 
@@ -48,11 +66,12 @@
     }
 
     function optionsMarkAllAsRead(button) {
-        console.log(button);
+        var parm = (button.data('groupid') != "") ? "?group_id=" + button.data('groupid') : "";
+
         $.ajax({
-            url: "/powiadomienia/markAsRead?group_id=" + button.data('groupid'),
+            url: "/powiadomienia/flagObjects.json" + parm,
             type: "GET",
-            dataType: "json",
+            dataType: "JSON",
             success: function (data) {
                 /*MARK SEEN ELEMENT AS READED TO NOT TRIGGER FUNCTION AGAIN AT SAME ELEMENT*/
                 if (data.status == "OK") {
@@ -77,20 +96,35 @@
         });
     }
 
+    if ((alertsButtons = $('.alertsButtons')).length > 0) {
+        alertsButtons.find('> input').click(function () {
+            var btn = $(this),
+                parent = btn.parents('.objectRender');
+
+            if (btn.hasClass('disabled')) return;
+
+            if (btn.hasClass('read')) {
+                _changeMarkStatus(parent, 'unread');
+            } else {
+                _changeMarkStatus(parent, 'read');
+                ;
+            }
+        });
+    }
+
     if ((addNewPhrase = $('#addPhraseModal')).length > 0) {
         var addNewPhraseSubmit = function () {
             var btn = addNewPhrase.find('.addNewPhrase .btn'),
                 input = addNewPhrase.find('.addNewPhrase input');
 
             if (input.val().length >= 2) {
-                console.log(encodeURI(input.val()));
                 $.ajax({
                     url: "/powiadomienia/phrases/add.json",
                     data: {
                         add: input.val()
                     },
                     type: "POST",
-                    dataType: "json",
+                    dataType: "JSON",
                     beforeSend: function () {
                         btn.addClass('loading');
                         addNewPhrase.find('.error').addClass('hide');
@@ -176,7 +210,6 @@
 
                 setTimeout(function () {
                     jQuery("body").click(function (event) {
-                        console.log(event.target.nodeName, event.target.nodeName != 'TEXTAREA')
                         if (event.target.nodeName != 'TEXTAREA') {
                             if (modal.find('.modal-header .edit.modal-title textarea').val() != modal.find('.modal-header h4.modal-title').text())
                                 modal.find('.modal-header h4.modal-title').text(jQuery.trim(modal.find('.modal-header .edit.modal-title textarea').val()));
