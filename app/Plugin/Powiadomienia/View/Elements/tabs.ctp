@@ -32,7 +32,7 @@
             <?php /* <input type="submit" name="data[Dataobject][visited]" value="1"/> */ ?>
         </li>
     </ul>
-    <div class="additionalOptions hidden-xs col-sm-2 col-md-3" style="display: none !important;">
+    <div class="additionalOptions hidden-xs col-sm-2 col-md-3">
         <div class="btn-group options show">
             <button data-toggle="dropdown"
                     class="btn btn-success btn-xs dropdown-toggle pull-right"
@@ -48,8 +48,10 @@
                     </a>
                 </li>
                 <li>
-                    <a class="markAllAsRead"
-                       href="#"><?php echo (isset($this->request->query['group_id'])) ? __d('powiadomienia', 'LC_POWIADOMIENIA_OPTIONS_MARK_ALL_READED_KEYWORD') : __d('powiadomienia', 'LC_POWIADOMIENIA_OPTIONS_MARK_ALL_READED') ?></a>
+                    <a class="markAllAsRead" href="#"
+                       data-groupid="<?php echo(isset($this->request->query['group_id']) ? $this->request->query['group_id'] : null); ?>">
+                        <?php echo (isset($this->request->query['group_id'])) ? __d('powiadomienia', 'LC_POWIADOMIENIA_OPTIONS_MARK_ALL_READED_KEYWORD') : __d('powiadomienia', 'LC_POWIADOMIENIA_OPTIONS_MARK_ALL_READED') ?>
+                    </a>
                 </li>
             </ul>
         </div>
