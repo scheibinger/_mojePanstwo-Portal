@@ -19,8 +19,16 @@
                             url: '/powiadomienia/flagObjects.json?mode=powiadomienia&action=read&id=' + newNotify.attr('gid'),
                             success: function (data) {
                                 /*MARK SEEN ELEMENT AS READED TO NOT TRIGGER FUNCTION AGAIN AT SAME ELEMENT*/
-                                if (data.status == "OK")
+                                if (data.status == "OK") {
                                     newNotify.addClass('readed');
+
+                                    $.each(data.groups_alerts_counts, function () {
+                                        var badge = $('.keywords').find('li[data-id="' + this.id + '"]').find('.badge');
+
+                                        (Number(this.alerts_unread_count) == 0) ? badge.removeClass('nonzero') : badge.addClass('nonzero');
+                                        badge.text(Number(this.alerts_unread_count));
+                                    })
+                                }
                             },
                             error: function () {
                                 var dataCount = (newNotify.data('count')) ? newNotify.data('count') + 1 : 1;
@@ -47,8 +55,15 @@
             dataType: "json",
             success: function (data) {
                 /*MARK SEEN ELEMENT AS READED TO NOT TRIGGER FUNCTION AGAIN AT SAME ELEMENT*/
-                if (data.status == "OK")
+                if (data.status == "OK") {
                     $('.dataContent .objectRender').addClass('readed');
+                    $.each(data.groups_alerts_counts, function () {
+                        var badge = $('.keywords').find('li[data-id="' + this.id + '"]').find('.badge');
+
+                        (Number(this.alerts_unread_count) == 0) ? badge.removeClass('nonzero') : badge.addClass('nonzero');
+                        badge.text(Number(this.alerts_unread_count));
+                    })
+                }
             },
             error: function () {
                 var dataCount = (button.data('count')) ? button.data('count') + 1 : 1;
