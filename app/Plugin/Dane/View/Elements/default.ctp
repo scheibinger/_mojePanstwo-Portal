@@ -42,9 +42,9 @@ $this->Dataobject->setObject($object);
 						
 						<? if($alertsButtons) {?>
                             <div class="alertsButtons pull-right">
-                                <input class="btn btn-sm read" type="button"
+                                <input class="btn btn-xs read" type="button"
                                        value="<?php echo __d('powiadomienia', 'LC_POWIADOMIENIA_OPTIONS_ALERT_BUTTON_READ'); ?>"/>
-                                <input class="btn btn-sm unread" type="button"
+                                <input class="btn btn-xs unread" type="button"
                                        value="<?php echo __d('powiadomienia', 'LC_POWIADOMIENIA_OPTIONS_ALERT_BUTTON_UNREAD'); ?>"/>
                             </div>
 						<? } ?>
