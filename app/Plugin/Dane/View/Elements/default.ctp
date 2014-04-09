@@ -17,7 +17,7 @@ if (in_array($object->getDataset(), array('rady_posiedzenia', 'rady_gmin_debaty'
 $this->Dataobject->setObject($object);
 
 ?>
-<div class="objectRender"
+<div class="objectRender<? if($alertsStatus) echo " unreaded"; else echo " readed"; ?>"
      oid="<?php echo $item['data']['id'] ?>" gid="<?php echo $gid ?>">
     <div class="row">
         <? if ($this->Dataobject->getDate()) { ?>
@@ -39,7 +39,13 @@ $this->Dataobject->setObject($object);
                     <?php } ?>
                     </div>
                     <div class="content col-md-<?= $object_content_sizes[1] ?>">
-
+						
+						<? if($alertsButtons) {?>
+							<div class="alertsButtons">
+								<input class="read" type="button" value="Przeczytane" /><input class="unread" type="button" value="Nieprzeczytane" />
+							</div>
+						<? } ?>
+												
                         <? if ($object->force_hl_fields || $forceLabel) { ?>
                             <p class="header">
                                 <?= $object->getLabel(); ?>
