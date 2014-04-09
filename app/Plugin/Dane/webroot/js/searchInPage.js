@@ -2,6 +2,8 @@
     var searchInPage = $('#searchInPage'),
         searchInPageNav = searchInPage.find('.searchInPageContent .nav');
 
+    searchInPage.css('marginTop', '-' + searchInPage.height() / 2 + 'px');
+
     function searchAndHighlight(button, searchTerm) {
         if (searchTerm) {
             //var wholeWordOnly = new RegExp("\\g"+searchTerm+"\\g","ig"); //matches whole word only
@@ -77,9 +79,9 @@
         if (newPos >= Number(that.data('searchMatch')))
             newPos = 0;
 
-        $('html, body').animate({
+        $('html, body').stop(true, true).animate({
             scrollTop: $($('.' + markedSearchWord)[newPos]).offset().top - 80
-        }, 2000);
+        }, 800);
 
         that.data('searchNodesPos', newPos);
 
