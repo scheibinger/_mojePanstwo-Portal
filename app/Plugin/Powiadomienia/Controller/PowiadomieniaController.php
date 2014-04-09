@@ -75,12 +75,24 @@ class PowiadomieniaController extends PowiadomieniaAppController
 
     public function flagObjects()
     {
-
-        $object_id = (int)@$this->request->query['id'];
-
-        if ($object_id && $this->Session->read('Auth.User.id'))
-            $status = $this->API->Powiadomienia()->flagObject($object_id);
-
+		
+		if( !$this->Session->read('Auth.User.id') )
+			return false;
+		
+        $object_id = (int) @$this->request->query['id'];
+        $group_id = (int) @$this->request->query['group_id'];
+        $action = @$this->request->query['action'];
+        
+        if( !in_array($action, array('read', 'unread')) )
+        	return false;
+                
+        if( $object_id )
+			$status = $this->API->Powiadomienia()->_flagObject($object_id, $action);
+		elseif( $group_id )
+			$status = $this->API->Powiadomienia()->_flagGroup($group_id, $action);
+		else
+			$status = $this->API->Powiadomienia()->_flagObjects($action);            
+				
         $this->set('status', $status);
         $this->set('_serialize', 'status');
 
