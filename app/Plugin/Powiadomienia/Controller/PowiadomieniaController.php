@@ -30,9 +30,14 @@ class PowiadomieniaController extends PowiadomieniaAppController
 
         // echo "index"; die();
         // FETCHING OBJECTS
+        
+        $group_id = isset($this->request->query['group_id']) ? $this->request->query['group_id'] : false;
+        if( !$group_id )
+        	$group_id = isset($this->request->query['groupid']) ? $this->request->query['groupid'] : false;
+        
         $queryData = array(
             'conditions' => array(
-                'group_id' => isset($this->request->query['group_id']) ? $this->request->query['group_id'] : false,
+                'group_id' => $group_id,
                 'mode' => isset($this->request->query['mode']) ? $this->request->query['mode'] : false,
             ),
             'limit' => 20,

@@ -32,7 +32,7 @@
             <?php /* <input type="submit" name="data[Dataobject][visited]" value="1"/> */ ?>
         </li>
     </ul>
-    <div class="additionalOptions hidden-xs col-sm-2 col-md-3">
+    <div class="additionalOptions hidden-xs col-sm-2 col-md-3" style="display: none !important;">
         <div class="btn-group options show">
             <button data-toggle="dropdown"
                     class="btn btn-success btn-xs dropdown-toggle pull-right"
