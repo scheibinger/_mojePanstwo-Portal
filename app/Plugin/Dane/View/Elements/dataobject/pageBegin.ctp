@@ -12,7 +12,7 @@ $buttons = isset($objectOptions['buttons']) ? $objectOptions['buttons'] : array(
 <?php $this->Combinator->add_libs('js', array('Dane.naglosnij', 'Dane.related-tabs')); ?>
 <div class="objectsPage">
 <?php if (isset($_ALERT_QUERIES)) {
-    $alertArray = [];
+    $alertArray = array();
     foreach ($_ALERT_QUERIES as $alert) {
         preg_match_all("'<em>(.*?)</em>'si", $alert['hl'], $match);
         foreach ($match[1] as $word) {
