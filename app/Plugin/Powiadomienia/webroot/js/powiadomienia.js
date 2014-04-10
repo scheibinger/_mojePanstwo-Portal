@@ -48,6 +48,24 @@
         });
     }
 
+
+    function addAlertsButtonEvent(dom) {
+        $.each(dom, function () {
+            dom.find('.alertsButtons > input').unbind().click(function () {
+                var btn = $(this),
+                    parent = btn.parents('.objectRender');
+
+                if (btn.hasClass('disabled')) return;
+
+                if (btn.hasClass('read')) {
+                    _changeMarkStatus(parent, 'unread');
+                } else {
+                    _changeMarkStatus(parent, 'read');
+                }
+            });
+        })
+    }
+
     function optionsMarkAsRead() {
         if (newNotification.find('.objectRender').length > 0 && $('.additionalOptions .markReadAfterThreeSec input').is(':checked')) {
             newNotificationIntervalMain = setInterval(function () {
@@ -92,22 +110,6 @@
                 } else {
                     optionsMarkAllAsRead(button);
                 }
-            }
-        });
-    }
-
-    if ((alertsButtons = $('.alertsButtons')).length > 0) {
-        alertsButtons.find('> input').click(function () {
-            var btn = $(this),
-                parent = btn.parents('.objectRender');
-
-            if (btn.hasClass('disabled')) return;
-
-            if (btn.hasClass('read')) {
-                _changeMarkStatus(parent, 'unread');
-            } else {
-                _changeMarkStatus(parent, 'read');
-                ;
             }
         });
     }
@@ -398,6 +400,7 @@
                         if (data) {
                             loadMoreContent.data('currentpage', page);
                             showData.append(data);
+                            addAlertsButtonEvent(showData);
                             loadMoreContentIntervalRunable = true;
                         } else {
                             clearInterval(loadMoreContentIntervalMain);
@@ -426,4 +429,5 @@
     });
 
     optionsMarkAsRead();
+    addAlertsButtonEvent($('.showResults .objectRender'));
 }(jQuery));
