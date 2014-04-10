@@ -29,7 +29,7 @@
                     }
 
                     $.each(data.groups_alerts_counts, function () {
-                        var badge = $('.keywords').find('li[data-id="' + this.id + '"]').find('.badge');
+                        var badge = $('.keywords').find('li[data-id="' + this.group_id + '"]').find('.badge');
 
                         (Number(this.alerts_unread_count) == 0) ? badge.removeClass('nonzero') : badge.addClass('nonzero');
                         badge.text(Number(this.alerts_unread_count));
@@ -66,10 +66,10 @@
     }
 
     function optionsMarkAllAsRead(button) {
-        var parm = (button.data('groupid') != "") ? "?group_id=" + button.data('groupid') : "";
+        var parm = (button.data('groupid') != "") ? "&group_id=" + button.data('groupid') : "";
 
         $.ajax({
-            url: "/powiadomienia/flagObjects.json" + parm,
+            url: "/powiadomienia/flagObjects.json?action=read" + parm,
             type: "GET",
             dataType: "JSON",
             success: function (data) {
@@ -77,7 +77,7 @@
                 if (data.status == "OK") {
                     $('.dataContent .objectRender').addClass('readed');
                     $.each(data.groups_alerts_counts, function () {
-                        var badge = $('.keywords').find('li[data-id="' + this.id + '"]').find('.badge');
+                        var badge = $('.keywords').find('li[data-id="' + this.group_id + '"]').find('.badge');
 
                         (Number(this.alerts_unread_count) == 0) ? badge.removeClass('nonzero') : badge.addClass('nonzero');
                         badge.text(Number(this.alerts_unread_count));

@@ -92,7 +92,7 @@ msgid "LC_POWIADOMIENIA_OPTIONS_MARK_ALL_READED"
 msgstr "Oznacz wszystko jako przeczytane"
 
 msgid "LC_POWIADOMIENIA_OPTIONS_MARK_ALL_READED_KEYWORD"
-msgstr "Oznacz słowo kluczowe jako przeczytane"
+msgstr "Oznacz wszystko w tej grupie jako przeczytane"
 
 msgid "LC_POWIADOMIENIA_OPTIONS_ALERT_BUTTON_READ"
 msgstr "Przeczytane"
