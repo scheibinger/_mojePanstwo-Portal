@@ -23,8 +23,8 @@ class UsersController extends PaszportAppController
     public function beforeFilter()
     {
         parent::beforeFilter();
+
         $this->Auth->allow(array('login', 'add', 'gate', 'ping', 'forgot', 'reset', 'fblogin', 'externalgate', 'import', 'externalfblogin', 'twitterlogin', 'twitter', 'client'));
-        $this->Auth->deny(array('index'));
         $this->OAuth->deny('me');
         if ($this->params->action == 'login' && $this->Auth->loggedIn()) {
             $this->redirect(array('action' => 'index'));

@@ -83,6 +83,9 @@ class PaszportAppController extends AppController
     public function beforeFilter()
     {
         parent::beforeFilter();
+        
+        $this->Auth->deny(); // default is to deny all
+
         $this->Auth->loginRedirect = array('controller' => 'users', 'action' => 'index');
         $this->Auth->authError = __d('paszport', 'LC_PASZPORT_UNAUTHORIZED', true);
         if ($this->Auth->loggedIn()) {
