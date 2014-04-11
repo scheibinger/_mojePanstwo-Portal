@@ -25,7 +25,7 @@
             <div class="col-md-2 intro"><?= __d('mapaprawa', 'LC_MAPAPRAWA_PROJEKT_OCOCHODZI') ?></div>
             <div class="col-md-10 content info">
                 <div class="section">
-                    <p class="value"><?= $projekt->getData('opis'); ?></p>
+                    <span class="value"><?= $projekt->getData('opis'); ?></span>
                 </div>
             </div>
         </div>

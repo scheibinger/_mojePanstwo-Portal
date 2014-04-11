@@ -181,7 +181,9 @@ var intervalMain;
                     jQuery(data.docs).each(function () {
                         var docsNode = jQuery('<li></li>');
                         docsNode.append(
-                            jQuery('<a></a>').attr('href', '#').data('document', this.dokument_id).text(this.title)
+                            jQuery('<a></a>').attr('href', '#').data('document', this.dokument_id).text(this.title).prepend(
+                                jQuery('<img />').attr('src', 'http://docs.sejmometr.pl/thumb/2/' + this.dokument_id + '.png')
+                            )
                         );
 
                         docsLister.append(docsNode);
@@ -233,7 +235,9 @@ var intervalMain;
                                     docViewer.find('.descline').append(mapaPrawa.find('.container > .descline').clone(true));
                                     docViewer.find('.documentTitle .intro').text(_mPHeart.translation.LC_MAPAPRAWA_DOKUMENT)
                                         .end()
-                                        .find('.documentTitle .content').text(jQuery(that).text())
+                                        .find('.documentTitle .content').text(jQuery(that).text());
+
+                                    docViewer.find('.htmlexDoc').append(jQuery('<a></a>').addClass('close glyphicon glyphicon-remove-sign'));
 
                                     if (data.doc.packages_count > 1)
                                         docViewer.find('.htmlexDoc').append(jQuery('<div></div>').addClass('loadMoreDocumentContent').data({'currentPackage': 1, 'packages': data.doc.packages_count}));
@@ -297,14 +301,18 @@ var intervalMain;
     }
 
     $lawMap.find('.slide').click(function () {
+        var self = jQuery(this),
+            slideId = self.data('slide'),
+            params = {
+                s: slideId,
+                lang: _mPHeart.language.threeDig
+            },
+            docContent = jQuery('<div></div>'),
+            additionalInfo = jQuery('.additionalInfo.doc-' + slideId),
+            additionalInfoAddon = jQuery('.additionalInfo.addon.doc-' + slideId);
 
         if ($(this).hasClass('open')) {
-            var that = $(this),
-                slide = that.data('slide'),
-                additionalInfo = jQuery('.additionalInfo.doc-' + slide),
-                additionalInfoAddon = jQuery('.additionalInfo.addon.doc-' + slide);
-
-            that.removeClass('open');
+            self.removeClass('open');
 
             if (additionalInfoAddon.length > 0 && additionalInfoAddon.is(':visible')) {
                 additionalInfoAddon.slideUp({
@@ -338,18 +346,9 @@ var intervalMain;
             return;
         }
 
-        var self = jQuery(this),
-            slideId = self.data('slide'),
-            params = {
-                s: slideId,
-                lang: _mPHeart.language.threeDig
-            },
-            docContent = jQuery('<div></div>'),
-            additionalInfoDocSlide = jQuery('.additionalInfo.doc-' + slideId);
-
         self.addClass('open');
 
-        if (additionalInfoDocSlide.length == 0) {
+        if (additionalInfo.length == 0) {
             var docList = jQuery('<ul></ul>');
 
             jQuery.ajax({
@@ -410,8 +409,7 @@ var intervalMain;
                         },
                         done: function () {
                             showLines();
-                        },
-                        duration: 150
+                        }
                     });
 
                     docList.find('li a').click(function (e) {
@@ -434,14 +432,14 @@ var intervalMain;
                 }
             });
         } else {
-            if (additionalInfoAddon.length > 0 && additionalInfoAddon.is(':hidden')) {
-                additionalInfoAddon.slideDown({
-                    step: function (now, tween) {
-                        if (tween.prop == 'height')
-                            showLines();
-                    },
-                    done: function () {
-                        additionalInfo.slideDown({
+            additionalInfo.slideDown({
+                step: function (now, tween) {
+                    if (tween.prop == 'height')
+                        showLines();
+                }, done: function () {
+                    showLines();
+                    if (additionalInfoAddon.length > 0) {
+                        additionalInfoAddon.slideDown({
                             step: function (now, tween) {
                                 if (tween.prop == 'height')
                                     showLines();
@@ -451,17 +449,8 @@ var intervalMain;
                             }
                         })
                     }
-                });
-            } else {
-                additionalInfo.slideDown({
-                    step: function (now, tween) {
-                        if (tween.prop == 'height')
-                            showLines();
-                    }, done: function () {
-                        showLines();
-                    }
-                });
-            }
+                }
+            });
         }
     });
 

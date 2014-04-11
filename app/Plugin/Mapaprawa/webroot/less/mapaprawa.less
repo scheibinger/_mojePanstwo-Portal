@@ -49,7 +49,7 @@
         }
 
         > div {
-            padding-bottom: 10px;
+            padding-bottom: 5px;
 
             &:last-child {
                 padding-bottom: 0;
@@ -74,7 +74,7 @@
                 line-height: 1em;
                 font-weight: 700;
                 color: #ED1E79;
-                padding-top: 20px;
+                padding-top: 15px;
                 padding-left: 22px;
             }
         }
@@ -97,14 +97,6 @@
                     float: right;
                 }
             }
-        }
-
-        .documentTitle {
-            .intro, .content {
-                border-top: 1px solid #808080;
-            }
-
-            padding-bottom: 20px;
         }
 
         .graph {
@@ -518,6 +510,11 @@
                                         display: block;
                                         float: left;
                                         color: #ffffff;
+
+                                        img {
+                                            padding-right: 8px;
+                                            float: left;
+                                        }
                                     }
                                 }
                             }
@@ -532,17 +529,20 @@
             font-size: 15px;
             color: #808080;
 
+            &.row .section {
+                border-top: 1px solid #D8D8D8;
+
+                &:last-child {
+                    border-bottom: 1px solid #D8D8D8;
+                }
+            }
+
             .section {
                 display: block;
                 width: 100%;
                 float: left;
                 padding: 10px 0 30px;
                 line-height: 1.2em;
-                border-top: 1px solid #D8D8D8;
-
-                &:last-child {
-                    border-bottom: 1px solid #D8D8D8;
-                }
 
                 > .intro {
                     width: 16%;
@@ -632,10 +632,10 @@
         top: 0;
         left: 0;
         z-index: 9999;
-        background-color: #000;
+        background-color: #303030;
 
         .container {
-            background-color: #000;
+            background-color: #303030;
             color: #ffffff;
             position: relative;
             overflow: auto;
@@ -649,13 +649,25 @@
                 overflow: auto;
                 width: 98%;
 
-                .headline .content > h2, .descline .content, .documentTitle .content {
+                .headline .intro, .descline .intro, .documentTitle .intro {
+                    text-align: right;
+                    padding-top: 8px;
+                }
+
+                .headline .content > h2, .descline .content .value, .documentTitle .content {
                     font-family: Georgia, Arial, Helvetica, sans-serif;
                     color: #FFFFFF;
-                    font-size: 33px;
+                    font-size: 18px;
                     font-weight: 400px;
-                    line-height: 48px;
-                    text-align: right;
+                    line-height: 24px;
+                }
+
+                .documentTitle {
+                    padding-bottom: 20px;
+
+                    .intro, .content {
+                        border-top: 1px solid #808080;
+                    }
                 }
 
                 .docContent {
