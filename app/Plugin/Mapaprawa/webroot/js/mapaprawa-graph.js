@@ -249,6 +249,8 @@ var intervalMain;
 
                                         jQuery('#imageViewCSS').remove();
                                         jQuery('#docViewer').remove();
+
+                                        clearInterval(intervalMain);
                                     });
 
                                     if (jQuery('.loadMoreDocumentContent').length) {
