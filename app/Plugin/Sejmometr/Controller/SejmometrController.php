@@ -3,7 +3,7 @@
 class SejmometrController extends SejmometrAppController
 {
 	
-	public $helpers = array('Dane.dataobjectsSlider', 'Dane.Dataobject', 'Dane.Filter');
+	public $helpers = array('Dane.DataobjectsSlider', 'Dane.Dataobject', 'Dane.Filter');
 	public $components = array('RequestHandler');
 	
     public function index()
