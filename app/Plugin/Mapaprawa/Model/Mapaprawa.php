@@ -26,8 +26,6 @@ class Mapaprawa extends AppModel
 
                 $object = $objects[$o];
 
-                // var_export( $object ); die();
-
                 $dataset = $object->getDataset();
                 $main_icon = 'pass';
                 $nodes = array(
@@ -78,7 +76,7 @@ class Mapaprawa extends AppModel
                             'id' => $object->getDataset() . '-' . $object->getId(),
                             'icon' => 'doc',
                             'status' => '1',
-                            'parent_id' => array($prev_object->getDataset() . '-' . $prev_object->getId()),
+                            'parent_id' => $prev_object ? array($prev_object->getDataset() . '-' . $prev_object->getId()) : array(),
                         ),
                     );
 
@@ -91,7 +89,7 @@ class Mapaprawa extends AppModel
                             'id' => $object->getDataset() . '-' . $object->getId(),
                             'icon' => 'doc',
                             'status' => '1',
-                            'parent_id' => array($prev_object->getDataset() . '-' . $prev_object->getId()),
+                            'parent_id' => $prev_object ? array($prev_object->getDataset() . '-' . $prev_object->getId()) : array(),
                         ),
                     );
 
@@ -107,7 +105,7 @@ class Mapaprawa extends AppModel
                             'id' => $object->getDataset() . '-' . $object->getId(),
                             'icon' => 'accept',
                             'status' => '1',
-                            'parent_id' => array($prev_object->getDataset() . '-' . $prev_object->getId()),
+                            'parent_id' => $prev_object ? array($prev_object->getDataset() . '-' . $prev_object->getId()) : array(),
                         ),
                     );
 
