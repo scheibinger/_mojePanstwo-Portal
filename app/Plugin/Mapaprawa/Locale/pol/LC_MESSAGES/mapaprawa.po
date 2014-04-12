@@ -1,6 +1,9 @@
 msgid "LC_MAPAPRAWA_STATUSETAPU"
 msgstr "Co się wydarzyło?"
 
+msgid "LC_MAPAPRAWA_DOKUMENT"
+msgstr "Dokument"
+
 msgid "LC_MAPAPRAWA_DOKUMENTACJA"
 msgstr "Dokumentacja"
 
