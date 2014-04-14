@@ -24,6 +24,7 @@ class MapaprawaController extends AppController
             if ($projekt) {
                 
                 $projekt->loadLayer('ludzie');
+                $projekt->loadLayer('opinie');
                 
                 $this->set('projekt', $projekt);
                 $this->set('path', $this->Mapaprawa->getPath($projekt));

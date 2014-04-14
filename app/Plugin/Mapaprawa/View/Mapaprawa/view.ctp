@@ -129,7 +129,7 @@
                                     </div>
                                     <div class="col-xs-10">
                                         <p class="header">
-                                            <a href="/dane/mowcy/<?= $item['mowca_id'] ?>"><?= $item['mowca_nazwa'] ?><? if( $item['mowca_nazwa'] && $item['funkcja_nazwa'] ) {?> - <?}?><?= $item['funkcja_nazwa'] ?></a>
+                                            <? if( $item['mowca_id'] ) {?><a href="/dane/mowcy/<?= $item['mowca_id'] ?>"><? } ?><?= $item['mowca_nazwa'] ?><? if( $item['mowca_id'] && $item['funkcja_nazwa'] ) {?> - <?}?><?= $item['funkcja_nazwa'] ?><? if( $item['mowca_id'] ) {?></a><? } ?>
                                         </p>
 
                                         <p><?= $item['rola'] ?></p>
@@ -152,6 +152,9 @@
                     </div>
                 </div>
                 <div class="column col-md-6">
+                    
+                    
+                    
                     <div class="section opinie">
                         <div class="intro">
                             <h3><?= __d('mapaprawa', 'LC_MAPAPRAWA_OPINIE') ?></h3>
