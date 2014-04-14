@@ -216,7 +216,7 @@
         <div class="row">
             <div class="logo col-md-4 pull-left">
                 <img align="left" alt="Przejrzysty Kraków"
-                     src="//sejmometr.pl/g/customObject/krakow/logo_pkrk.jpg">
+                     src="../../Dane/img/customObject/krakow/logo_pkrk.jpg">
             </div>
             <div class="textline col-md-6">
                 Program Przejrzysty Kraków, prowadzony przez Fundację Stańczyka, ma na celu wieloaspektowy
@@ -227,7 +227,7 @@
             </div>
             <div class="logo col-md-2 pull-right">
                 <img align="right" alt="Fundacja Stańczyk"
-                     src="//sejmometr.pl/g/customObject/krakow/logo_fundacja_stanczyk.jpg">
+                     src="../../Dane/img/customObject/krakow/logo_fundacja_stanczyk.jpg">
             </div>
         </div>
     </div>
