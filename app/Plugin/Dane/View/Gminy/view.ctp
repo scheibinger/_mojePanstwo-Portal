@@ -100,14 +100,12 @@
 
                 <div class="content">
                     <div class="dataobjectsSliderRow row">
-                        <div>
                             <?php echo $this->dataobjectsSlider->render($rady_druki, array(
                                 'perGroup' => 3,
                                 'rowNumber' => 1,
                                 'labelMode' => 'none',
                                 // 'dfFields' => array('data_publikacji'),
                             )) ?>
-                        </div>
                     </div>
                 </div>
             </div>

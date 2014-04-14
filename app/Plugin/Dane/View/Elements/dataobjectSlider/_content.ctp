@@ -23,7 +23,10 @@ if ($object->getDescription()) {
         
         
     <div class="row description">
-        <?= $this->Text->truncate($object->getDescription(), 200) ?>
+        <?
+        	$desc = strip_tags( preg_replace('/\<br(\s*)?\/?\>/i', "\n", $object->getDescription()) );        	
+        	echo nl2br( $this->Text->truncate($desc, 200) );
+        ?>
     </div>
         
     <div>
