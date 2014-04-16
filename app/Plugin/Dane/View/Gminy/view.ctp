@@ -50,6 +50,9 @@
         <!-- profile_baner END -->
 
         <? if ($object->getId() == 903) { ?>
+        	
+        	<?php $this->Combinator->add_libs('js', 'Dane.view-gminy-krakow'); ?>
+        	
             <div id="rada" class="block">
                 <div class="block-header">
                     <h2 class="pull-left">Posiedzenia rady miasta</h2>
@@ -109,6 +112,12 @@
                     </div>
                 </div>
             </div>
+            
+            <div class="locationBrowser dataContent content col-xs-12">
+		        <div class="mapsContent col-md-12 col-lg-10 col-lg-offset-1">
+		            <div id="PLBrowser"></div>
+		        </div>
+		    </div>
 
         <? } ?>
 
