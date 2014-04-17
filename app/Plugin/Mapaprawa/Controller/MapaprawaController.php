@@ -19,18 +19,11 @@ class MapaprawaController extends AppController
 
         $projekt_id = $this->request->params['projekt_id'];
         if ($projekt_id) {
-            
             $projekt = $this->API->Dane()->getObject('legislacja_projekty_ustaw', $projekt_id);
             if ($projekt) {
-                
-                $projekt->loadLayer('ludzie');
-                $projekt->loadLayer('opinie');
-                
                 $this->set('projekt', $projekt);
                 $this->set('path', $this->Mapaprawa->getPath($projekt));
-            
             }
-            
         }
     }
 

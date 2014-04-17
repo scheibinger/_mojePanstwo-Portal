@@ -34,13 +34,14 @@
             <div class="col-md-12">
                 <div class="graphContent">
                     <div class="lawMapContent content">
+                        <a class="lawMapNav top hide"
+                           href="#prevSlide"><?php echo __d('mapaprawa', 'LC_MAPAPRAWA_POPRZEDNIE_ETAPY') ?></a>
+
                         <div id="lawMap" class="lawMap">
                             <div id="svgLines"></div>
                             <?php $nodeCenter = 150;
                             $padding = 45;?>
-							
-							<? // debug( $path ); ?>
-							
+
                             <?php foreach ($path as $p) { ?>
                                 <div class="slide <?php if (isset($p['status'])) {
                                     echo ' ' . $p['status'];
@@ -50,7 +51,7 @@
                                      data-slide="<?= $p['id'] ?>">
                                     <div class="date"><?= $this->Czas->dataSlownie($p['date']) ?></div>
                                     <div class="desc">
-                                    <p><?= $this->Text->truncate($p['label'], 40) ?></p>
+                                        <p><?= $p['label'] ?></p>
                                     </div>
                                     <div class="lastIcon icon icon-<?= $p['icon'] ?>"></div>
                                     <div class="path">
@@ -89,6 +90,8 @@
                                 </div>
                             <?php } ?>
                         </div>
+                        <a class="lawMapNav bottom  hide"
+                           href="#nextSlide"><?php echo __d('mapaprawa', 'LC_MAPAPRAWA_NASTEPNE_ETAPY') ?></a>
                     </div>
                 </div>
             </div>
@@ -102,13 +105,9 @@
                             <h3><?= __d('mapaprawa', 'LC_MAPAPRAWA_AUTOR') ?></h3>
                         </div>
                         <div class="content">
-                            <?= $projekt->getData('autorzy_html'); ?>
+                            <p>Ministerstwo Transportu, Budownictwa i Gospodarki Morskiej</p>
                         </div>
                     </div>
-                    
-                    <?
-                    	if( $items = $projekt->getLayer('ludzie') ) {
-                    ?>
                     <div class="section ludzie">
                         <div class="intro">
                             <h3><?= __d('mapaprawa', 'LC_MAPAPRAWA_LUDZIE') ?></h3>
@@ -116,45 +115,58 @@
 
                         <div class="content">
                             <p>Osoby które odegrały kluczowe role w pracach nad projektem.</p>
-                            
-                        	<ul class="ludzieList">
-                            <?
-                            	foreach( $items as $item ) {
-	                        ?>
-	                        	<li class="col-xs-12">
+                            <ul class="ludzieList">
+                                <li class="col-xs-12">
                                     <div class="col-xs-1">
                                         <div class="row">
-                                            <? if( $item['avatar'] ) {?><img src="http://resources.sejmometr.pl/mowcy/a/3/<?= $item['mowca_id'] ?>.jpg"><? } ?>
+                                            <img src="http://resources.sejmometr.pl/mowcy/a/3/393.jpg">
                                         </div>
                                     </div>
                                     <div class="col-xs-10">
                                         <p class="header">
-                                            <? if( $item['mowca_id'] ) {?><a href="/dane/mowcy/<?= $item['mowca_id'] ?>"><? } ?><?= $item['mowca_nazwa'] ?><? if( $item['mowca_id'] && $item['funkcja_nazwa'] ) {?> - <?}?><?= $item['funkcja_nazwa'] ?><? if( $item['mowca_id'] ) {?></a><? } ?>
+                                            <a href="/dane/poslowie/402">Jacek Tomczak</a>
                                         </p>
 
-                                        <p><?= $item['rola'] ?></p>
+                                        <p>Przedstawiciel wnioskodawców</p>
                                     </div>
                                 </li>
-	                        <?  	
-                            	}	
-                            ?>
-                        	</ul>
+                                <li class="col-xs-12">
+                                    <div class="col-xs-1">
+                                        <div class="row">
+                                            <img src="http://resources.sejmometr.pl/mowcy/a/3/393.jpg">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-10">
+                                        <p class="header">
+                                            <a href="/dane/poslowie/402">Jacek Tomczak</a>
+                                        </p>
 
+                                        <p>Przedstawiciel wnioskodawców</p>
+                                    </div>
+                                </li>
+                                <li class="col-xs-12">
+                                    <div class="col-xs-1">
+                                        <div class="row">
+                                            <img src="http://resources.sejmometr.pl/mowcy/a/3/393.jpg">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-10">
+                                        <p class="header">
+                                            <a href="/dane/poslowie/402">Jacek Tomczak</a>
+                                        </p>
+
+                                        <p>Przedstawiciel wnioskodawców</p>
+                                    </div>
+                                </li>
+                            </ul>
                         </div>
                     </div>
-                    <?
-                    	}
-                    ?>
-                    
                     <div class="section hyperlink">
                         <a href="#">Osoby które wypowiadały sie w sprawie projektu &gt;</a>
                         <a href="#">Posłowie którzy złożyli podpis pod projektem &gt;</a>
                     </div>
                 </div>
                 <div class="column col-md-6">
-                    
-                    
-                    
                     <div class="section opinie">
                         <div class="intro">
                             <h3><?= __d('mapaprawa', 'LC_MAPAPRAWA_OPINIE') ?></h3>

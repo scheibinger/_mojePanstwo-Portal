@@ -10,7 +10,7 @@ class Mapaprawa extends AppModel
             return false;
 
         $related = $object->loadRelated();
-				
+
         $groups = $related['groups'];
         $path = array();
         $prev_object = false;
@@ -126,7 +126,7 @@ class Mapaprawa extends AppModel
                         case 'rcl_etapy':
                         {
 
-                            $label = 'Rada Ministrów / ' . $object->getShortTitle();
+                            $label = $object->getShortTitle();
                             break;
 
                         }
