@@ -34,7 +34,7 @@
             <div class="col-md-12">
                 <div class="graphContent">
                     <div class="lawMapContent content">
-                        <a class="lawMapNav top hide"
+                        <a class="lawMapNav top"
                            href="#prevSlide"><?php echo __d('mapaprawa', 'LC_MAPAPRAWA_POPRZEDNIE_ETAPY') ?></a>
 
                         <div id="lawMap" class="lawMap">
@@ -90,7 +90,7 @@
                                 </div>
                             <?php } ?>
                         </div>
-                        <a class="lawMapNav bottom  hide"
+                        <a class="lawMapNav bottom"
                            href="#nextSlide"><?php echo __d('mapaprawa', 'LC_MAPAPRAWA_NASTEPNE_ETAPY') ?></a>
                     </div>
                 </div>

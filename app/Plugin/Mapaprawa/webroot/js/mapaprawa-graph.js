@@ -462,45 +462,35 @@ var intervalMain;
     if ($lawMap.find('.slide').length > $lawMapNavLimit) {
         var marker = ($lawMap.find('.slide.active:last').length > 0) ? $lawMap.find('.slide.active:last') : $lawMap.find('.slide:first'),
             lawMapNavTop = $lawMapNav.parent().find('> .top'),
-            lawMapNavBottom = $lawMapNav.parent().find('> .bottom'),
-            showLimit = 5;
+            lawMapNavBottom = $lawMapNav.parent().find('> .bottom');
 
         $lawMap.find('.slide').addClass('hide');
 
-        /*SHOW 2 PREVIOUS*/
-        marker.prevAll('.slide.hide').slice(0, 2).removeClass('hide');
+        function sweepToThree() {
+            $lawMap.find('.slide').addClass('hide');
+            marker.prevAll('.slide.hide').slice(0, 2).removeClass('hide');
+            marker.removeClass('hide');
+            marker.next('.slide.hide').removeClass('hide');
+            $lawMapNav.removeClass('maximal').addClass('minimal');
+        }
 
-        /*SHOW MARKED - AS CENTER ONE*/
-        marker.removeClass('hide');
+        function sweepToAll() {
+            marker.prevAll('.slide.hide').removeClass('hide');
+            marker.nextAll('.slide.hide').removeClass('hide');
+            $lawMapNav.removeClass('minimal').addClass('maximal');
+        }
 
-        /*SHOW 1 NEXT*/
-        marker.next('.slide.hide').removeClass('hide');
+        $lawMapNav.click(function (e) {
+            e.preventDefault();
 
-        if (marker.prevAll('.slide.hide').length > 0)
-            lawMapNavTop.removeClass('hide');
-        if (marker.nextAll('.slide.hide').length > 0)
-            lawMapNavBottom.removeClass('hide');
-
-        $lawMapNav.click(function () {
-            if ($lawMapNav.hasClass('top')) {
-                var prevSlide = marker.prevAll('.slide.hide').slice(0, showLimit);
-
-                prevSlide.removeClass('hide');
-
-                if (marker.prevAll('.slide.hide').length == 0)
-                    lawMapNavTop.addClass('hide');
-
-            } else if ($lawMapNav.hasClass('bottom')) {
-                var nextSlide = marker.nextAll('.slide.hide').slice(0, showLimit);
-
-                nextSlide.removeClass('hide');
-
-                if (marker.nextAll('.slide.hide').length == 0)
-                    lawMapNavBottom.addClass('hide');
+            if ($(this).hasClass('minimal')) {
+                sweepToAll();
+            } else if ($(this).hasClass('maximal')) {
+                sweepToThree();
             }
             showLines();
         });
-
+        sweepToThree();
         showLines();
     } else {
         showLines();
