@@ -3,7 +3,9 @@ var intervalMain;
 (function () {
     var myLines = [],
         svg = null,
-        $lawMap = jQuery('.lawMap'),
+        $lawMap = jQuery('#lawMap'),
+        $lawMapNav = jQuery('.lawMapNav'),
+        $lawMapNavLimit = 3,
         $svgLines = jQuery("#svgLines"),
         $svgPathMarker = $lawMap.find('.slide:first .path'),
         $svgLinesDiff = $svgPathMarker.offset().left - $lawMap.offset().left;
@@ -17,35 +19,36 @@ var intervalMain;
     svg = Raphael("svgLines", $svgLines.width(), '100%');
 
     function drawLine(eTarget, eSource, color) {
+        if (eTarget.is(':visible') && eSource.is(':visible')) {
+            var $lawMapOffset = $lawMap.offset(),
+                $sourceOffset = eSource.offset(),
+                $targetOffset = eTarget.offset(),
 
-        var $lawMapOffset = $lawMap.offset(),
-            $sourceOffset = eSource.offset(),
-            $targetOffset = eTarget.offset(),
+                originX = -$svgLinesDiff + ($sourceOffset.left - $lawMapOffset.left) + (eSource.width() / 2) + 3,
+                originY = ($sourceOffset.top - $lawMapOffset.top) + (eSource.height() / 2) - 3,
 
-            originX = -$svgLinesDiff + ($sourceOffset.left - $lawMapOffset.left) + (eSource.width() / 2) + 3,
-            originY = ($sourceOffset.top - $lawMapOffset.top) + (eSource.height() / 2) - 3,
+                endingX = -$svgLinesDiff + ($targetOffset.left - $lawMapOffset.left) + (eTarget.width() / 2) + 3,
+                endingY = ($targetOffset.top - $lawMapOffset.top) + (eTarget.height() / 2) - 3,
 
-            endingX = -$svgLinesDiff + ($targetOffset.left - $lawMapOffset.left) + (eTarget.width() / 2) + 3,
-            endingY = ($targetOffset.top - $lawMapOffset.top) + (eTarget.height() / 2) - 3,
+                space = 35,
 
-            space = 35,
+                path = "M" + originX + " " + (originY + 10) + " "
+                    + "L" + originX + " " + originY + " " /*POINT AT TOP BORDER OF BOTTOM ICON*/
+                    + "L" + endingX + " " + (originY - space) + " " /*POINT AT MIDDLE - X SAME AS TOP ICON*/
+                    + "L" + endingX + " " + endingY, /*POINT AT BOTTOM BORDER OF TOP ICON*/
 
-            path = "M" + originX + " " + (originY + 10) + " "
-                + "L" + originX + " " + originY + " " /*POINT AT TOP BORDER OF BOTTOM ICON*/
-                + "L" + endingX + " " + (originY - space) + " " /*POINT AT MIDDLE - X SAME AS TOP ICON*/
-                + "L" + endingX + " " + endingY, /*POINT AT BOTTOM BORDER OF TOP ICON*/
+                rachaelLine = svg
+                    .path(path)
+                    .attr({
+                        "stroke": color,
+                        "stroke-width": 28
+                    });
 
-            rachaelLine = svg
-                .path(path)
-                .attr({
-                    "stroke": color,
-                    "stroke-width": 28
-                });
+            if (!eSource.hasClass('active'))
+                rachaelLine.toBack();
 
-        if (!eSource.hasClass('active'))
-            rachaelLine.toBack();
-
-        myLines[myLines.length] = rachaelLine;
+            myLines[myLines.length] = rachaelLine;
+        }
     }
 
     function showLines() {
@@ -456,6 +459,50 @@ var intervalMain;
         }
     });
 
-    /* Draw first line after page start*/
-    showLines();
+    if ($lawMap.find('.slide').length > $lawMapNavLimit) {
+        var marker = ($lawMap.find('.slide.active:last').length > 0) ? $lawMap.find('.slide.active:last') : $lawMap.find('.slide:first'),
+            lawMapNavTop = $lawMapNav.parent().find('> .top'),
+            lawMapNavBottom = $lawMapNav.parent().find('> .bottom'),
+            showLimit = 5;
+
+        $lawMap.find('.slide').addClass('hide');
+
+        /*SHOW 2 PREVIOUS*/
+        marker.prevAll('.slide.hide').slice(0, 2).removeClass('hide');
+
+        /*SHOW MARKED - AS CENTER ONE*/
+        marker.removeClass('hide');
+
+        /*SHOW 1 NEXT*/
+        marker.next('.slide.hide').removeClass('hide');
+
+        if (marker.prevAll('.slide.hide').length > 0)
+            lawMapNavTop.removeClass('hide');
+        if (marker.nextAll('.slide.hide').length > 0)
+            lawMapNavBottom.removeClass('hide');
+
+        $lawMapNav.click(function () {
+            if ($lawMapNav.hasClass('top')) {
+                var prevSlide = marker.prevAll('.slide.hide').slice(0, showLimit);
+
+                prevSlide.removeClass('hide');
+
+                if (marker.prevAll('.slide.hide').length == 0)
+                    lawMapNavTop.addClass('hide');
+
+            } else if ($lawMapNav.hasClass('bottom')) {
+                var nextSlide = marker.nextAll('.slide.hide').slice(0, showLimit);
+
+                nextSlide.removeClass('hide');
+
+                if (marker.nextAll('.slide.hide').length == 0)
+                    lawMapNavBottom.addClass('hide');
+            }
+            showLines();
+        });
+
+        showLines();
+    } else {
+        showLines();
+    }
 }());

@@ -107,24 +107,29 @@
                 overflow: hidden;
 
                 .lawMapNav {
-                    float: left;
-                    height: 15px;
-                    margin-left: 8px;
+                    float: right;
                     text-align: left;
+                    font-family: "Lato", sans-serif;
+                    font-size: 18px;
+                    font-weight: 400;
+                    color: #D8D8D8;
 
-                    &.top {
-                        margin-top: 10px;
-
-                        &:before {
-                            .icon-inside('\e62b');
-                        }
+                    &:after {
+                        font-size: 26px;
+                        padding-left: 8px;
+                        display: block;
+                        float: right;
                     }
-                    &.bottom {
-                        margin-bottom: 10px;
 
-                        &:before {
-                            .icon-inside('\e62a');
-                        }
+                    &.bottom {
+                        margin-top: 10px;
+                    }
+
+                    &.top:after {
+                        .icon-inside('\e601');
+                    }
+                    &.bottom:after {
+                        .icon-inside('\e600');
                     }
                 }
 

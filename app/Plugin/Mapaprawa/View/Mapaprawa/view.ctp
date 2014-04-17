@@ -34,6 +34,9 @@
             <div class="col-md-12">
                 <div class="graphContent">
                     <div class="lawMapContent content">
+                        <a class="lawMapNav top hide"
+                           href="#prevSlide"><?php echo __d('mapaprawa', 'LC_MAPAPRAWA_POPRZEDNIE_ETAPY') ?></a>
+
                         <div id="lawMap" class="lawMap">
                             <div id="svgLines"></div>
                             <?php $nodeCenter = 150;
@@ -87,6 +90,8 @@
                                 </div>
                             <?php } ?>
                         </div>
+                        <a class="lawMapNav bottom  hide"
+                           href="#nextSlide"><?php echo __d('mapaprawa', 'LC_MAPAPRAWA_NASTEPNE_ETAPY') ?></a>
                     </div>
                 </div>
             </div>
