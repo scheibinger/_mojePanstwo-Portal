@@ -27,18 +27,40 @@ $this->Dataobject->setObject($object);
         <? } ?>
         <div class="data col-md-<?= $this->Dataobject->getDate() ? '11' : '12' ?>">
             <div class="row">
-                <? if ($object->getThumbnailUrl($thumbSize)) { ?>
-                    <div class="attachment col-md-<?= $object_content_sizes[0] ?> text-center">
+            	
+            	<?
+                	if( $object->getPosition() ) {
+                ?>
+                <div class="content col-md-1">
+                	<span class="badge badge-position pull-right"><?= $object->getPosition() ?></span>
+                </div>
+                <?
+                	}
+                ?>
+            	
+                <? if ($object->getThumbnailUrl($thumbSize)) { 
+	                
+	                $size = $object_content_sizes[0];
+	                if( $object->getPosition() )
+	                	$size--;
+	                
+                ?>
+                    <div class="attachment col-md-<?= $size ?> text-center">
                         <?php if ($object->getUrl() != false) { ?>
                         <a href="<?= $object->getUrl() ?>">
                             <?php } ?>
-                            <img onerror="imgFixer(this)" src="<?= $object->getThumbnailUrl($thumbSize) ?>"
+                            <img class="pull-right" onerror="imgFixer(this)" src="<?= $object->getThumbnailUrl($thumbSize) ?>"
                                  alt="<?= strip_tags($object->getTitle()) ?>"/>
                             <?php if ($object->getUrl() != false) { ?>
                         </a>
                     <?php } ?>
-                    </div>
-                    <div class="content col-md-<?= $object_content_sizes[1] ?>">
+                    </div>                    
+                    <?
+                    	$size = $object_content_sizes[1];
+                    	if( !$object->getThumbnailUrl($thumbSize) && $object->getPosition() )
+                    		$size--;
+                    ?>
+                    <div class="content col-md-<?= $size ?>">
 
                         <? if ($object->force_hl_fields || $forceLabel) { ?>
                             <p class="header">
