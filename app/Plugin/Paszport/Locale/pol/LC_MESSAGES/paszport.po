@@ -31,6 +31,12 @@ msgstr "Konto zostało utworzone za pośrednictwem serwisu Facebook"
 msgid "LC_PASZPORT_FACEBOOK_REGISTER_FAILED"
 msgstr "Błąd tworzenia konta za pośrednictwem serwisu Facebook"
 
+msgid "LC_PASZPORT_FACEBOOK_LOGIN_USER_DENIED"
+msgstr "Odrzucono prośbę o udostępnienie danych z serwisu Facebook. Chcesz zalogować się używając e-mail?"
+
+msgid "LC_PASZPORT_FACEBOOK_LOGIN_FAILED"
+msgstr "Błąd logowania za pośrednictwem serwisu Facebook"
+
 #: Controller/UsersController.php:142
 msgid "LC_PASZPORT_PASSWORD_SET"
 msgstr "Hasło zostało zmienione"
