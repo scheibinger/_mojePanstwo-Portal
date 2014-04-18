@@ -5,7 +5,7 @@ $path = App::path('Plugin');
 $element = (isset($file) && $file) ?
     $file :
     $object->getDataset();
-
+    
 $element_exists = $element ?
     file_exists($path[0] . '/Dane/View/Elements/' . $theme . '/' . $element . '.ctp') :
     false;

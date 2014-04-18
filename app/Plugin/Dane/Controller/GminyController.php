@@ -197,7 +197,7 @@ class GminyController extends DataobjectsController
             'excludeFilters' => array(
                 'gmina_id', 'gminy.powiat_id', 'gminy.wojewodztwo_id'
             ),
-            'hlFields' => array('rady_gmin_komitety.nazwa', 'liczba_glosow', 'procent_glosow_w_okregu', 'oswiadczenie_id'),
+            'hlFields' => array('rady_gmin_komitety.nazwa', 'liczba_glosow', 'oswiadczenie_id'),
         ));
     }
     
