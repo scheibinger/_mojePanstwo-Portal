@@ -346,6 +346,9 @@ var DataObjectesAjax = {
         if (redirectUrl)
             location.href = redirectUrl;
 
+        if (typeof(paramArray) == 'object')
+            paramArray = paramArray.join("&");
+
         jQuery.ajax({
             type: 'GET',
             url: formAction + '.json?' + paramArray,

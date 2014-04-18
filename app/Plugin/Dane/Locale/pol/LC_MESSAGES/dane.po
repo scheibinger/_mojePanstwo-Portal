@@ -710,7 +710,7 @@ msgid "LC_KOLEJLINIE_ODJAZD"
 msgstr "Odjazd"
 
 msgid "LC_GMINY_WYNIKI_WYBOROW"
-msgstr "Wyniki wyborów do rady gminy"
+msgstr "Radni gminy"
 
 msgid "LC_GMINY_POSIEDZENIA_GMINY"
 msgstr "Posiedzenia rady gminy"

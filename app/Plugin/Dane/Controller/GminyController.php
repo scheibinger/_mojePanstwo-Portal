@@ -128,6 +128,14 @@ class GminyController extends DataobjectsController
                 ),
             ));
             $this->set('prawo_lokalne', $this->API->getObjects());
+            
+            $this->API->searchDataset('dzielnice', array(
+                'limit' => 100,
+                'conditions' => array(
+                    'gmina_id' => $this->object->getId(),
+                ),
+            ));
+            $this->set('dzielnice', $this->API->getObjects());
 
         }
 
@@ -189,7 +197,20 @@ class GminyController extends DataobjectsController
             'excludeFilters' => array(
                 'gmina_id', 'gminy.powiat_id', 'gminy.wojewodztwo_id'
             ),
-            'hlFields' => array('rady_gmin_komitety.nazwa', 'liczba_glosow', 'procent_glosow_w_okregu', 'oswiadczenie_id'),
+            'hlFields' => array('rady_gmin_komitety.nazwa', 'liczba_glosow', 'oswiadczenie_id'),
+        ));
+    }
+    
+    
+    public function radni_dzielnic()
+    {
+        parent::_prepareView();
+        $this->dataobjectsBrowserView(array(
+            'source' => 'gminy.radni_dzielnic:' . $this->object->getId(),
+            'dataset' => 'radni_dzielnic',
+            'title' => 'Radni dzielnic',
+            'noResultsTitle' => 'Brak radnych dzielnic dla tej gminy',
+            'hlFields' => array('dzielnice.nazwa', 'liczba_glosow'),
         ));
     }
 

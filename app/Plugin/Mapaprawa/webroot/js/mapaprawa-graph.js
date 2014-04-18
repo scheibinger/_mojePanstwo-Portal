@@ -3,7 +3,9 @@ var intervalMain;
 (function () {
     var myLines = [],
         svg = null,
-        $lawMap = jQuery('.lawMap'),
+        $lawMap = jQuery('#lawMap'),
+        $lawMapNav = jQuery('.lawMapNav'),
+        $lawMapNavLimit = 3,
         $svgLines = jQuery("#svgLines"),
         $svgPathMarker = $lawMap.find('.slide:first .path'),
         $svgLinesDiff = $svgPathMarker.offset().left - $lawMap.offset().left;
@@ -17,43 +19,45 @@ var intervalMain;
     svg = Raphael("svgLines", $svgLines.width(), '100%');
 
     function drawLine(eTarget, eSource, color) {
+        if (eTarget.is(':visible') && eSource.is(':visible')) {
+            var $lawMapOffset = $lawMap.offset(),
+                $sourceOffset = eSource.offset(),
+                $targetOffset = eTarget.offset(),
 
-        var $lawMapOffset = $lawMap.offset(),
-            $sourceOffset = eSource.offset(),
-            $targetOffset = eTarget.offset(),
+                originX = -$svgLinesDiff + ($sourceOffset.left - $lawMapOffset.left) + (eSource.width() / 2) + 3,
+                originY = ($sourceOffset.top - $lawMapOffset.top) + (eSource.height() / 2) - 3,
 
-            originX = -$svgLinesDiff + ($sourceOffset.left - $lawMapOffset.left) + (eSource.width() / 2) + 2,
-            originY = ($sourceOffset.top - $lawMapOffset.top) + 3,
+                endingX = -$svgLinesDiff + ($targetOffset.left - $lawMapOffset.left) + (eTarget.width() / 2) + 3,
+                endingY = ($targetOffset.top - $lawMapOffset.top) + (eTarget.height() / 2) - 3,
 
-            endingX = -$svgLinesDiff + ($targetOffset.left - $lawMapOffset.left) + (eTarget.width() / 2) + 2,
-            endingY = ($targetOffset.top - $lawMapOffset.top) + eTarget.height() - 3,
+                space = 35,
 
-            space = 28,
+                path = "M" + originX + " " + (originY + 10) + " "
+                    + "L" + originX + " " + originY + " " /*POINT AT TOP BORDER OF BOTTOM ICON*/
+                    + "L" + endingX + " " + (originY - space) + " " /*POINT AT MIDDLE - X SAME AS TOP ICON*/
+                    + "L" + endingX + " " + endingY, /*POINT AT BOTTOM BORDER OF TOP ICON*/
 
-            a = "M" + originX + " " + originY + " L" + endingX + " " + (originY - space),
-            b = "M" + endingX + " " + (originY - space) + " L" + endingX + " " + endingY,
-            all = a + " " + b,
+                rachaelLine = svg
+                    .path(path)
+                    .attr({
+                        "stroke": color,
+                        "stroke-width": 28
+                    });
 
-            rachaelLine = svg
-                .path(all)
-                .attr({
-                    "stroke": color,
-                    "stroke-width": 2
-                });
+            if (!eSource.hasClass('active'))
+                rachaelLine.toBack();
 
-        if (!eSource.hasClass('active'))
-            rachaelLine.toBack();
-
-        myLines[myLines.length] = rachaelLine;
+            myLines[myLines.length] = rachaelLine;
+        }
     }
 
     function showLines() {
         var colors = {
-            'inactive': '#0BD35C',
-            'lastActive': '#0BD35C',
-            'lastNotActive': '#0BD35C',
-            'passActive': '#0BD35C',
-            'passNotActive': '#DDDDDD'
+            'inactive': '#E6E6E6',
+            'lastActive': '#86BCE0',
+            'lastNotActive': '#D4DEE2',
+            'passActive': '#86BCE0',
+            'passNotActive': '#D4DEE2'
         };
 
         setTimeout(function () {
@@ -83,15 +87,11 @@ var intervalMain;
         var container,
             parent = jQuery('.additionalInfo.doc-' + params.s);
 
-        $('#_mojePanstwoCockpit').addClass('loading');
         jQuery.ajax({
             type: "GET",
             url: "loadItemData.json",
             data: params,
             success: function (data) {
-
-                $('#_mojePanstwoCockpit').removeClass('loading');
-
                 if (data != null) {
                     if ((container = jQuery('.lawMap').find('.additionalInfo.addon.doc-' + params.s)).length) {
                         container.html('');
@@ -184,42 +184,25 @@ var intervalMain;
                     jQuery(data.docs).each(function () {
                         var docsNode = jQuery('<li></li>');
                         docsNode.append(
-                            jQuery('<a></a>').attr('href', '#').data('document', this.dokument_id).text(this.title)
+                            jQuery('<a></a>').attr('href', '#').data('document', this.dokument_id).text(this.title).prepend(
+                                jQuery('<img />').attr('src', 'http://docs.sejmometr.pl/thumb/2/' + this.dokument_id + '.png')
+                            )
                         );
 
                         docsLister.append(docsNode);
                     });
                     container.append(docsLister);
 
-                    container.append(jQuery('<a></a>').addClass('close glyphicon glyphicon-remove-sign').attr({'data-slide': params.s, 'href': "#"}));
-                    container.find('.close').click(function (e) {
-                        var slide = jQuery(this).data('slide');
-
-                        e.preventDefault();
-                        jQuery('.additionalInfo.addon.doc-' + slide).slideUp({
-                            step: function (now, tween) {
-                                if (tween.prop == 'height')
-                                    showLines();
-                            },
-                            done: function () {
-                                jQuery('.additionalInfo.doc-' + slide).find('.documentList li a.active').removeClass('active');
-                                showLines();
-                            }
-                        });
-                    });
                     container.find('.docsLister li a').click(function () {
-                        var docViewer = null,
+                        var that = this,
+                            docViewer = null,
                             docId = jQuery(this).data('document'),
                             intervalRunable = true;
 
-                        $('#_mojePanstwoCockpit').addClass('loading');
                         jQuery.ajax({
                             type: "GET",
                             url: "/docs/" + docId + "-1.json",
                             success: function (data) {
-
-                                $('#_mojePanstwoCockpit').removeClass('loading');
-
                                 if (data != null) {
                                     var mapaPrawa = jQuery('#mapaprawa');
 
@@ -236,16 +219,31 @@ var intervalMain;
                                             jQuery('<div></div>').addClass('htmlexDoc').append(
                                                     jQuery('<div></div>').addClass('headline')
                                                 ).append(
+                                                    jQuery('<div></div>').addClass('descline')
+                                                ).append(
+                                                    jQuery('<div></div>').addClass('documentTitle').append(
+                                                        jQuery('<div></div>').addClass('row documentTitle').append(
+                                                                jQuery('<div></div>').addClass('col-md-2 intro')
+                                                            ).append(
+                                                                jQuery('<div></div>').addClass('col-md-10 content info')
+                                                            )
+                                                    )
+                                                ).append(
                                                     jQuery('<div></div>').addClass('docContent canvas').html(data.html)
                                                 )
                                         )
                                     );
-                                    mapaPrawa.find('.container > .headline').prependTo(docViewer.find('.headline'));
+
+                                    docViewer.find('.headline').append(mapaPrawa.find('.container > .headline').clone(true));
+                                    docViewer.find('.descline').append(mapaPrawa.find('.container > .descline').clone(true));
+                                    docViewer.find('.documentTitle .intro').text(_mPHeart.translation.LC_MAPAPRAWA_DOKUMENT)
+                                        .end()
+                                        .find('.documentTitle .content').text(jQuery(that).text());
 
                                     docViewer.find('.htmlexDoc').append(jQuery('<a></a>').addClass('close glyphicon glyphicon-remove-sign'));
 
                                     if (data.doc.packages_count > 1)
-                                        docViewer.find('.htmlexDoc').append(jQuery('<div></div>').addClass('loadMoreDocumentContent').data({'currentPackage': 1, 'packages': data.docs.packages_count}));
+                                        docViewer.find('.htmlexDoc').append(jQuery('<div></div>').addClass('loadMoreDocumentContent').data({'currentPackage': 1, 'packages': data.doc.packages_count}));
 
                                     mapaPrawa.append(docViewer);
 
@@ -254,6 +252,8 @@ var intervalMain;
 
                                         jQuery('#imageViewCSS').remove();
                                         jQuery('#docViewer').remove();
+
+                                        clearInterval(intervalMain);
                                     });
 
                                     if (jQuery('.loadMoreDocumentContent').length) {
@@ -268,14 +268,10 @@ var intervalMain;
                                                     loadMoreDocumentContent.addClass('loading');
                                                     loadMoreDocumentContent.data('currentPackage', page);
 
-                                                    $('#_mojePanstwoCockpit').addClass('loading');
                                                     jQuery.ajax({
                                                         type: "GET",
                                                         url: "/docs/" + docId + "-" + page + ".html",
                                                         success: function (html) {
-
-                                                            $('#_mojePanstwoCockpit').removeClass('loading');
-
                                                             docViewer.find('.docContent').append(html);
                                                             intervalRunable = true;
                                                         }
@@ -310,9 +306,6 @@ var intervalMain;
     }
 
     $lawMap.find('.slide').click(function () {
-
-        console.log('slide click');
-
         var self = jQuery(this),
             slideId = self.data('slide'),
             params = {
@@ -320,33 +313,70 @@ var intervalMain;
                 lang: _mPHeart.language.threeDig
             },
             docContent = jQuery('<div></div>'),
-            additionalInfoDocSlide = jQuery('.additionalInfo.doc-' + slideId);
+            additionalInfo = jQuery('.additionalInfo.doc-' + slideId),
+            additionalInfoAddon = jQuery('.additionalInfo.addon.doc-' + slideId);
 
-        self.addClass('active');
+        if ($(this).hasClass('open')) {
+            self.removeClass('open');
 
-        if (additionalInfoDocSlide.length == 0) {
+            if (additionalInfoAddon.length > 0 && additionalInfoAddon.is(':visible')) {
+                additionalInfoAddon.slideUp({
+                    step: function (now, tween) {
+                        if (tween.prop == 'height')
+                            showLines();
+                    },
+                    done: function () {
+                        additionalInfo.slideUp({
+                            step: function (now, tween) {
+                                if (tween.prop == 'height')
+                                    showLines();
+                            },
+                            done: function () {
+                                showLines();
+                            }
+                        })
+                    }
+                });
+            } else {
+                additionalInfo.slideUp({
+                    step: function (now, tween) {
+                        if (tween.prop == 'height')
+                            showLines();
+                    }, done: function () {
+                        showLines();
+                    }
+                });
+            }
+
+            return;
+        }
+
+        self.addClass('open');
+
+        if (additionalInfo.length == 0) {
             var docList = jQuery('<ul></ul>');
 
-            $('#_mojePanstwoCockpit').addClass('loading');
             jQuery.ajax({
                 type: "GET",
                 url: "loadBlockData.json",
                 data: params,
                 success: function (data) {
-
-                    $('#_mojePanstwoCockpit').removeClass('loading');
-
-
                     if (!data)
                         data = {'info': 'Etap', 'list': []};
 
                     docContent.addClass('additionalInfo doc-' + slideId);
+
+                    if (self.hasClass('active'))
+                        docContent.addClass('open-active');
+                    else if (self.hasClass('inactive'))
+                        docContent.addClass('open-inactive');
+
                     docContent.attr({
                         'data-slide': slideId
                     });
                     docContent.append(
                             jQuery('<div></div>').addClass('documentInfo').append(
-                                    jQuery('<h3></h3>').text(_mPHeart.translation.LC_MAPAPRAWA_STATUSETAPU)
+                                    jQuery('<h3></h3>').html("&nbsp;")
                                 ).append(
                                     jQuery('<p></p>').html(data.info)
                                 )
@@ -374,10 +404,8 @@ var intervalMain;
                             }
                         });
 
-                    docContent.append(jQuery('<a></a>').addClass('close glyphicon glyphicon-remove-sign').attr({'data-slide': slideId, 'href': "#"}));
                     docContent.insertAfter(self);
                     docContent.hide();
-
 
                     docContent.slideDown({
                         step: function (now, tween) {
@@ -386,49 +414,6 @@ var intervalMain;
                         },
                         done: function () {
                             showLines();
-                        },
-                        duration: 150
-                    });
-
-                    docContent.find('.close').click(function (e) {
-
-
-                        console.log('close');
-
-                        var slide = jQuery(this).data('slide'),
-                            additionalInfo = jQuery('.additionalInfo.doc-' + slide),
-                            additionalInfoAddon = jQuery('.additionalInfo.addon.doc-' + slide);
-
-                        e.preventDefault();
-                        $('.slide.active').removeClass('active');
-
-                        if (additionalInfoAddon.length > 0 && additionalInfoAddon.is(':visible')) {
-                            additionalInfoAddon.slideUp({
-                                step: function (now, tween) {
-                                    if (tween.prop == 'height')
-                                        showLines();
-                                },
-                                done: function () {
-                                    additionalInfo.slideUp({
-                                        step: function (now, tween) {
-                                            if (tween.prop == 'height')
-                                                showLines();
-                                        },
-                                        done: function () {
-                                            showLines();
-                                        }
-                                    })
-                                }
-                            });
-                        } else {
-                            additionalInfo.slideUp({
-                                step: function (now, tween) {
-                                    if (tween.prop == 'height')
-                                        showLines();
-                                }, done: function () {
-                                    showLines();
-                                }
-                            });
                         }
                     });
 
@@ -438,8 +423,8 @@ var intervalMain;
                             parent = that.parents('.additionalInfo');
                         e.preventDefault();
 
-                        list.find('.active').removeClass('active');
-                        that.addClass('active');
+                        list.find('.open').removeClass('open');
+                        that.addClass('open');
 
                         loadNodeDocument({
                             's': parent.data('slide'),
@@ -452,20 +437,62 @@ var intervalMain;
                 }
             });
         } else {
-            if (additionalInfoDocSlide.is(':hidden')) {
-                additionalInfoDocSlide.slideDown({
-                    step: function (now, tween) {
-                        if (tween.prop == 'height')
-                            showLines();
-                    },
-                    done: function () {
+            additionalInfo.slideDown({
+                step: function (now, tween) {
+                    if (tween.prop == 'height')
                         showLines();
+                }, done: function () {
+                    showLines();
+                    if (additionalInfoAddon.length > 0) {
+                        additionalInfoAddon.slideDown({
+                            step: function (now, tween) {
+                                if (tween.prop == 'height')
+                                    showLines();
+                            },
+                            done: function () {
+                                showLines();
+                            }
+                        })
                     }
-                })
-            }
+                }
+            });
         }
     });
 
-    /* Draw first line after page start*/
-    showLines();
+    if ($lawMap.find('.slide').length > $lawMapNavLimit) {
+        var marker = ($lawMap.find('.slide.active:last').length > 0) ? $lawMap.find('.slide.active:last') : $lawMap.find('.slide:first'),
+            lawMapNavTop = $lawMapNav.parent().find('> .top'),
+            lawMapNavBottom = $lawMapNav.parent().find('> .bottom');
+
+        $lawMap.find('.slide').addClass('hide');
+
+        function sweepToThree() {
+            $lawMap.find('.slide').addClass('hide');
+            marker.prevAll('.slide.hide').slice(0, 2).removeClass('hide');
+            marker.removeClass('hide');
+            marker.next('.slide.hide').removeClass('hide');
+            $lawMapNav.removeClass('maximal').addClass('minimal');
+        }
+
+        function sweepToAll() {
+            marker.prevAll('.slide.hide').removeClass('hide');
+            marker.nextAll('.slide.hide').removeClass('hide');
+            $lawMapNav.removeClass('minimal').addClass('maximal');
+        }
+
+        $lawMapNav.click(function (e) {
+            e.preventDefault();
+
+            if ($(this).hasClass('minimal')) {
+                sweepToAll();
+            } else if ($(this).hasClass('maximal')) {
+                sweepToThree();
+            }
+            showLines();
+        });
+        sweepToThree();
+        showLines();
+    } else {
+        showLines();
+    }
 }());
