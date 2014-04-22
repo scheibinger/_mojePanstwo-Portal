@@ -99,3 +99,12 @@ msgstr "Przeczytane"
 
 msgid "LC_POWIADOMIENIA_OPTIONS_ALERT_BUTTON_UNREAD"
 msgstr "Nieprzeczytane"
+
+msgid "LC_POWIADOMIENIA_POWIADOMENIA_MODAL_DATASETS"
+msgstr "Datasety"
+
+msgid "LC_POWIADOMIENIA_POWIADOMENIA_MODAL_NO_DATASETS"
+msgstr "Brak datasetów"
+
+msgid "LC_POWIADOMIENIA_POWIADOMENIA_MODAL_KEYWORDS"
+msgstr "Słowa kluczowe"

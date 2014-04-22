@@ -5,6 +5,7 @@
 
 <?php echo $this->Html->script('../plugins/scriptaculous/lib/prototype', array('block' => 'scriptBlock')); ?>
 <?php echo $this->Html->script('../plugins/scriptaculous/src/scriptaculous', array('block' => 'scriptBlock')); ?>
+<?php $this->Combinator->add_libs('js', 'Powiadomienia.powiadomieniaModal.js'); ?>
 <?php $this->Combinator->add_libs('js', 'Powiadomienia.powiadomienia.js'); ?>
 
 <div id="powiadomienia">

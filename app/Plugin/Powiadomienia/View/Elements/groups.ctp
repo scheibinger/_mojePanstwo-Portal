@@ -1,7 +1,6 @@
 <div class="keywords">
     <label><?php echo __d('powiadomienia', "LC_POWIADOMIENIA_GRUPY_USER") ?>:</label>
-    <button class="btn btn-success btn-sm addphrase pull-right" data-toggle="modal" data-target="#addPhraseModal">+
-    </button>
+    <!--<button class="btn btn-success btn-sm addphrase pull-right" data-toggle="modal" data-target="#addPhraseModal">+</button>-->
     <div class="modal fade" id="addPhraseModal" role="dialog"
          aria-labelledby="<?php echo __d('powiadomienia', 'LC_POWIADOMIENIA_FRAZY_DODAJ_FRAZE') ?>" aria-hidden="true">
         <div class="modal-dialog">
