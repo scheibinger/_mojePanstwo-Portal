@@ -9,7 +9,7 @@
         }
     }
 
-    ul.gminy_ul, ul.miejscowosci_ul, ul.miejsca_ul {
+    ul, ul ul {
         list-style-type: none;
         background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAKAQMAAABPHKYJAAAAA1BMVEWIiIhYZW6zAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH1ggGExMZBky19AAAAAtJREFUCNdjYMAEAAAUAAHlhrBKAAAAAElFTkSuQmCC);
         background-repeat: repeat-y;
@@ -21,20 +21,26 @@
             background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAUAQMAAACK1e4oAAAABlBMVEUAAwCIiIgd2JB2AAAAAXRSTlMAQObYZgAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9YIBhQIJYVaFGwAAAARSURBVAjXY2hgQIf/GTDFGgDSkwqATqpCHAAAAABJRU5ErkJggg==);
             background-repeat: no-repeat;
 
-            &:last-child {
+            &.last {
                 background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAUAQMAAACK1e4oAAAABlBMVEUAAwCIiIgd2JB2AAAAAXRSTlMAQObYZgAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9YIBhQIIhs+gc8AAAAQSURBVAjXY2hgQIf/GbAAAKCTBYBUjWvCAAAAAElFTkSuQmCC);
                 background-repeat: no-repeat;
                 background-color: #FFFFFF;
             }
         }
     }
-    ul.miejscowosci_ul, ul.miejsca_ul {
+    ul ul {
         margin-left: 10px;
     }
 
     .gminy_ul {
         list-style-type: none;
-        margin: 0 10px 10px 0;
+        margin: 0 10px;
+        padding-bottom: 10px;
+
+        &:last-child {
+            padding-bottom: 0;
+            margin-bottom: 10px;
+        }
 
         h2 {
             font-family: "Lato", sans-serif;
@@ -72,37 +78,30 @@
                         }
                     }
                 }
-                
+
                 .czesci_ul {
-		            
-		            list-style-type: none;
-		            padding: 0 15px;
-		
-		            .czesc_li {
-		                padding: 5px;
-		                margin-top: 10px;
-		                
-		                h4 {
-			                font-family: "Lato", sans-serif;
-				            font-size: 17px;
-				            padding: 5px 10px;
-				            margin: 0;
-				            
-				            span {
-					            font-size: 12px;
-					            margin-left: 3px;
-					            color: #999;
-				            }
-		                }
-		            }
-		        }
-                
+                    list-style-type: none;
+
+                    .czesc_li {
+                        h4 {
+                            font-family: "Lato", sans-serif;
+                            font-size: 17px;
+                            margin: 0;
+
+                            span {
+                                font-size: 12px;
+                                margin-left: 3px;
+                                color: #999;
+                            }
+                        }
+                    }
+                }
+
                 .miejsca_ul {
                     list-style-type: none;
                     padding-top: 10px;
 
                     .miejsce_li {
-
                         h4 {
                             font-family: "Lato", sans-serif;
                             font-size: 14px;
