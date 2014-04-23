@@ -10,10 +10,12 @@ $this->Combinator->add_libs('js', 'Dane.view-kodypocztowe');
     <div class="object">
         <div class="col-md-5">
             <div class="hint">
-
+				<p>Zasięg występowania kodu pocztowego:</p>
+				<!--
                 <p><?php echo __d('dane', __('LC_DANE_VIEW_KODYPOCZTOWE_HINT_GMINA')) ?></p>
 
                 <p><?php echo __d('dane', __('LC_DANE_VIEW_KODYPOCZTOWE_HINT_MIEJSCOWOSC')) ?></p>
+                -->
             </div>
 
 			
@@ -28,6 +30,8 @@ $this->Combinator->add_libs('js', 'Dane.view-kodypocztowe');
                                 <?php foreach ($gmina['miejscowosci'] as $miejscowosc) { ?>
                                     <li class="miejscowosc_li">
                                     	<h3><a href="#"><?php echo $miejscowosc['nazwa']; ?></a> <span class="badge badge-position"><?= $miejscowosc['typ'] ?></span></h3>
+                                    	
+                                    	<? if( isset($miejscowosc['miejsca']) && !empty($miejscowosc['miejsca']) ) {?>
                                     	<ul class="miejsca_ul">
                                     	<?php foreach ($miejscowosc['miejsca'] as $miejsce) { ?>
 		                                    <li class="miejsce_li">
@@ -41,6 +45,37 @@ $this->Combinator->add_libs('js', 'Dane.view-kodypocztowe');
 		                                    </li>
 		                                <?php } ?>
                                     	</ul>
+                                    	<? } ?>
+                                    	
+                                    	<? if( isset($miejscowosc['czesci']) && !empty($miejscowosc['czesci']) ) {?>
+                                    	<ul class="czesci_ul">
+                                    	<?php foreach ($miejscowosc['czesci'] as $czesc) { ?>
+		                                    <li class="czesc_li">
+		                                    	
+		                                    	<h4><a href="#"><?php echo $czesc['nazwa']; ?></a> <span class="badge badge-position"><?= $czesc['typ'] ?></span></h4>
+		                                    	
+		                                    	<? if( isset($czesc['miejsca']) && !empty($czesc['miejsca']) ) {?>
+		                                    	<ul class="miejsca_ul">
+		                                    	<?php foreach ($czesc['miejsca'] as $miejsce) { ?>
+				                                    <li class="miejsce_li">
+				                                    	
+				                                    	<? if( $miejsce['adres'] ) { ?>
+				                                    		<h4><a href="#"><?= $miejsce['adres'] ?></a></h4>
+				                                    	<? } else { ?>
+				                                    		<p class="all_addresses">Wszystkie adresy</p>
+				                                    	<? } ?>
+				                                    	
+				                                    </li>
+				                                <?php } ?>
+		                                    	</ul>
+		                                    	<? } ?>
+		                                    	
+		                                    	
+		                                    </li>
+		                                <?php } ?>
+                                    	</ul>
+                                    	<? } ?>
+                                    	
                                     </li>
                                 <?php } ?>
                             </ul>
