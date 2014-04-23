@@ -79,7 +79,26 @@ class UsersController extends PaszportAppController
     {
         $user_data = $this->Connect->FB->api('/me/?fields=id,first_name,last_name,email,gender,picture.type(square).width(200),birthday,locale');
         if (!isset($user_data['id'])) { # do we have access to user details ?
-            $this->redirect($this->Connect->FB->getLoginUrl(array('scope' => 'email,user_birthday')));
+            if (isset($this->request->query['error_reason'])) {
+                // an error has occurred
+                //fblogin?error=access_denied&error_code=200&error_description=Permissions+error&error_reason=user_denied&state=dca62b8eb289375be97d4783b4caedc4
+                $error = $this->request->query['error'];
+                $error_code = $this->request->query['error_code'];
+                $error_description = $this->request->query['error_description'];
+                $error_reason = $this->request->query['error_reason'];
+
+                if ($error_reason == 'user_denied') {
+                    $this->Session->setFlash(__d('paszport', 'LC_PASZPORT_FACEBOOK_LOGIN_USER_DENIED', true), null, array('class' => 'alert-error'));
+                    $this->redirect(array('action' => 'login'));
+                } else {
+                    $this->Session->setFlash(__d('paszport', 'LC_PASZPORT_FACEBOOK_LOGIN_FAILED', true), null, array('class' => 'alert-error'));
+                    $this->redirect(array('action' => 'login'));
+                }
+
+            } else {
+                $this->redirect($this->Connect->FB->getLoginUrl(array('scope' => 'email,user_birthday')));
+            }
+
         } else { # we do...
             $conds = array(
                 'conditions' => array(

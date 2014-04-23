@@ -25,7 +25,8 @@ class RadyPosiedzeniaController extends DataobjectsController
                 'kategoria_id',
             ),
             */
-            'hlFields' => array('numer_punktu', 'opis'),
+            // 'hlFields' => array('numer_punktu', 'opis'),
+            'hlFields' => array(),
             'routes' => array(
                 'date' => false,
             ),

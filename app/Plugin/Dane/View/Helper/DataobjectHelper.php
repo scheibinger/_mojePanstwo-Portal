@@ -165,7 +165,7 @@ class DataobjectHelper extends AppHelper
 
         $output = '<div class="dataHighlights normal">';
         $index = 0;
-        $limit = 4;
+        $limit = isset($options['limit']) ? $options['limit'] : 4;
         if (!isset($options['col_width']))
             $options['col_width'] = 3;
 
