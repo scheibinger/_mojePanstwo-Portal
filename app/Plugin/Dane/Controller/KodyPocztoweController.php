@@ -9,6 +9,6 @@ class KodyPocztoweController extends DataobjectsController
     public function view()
     {
         parent::view();
-        $this->set('obszary', $this->object->loadLayer('obszary'));
+        $this->object->loadLayer('struktura');
     }
 } 

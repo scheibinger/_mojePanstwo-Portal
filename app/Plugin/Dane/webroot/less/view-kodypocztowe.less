@@ -9,36 +9,92 @@
         }
     }
 
-    #obszary {
+    .gminy_ul {
         list-style-type: none;
+        padding: 20px 20px 10px;
 
-        .gminy {
-            padding: 20px;
-
-            h2 {
-                font-family: "Lato", sans-serif;
-                font-size: 20px;
-                padding: 10px;
-                margin: 0;
+        h2 {
+            font-family: "Lato", sans-serif;
+            font-size: 20px;
+            padding: 10px;
+            margin: 0;
+            
+            span {
+	            font-size: 12px;
+	            margin-left: 3px;
+	            color: #999;
+	            
+	            &.badge {
+		            color: white;
+		            background-color: #428BCA;
+	            }
             }
+        }
 
-            .pnaUl {
-                list-style-type: none;
-                padding: 0 15px;
+        .miejscowosci_ul {
+            list-style-type: none;
+            padding: 0 15px;
 
-                .pnaLi {
-                    padding: 5px;
+            .miejscowosc_li {
+                padding: 5px;
+                
+                h3 {
+	                font-family: "Lato", sans-serif;
+		            font-size: 17px;
+		            padding: 10px;
+		            margin: 0;
+		            
+		            span {
+			            font-size: 12px;
+			            margin-left: 3px;
+			            color: #999;
+			            
+			            a {
+				            color: fade(#157AB5, 65%);
+			            }
+		            }
                 }
+                
+                .miejsca_ul {
+		            
+		            list-style-type: none;
+		            padding: 0 15px;
+		
+		            .miejsce_li {
+		                padding: 5px;
+		                
+		                h4 {
+			                font-family: "Lato", sans-serif;
+				            font-size: 14px;
+				            padding: 5px 10px;
+				            margin: 0;
+		                }
+		            }
+		        }
             }
         }
     }
+    
+    .all_addresses {
+	    color: #AAAAAA;
+	    font-size: 10px;
+	    margin: -8px 0 0;
+	    padding: 0;
+	    text-transform: uppercase;
+    }
+    
     .maps {
         padding: 0;
 
         #mapa {
             display: block;
             width: 100%;
-            height: 450px;
+            height: 450px;            
+        }
+        
+        #map_cont.stick {
+	            position: fixed;
+	            top: 40px;	        
         }
     }
 }

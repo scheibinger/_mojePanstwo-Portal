@@ -8,38 +8,53 @@ $this->Combinator->add_libs('js', 'Dane.view-kodypocztowe');
 
 <?php echo $this->Element('dataobject/pageBegin'); ?>
     <div class="object">
-        <div class="col-md-7">
+        <div class="col-md-5">
             <div class="hint">
-                <p><?php echo __d('dane', __('LC_DANE_VIEW_KODYPOCZTOWE_HINT_TEXT')) . ' <strong>' . $object->getData('kod') . '</strong>.' ?></p>
 
                 <p><?php echo __d('dane', __('LC_DANE_VIEW_KODYPOCZTOWE_HINT_GMINA')) ?></p>
 
                 <p><?php echo __d('dane', __('LC_DANE_VIEW_KODYPOCZTOWE_HINT_MIEJSCOWOSC')) ?></p>
             </div>
 
-
-            <?php foreach ($obszary as $obszar) { ?>
-                <ul id="obszary">
-                    <li class="gminy" _gs="<?php echo $obszar['pl_gminy']['gmina_nazwa']; ?>">
+			
+            <?php foreach ($object->getLayer('struktura') as $gmina) { ?>
+                <ul class="gminy_ul">
+                    <li class="gminy gmina_li" _gs="<?php echo $gmina['nazwa']; ?>">
                         <h2>
-                            <a href="<?php echo $this->Html->url(array('plugin' => 'Dane', 'controller' => 'gminy', 'action' => 'view', 'id' => $obszar['pl_gminy']['gmina_id'])); ?>"><?php echo $obszar['pl_gminy']['gmina_nazwa']; ?></a>
+                            <a href="<?php echo $this->Html->url(array('plugin' => 'Dane', 'controller' => 'gminy', 'action' => 'view', 'id' => $gmina['id'])); ?>"><?php echo $gmina['nazwa']; ?></a> <span class="badge badge-position"><?= $gmina['typ'] ?></span>
                         </h2>
-                        <?php if (!empty($obszar['pnas'])) { ?>
-                            <ul class="pnaUl">
-                                <?php foreach ($obszar['pnas'] as $pnas) { ?>
-                                    <li class="pnaLi"><?php echo $pnas['miejscowosc'];
-                                        if ($pnas['ulica'] != '') {
-                                            echo ', ' . $pnas['ulica'];
-                                        } ?></li>
+                        <?php if (!empty($gmina['miejscowosci'])) { ?>
+                            <ul class="miejscowosci_ul">
+                                <?php foreach ($gmina['miejscowosci'] as $miejscowosc) { ?>
+                                    <li class="miejscowosc_li">
+                                    	<h3><a href="#"><?php echo $miejscowosc['nazwa']; ?></a> <span class="badge badge-position"><?= $miejscowosc['typ'] ?></span></h3>
+                                    	<ul class="miejsca_ul">
+                                    	<?php foreach ($miejscowosc['miejsca'] as $miejsce) { ?>
+		                                    <li class="miejsce_li">
+		                                    	
+		                                    	<? if( $miejsce['adres'] ) { ?>
+		                                    		<h4><a href="#"><?= $miejsce['adres'] ?></a></h4>
+		                                    	<? } else { ?>
+		                                    		<p class="all_addresses">Wszystkie adresy</p>
+		                                    	<? } ?>
+		                                    	
+		                                    </li>
+		                                <?php } ?>
+                                    	</ul>
+                                    </li>
                                 <?php } ?>
                             </ul>
                         <?php } ?>
                     </li>
                 </ul>
             <?php } ?>
+            
+            
         </div>
-        <div class="col-md-5 maps">
-            <div id="mapa"></div>
+        <div class="col-md-7 maps">
+        	<div id="map_cont">
+	            <div id="mapa"></div>
+        	</div>
         </div>
     </div>
 <?php echo $this->Element('dataobject/pageEnd'); ?>

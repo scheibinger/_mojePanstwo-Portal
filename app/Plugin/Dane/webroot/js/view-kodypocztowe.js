@@ -1,5 +1,5 @@
 var googleMapKodyPocztowe = {
-    googleMap: $('mapa'),
+    googleMap: jQuery('#mapa'),
     map: null,
     geocoder: null,
     marker: null,
@@ -7,8 +7,14 @@ var googleMapKodyPocztowe = {
     /*CREATE GOOGLE MAP*/
     init: function () {
         var that = this;
+				
+		console.log('v1', that.googleMap);
 
-        if (this.googleMap) {
+        if (that.googleMap) {
+        
+	        that.googleMap = jQuery(that.googleMap[0]);
+			console.log('v2', that.googleMap);
+            
             var mapOptions = {
                 center: new google.maps.LatLng(51.95972581431439, 18.51660156250001),
                 zoom: 6,
@@ -18,14 +24,22 @@ var googleMapKodyPocztowe = {
             that.geocoder = new google.maps.Geocoder();
 
             //Google map center on first "gmina" from list - in most case there will be only one "gmina"
+            /*
             this.geocoder.geocode({ 'address': 'Poland, ' + $$('.gminy')[0].readAttribute('_gs')}, function (results, status) {
                 if (status == google.maps.GeocoderStatus.OK) {
                     that.map.setCenter(results[0].geometry.location);
                     that.map.setZoom(10);
                 }
             });
+            */
 
-            this.listConnection();
+            // this.listConnection();
+            
+            // var x = jQuery('#mapa').css('width');
+            // console.log('x', x);
+            
+            // jQuery('#map_cont').css('width', x);
+            // sticky('#map_cont');
         }
     },
     /*RESULT LIST CONNECTED TO MARKER AT GOOGLE MAP*/
