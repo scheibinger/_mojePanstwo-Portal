@@ -10,10 +10,12 @@ $this->Combinator->add_libs('js', 'Dane.view-kodypocztowe');
     <div class="object">
         <div class="col-md-5">
             <div class="hint">
-
+				<p>Zasięg występowania kodu pocztowego:</p>
+				<!--
                 <p><?php echo __d('dane', __('LC_DANE_VIEW_KODYPOCZTOWE_HINT_GMINA')) ?></p>
 
                 <p><?php echo __d('dane', __('LC_DANE_VIEW_KODYPOCZTOWE_HINT_MIEJSCOWOSC')) ?></p>
+                -->
             </div>
 
 			
