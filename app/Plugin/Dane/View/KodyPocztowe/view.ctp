@@ -18,13 +18,10 @@ $this->Combinator->add_libs('js', 'Dane.view-kodypocztowe');
                 -->
             </div>
 
-            <?php $struktura = $object->getLayer('struktura');
-            foreach ($struktura as $gmina) {
-                ?>
+            <?php foreach ($object->getLayer('struktura') as $gmina) { ?>
                 <ul class="gminy_ul">
-                    <li class="gminy gmina_li<?php if ($gmina === end($struktura)) echo ' last'; ?>"
-                        _gs="<?php echo $gmina['nazwa']; ?>">
-                        <h2>
+                    <li class="gminy gmina_li" _gs="<?php echo $gmina['nazwa']; ?>">
+                    <h2>
                             <a href="<?php echo $this->Html->url(array('plugin' => 'Dane', 'controller' => 'gminy', 'action' => 'view', 'id' => $gmina['id'])); ?>"><?php echo $gmina['nazwa']; ?></a>
                             <span class="badge badge-position"><?= $gmina['typ'] ?></span>
                         </h2>
