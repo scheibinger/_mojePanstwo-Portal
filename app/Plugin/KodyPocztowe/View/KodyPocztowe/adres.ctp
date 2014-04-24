@@ -56,11 +56,11 @@ $this->Combinator->add_libs('js', 'KodyPocztowe.kody.js');
 <div id="display">
     <div class="adresList col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
         <? if (count($adres->getData()) > 0) {
-            $adr = $adres->getData();?>
+            $adr = $adres->getData(); ?>
             <div class="col-xs-4">
                 <small><?= __d('kody_pocztowe', 'LC_KODY_TABLE_ADRES_GMINA') ?></small>
                 <a href="/dane/gminy/<?= $adr['miejscowosci.gmina_id'] ?>"
-                   target="_self"><?= $adr['miejscowosci.nazwa_gminy'] ?></a>
+                   target="_self"><?= $adr['gminy.nazwa'] ?></a>
             </div>
             <div class="col-xs-4">
                 <small><?= __d('kody_pocztowe', 'LC_KODY_TABLE_ADRES_MIEJSCOWOSC') ?></small>

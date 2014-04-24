@@ -1,3 +1,5 @@
+var mapWidthInterval = null;
+
 var googleMapKodyPocztowe = {
     googleMap: $('mapa'),
     map: null,
@@ -8,7 +10,7 @@ var googleMapKodyPocztowe = {
     init: function () {
         var that = this;
 
-        if (this.googleMap) {
+        if (that.googleMap) {
             var mapOptions = {
                 center: new google.maps.LatLng(51.95972581431439, 18.51660156250001),
                 zoom: 6,
@@ -26,6 +28,18 @@ var googleMapKodyPocztowe = {
             });
 
             this.listConnection();
+
+            sticky('#map_cont');
+
+            var mapWidthInterval = setInterval(function () {
+                var mapWidth = jQuery('#mapa').css('width');
+                console.log(mapWidth);
+                jQuery('#map_cont').css('width', mapWidth);
+
+                /*SECURE FOR GOOGLE MAP LOADING SYSTEM - IF MAP IS NOT LOADED YET AND GOT 0px WE RUN CHECK WIDTH AGAIN AFTER SOME SHORT PERIOD OF TIME*/
+                if (mapWidth != '0px' && mapWidth != '0')
+                    clearInterval(mapWidthInterval);
+            }, 500);
         }
     },
     /*RESULT LIST CONNECTED TO MARKER AT GOOGLE MAP*/
@@ -100,5 +114,6 @@ var googleMapKodyPocztowe = {
 };
 
 jQuery(document).ready(function () {
+    console.log(jQuery('#mapa').css('width'));
     googleMapKodyPocztowe.init();
 });
