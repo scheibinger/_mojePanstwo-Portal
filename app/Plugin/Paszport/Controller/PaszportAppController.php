@@ -44,11 +44,6 @@ class PaszportAppController extends AppController
                 'action' => 'login',
                 'plugin' => 'paszport'
             ),
-            'logoutRedirect' => array(
-                'controller' => 'pages',
-                'action' => 'home',
-                'plugin' => 'paszport',
-            ),
             'authenticate' => array(
                 'Form' => array(
                     'fields' => array('username' => 'email', 'password' => 'password'),
@@ -79,6 +74,8 @@ class PaszportAppController extends AppController
     );
 
     public $uses = array('Paszport.User');
+
+    public $PassportApi;
 
     public function beforeFilter()
     {

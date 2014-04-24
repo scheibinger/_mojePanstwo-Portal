@@ -10,12 +10,9 @@ class UsersController extends PaszportAppController
 {
     public $components = array(
         'Paszport.Image2',
-//        'Paszport.PassportApi',
     );
 
     public $uses = array('Paszport.User');
-
-    public $PassportApi;
 
     /**
      * Sets permissions
@@ -77,8 +74,8 @@ class UsersController extends PaszportAppController
      */
     public function fblogin()
     {
-        $user_data = $this->Connect->FB->api('/me/?fields=id,first_name,last_name,email,gender,picture.type(square).width(200),birthday,locale');
-        if (!isset($user_data['id'])) { # do we have access to user details ?
+        $fb_user = $this->Connect->FB->getUser();
+        if (!$fb_user) {
             if (isset($this->request->query['error_reason'])) {
                 // an error has occurred
                 //fblogin?error=access_denied&error_code=200&error_description=Permissions+error&error_reason=user_denied&state=dca62b8eb289375be97d4783b4caedc4
@@ -98,8 +95,9 @@ class UsersController extends PaszportAppController
             } else {
                 $this->redirect($this->Connect->FB->getLoginUrl(array('scope' => 'email,user_birthday')));
             }
+        } else { # we do have access to user details
+            $user_data = $this->Connect->FB->api('/me/?fields=id,first_name,last_name,email,gender,picture.type(square).width(200),birthday,locale');
 
-        } else { # we do...
             $conds = array(
                 'conditions' => array(
                     'OR' => array(
@@ -124,8 +122,8 @@ class UsersController extends PaszportAppController
                     $session = $this->Session->read('API.session');
                     $this->externalgate($service, $session);
                 }
-                $this->redirect(array('action' => 'index'));
-                return true;
+                $this->redirect($this->referer());
+
             } else { # if not we will attempt to create new user based on his facebook data or we will merge his existing account
                 if ($user && $user['User']['email']) { # merge attempt
                     $this->User->id = $user['User']['id'];
@@ -137,10 +135,11 @@ class UsersController extends PaszportAppController
                         $session = $this->Session->read('API.session');
                         $this->externalgate($service, $session);
                     }
-                    $this->redirect(array('action' => 'index'));
+                    $this->redirect(array('action' => 'index')); // show profile for user to verify it
+
                 } else { # new user
-                    $this->User->create();
-                    $to_save = array(
+                    //$this->User->create();
+                    $to_save = array( 'User' => array(
                         'personal_name' => $user_data['first_name'],
                         'personal_lastname' => $user_data['last_name'],
                         'username' => $user_data['first_name'] . '' . $user_data['last_name'] . rand(0, 999),
@@ -154,13 +153,13 @@ class UsersController extends PaszportAppController
                         'photo' => preg_replace('/https/', 'http', $user_data['picture']['data']['url']),
                         'source' => 'facebook',
                         'group_id' => 1, # personal group
-                    );
+                    ));
 
                     $resp_user = $this->PassportApi->User()->add($to_save);
-                    if (isset($resp_user['user'])) {
+                    if (array_key_exists('user', $resp_user) && !empty($resp_user['user'])) {
                         $this->Session->setFlash(__d('paszport', 'LC_PASZPORT_FACEBOOK_REGISTER', true), null, array('class' => 'alert-success'));
-                        $to_save['id'] = $resp_user['user']['User']['id'];
-                        $this->Auth->login($to_save);
+
+                        $this->Auth->login($resp_user['user']);
                         $this->Session->write('FB_JUST_REGISTERED', true);
                         if ($this->Session->read('API.gate')) {
                             $service = $this->Session->read('API.service');
@@ -416,9 +415,10 @@ class UsersController extends PaszportAppController
             echo json_encode(array('error' => '', 'status' => 200, 'msg' => __d('paszport', 'LC_PASZPORT_LOGOUT', true)));
             die();
         }
-//        $this->_log(array('msg' => 'LC_PASZPORT_LOG_LOGOUT', 'ip' => $this->request->clientIp(), 'user_agent' => env('HTTP_USER_AGENT')));
+
         $this->set('title_for_layout', __d('paszport', 'LC_PASZPORT_LOGOUT', true));
-        $this->redirect($this->Auth->logout());
+        $this->Auth->logout();
+        $this->redirect($this->referer());
     }
 
     /**

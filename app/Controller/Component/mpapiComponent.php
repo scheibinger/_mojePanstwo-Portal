@@ -22,7 +22,7 @@ class mpapiComponent extends Component
 
         // PROCESSING USER
 
-        if ($data['user']) {
+        if (isset($data['user'])) {
             $this->User = $data['user'];
             $controller->Session->write('Auth.User', $this->User);
             $controller->set('_USER', $this->User);
@@ -32,7 +32,7 @@ class mpapiComponent extends Component
         // PROCESSING APPLICATIONS 
 
         $applications = array();
-        if ($data['applications']) {
+        if (isset($data['applications'])) {
 
             $folders = array();
 

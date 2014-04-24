@@ -19,23 +19,24 @@ App::uses('OAuthAppController', 'OAuth.Controller');
 class OAuthController extends OAuthAppController
 {
 
-    public $components = array('OAuth.OAuth', 'Auth' => array(
-        'loginAction' => array(
-            'controller' => 'users',
-            'action' => 'login',
-            'plugin' => 'paszport'
-        ),
-        'authenticate' => array(
-            'Form' => array(
-                'fields' => array('username' => 'email', 'password' => 'password'),
-                'passwordHasher' => array(
-                    'className' => 'Simple',
-                    'hashType' => 'sha256'
-                ),
-                'userModel' => 'Paszport.User',
-            )
-        )
-    ), 'Session', 'Security');
+    public $components = array('OAuth.OAuth', 'Security');
+//    , 'Auth' => array(
+//        'loginAction' => array(
+//            'controller' => 'users',
+//            'action' => 'login',
+//            'plugin' => 'paszport'
+//        ),
+//        'authenticate' => array(
+//            'Form' => array(
+//                'fields' => array('username' => 'email', 'password' => 'password'),
+//                'passwordHasher' => array(
+//                    'className' => 'Simple',
+//                    'hashType' => 'sha256'
+//                ),
+//                'userModel' => 'Paszport.User',
+//            )
+//        )
+//    ), 'Session', 'Security');
 
     public $uses = array('Paszport.User');
 
@@ -50,9 +51,12 @@ class OAuthController extends OAuthAppController
     public function beforeFilter()
     {
         parent::beforeFilter();
+
+        // user has to be logged in
+        $this->Auth->deny();
+
         $this->OAuth->authenticate = array('fields' => array('username' => 'email'), 'userModel' => 'Paszport.User');
         $this->Auth->authError = __('LC_UNAUTHORIZED', true);
-        $this->Auth->allow($this->OAuth->allowedActions);
         $this->Security->blackHoleCallback = 'blackHole';
     }
 
@@ -70,9 +74,9 @@ class OAuthController extends OAuthAppController
     public function authorize()
     {
         $this->set('title_for_layout', 'LC_GIVE_ACCESS');
-        if (!$this->Auth->loggedIn()) {
-            $this->redirect(array('action' => 'login', '?' => $this->request->query));
-        }
+//        if (!$this->Auth->loggedIn()) {
+//            $this->redirect(array('action' => 'login', '?' => $this->request->query));
+//        }
 
         if ($this->request->is('post')) {
             $this->validateRequest();
@@ -107,6 +111,7 @@ class OAuthController extends OAuthAppController
         }
         $this->loadModel('OAuth.Client');
         $client = $this->Client->find('first', array('conditions' => array('Client.client_id' => $OAuthParams['client_id'])));
+        // TODO około 400 access token / authcode / refreshtoken; po co to jest tutaj przekazywane?
         //@TODO : switch to php client
         $this->set(compact('OAuthParams', 'client'));
     }
@@ -121,13 +126,8 @@ class OAuthController extends OAuthAppController
     public function login()
     {
         $OAuthParams = $this->OAuth->getAuthorizeParams();
-        if ($this->request->is('post')) {
-            $this->validateRequest();
 
-            //Attempted login
-            $user = $this->API->Paszport()->User()->login($this->data);
-            if ($user['user'] && $this->Auth->login($user['user'])) {
-                //Write this to session so we can log them out after authenticating
+                //Write this to session so we can log them out after authenticating TODO
                 $this->Session->write('OAuth.logout', true);
 
                 //Write the auth params to the session for later
@@ -135,10 +135,7 @@ class OAuthController extends OAuthAppController
 
                 //Off we go
                 $this->redirect(array('action' => 'authorize'));
-            } else {
-                $this->Session->setFlash(__('LC_LOGIN_FAILED'), 'alert', array('class' => 'alert-error'), 'auth');
-            }
-        }
+
         $this->set(compact('OAuthParams'));
     }
 
