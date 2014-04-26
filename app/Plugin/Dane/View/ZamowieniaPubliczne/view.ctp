@@ -8,36 +8,35 @@
         <div class="col-lg-9">
 
             <div class="object mpanel">
-
-                <? $bg = false; ?>
-
-                <div class="block<? if ($bg) { ?> bg<? } ?>">
-                    <h2 class="underline"><?php echo __d('dane', __('LC_DANE_VIEW_ZAMOWIENIAPUBLICZNE_PRZEDMIOT')); ?></h2>
+				
+				<div class="block-group">
+				
+				<?
+					foreach( $object->getLayer('details') as $key => $value ) { if( $value ) {
+				?>
+				
+				
+				
+				
+                <div class="block">
+                    <div class="block-header">
+	                    <h2 class="pull-left label"><?php echo __d('dane', __('LC_DANE_VIEW_ZAMOWIENIAPUBLICZNE_' . $key)); ?></h2>
+                    </div>
 
                     <div class="content">
 
-                        <div class="textBlock"><?php echo($details['przedmiot']); ?></div>
+                        <div class="textBlock"><?php echo( $value ); ?></div>
 
                     </div>
                 </div>
-
-                <? if ($object->getData('wadium')) { ?>
-
-                    <? $bg = !$bg; ?>
-
-                    <div class="block<? if ($bg) { ?> bg<? } ?>">
-                        <h2 class="underline">Wadium</h2>
-
-                        <div class="content">
-
-                            <div class="textBlock"><?php echo $object->getData('wadium'); ?></div>
-
-                        </div>
-                    </div>
-
-                <? } ?>
                 
-                <div id="source" class="block">
+                <? } } ?>
+                
+				</div>
+
+               
+                
+                <div id="source">
                 	
                 </div>
 

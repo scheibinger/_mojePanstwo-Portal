@@ -13,7 +13,10 @@ class ZamowieniaPubliczneController extends DataobjectsController
     {
 
         parent::view();
-        $details = $this->object->loadLayer('details');
+        $this->object->loadLayer('details');
+        
+        
+        /*
         $fields = $details['ZamowieniaPubliczne'];
 
 
@@ -39,5 +42,6 @@ class ZamowieniaPubliczneController extends DataobjectsController
 
         $fields['przedmiot'] = '<p>' . implode("</p>\n<p>", $paragraphs) . '</p>';
         $this->set('details', $fields);
+        */
     }
 } 
