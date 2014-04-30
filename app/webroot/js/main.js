@@ -187,15 +187,15 @@ jQuery.extend(jQuery.ui.dialog.prototype.options, {
             _mPViewportReloadCookie = $.cookie('_mPViewportReload'),
             _mPViewportReload = (_mPViewportReloadCookie == undefined || Number(_mPViewportReloadCookie) == "NaN" ) ? 1 : Number(_mPViewportReloadCookie) + 1;
 
-        $.cookie('_mPViewportCookieAvailable','true');
+        $.cookie('_mPViewportCookieAvailable', 'true');
         var cookieAvailable = $.cookie('_mPViewportCookieAvailable');
 
-        if (Number(_mPViewportReload) < 5 && cookieAvailable =='true') {
+        if (Number(_mPViewportReload) < 5 && cookieAvailable == 'true') {
             $.cookie('_mPViewport', checkSizeMarker, { expires: 365, path: '/' });
             $.cookie('_mPViewportReload', _mPViewportReload, { expires: 1, path: '/' });
 
             $('body').append(rescaleOverlay).append(rescaleWindow);
-            if(cookieAvailable == 'true')
+            if (cookieAvailable == 'true')
                 location.reload();
         } else {
             $.cookie('_mPViewport', 'lg', { expires: 365, path: '/' });

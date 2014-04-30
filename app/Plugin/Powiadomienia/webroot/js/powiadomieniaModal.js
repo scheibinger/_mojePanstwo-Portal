@@ -17,6 +17,7 @@ var powiadomieniaModal;
             powiadomieniaModal.editTitle();
         },
         createModal: function () {
+            $('#frazyModalBox').remove();
             powiadomieniaModal.modal = $('<div></div>');
             powiadomieniaModal.modal.addClass("modal fade").attr({'id': "frazyModalBox", "tabindex": -1, "role": "dialog", "aria-labelledby": "myModalLabel", "aria-hidden": "true"}).append(
                 $('<div></div>').addClass('modal-dialog').append(
@@ -111,10 +112,8 @@ var powiadomieniaModal;
                             ],
                             'keywords': [
                                 {id: 1, name: 'keywords-test'},
-                                {id: 2, name: 'keywords-test2', 'selected': true},
-                                {id: 3, name: 'keywords-test3', 'selected': true},
-                                {id: 4, name: 'keywords-test4'},
-                                {id: 5, name: 'keywords-test5'}
+                                {id: 2, name: 'keywords-test2'},
+                                {id: 3, name: 'keywords-test3'}
                             ]
                         }
 
@@ -130,15 +129,17 @@ var powiadomieniaModal;
                         if (data['datasets'].length > 0) {
                             $.each(data['datasets'], function () {
                                 powiadomieniaModal.modal.find('.modal-body .datasets').append(
-                                    $('<div></div>').addClass('checkbox').append(
-                                        $('<label></label>').text(this.name).prepend(
-                                            $('<input />').attr({'type': 'checkbox', 'name': 'data[datasets][ids]'}).val(this.id)
+                                    $('<div></div>').addClass('switchCheckbox').append(
+                                            $('<input />').attr({'type': 'checkbox', 'name': 'data[datasets][ids]'}).data({'size': 'small'}).val(this.id)
+                                        ).append(
+                                            $('<label></label>').text(this.name)
                                         )
-                                    )
                                 )
                                 if (this.selected)
-                                    powiadomieniaModal.modal.find('.modal-body .datasets input:last').prop('checked', true);
-                            })
+                                    powiadomieniaModal.modal.find('.modal-body .datasets .switchCheckbox:last input').bootstrapSwitch('state', true, true);
+                                else
+                                    powiadomieniaModal.modal.find('.modal-body .datasets .switchCheckbox:last input').bootstrapSwitch();
+                            });
                         } else {
                             powiadomieniaModal.modal.find('.modal-body .datasets').append(
                                 $('<span></span>').text(_mPHeart.translation.LC_POWIADOMIENIA_POWIADOMENIA_MODAL_NO_DATASETS)
@@ -154,22 +155,32 @@ var powiadomieniaModal;
                         )
 
                         if (data['keywords'].length > 0) {
-                            $.each(data['keywords'], function () {
-                                powiadomieniaModal.modal.find('.modal-body .keywords').append(
-                                    $('<div></div>').addClass('checkbox').append(
-                                        $('<label></label>').text(this.name).prepend(
-                                            $('<input />').attr({'type': 'checkbox', 'name': 'data[keywords][ids]'}).val(this.id)
-                                        )
-                                    )
-                                )
-                                if (this.selected)
-                                    powiadomieniaModal.modal.find('.modal-body .keywords input:last').prop('checked', true);
-                            })
+                            powiadomieniaModal.modal.find('.modal-body .keywords').append(
+                                $('<input />').attr({'name': 'keywords', 'id': 'keywordsInput'})
+                            )
+                            /*$.each(data['keywords'], function () {
+                             powiadomieniaModal.modal.find('.modal-body .keywords').append(
+                             $('<div></div>').addClass('checkbox').append(
+                             $('<label></label>').text(this.name).prepend(
+                             $('<input />').attr({'type': 'checkbox', 'name': 'data[keywords][ids]'}).val(this.id)
+                             )
+                             )
+                             )
+                             if (this.selected)
+                             powiadomieniaModal.modal.find('.modal-body .keywords input:last').prop('checked', true);
+                             })*/
                         } else {
                             powiadomieniaModal.modal.find('.modal-body .keywords').append(
-                                $('<span></span>').text('Brak keywordsów')
+                                $('<input />').attr({'name': 'keywords', 'id': 'keywordsInput'})
                             )
                         }
+                        $('#keywordsInput').tagsInput({
+                            //autocomplete_url:'http://jqueryui.com/resources/demos/autocomplete/search.php',
+                            //autocomplete:{selectFirst:true,width:'100px',autoFill:true},
+                            'interactive': true,
+                            'defaultText': 'Wpisz słowo kluczowe...',
+                            'minChars': 0
+                        });
                     }
                 })
             }, 0);
