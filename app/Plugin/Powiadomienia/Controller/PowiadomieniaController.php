@@ -97,5 +97,13 @@ class PowiadomieniaController extends PowiadomieniaAppController
         $this->set('_serialize', 'status');
 
     }
+    
+    public function getApps()
+    {
+	    
+	    $this->set('apps', $this->API->Powiadomienia()->getApps());
+        $this->set('_serialize', 'apps');
+	    
+    }
 
 }
