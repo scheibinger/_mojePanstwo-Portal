@@ -73,7 +73,7 @@ body > pre:first-child {
 }
 
 .block {
-    padding: 20px 20px 0;
+    padding: 30px 30px 0;
 
     &.nosidepadding {
         padding-left: 0;
@@ -88,6 +88,7 @@ body > pre:first-child {
         display: inline-block;
         width: 100%;
         min-height: 45px;
+        margin-top: -10px;
     }
 
     &.bg {
@@ -218,8 +219,9 @@ body > pre:first-child {
         }
 
         ._value {
-            font-size: 12px;
+            font-size: 13px;
             margin: 0;
+            color: #5CB85C;
 
             img {
                 float: left;
@@ -246,6 +248,50 @@ body > pre:first-child {
             }
         }
     }
+}
+
+.dataHighlights.side {
+
+    margin-top: 10px;
+    padding: 0 !important;
+    
+    h2 {
+	    font-size: 14px;
+	    border-top: 1px solid #CCC;
+	    padding-top: 10px;
+    }
+    
+    .dataHighlight {
+    	margin-top: 10px;
+    	
+    	&.topborder {
+	    	border-top: 1px solid #CCC;
+	    	padding-top: 10px;
+    	}
+    	
+    	&.inl {
+	    	._label {
+		    	float: left;
+                margin-right: 10px;
+	    	}
+	    	._value {
+		    	position: relative;
+		    	top: -4px;
+	    	}
+    	}
+    	
+    	._value {
+            font-size: 16px;	
+        }
+        
+        &.big {
+	        ._value {
+	            font-size: 30px;
+	            font-weight: 300;	
+	        }
+        }
+    }
+    
 }
 
 .form-control {

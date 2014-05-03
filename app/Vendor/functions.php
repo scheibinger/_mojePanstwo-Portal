@@ -162,6 +162,12 @@ if (!function_exists('endsWith')) {
 
 #    Output easy-to-read numbers
 #    by james at bandit.co.nz
+
+function _currency($value)
+{
+	return '<span class="_currency">' . number_format($value, $decimals = 2, $dec_point = '<span class="_subcurrency">,', $thousands_sep = ' ') . ' PLN</span></span>';
+}
+
 function number_format_h($n, $decimals = 0, $dec_point = '.', $thousands_sep = ' ')
 {
     // first strip any formatting;

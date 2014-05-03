@@ -25,7 +25,7 @@
 
                     <div class="content">
 
-                        <div class="textBlock"><?php echo( $value ); ?></div>
+                        <div class="textBlock"><?php echo( nl2br($value) ); ?></div>
 
                     </div>
                 </div>
@@ -34,18 +34,106 @@
                 
 				</div>
 
-               
-                
-                <div id="source">
-                	
-                </div>
-
             </div>
 
         </div>
         <div class="col-lg-3">
 
-            <div class="block nosidepadding">
+            <div class="row">
+
+                <ul class="dataHighlights side">
+                	<li class="dataHighlight big">
+                		<p class="_label">Wartość udzielonego zamówienia</p>
+                		<p class="_value"><?= _currency( $object->getData('wartosc_cena') ); ?></p>
+                	</li>
+                	<li class="dataHighlight" style="display: none;">
+                		<p class="_label">Wartość szacowana przez zamawiającego</p>
+                		<p class="_value"><?= _currency( $object->getData('wartosc_szacowana') ); ?></p>
+                	</li>
+                	<li class="dataHighlight">
+                		<p class="_label">Zamawiający</p>
+                		<p class="_value"><a href="/dane/zamowienia_publiczne_zamawiajacy/<?= $object->getData('zamawiajacy_id'); ?>"><?= $object->getData('zamawiajacy_nazwa'); ?></a></p>
+                	</li>
+                	<?
+                	
+                		$czesci = $object->getLayer('czesci');
+                		if( count($czesci)==1 ) {
+	                		$czesc = $czesci[0];
+	                ?>
+	                <li class="dataHighlight topborder">
+                		<p class="_label">Wykonawca</p>
+                		<? foreach($czesc['wykonawcy'] as $wykonawca) {?>
+                		<p class="_value"><a href="/dane/zamowienia_publiczne_wykonawcy/<?= $wykonawca['id'] ?>"><?= $wykonawca['nazwa']; ?></a></p>
+                		<? } ?>
+                	</li>
+                	<li class="dataHighlight">
+                		<p class="_label">Data udzielenia zamówienia</p>
+                		<p class="_value"><?= $czesc['data_zam']; ?></p>
+                	</li>
+                	<li class="dataHighlight">
+                		<p class="_label">Cena minimalna</p>
+                		<p class="_value"><?= _currency( $czesc['cena_min'] ); ?></p>
+                	</li>
+                	<li class="dataHighlight">
+                		<p class="_label">Cena maksymalna</p>
+                		<p class="_value"><?= _currency( $czesc['cena_max'] ); ?></p>
+                	</li>
+                	<li class="dataHighlight inl">
+                		<p class="_label">Liczba ofert</p>
+                		<p class="_value"><?= $czesc['liczba_ofert']; ?></p>
+                	</li>	
+                	<li class="dataHighlight inl">
+                		<p class="_label">Liczba odrzuconych ofert</p>
+                		<p class="_value"><?= $czesc['liczba_odrzuconych_ofert']; ?></p>
+                	</li>	                
+	                <?		
+                		} else {
+                		
+                		foreach($czesci as $czesc) {
+                	?>
+                		
+                		<h2><span>#<?= $czesc['numer'] ?></span> <span><?= $czesc['nazwa'] ?></span></h2>
+                		
+                		<li class="dataHighlight">
+	                		<p class="_label">Wykonawca</p>
+	                		<? foreach($czesc['wykonawcy'] as $wykonawca) {?>
+	                		<p class="_value"><a href="/dane/zamowienia_publiczne_wykonawcy/<?= $wykonawca['id'] ?>"><?= $wykonawca['nazwa']; ?></a></p>
+	                		<? } ?>
+	                	</li>
+	                	<li class="dataHighlight inl" style="display: none;">
+	                		<p class="_label">Data udzielenia zamówienia</p>
+	                		<p class="_value"><?= $czesc['data_zam']; ?></p>
+	                	</li>
+	                	<li class="dataHighlight inl">
+	                		<p class="_label">Cena</p>
+	                		<p class="_value"><?= _currency( $czesc['cena'] ); ?></p>
+	                	</li>
+	                	<li class="dataHighlight inl" style="display: none;">
+	                		<p class="_label">Cena minimalna</p>
+	                		<p class="_value"><?= _currency( $czesc['cena_min'] ); ?></p>
+	                	</li>
+	                	<li class="dataHighlight inl" style="display: none;">
+	                		<p class="_label">Cena maksymalna</p>
+	                		<p class="_value"><?= _currency( $czesc['cena_max'] ); ?></p>
+	                	</li>
+	                	<li class="dataHighlight inl">
+	                		<p class="_label">Liczba ofert</p>
+	                		<p class="_value"><?= $czesc['liczba_ofert']; ?></p>
+	                	</li>	
+	                	<li class="dataHighlight inl" style="display: none;">
+	                		<p class="_label">Liczba odrzuconych ofert</p>
+	                		<p class="_value"><?= $czesc['liczba_odrzuconych_ofert']; ?></p>
+	                	</li>
+                	
+                	
+                	<? } } ?>
+                	<li class="dataHighlight topborder">
+                		<p class="_label">Źródło</p>
+                		<p class="_value" id="sources"></p>
+                	</li>	
+                </ul>
+                                                
+                <? /*
                 <h2><?php echo __d('dane', __('LC_DANE_VIEW_ZAMOWIENIAPUBLICZNE_ZAMAWIAJACY')); ?></h2>
 
                 <div class="content">
@@ -59,6 +147,9 @@
                         </li>
                     </ul>
                 </div>
+				*/ ?>
+            
+            
             </div>
 
         </div>
@@ -93,8 +184,5 @@
 <?= $this->Element('dataobject/pageEnd'); ?>
 
 <script type="text/javascript">
-	var zamowienie = {
-		ogloszenie_nr: '<?= $object->getData('ogloszenie_nr') ?>',
-		data: '<?= $object->getDate() ?>'
-	};
+	var sources = <?= json_encode( $object->getLayer('sources') ) ?>;
 </script>
