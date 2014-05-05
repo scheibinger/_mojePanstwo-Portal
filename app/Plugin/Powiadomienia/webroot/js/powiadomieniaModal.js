@@ -54,6 +54,7 @@ var powiadomieniaModal;
             }
         },
         footerConstruct: function () {
+            console.log(powiadomieniaModal.footer);
             if (powiadomieniaModal.footer == null) {
                 powiadomieniaModal.modal.find('.modal-content').append(
                     $('<div></div>').addClass('modal-footer').append(
@@ -66,7 +67,6 @@ var powiadomieniaModal;
                 powiadomieniaModal.modal.find('.modal-content').append(powiadomieniaModal.footer);
             }
             powiadomieniaModal.additionalInfo();
-            console.log(powiadomieniaModal.modal);
         },
         editTitle: function () {
             powiadomieniaModal.modal.find('.modal-header h4.modal-title').click(function () {
@@ -91,7 +91,6 @@ var powiadomieniaModal;
             })
         },
         additionalInfo: function () {
-            console.log(powiadomieniaModal.ajax);
             window.setTimeout(function () {
                 $.ajax({
                     type: 'GET',
@@ -101,13 +100,12 @@ var powiadomieniaModal;
                     beforeSend: function () {
                         powiadomieniaModal.modal.modal();
                     },
-                    complete: function (data) { /*TODO: zamienic na success gdy beda juz AJAX REQUEST gotowe*/
-                        
-                        console.log(data);
+                    success: function (results) {
+                        var data = results.group;
 
                         powiadomieniaModal.modal.find('.modal-body').html('');
-						
-						powiadomieniaModal.modal.find('.modal-body').append(
+
+                        powiadomieniaModal.modal.find('.modal-body').append(
                             $('<div></div>').addClass('keywords').append(
                                     $('<h5></h5>').text(_mPHeart.translation.LC_POWIADOMIENIA_POWIADOMENIA_MODAL_KEYWORDS)
                                 ).append(
@@ -115,36 +113,26 @@ var powiadomieniaModal;
                                 )
                         )
 
-                        if (data['keywords'].length > 0) {
+                        if (data.phrases.length > 0) {
                             powiadomieniaModal.modal.find('.modal-body .keywords').append(
                                 $('<input />').attr({'name': 'keywords', 'id': 'keywordsInput'})
                             )
-                            $.each(data['keywords'], function () {
-                             powiadomieniaModal.modal.find('.modal-body .keywords').append(
-                             $('<div></div>').addClass('checkbox').append(
-                             $('<label></label>').text(this.name).prepend(
-                             $('<input />').attr({'type': 'checkbox', 'name': 'data[keywords][ids]'}).val(this.id)
-                             )
-                             )
-                             )
-                             if (this.selected)
-                             powiadomieniaModal.modal.find('.modal-body .keywords input:last').prop('checked', true);
-                             })
+                            var dataPhrasesArray = [];
+                            $.each(data.phrases, function (index, value) {
+                                dataPhrasesArray.push(value);
+                            })
+                            powiadomieniaModal.modal.find('.modal-body #keywordsInput').val(dataPhrasesArray.join(","))
                         } else {
                             powiadomieniaModal.modal.find('.modal-body .keywords').append(
                                 $('<input />').attr({'name': 'keywords', 'id': 'keywordsInput'})
                             )
                         }
                         $('#keywordsInput').tagsInput({
-                            //autocomplete_url:'http://jqueryui.com/resources/demos/autocomplete/search.php',
-                            //autocomplete:{selectFirst:true,width:'100px',autoFill:true},
                             'interactive': true,
-                            'defaultText': 'Wpisz słowo kluczowe...',
+                            'defaultText': _mPHeart.translation.LC_POWIADOMIENIA_POWIADOMENIA_MODAL_KEYWORDS_INPUT,
                             'minChars': 0
                         });
-						
-						
-						
+
                         powiadomieniaModal.modal.find('.modal-body').append(
                             $('<div></div>').addClass('datasets').append(
                                     $('<h5></h5>').text(_mPHeart.translation.LC_POWIADOMIENIA_POWIADOMENIA_MODAL_DATASETS)
@@ -152,31 +140,23 @@ var powiadomieniaModal;
                                     $('<hr />')
                                 )
                         )
-                        
-                        
-                        
-                        
-                        if (data['datasets'].length > 0) {
-                            $.each(data['datasets'], function () {
+
+                        if (data.apps.length > 0) {
+                            $.each(data.apps, function (index, value) {
                                 powiadomieniaModal.modal.find('.modal-body .datasets').append(
                                     $('<div></div>').addClass('switchCheckbox').append(
-                                            $('<input />').attr({'type': 'checkbox', 'name': 'data[datasets][ids]'}).data({'size': 'small'}).val(this.id)
+                                            $('<input />').attr({'type': 'checkbox', 'name': value.name, 'checked': 'checked'}).data({'size': 'small'}).val(value.id)
                                         ).append(
-                                            $('<label></label>').text(this.name)
+                                            $('<label></label>').text(value.name)
                                         )
                                 )
-                                if (this.selected)
-                                    powiadomieniaModal.modal.find('.modal-body .datasets .switchCheckbox:last input').bootstrapSwitch('state', true, true);
-                                else
-                                    powiadomieniaModal.modal.find('.modal-body .datasets .switchCheckbox:last input').bootstrapSwitch();
+                                powiadomieniaModal.modal.find('.modal-body .datasets .switchCheckbox:last input').bootstrapSwitch('disabled', true, true);
                             });
                         } else {
                             powiadomieniaModal.modal.find('.modal-body .datasets').append(
                                 $('<span></span>').text(_mPHeart.translation.LC_POWIADOMIENIA_POWIADOMENIA_MODAL_NO_DATASETS)
                             )
                         }
-
-                        
                     }
                 })
             }, 0);
