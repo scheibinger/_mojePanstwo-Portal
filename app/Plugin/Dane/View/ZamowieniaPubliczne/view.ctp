@@ -5,7 +5,7 @@
 <?= $this->Element('dataobject/pageBegin'); ?>
 
     <div class="row">
-        <div class="col-lg-9">
+        <div class="col-lg-9 objectMain">
 
             <div class="object mpanel">
 				
@@ -37,10 +37,10 @@
             </div>
 
         </div>
-        <div class="col-lg-3">
-
-            <div class="row">
-
+        <div class="col-lg-3 objectSide">
+			<div class="objectSideInner">
+			
+	
                 <ul class="dataHighlights side">
                 	<li class="dataHighlight big">
                 		<p class="_label">Wartość udzielonego zamówienia</p>
@@ -149,9 +149,9 @@
                 </div>
 				*/ ?>
             
+	            
             
-            </div>
-
+			</div>
         </div>
     </div>
 

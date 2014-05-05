@@ -52,13 +52,25 @@ class DataobjectsController extends DaneAppController
 
     public function _prepareView()
     {
-        $this->dataset = $this->API->getDataset($this->params->controller);
-        $this->set('dataset', $this->dataset);
-
-        $this->object = $this->API->getObject($this->params->controller, $this->params->id);
-
+    	
+    	try {
+	    	$this->object = $this->API->getObject($this->params->controller, $this->params->id);        
+        } catch (Exception $e) {
+		    
+		    $data = $e->getData();
+		    if( $data && isset($data['redirect']) && $data['redirect'] ) {
+			    
+			    $this->redirect('/dane/' . $data['redirect']['alias'] . '/' . $data['redirect']['object_id']);
+			    
+		    }
+		    throw new NotFoundException('Could not find that object');
+		    
+		}
+        
         if (is_object($this->object)) {
 
+			$this->dataset = $this->API->getDataset($this->params->controller);
+	        $this->set('dataset', $this->dataset);
 			
 			if( $this->autoRelated )
 			{
