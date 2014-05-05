@@ -98,7 +98,7 @@ class PowiadomieniaController extends PowiadomieniaAppController
 
     }
     
-    public function getApps()
+    public function apps()
     {
 	    
 	    $this->set('apps', $this->API->Powiadomienia()->getApps());

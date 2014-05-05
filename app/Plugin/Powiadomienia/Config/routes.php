@@ -7,6 +7,6 @@ Router::connect('/powiadomienia/flagObjects', array('plugin' => 'powiadomienia',
 Router::connect('/powiadomienia/groups/:id', array('plugin' => 'Powiadomienia', 'controller' => 'Groups', 'action' => 'view'));
 
 
-Router::connect('/powiadomienia/getApps', array('plugin' => 'powiadomienia', 'controller' => 'powiadomienia', 'action' => 'getApps'));
+Router::connect('/powiadomienia/apps', array('plugin' => 'powiadomienia', 'controller' => 'powiadomienia', 'action' => 'apps'));
 Router::mapResources('dataobjects');
 Router::mapResources('phrases');
