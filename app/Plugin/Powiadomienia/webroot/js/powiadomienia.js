@@ -253,8 +253,7 @@
                 ajax: {
                     saveUrl: '/',
                     saveParm: {id: parent.data('id')},
-                    additionalUrl: '/powiadomienia/groups/' + parent.data('id') + '.json',
-                    additionalParm: null
+                    additionalUrl: '/powiadomienia/groups/' + parent.data('id') + '.json'
                 }
             })
         });
