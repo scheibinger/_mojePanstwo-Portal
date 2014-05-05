@@ -172,14 +172,15 @@
                 modalBottom = $('<div></div>');
 
             e.preventDefault();
-
+			
             modalBottom.addClass('modal-footer').append(
-                    $('<button></button>').addClass('btn delete btn-danger pull-left').attr({'type': 'button'}).text('Usuń')
+                    $('<button></button>').addClass('btn delete btn-danger pull-left').hide().attr({'type': 'button'}).text('Usuń')
                 ).append(
-                    $('<button></button>').addClass('btn duplicate btn-info pull-left').attr({'type': 'button'}).text('Duplikuj')
+                    $('<button></button>').addClass('btn duplicate btn-info pull-left').hide().attr({'type': 'button'}).text('Duplikuj')
                 ).append(
-                    $('<button></button>').addClass('btn save btn-primary pull-right').attr({'type': 'button'}).text('Zapisz')
+                    $('<button></button>').addClass('btn save btn-primary pull-left').attr({'type': 'button'}).text('Zapisz')
                 );
+                
 
             /*DELETE*/
             modalBottom.find('.btn.delete').click(function () {
@@ -252,8 +253,8 @@
                 ajax: {
                     saveUrl: '/',
                     saveParm: {id: parent.data('id')},
-                    additionalUrl: '/',
-                    additionalParm: {id: parent.data('id')}
+                    additionalUrl: '/powiadomienia/groups/' + parent.data('id') + '.json',
+                    additionalParm: null
                 }
             })
         });

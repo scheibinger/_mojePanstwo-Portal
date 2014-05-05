@@ -20,6 +20,16 @@ class GroupsController extends PowiadomieniaAppController
         }
     }
 	
+	public function view()
+	{
+		
+		$group = $this->API->getGroup( $this->request->params['id'] );		
+		
+		$this->set('group', $group);
+		$this->set('_serialize', array('group'));
+		
+	}
+	
 	public function add()
 	{
 		

@@ -96,29 +96,55 @@ var powiadomieniaModal;
                 $.ajax({
                     type: 'GET',
                     url: powiadomieniaModal.ajax.additionalUrl,
-                    data: powiadomieniaModal.ajax.additionalParm,
+                    // data: powiadomieniaModal.ajax.additionalParm,
                     dataType: 'JSON',
                     beforeSend: function () {
                         powiadomieniaModal.modal.modal();
                     },
                     complete: function (data) { /*TODO: zamienic na success gdy beda juz AJAX REQUEST gotowe*/
-                        data = {
-                            'datasets': [
-                                {id: 1, name: 'datasets-test'},
-                                {id: 2, name: 'datasets-test2'},
-                                {id: 3, name: 'datasets-test3', 'selected': true},
-                                {id: 4, name: 'datasets-test4', 'selected': true},
-                                {id: 5, name: 'datasets-test5'}
-                            ],
-                            'keywords': [
-                                {id: 1, name: 'keywords-test'},
-                                {id: 2, name: 'keywords-test2'},
-                                {id: 3, name: 'keywords-test3'}
-                            ]
-                        }
+                        
+                        console.log(data);
 
                         powiadomieniaModal.modal.find('.modal-body').html('');
+						
+						powiadomieniaModal.modal.find('.modal-body').append(
+                            $('<div></div>').addClass('keywords').append(
+                                    $('<h5></h5>').text(_mPHeart.translation.LC_POWIADOMIENIA_POWIADOMENIA_MODAL_KEYWORDS)
+                                ).append(
+                                    $('<hr />')
+                                )
+                        )
 
+                        if (data['keywords'].length > 0) {
+                            powiadomieniaModal.modal.find('.modal-body .keywords').append(
+                                $('<input />').attr({'name': 'keywords', 'id': 'keywordsInput'})
+                            )
+                            $.each(data['keywords'], function () {
+                             powiadomieniaModal.modal.find('.modal-body .keywords').append(
+                             $('<div></div>').addClass('checkbox').append(
+                             $('<label></label>').text(this.name).prepend(
+                             $('<input />').attr({'type': 'checkbox', 'name': 'data[keywords][ids]'}).val(this.id)
+                             )
+                             )
+                             )
+                             if (this.selected)
+                             powiadomieniaModal.modal.find('.modal-body .keywords input:last').prop('checked', true);
+                             })
+                        } else {
+                            powiadomieniaModal.modal.find('.modal-body .keywords').append(
+                                $('<input />').attr({'name': 'keywords', 'id': 'keywordsInput'})
+                            )
+                        }
+                        $('#keywordsInput').tagsInput({
+                            //autocomplete_url:'http://jqueryui.com/resources/demos/autocomplete/search.php',
+                            //autocomplete:{selectFirst:true,width:'100px',autoFill:true},
+                            'interactive': true,
+                            'defaultText': 'Wpisz słowo kluczowe...',
+                            'minChars': 0
+                        });
+						
+						
+						
                         powiadomieniaModal.modal.find('.modal-body').append(
                             $('<div></div>').addClass('datasets').append(
                                     $('<h5></h5>').text(_mPHeart.translation.LC_POWIADOMIENIA_POWIADOMENIA_MODAL_DATASETS)
@@ -126,6 +152,10 @@ var powiadomieniaModal;
                                     $('<hr />')
                                 )
                         )
+                        
+                        
+                        
+                        
                         if (data['datasets'].length > 0) {
                             $.each(data['datasets'], function () {
                                 powiadomieniaModal.modal.find('.modal-body .datasets').append(
@@ -146,41 +176,7 @@ var powiadomieniaModal;
                             )
                         }
 
-                        powiadomieniaModal.modal.find('.modal-body').append(
-                            $('<div></div>').addClass('keywords').append(
-                                    $('<h5></h5>').text(_mPHeart.translation.LC_POWIADOMIENIA_POWIADOMENIA_MODAL_KEYWORDS)
-                                ).append(
-                                    $('<hr />')
-                                )
-                        )
-
-                        if (data['keywords'].length > 0) {
-                            powiadomieniaModal.modal.find('.modal-body .keywords').append(
-                                $('<input />').attr({'name': 'keywords', 'id': 'keywordsInput'})
-                            )
-                            /*$.each(data['keywords'], function () {
-                             powiadomieniaModal.modal.find('.modal-body .keywords').append(
-                             $('<div></div>').addClass('checkbox').append(
-                             $('<label></label>').text(this.name).prepend(
-                             $('<input />').attr({'type': 'checkbox', 'name': 'data[keywords][ids]'}).val(this.id)
-                             )
-                             )
-                             )
-                             if (this.selected)
-                             powiadomieniaModal.modal.find('.modal-body .keywords input:last').prop('checked', true);
-                             })*/
-                        } else {
-                            powiadomieniaModal.modal.find('.modal-body .keywords').append(
-                                $('<input />').attr({'name': 'keywords', 'id': 'keywordsInput'})
-                            )
-                        }
-                        $('#keywordsInput').tagsInput({
-                            //autocomplete_url:'http://jqueryui.com/resources/demos/autocomplete/search.php',
-                            //autocomplete:{selectFirst:true,width:'100px',autoFill:true},
-                            'interactive': true,
-                            'defaultText': 'Wpisz słowo kluczowe...',
-                            'minChars': 0
-                        });
+                        
                     }
                 })
             }, 0);

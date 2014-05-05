@@ -101,10 +101,10 @@ msgid "LC_POWIADOMIENIA_OPTIONS_ALERT_BUTTON_UNREAD"
 msgstr "Nieprzeczytane"
 
 msgid "LC_POWIADOMIENIA_POWIADOMENIA_MODAL_DATASETS"
-msgstr "Datasety"
+msgstr "Pochodzące z następujących aplikacji:"
 
 msgid "LC_POWIADOMIENIA_POWIADOMENIA_MODAL_NO_DATASETS"
-msgstr "Brak datasetów"
+msgstr "Brak aplikacji"
 
 msgid "LC_POWIADOMIENIA_POWIADOMENIA_MODAL_KEYWORDS"
-msgstr "Słowa kluczowe"
+msgstr "Otrzymuj powiadomienia zawierające następujące słowa kluczowe:"
