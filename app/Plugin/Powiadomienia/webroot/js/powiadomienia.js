@@ -116,53 +116,36 @@
         });
     }
 
-    if ((addNewPhrase = $('#addPhraseModal')).length > 0) {
-        var addNewPhraseSubmit = function () {
-            var btn = addNewPhrase.find('.addNewPhrase .btn'),
-                input = addNewPhrase.find('.addNewPhrase input');
+    if ((addNewPhrase = $('#powiadomienia').find('.addphrase')).length > 0) {
+        addNewPhrase.click(function (e) {
+            var modalBottom = $('<div></div>');
 
-            if (input.val().length >= 2) {
+            e.preventDefault();
+
+            modalBottom.addClass('modal-footer').append(
+                $('<button></button>').addClass('btn save btn-primary pull-left').attr({'type': 'button'}).text('Zapisz')
+            );
+
+            modalBottom.find('.btn.save').click(function () {
+                if ($(this).hasClass('disabled')) return;
+
                 $.ajax({
-                    url: "/powiadomienia/phrases/add.json",
-                    data: {
-                        add: input.val()
-                    },
-                    type: "POST",
-                    dataType: "JSON",
+                    type: 'GET',
+                    url: '/?' + modalBottom.find('form').serialize() + '&action=save',
+                    dataType: 'JSON',
                     beforeSend: function () {
-                        btn.addClass('loading');
-                        addNewPhrase.find('.error').addClass('hide');
+                        modalBottom.find('.btn').addClass('disabled');
+                        modalBottom.find('.btn.save').addClass('loading');
                     },
-                    success: function (res) {
-                        if (res == true) {
-                            $('#addPhraseModal').modal('hide');
-                            // TODO: dorobić odświerzanie samej warstwy z frazami, a nie przełodowanie całej strony
-                            location.reload();
-                        } else {
-                            addNewPhrase.find('.error').removeClass('hide').text(_mPHeart.translation.LC_POWIADOMIENIA_JS_AJAX_ERROR);
-                        }
-                    },
-                    complete: function () {
-                        btn.removeClass('loading')
+                    complete: function () { /*TODO: zamienic na success gdy beda juz AJAX REQUEST gotowe*/
+                        powiadomieniaModal.modal.modal('toggle');
                     }
-                });
-            } else {
-                addNewPhrase.find('.error').removeClass('hide').text(_mPHeart.translation.LC_POWIADOMIENIA_JS_PHRASE_AT_LEASE_2_CHARS);
-            }
-        };
-
-        addNewPhrase.find('.addNewPhrase .btn').click(function () {
-            if (!$(this).hasClass('loading')) {
-                addNewPhraseSubmit();
-            }
-        });
-        $('#addPhraseModal').on('shown.bs.modal', function () {
-            $('.addNewPhrase input').val('').focus().keyup(function (e) {
-                if (e.keyCode == '13') {
-                    addNewPhraseSubmit();
-                }
+                })
             });
-        })
+            powiadomieniaModal.init({
+                footer: modalBottom
+            })
+        });
     }
 
     if ((phraseContent = $('#powiadomienia').find('.frazy')).length > 0) {
@@ -172,7 +155,7 @@
                 modalBottom = $('<div></div>');
 
             e.preventDefault();
-			
+
             modalBottom.addClass('modal-footer').append(
                     $('<button></button>').addClass('btn delete btn-danger pull-left').hide().attr({'type': 'button'}).text('Usuń')
                 ).append(
@@ -180,7 +163,7 @@
                 ).append(
                     $('<button></button>').addClass('btn save btn-primary pull-left').attr({'type': 'button'}).text('Zapisz')
                 );
-                
+
 
             /*DELETE*/
             modalBottom.find('.btn.delete').click(function () {

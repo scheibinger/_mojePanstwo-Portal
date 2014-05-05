@@ -1,29 +1,6 @@
 <div class="keywords">
     <label><?php echo __d('powiadomienia', "LC_POWIADOMIENIA_GRUPY_USER") ?>:</label>
-    <!--<button class="btn btn-success btn-sm addphrase pull-right" data-toggle="modal" data-target="#addPhraseModal">+</button>-->
-    <div class="modal fade" id="addPhraseModal" role="dialog"
-         aria-labelledby="<?php echo __d('powiadomienia', 'LC_POWIADOMIENIA_FRAZY_DODAJ_FRAZE') ?>" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title"
-                        id="myModalLabel"><?php echo __d('powiadomienia', 'LC_POWIADOMIENIA_FRAZY_DODAJ_FRAZE') ?></h4>
-                </div>
-                <div class="modal-body">
-                    <div class="input-group addNewPhrase">
-                        <input type="text" class="form-control" value=""
-                               placeholder="<?php echo __d('powiadomienia', 'LC_POWIADOMIENIA_FRAZY_DODAJ_FRAZE_PLACEHOLDER') ?>">
-                        <span class="input-group-btn">
-                            <button class="btn btn-success" type="submit">+</button>
-                        </span>
-                    </div>
-                    <div class="error alert alert-warning hide"></div>
-                </div>
-                <?php /* <div class="modal-footer"></div> */ ?>
-            </div>
-        </div>
-    </div>
+    <button class="btn btn-success btn-sm addphrase pull-right">+</button>
     <ul>
         <?php if ($groups) {
             foreach ($groups as $index => $group) {
