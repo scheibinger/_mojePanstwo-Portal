@@ -12,23 +12,7 @@
 	
 	<div class="col-lg-3 objectSide">
 	        
-    	<? /* 
-	        <div class="block">
-	            <?php echo $this->Dataobject->hlTableForObject($object, array(
-	                'krs', 'nip', 'regon', 
-	                'wartosc_czesc_kapitalu_wplaconego', 'wartosc_kapital_docelowy', 'wartosc_kapital_zakladowy', 'wartosc_nominalna_akcji', 'wartosc_nominalna_podwyzszenia_kapitalu', 
-	                
-	                'data_rejestracji', 'data_dokonania_wpisu',
-	                
-	                'email', 'www',
-	                
-	                
-	            ), array(
-	                'col_width' => 3,
-	                'display' => 'firstRow',
-	            )); ?>
-	        </div>
-	    */ ?>
+    	
 	        
         <div class="objectSideInner">
             <ul class="dataHighlights side">
@@ -59,6 +43,40 @@
                 
                 
                 
+                <? if( $object->getData('wartosc_kapital_zakladowy') ) {?>
+                <li class="dataHighlight">
+                    <p class="_label">Kapitał zakładowy</p>
+
+                    <p class="_value"><?= _currency($object->getData('wartosc_kapital_zakladowy')); ?></p>
+                </li>
+                <? } ?>
+                
+                <? if( $object->getData('wartosc_czesc_kapitalu_wplaconego') ) {?>
+                <li class="dataHighlight topborder">
+                    <p class="_label">Część kapitału wpłaconego</p>
+
+                    <p class="_value"><?= _currency($object->getData('wartosc_czesc_kapitalu_wplaconego')); ?></p>
+                </li>
+                <? } ?>
+                
+                <? if( $object->getData('wartosc_kapital_docelowy') ) {?>
+                <li class="dataHighlight">
+                    <p class="_label">Kapitał docelowy</p>
+
+                    <p class="_value"><?= _currency($object->getData('wartosc_kapital_docelowy')); ?></p>
+                </li>
+                <? } ?>                
+                                
+                <? if( $object->getData('wartosc_nominalna_podwyzszenia_kapitalu') ) {?>
+                <li class="dataHighlight">
+                    <p class="_label">Wartość nominalna podwyższenia kapitału</p>
+
+                    <p class="_value"><?= $object->getData('wartosc_nominalna_podwyzszenia_kapitalu'); ?></p>
+                </li>
+                <? } ?>
+                                
+                
+                
                 <? if( $object->getData('data_rejestracji') ) {?>
                 <li class="dataHighlight inl topborder">
                     <p class="_label">Data rejestracji</p>
@@ -75,6 +93,30 @@
                 </li>
                 <? } ?>               
                 
+               
+                <? if( $object->getData('www') ) {?>
+                <li class="dataHighlight inl topborder">
+                    <p class="_label">Stron WWW</p>
+
+                    <p class="_value"><?= $object->getData('www'); ?></p>
+                </li>
+                <? } ?>
+                
+                <? if( $object->getData('email') ) {?>
+                <li class="dataHighlight inl">
+                    <p class="_label">Adres email</p>
+
+                    <p class="_value"><?= $object->getData('email'); ?></p>
+                </li>
+                <? } ?>
+            </ul>
+            
+            <p class="text-center showHideSide">
+                <a class="a-more">Więcej &darr;</a>
+                <a class="a-less hide">Mniej &uarr;</a>
+            </p>
+            
+            <ul class="dataHighlights side" style="display: none;">
                 <? if( $object->getData('forma_prawna_str') ) {?>
                 <li class="dataHighlight inl topborder">
                     <p class="_label">Forma prawna</p>
@@ -155,7 +197,8 @@
 				
 			<? if ($object->getData('cel_dzialania')) { ?>
 		        <div class="dzialanie block">
-		            <h2>Cel działania</h2>
+		            
+		            <div class="block-header"><h2 class="label">Cel działania</h2></div>
 		
 		            <div class="content normalizeText textBlock">
 		                <?= $object->getData('cel_dzialania') ?>
@@ -165,16 +208,70 @@
 				
 	        <? if ($object->getData('sposob_reprezentacji')) { ?>
 	            <div class="reprezentacja block">
-	                <h2>Sposób reprezentacji</h2>
+	                <div class="block-header"><h2 class="label">Sposób reprezentacji</h2></div>
 	
 	                <div class="content normalizeText textBlock">
 	                    <?= $object->getData('sposob_reprezentacji') ?>
 	                </div>
 	            </div>
 	        <? } ?>				
-		
+				
+				<div class="organy block row">
+				    <? $organy_count = count($organy);
+				    if ($organy_count) {
+				    if ($organy_count < 5)
+				        $column_width = 12 / $organy_count;
+				    else
+				        $column_width = 3;
+				    ?>
+				    <? foreach ($organy as $organ) { ?>
+				    <div class="col-lg-<?= $column_width ?>">
+				        <div class="block small">
+				            <div class="block-header"><h2 class="label" id="<?= $organ['idTag'] ?>" class="normalizeText"><?= $organ['title'] ?></h2></div>
+				            <? /* if (isset($organ['label']) && $organ['label']) { ?>
+				                <p class="label label-primary"><?= $organ['label'] ?></p>
+				            <? } */
+				            ?>
+				
+				            <? if ($organ['content']) { ?>
+				            <div class="list-group less-borders">
+				                <? foreach ($organ['content'] as $osoba) { ?>
+				                <? if (@$osoba['osoba_id']) { ?>
+				                <a class="list-group-item" href="/dane/krs_osoby/<?= $osoba['osoba_id'] ?>">
+				                    <? } else { ?>
+				                    <div class="list-group-item">
+				                        <? } ?>
+				
+				                        <h4 class="list-group-item-heading">
+				                            <?= $osoba['nazwa'] ?><? if (isset($osoba['wiek']) && $osoba['wiek']) { ?>
+				                                <span class="wiek">,
+				                                    <?= pl_dopelniacz($osoba['wiek'], 'rok', 'lata', 'lat') ?>
+				                                                </span>
+				                            <? } ?>
+				                        </h4>
+				
+				                        <? if (isset($osoba['funkcja']) && $osoba['funkcja']) { ?>
+				                            <p class="list-group-item-text normalizeText">
+				                                <?= $osoba['funkcja'] ?>
+				                            </p>
+				                        <? } ?>
+				
+				                        <? if (@$osoba['osoba_id']) { ?>
+				                </a>
+				                <? } else { ?>
+				            </div>
+				        <? } ?>
+				        <? } ?>
+				        </div>
+				        <? } ?>
+				    </div>
+				</div>
+				<? } ?>
+				<? } ?>
+				</div>
+				
 			    <div class="graph block">
-			        <h2>Powiązania</h2>
+	                <div class="block-header"><h2 class="label">Powiązania</h2></div>
 			
 			        <div id="connectionGraph" class="col-xs-12" data-id="<?php echo $object->getId() ?>">
 			            <script>var connectionGraphObject = <?php echo json_encode($object) ?>;</script>
@@ -185,7 +282,7 @@
 		
 		    <? if ($dzialalnosci) { ?>
 		        <div class="dzialalnosci block">
-		            <h2 id="<?= $dzialalnosci['idTag'] ?>"><?= $dzialalnosci['title'] ?></h2>
+	                <div class="block-header"><h2 id="<?= $dzialalnosci['idTag'] ?>" class="label"><?= $dzialalnosci['title'] ?></h2></div>
 		
 		            <div class="content normalizeText">
 		                <div class="list-group less-borders">
