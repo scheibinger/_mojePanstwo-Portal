@@ -20,7 +20,12 @@ jQuery(document).ready(function () {
             type: 'column'
         },
         xAxis: {
-            categories: dataMonth
+            categories: dataMonth,
+            labels: {
+                rotation: 270,
+                x: 4,
+                y: 16
+            }
         },
         yAxis: {
             min: dataFollowersMin,
