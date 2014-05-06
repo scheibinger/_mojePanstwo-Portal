@@ -1,57 +1,54 @@
 jQuery(document).ready(function () {
     var $followers = $('.followers'),
         dataJSON = $followers.data('json'),
-        dataMonth = [],
-        dataFollowers = [],
+        dataArray = [],
         dataFollowersMin = Number(dataJSON[0].count),
         $objectSideInner = $('.objectSideInner'),
         $showHideSide = $('.showHideSide');
 
     $.each(dataJSON, function (index, data) {
-        dataMonth.push(data.date_str);
-        dataFollowers.push(Number(data.count));
+        var d = data.date.split('-');
+        dataArray.push([Date.UTC(Number(d[0]), Number(d[1]) - 1, Number(d[2])), Number(data.count)]);
         if (dataFollowersMin > Number(data.count))
             dataFollowersMin = Number(data.count)
     });
 
     $followers.highcharts({
         chart: {
-            type: 'line',
+            type: 'spline',
             height: 250,
             backgroundColor:'rgba(255, 255, 255, 0)'
-        }, 
-        legend: {
-        	enabled: false
-        },
-        xAxis: {
-            categories: dataMonth,
-            labels: {
-                rotation: 270,
-                x: 4,
-                y: 16
-            },
-            tickmarkPlacement: 'on',
-        },
-        yAxis: {
-            min: dataFollowersMin,
-            title: false
         },
         title: {
             text: ''
         },
-        plotOptions: {
-            column: {
-                pointPadding: 0.2,
-                borderWidth: 0
+        legend: {
+        	enabled: false
+        },
+        xAxis: {
+            type: 'datetime',
+            dateTimeLabelFormats: { // don't display the dummy year
+                month: '%e. %b',
+                year: '%b'
+            },
+            title: false,
+            labels: {
+                rotation: 270,
+                x: 2,
+                y: 25
             }
+        },
+        yAxis: {
+            min: dataFollowersMin,
+            title: false
         },
         credits: {
 	    	enabled: false    
         },
         series: [
             {
-                name: 'Obserwujący',
-                data: dataFollowers
+                name: 'Obserwujących',
+                data: dataArray
             }
         ]
     });
