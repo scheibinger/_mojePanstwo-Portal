@@ -5,38 +5,7 @@
 <?= $this->Element('dataobject/pageBegin'); ?>
 
     <div class="row">
-        <div class="col-lg-9 objectMain">
-
-            <div class="object mpanel">
-				
-				<div class="block-group">
-				
-				<?
-					foreach( $object->getLayer('details') as $key => $value ) { if( $value ) {
-				?>
-				
-				
-				
-				
-                <div class="block">
-                    <div class="block-header">
-	                    <h2 class="pull-left label"><?php echo __d('dane', __('LC_DANE_VIEW_ZAMOWIENIAPUBLICZNE_' . $key)); ?></h2>
-                    </div>
-
-                    <div class="content">
-
-                        <div class="textBlock"><?php echo( nl2br($value) ); ?></div>
-
-                    </div>
-                </div>
-                
-                <? } } ?>
-                
-				</div>
-
-            </div>
-
-        </div>
+        
         <div class="col-lg-3 objectSide">
 			<div class="objectSideInner">
 			
@@ -52,7 +21,7 @@
                 	</li>
                 	<li class="dataHighlight">
                 		<p class="_label">Zamawiający</p>
-                		<p class="_value"><a href="/dane/zamowienia_publiczne_zamawiajacy/<?= $object->getData('zamawiajacy_id'); ?>"><?= $object->getData('zamawiajacy_nazwa'); ?></a></p>
+                		<p class="_value"><a href="/dane/zamowienia_publiczne_zamawiajacy/<?= $object->getData('zamawiajacy_id'); ?>"><?= $object->getData('zamawiajacy_nazwa'); ?><br/><?= $object->getData('zamawiajacy_miejscowosc'); ?></a></p>
                 	</li>
                 	<?
                 	
@@ -109,15 +78,15 @@
 	                		<p class="_value"><?= _currency( $czesc['cena'] ); ?></p>
 	                	</li>
 	                	<li class="dataHighlight inl" style="display: none;">
-	                		<p class="_label">Cena minimalna</p>
+	                		<p class="_label">Cena najtańszej oferty</p>
 	                		<p class="_value"><?= _currency( $czesc['cena_min'] ); ?></p>
 	                	</li>
 	                	<li class="dataHighlight inl" style="display: none;">
-	                		<p class="_label">Cena maksymalna</p>
+	                		<p class="_label">Cena najdroższej oferty</p>
 	                		<p class="_value"><?= _currency( $czesc['cena_max'] ); ?></p>
 	                	</li>
 	                	<li class="dataHighlight inl">
-	                		<p class="_label">Liczba ofert</p>
+	                		<p class="_label">Liczba otrzymanych ofert</p>
 	                		<p class="_value"><?= $czesc['liczba_ofert']; ?></p>
 	                	</li>	
 	                	<li class="dataHighlight inl" style="display: none;">
@@ -127,7 +96,7 @@
                 	
                 	
                 	<? } } ?>
-                	<li class="dataHighlight topborder">
+                	<li class="dataHighlight topborder" style="display: none;">
                 		<p class="_label">Źródło</p>
                 		<p class="_value" id="sources"></p>
                 	</li>	
@@ -153,6 +122,40 @@
             
 			</div>
         </div>
+        
+        <div class="col-lg-9 objectMain">
+
+            <div class="object mpanel">
+				
+				<div class="block-group">
+				
+				<?
+					foreach( $object->getLayer('details') as $key => $value ) { if( $value ) {
+				?>
+				
+				
+				
+				
+                <div class="block">
+                    <div class="block-header">
+	                    <h2 class="pull-left label"><?php echo __d('dane', __('LC_DANE_VIEW_ZAMOWIENIAPUBLICZNE_' . $key)); ?></h2>
+                    </div>
+
+                    <div class="content">
+
+                        <div class="textBlock"><?php echo( nl2br($value) ); ?></div>
+
+                    </div>
+                </div>
+                
+                <? } } ?>
+                
+				</div>
+
+            </div>
+
+        </div>
+        
     </div>
 
 <? /*
