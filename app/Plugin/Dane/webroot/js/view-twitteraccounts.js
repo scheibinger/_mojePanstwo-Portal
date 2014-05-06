@@ -8,7 +8,7 @@ jQuery(document).ready(function () {
         $showHideSide = $('.showHideSide');
 
     $.each(dataJSON, function (index, data) {
-        dataMonth.push(data.date);
+        dataMonth.push(data.date_str);
         dataFollowers.push(Number(data.count));
         if (dataFollowersMin > Number(data.count))
             dataFollowersMin = Number(data.count)
@@ -16,11 +16,13 @@ jQuery(document).ready(function () {
 
     $followers.highcharts({
         chart: {
-            type: 'column'
-        }, /*
-         legend: {
-         enabled: false
-         },*/
+            type: 'line',
+            height: 250,
+            backgroundColor:'rgba(255, 255, 255, 0)'
+        }, 
+        legend: {
+        	enabled: false
+        },
         xAxis: {
             categories: dataMonth,
             labels: {
@@ -28,13 +30,11 @@ jQuery(document).ready(function () {
                 x: 4,
                 y: 16
             },
-            tickmarkPlacement: 'on'
+            tickmarkPlacement: 'on',
         },
         yAxis: {
             min: dataFollowersMin,
-            title: {
-                text: 'Liczba obserwujących osób'
-            }
+            title: false
         },
         title: {
             text: ''
@@ -44,6 +44,9 @@ jQuery(document).ready(function () {
                 pointPadding: 0.2,
                 borderWidth: 0
             }
+        },
+        credits: {
+	    	enabled: false    
         },
         series: [
             {

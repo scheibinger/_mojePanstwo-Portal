@@ -7,7 +7,8 @@ $this->Combinator->add_libs('js', '../plugins/highcharts/locals');
 $this->Combinator->add_libs('js', 'Dane.view-twitteraccounts');
 
 echo $this->Element('dataobject/pageBegin');
-?>
+?>	
+
     <div class="row">
         <div class="col-lg-9 objectMain">
             <div class="object mpanel">
