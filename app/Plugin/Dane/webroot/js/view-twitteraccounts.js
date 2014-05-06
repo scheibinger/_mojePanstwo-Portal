@@ -12,20 +12,21 @@ jQuery(document).ready(function () {
             dataFollowersMin = Number(data.count)
     });
 
-    console.log(dataMonth);
-    console.log(dataFollowers);
-
     $followers.highcharts({
         chart: {
             type: 'column'
-        },
+        }, /*
+         legend: {
+         enabled: false
+         },*/
         xAxis: {
             categories: dataMonth,
             labels: {
                 rotation: 270,
                 x: 4,
                 y: 16
-            }
+            },
+            tickmarkPlacement: 'on'
         },
         yAxis: {
             min: dataFollowersMin,
