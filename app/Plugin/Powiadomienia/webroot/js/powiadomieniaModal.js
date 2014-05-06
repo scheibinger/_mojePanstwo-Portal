@@ -97,18 +97,32 @@ var powiadomieniaModal;
         },
         additionalInfo: function () {
             if (powiadomieniaModal.options.ajax.additionalUrl != null) {
-                $.ajax({
-                    type: 'GET',
-                    url: powiadomieniaModal.options.ajax.additionalUrl,
-                    dataType: 'JSON',
-                    success: function (results) {
-                        var data = results.group;
-                        powiadomieniaModal.additionalInfoLoad(data);
+                if (powiadomieniaModal.options.additionalInfoList) {
+                    var appList = powiadomieniaModal.options.additionalInfoList;
+                    if (appList.status == undefined || appList.status == 'pending') {
+                        window.setTimeout(function () {
+                            powiadomieniaModal.additionalInfo();
+                        }, 400);
+                    } else if (appList.status == 'success' || appList.status == 'error') {
+                        powiadomieniaModal.additionalInfoAjax();
                     }
-                })
+                } else {
+                    powiadomieniaModal.additionalInfoAjax();
+                }
             } else {
                 powiadomieniaModal.additionalInfoLoad({});
             }
+        },
+        additionalInfoAjax: function () {
+            $.ajax({
+                type: 'GET',
+                url: powiadomieniaModal.options.ajax.additionalUrl,
+                dataType: 'JSON',
+                success: function (results) {
+                    var data = results.group;
+                    powiadomieniaModal.additionalInfoLoad(data);
+                }
+            })
         },
         additionalInfoLoad: function (data) {
             window.setTimeout(function () {
@@ -149,21 +163,78 @@ var powiadomieniaModal;
                         )
                 )
 
-                if (data.apps && data.apps.length > 0) {
-                    $.each(data.apps, function (index, value) {
-                        powiadomieniaModal.options.modal.find('.modal-body .datasets').append(
-                            $('<div></div>').addClass('switchCheckbox').append(
-                                    $('<input />').attr({'type': 'checkbox', 'name': value.name, 'checked': 'checked'}).data({'size': 'small'}).val(value.id)
-                                ).append(
-                                    $('<label></label>').text(value.name)
+                if (powiadomieniaModal.options.additionalInfoList) {
+                    var appList = powiadomieniaModal.options.additionalInfoList;
+                    if (appList.status == 'success') {
+                        if (appList.list.length > 0) {
+                            $.each(appList.list, function (index, value) {
+                                powiadomieniaModal.options.modal.find('.modal-body .datasets').append(
+                                    $('<div></div>').addClass('switchCheckbox').append(
+                                            $('<input />').attr({'type': 'checkbox', 'name': value.name}).data({'size': 'small'}).val(value.id)
+                                        ).append(
+                                            $('<label></label>').text(value.name)
+                                        )
                                 )
-                        )
-                        powiadomieniaModal.options.modal.find('.modal-body .datasets .switchCheckbox:last input').bootstrapSwitch('disabled', true, true);
-                    });
+
+                            });
+                            if (data.apps && data.apps.length > 0) {
+                                $.each(data.apps, function (index, value) {
+                                    var checkedData = powiadomieniaModal.options.modal.find('.modal-body .datasets input[name="' + value.name + '"]');
+                                    checkedData.attr('checked', 'checked');
+                                })
+                            }
+                            powiadomieniaModal.options.modal.find('.modal-body .datasets .switchCheckbox input').bootstrapSwitch('disabled', true, true);
+                        } else if (data.apps && data.apps.length > 0) {
+                            $.each(data.apps, function (index, value) {
+                                powiadomieniaModal.options.modal.find('.modal-body .datasets').append(
+                                    $('<div></div>').addClass('switchCheckbox').append(
+                                            $('<input />').attr({'type': 'checkbox', 'name': value.name, 'checked': 'checked'}).data({'size': 'small'}).val(value.id)
+                                        ).append(
+                                            $('<label></label>').text(value.name)
+                                        )
+                                )
+                                powiadomieniaModal.options.modal.find('.modal-body .datasets .switchCheckbox:last input').bootstrapSwitch('disabled', true, true);
+                            });
+                        } else {
+                            powiadomieniaModal.options.modal.find('.modal-body .datasets').append(
+                                $('<span></span>').text(_mPHeart.translation.LC_POWIADOMIENIA_POWIADOMENIA_MODAL_NO_DATASETS)
+                            )
+                        }
+                    } else if (appList.status == 'error') {
+                        if (data.apps && data.apps.length > 0) {
+                            $.each(data.apps, function (index, value) {
+                                powiadomieniaModal.options.modal.find('.modal-body .datasets').append(
+                                    $('<div></div>').addClass('switchCheckbox').append(
+                                            $('<input />').attr({'type': 'checkbox', 'name': value.name, 'checked': 'checked'}).data({'size': 'small'}).val(value.id)
+                                        ).append(
+                                            $('<label></label>').text(value.name)
+                                        )
+                                )
+                                powiadomieniaModal.options.modal.find('.modal-body .datasets .switchCheckbox:last input').bootstrapSwitch('disabled', true, true);
+                            });
+                        } else {
+                            powiadomieniaModal.options.modal.find('.modal-body .datasets').append(
+                                $('<span></span>').text(_mPHeart.translation.LC_POWIADOMIENIA_POWIADOMENIA_MODAL_NO_DATASETS)
+                            )
+                        }
+                    }
                 } else {
-                    powiadomieniaModal.options.modal.find('.modal-body .datasets').append(
-                        $('<span></span>').text(_mPHeart.translation.LC_POWIADOMIENIA_POWIADOMENIA_MODAL_NO_DATASETS)
-                    )
+                    if (data.apps && data.apps.length > 0) {
+                        $.each(data.apps, function (index, value) {
+                            powiadomieniaModal.options.modal.find('.modal-body .datasets').append(
+                                $('<div></div>').addClass('switchCheckbox').append(
+                                        $('<input />').attr({'type': 'checkbox', 'name': value.name, 'checked': 'checked'}).data({'size': 'small'}).val(value.id)
+                                    ).append(
+                                        $('<label></label>').text(value.name)
+                                    )
+                            )
+                            powiadomieniaModal.options.modal.find('.modal-body .datasets .switchCheckbox:last input').bootstrapSwitch('disabled', true, true);
+                        });
+                    } else {
+                        powiadomieniaModal.options.modal.find('.modal-body .datasets').append(
+                            $('<span></span>').text(_mPHeart.translation.LC_POWIADOMIENIA_POWIADOMENIA_MODAL_NO_DATASETS)
+                        )
+                    }
                 }
             }, 200);
         }

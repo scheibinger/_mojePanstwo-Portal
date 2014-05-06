@@ -8,7 +8,8 @@
         addNewPhrase,
         phraseContent,
         alertsButtons,
-        tryNumbers = 4;
+        tryNumbers = 4,
+        appList = {};
 
     function _changeMarkStatus(newNotify, mode) {
         $.ajax({
@@ -116,6 +117,22 @@
         });
     }
 
+    $.ajax({
+        url: "/powiadomienia/apps.json",
+        type: "GET",
+        dataType: "JSON",
+        beforeSend: function () {
+            appList.status = 'pending';
+        },
+        success: function (data) {
+            appList.list = data;
+            appList.status = 'success';
+        },
+        error: function () {
+            appList.status = 'error';
+        }
+    });
+
     if ((addNewPhrase = $('#powiadomienia').find('.addphrase')).length > 0) {
         addNewPhrase.click(function (e) {
             var modalBottom = $('<div></div>');
@@ -143,7 +160,8 @@
                 })
             });
             powiadomieniaModal.init({
-                footer: modalBottom
+                footer: modalBottom,
+                additionalInfoList: appList
             })
         });
     }
@@ -233,6 +251,7 @@
                 hiddenInput: {
                     'data[Dataobject][ids]': parent.data('id')
                 },
+                additionalInfoList: appList,
                 ajax: {
                     saveUrl: '/',
                     saveParm: {id: parent.data('id')},
