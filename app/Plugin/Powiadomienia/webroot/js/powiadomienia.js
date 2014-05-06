@@ -148,7 +148,9 @@
 
                 $.ajax({
                     type: 'GET',
-                    url: '/?' + modalBottom.find('form').serialize() + '&action=save',
+                    url: '/?' + $('#frazyModalBox').find('form').serialize() + '&action=save',
+                    //url: '/',
+                    //data: $('#frazyModalBox').find('form').serializeArray(),
                     dataType: 'JSON',
                     beforeSend: function () {
                         modalBottom.find('.btn').addClass('disabled');
@@ -233,7 +235,9 @@
 
                 $.ajax({
                     type: 'GET',
-                    url: '/?' + modalBottom.find('form').serialize() + '&action=save',
+                    url: '/?' + $('#frazyModalBox').find('form').serialize() + '&action=save',
+                    //url: '/',
+                    //data: $('#frazyModalBox').find('form').serializeArray(),
                     dataType: 'JSON',
                     beforeSend: function () {
                         modalBottom.find('.btn').addClass('disabled');
