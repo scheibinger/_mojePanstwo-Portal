@@ -56,8 +56,14 @@ $this->Dataobject->setObject($object);
                                 'item' => $item,
                                 'object' => $object
                             ));
-                        else
+                        else {
                             echo $this->Dataobject->highlights($hlFields);
+                            if( $object->getDescription() ){?>
+	                        <div class="description">
+	                        	<?= $object->getDescription() ?>
+	                        </div>
+	                        <? }
+                        }
                         ?>
                     </div>
 
@@ -83,8 +89,14 @@ $this->Dataobject->setObject($object);
                                 'item' => $item,
                                 'object' => $object
                             ));
-                        else
+                        else {
                             echo $this->Dataobject->highlights($hlFields);
+                            if( $object->getDescription() ){?>
+	                        <div class="description">
+	                        	<?= $object->getDescription() ?>
+	                        </div>
+	                        <? }
+                        }
                         ?>
 
                     </div>

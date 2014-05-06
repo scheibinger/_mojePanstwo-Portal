@@ -168,6 +168,11 @@ function _currency($value)
 	return '<span class="_currency">' . number_format($value, $decimals = 2, $dec_point = '<span class="_subcurrency">,', $thousands_sep = ' ') . ' PLN</span></span>';
 }
 
+function _number($value)
+{
+	return '<span class="_number">' . number_format($value, $decimals = 0, $dec_point = '', $thousands_sep = ' ') . '</span>';
+}
+
 function number_format_h($n, $decimals = 0, $dec_point = '.', $thousands_sep = ' ')
 {
     // first strip any formatting;
