@@ -148,9 +148,9 @@
 
                 $.ajax({
                     type: 'GET',
-                    url: '/?' + $('#frazyModalBox').find('form').serialize() + '&action=save',
+                    url: '/?' + powiadomieniaModal.options.modal.find('form').serialize() + '&action=save',
                     //url: '/',
-                    //data: $('#frazyModalBox').find('form').serializeArray(),
+                    //data: powiadomieniaModal.options.modal.find('form').serializeArray(),
                     dataType: 'JSON',
                     beforeSend: function () {
                         modalBottom.find('.btn').addClass('disabled');
@@ -224,7 +224,7 @@
                         modalBottom.find('.btn.duplicate').addClass('loading');
                     },
                     complete: function () { /*TODO: zamienic na success gdy beda juz AJAX REQUEST gotowe*/
-                        powiadomieniaModal.modal.modal('toggle');
+                        powiadomieniaModal.options.modal.modal('toggle');
                     }
                 })
             });
@@ -235,17 +235,17 @@
 
                 $.ajax({
                     type: 'GET',
-                    url: '/?' + $('#frazyModalBox').find('form').serialize() + '&action=save',
+                    url: '/?' + powiadomieniaModal.options.modal.find('form').serialize() + '&action=save',
                     //url: '/',
-                    //data: $('#frazyModalBox').find('form').serializeArray(),
+                    //data: powiadomieniaModal.options.modal.find('form').serializeArray(),
                     dataType: 'JSON',
                     beforeSend: function () {
                         modalBottom.find('.btn').addClass('disabled');
                         modalBottom.find('.btn.save').addClass('loading');
                     },
                     complete: function () { /*TODO: zamienic na success gdy beda juz AJAX REQUEST gotowe*/
-                        powiadomieniaModal.modal.modal('toggle');
-                        parent.find('label a.wrap').text($.trim(powiadomieniaModal.modal.find('.modal-header textarea.modal-title').val()))
+                        powiadomieniaModal.options.modal.modal('toggle');
+                        parent.find('label a.wrap').text($.trim(powiadomieniaModal.options.modal.find('.modal-header textarea.modal-title').val()))
                     }
                 })
             });
