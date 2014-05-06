@@ -72,10 +72,13 @@ echo $this->Element('dataobject/pageBegin');
                     </li>
                 </ul>
 
-                <p class="text-center"><a class="a-more">Więcej &#8595;</a></p>
+                <p class="text-center showHideSide">
+                    <a class="a-more">Więcej &darr;</a>
+                    <a class="a-less hide">Mniej &uarr;</a>
+                </p>
 
-                <ul class="dataHighlights side" style="display: none;">
-                    <li class="dataHighlight inl topborder">
+                <ul class="dataHighlights side hide">
+                <li class="dataHighlight inl topborder">
                         <p class="_label">Liczba tweetów w 2013 r.</p>
 
                         <p class="_value"><?= _number($object->getData('liczba_tweetow_wlasnych_2013')); ?></p>

@@ -3,7 +3,9 @@ jQuery(document).ready(function () {
         dataJSON = $followers.data('json'),
         dataMonth = [],
         dataFollowers = [],
-        dataFollowersMin = Number(dataJSON[0].count);
+        dataFollowersMin = Number(dataJSON[0].count),
+        $objectSideInner = $('.objectSideInner'),
+        $showHideSide = $('.showHideSide');
 
     $.each(dataJSON, function (index, data) {
         dataMonth.push(data.date);
@@ -50,4 +52,17 @@ jQuery(document).ready(function () {
             }
         ]
     });
+
+    $showHideSide.find('> a').click(function () {
+        var that = $(this);
+        $showHideSide.find('>a').removeClass('hide');
+        that.addClass('hide');
+        if (that.hasClass('a-more')) {
+            $objectSideInner.find('.dataHighlights.hide').removeClass('hide').hide().addClass('unhide').slideDown();
+        } else if (that.hasClass('a-less')) {
+            $objectSideInner.find('.dataHighlights.unhide').slideUp(function () {
+                $objectSideInner.find('.dataHighlights.unhide').removeClass('uhhide').addClass('hide');
+            });
+        }
+    })
 });
