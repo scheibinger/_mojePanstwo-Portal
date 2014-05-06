@@ -16,7 +16,7 @@ echo $this->Element('dataobject/pageBegin');
                         <div class="block-header">
                             <h2 class="pull-left label">Ostatnie twitty</h2>
                             <a class="btn btn-default btn-sm pull-right"
-                               href="/dane/twitter_Accounts/<?= $object->getId() ?>/twitts">Zobacz wszystkie</a>
+                               href="/dane/twitter_accounts/<?= $object->getId() ?>/twitts">Zobacz wszystkie</a>
                         </div>
                         <div class="content">
                             <div class="dataobjectsSliderRow row">
@@ -25,7 +25,7 @@ echo $this->Element('dataobject/pageBegin');
                                         'perGroup' => 3,
                                         'rowNumber' => 1,
                                         'labelMode' => 'none',
-                                        'file' => '',
+                                        'file' => 'twitter_min',
                                     )) ?>
                                 </div>
                             </div>
@@ -71,7 +71,6 @@ echo $this->Element('dataobject/pageBegin');
                         <p class="_value"><?= _number($object->getData('liczba_odpowiedzi_rts')); ?></p>
                     </li>
                 </ul>
-
 
                 <p class="text-center"><a class="a-more">Więcej &#8595;</a></p>
 
