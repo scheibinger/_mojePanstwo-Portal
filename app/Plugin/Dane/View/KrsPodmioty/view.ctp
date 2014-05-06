@@ -96,7 +96,7 @@
                
                 <? if( $object->getData('www') ) {?>
                 <li class="dataHighlight inl topborder">
-                    <p class="_label">Stron WWW</p>
+                    <p class="_label">Strona WWW</p>
 
                     <p class="_value"><?= $object->getData('www'); ?></p>
                 </li>
