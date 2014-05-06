@@ -73,6 +73,9 @@ echo $this->Element('dataobject/pageBegin');
                     </li>
                 </ul>
 
+                
+                <p class="text-center"><a class="a-more">Więcej &#8595;</a></p>
+                
                 <ul class="dataHighlights side" style="display: none;">
                     <li class="dataHighlight inl topborder">
                         <p class="_label">Liczba tweetów w 2013 r.</p>

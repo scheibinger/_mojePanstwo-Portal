@@ -30,15 +30,17 @@ class TwitterAccountsController extends DataobjectsController
             ),
         ));
         $this->set('twitts', $this->API->getObjects());
-        
-        /*
-        $this->dataobjectsBrowserView(array(
+
+    }
+    
+    public function twitts()
+    {
+	    parent::_prepareView();
+	    $this->dataobjectsBrowserView(array(
             'source' => 'twitterAccounts.relatedTweets:' . $this->object->getId(),
             'dataset' => 'twitter',
             'title' => 'Powiązane tweety',
         ));
-        */
-
     }
 
     public function timeline()
