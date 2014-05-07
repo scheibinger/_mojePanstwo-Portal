@@ -210,11 +210,11 @@
             e.preventDefault();
 
             modalBottom.addClass('modal-footer').append(
-                    $('<button></button>').addClass('btn delete btn-danger pull-left').hide().attr({'type': 'button'}).text('Usuń')
+                    $('<button></button>').addClass('btn delete btn-danger pull-left').hide().attr({'type': 'button'}).text(_mPHeart.translation.LC_POWIADOMIENIA_POWIADOMENIA_MODAL_USUN)
                 ).append(
-                    $('<button></button>').addClass('btn duplicate btn-info pull-left').hide().attr({'type': 'button'}).text('Duplikuj')
+                    $('<button></button>').addClass('btn duplicate btn-info pull-left').hide().attr({'type': 'button'}).text(_mPHeart.translation.LC_POWIADOMIENIA_POWIADOMENIA_MODAL_DUPLIKUJ)
                 ).append(
-                    $('<button></button>').addClass('btn save btn-primary pull-left').attr({'type': 'button'}).text('Zapisz')
+                    $('<button></button>').addClass('btn save btn-primary pull-right').attr({'type': 'button'}).text(_mPHeart.translation.LC_POWIADOMIENIA_POWIADOMENIA_MODAL_ZAPISZ)
                 );
 
 

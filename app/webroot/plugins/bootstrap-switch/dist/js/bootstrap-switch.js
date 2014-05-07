@@ -98,7 +98,7 @@
                 })(this));
                 this.$container = this.$element.wrap(this.$container).parent();
                 this.$wrapper = this.$container.wrap(this.$wrapper).parent();
-                this.$element.before(this.$on).before(this.$label).before(this.$off).trigger('init.bootstrapSwitch');
+                this.$element.before(this.$off).before(this.$label).before(this.$on).trigger('init.bootstrapSwitch');
                 this._elementHandlers();
                 this._handleHandlers();
                 this._labelHandlers();

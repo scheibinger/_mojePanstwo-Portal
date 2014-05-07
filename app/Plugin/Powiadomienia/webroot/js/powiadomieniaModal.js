@@ -26,7 +26,7 @@ var powiadomieniaModal;
                                 $('<div></div>').addClass('modal-header').append(
                                         $('<button></button>').addClass('close').attr({'role': 'close', "data-dismiss": "modal", "aria-hidden": "true"}).html('&times;')
                                     ).append(
-                                        $('<h4></h4>').addClass('modal-title').attr({'id': 'frazyModalBox', 'data-placeholder': _mPHeart.translation.LC_POWIADOMIENIA_POWIADOMENIA_MODAL_TITLE_PLACEHOLDER}).text(powiadomieniaModal.options.title)
+                                        $('<h4></h4>').addClass('modal-title').attr({'id': 'frazyModalTitle', 'data-placeholder': _mPHeart.translation.LC_POWIADOMIENIA_POWIADOMENIA_MODAL_TITLE_PLACEHOLDER}).text(powiadomieniaModal.options.title)
                                     ).append(
                                         $('<div></div>').addClass('edit modal-title hide').append(
                                             $('<textarea></textarea>').addClass('modal-title form-control').attr({'type': 'text', 'rows': 2, 'name': 'title', 'placeholder': _mPHeart.translation.LC_POWIADOMIENIA_POWIADOMENIA_MODAL_TITLE_PLACEHOLDER}).text(powiadomieniaModal.options.title)
