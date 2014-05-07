@@ -68,7 +68,9 @@ jQuery(document).ready(function () {
             menuAutoScroll = true,
             headerHeight = jQuery('header').outerHeight(),
             connectionGraph = jQuery('#connectionGraph'),
-            dataHighlightsOptions = jQuery('.dataHighlightsOptions');
+            dataHighlightsOptions = jQuery('.dataHighlightsOptions'),
+            $showHideSide = $('.showHideSide'),
+            $objectSideInner = $('.objectSideInner');
 
         if (banner.length > 0) {
             banner.find('.bg img').css('width', banner.width() + 'px');
@@ -460,13 +462,53 @@ jQuery(document).ready(function () {
                     dataContent.append(jQuery('<button></button>').addClass('btn btn-xs pull-right').text('x'));
                     dataContent.append(jQuery('<table></table>').addClass('table table-striped'));
 
-                    jQuery.each(node.data, function (label, value) {
-                        var tr = jQuery('<tr></tr>');
+                    var linkEl = jQuery('<a></a>').attr('target', '_self').text(_mPHeart.translation.LC_DANE_VIEW_KRSPODMIOTY_LINK);
 
-                        tr.append(jQuery('<td></td>').text(label));
-                        tr.append(jQuery('<td></td>').text(value));
-                        dataContent.find('table').append(tr);
+                    jQuery.each(node.data, function (label, value) {
+                        if (label == 'mp_id') {
+                            if (node.label == "podmiot") {
+                                linkEl.attr('href', '/dane/podmiot/' + value);
+                            } else if (node.label == "osoba") {
+                                linkEl.attr('href', '/dane/osoba/' + value);
+                            }
+                        } else {
+                            var tr = jQuery('<tr></tr>');
+
+                            if (label == 'data_urodzenia')
+                                label = _mPHeart.translation.LC_DANE_VIEW_KRSPODMIOTY_DATA_URODZENIA;
+                            if (label == 'plec') {
+                                label = _mPHeart.translation.LC_DANE_VIEW_KRSPODMIOTY_PLEC;
+                                if (value == 'K')
+                                    value = _mPHeart.translation.LC_DANE_VIEW_KRSPODMIOTY_KOBIETA;
+                                else if (value == 'M')
+                                    value = _mPHeart.translation.LC_DANE_VIEW_KRSPODMIOTY_MEZCZYZNA;
+                            }
+                            if (label == 'nazwisko')
+                                label = _mPHeart.translation.LC_DANE_VIEW_KRSPODMIOTY_NAZWISKO;
+                            if (label == 'imiona')
+                                label = _mPHeart.translation.LC_DANE_VIEW_KRSPODMIOTY_IMIONA;
+                            if (label == 'krs')
+                                label = _mPHeart.translation.LC_DANE_VIEW_KRSPODMIOTY_KRS;
+                            if (label == 'kapital_zakladowy')
+                                label = _mPHeart.translation.LC_DANE_VIEW_KRSPODMIOTY_KAPITAL_ZAKLADOWY;
+                            if (label == 'miejscowosc')
+                                label = _mPHeart.translation.LC_DANE_VIEW_KRSPODMIOTY_MIEJSCOWOSC;
+                            if (label == 'data_rejestracji')
+                                label = _mPHeart.translation.LC_DANE_VIEW_KRSPODMIOTY_REJESTRACJI;
+                            if (label == 'forma')
+                                label = _mPHeart.translation.LC_DANE_VIEW_KRSPODMIOTY_FORMA_PRAWNA;
+                            if (label == 'nazwa')
+                                label = _mPHeart.translation.LC_DANE_VIEW_KRSPODMIOTY_NAZWA;
+                            tr.append(jQuery('<td></td>').text(label));
+                            tr.append(jQuery('<td></td>').text(value));
+                            dataContent.find('table').append(tr);
+                        }
                     });
+
+                    var link = jQuery('<tr></tr>').append(
+                        jQuery('<td colspan="2"></td>').append(linkEl)
+                    );
+                    dataContent.find('table').append(link);
 
                     connectionGraph.append(dataContent);
 
@@ -480,6 +522,19 @@ jQuery(document).ready(function () {
                 }
             });
         }
+
+        $showHideSide.find('> a').click(function () {
+            var that = $(this);
+            $showHideSide.find('>a').removeClass('hide');
+            that.addClass('hide');
+            if (that.hasClass('a-more')) {
+                $objectSideInner.find('.dataHighlights.hide').removeClass('hide').hide().addClass('unhide').slideDown();
+            } else if (that.hasClass('a-less')) {
+                $objectSideInner.find('.dataHighlights.unhide').slideUp(function () {
+                    $objectSideInner.find('.dataHighlights.unhide').removeClass('uhhide').addClass('hide');
+                });
+            }
+        })
     }
 )
 ;

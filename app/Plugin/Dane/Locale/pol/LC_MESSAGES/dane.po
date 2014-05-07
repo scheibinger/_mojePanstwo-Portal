@@ -457,6 +457,30 @@ msgstr "Sygnatura akt"
 msgid "LC_DANE_VIEW_KRSPODMIOTY_OTWORZ_MAPE"
 msgstr "Otwórz mapę"
 
+msgid "LC_DANE_VIEW_KRSPODMIOTY_DATA_URODZENIA"
+msgstr "Data urodzenia"
+
+msgid "LC_DANE_VIEW_KRSPODMIOTY_PLEC"
+msgstr "Płeć"
+
+msgid "LC_DANE_VIEW_KRSPODMIOTY_KOBIETA"
+msgstr "Kobieta"
+
+msgid "LC_DANE_VIEW_KRSPODMIOTY_MEZCZYZNA"
+msgstr "Mężczyzna"
+
+msgid "LC_DANE_VIEW_KRSPODMIOTY_IMIONA"
+msgstr "Imiona"
+
+msgid "LC_DANE_VIEW_KRSPODMIOTY_NAZWISKO"
+msgstr "Nazwisko"
+
+msgid "LC_DANE_VIEW_KRSPODMIOTY_KAPITAL_ZAKLADOWY"
+msgstr "Kapitał zakładowy"
+
+msgid "LC_DANE_VIEW_KRSPODMIOTY_LINK"
+msgstr "Przejdź do elementu"
+
 msgid "LC_DANE_GMINA_DO_KTOREJ_ZOSTAL_WYBRANY_RADNY"
 msgstr "Gmina, do której rady został wybrany radny"
 
