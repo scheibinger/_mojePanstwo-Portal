@@ -146,18 +146,51 @@
             modalBottom.find('.btn.save').click(function () {
                 if ($(this).hasClass('disabled')) return;
 
+                /*wyłączenie disabled input na czas pobierania danych dla serialize*/
+                powiadomieniaModal.options.modal.find('form input:disabled').removeAttr('disabled');
+
+                var serialize = powiadomieniaModal.options.modal.find('form').serializeArray(),
+                    parm = {
+                        group: {
+                            PowiadomieniaGroup: {
+                                id: null,
+                                title: null
+                            },
+                            phrases: [],
+                            apps: []
+                        }
+                    };
+
+                $.each(serialize, function (index, data) {
+                    if (data.name == "title")
+                        parm.group.PowiadomieniaGroup.title = data.value;
+                    if (data.name == "data[Dataobject][ids]")
+                        parm.group.PowiadomieniaGroup.id = data.value;
+                    if (data.name == "keywords") {
+                        parm.group.phrases = data.value.split(',');
+                    }
+                    if (data.name.indexOf("apps[") === 0) {
+                        var m = data.name.match(/\[(.*?)\]/);
+                        var app = {
+                            id: data.value,
+                            name: m[1]
+                        };
+                        parm.group.apps.push(app);
+                    }
+                });
+
                 $.ajax({
-                    type: 'GET',
-                    url: '/?' + powiadomieniaModal.options.modal.find('form').serialize() + '&action=save',
-                    //url: '/',
-                    //data: powiadomieniaModal.options.modal.find('form').serializeArray(),
-                    dataType: 'JSON',
+                    type: 'PUT',
+                    url: '/powiadomienia/groups/new.json',
+                    data: parm,
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
                     beforeSend: function () {
                         modalBottom.find('.btn').addClass('disabled');
                         modalBottom.find('.btn.save').addClass('loading');
                     },
-                    complete: function () { /*TODO: zamienic na success gdy beda juz AJAX REQUEST gotowe*/
-                        powiadomieniaModal.modal.modal('toggle');
+                    complete: function () {/*TODO: zamienic na success gdy beda juz AJAX REQUEST gotowe*/
+                        powiadomieniaModal.options.modal.modal('toggle');
                     }
                 })
             });
@@ -233,19 +266,52 @@
             modalBottom.find('.btn.save').click(function () {
                 if ($(this).hasClass('disabled')) return;
 
+                /*wyłączenie disabled input na czas pobierania danych dla serialize*/
+                powiadomieniaModal.options.modal.find('form input:disabled').removeAttr('disabled');
+
+                var serialize = powiadomieniaModal.options.modal.find('form').serializeArray(),
+                    parm = {
+                        group: {
+                            PowiadomieniaGroup: {
+                                id: null,
+                                title: null
+                            },
+                            phrases: [],
+                            apps: []
+                        }
+                    };
+
+                $.each(serialize, function (index, data) {
+                    if (data.name == "title")
+                        parm.group.PowiadomieniaGroup.title = data.value;
+                    if (data.name == "data[Dataobject][ids]")
+                        parm.group.PowiadomieniaGroup.id = data.value;
+                    if (data.name == "keywords") {
+                        parm.group.phrases = data.value.split(',');
+                    }
+                    if (data.name.indexOf("apps[") === 0) {
+                        var m = data.name.match(/\[(.*?)\]/);
+                        var app = {
+                            id: data.value,
+                            name: m[1]
+                        };
+                        parm.group.apps.push(app);
+                    }
+                });
+
                 $.ajax({
-                    type: 'GET',
-                    url: '/?' + powiadomieniaModal.options.modal.find('form').serialize() + '&action=save',
-                    //url: '/',
-                    //data: powiadomieniaModal.options.modal.find('form').serializeArray(),
-                    dataType: 'JSON',
+                    type: 'PUT',
+                    url: '/powiadomienia/groups/' + parm.group.PowiadomieniaGroup.id + '.json',
+                    data: parm,
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
                     beforeSend: function () {
                         modalBottom.find('.btn').addClass('disabled');
                         modalBottom.find('.btn.save').addClass('loading');
                     },
-                    complete: function () { /*TODO: zamienic na success gdy beda juz AJAX REQUEST gotowe*/
+                    complete: function () {/*TODO: zamienic na success gdy beda juz AJAX REQUEST gotowe*/
                         powiadomieniaModal.options.modal.modal('toggle');
-                        parent.find('label a.wrap').text($.trim(powiadomieniaModal.options.modal.find('.modal-header textarea.modal-title').val()))
+                        parent.find('label a.wrap').text(parm.group.PowiadomieniaGroup.title)
                     }
                 })
             });

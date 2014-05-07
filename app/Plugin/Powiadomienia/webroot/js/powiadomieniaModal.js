@@ -63,7 +63,6 @@ var powiadomieniaModal;
             } else {
                 powiadomieniaModal.options.modal.find('.modal-content').append(powiadomieniaModal.options.footer);
             }
-            console.log(powiadomieniaModal.options.modal);
             powiadomieniaModal.options.modal.modal();
             powiadomieniaModal.additionalInfo();
         },
@@ -170,7 +169,7 @@ var powiadomieniaModal;
                             $.each(appList.list, function (index, value) {
                                 powiadomieniaModal.options.modal.find('.modal-body .datasets').append(
                                     $('<div></div>').addClass('switchCheckbox').append(
-                                            $('<input />').attr({'type': 'checkbox', 'name': value.name}).data({'size': 'small'}).val(value.id)
+                                            $('<input />').attr({'type': 'checkbox', 'name': 'apps[' + value.name + ']'}).data({'size': 'small'}).val(value.id)
                                         ).append(
                                             $('<label></label>').text(value.name)
                                         )
@@ -179,7 +178,7 @@ var powiadomieniaModal;
                             });
                             if (data.apps && data.apps.length > 0) {
                                 $.each(data.apps, function (index, value) {
-                                    var checkedData = powiadomieniaModal.options.modal.find('.modal-body .datasets input[name="' + value.name + '"]');
+                                    var checkedData = powiadomieniaModal.options.modal.find('.modal-body .datasets input[name="apps[' + value.name + ']"]');
                                     checkedData.attr('checked', 'checked');
                                 })
                             }
@@ -188,7 +187,7 @@ var powiadomieniaModal;
                             $.each(data.apps, function (index, value) {
                                 powiadomieniaModal.options.modal.find('.modal-body .datasets').append(
                                     $('<div></div>').addClass('switchCheckbox').append(
-                                            $('<input />').attr({'type': 'checkbox', 'name': value.name, 'checked': 'checked'}).data({'size': 'small'}).val(value.id)
+                                            $('<input />').attr({'type': 'checkbox', 'name': 'apps[' + value.name + ']', 'checked': 'checked'}).data({'size': 'small'}).val(value.id)
                                         ).append(
                                             $('<label></label>').text(value.name)
                                         )
