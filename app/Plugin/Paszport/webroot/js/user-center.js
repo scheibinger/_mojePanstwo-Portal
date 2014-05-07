@@ -50,18 +50,16 @@
 
                 $.ajax({
                     type: "POST",
+                    dataType: "json",
                     url: form.attr('action'),
                     data: data,
                     beforeSend: function () {
                         /*TODO: add twirl*/
                     },
                     success: function (data) {
-                        var status = null;
+                        var status = data.status;
                         el.data('text', switchOldText).text(switchNewText).toggleClass('save');
                         form.find('.viewElement, .editElement').toggle();
-                        status = ($.grep(data, function (e) {
-                            return e.status;
-                        }))[0].status;
 
                         if (status == '200') {
                             if (el.hasClass('genderButton') || el.hasClass('languageButton')) {

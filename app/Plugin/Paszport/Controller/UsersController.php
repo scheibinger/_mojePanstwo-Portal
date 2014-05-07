@@ -53,8 +53,6 @@ class UsersController extends PaszportAppController
     public function login()
     {
         if ($this->request->is('post')) {
-
-            $data = $this->data;
             $user = $this->PassportApi->User()->login($this->data);
 
             if ($user['user']) {
@@ -127,7 +125,7 @@ class UsersController extends PaszportAppController
             } else { # if not we will attempt to create new user based on his facebook data or we will merge his existing account
                 if ($user && $user['User']['email']) { # merge attempt
                     $this->User->id = $user['User']['id'];
-                    $this->PassportApi->field('users', $user['User']['id'], array('facebook_id', $user_data['id']));
+                    $this->PassportApi->field('users', $user['User']['id'], array('User' => array('facebook_id' => $user_data['id'])));
                     $this->Session->setFlash(__d('paszport', 'LC_PASZPORT_FB_ACCOUNT_MERGED', true), 'alert', array('class' => 'alert-success'));
                     $this->Auth->login($user['User']);
                     if ($this->Session->read('API.gate')) {
@@ -138,7 +136,6 @@ class UsersController extends PaszportAppController
                     $this->redirect(array('action' => 'index')); // show profile for user to verify it
 
                 } else { # new user
-                    //$this->User->create();
                     $to_save = array( 'User' => array(
                         'personal_name' => $user_data['first_name'],
                         'personal_lastname' => $user_data['last_name'],
@@ -180,7 +177,6 @@ class UsersController extends PaszportAppController
     /**
      * forces password for just registered FB users
      */
-    //@TODO
     public function setpassword()
     {
         $user = $this->PassportApi->find('users', array('conditions' => array('User.id' => $this->Auth->user('id'))));
@@ -334,19 +330,26 @@ class UsersController extends PaszportAppController
             $user = $this->PassportApi->find('users', array('conditions' => array('User.email' => $this->data['User']['email'])));
             $user = $user['user'];
             if ($user) { # if user exists send email
-                $Email = new CakeEmail();
-                $Email->config('smtp_paszport');
+                $Email = new CakeEmail('default');
                 $Email->to($user['User']['email']);
                 $Email->subject(__d('paszport', 'LC_PASZPORT_MAIL_RESET_PASS_SUBJECT', true));
                 $e = new Encryption(MCRYPT_BlOWFISH, MCRYPT_MODE_CBC);
                 $data = json_encode(array('email' => $user['User']['email'], 'expires' => strtotime('+24 hours')));
                 $hash = base64_encode($e->encrypt($data, Configure::read('Security.salt')));
                 $Email->viewVars(array('hash' => urlencode($hash)));
+
                 if ($Email->send()) {
 //                    $this->_log(array('msg' => 'LC_PASZPORT_LOG_MAIL_RESET_PASS_SENT', 'ip' => $this->request->clientIp(), 'user_agent' => env('HTTP_USER_AGENT')));
+                    $this->PassportApi->field('users', $user['User']['id'], array('User' => array('reset_hash' => urlencode($hash))));
+
                     $this->Session->setFlash(__d('paszport', 'LC_PASZPORT_MAIL_RESET_PASS_SENT', true), 'alert', array('class' => 'alert-info'));
-                    $this->PassportApi->field('users', $user['User']['id'], array('reset_hash', urlencode($hash)));
+                    $this->redirect('login');
+
+                } else {
+                    $this->Session->setFlash(__('LC_MAIL_SEND_ERROR', true), 'alert', array('class' => 'alert-error'));
                 }
+
+
             } else { # if not display error
                 $this->Session->setFlash(__d('paszport', 'LC_PASZPORT_USER_DOES_NOT_EXIST', true), 'alert', array('class' => 'alert-error'));
             }
@@ -549,20 +552,25 @@ class UsersController extends PaszportAppController
      */
     public function delete()
     {
-        $this->Session->setFlash(__d('paszport', 'LC_PASZPORT_ACCOUNT_DELETE_WARNING', true), null, array('class' => 'alert-danger'));
-        if ($this->request->isPost()) {
-            $user = $this->PassportApi->User()->login($this->data);
-            if ($user) {
-                $this->PassportApi->User()->delete();
-                $this->Session->setFlash(__d('paszport', 'LC_PASZPORT_ACCOUNT_DELETED', true), 'alert', array('class' => 'alert-success'));
-                $this->Auth->logout();
-                $this->redirect(array('controller' => 'users', 'action' => 'login'));
-            } else {
-                $this->Session->setFlash(__d('paszport', 'LC_PASZPORT_PASSWORD_INCORRECT', true), 'alert', array('class' => 'alert-error'));
-            }
-        }
         $this->set('title_for_layout', __d('paszport', 'LC_PASZPORT_ACCOUNT_DELETE_TITLE', true));
 
+        if ($this->request->isPost()) {
+            //$id = $this->Auth->user('id');
+            //$user = $this->PassportApi->find('users', array('conditions' => array('User.id' => $id)));
+
+            $resp = $this->PassportApi->User()->delete($this->data);
+
+            if (isset($resp['errors'])) {
+                $this->Session->setFlash(__d('paszport', 'LC_PASZPORT_ACCOUNT_DELETE_WARNING', true), null, array('class' => 'alert-danger'));
+                $this->Session->setFlash(__d('paszport', 'LC_PASZPORT_PASSWORD_INCORRECT', true), 'alert', array('class' => 'alert-error'));
+
+                return;
+            }
+
+            $this->Session->setFlash(__d('paszport', 'LC_PASZPORT_ACCOUNT_DELETED', true), 'alert', array('class' => 'alert-success'));
+            $this->Auth->logout();
+            $this->redirect(array('controller' => 'users', 'action' => 'login'));
+        }
     }
 
     /**
