@@ -72,11 +72,11 @@
         input.data('minwidth', minWidth);
         input.data('maxwidth', maxWidth);
         input.data('tester_id', testerId);
-        input.css('width', minWidth);
+        //input.css('width', minWidth);
     };
 
     $.fn.addTag = function (value, options) {
-        options = jQuery.extend({focus: false, callback: true}, options);
+        options = jQuery.extend({focus: false, callback: true, newTag: false}, options);
         this.each(function () {
             var id = $(this).attr('id');
 
@@ -98,7 +98,7 @@
             }
 
             if (value != '' && skipTag != true) {
-                $('<span>').addClass('tag').append(
+                var newTag = $('<span>').addClass('tag').append(
                     $('<span>').text(value).append('&nbsp;&nbsp;'),
                     $('<a>', {
                         href: '#',
@@ -107,7 +107,11 @@
                     }).click(function () {
                         return $('#' + id).removeTag(escape(value));
                     })
-                ).insertBefore('#' + id + '_addTag');
+                );
+
+                if ($('.tagsInput span.tag').length != 0) {
+                    newTag.insertAfter('.tagsInput span.tag:last');
+                } else newTag.insertAfter('#' + id + '_addTag');
 
                 tagslist.push(value);
 
@@ -219,18 +223,18 @@
                 tags_callbacks[id]['onChange'] = settings.onChange;
             }
 
-            var markup = '<div id="' + id + '_tagsinput" class="tagsinput"><div id="' + id + '_addTag">';
+            var markup = '<div id="' + id + '_tagsinput" class="tagsInput"><div id="' + id + '_addTag" class="keywordsInput">';
 
             if (settings.interactive) {
-                markup = markup + '<input id="' + id + '_tag" value="" data-default="' + settings.defaultText + '" />';
+                markup += "<div class=\"input-group\"><input id=\"" + id + '_tag" value="" data-default="' + settings.defaultText + '" type="text" class="form-control">' + "<span class=\"input-group-btn\"><button class=\"btn btn-success\" type=\"button\">Dodaj</button></span></div>";
             }
 
             markup = markup + '</div><div class="tags_clear"></div></div>';
 
             $(markup).insertAfter(this);
 
-            $(data.holder).css('width', settings.width);
-            $(data.holder).css('min-height', settings.height);
+            //$(data.holder).css('width', settings.width);
+            //$(data.holder).css('min-height', settings.height);
             $(data.holder).css('height', '100%');
 
             if ($(data.real_input).val() != '') {
@@ -303,7 +307,8 @@
 
                     }
                 });
-                //Delete last tag on backspace
+                /*
+                 //Delete last tag on backspace
                 data.removeWithBackspace && $(data.fake_input).bind('keydown', function (event) {
                     if (event.keyCode == 8 && $(this).val() == '') {
                         event.preventDefault();
@@ -314,6 +319,7 @@
                         $(this).trigger('focus');
                     }
                 });
+                 */
                 $(data.fake_input).blur();
 
                 //Removes the not_valid class when user changes the value of the fake input
