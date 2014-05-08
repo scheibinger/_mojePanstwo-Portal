@@ -182,7 +182,6 @@
                     type: 'POST',
                     url: '/powiadomienia/groups.json',
                     data: parm,
-                    contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     beforeSend: function () {
                         modalBottom.find('.btn').addClass('disabled');
@@ -302,7 +301,6 @@
                     type: 'POST',
                     url: '/powiadomienia/groups/' + parm.group.PowiadomieniaGroup.id + '.json',
                     data: parm,
-                    contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     beforeSend: function () {
                         modalBottom.find('.btn').addClass('disabled');
