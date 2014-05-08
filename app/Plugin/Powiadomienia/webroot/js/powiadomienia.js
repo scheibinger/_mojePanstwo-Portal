@@ -153,7 +153,6 @@
                     parm = {
                         group: {
                             PowiadomieniaGroup: {
-                                id: null,
                                 title: null
                             },
                             phrases: [],
@@ -180,8 +179,8 @@
                 });
 
                 $.ajax({
-                    type: 'PUT',
-                    url: '/powiadomienia/groups/new.json',
+                    type: 'POST',
+                    url: '/powiadomienia/groups.json',
                     data: parm,
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
@@ -300,7 +299,7 @@
                 });
 
                 $.ajax({
-                    type: 'PUT',
+                    type: 'POST',
                     url: '/powiadomienia/groups/' + parm.group.PowiadomieniaGroup.id + '.json',
                     data: parm,
                     contentType: "application/json; charset=utf-8",
