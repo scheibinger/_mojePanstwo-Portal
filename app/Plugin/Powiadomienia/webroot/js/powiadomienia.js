@@ -146,9 +146,6 @@
             modalBottom.find('.btn.save').click(function () {
                 if ($(this).hasClass('disabled')) return;
 
-                /*wyłączenie disabled input na czas pobierania danych dla serialize*/
-                powiadomieniaModal.options.modal.find('form input:disabled').removeAttr('disabled');
-
                 var serialize = powiadomieniaModal.options.modal.find('form').serializeArray(),
                     parm = {
                         group: {
@@ -263,9 +260,6 @@
             /*SAVE*/
             modalBottom.find('.btn.save').click(function () {
                 if ($(this).hasClass('disabled')) return;
-
-                /*wyłączenie disabled input na czas pobierania danych dla serialize*/
-                powiadomieniaModal.options.modal.find('form input:disabled').removeAttr('disabled');
 
                 var serialize = powiadomieniaModal.options.modal.find('form').serializeArray(),
                     parm = {

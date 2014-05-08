@@ -34,7 +34,7 @@
     echo $this->Html->css('../plugins/bootstrap-select/bootstrap-select.min.css');
 
     /*BOOTSTRAP CHECKBOX LOOKS SWITCH BUTTONS*/
-    echo $this->Html->css('../plugins/bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.min.css');
+    echo $this->Html->css('../plugins/bootstrap-switch/bootstrap-switch.css');
 
     /* SOCIAL BUTTONS */
     echo $this->Html->css('//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css');
@@ -137,7 +137,7 @@ echo $this->Html->script('//netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap
 echo $this->Html->script('../plugins/browserstate/history.js/scripts/bundled/html4+html5/jquery.history.js');
 echo $this->Html->script('../plugins/carhartl/jquery-cookie/jquery.cookie.js');
 echo $this->Html->script('../plugins/bootstrap-select/bootstrap-select.min.js');
-echo $this->Html->script('../plugins/bootstrap-switch/dist/js/bootstrap-switch.min.js');?>
+echo $this->Html->script('../plugins/bootstrap-switch/bootstrap-switch.js');?>
 
 <?php /*PHP DATA FOR JS */ ?>
 <script type="text/javascript">

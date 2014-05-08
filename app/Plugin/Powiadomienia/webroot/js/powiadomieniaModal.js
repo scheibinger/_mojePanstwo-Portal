@@ -182,7 +182,7 @@ var powiadomieniaModal;
                                     checkedData.attr('checked', 'checked');
                                 })
                             }
-                            powiadomieniaModal.options.modal.find('.modal-body .datasets .switchCheckbox input').bootstrapSwitch('disabled', true, true);
+                            powiadomieniaModal.options.modal.find('.modal-body .datasets .switchCheckbox input').bootstrapSwitch();
                         } else if (data.apps && data.apps.length > 0) {
                             $.each(data.apps, function (index, value) {
                                 powiadomieniaModal.options.modal.find('.modal-body .datasets').append(
@@ -192,9 +192,10 @@ var powiadomieniaModal;
                                             $('<label></label>').text(value.name)
                                         )
                                 )
-                                powiadomieniaModal.options.modal.find('.modal-body .datasets .switchCheckbox:last input').bootstrapSwitch('disabled', true, true);
+                                powiadomieniaModal.options.modal.find('.modal-body .datasets .switchCheckbox:last input').bootstrapSwitch();
                             });
                         } else {
+                            console.log('c');
                             powiadomieniaModal.options.modal.find('.modal-body .datasets').append(
                                 $('<span></span>').text(_mPHeart.translation.LC_POWIADOMIENIA_POWIADOMENIA_MODAL_NO_DATASETS)
                             )
@@ -209,7 +210,7 @@ var powiadomieniaModal;
                                             $('<label></label>').text(value.name)
                                         )
                                 )
-                                powiadomieniaModal.options.modal.find('.modal-body .datasets .switchCheckbox:last input').bootstrapSwitch('disabled', true, true);
+                                powiadomieniaModal.options.modal.find('.modal-body .datasets .switchCheckbox:last input').bootstrapSwitch();
                             });
                         } else {
                             powiadomieniaModal.options.modal.find('.modal-body .datasets').append(
