@@ -117,6 +117,53 @@
         });
     }
 
+    function serializePowiadomieniaFind(serialize, purposeName) {
+        return $.grep(serialize.group.apps, function (item) {
+            return item.name == purposeName;
+        });
+    }
+
+    function serializePowiadomienia() {
+        var serialize = powiadomieniaModal.options.modal.find('form').serializeArray(),
+            parm = {
+                group: {
+                    PowiadomieniaGroup: {
+                        title: null
+                    },
+                    phrases: [],
+                    apps: []
+                }
+            };
+
+        /*GETHER APPS LIST WITH STATUS MARKER*/
+        powiadomieniaModal.options.modal.find('form .datasets > .switchCheckbox > .bootstrap-switch input').map(function () {
+            var name = this.name.match(/\[(.*?)\]/);
+            parm.group.apps.push({name: name[1], value: this.value, status: this.checked ? true : false, datasets: [] })
+        });
+
+        $.each(serialize, function (index, data) {
+            if (data.name == "title")
+                parm.group.PowiadomieniaGroup.title = data.value;
+            if (data.name == "data[Dataobject][ids]")
+                parm.group.PowiadomieniaGroup.id = data.value;
+            if (data.name == "keywords") {
+                parm.group.phrases = data.value.split(',');
+            }
+
+            if (data.name.indexOf("subapps[") === 0) {
+                var m = data.name.match(/\[(.*?)\]\[(.*?)\]/);
+
+                var subapp = {
+                    id: data.value,
+                    name: m[2]
+                };
+                serializePowiadomieniaFind(parm, m[1])[0].datasets.push(subapp);
+            }
+        });
+
+        return parm;
+    }
+
     $.ajax({
         url: "/powiadomienia/apps.json",
         type: "GET",
@@ -146,39 +193,10 @@
             modalBottom.find('.btn.save').click(function () {
                 if ($(this).hasClass('disabled')) return;
 
-                var serialize = powiadomieniaModal.options.modal.find('form').serializeArray(),
-                    parm = {
-                        group: {
-                            PowiadomieniaGroup: {
-                                title: null
-                            },
-                            phrases: [],
-                            apps: []
-                        }
-                    };
-
-                $.each(serialize, function (index, data) {
-                    if (data.name == "title")
-                        parm.group.PowiadomieniaGroup.title = data.value;
-                    if (data.name == "data[Dataobject][ids]")
-                        parm.group.PowiadomieniaGroup.id = data.value;
-                    if (data.name == "keywords") {
-                        parm.group.phrases = data.value.split(',');
-                    }
-                    if (data.name.indexOf("apps[") === 0) {
-                        var m = data.name.match(/\[(.*?)\]/);
-                        var app = {
-                            id: data.value,
-                            name: m[1]
-                        };
-                        parm.group.apps.push(app);
-                    }
-                });
-
                 $.ajax({
                     type: 'POST',
                     url: '/powiadomienia/groups.json',
-                    data: parm,
+                    data: serializePowiadomienia(),
                     dataType: "json",
                     beforeSend: function () {
                         modalBottom.find('.btn').addClass('disabled');
@@ -261,35 +279,7 @@
             modalBottom.find('.btn.save').click(function () {
                 if ($(this).hasClass('disabled')) return;
 
-                var serialize = powiadomieniaModal.options.modal.find('form').serializeArray(),
-                    parm = {
-                        group: {
-                            PowiadomieniaGroup: {
-                                id: null,
-                                title: null
-                            },
-                            phrases: [],
-                            apps: []
-                        }
-                    };
-
-                $.each(serialize, function (index, data) {
-                    if (data.name == "title")
-                        parm.group.PowiadomieniaGroup.title = data.value;
-                    if (data.name == "data[Dataobject][ids]")
-                        parm.group.PowiadomieniaGroup.id = data.value;
-                    if (data.name == "keywords") {
-                        parm.group.phrases = data.value.split(',');
-                    }
-                    if (data.name.indexOf("apps[") === 0) {
-                        var m = data.name.match(/\[(.*?)\]/);
-                        var app = {
-                            id: data.value,
-                            name: m[1]
-                        };
-                        parm.group.apps.push(app);
-                    }
-                });
+                var parm = serializePowiadomienia();
 
                 $.ajax({
                     type: 'POST',

@@ -150,7 +150,7 @@ var powiadomieniaModal;
                 powiadomieniaModal.options.modal.find('.modal-body .keywords #keywordsInput').tagsInput({
                     'interactive': true,
                     'defaultText': _mPHeart.translation.LC_POWIADOMIENIA_POWIADOMENIA_MODAL_KEYWORDS_INPUT,
-                    'minChars': 0
+                    'minChars': 2
                 });
 
 
@@ -166,48 +166,76 @@ var powiadomieniaModal;
                     var appList = powiadomieniaModal.options.additionalInfoList;
                     if (appList.status == 'success') {
                         if (appList.list.length > 0) {
-                            $.each(appList.list, function (index, value) {
+                            $.each(appList.list, function (index, app) {
                                 powiadomieniaModal.options.modal.find('.modal-body .datasets').append(
                                     $('<div></div>').addClass('switchCheckbox').append(
-                                            $('<input />').attr({'type': 'checkbox', 'name': 'apps[' + value.name + ']'}).data({'size': 'small'}).val(value.id)
+                                            $('<input />').attr({'type': 'checkbox', 'name': 'apps[' + app.name + ']'}).data({'size': 'small'}).val(app.id)
                                         ).append(
-                                            $('<label></label>').text(value.name)
+                                            $('<label></label>').text(app.name)
+                                        ).append(
+                                            $('<div></div>').addClass('datasetsList')
                                         )
                                 )
+                                $.each(app.datasets, function (index, subApp) {
+                                    powiadomieniaModal.options.modal.find('.modal-body .datasets .datasetsList:last').append(
+                                        $('<div></div>').addClass('switchCheckbox').append(
+                                                $('<input />').attr({'type': 'checkbox', 'name': 'subapps[' + app.name + '][' + subApp.name + ']'}).data({'size': 'small'}).val(subApp.id)
+                                            ).append(
+                                                $('<label></label>').text(subApp.name)
+                                            )
+                                    )
+                                })
 
                             });
                             if (data.apps && data.apps.length > 0) {
-                                $.each(data.apps, function (index, value) {
-                                    var checkedData = powiadomieniaModal.options.modal.find('.modal-body .datasets input[name="apps[' + value.name + ']"]');
-                                    checkedData.attr('checked', 'checked');
+                                $.each(data.apps, function (index, app) {
+                                    var checkedApp = powiadomieniaModal.options.modal.find('.modal-body .datasets input[name="apps[' + app.name + ']"]');
+                                    checkedApp.attr('checked', 'checked');
+
+                                    $.each(app.datasets, function (index, subapp) {
+                                        var checkedSubApp = powiadomieniaModal.options.modal.find('.modal-body .datasets input[name="subapps[' + app.name + '][' + subapp.name + ']"]');
+                                        checkedSubApp.attr('checked', 'checked');
+                                    });
                                 })
                             }
                             powiadomieniaModal.options.modal.find('.modal-body .datasets .switchCheckbox input').bootstrapSwitch();
                         } else if (data.apps && data.apps.length > 0) {
-                            $.each(data.apps, function (index, value) {
+                            $.each(data.apps, function (index, app) {
                                 powiadomieniaModal.options.modal.find('.modal-body .datasets').append(
                                     $('<div></div>').addClass('switchCheckbox').append(
-                                            $('<input />').attr({'type': 'checkbox', 'name': 'apps[' + value.name + ']', 'checked': 'checked'}).data({'size': 'small'}).val(value.id)
+                                            $('<input />').attr({'type': 'checkbox', 'name': 'apps[' + app.name + ']', 'checked': 'checked'}).data({'size': 'small'}).val(app.id)
                                         ).append(
-                                            $('<label></label>').text(value.name)
+                                            $('<label></label>').text(app.name)
+                                        ).append(
+                                            $('<div></div>').addClass('datasetsList')
                                         )
                                 )
+                                $.each(app.datasets, function (index, subApp) {
+                                    powiadomieniaModal.options.modal.find('.modal-body .datasets .datasetsList:last').append(
+                                        $('<div></div>').addClass('switchCheckbox').append(
+                                                $('<input />').attr({'type': 'checkbox', 'name': 'subapps[' + app.name + '][' + subApp.name + ']', 'checked': 'checked'}).data({'size': 'small'}).val(subApp.id)
+                                            ).append(
+                                                $('<label></label>').text(subApp.name)
+                                            )
+                                    )
+                                    powiadomieniaModal.options.modal.find('.modal-body .datasets .switchCheckbox:last .switchCheckbox:last input').bootstrapSwitch();
+                                })
+
                                 powiadomieniaModal.options.modal.find('.modal-body .datasets .switchCheckbox:last input').bootstrapSwitch();
                             });
                         } else {
-                            console.log('c');
                             powiadomieniaModal.options.modal.find('.modal-body .datasets').append(
                                 $('<span></span>').text(_mPHeart.translation.LC_POWIADOMIENIA_POWIADOMENIA_MODAL_NO_DATASETS)
                             )
                         }
                     } else if (appList.status == 'error') {
                         if (data.apps && data.apps.length > 0) {
-                            $.each(data.apps, function (index, value) {
+                            $.each(data.apps, function (index, app) {
                                 powiadomieniaModal.options.modal.find('.modal-body .datasets').append(
                                     $('<div></div>').addClass('switchCheckbox').append(
-                                            $('<input />').attr({'type': 'checkbox', 'name': value.name, 'checked': 'checked'}).data({'size': 'small'}).val(value.id)
+                                            $('<input />').attr({'type': 'checkbox', 'name': app.name, 'checked': 'checked'}).data({'size': 'small'}).val(app.id)
                                         ).append(
-                                            $('<label></label>').text(value.name)
+                                            $('<label></label>').text(app.name)
                                         )
                                 )
                                 powiadomieniaModal.options.modal.find('.modal-body .datasets .switchCheckbox:last input').bootstrapSwitch();
@@ -220,12 +248,12 @@ var powiadomieniaModal;
                     }
                 } else {
                     if (data.apps && data.apps.length > 0) {
-                        $.each(data.apps, function (index, value) {
+                        $.each(data.apps, function (index, app) {
                             powiadomieniaModal.options.modal.find('.modal-body .datasets').append(
                                 $('<div></div>').addClass('switchCheckbox').append(
-                                        $('<input />').attr({'type': 'checkbox', 'name': value.name, 'checked': 'checked'}).data({'size': 'small'}).val(value.id)
+                                        $('<input />').attr({'type': 'checkbox', 'name': app.name, 'checked': 'checked'}).data({'size': 'small'}).val(app.id)
                                     ).append(
-                                        $('<label></label>').text(value.name)
+                                        $('<label></label>').text(app.name)
                                     )
                             )
                             powiadomieniaModal.options.modal.find('.modal-body .datasets .switchCheckbox:last input').bootstrapSwitch('disabled', true, true);
@@ -235,6 +263,50 @@ var powiadomieniaModal;
                             $('<span></span>').text(_mPHeart.translation.LC_POWIADOMIENIA_POWIADOMENIA_MODAL_NO_DATASETS)
                         )
                     }
+                }
+                var appSwitch;
+                if ((appSwitch = powiadomieniaModal.options.modal.find('form .datasets > .switchCheckbox')).length != 0) {
+                    appSwitch.append(
+                        jQuery('<a></a>').addClass('slide right').attr({'href': '#showDatasets'}).click(function (e) {
+                            var that = $(this),
+                                parent = that.parents('.switchCheckbox'),
+                                subAppList = parent.find('.datasetsList'),
+                                width = powiadomieniaModal.options.modal.find('.modal-body > .datasets').outerWidth(),
+                                animSpeed = 600;
+
+                            e.preventDefault();
+
+                            if (that.hasClass('right')) {
+                                that.removeClass('right').addClass('down');
+                                parent.addClass('choosed').queue(function () {
+                                    $.each(appSwitch, function () {
+                                        if (!($(this).hasClass('choosed'))) {
+                                            $(this).animate({opacity: 0}, animSpeed / 2, function () {
+                                                $(this).slideUp(animSpeed / 2);
+                                            })
+                                        } else {
+                                            $(this).removeClass('choosed');
+                                            $(this).dequeue();
+                                        }
+                                    })
+                                }).queue(function () {
+                                    subAppList.css({'right': -width, opacity: 0}).show().animate({right: 0, opacity: 1}, animSpeed);
+                                    $(this).dequeue();
+                                });
+
+                            } else {
+                                that.removeClass('down').addClass('right');
+                                subAppList.animate({right: -width, opacity: 0}, animSpeed, function () {
+                                    subAppList.hide().removeAttr('style');
+                                })
+                                $.each(appSwitch, function () {
+                                    $(this).slideDown(animSpeed / 2);
+                                    $(this).animate({opacity: 1}, animSpeed)
+                                })
+
+                            }
+                        })
+                    )
                 }
             }, 200);
         }

@@ -25,82 +25,130 @@
     .visibledNone {
         visibility: hidden;
     }
-    .modal-content {
-        -moz-border-radius: 0;
-        -webkit-border-radius: 0;
-        border-radius: 0;
-        border-width: 0;
-        border-bottom: 10px solid #428BCA;
 
-        .modal-header {
-            @fontSize: 20px;
+    .modal-dialog {
+        .modal-content {
+            -moz-border-radius: 0;
+            -webkit-border-radius: 0;
+            border-radius: 0;
+            border-width: 0;
+            border-bottom: 10px solid #428BCA;
 
-            h4 {
-                font-size: @fontSize;
-                color: #428BCA;
-            }
-            .edit.modal-title textarea {
-                color: #555555;
-                font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-                font-size: @fontSize;
-                font-weight: 400;
-                margin-left: -6px;
-                margin-top: -5px;
-                padding: 3px;
-                width: 95%;
-            }
-        }
-        .modal-body {
-            @paddingChange: 10px;
+            .modal-header {
+                @fontSize: 20px;
 
-            padding-top: @paddingChange;
-            padding-bottom: @paddingChange;
-
-            .loading {
-                background: url(../../img/loader/ajax-loader-square-blue.gif) center center no-repeat;
-                width: 100%;
-                height: 20px;
-                display: block;
-                margin: 15px 0 10px;
-            }
-
-            .datasets, .keywords {
-                margin: 5px 1%;
-                width: 98%;
-                display: inline-block;
-            }
-
-            .datasets .switchCheckbox {
-                margin: 1% 0;
-
-                .bootstrap-switch {
-                    margin-right: 10px;
+                h4 {
+                    font-size: @fontSize;
+                    color: #428BCA;
                 }
-                label {
+                .edit.modal-title textarea {
+                    color: #555555;
+                    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+                    font-size: @fontSize;
+                    font-weight: 400;
+                    margin-left: -6px;
+                    margin-top: -5px;
+                    padding: 3px;
+                    width: 95%;
                 }
             }
+            .modal-body {
+                @paddingChange: 10px;
 
-            hr {
-                margin-top: 5px;
+                padding-top: @paddingChange;
+                padding-bottom: @paddingChange;
+                overflow-x: hidden;
+
+                .loading {
+                    background: url(../../img/loader/ajax-loader-square-blue.gif) center center no-repeat;
+                    width: 100%;
+                    height: 20px;
+                    display: block;
+                    margin: 15px 0 10px;
+                }
+
+                .datasets, .keywords {
+                    margin: 5px 1%;
+                    width: 98%;
+                    display: inline-block;
+                }
+
+                .datasets {
+                    .switchCheckbox {
+                        margin: 1% 0;
+                        position: relative;
+
+                        .bootstrap-switch {
+                            margin-right: 10px;
+                        }
+                        .datasetsList {
+                            display: none;
+                            border-top: 1px solid #dedede;
+                            margin-top: 10px;
+                            padding-top: 5px;
+                            position: relative;
+                        }
+                        .slide {
+                            @size: 20px;
+
+                            width: @size;
+                            height: @size;
+                            position: absolute;
+                            //top: 50%;
+                            top: 3px;
+                            right: 1%;
+                            //margin-top: -(@size/2);
+
+                            &:before {
+                                font-size: 22px;
+                                font-family: 'mojePanstwo';
+                                speak: none;
+                                font-style: normal;
+                                font-weight: normal;
+                                font-variant: normal;
+                                text-transform: none;
+                                line-height: 1;
+                                -webkit-font-smoothing: antialiased;
+                                -moz-osx-font-smoothing: grayscale;
+                            }
+                            &.left:before {
+                                content: '\e609';
+                            }
+                            &.right:before {
+                                content: '\e60b';
+                            }
+                            &.up:before {
+                                content: '\e60a';
+                            }
+                            &.down:before {
+                                content: '\e608';
+                            }
+                        }
+                    }
+                }
+
+                hr {
+                    margin-top: 5px;
+                }
             }
-        }
-        .modal-footer {
-            .btn {
-                &.loading {
-                    background-image: url(../../img/loader/search-loading.png);
-                    background-position: center center;
-                    background-repeat: no-repeat;
-                    line-height: 5em;
-                    height: 34px;
+            .modal-footer {
+                .btn {
+                    &.loading {
+                        background-image: url(../../img/loader/search-loading.png);
+                        background-position: center center;
+                        background-repeat: no-repeat;
+                        line-height: 5em;
+                        height: 34px;
 
-                    &.delete {
-                        background-color: #D9534F;
-                    }
-                    &.duplicate {
-                        background-color: #5BC0DE;
-                    }
-                    &.save {
-                        background-color: #428BCA;
+                        &.delete {
+                            background-color: #D9534F;
+                        }
+                        &.duplicate {
+                            background-color: #5BC0DE;
+                        }
+                        &.save {
+                            background-color: #428BCA;
+                        }
                     }
                 }
             }
