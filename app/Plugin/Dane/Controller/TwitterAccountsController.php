@@ -12,44 +12,36 @@ class TwitterAccountsController extends DataobjectsController
 
     public $menu = array();
 
+	public $objectOptions = array(
+        'hlFields' => array(),
+    );
+	
     public function view()
     {
 
 
         parent::_prepareView();
-        $this->dataobjectsBrowserView(array(
+        $this->object->loadLayer('followers_chart');
+        
+        $this->API->searchDataset('twitter', array(
+            'limit' => 12,
+            'conditions' => array(
+                'twitter_account_id' => $this->object->getId(),
+            ),
+        ));
+        $this->set('twitts', $this->API->getObjects());
+
+    }
+    
+    public function twitts()
+    {
+	    parent::_prepareView();
+	    $this->dataobjectsBrowserView(array(
             'source' => 'twitterAccounts.relatedTweets:' . $this->object->getId(),
             'dataset' => 'twitter',
             'title' => 'Powiązane tweety',
         ));
-
     }
-
-    /*
-    public function view()
-    {
-	    parent::_prepareView();
-	    $this->object->loadLayer('tweets_stats');
-	    $this->object->loadLayer('tags_stats');
-	    $this->object->loadLayer('mentions_stats');
-	    $this->object->loadLayer('urls_stats');
-        $this->object->loadLayer('followers_chart');
-        $tweets = $this->Dataobject->find('all', array(
-            'conditions' => array(
-                'dataset' => 'twitter',
-                'twitter_accounts.id' => $this->object->object_id,
-            ),
-            'limit' => 24,
-        ));
-        $latest_tweets = array();
-        foreach($tweets as $tweet) {
-            array_push($latest_tweets, array_pop($tweet));
-        }
-        $this->set(compact('latest_tweets'));
-
-    }
-    */
-
 
     public function timeline()
     {

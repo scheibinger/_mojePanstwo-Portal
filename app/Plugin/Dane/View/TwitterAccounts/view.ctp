@@ -1,128 +1,110 @@
 <?
 $this->Combinator->add_libs('css', $this->Less->css('view-twitteraccounts', array('plugin' => 'Dane')));
-
-
-/*
-$this->Combinator->add_libs('css', $this->Less->css('view-twitteraccounts', array('plugin' => 'Dane')));
 $this->Combinator->add_libs('css', $this->Less->css('dataobjectslider', array('plugin' => 'Dane')));
+
 $this->Combinator->add_libs('js', '../plugins/highcharts/js/highcharts');
 $this->Combinator->add_libs('js', '../plugins/highcharts/locals');
-$this->Combinator->add_libs('js', 'Dane.highcharts-twitter-accounts');
-$this->Combinator->add_libs('js', 'Dane.view-twitter-accounts');
-$this->Combinator->add_libs('js', 'Dane.dataobjectsslider');
+$this->Combinator->add_libs('js', 'Dane.view-twitteraccounts');
 
-$this->Combinator->add_libs('js', 'storyjs-embed.js');
+echo $this->Element('dataobject/pageBegin');
+?>	
 
-
-
-
-
-
-
-
-
-$tags_data = $object->getLayer('tags_stats');
-$tags = $tags_data['data'];
-
-$mentions_data = $object->getLayer('mentions_stats');
-$mentions = $mentions_data['data'];
-
-$urls_data = $object->getLayer('urls_stats');
-$urls = $urls_data['data'];
-
-$chart_data = $object->getLayer('followers_chart');
-?>
-	
-	
-	
-	
-    <script type="text/javascript">
-        var chart_data = '<?php echo json_encode($chart_data); ?>';
-    </script>
-<?= $this->Element('dataobject/pageBegin'); ?>
+<div class="row">
     
-    
-    <div class="upperContent">upperContent</div>
-    
-    </div>
-    
-    <div id="timeline-embed"></div>
-	<script type="text/javascript">
-	var timeline_config = {
-		 width: "100%",
-		 height: 500,
-		 source: '<?= $object->getId() ?>/timeline.json',
-		 embed_id: 'timeline-embed',
-		 css: '/plugins/TimelineJS/build/css/timeline.css',
-	     js: '/plugins/TimelineJS/build/js/timeline-min.js',
-	     
-	}
-	</script>
-	
-	<div>
-    
-    <div class="col-md-12">
-        <div class="object">
-            
-            <div class="col-md-12">
-                <div class="dataobjectsSliderRow" data-row="1">
-                    <? echo $this->dataobjectsSlider->render($latest_tweets, array(
-                        'perGroup' => 3,
-                    )); ?>
-                </div>
-                
-            </div>
-            
-            
-            <div>
-    	
-		    	<div class="col-lg-9 left-panel">
-		    		<div id="chart">
+    <div class="col-lg-3 objectSide">
+        <div class="objectSideInner">
+            <ul class="dataHighlights side">
+                <li class="dataHighlight big">
+                    <p class="_label">Liczba obserwujacych</p>
 
-	                </div>
-		    	</div>
-		            
-		
-		        <div class="col-lg-3 right-panel">
-		            <h4>Wzmianki</h4>
-		            <ul class="list-group">
-		                <? foreach ($mentions as $mention) { ?>
-		                    <li class="list-group-item">
-		                        <span class="badge"><?php echo $mention['count']; ?></span>
-		                        <a href="#" class="small" data-id="<?php echo $mention['id']; ?>">
-		                            <?= $mention['twitter_name'] ?>
-		                        </a>
-		                    </li>
-		                <? } ?>
-		            </ul>
-		            <h4>Hashtagi</h4>
-		            <ul class="list-group">
-		                <? foreach ($tags as $tag) { ?>
-		                    <li class="list-group-item">
-		                        <span class="badge"><?php echo $tag['count']; ?></span>
-		                        <a href="#" class="small">#<?= $tag['tag'] ?></a>
-		                    </li>
-		
-		                <? } ?>
-		            </ul>
-		            <h4>Linki</h4>
-		            <ul class="list-group">
-		                <? foreach ($urls as $url) { ?>
-		                    <li class="list-group-item">
-		                        <a rel="nofollow" class="small url" href="<?= $url['url'] ?>" target="_blank"
-		                           data-url="<?php echo $url['url']; ?>"><?= array_shift(preg_split('/\//', preg_replace('/(http|https)\:\/\//', '', $url['url']))); ?></a>
-		                    </li>
-		                <? } ?>
-		            </ul>
-		        </div>
-		            
-		
-		            
-		    </div>
-            
+                    <p class="_value"><?= _number($object->getData('liczba_obserwujacych')); ?></p>
+                </li>
+                <li class="dataHighlight inl">
+                    <p class="_label">Liczba tweetów</p>
+
+                    <p class="_value"><?= _number($object->getData('liczba_tweetow')); ?></p>
+                </li>
+                <li class="dataHighlight inl">
+                    <p class="_label">Liczba retweetów</p>
+
+                    <p class="_value"><?= _number($object->getData('liczba_retweetow_wlasnych')); ?></p>
+                </li>
+                <li class="dataHighlight inl">
+                    <p class="_label">Liczba wzmianek</p>
+
+                    <p class="_value"><?= _number($object->getData('liczba_wzmianek_rts')); ?></p>
+                </li>
+                <li class="dataHighlight inl">
+                    <p class="_label">Liczba odpowiedzi</p>
+
+                    <p class="_value"><?= _number($object->getData('liczba_odpowiedzi_rts')); ?></p>
+                </li>
+            </ul>
+
+            <p class="text-center showHideSide">
+                <a class="a-more">Więcej &darr;</a>
+                <a class="a-less hide">Mniej &uarr;</a>
+            </p>
+
+            <ul class="dataHighlights side hide">
+            <li class="dataHighlight inl topborder">
+                    <p class="_label">Liczba tweetów w 2013 r.</p>
+
+                    <p class="_value"><?= _number($object->getData('liczba_tweetow_wlasnych_2013')); ?></p>
+                </li>
+                <li class="dataHighlight inl">
+                    <p class="_label">Liczba retweetów w 2013 r.</p>
+
+                    <p class="_value"><?= _number($object->getData('liczba_retweetow_wlasnych_2013')); ?></p>
+                </li>
+                <li class="dataHighlight inl">
+                    <p class="_label">Liczba wzmianek w 2013 r.</p>
+
+                    <p class="_value"><?= _number($object->getData('liczba_wzmianek_rts_2013')); ?></p>
+                </li>
+                <li class="dataHighlight inl">
+                    <p class="_label">Liczba odpowiedzi w 2013 r.</p>
+
+                    <p class="_value"><?= _number($object->getData('liczba_odpowiedzi_rts_2013')); ?></p>
+                </li>
+            </ul>
         </div>
     </div>
-*/
-?>
+    
+    <div class="col-lg-9 objectMain">
+        <div class="object mpanel">
+            <div class="block-group">
+                <div class="block">
+                    <div class="block-header">
+                        <h2 class="pull-left label">Ostatnie twitty</h2>
+                        <a class="btn btn-default btn-sm pull-right"
+                           href="/dane/twitter_accounts/<?= $object->getId() ?>/twitts">Zobacz wszystkie</a>
+                    </div>
+                    <div class="content">
+                        <div class="dataobjectsSliderRow row">
+                            <div>
+                                <?php echo $this->dataobjectsSlider->render($twitts, array(
+                                    'perGroup' => 3,
+                                    'rowNumber' => 1,
+                                    'labelMode' => 'none',
+                                    'file' => 'twitter_min',
+                                )) ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="block">
+                    <div class="block-header">
+                        <h2 class="pull-left label">Liczba obserwujących</h2>
+                    </div>
+                    <div class="content followers"
+                         data-json='<?php echo json_encode($object->getLayer('followers_chart')) ?>'>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div>
 
-<? // echo $this->Element('dataobject/pageEnd'); ?>
+<?= $this->Element('dataobject/pageEnd'); ?>

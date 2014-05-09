@@ -138,7 +138,7 @@ class DataobjectHelper extends AppHelper
                 $col_width = 2;
 
             $output .= '<div class="row dataHighlights dimmed';
-            if ($col_width >= 6)
+            if ($col_width >= 4)
                 $output .= ' inl';
             $output .= '">';
 

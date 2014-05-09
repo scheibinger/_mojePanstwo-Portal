@@ -457,6 +457,30 @@ msgstr "Sygnatura akt"
 msgid "LC_DANE_VIEW_KRSPODMIOTY_OTWORZ_MAPE"
 msgstr "Otwórz mapę"
 
+msgid "LC_DANE_VIEW_KRSPODMIOTY_DATA_URODZENIA"
+msgstr "Data urodzenia"
+
+msgid "LC_DANE_VIEW_KRSPODMIOTY_PLEC"
+msgstr "Płeć"
+
+msgid "LC_DANE_VIEW_KRSPODMIOTY_KOBIETA"
+msgstr "Kobieta"
+
+msgid "LC_DANE_VIEW_KRSPODMIOTY_MEZCZYZNA"
+msgstr "Mężczyzna"
+
+msgid "LC_DANE_VIEW_KRSPODMIOTY_IMIONA"
+msgstr "Imiona"
+
+msgid "LC_DANE_VIEW_KRSPODMIOTY_NAZWISKO"
+msgstr "Nazwisko"
+
+msgid "LC_DANE_VIEW_KRSPODMIOTY_KAPITAL_ZAKLADOWY"
+msgstr "Kapitał zakładowy"
+
+msgid "LC_DANE_VIEW_KRSPODMIOTY_LINK"
+msgstr "Przejdź do elementu"
+
 msgid "LC_DANE_GMINA_DO_KTOREJ_ZOSTAL_WYBRANY_RADNY"
 msgstr "Gmina, do której rady został wybrany radny"
 
@@ -969,3 +993,103 @@ msgstr "Szukaj po imieniu bądź nazwisku..."
 
 msgid "LC_POSLOWIE_W_KLUBIE"
 msgstr "Posłowie w tym klubie"
+
+
+
+
+
+
+
+
+
+msgid "LC_DANE_VIEW_ZAMOWIENIAPUBLICZNE_przedmiot"
+msgstr "Przedmiot zamówienia"
+
+msgid "LC_DANE_VIEW_ZAMOWIENIAPUBLICZNE_uprawnienie"
+msgstr "Uprawnienia"
+
+msgid "LC_DANE_VIEW_ZAMOWIENIAPUBLICZNE_wiedza"
+msgstr "Wiedza i oś"
+
+msgid "LC_DANE_VIEW_ZAMOWIENIAPUBLICZNE_potencjal"
+msgstr "Potencjał techniczny"
+
+msgid "LC_DANE_VIEW_ZAMOWIENIAPUBLICZNE_osoby_zdolne"
+msgstr "Osoby zdolne"
+
+msgid "LC_DANE_VIEW_ZAMOWIENIAPUBLICZNE_sytuacja_ekonomiczna"
+msgstr "Sytuacja ekonomiczna"
+
+msgid "LC_DANE_VIEW_ZAMOWIENIAPUBLICZNE_zal_pprawna"
+msgstr "Podstawa prawna prowadzenia postępowania w trybie zapytanie o cenę"
+
+msgid "LC_DANE_VIEW_ZAMOWIENIAPUBLICZNE_zal_uzasadnienie"
+msgstr "Uzasadnienie wyboru trybu prowadzenia postępowania"
+
+msgid "LC_DANE_VIEW_ZAMOWIENIAPUBLICZNE_zamowienie_uzupelniajace"
+msgstr "Zamówienie uzupełniające"
+
+msgid "LC_DANE_VIEW_ZAMOWIENIAPUBLICZNE_wadium"
+msgstr "Wadium"
+
+msgid "LC_DANE_VIEW_ZAMOWIENIAPUBLICZNE_wybor_wykonawcow"
+msgstr "Wybór wykonawców"
+
+msgid "LC_DANE_VIEW_ZAMOWIENIAPUBLICZNE_zmieniona_umowa"
+msgstr "Zmieniona umowa"
+
+msgid "LC_DANE_VIEW_ZAMOWIENIAPUBLICZNE_aukcja_www"
+msgstr "Aukajca WWW"
+
+msgid "LC_DANE_VIEW_ZAMOWIENIAPUBLICZNE_siwz_www"
+msgstr "SIWZ"
+
+msgid "LC_DANE_VIEW_ZAMOWIENIAPUBLICZNE_siwz_adres"
+msgstr "Adres pod którym dostępny jest SIWZ"
+
+msgid "LC_DANE_VIEW_ZAMOWIENIAPUBLICZNE_dk_potrzeby"
+msgstr "Potrzeby"
+
+msgid "LC_DANE_VIEW_ZAMOWIENIAPUBLICZNE_dk_nagrody"
+msgstr "Nagrody"
+
+msgid "LC_DANE_VIEW_ZAMOWIENIAPUBLICZNE_oferty_miejsce"
+msgstr "Miejsce składania ofert"
+
+msgid "LC_DANE_VIEW_ZAMOWIENIAPUBLICZNE_umowa_zabezpieczenia"
+msgstr "Umowa zabezpieczenia"
+
+msgid "LC_DANE_VIEW_ZAMOWIENIAPUBLICZNE_umowa_istotne_postanowienia"
+msgstr "Istotne postanowienia umowy"
+
+msgid "LC_DANE_VIEW_ZAMOWIENIAPUBLICZNE_info"
+msgstr "Inne informacje"
+
+msgid "LC_DANE_VIEW_ZAMOWIENIAPUBLICZNE_inne_dokumenty"
+msgstr "Inne dokumenty"
+
+msgid "LC_DANE_VIEW_ZAMOWIENIAPUBLICZNE_inne_dok_potw"
+msgstr "Inne dokumenty potwierdzjące"
+
+msgid "LC_DANE_VIEW_ZAMOWIENIAPUBLICZNE_niepelnosprawne"
+msgstr "Osoby niepełnosprawne"
+
+msgid "LC_DANE_VIEW_ZAMOWIENIAPUBLICZNE_zal_pprawna_hid"
+msgstr "Podstawa prawna prowadzenia postępowania"
+
+msgid "LC_DANE_VIEW_ZAMOWIENIAPUBLICZNE_zamowienie_pprawna"
+msgstr "Podstawa prawna prowadzenia postępowania"
+
+msgid "LC_DANE_VIEW_ZAMOWIENIAPUBLICZNE_zamowienie_pprawna_hid"
+msgstr "Podstawa prawna prowadzenia postępowania"
+
+msgid "LC_DANE_VIEW_ZAMOWIENIAPUBLICZNE_zamowienie_uzasadnienie"
+msgstr "Uzasadnienie wyboru trybu prowadzenia postępowania"
+
+
+
+
+
+
+
+

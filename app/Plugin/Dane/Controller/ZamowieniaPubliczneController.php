@@ -6,14 +6,19 @@ class ZamowieniaPubliczneController extends DataobjectsController
 {
     public $menu = array();
     public $objectOptions = array(
-        'hlFields' => array(),
+        'hlFields' => array('status_id', 'tryb_id', 'rodzaj_id'),
     );
 
     public function view()
     {
 
         parent::view();
-        $details = $this->object->loadLayer('details');
+        $this->object->loadLayer('details');
+        $this->object->loadLayer('sources');
+        $this->object->loadLayer('czesci');
+        
+        
+        /*
         $fields = $details['ZamowieniaPubliczne'];
 
 
@@ -39,5 +44,6 @@ class ZamowieniaPubliczneController extends DataobjectsController
 
         $fields['przedmiot'] = '<p>' . implode("</p>\n<p>", $paragraphs) . '</p>';
         $this->set('details', $fields);
+        */
     }
 } 

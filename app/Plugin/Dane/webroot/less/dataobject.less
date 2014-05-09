@@ -136,7 +136,6 @@ blockquote {
             padding: 10px 20px 0 10px;
             color: #2F2F2F;
             font-size: 14px;
-            background: #EAEAEA;
             margin-top: 0;
             overflow: auto;
 
@@ -191,6 +190,7 @@ blockquote {
                         float: left;
                         margin-right: 10px;
                         font-weight: 500;
+                        color: #2E8F3E;
                     }
 
                     .sublabel {
@@ -274,7 +274,7 @@ blockquote {
 
                                 &:before {
                                     content: "\e606";
-                                    color: #008000;
+                                    color: lighten(#2E8F3E, 10%);
                                 }
                             }
                         }
@@ -601,6 +601,14 @@ blockquote {
             &.noBorder {
                 border: 0;
             }
+        }
+        
+        .thumb_cont {
+	        overflow: hidden;
+	        max-height: 100px;
+	        .thumb {
+		        
+	        }
         }
     }
 

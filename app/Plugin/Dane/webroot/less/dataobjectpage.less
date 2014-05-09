@@ -8,8 +8,8 @@
             .objectRender {
 
                 .header {
-                    color: #555;
-                    font-size: 13px;
+                    color: #777;
+                    font-size: 11px;
                 }
 
                 h1.title {
@@ -42,7 +42,24 @@
     .objectsPageWindow {
         padding-bottom: 20px;
         overflow: hidden;
-
+		
+		.objectMain {
+			padding-left: 0;
+			
+		}
+		
+		.objectSide {
+		
+			padding-right: 0;
+			
+			.objectSideInner {
+				
+				padding: 10px;
+				margin-top: -20px;
+				
+			}
+		}
+		
         .objectMenu {
             &.horizontal .nav-stacked > li {
                 float: left;
@@ -78,7 +95,7 @@
             min-height: 400px;
             position: relative;
             top: -4px;
-
+			
             .dataBrowser {
                 position: relative;
                 top: -10px;
@@ -125,70 +142,74 @@
                 overflow: auto;
             }
 
-            .dataHighlights {
-                margin-top: 10px;
-                padding: 0 20px;
-                display: inline-block;
-                width: 100%;
+            .object {
 
-                &.normal .dataHighlight {
-                    ._label {
-                        font-size: 13px;
-                    }
-                    ._value {
-                        font-size: 16px;
-                    }
-                }
-
-                .dataHighlight {
-                    padding: 5px;
-                    overflow: auto;
-                    margin-bottom: 15px;
-
-                    &.secondRow {
-                        display: none;
-                    }
-
-                    ._label {
-                        font-size: 11px;
-                        margin: 0 0 3px;
-                        color: #999;
-                        font-family: Lato;
-                    }
-
-                    ._value {
-                        font-size: 12px;
-                        margin: 0;
-
-                        img {
-                            float: left;
-                            margin-right: 5px;
-                        }
-
-                        .add {
-                            display: none;
-                        }
-
-                    }
-
-                    .__autorzy_html_ul {
-                        font-size: 12px;
-                        margin: 0;
-                    }
-                }
-
-                &.inl {
-                    .dataHighlight {
-                        ._label {
-                            float: left;
-                            margin-right: 10px;
-                        }
-                    }
-                }
-            }
-            .dataHighlightsOptions {
-                padding-bottom: 20px;
-                margin: 0;
+	            .dataHighlights {
+	                margin-top: 10px;
+	                padding: 0 20px;
+	                display: inline-block;
+	                width: 100%;
+	
+	                &.normal .dataHighlight {
+	                    ._label {
+	                        font-size: 13px;
+	                    }
+	                    ._value {
+	                        font-size: 16px;
+	                    }
+	                }
+	
+	                .dataHighlight {
+	                    padding: 5px;
+	                    overflow: auto;
+	                    margin-bottom: 15px;
+	
+	                    &.secondRow {
+	                        display: none;
+	                    }
+	
+	                    ._label {
+	                        font-size: 11px;
+	                        margin: 0 0 3px;
+	                        color: #999;
+	                        font-family: Lato;
+	                    }
+	
+	                    ._value {
+	                        font-size: 12px;
+	                        margin: 0;
+	
+	                        img {
+	                            float: left;
+	                            margin-right: 5px;
+	                        }
+	
+	                        .add {
+	                            display: none;
+	                        }
+	
+	                    }
+	
+	                    .__autorzy_html_ul {
+	                        font-size: 12px;
+	                        margin: 0;
+	                    }
+	                }
+	
+	                &.inl {
+	                    .dataHighlight {
+	                        ._label {
+	                            float: left;
+	                            margin-right: 10px;
+	                        }
+	                    }
+	                }
+	            }
+	            .dataHighlightsOptions {
+	                padding-bottom: 20px;
+	                margin: 0;
+	            }
+            
             }
         }
     }

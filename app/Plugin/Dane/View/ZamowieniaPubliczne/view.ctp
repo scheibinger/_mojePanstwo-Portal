@@ -5,48 +5,104 @@
 <?= $this->Element('dataobject/pageBegin'); ?>
 
     <div class="row">
-        <div class="col-lg-9">
-
-            <div class="object mpanel">
-
-                <? $bg = false; ?>
-
-                <div class="block<? if ($bg) { ?> bg<? } ?>">
-                    <h2 class="underline"><?php echo __d('dane', __('LC_DANE_VIEW_ZAMOWIENIAPUBLICZNE_PRZEDMIOT')); ?></h2>
-
-                    <div class="content">
-
-                        <div class="textBlock"><?php echo($details['przedmiot']); ?></div>
-
-                    </div>
-                </div>
-
-                <? if ($object->getData('wadium')) { ?>
-
-                    <? $bg = !$bg; ?>
-
-                    <div class="block<? if ($bg) { ?> bg<? } ?>">
-                        <h2 class="underline">Wadium</h2>
-
-                        <div class="content">
-
-                            <div class="textBlock"><?php echo $object->getData('wadium'); ?></div>
-
-                        </div>
-                    </div>
-
-                <? } ?>
-                
-                <div id="source" class="block">
+        
+        <div class="col-lg-3 objectSide">
+			<div class="objectSideInner">
+			
+	
+                <ul class="dataHighlights side">
+                	<li class="dataHighlight big">
+                		<p class="_label">Wartość udzielonego zamówienia</p>
+                		<p class="_value"><?= _currency( $object->getData('wartosc_cena') ); ?></p>
+                	</li>
+                	<li class="dataHighlight" style="display: none;">
+                		<p class="_label">Wartość szacowana przez zamawiającego</p>
+                		<p class="_value"><?= _currency( $object->getData('wartosc_szacowana') ); ?></p>
+                	</li>
+                	<li class="dataHighlight">
+                		<p class="_label">Zamawiający</p>
+                		<p class="_value"><a href="/dane/zamowienia_publiczne_zamawiajacy/<?= $object->getData('zamawiajacy_id'); ?>"><?= $object->getData('zamawiajacy_nazwa'); ?><br/><?= $object->getData('zamawiajacy_miejscowosc'); ?></a></p>
+                	</li>
+                	<?
                 	
-                </div>
-
-            </div>
-
-        </div>
-        <div class="col-lg-3">
-
-            <div class="block nosidepadding">
+                		$czesci = $object->getLayer('czesci');
+                		if( count($czesci)==1 ) {
+	                		$czesc = $czesci[0];
+	                ?>
+	                <li class="dataHighlight topborder">
+                		<p class="_label">Wykonawca</p>
+                		<? foreach($czesc['wykonawcy'] as $wykonawca) {?>
+                		<p class="_value"><a href="/dane/zamowienia_publiczne_wykonawcy/<?= $wykonawca['id'] ?>"><?= $wykonawca['nazwa']; ?></a></p>
+                		<? } ?>
+                	</li>
+                	<li class="dataHighlight">
+                		<p class="_label">Data udzielenia zamówienia</p>
+                		<p class="_value"><?= $czesc['data_zam']; ?></p>
+                	</li>
+                	<li class="dataHighlight">
+                		<p class="_label">Cena minimalna</p>
+                		<p class="_value"><?= _currency( $czesc['cena_min'] ); ?></p>
+                	</li>
+                	<li class="dataHighlight">
+                		<p class="_label">Cena maksymalna</p>
+                		<p class="_value"><?= _currency( $czesc['cena_max'] ); ?></p>
+                	</li>
+                	<li class="dataHighlight inl">
+                		<p class="_label">Liczba ofert</p>
+                		<p class="_value"><?= $czesc['liczba_ofert']; ?></p>
+                	</li>	
+                	<li class="dataHighlight inl">
+                		<p class="_label">Liczba odrzuconych ofert</p>
+                		<p class="_value"><?= $czesc['liczba_odrzuconych_ofert']; ?></p>
+                	</li>	                
+	                <?		
+                		} else {
+                		
+                		foreach($czesci as $czesc) {
+                	?>
+                		
+                		<h2><span>#<?= $czesc['numer'] ?></span> <span><?= $czesc['nazwa'] ?></span></h2>
+                		
+                		<li class="dataHighlight">
+	                		<p class="_label">Wykonawca</p>
+	                		<? foreach($czesc['wykonawcy'] as $wykonawca) {?>
+	                		<p class="_value"><a href="/dane/zamowienia_publiczne_wykonawcy/<?= $wykonawca['id'] ?>"><?= $wykonawca['nazwa']; ?></a></p>
+	                		<? } ?>
+	                	</li>
+	                	<li class="dataHighlight inl" style="display: none;">
+	                		<p class="_label">Data udzielenia zamówienia</p>
+	                		<p class="_value"><?= $czesc['data_zam']; ?></p>
+	                	</li>
+	                	<li class="dataHighlight inl">
+	                		<p class="_label">Cena</p>
+	                		<p class="_value"><?= _currency( $czesc['cena'] ); ?></p>
+	                	</li>
+	                	<li class="dataHighlight inl" style="display: none;">
+	                		<p class="_label">Cena najtańszej oferty</p>
+	                		<p class="_value"><?= _currency( $czesc['cena_min'] ); ?></p>
+	                	</li>
+	                	<li class="dataHighlight inl" style="display: none;">
+	                		<p class="_label">Cena najdroższej oferty</p>
+	                		<p class="_value"><?= _currency( $czesc['cena_max'] ); ?></p>
+	                	</li>
+	                	<li class="dataHighlight inl">
+	                		<p class="_label">Liczba otrzymanych ofert</p>
+	                		<p class="_value"><?= $czesc['liczba_ofert']; ?></p>
+	                	</li>	
+	                	<li class="dataHighlight inl" style="display: none;">
+	                		<p class="_label">Liczba odrzuconych ofert</p>
+	                		<p class="_value"><?= $czesc['liczba_odrzuconych_ofert']; ?></p>
+	                	</li>
+                	
+                	
+                	<? } } ?>
+                	<li class="dataHighlight topborder" style="display: none;">
+                		<p class="_label">Źródło</p>
+                		<p class="_value" id="sources"></p>
+                	</li>	
+                </ul>
+                                                
+                <? /*
                 <h2><?php echo __d('dane', __('LC_DANE_VIEW_ZAMOWIENIAPUBLICZNE_ZAMAWIAJACY')); ?></h2>
 
                 <div class="content">
@@ -60,9 +116,46 @@
                         </li>
                     </ul>
                 </div>
+				*/ ?>
+            
+	            
+            
+			</div>
+        </div>
+        
+        <div class="col-lg-9 objectMain">
+
+            <div class="object mpanel">
+				
+				<div class="block-group">
+				
+				<?
+					foreach( $object->getLayer('details') as $key => $value ) { if( $value ) {
+				?>
+				
+				
+				
+				
+                <div class="block">
+                    <div class="block-header">
+	                    <h2 class="pull-left label"><?php echo __d('dane', __('LC_DANE_VIEW_ZAMOWIENIAPUBLICZNE_' . $key)); ?></h2>
+                    </div>
+
+                    <div class="content">
+
+                        <div class="textBlock"><?php echo( nl2br($value) ); ?></div>
+
+                    </div>
+                </div>
+                
+                <? } } ?>
+                
+				</div>
+
             </div>
 
         </div>
+        
     </div>
 
 <? /*
@@ -94,8 +187,5 @@
 <?= $this->Element('dataobject/pageEnd'); ?>
 
 <script type="text/javascript">
-	var zamowienie = {
-		ogloszenie_nr: '<?= $object->getData('ogloszenie_nr') ?>',
-		data: '<?= $object->getDate() ?>'
-	};
+	var sources = <?= json_encode( $object->getLayer('sources') ) ?>;
 </script>

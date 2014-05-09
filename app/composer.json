@@ -1,7 +1,7 @@
 {
     "name": "epforgpl/mojepanstwo",
     "description": "_mojePaństwo Portal",
-    "version": "0.0.1-alpha",
+    "version": "0.1.0-beta",
     "type": "project",
     "keywords": ["_mojePanstwo", "_eP", "moje panstwo", "ep", "ePF", "portal"],
     "homepage": "http://mojepanstwo.pl",
