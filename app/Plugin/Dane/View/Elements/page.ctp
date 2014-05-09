@@ -23,9 +23,9 @@ $this->Dataobject->setObject($object);
                 <? if ($object->getThumbnailUrl($thumbSize)) { ?>
                     <div class="attachment col-md-<?= $object_content_sizes[0] ?> text-center">
                         <?php if ($object->getUrl() != false) { ?>
-                        <a href="<?= $object->getUrl() ?>">
+                        <a class="thumb_cont" href="<?= $object->getUrl() ?>">
                             <?php } ?>
-                            <img onerror="imgFixer(this)" src="<?= $object->getThumbnailUrl($thumbSize) ?>"
+                            <img class="thumb" onerror="imgFixer(this)" src="<?= $object->getThumbnailUrl($thumbSize) ?>"
                                  alt="<?= strip_tags($object->getTitle()) ?>"/>
                             <?php if ($object->getUrl() != false) { ?>
                         </a>
