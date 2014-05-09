@@ -78,7 +78,8 @@ class OAuthController extends OAuthAppController
 //            $this->redirect(array('action' => 'login', '?' => $this->request->query));
 //        }
 
-        if ($this->request->is('post')) {
+      //  if ($this->request->is('post')) {
+        // always authorize
             $this->validateRequest();
 
             $userId = $this->Auth->user('id');
@@ -89,13 +90,13 @@ class OAuthController extends OAuthAppController
             }
 
             //Did they accept the form? Adjust accordingly
-            $accepted = $this->request->data['accept'] == __('LC_AUTHORIZE');
+            $accepted = true; // $this->request->data['accept'] == __('LC_AUTHORIZE');
             try {
                 $this->OAuth->finishClientAuthorization($accepted, $userId, $this->request->data['Authorize']);
             } catch (OAuth2RedirectException $e) {
                 $e->sendHttpResponse();
             }
-        }
+       // }
         // Clickjacking prevention (supported by IE8+, FF3.6.9+, Opera10.5+, Safari4+, Chrome 4.1.249.1042+)
         $this->response->header('X-Frame-Options: DENY');
 
