@@ -33,28 +33,8 @@ class GroupsController extends PowiadomieniaAppController
 	public function add()
 	{
 		
-		$data = $this->request->data;
-		$data = '{
-		    "group": {
-		        "PowiadomieniaGroup": {
-		            "title": "Narkotyki w Sejmie"
-		        },
-		        "phrases": [
-		            "marihuana",
-		            "kokaina",
-		            "heroina",
-		            "LSD",
-		            "alkohol"
-		        ],
-		        "apps": [
-		            {
-		                "id": 14		                
-		            }
-		        ]
-		    }
-		}';
-			
-		$status = $this->API->addGroup( $data );
+		$data = $this->request->data;		
+		$status = $this->API->saveGroup( $data );
 		
 		$this->set('status', $status);
 		$this->set('_serialize', 'status');
@@ -63,52 +43,14 @@ class GroupsController extends PowiadomieniaAppController
 	
 	public function edit($id)
 	{
+	
 		$data = $this->request->data;
-		$data = '{
-		    "group": {
-		        "PowiadomieniaGroup": {
-		            "id": "4",
-		            "title": "COE Verbatim Records",
-		            "slug": "coe-verbatim-records",
-		            "user_id": "2578",
-		            "alerts_unread_count": "7"
-		        },
-		        "phrases": [
-		            "\"Catherine Ashton\"",
-		            "\"depravation of liberty\"",
-		            "\"Eastern Partnership\"",
-		            "\"equal treatment\"",
-		            "\"fair trial\"",
-		            "\"freedom of religion\"",
-		            "\"freedom of speech\"",
-		            "\"rights of internally displaced people\"",
-		            "\"\u0160tefan F\u00fcle\"",
-		            "Azerbaijan",
-		            "Barroso",
-		            "discrimination",
-		            "Kazakhstan",
-		            "LGBT",
-		            "protests",
-		            "Tadeusz Iwi\u0144ski",
-		            "torture"
-		        ],
-		        "apps": [
-		            {
-		                "id": 14,
-		                "name": "HFHR",
-		                "datasets": [
-		                    {
-		                        "id": "141",
-		                        "name": "Posiedzenia Rady Europy"
-		                    }
-		                ]
-		            }
-		        ]
-		    }
-		}';
-		$data = json_decode( $data );
+		$data['group']['PowiadomieniaGroup']['id'] = $id;
+			
+		$status = $this->API->saveGroup( $data );
 		
-		debug( $data );
+		$this->set('status', $status);
+		$this->set('_serialize', 'status');
 		
 	}
 	
