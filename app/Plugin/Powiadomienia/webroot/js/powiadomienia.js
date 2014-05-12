@@ -175,7 +175,7 @@
                 appStatus = true;
                 return false;
             }
-        })
+        });
 
         return (
             (

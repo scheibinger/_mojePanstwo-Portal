@@ -101,7 +101,7 @@ msgid "LC_POWIADOMIENIA_OPTIONS_ALERT_BUTTON_UNREAD"
 msgstr "Nieprzeczytane"
 
 msgid "LC_POWIADOMIENIA_POWIADOMENIA_MODAL_TITLE_PLACEHOLDER"
-msgstr "Podaj nazwę dla grupy powiadomień..."
+msgstr "Podaj tytuł grupy..."
 
 msgid "LC_POWIADOMIENIA_POWIADOMENIA_MODAL_DATASETS"
 msgstr "Pochodzące z następujących aplikacji:"

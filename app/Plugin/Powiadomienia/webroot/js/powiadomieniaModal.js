@@ -76,28 +76,38 @@ var powiadomieniaModal;
                 powiadomieniaModal.options.modal.find('.modal-header h4.modal-title').text('...');
 
             powiadomieniaModal.options.modal.find('.modal-header h4.modal-title').click(function () {
-                powiadomieniaModal.options.modal.find('.modal-header h4.modal-title').addClass('hide');
-                powiadomieniaModal.options.modal.find('.modal-header .edit.modal-title').removeClass('hide');
-
+                powiadomieniaModal.options.modal.find('.modal-header h4.modal-title').addClass('hide').focus();
+                powiadomieniaModal.options.modal.find('.modal-header .edit.modal-title').removeClass('hide').keypress(function (e) {
+                    console.log(e, e.which);
+                    if (e.which == 13) {
+                        powiadomieniaModal.editTitleChange();
+                        return false;
+                    }
+                });
+                var tempTextarea = powiadomieniaModal.options.modal.find('.modal-header .edit.modal-title textarea').val();
+                powiadomieniaModal.options.modal.find('.modal-header .edit.modal-title textarea').focus().val('').val(tempTextarea);
                 setTimeout(function () {
                     $("body").click(function (event) {
                         if (event.target.nodeName != 'TEXTAREA') {
-                            if (powiadomieniaModal.options.modal.find('.modal-header .edit.modal-title textarea').val() != powiadomieniaModal.options.modal.find('.modal-header h4.modal-title').text()) {
-                                powiadomieniaModal.options.title = $.trim(powiadomieniaModal.options.modal.find('.modal-header .edit.modal-title textarea').val());
-                                if (powiadomieniaModal.options.title == '')
-                                    powiadomieniaModal.options.modal.find('.modal-header h4.modal-title').text('...');
-                                else
-                                    powiadomieniaModal.options.modal.find('.modal-header h4.modal-title').text(powiadomieniaModal.options.title);
-                            }
-
-                            powiadomieniaModal.options.modal.find('.modal-header .edit.modal-title').addClass('hide');
-                            powiadomieniaModal.options.modal.find('.modal-header h4.modal-title').removeClass('hide');
-
-                            $("body").unbind('click');
+                            powiadomieniaModal.editTitleChange();
                         }
                     });
                 }, 0);
             })
+        },
+        editTitleChange: function () {
+            if (powiadomieniaModal.options.modal.find('.modal-header .edit.modal-title textarea').val() != powiadomieniaModal.options.modal.find('.modal-header h4.modal-title').text()) {
+                powiadomieniaModal.options.title = $.trim(powiadomieniaModal.options.modal.find('.modal-header .edit.modal-title textarea').val());
+                if (powiadomieniaModal.options.title == '')
+                    powiadomieniaModal.options.modal.find('.modal-header h4.modal-title').text('...');
+                else
+                    powiadomieniaModal.options.modal.find('.modal-header h4.modal-title').text(powiadomieniaModal.options.title);
+            }
+
+            powiadomieniaModal.options.modal.find('.modal-header .edit.modal-title').addClass('hide');
+            powiadomieniaModal.options.modal.find('.modal-header h4.modal-title').removeClass('hide');
+
+            $("body").unbind('click');
         },
         additionalInfo: function () {
             if (powiadomieniaModal.options.ajax.additionalUrl != null) {
