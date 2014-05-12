@@ -57,12 +57,17 @@ var powiadomieniaModal;
             if (powiadomieniaModal.options.footer == null) {
                 powiadomieniaModal.options.modal.find('.modal-content').append(
                     $('<div></div>').addClass('modal-footer').append(
-                        $('<button></button>').addClass('btn close btn-info pull-left').attr({'type': 'button'}).text('Zamknij')
+                        $('<button></button>').addClass('btn btn-default closed pull-left').attr({'type': 'button'}).text('Zamknij')
                     )
                 )
             } else {
+                powiadomieniaModal.options.footer.prepend(
+                    $('<button></button>').addClass('btn btn-default closed pull-left').attr({'type': 'button'}).text('Zamknij')
+                );
                 powiadomieniaModal.options.modal.find('.modal-content').append(powiadomieniaModal.options.footer);
             }
+
+            powiadomieniaModal.options.modal.find('.modal-footer button.closed').click(powiadomieniaModal.options.modal.modal('toggle'));
             powiadomieniaModal.options.modal.modal();
             powiadomieniaModal.additionalInfo();
         },

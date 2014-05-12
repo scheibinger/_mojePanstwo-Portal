@@ -123,3 +123,6 @@ msgstr "Duplikuj"
 
 msgid "LC_POWIADOMIENIA_POWIADOMENIA_MODAL_ZAPISZ"
 msgstr "Zapisz"
+
+msgid "LC_POWIADOMIENIA_POWIADOMENIA_MODAL_WIECEJ"
+msgstr "Więcej"

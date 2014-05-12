@@ -223,38 +223,51 @@
             e.preventDefault();
 
             modalBottom.addClass('modal-footer').append(
-                    $('<button></button>').addClass('btn delete btn-danger pull-left').hide().attr({'type': 'button'}).text(_mPHeart.translation.LC_POWIADOMIENIA_POWIADOMENIA_MODAL_USUN)
-                ).append(
-                    $('<button></button>').addClass('btn duplicate btn-info pull-left').hide().attr({'type': 'button'}).text(_mPHeart.translation.LC_POWIADOMIENIA_POWIADOMENIA_MODAL_DUPLIKUJ)
+                    $('<div></div>').addClass('btn-group pull-left').append(
+                            $('<button></button>').addClass('btn btn-default dropdown-toggle').attr({'data-toggle': 'dropdown', 'type': 'button'}).text(_mPHeart.translation.LC_POWIADOMIENIA_POWIADOMENIA_MODAL_WIECEJ).append(
+                                $('<span></span>').addClass("caret")
+                            )
+                        ).append(
+                            $('<ul></ul>').addClass('dropdown-menu').attr('role', 'menu')
+                                /*.append(
+                                 $('<li></li>').append(
+                                 $('<a></a>').addClass('duplicate').attr('href', '#').text(_mPHeart.translation.LC_POWIADOMIENIA_POWIADOMENIA_MODAL_DUPLIKUJ)
+                                 )
+                                 ).append(
+                                 $('<li></li>').addClass('divider')
+                                 )*/.append(
+                                    $('<li></li>').append(
+                                        $('<a></a>').addClass('delete').attr('href', '#').text(_mPHeart.translation.LC_POWIADOMIENIA_POWIADOMENIA_MODAL_USUN)
+                                    )
+                                )
+                        )
                 ).append(
                     $('<button></button>').addClass('btn save btn-primary pull-right').attr({'type': 'button'}).text(_mPHeart.translation.LC_POWIADOMIENIA_POWIADOMENIA_MODAL_ZAPISZ)
                 );
 
-
             /*DELETE*/
-            modalBottom.find('.btn.delete').click(function () {
+            modalBottom.find('a.delete').click(function () {
                 if ($(this).hasClass('disabled')) return;
 
+                var parm = serializePowiadomienia();
+
                 $.ajax({
-                    type: 'GET',
-                    url: '/',
-                    data: {
-                        id: parent.data('id'),
-                        action: 'delete'
-                    },
-                    dataType: 'JSON',
+                    type: 'DELETE',
+                    url: '/powiadomienia/groups/' + parm.group.PowiadomieniaGroup.id + '.json',
+                    dataType: "json",
                     beforeSend: function () {
-                        modalBottom.find('.btn').addClass('disabled');
+                        modalBottom.find('.btn', '.btn-group').addClass('disabled');
                         modalBottom.find('.btn.delete').addClass('loading');
                     },
                     complete: function () { /*TODO: zamienic na success gdy beda juz AJAX REQUEST gotowe*/
-                        powiadomieniaModal.modal.modal('toggle');
+                        powiadomieniaModal.options.modal.modal('toggle');
+                        parent.addClass('hide');
                     }
                 })
             });
 
             /*DUPLICATE*/
-            modalBottom.find('.btn.duplicate').click(function () {
+            modalBottom.find('a.duplicate').click(function () {
                 if ($(this).hasClass('disabled')) return;
 
                 $.ajax({
@@ -266,7 +279,7 @@
                     },
                     dataType: 'JSON',
                     beforeSend: function () {
-                        modalBottom.find('.btn').addClass('disabled');
+                        modalBottom.find('.btn', '.btn-group').addClass('disabled');
                         modalBottom.find('.btn.duplicate').addClass('loading');
                     },
                     complete: function () { /*TODO: zamienic na success gdy beda juz AJAX REQUEST gotowe*/
@@ -287,7 +300,7 @@
                     data: parm,
                     dataType: "json",
                     beforeSend: function () {
-                        modalBottom.find('.btn').addClass('disabled');
+                        modalBottom.find('.btn', '.btn-group').addClass('disabled');
                         modalBottom.find('.btn.save').addClass('loading');
                     },
                     complete: function () {/*TODO: zamienic na success gdy beda juz AJAX REQUEST gotowe*/
