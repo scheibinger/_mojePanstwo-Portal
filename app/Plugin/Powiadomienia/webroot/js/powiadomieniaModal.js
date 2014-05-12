@@ -278,26 +278,28 @@ var powiadomieniaModal;
 
                             if (that.hasClass('right')) {
                                 that.removeClass('right').addClass('down');
-                                parent.addClass('choosed').queue(function () {
-                                    $.each(appSwitch, function () {
-                                        if (!($(this).hasClass('choosed'))) {
-                                            $(this).animate({opacity: 0}, animSpeed / 2, function () {
-                                                $(this).slideUp(animSpeed / 2);
-                                            })
-                                        } else {
-                                            $(this).removeClass('choosed');
-                                            $(this).dequeue();
-                                        }
-                                    })
-                                }).queue(function () {
-                                    subAppList.css({'right': -width, opacity: 0}).show().animate({right: 0, opacity: 1}, animSpeed);
-                                    $(this).dequeue();
-                                });
+                                parent.addClass('choosed');
+                                $.each(appSwitch, function () {
+                                    if (!($(this).hasClass('choosed'))) {
+                                        $(this).animate({opacity: 0}, animSpeed / 2, function () {
+                                            $(this).slideUp(animSpeed / 2);
+                                        })
+                                    } else {
+                                        $(this).removeClass('choosed');
+                                    }
+                                })
 
+                                var autoHeight = subAppList.css('height', 'auto').outerHeight() + 20;
+
+                                subAppList.css({'right': -width, opacity: 0}).height(0).show().animate({height: autoHeight}, animSpeed / 2, function () {
+                                    subAppList.animate({right: 0, opacity: 1, height: 'auto'}, animSpeed);
+                                });
                             } else {
                                 that.removeClass('down').addClass('right');
                                 subAppList.animate({right: -width, opacity: 0}, animSpeed, function () {
-                                    subAppList.hide().removeAttr('style');
+                                    subAppList.animate({height: 0}, animSpeed / 2, function () {
+                                        subAppList.hide().removeAttr('style');
+                                    })
                                 })
                                 $.each(appSwitch, function () {
                                     $(this).slideDown(animSpeed / 2);
