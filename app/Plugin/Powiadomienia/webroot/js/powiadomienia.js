@@ -138,16 +138,20 @@
         /*GETHER APPS LIST WITH STATUS MARKER*/
         powiadomieniaModal.options.modal.find('form .datasets > .switchCheckbox > .bootstrap-switch input').map(function () {
             var name = this.name.match(/\[(.*?)\]/);
+
             parm.group.apps.push({name: name[1], value: this.value, status: this.checked ? true : false, datasets: [] })
         });
 
         $.each(serialize, function (index, data) {
             if (data.name == "title")
-                parm.group.PowiadomieniaGroup.title = data.value;
+                parm.group.PowiadomieniaGroup.title = data.value.replace(/<\/?[^>]+>/gi, '');
             if (data.name == "data[Dataobject][ids]")
                 parm.group.PowiadomieniaGroup.id = data.value;
             if (data.name == "keywords") {
                 parm.group.phrases = data.value.split(',');
+                $.each(parm.group.phrases, function (index, value) {
+                    parm.group.phrases[index] = value.replace(/<\/?[^>]+>/gi, '')
+                })
             }
 
             if (data.name.indexOf("subapps[") === 0) {
@@ -162,6 +166,27 @@
         });
 
         return parm;
+    }
+
+    function serializePowiadomieniaSave(parm) {
+        var appStatus = false;
+        $.each(parm.group.apps, function (index, data) {
+            if (data.status == true && data.datasets.length > 0) {
+                appStatus = true;
+                return false;
+            }
+        })
+
+        return (
+            (
+                parm.group.PowiadomieniaGroup.title != null
+                    && parm.group.PowiadomieniaGroup.title != ""
+                    && parm.group.PowiadomieniaGroup.title != '...'
+                ) && (
+                parm.group.phrases.length != 0 && !(parm.group.phrases.length == 1 && parm.group.phrases[0] == "")
+                ) &&
+                appStatus
+            )
     }
 
     $.ajax({
@@ -190,27 +215,35 @@
                 $('<button></button>').addClass('btn save btn-primary pull-left').attr({'type': 'button'}).text('Zapisz')
             );
 
-            modalBottom.find('.btn.save').click(function () {
-                if ($(this).hasClass('disabled')) return;
-
-                $.ajax({
-                    type: 'POST',
-                    url: '/powiadomienia/groups.json',
-                    data: serializePowiadomienia(),
-                    dataType: "json",
-                    beforeSend: function () {
-                        modalBottom.find('.btn').addClass('disabled');
-                        modalBottom.find('.btn.save').addClass('loading');
-                    },
-                    complete: function () {/*TODO: zamienic na success gdy beda juz AJAX REQUEST gotowe*/
-                        powiadomieniaModal.options.modal.modal('toggle');
-                    }
-                })
-            });
             powiadomieniaModal.init({
                 footer: modalBottom,
                 additionalInfoList: appList
             })
+
+            modalBottom.find('.btn.save').click(function () {
+                if ($(this).hasClass('disabled')) return;
+
+                var parm = serializePowiadomienia();
+
+                if (serializePowiadomieniaSave(parm)) {
+                    $.ajax({
+                        type: 'POST',
+                        url: '/powiadomienia/groups.json',
+                        data: serializePowiadomienia(),
+                        dataType: "json",
+                        beforeSend: function () {
+                            modalBottom.find('.btn').addClass('disabled');
+                            modalBottom.find('.btn.save').addClass('loading');
+                        },
+                        complete: function () {/*TODO: zamienic na success gdy beda juz AJAX REQUEST gotowe*/
+                            powiadomieniaModal.options.modal.modal('toggle');
+                        }
+                    })
+
+                } else {
+                    /*ERROR - BRAK TITLE, KEYWORDS, APPS*/
+                }
+            });
         });
     }
 
@@ -270,6 +303,8 @@
             modalBottom.find('a.duplicate').click(function () {
                 if ($(this).hasClass('disabled')) return;
 
+                var parm = serializePowiadomienia();
+
                 $.ajax({
                     type: 'GET',
                     url: '/',
@@ -294,20 +329,24 @@
 
                 var parm = serializePowiadomienia();
 
-                $.ajax({
-                    type: 'POST',
-                    url: '/powiadomienia/groups/' + parm.group.PowiadomieniaGroup.id + '.json',
-                    data: parm,
-                    dataType: "json",
-                    beforeSend: function () {
-                        modalBottom.find('.btn', '.btn-group').addClass('disabled');
-                        modalBottom.find('.btn.save').addClass('loading');
-                    },
-                    complete: function () {/*TODO: zamienic na success gdy beda juz AJAX REQUEST gotowe*/
-                        powiadomieniaModal.options.modal.modal('toggle');
-                        parent.find('label a.wrap').text(parm.group.PowiadomieniaGroup.title)
-                    }
-                })
+                if (serializePowiadomieniaSave(parm)) {
+                    $.ajax({
+                        type: 'POST',
+                        url: '/powiadomienia/groups/' + parm.group.PowiadomieniaGroup.id + '.json',
+                        data: parm,
+                        dataType: "json",
+                        beforeSend: function () {
+                            modalBottom.find('.btn', '.btn-group').addClass('disabled');
+                            modalBottom.find('.btn.save').addClass('loading');
+                        },
+                        complete: function () {/*TODO: zamienic na success gdy beda juz AJAX REQUEST gotowe*/
+                            powiadomieniaModal.options.modal.modal('toggle');
+                            parent.find('label a.wrap').text(parm.group.PowiadomieniaGroup.title)
+                        }
+                    })
+                } else {
+                    /*ERROR - BRAK TITLE, KEYWORDS, APPS*/
+                }
             });
             powiadomieniaModal.init({
                 footer: modalBottom,
