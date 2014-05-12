@@ -136,7 +136,7 @@
             };
 
         /*GETHER APPS LIST WITH STATUS MARKER*/
-        powiadomieniaModal.options.modal.find('form .datasets > .switchCheckbox > .bootstrap-switch input').map(function () {
+        powiadomieniaModal.options.modal.find('form .datasets .datasetsContent > .switchCheckbox > .bootstrap-switch input').map(function () {
             var name = this.name.match(/\[(.*?)\]/);
 
             parm.group.apps.push({name: name[1], value: this.value, status: this.checked ? true : false, datasets: [] })
@@ -177,6 +177,13 @@
             }
         });
 
+        if (!(parm.group.PowiadomieniaGroup.title != null && parm.group.PowiadomieniaGroup.title != "" && parm.group.PowiadomieniaGroup.title != '...'))
+            serializePowiadomieniaSaveAlert('title')
+        else if (!(parm.group.phrases.length != 0 && !(parm.group.phrases.length == 1 && parm.group.phrases[0] == "")))
+            serializePowiadomieniaSaveAlert('phrase')
+        else if (!(appStatus))
+            serializePowiadomieniaSaveAlert('apps')
+
         return (
             (
                 parm.group.PowiadomieniaGroup.title != null
@@ -187,6 +194,29 @@
                 ) &&
                 appStatus
             )
+    }
+
+    function serializePowiadomieniaSaveAlert(status) {
+        var modalAlert;
+
+        if ((modalAlert = powiadomieniaModal.options.modal.find('.modal-alert')).length == 0) {
+            modalAlert = $('<div></div>').addClass('modal-alert');
+            modalAlert.insertAfter(powiadomieniaModal.options.modal.find('.modal-footer'));
+        }
+        switch (status) {
+            case('title'):
+                modalAlert.text(_mPHeart.translation.LC_POWIADOMIENIA_POWIADOMENIA_MODAL_ALERT_TITLE);
+                break;
+            case('phrase'):
+                modalAlert.text(_mPHeart.translation.LC_POWIADOMIENIA_POWIADOMENIA_MODAL_ALERT_PHRASE);
+                break;
+            case('apps'):
+                modalAlert.text(_mPHeart.translation.LC_POWIADOMIENIA_POWIADOMENIA_MODAL_ALERT_APPS);
+                break;
+            default:
+                modalAlert.text(_mPHeart.translation.LC_POWIADOMIENIA_POWIADOMENIA_MODAL_ALERT_DEFAULT);
+                break;
+        }
     }
 
     $.ajax({
@@ -240,8 +270,6 @@
                         }
                     })
 
-                } else {
-                    /*ERROR - BRAK TITLE, KEYWORDS, APPS*/
                 }
             });
         });

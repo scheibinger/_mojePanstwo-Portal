@@ -126,3 +126,15 @@ msgstr "Zapisz"
 
 msgid "LC_POWIADOMIENIA_POWIADOMENIA_MODAL_WIECEJ"
 msgstr "Więcej"
+
+msgid "LC_POWIADOMIENIA_POWIADOMENIA_MODAL_ALERT_TITLE"
+msgstr "Błąd! Nie wpisano tytułu dla grupy powiadomień."
+
+msgid "LC_POWIADOMIENIA_POWIADOMENIA_MODAL_ALERT_PHRASE"
+msgstr "Błąd! Nie wybrano żadnych słów kluczowych."
+
+msgid "LC_POWIADOMIENIA_POWIADOMENIA_MODAL_ALERT_APPS"
+msgstr "Błąd! Nie wybrano żadnych aplikacji bądź datasetów do śledzenia."
+
+msgid "LC_POWIADOMIENIA_POWIADOMENIA_MODAL_ALERT_DEFAULT"
+msgstr "Błąd! Wystąpił błąd podczas zapisu. Prosze spróbować ponownie później."

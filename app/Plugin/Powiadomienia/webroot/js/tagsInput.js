@@ -109,9 +109,11 @@
                     })
                 );
 
-                if ($('.tagsInput span.tag').length != 0) {
-                    newTag.insertAfter('.tagsInput span.tag:last');
-                } else newTag.insertAfter('#' + id + '_addTag');
+                if ($('.tagsInput .tagsList span.tag').length != 0) {
+                    newTag.insertAfter('.tagsInput .tagsList span.tag:last');
+                } else {
+                    $('<div></div>').addClass('tagsList').append(newTag).insertAfter('#' + id + '_addTag');
+                }
 
                 tagslist.push(value);
 
