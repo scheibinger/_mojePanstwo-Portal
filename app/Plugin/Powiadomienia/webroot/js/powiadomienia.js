@@ -256,7 +256,7 @@
             e.preventDefault();
 
             modalBottom.addClass('modal-footer').append(
-                    $('<div></div>').addClass('btn-group pull-left').append(
+                    $('<div></div>').addClass('btn-group pull-left show').append(
                             $('<button></button>').addClass('btn btn-default dropdown-toggle').attr({'data-toggle': 'dropdown', 'type': 'button'}).text(_mPHeart.translation.LC_POWIADOMIENIA_POWIADOMENIA_MODAL_WIECEJ).append(
                                 $('<span></span>').addClass("caret")
                             )

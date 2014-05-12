@@ -273,48 +273,58 @@ var powiadomieniaModal;
                     var appSwitch;
                     if ((appSwitch = powiadomieniaModal.options.modal.find('form .datasets > .switchCheckbox')).length != 0) {
                         appSwitch.append(
-                            jQuery('<a></a>').addClass('slide right').attr({'href': '#showDatasets'}).click(function (e) {
-                                var that = $(this),
-                                    parent = that.parents('.switchCheckbox'),
-                                    subAppList = parent.find('.datasetsList'),
-                                    width = powiadomieniaModal.options.modal.find('.modal-body > .datasets').outerWidth(),
-                                    animSpeed = 600;
+                                jQuery('<a></a>').addClass('slide right').attr({'href': '#showDatasets'})
+                            ).prepend(
+                                jQuery('<a></a>').addClass('slide left').attr({'href': '#showDatasets'})
+                            )
+                        appSwitch.find('> label, >.slide').click(function (e) {
+                            var that = $(this),
+                                parent = that.parents('.switchCheckbox'),
+                                subAppList = parent.find('.datasetsList'),
+                                width = powiadomieniaModal.options.modal.find('.modal-body > .datasets').outerWidth(),
+                                animSpeed = 600;
 
-                                e.preventDefault();
+                            e.preventDefault();
 
-                                if (that.hasClass('right')) {
-                                    that.removeClass('right').addClass('down');
-                                    parent.addClass('choosed');
-                                    $.each(appSwitch, function () {
-                                        if (!($(this).hasClass('choosed'))) {
-                                            $(this).animate({opacity: 0}, animSpeed / 2, function () {
-                                                $(this).slideUp(animSpeed / 2);
-                                            })
-                                        } else {
-                                            $(this).removeClass('choosed');
-                                        }
+                            if (parent.hasClass('choosed')) {
+                                parent.removeClass('choosed');
+
+                                parent.find('>.bootstrap-switch').stop(true, true).animate({'margin-left': 0}, animSpeed / 2, function () {
+                                    parent.removeAttr('style');
+                                });
+                                parent.find('a.slide.left').stop(true, true).animate({left: '-50px', 'opacity': 0}, animSpeed / 2)
+                                parent.find('a.slide.right').stop(true, true).animate({right: '1%', 'opacity': 1}, animSpeed / 2)
+                                subAppList.stop(true, true).animate({right: -width, opacity: 0}, animSpeed, function () {
+                                    subAppList.stop(true, true).animate({height: 0}, animSpeed / 2, function () {
+                                        subAppList.hide().removeAttr('style');
                                     })
+                                })
+                                $.each(appSwitch, function () {
+                                    $(this).slideDown(animSpeed / 2);
+                                    $(this).stop(true, true).animate({opacity: 1}, animSpeed)
+                                })
+                            } else {
+                                parent.addClass('choosed');
 
-                                    var autoHeight = subAppList.css('height', 'auto').outerHeight() + 20;
-
-                                    subAppList.css({'right': -width, opacity: 0}).height(0).show().animate({height: autoHeight}, animSpeed / 2, function () {
-                                        subAppList.animate({right: 0, opacity: 1, height: 'auto'}, animSpeed);
-                                    });
-                                } else {
-                                    that.removeClass('down').addClass('right');
-                                    subAppList.animate({right: -width, opacity: 0}, animSpeed, function () {
-                                        subAppList.animate({height: 0}, animSpeed / 2, function () {
-                                            subAppList.hide().removeAttr('style');
+                                $.each(appSwitch, function () {
+                                    if (!($(this).hasClass('choosed'))) {
+                                        $(this).stop(true, true).animate({opacity: 0}, animSpeed / 2, function () {
+                                            $(this).slideUp(animSpeed / 2);
                                         })
-                                    })
-                                    $.each(appSwitch, function () {
-                                        $(this).slideDown(animSpeed / 2);
-                                        $(this).animate({opacity: 1}, animSpeed)
-                                    })
+                                    } else {
+                                        parent.find('>.bootstrap-switch').stop(true, true).animate({'margin-left': 40}, animSpeed / 2);
+                                        parent.find('a.slide.left').stop(true, true).animate({left: '1%', 'opacity': 1}, animSpeed / 2)
+                                        parent.find('a.slide.right').stop(true, true).animate({right: '-50px', 'opacity': 0}, animSpeed / 2)
+                                    }
+                                })
 
-                                }
-                            })
-                        )
+                                var autoHeight = subAppList.css('height', 'auto').outerHeight() + 20;
+
+                                subAppList.css({'right': -width, opacity: 0}).height(0).show().stop(true, true).animate({height: autoHeight}, animSpeed / 2, function () {
+                                    subAppList.stop(true, true).animate({right: 0, opacity: 1, height: 'auto'}, animSpeed);
+                                });
+                            }
+                        })
                     }
                 }, 200
             );

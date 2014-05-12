@@ -78,6 +78,10 @@
                         margin: 1% 0;
                         position: relative;
 
+                        label {
+                            cursor: pointer;
+                        }
+
                         .bootstrap-switch {
                             margin-right: 10px;
                         }
@@ -86,6 +90,7 @@
                             border-top: 1px solid #dedede;
                             margin-top: 10px;
                             padding-top: 5px;
+                            padding-left: 40px;
                             position: relative;
                         }
                         .slide {
@@ -94,10 +99,33 @@
                             width: @size;
                             height: @size;
                             position: absolute;
-                            //top: 50%;
-                            top: 3px;
-                            right: 1%;
-                            //margin-top: -(@size/2);
+                            top: 2px;
+
+                            &.left {
+                                left: -50px;
+                                opacity: 0;
+
+                                &:before {
+                                    content: '\e609';
+                                }
+                            }
+                            &.right {
+                                right: 1%;
+
+                                &:before {
+                                    content: '\e60b';
+                                }
+                            }
+                            &.up {
+                                &:before {
+                                    content: '\e60a';
+                                }
+                            }
+                            &.down {
+                                &:before {
+                                    content: '\e608';
+                                }
+                            }
 
                             &:before {
                                 font-size: 22px;
@@ -110,18 +138,6 @@
                                 line-height: 1;
                                 -webkit-font-smoothing: antialiased;
                                 -moz-osx-font-smoothing: grayscale;
-                            }
-                            &.left:before {
-                                content: '\e609';
-                            }
-                            &.right:before {
-                                content: '\e60b';
-                            }
-                            &.up:before {
-                                content: '\e60a';
-                            }
-                            &.down:before {
-                                content: '\e608';
                             }
                         }
                     }
@@ -153,6 +169,10 @@
                 }
                 .btn-group {
                     margin-left: 5px;
+
+                    .caret {
+                        margin-left: 5px;
+                    }
 
                     a.delete {
                         color: #D9534F;
