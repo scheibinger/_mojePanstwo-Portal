@@ -171,6 +171,10 @@ class AppController extends Controller
         $this->set('statusbarCrumbs', $this->statusbarCrumbs);
         $this->set('statusbarMode', $this->statusbarMode);
 
+        // remember path for redirect if necessary
+        if (Router::url(null) != '/null') { // hack for bug
+            $this->Session->write('Auth.loginRedirect', Router::url(null, true));
+        }
     }
 
     public function addStatusbarCrumb($item)

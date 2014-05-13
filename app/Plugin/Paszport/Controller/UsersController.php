@@ -19,13 +19,15 @@ class UsersController extends PaszportAppController
      */
     public function beforeFilter()
     {
+        // save login redirect because it will be overwritten by AppController::beforeFilter
+        if ($this->Session->read("Auth.loginRedirect") != Router::url(array('action'=>'login'), true)) {
+            $this->Auth->loginRedirect = $this->Session->read("Auth.loginRedirect");
+        }
+
         parent::beforeFilter();
 
         $this->Auth->allow(array('login', 'add', 'gate', 'ping', 'forgot', 'reset', 'fblogin', 'externalgate', 'import', 'externalfblogin', 'twitterlogin', 'twitter', 'client'));
         $this->OAuth->deny('me');
-        if ($this->params->action == 'login' && $this->Auth->loggedIn()) {
-            $this->redirect(array('action' => 'index'));
-        }
     }
 
     /**
@@ -52,12 +54,17 @@ class UsersController extends PaszportAppController
      */
     public function login()
     {
+        if ($this->Auth->loggedIn()) {
+            $this->redirect('/');
+        }
+
         if ($this->request->is('post')) {
             $user = $this->PassportApi->User()->login($this->data);
 
             if ($user['user']) {
                 $this->Auth->login($user['user']);
-                $this->redirect(array('action' => 'index'));
+                $this->redirect($this->Auth->redirectUrl());
+
             } else {
                 $this->Session->setFlash(__d('paszport', 'LC_PASZPORT_LOGIN_FAILED'), 'alert', array('class' => 'alert-error'), 'auth');
                 $this->redirect(array('action' => 'login'));
@@ -120,7 +127,7 @@ class UsersController extends PaszportAppController
                     $session = $this->Session->read('API.session');
                     $this->externalgate($service, $session);
                 }
-                $this->redirect($this->referer());
+                $this->redirect($this->Auth->redirectUrl());
 
             } else { # if not we will attempt to create new user based on his facebook data or we will merge his existing account
                 if ($user && $user['User']['email']) { # merge attempt
@@ -164,6 +171,7 @@ class UsersController extends PaszportAppController
                             $this->externalgate($service, $session);
                         }
                         $this->redirect(array('action' => 'setpassword'));
+
                     } else {
                         $this->Session->setFlash(__d('paszport', 'LC_PASZPORT_FACEBOOK_REGISTER_FAILED', true), null, array('class' => 'alert-error'));
                         $this->redirect(array('action' => 'login'));
