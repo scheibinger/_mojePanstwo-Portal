@@ -92,7 +92,7 @@ class OAuthController extends OAuthAppController
             //Did they accept the form? Adjust accordingly
             $accepted = true; // $this->request->data['accept'] == __('LC_AUTHORIZE');
             try {
-                $this->OAuth->finishClientAuthorization($accepted, $userId, $this->request->data['Authorize']);
+                $this->OAuth->finishClientAuthorization($accepted, $userId, $this->Session->read('OAuth.params'));
             } catch (OAuth2RedirectException $e) {
                 $e->sendHttpResponse();
             }

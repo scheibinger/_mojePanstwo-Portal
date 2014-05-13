@@ -20,7 +20,7 @@ class UsersController extends PaszportAppController
     public function beforeFilter()
     {
         // save login redirect because it will be overwritten by AppController::beforeFilter
-        if ($this->Session->read("Auth.loginRedirect") != Router::url(array('action'=>'login'), true)) {
+        if ($this->Session->read("Auth.loginRedirect") != Router::url(array('action'=>'login'), true) && $this->Session->read("Auth.loginRedirect") != (Router::url('/', true) . 'oauth/login')) {
             $this->Auth->loginRedirect = $this->Session->read("Auth.loginRedirect");
         }
 
