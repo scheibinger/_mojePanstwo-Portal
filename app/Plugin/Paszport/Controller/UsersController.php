@@ -187,18 +187,26 @@ class UsersController extends PaszportAppController
      */
     public function setpassword()
     {
+        $this->set('title_for_layout', __d('paszport', 'LC_PASZPORT_SET_PASSWORD', true));
+
         $user = $this->PassportApi->find('users', array('conditions' => array('User.id' => $this->Auth->user('id'))));
         $user = $user['user'];
         if ($user['User']['password_set']) {
             $this->redirect(array('action' => 'index'));
         }
+
         if ($this->request->isPost()) {
-            $this->PassportApi->User()->setPassword($this->data);
-            $this->Session->setFlash(__d('paszport', 'LC_PASZPORT_PASSWORD_SET', true), null, array('class' => 'alert-success'));
-            $this->Session->delete('FB_JUST_REGISTERED');
-            $this->redirect(array('action' => 'index'));
+            $response = $this->PassportApi->User()->setPassword($this->data);
+
+            if (isset($response['errors']['password'])) {
+                $this->Session->setFlash(__d('paszport', $response['errors']['password'][0], true), 'alert', array('class' => 'alert-error'));
+
+            } else {
+                $this->Session->setFlash(__d('paszport', 'LC_PASZPORT_PASSWORD_SET', true), null, array('class' => 'alert-success'));
+                $this->Session->delete('FB_JUST_REGISTERED');
+                $this->redirect(array('action' => 'index'));
+            }
         }
-        $this->set('title_for_layout', __d('paszport', 'LC_PASZPORT_SET_PASSWORD', true));
     }
 
     /**
