@@ -83,7 +83,6 @@ class PaszportAppController extends AppController
         
         $this->Auth->deny(); // default is to deny all
 
-        $this->Auth->loginRedirect = array('controller' => 'users', 'action' => 'index');
         $this->Auth->authError = __d('paszport', 'LC_PASZPORT_UNAUTHORIZED', true);
         if ($this->Auth->loggedIn()) {
             $avatar_for_layout = $this->Auth->user('photo_small');
