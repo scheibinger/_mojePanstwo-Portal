@@ -43,3 +43,4 @@ Thumbs.db
 #############################
 .idea
 
+app/Config/email.php
