@@ -103,6 +103,9 @@ body > pre:first-child {
 	        font-weight: 300;
 	        font-size: 20px;
 	        margin-left: -10px;
+	        white-space: normal !important;
+	        line-height: 24px;
+	        text-align: left;
         }
     }
 
@@ -130,6 +133,10 @@ body > pre:first-child {
 
     .textBlock {
         padding: 0 20px 20px;
+        
+        br {
+	        margin-bottom: 15px;
+        }
     }
 
     ul {
@@ -219,6 +226,11 @@ body > pre:first-child {
             font-size: 12px;
             margin: 0;
         }
+        
+        .label {
+	        font-size: 85%;
+        }
+        
     }
 
     &.inl {
@@ -244,6 +256,7 @@ body > pre:first-child {
     
     .dataHighlight {
     	margin-top: 10px;
+    	list-style: none;
     	
     	&.topborder {
 	    	border-top: 1px solid #CCC;

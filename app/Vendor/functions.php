@@ -88,7 +88,12 @@ if (!function_exists('array_column')) {
 function dataSlownie($data)
 {
     $_data = $data;
-
+	
+	if( strpos($data, '/') ) {
+		$parts = explode('/', $data);
+		$data = $parts[2] . '-' . $parts[1] . '-' . $parts[0];
+	}
+	
     $timestamp = strtotime($data);
     if (!$timestamp)
         return false;
