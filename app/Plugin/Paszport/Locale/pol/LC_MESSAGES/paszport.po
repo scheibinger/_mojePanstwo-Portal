@@ -406,7 +406,7 @@ msgstr "Wybierz język strony"
 
 #: View/Users/add.ctp:35
 msgid "LC_PASZPORT_REGISTER_BUTTON"
-msgstr "Wyślij!"
+msgstr "Zarejestruj"
 
 #: View/Users/avatar.ctp:5
 msgid "LC_PASZPORT_CHANGE_AVATAR_TITLE"
@@ -713,7 +713,7 @@ msgid "LC_PASZPORT_MODAL_LOGIN_VIA_EMAIL"
 msgstr "Zaloguj się przez konto email"
 
 msgid "LC_PASZPORT_MODAL_LOGIN_REGISTER"
-msgstr "Wyrób paszport na Twoje konto email"
+msgstr "Nie masz konta? Wyrób paszport na Twoje konto email"
 
 msgid "LC_PASZPORT_FLASH_MESSAGE_SWITCH_STREAM"
 msgstr "Aktualny stream"
@@ -727,5 +727,11 @@ msgstr "Zaloguj się aby korzystać z rozszerzonych możliwości _mojego<strong>
 msgid "LC_PASZPORT_HOME_LOGIN"
 msgstr "Zaloguj się"
 
-msgid "LC_PASZPORT_FORGET_EMAIL_PLACEHOLDER"
-msgstr "Podaj adres email..."
+msgid "LC_PASZPORT_FORGET_EMAIL"
+msgstr "Wprowadź adres email"
+
+msgid "LC_PASZPORT_FORGET_BUTTON"
+msgstr "Odzyskaj hasło"
+
+msgid "LC_PASZPORT_RESERT_BUTTON"
+msgstr "Resetuj hasło"

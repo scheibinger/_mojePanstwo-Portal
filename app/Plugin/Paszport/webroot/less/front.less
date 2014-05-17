@@ -16,6 +16,8 @@
 }
 
 .main {
+    @background: #F3F3F3;
+
     padding-bottom: 30px;
 
     .header .container h1 {
@@ -24,71 +26,94 @@
     }
 
     .content {
-        .row {
-            margin-bottom: 40px;
+        #modalPaszportLoginForm {
+            display: block;
 
-            &.logInAccount {
-                margin-top: 0;
-                margin-bottom: 0;
-
-                label {
-                    font-family: "Lato", sans-serif;
-                    font-weight: 400;
-                    font-size: 13px;
-                    color: #666;
-                }
-
-                .logInVia .content {
-                    text-align: center;
-
-                    > .logInBy {
-                        display: block;
-                        float: left;
-                        margin-left: 8px;
-                        margin-bottom: 0;
-
-                        &.disabled {
-                            opacity: 0.3;
-                        }
-                    }
-                }
-                .or {
-                    margin-top: 30px;
-                    margin-bottom: 30px;
-                    text-align: center;
-                    height: 14px;
-                    border-bottom: 1px solid #CCCCCC;
-                    font-family: "Lato", sans-serif;
-                    font-size: 16px;
-
-                    .middle {
-                        padding: 4px 20px;
-                        background-color: #EEE;
-                    }
-
-                    &.nomargin {
-                        margin-top: 20px;
-                    }
-                }
-
-                .loginOptions {
-                    font-family: "Lato", sans-serif;
-                    font-size: 12px;
-                    font-weight: 300;
-                    margin-top: -15px;
-
-                    a {
-                        padding-right: 10px;
-
-                        &:last-child {
-                            padding-right: 0;
-                        }
-                    }
-                }
+            .modal-dialog .modal-content .modal-header .close {
+                display: none;
             }
+        }
 
-            &.registerAccount {
-                text-align: center;
+        .modal-dialog {
+            @globalWidth: 435px;
+
+            max-width: @globalWidth;
+            padding: 30px 0;
+
+            .modal-content {
+                background-color: #FFFFFF;
+                border-radius: 0;
+                overflow-x: hidden;
+
+                -moz-box-shadow: none;
+                -webkit-box-shadow: none;
+                box-shadow: none;
+                border-width: 0;
+
+                .modal-header {
+                    color: #A4A4A4;
+                    border-bottom-width: 0;
+                    padding-bottom: 0;
+
+                    .modal-title {
+                        font-family: "Lato", sans-serif;
+                        font-size: 40px;
+                        font-weight: 300;
+                        text-align: center;
+                    }
+                }
+                .modal-body {
+                    width: @globalWidth;
+                    padding: 0;
+
+                    #UserAddForm, #UserForgotForm, #UserResetForm {
+                        border-bottom: 8px solid #428BCA;
+
+                        .slide {
+                            margin-top: 8px;
+                        }
+                    }
+
+                    .slide {
+                        display: inline-block;
+
+                        &.inputForm {
+                            padding: 0 90px;
+                        }
+
+                        &.sendForm {
+                            margin-top: 10px;
+                            padding-bottom: 30px;
+
+                            .submit input {
+                                @padding: 10px;
+
+                                width: 100%;
+                                padding-top: @padding;
+                                padding-bottom: @padding;
+                            }
+                        }
+
+                        &.textForm {
+                            font-family: "Lato", sans-serif;
+                            font-size: 16px;
+                            font-weight: 300;
+                            line-height: 1.2em;
+                            margin: 10px 0;
+                        }
+
+                        .help-block {
+                            margin: 0;
+                        }
+
+                        label {
+                            font-family: "Lato", sans-serif;
+                            font-weight: 400;
+                            font-size: 13px;
+                            color: #666;
+                        }
+                    }
+                }
             }
         }
 
