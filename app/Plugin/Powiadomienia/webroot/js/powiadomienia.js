@@ -139,7 +139,7 @@
         powiadomieniaModal.options.modal.find('form .datasets .datasetsContent > .switchCheckbox > .bootstrap-switch input').map(function () {
             var name = this.name.match(/\[(.*?)\]/);
 
-            parm.group.apps.push({name: name[1], value: this.value, status: this.checked ? true : false, datasets: [] })
+            parm.group.apps.push({name: name[1], id: this.value, status: this.checked ? true : false, datasets: [] })
         });
 
         $.each(serialize, function (index, data) {

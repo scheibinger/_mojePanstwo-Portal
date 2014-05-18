@@ -10,14 +10,31 @@ class GroupsController extends PowiadomieniaAppController
 
     public function index()
     {
-        $groups = $this->API->getGroups();
-        $this->set(compact('groups'));
-        if (isset($this->params->query['addGroup'])) {
-            $this->params->query['addGroup'] = Sanitize::stripAll($this->params->query['addgroup']);
-            $this->API->addGroup(array('q' => $this->params->query['addgroup']));
-            $this->Session->setFlash(sprintf(__d('powiadomienia', 'LC_POWIADOMIENIA_FRAZA_ZOSTALA_DODANA'), $this->params->query['addGroup']));
-            $this->redirect(array('controller' => 'powiadomienia', 'action' => 'index'));
+    
+        $groups = $this->API->getGroups();        
+        if (@$this->request->params['ext'] == 'json') {
+	
+            $html = '';
+            if (!empty($groups)) {
+                
+                $view = new View($this, false);
+                $html = $view->element('groups', array(
+                    'groups' => $groups,
+                ));
+            
+            }
+
+            $this->set('html', $html);
+            $this->set('_serialize', 'html');
+
+
+        } else {
+			
+            $groups = $this->API->getGroups();
+            $this->set('groups', $groups);
+
         }
+		
     }
 	
 	public function view()
@@ -54,7 +71,7 @@ class GroupsController extends PowiadomieniaAppController
 		
 	}
 	
-    public function remove($id = null)
+    public function delete($id = null)
     {
         if (!is_null($id)) {
             $this->API->removeGroup($id);
