@@ -15,7 +15,15 @@ $this->Combinator->add_libs('js', 'Dane.view-krspodmioty');
 
         <div class="objectSideInner">
             <ul class="dataHighlights side">
-
+				
+	
+				<? if( $object->getData('wykreslony') ) {?>
+				<li class="dataHighlight">
+					<span class="label label-danger">Podmiot wykreślony z KRS</span>
+				</li>
+				<?} ?>
+	
+				
                 <? if ($object->getData('krs')) { ?>
                     <li class="dataHighlight big">
                         <p class="_label">Numer KRS</p>
@@ -43,7 +51,7 @@ $this->Combinator->add_libs('js', 'Dane.view-krspodmioty');
 
 
                 <? if ($object->getData('wartosc_kapital_zakladowy')) { ?>
-                    <li class="dataHighlight">
+                    <li class="dataHighlight topborder">
                         <p class="_label">Kapitał zakładowy</p>
 
                         <p class="_value"><?= _currency($object->getData('wartosc_kapital_zakladowy')); ?></p>
@@ -51,7 +59,7 @@ $this->Combinator->add_libs('js', 'Dane.view-krspodmioty');
                 <? } ?>
 
                 <? if ($object->getData('wartosc_czesc_kapitalu_wplaconego')) { ?>
-                    <li class="dataHighlight topborder">
+                    <li class="dataHighlight">
                         <p class="_label">Część kapitału wpłaconego</p>
 
                         <p class="_value"><?= _currency($object->getData('wartosc_czesc_kapitalu_wplaconego')); ?></p>
@@ -243,10 +251,15 @@ $this->Combinator->add_libs('js', 'Dane.view-krspodmioty');
                                         <? } ?>
 
                                         <h4 class="list-group-item-heading">
-                                            <?= $osoba['nazwa'] ?><? if (isset($osoba['wiek']) && $osoba['wiek']) { ?>
-                                                <span class="wiek">,
-                                                    <?= pl_dopelniacz($osoba['wiek'], 'rok', 'lata', 'lat') ?>
-				                                                </span>
+                                            <?= $osoba['nazwa'] ?>
+                                            <? if (
+                                            	($osoba['privacy_level']!='1') && 
+                                            	$osoba['data_urodzenia'] && 
+                                            	$osoba['data_urodzenia']!='0000-00-00' 
+                                            ) { ?>
+                                                <span class="wiek">
+                                                    <?= pl_dopelniacz(pl_wiek($osoba['data_urodzenia']), 'rok', 'lata', 'lat') ?>
+				                                </span>
                                             <? } ?>
                                         </h4>
 
