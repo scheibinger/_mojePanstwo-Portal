@@ -19,7 +19,7 @@
 	                	<?
                 			} elseif( $object->getData('status_id')=='2' ) {
 	                	?>
-	                	<span class="label label label-danger">Zamówienie rozstrzygnięte</span>
+	                	<span class="label label-danger">Zamówienie rozstrzygnięte</span>
 	                	<?		
                 			}
                 		?>
@@ -206,21 +206,27 @@
 					<div class="content">
 						<div class="textBlock">
 							
+							<? if( !empty($czesc['wykonawcy']) || @$czesc['cena'] ) {?>
 							<div class="row header-details dataHighlights">
-
+								
+								<? if( !empty($czesc['wykonawcy']) ) {?>
 								<div class="dataHighlight col-lg-4">
 			                		<p class="_label">Wykonawca</p>
 			                		<? foreach($czesc['wykonawcy'] as $wykonawca) {?>
 			                		<p class="_value"><a href="/dane/zamowienia_publiczne_wykonawcy/<?= $wykonawca['id'] ?>"><?= $wykonawca['nazwa']; ?></a></p>
 			                		<? } ?>
 			                	</div>
+			                	<?}?>
 			                	
+			                	<? if( $czesc['cena'] ) {?>
 			                	<div class="dataHighlight col-lg-4">
 			                		<p class="_label">Cena</p>
 			                		<p class="_value big"><?= _currency( $czesc['cena'] ); ?></p>
 			                	</div>
+			                	<?}?>
 			                			                	
 							</div>
+							<?}?>
 							
 							<div class="row part-details dataHighlights">
 																		
@@ -243,61 +249,63 @@
 								</div>
 								<? }?>
 								
-								<? if($czesc['cena_min']) {?>
+								<? if(@$czesc['cena_min']) {?>
 			                	<div class="dataHighlight col-lg-4">
 			                		<p class="_label">Cena najtańszej oferty</p>
 			                		<p class="_value"><?= _currency( $czesc['cena_min'] ); ?></p>
 			                	</div>
 			                	<?}?>
 			                	
-			                	<? if($czesc['cena_max']) {?>
+			                	<? if(@$czesc['cena_max']) {?>
 			                	<div class="dataHighlight col-lg-4">
 			                		<p class="_label">Cena najdroższej oferty</p>
 			                		<p class="_value"><?= _currency( $czesc['cena_max'] ); ?></p>
 			                	</div>
 			                	<?}?>
 								
-								<? if($czesc['wartosc']) {?>
+								<? if(@$czesc['wartosc']) {?>
 			                	<div class="dataHighlight col-lg-4">
 			                		<p class="_label">Szacunkowa wartość zamówienia (bez VAT)</p>
 			                		<p class="_value"><?= _currency( $czesc['wartosc'] ); ?></p>
 			                	</div>
 			                	<?}?>
 								
-								<? if($czesc['liczba_ofert']) {?>
+								<? if(@$czesc['liczba_ofert']) {?>
 			                	<div class="dataHighlight col-lg-4">
 			                		<p class="_label">Liczba otrzymanych ofert</p>
 			                		<p class="_value"><?= $czesc['liczba_ofert']; ?></p>
 			                	</div>
 			                	<?}?>								
 			                			                				                				                	
-			                	<? if($czesc['liczba_ofert']) {?>
+			                	<? if(@$czesc['liczba_ofert']) {?>
 			                	<div class="dataHighlight col-lg-4">
 			                		<p class="_label">Liczba odrzuconych ofert</p>
 			                		<p class="_value"><?= $czesc['liczba_odrzuconych_ofert']; ?></p>
 			                	</div>
 								<?}?>
-																
+								
+								<? if(@$czesc['data_zam'] && ($czesc['data_zam']!='0000-00-00')) {?>					
 								<div class="dataHighlight col-lg-4">
 			                		<p class="_label">Data udzielenia zamówienia</p>
 			                		<p class="_value"><?= $this->Czas->dataSlownie($czesc['data_zam']) ?></p>
 			                	</div>
+			                	<?}?>
 								
-								<? if($czesc['czas_mies']) {?>
+								<? if(@$czesc['czas_mies']) {?>
 								<div class="dataHighlight col-lg-4">
 									<p class="_label">Czas trwania lub termin wykonania</p>
 									<p class="_value x"><?= pl_dopelniacz($czesc['czas_mies'], 'miesiąc', 'miesiące', 'miesięcy') ?></p>
 								</div>
 								<? }?>
 
-								<? if( $czesc['data_rozpoczecia'] && ($czesc['data_rozpoczecia']!='0000-00-00') ) {?>
+								<? if( @$czesc['data_rozpoczecia'] && ($czesc['data_rozpoczecia']!='0000-00-00') ) {?>
 								<div class="dataHighlight col-lg-4">
 									<p class="_label">Termin rozpoczęcia</p>
 									<p class="_value"><?= $this->Czas->dataSlownie($czesc['data_rozpoczecia']) ?></p>
 								</div>
 								<? }?>
 								
-								<? if( $czesc['data_zakonczenia'] && ($czesc['data_zakonczenia']!='0000-00-00') ) {?>
+								<? if( @$czesc['data_zakonczenia'] && ($czesc['data_zakonczenia']!='0000-00-00') ) {?>
 								<div class="dataHighlight col-lg-4">
 									<p class="_label">Termin wykonania</p>
 									<p class="_value"><?= $this->Czas->dataSlownie($czesc['data_zakonczenia']) ?></p>
