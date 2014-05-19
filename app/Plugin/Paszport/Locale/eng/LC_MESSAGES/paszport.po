@@ -43,6 +43,9 @@ msgstr "Operacja zakończona niepowodzeniem"
 msgid "LC_PASZPORT_SET_PASSWORD"
 msgstr "Zmiana hasła"
 
+msgid "LC_PASZPORT_RESET_PASSWORD_INFO"
+msgstr "Aby zresetować hasło proszę kliknąć na poniższy link. Zignoruj ten mail jeżeli nie zamierzasz zmienić hasła."
+
 #: Controller/UsersController.php:159;182
 msgid "LC_PASZPORT_ERROR"
 msgstr "Operacja zakończona błędem"

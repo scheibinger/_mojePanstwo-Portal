@@ -41,6 +41,9 @@ msgstr "Błąd logowania za pośrednictwem serwisu Facebook"
 msgid "LC_PASZPORT_PASSWORD_SET"
 msgstr "Hasło zostało zmienione"
 
+msgid "LC_PASZPORT_RESET_PASSWORD_INFO"
+msgstr "Aby zresetować hasło proszę kliknąć na poniższy link. Zignoruj ten mail jeżeli nie zamierzasz zmienić hasła."
+
 #: Controller/UsersController.php:146
 msgid "LC_PASZPORT_FAILED"
 msgstr "Operacja zakończona niepowodzeniem"
@@ -59,7 +62,7 @@ msgstr "Rozłączono z kontem Facebook"
 
 #: Controller/UsersController.php:294
 msgid "LC_PASZPORT_MAIL_RESET_PASS_SUBJECT"
-msgstr "Przypomnienie hasła do Paszportu"
+msgstr "Paszport Mojego Państwa - Przypomnienie hasła"
 
 #: Controller/UsersController.php:302
 msgid "LC_PASZPORT_MAIL_RESET_PASS_SENT"

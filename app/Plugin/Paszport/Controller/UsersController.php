@@ -347,8 +347,11 @@ class UsersController extends PaszportAppController
             $user = $user['user'];
             if ($user) { # if user exists send email
                 $Email = new CakeEmail('default');
-                $Email->to($user['User']['email']);
-                $Email->subject(__d('paszport', 'LC_PASZPORT_MAIL_RESET_PASS_SUBJECT', true));
+                $Email->to($user['User']['email'])
+                    ->template('Paszport.reset')
+                    ->emailFormat('text')
+                    ->subject(__d('paszport', 'LC_PASZPORT_MAIL_RESET_PASS_SUBJECT', true));
+
                 $e = new Encryption(MCRYPT_BlOWFISH, MCRYPT_MODE_CBC);
                 $data = json_encode(array('email' => $user['User']['email'], 'expires' => strtotime('+24 hours')));
                 $hash = base64_encode($e->encrypt($data, Configure::read('Security.salt')));
@@ -383,6 +386,7 @@ class UsersController extends PaszportAppController
                     $this->Session->setFlash(__d('paszport', 'LC_PASZPORT_SECURITY_TOKEN_EXPIRED', true), 'alert', array('class' => 'alert-error'));
                     $this->redirect(array('action' => 'forgot'));
                     return false;
+
                 } else {
                     $user = $this->PassportApi->find('users', array('conditions' => array('User.email' => $user_email, 'User.reset_hash' => urlencode($this->request->query['token']))));
                     $user = $user['user'];
@@ -408,17 +412,16 @@ class UsersController extends PaszportAppController
     {
         if ($this->request->isPost() && $this->Session->read('User.id')) {
             $to_save = $this->data;
-            $to_save['User']['reset_hash'] = ''; # clean the reset hash
-            $to_save['User']['password'] = $this->Auth->password($this->data['User']['password']); # hash the password
-            $to_save['User']['repassword'] = $this->Auth->password($this->data['User']['repassword']);
             $to_save['User']['id'] = $this->Session->read('User.id');
-            if ($this->PassportApi->User()->reset($to_save)) {
-//                $this->_log(array('msg' => 'LC_PASZPORT_LOG_PASSWORD_RESET_SUCCESS', 'ip' => $this->request->clientIp(), 'user_agent' => env('HTTP_USER_AGENT')));
+
+            $response = $this->PassportApi->User()->reset($to_save);
+            if (isset($response['errors']['password'])) {
+                $this->Session->setFlash(__d('paszport', $response['errors']['password'][0], true), 'alert', array('class' => 'alert-error'));
+
+            } else {
                 $this->Session->setFlash(__d('paszport', 'LC_PASZPORT_PASSWORD_RESET_SUCCESS'), 'alert', array('class' => 'alert-success'));
                 $this->Session->delete('User');
                 $this->redirect(array('action' => 'login'));
-            } else {
-                $this->Session->setFlash(__d('paszport', 'LC_PASZPORT_PASSWORD_RESET_FAIL'), 'alert', array('class' => 'alert-error'));
             }
         }
         $this->set('title_for_layout', __d('paszport', 'LC_PASZPORT_FORGOT_PASSWORD', true));
