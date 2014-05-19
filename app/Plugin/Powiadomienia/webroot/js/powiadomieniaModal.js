@@ -67,7 +67,9 @@ var powiadomieniaModal;
                 powiadomieniaModal.options.modal.find('.modal-content').append(powiadomieniaModal.options.footer);
             }
             powiadomieniaModal.options.modal.modal();
-            powiadomieniaModal.options.modal.find('.modal-footer .closed').click(powiadomieniaModal.options.modal.modal('toggle'));
+            powiadomieniaModal.options.modal.find('.modal-footer .closed').click(function () {
+                powiadomieniaModal.options.modal.modal('toggle')
+            });
             powiadomieniaModal.additionalInfo();
         },
         editTitle: function () {
@@ -138,194 +140,236 @@ var powiadomieniaModal;
         },
         additionalInfoLoad: function (data) {
             window.setTimeout(function () {
-                    powiadomieniaModal.options.modal.find('.modal-body').html('');
+                powiadomieniaModal.options.modal.find('.modal-body').html('');
 
-                    powiadomieniaModal.options.modal.find('.modal-body').append(
-                        $('<div></div>').addClass('keywords').append(
-                                $('<h5></h5>').text(_mPHeart.translation.LC_POWIADOMIENIA_POWIADOMENIA_MODAL_KEYWORDS)
-                            ).append(
-                                $('<hr />')
-                            )
-                    )
+                powiadomieniaModal.options.modal.find('.modal-body').append(
+                    $('<div></div>').addClass('keywords').append(
+                            $('<h5></h5>').text(_mPHeart.translation.LC_POWIADOMIENIA_POWIADOMENIA_MODAL_KEYWORDS)
+                        ).append(
+                            $('<hr />')
+                        )
+                );
 
-                    powiadomieniaModal.options.modal.find('.modal-body .keywords').append(
-                        $('<input />').attr({'name': 'keywords', 'id': 'keywordsInput'})
-                    )
-                    if (data.phrases && data.phrases.length > 0) {
-                        var dataPhrasesArray = [];
-                        $.each(data.phrases, function (index, value) {
-                            dataPhrasesArray.push(value);
-                        })
-                        powiadomieniaModal.options.modal.find('.modal-body #keywordsInput').val(dataPhrasesArray.join(","))
-                    }
-
-
-                    powiadomieniaModal.options.modal.find('.modal-body .keywords #keywordsInput').tagsInput({
-                        'interactive': true,
-                        'defaultText': _mPHeart.translation.LC_POWIADOMIENIA_POWIADOMENIA_MODAL_KEYWORDS_INPUT,
-                        'minChars': 2
-                    });
+                powiadomieniaModal.options.modal.find('.modal-body .keywords').append(
+                    $('<input />').attr({'name': 'keywords', 'id': 'keywordsInput'})
+                )
+                if (data.phrases && data.phrases.length > 0) {
+                    var dataPhrasesArray = [];
+                    $.each(data.phrases, function (index, value) {
+                        dataPhrasesArray.push(value);
+                    })
+                    powiadomieniaModal.options.modal.find('.modal-body #keywordsInput').val(dataPhrasesArray.join(","))
+                }
 
 
-                    powiadomieniaModal.options.modal.find('.modal-body').append(
-                        $('<div></div>').addClass('datasets').append(
-                                $('<h5></h5>').text(_mPHeart.translation.LC_POWIADOMIENIA_POWIADOMENIA_MODAL_DATASETS)
-                            ).append(
-                                $('<hr />')
-                            ).append(
-                                $('<div></div>').addClass('datasetsContent')
-                            )
-                    )
+                powiadomieniaModal.options.modal.find('.modal-body .keywords #keywordsInput').tagsInput({
+                    'interactive': true,
+                    'defaultText': _mPHeart.translation.LC_POWIADOMIENIA_POWIADOMENIA_MODAL_KEYWORDS_INPUT,
+                    'minChars': 2
+                });
 
-                    if (powiadomieniaModal.options.additionalInfoList && powiadomieniaModal.options.additionalInfoList.status == 'success') {
-                        var appList = powiadomieniaModal.options.additionalInfoList;
-                        if (appList.list.length > 0) {
-                            $.each(appList.list, function (index, app) {
-                                powiadomieniaModal.options.modal.find('.modal-body .datasets .datasetsContent').append(
-                                    $('<div></div>').addClass('switchCheckbox').append(
-                                            $('<input />').attr({'type': 'checkbox', 'name': 'apps[' + app.name + ']'}).data({'size': 'small'}).val(app.id)
-                                        ).append(
-                                            $('<label></label>').text(app.name)
-                                        ).append(
-                                            $('<div></div>').addClass('datasetsList')
-                                        )
-                                )
-                                $.each(app.datasets, function (index, subApp) {
-                                    powiadomieniaModal.options.modal.find('.modal-body .datasets .datasetsList:last').append(
-                                        $('<div></div>').addClass('checkbox').append(
-                                            $('<label></label>').text(subApp.name).append(
-                                                $('<input />').attr({'type': 'checkbox', 'name': 'subapps[' + app.name + '][' + subApp.name + ']'}).data({'size': 'small'}).val(subApp.id)
-                                            )
-                                        )
-                                    )
-                                })
 
-                            });
-                            if (data.apps && data.apps.length > 0) {
-                                $.each(data.apps, function (index, app) {
-                                    var checkedApp = powiadomieniaModal.options.modal.find('.modal-body .datasets input[name="apps[' + app.name + ']"]');
-                                    checkedApp.attr('checked', 'checked');
+                powiadomieniaModal.options.modal.find('.modal-body').append(
+                    $('<div></div>').addClass('datasets').append(
+                            $('<h5></h5>').text(_mPHeart.translation.LC_POWIADOMIENIA_POWIADOMENIA_MODAL_DATASETS)
+                        ).append(
+                            $('<hr />')
+                        ).append(
+                            $('<div></div>').addClass('datasetsContent')
+                        )
+                )
 
-                                    $.each(app.datasets, function (index, subapp) {
-                                        var checkedSubApp = powiadomieniaModal.options.modal.find('.modal-body .datasets input[name="subapps[' + app.name + '][' + subapp.name + ']"]');
-                                        checkedSubApp.attr('checked', 'checked');
-                                    });
-                                })
-                            }
-                            powiadomieniaModal.options.modal.find('.modal-body .datasets .datasetsContent > .switchCheckbox > input').bootstrapSwitch();
-                        } else if (data.apps && data.apps.length > 0) {
-                            $.each(data.apps, function (index, app) {
-                                powiadomieniaModal.options.modal.find('.modal-body .datasets .datasetsContent').append(
-                                    $('<div></div>').addClass('switchCheckbox').append(
-                                            $('<input />').attr({'type': 'checkbox', 'name': 'apps[' + app.name + ']', 'checked': 'checked'}).data({'size': 'small'}).val(app.id)
-                                        ).append(
-                                            $('<label></label>').text(app.name)
-                                        ).append(
-                                            $('<div></div>').addClass('datasetsList')
-                                        )
-                                )
-                                $.each(app.datasets, function (index, subApp) {
-                                    powiadomieniaModal.options.modal.find('.modal-body .datasets .datasetsList:last').append(
-                                        $('<div></div>').addClass('switchCheckbox checkbox').append(
-                                            $('<label></label>').text(subApp.name).append(
-                                                $('<input />').attr({'type': 'checkbox', 'name': 'subapps[' + app.name + '][' + subApp.name + ']', 'checked': 'checked'}).data({'size': 'small'}).val(subApp.id)
-                                            )
+                if (powiadomieniaModal.options.additionalInfoList && powiadomieniaModal.options.additionalInfoList.status == 'success') {
+                    var appList = powiadomieniaModal.options.additionalInfoList;
+                    if (appList.list.length > 0) {
+                        $.each(appList.list, function (index, app) {
+                            powiadomieniaModal.options.modal.find('.modal-body .datasets .datasetsContent').append(
+                                $('<div></div>').addClass('switchCheckbox').append(
+                                        $('<input />').attr({'type': 'checkbox', 'name': 'apps[' + app.name + ']'}).data({'size': 'small'}).val(app.id)
+                                    ).append(
+                                        $('<label></label>').text(app.name)
+                                    ).append(
+                                        $('<div></div>').addClass('datasetsList').append(
+                                            jQuery('<div></div>').addClass('head').append(
+                                                    jQuery('<span></span>').addClass('label pull-left').text(_mPHeart.translation.LC_POWIADOMIENIA_POWIADOMENIA_MODAL_DATASETS_LIST_LABEL)
+                                                ).append(
+                                                    jQuery('<span></span>').addClass('datasetOptions pull-right').append(
+                                                            jQuery('<button></button>').addClass('markAll btn btn-default btn-xs').text(_mPHeart.translation.LC_POWIADOMIENIA_POWIADOMENIA_MODAL_DATASETS_LIST_OPTIONS_MARK_ALL)
+                                                        ).append(
+                                                            jQuery('<button></button>').addClass('markNone btn btn-default btn-xs').text(_mPHeart.translation.LC_POWIADOMIENIA_POWIADOMENIA_MODAL_DATASETS_LIST_OPTIONS_MARK_NONE)
+                                                        )
+                                                )
                                         )
                                     )
-                                })
-
-                                powiadomieniaModal.options.modal.find('.modal-body .datasets .datasetsContent > .switchCheckbox:last > input').bootstrapSwitch();
-                            });
-                        } else {
-                            powiadomieniaModal.options.modal.find('.modal-body .datasets').append(
-                                $('<span></span>').text(_mPHeart.translation.LC_POWIADOMIENIA_POWIADOMENIA_MODAL_NO_DATASETS)
                             )
-                        }
-                    } else {
+                            $.each(app.datasets, function (index, subApp) {
+                                powiadomieniaModal.options.modal.find('.modal-body .datasets .datasetsList:last').append(
+                                    $('<div></div>').addClass('checkbox').append(
+                                        $('<label></label>').text(subApp.name).append(
+                                            $('<input />').attr({'type': 'checkbox', 'name': 'subapps[' + app.name + '][' + subApp.name + ']'}).data({'size': 'small'}).val(subApp.id)
+                                        )
+                                    )
+                                )
+                            })
+
+                        });
                         if (data.apps && data.apps.length > 0) {
                             $.each(data.apps, function (index, app) {
-                                powiadomieniaModal.options.modal.find('.modal-body .datasets .datasetsContent').append(
-                                    $('<div></div>').addClass('switchCheckbox').append(
-                                            $('<input />').attr({'type': 'checkbox', 'name': app.name, 'checked': 'checked'}).data({'size': 'small'}).val(app.id)
-                                        ).append(
-                                            $('<label></label>').text(app.name)
-                                        )
-                                )
-                                $.each(app.datasets, function (index, subApp) {
-                                    powiadomieniaModal.options.modal.find('.modal-body .datasets .datasetsList:last').append(
-                                        $('<div></div>').addClass('switchCheckbox checkbox').append(
-                                            $('<label></label>').text(subApp.name).append(
-                                                $('<input />').attr({'type': 'checkbox', 'name': 'subapps[' + app.name + '][' + subApp.name + ']', 'checked': 'checked'}).data({'size': 'small'}).val(subApp.id)
-                                            )
+                                var checkedApp = powiadomieniaModal.options.modal.find('.modal-body .datasets input[name="apps[' + app.name + ']"]');
+                                checkedApp.attr('checked', 'checked');
+
+                                //checkedApp.parents('.switchCheckbox').find('.datasetsList input').removeAttr('disabled');
+
+                                $.each(app.datasets, function (index, subapp) {
+                                    var checkedSubApp = powiadomieniaModal.options.modal.find('.modal-body .datasets input[name="subapps[' + app.name + '][' + subapp.name + ']"]');
+                                    checkedSubApp.attr('checked', 'checked');
+                                    checkedSubApp.removeAttr('disabled');
+                                });
+                            })
+                        }
+                        powiadomieniaModal.options.modal.find('.modal-body .datasets .datasetsContent > .switchCheckbox > input').bootstrapSwitch();
+                    } else if (data.apps && data.apps.length > 0) {
+                        $.each(data.apps, function (index, app) {
+                            powiadomieniaModal.options.modal.find('.modal-body .datasets .datasetsContent').append(
+                                $('<div></div>').addClass('switchCheckbox').append(
+                                        $('<input />').attr({'type': 'checkbox', 'name': 'apps[' + app.name + ']', 'checked': 'checked'}).data({'size': 'small'}).val(app.id)
+                                    ).append(
+                                        $('<label></label>').text(app.name)
+                                    ).append(
+                                        $('<div></div>').addClass('datasetsList').append(
+                                            jQuery('<div></div>').addClass('head').append(
+                                                    jQuery('<span></span>').addClass('label pull-left').text(_mPHeart.translation.LC_POWIADOMIENIA_POWIADOMENIA_MODAL_DATASETS_LIST_LABEL)
+                                                ).append(
+                                                    jQuery('<span></span>').addClass('datasetOptions pull-right').append(
+                                                            jQuery('<button></button>').addClass('markAll btn btn-default btn-xs').text(_mPHeart.translation.LC_POWIADOMIENIA_POWIADOMENIA_MODAL_DATASETS_LIST_OPTIONS_MARK_ALL)
+                                                        ).append(
+                                                            jQuery('<button></button>').addClass('markNone btn btn-default btn-xs').text(_mPHeart.translation.LC_POWIADOMIENIA_POWIADOMENIA_MODAL_DATASETS_LIST_OPTIONS_MARK_NONE)
+                                                        )
+                                                )
                                         )
                                     )
-                                })
-                                powiadomieniaModal.options.modal.find('.modal-body .datasets .datasetsContent > .switchCheckbox:last > input').bootstrapSwitch();
-                            });
-                        } else {
-                            powiadomieniaModal.options.modal.find('.modal-body .datasets').append(
-                                $('<span></span>').text(_mPHeart.translation.LC_POWIADOMIENIA_POWIADOMENIA_MODAL_NO_DATASETS)
                             )
-                        }
-                    }
-                    var appSwitch;
-                    if ((appSwitch = powiadomieniaModal.options.modal.find('form .datasets .datasetsContent > .switchCheckbox')).length != 0) {
-                        appSwitch.append(
-                                jQuery('<a></a>').addClass('slide right').attr({'href': '#showDatasets'})
-                            ).prepend(
-                                jQuery('<a></a>').addClass('slide left').attr({'href': '#showDatasets'})
-                            )
-                        appSwitch.find('> label, >.slide').click(function (e) {
-                            var that = $(this),
-                                parent = that.parents('.switchCheckbox'),
-                                subAppList = parent.find('.datasetsList'),
-                                width = powiadomieniaModal.options.modal.find('.modal-body > .datasets').outerWidth(),
-                                animSpeed = 600;
+                            $.each(app.datasets, function (index, subApp) {
+                                powiadomieniaModal.options.modal.find('.modal-body .datasets .datasetsList:last').append(
+                                    $('<div></div>').addClass('switchCheckbox checkbox').append(
+                                        $('<label></label>').text(subApp.name).append(
+                                            $('<input />').attr({'type': 'checkbox', 'name': 'subapps[' + app.name + '][' + subApp.name + ']', 'checked': 'checked'}).data({'size': 'small'}).val(subApp.id)
+                                        )
+                                    )
+                                )
+                            })
 
+                            powiadomieniaModal.options.modal.find('.modal-body .datasets .datasetsContent > .switchCheckbox:last > input').bootstrapSwitch();
+                        });
+                    } else {
+                        powiadomieniaModal.options.modal.find('.modal-body .datasets').append(
+                            $('<span></span>').text(_mPHeart.translation.LC_POWIADOMIENIA_POWIADOMENIA_MODAL_NO_DATASETS)
+                        )
+                    }
+                } else {
+                    if (data.apps && data.apps.length > 0) {
+                        $.each(data.apps, function (index, app) {
+                            powiadomieniaModal.options.modal.find('.modal-body .datasets .datasetsContent').append(
+                                $('<div></div>').addClass('switchCheckbox').append(
+                                        $('<input />').attr({'type': 'checkbox', 'name': app.name, 'checked': 'checked'}).data({'size': 'small'}).val(app.id)
+                                    ).append(
+                                        $('<label></label>').text(app.name)
+                                    )
+                            )
+                            $.each(app.datasets, function (index, subApp) {
+                                powiadomieniaModal.options.modal.find('.modal-body .datasets .datasetsList:last').append(
+                                    $('<div></div>').addClass('switchCheckbox checkbox').append(
+                                        $('<label></label>').text(subApp.name).append(
+                                            $('<input />').attr({'type': 'checkbox', 'name': 'subapps[' + app.name + '][' + subApp.name + ']', 'checked': 'checked'}).data({'size': 'small'}).val(subApp.id)
+                                        )
+                                    )
+                                )
+                            })
+                            powiadomieniaModal.options.modal.find('.modal-body .datasets .datasetsContent > .switchCheckbox:last > input').bootstrapSwitch();
+                        });
+                    } else {
+                        powiadomieniaModal.options.modal.find('.modal-body .datasets').append(
+                            $('<span></span>').text(_mPHeart.translation.LC_POWIADOMIENIA_POWIADOMENIA_MODAL_NO_DATASETS)
+                        )
+                    }
+                }
+                var appSwitch;
+                if ((appSwitch = powiadomieniaModal.options.modal.find('form .datasets .datasetsContent > .switchCheckbox')).length != 0) {
+                    appSwitch.append(
+                            jQuery('<a></a>').addClass('slide right').attr({'href': '#showDatasets'})
+                        ).prepend(
+                            jQuery('<a></a>').addClass('slide left').attr({'href': '#showDatasets'})
+                        )
+                    appSwitch.find('> label, >.slide').click(function (e) {
+                        var that = $(this),
+                            parent = that.parents('.switchCheckbox'),
+                            subAppList = parent.find('.datasetsList'),
+                            width = powiadomieniaModal.options.modal.find('.modal-body > .datasets').outerWidth(),
+                            animSpeed = 600;
+
+                        e.preventDefault();
+
+                        if (parent.hasClass('choosed')) {
+                            parent.removeClass('choosed');
+
+                            parent.find('>.bootstrap-switch').stop(true, true).animate({'margin-left': 0}, animSpeed / 2, function () {
+                                parent.removeAttr('style');
+                            });
+                            parent.find('a.slide.left').stop(true, true).animate({left: '-50px', 'opacity': 0}, animSpeed / 2)
+                            parent.find('a.slide.right').stop(true, true).animate({right: '1%', 'opacity': 1}, animSpeed / 2)
+                            subAppList.stop(true, true).animate({right: -width, opacity: 0}, animSpeed, function () {
+                                subAppList.stop(true, true).animate({height: 0}, animSpeed / 2, function () {
+                                    subAppList.hide().removeAttr('style');
+                                })
+                            })
+                            $.each(appSwitch, function () {
+                                $(this).slideDown(animSpeed / 2);
+                                $(this).stop(true, true).animate({opacity: 1}, animSpeed)
+                            })
+                        } else {
+                            parent.addClass('choosed');
+
+                            $.each(appSwitch, function () {
+                                if (!($(this).hasClass('choosed'))) {
+                                    $(this).stop(true, true).animate({opacity: 0}, animSpeed / 2, function () {
+                                        $(this).slideUp(animSpeed / 2);
+                                    })
+                                } else {
+                                    parent.find('>.bootstrap-switch').stop(true, true).animate({'margin-left': 40}, animSpeed / 2);
+                                    parent.find('a.slide.left').stop(true, true).animate({left: '1%', 'opacity': 1}, animSpeed / 2)
+                                    parent.find('a.slide.right').stop(true, true).animate({right: '-50px', 'opacity': 0}, animSpeed / 2)
+                                }
+                            })
+
+                            var autoHeight = subAppList.css('height', 'auto').outerHeight() + 20;
+
+                            subAppList.css({'right': -width, opacity: 0}).height(0).show().stop(true, true).animate({height: autoHeight}, animSpeed / 2, function () {
+                                subAppList.stop(true, true).animate({right: 0, opacity: 1, height: 'auto'}, animSpeed);
+                            });
+                        }
+                    })
+
+                    powiadomieniaModal.options.modal.find('.modal-body .datasets .datasetsContent > .switchCheckbox .bootstrap-switch-container > input').on('switchChange.bootstrapSwitch', function (event, state) {
+                        if (state) {
+                            $(this).parents('.switchCheckbox').find('.datasetsList .checkbox input').removeAttr('disabled');
+                        } else {
+                            $(this).parents('.switchCheckbox').find('.datasetsList .checkbox input').attr('disabled', 'disabled');
+                        }
+                    });
+
+                    if (powiadomieniaModal.options.modal.find('.modal-body .datasets .datasetsList .datasetOptions').length > 0) {
+                        powiadomieniaModal.options.modal.find('.modal-body .datasets .datasetsList .datasetOptions button').click(function (e) {
                             e.preventDefault();
 
-                            if (parent.hasClass('choosed')) {
-                                parent.removeClass('choosed');
-
-                                parent.find('>.bootstrap-switch').stop(true, true).animate({'margin-left': 0}, animSpeed / 2, function () {
-                                    parent.removeAttr('style');
-                                });
-                                parent.find('a.slide.left').stop(true, true).animate({left: '-50px', 'opacity': 0}, animSpeed / 2)
-                                parent.find('a.slide.right').stop(true, true).animate({right: '1%', 'opacity': 1}, animSpeed / 2)
-                                subAppList.stop(true, true).animate({right: -width, opacity: 0}, animSpeed, function () {
-                                    subAppList.stop(true, true).animate({height: 0}, animSpeed / 2, function () {
-                                        subAppList.hide().removeAttr('style');
-                                    })
-                                })
-                                $.each(appSwitch, function () {
-                                    $(this).slideDown(animSpeed / 2);
-                                    $(this).stop(true, true).animate({opacity: 1}, animSpeed)
-                                })
+                            if ($(this).hasClass('markAll')) {
+                                powiadomieniaModal.options.modal.find('.modal-body .datasets .datasetsList .checkbox input').attr('checked', 'checked');
                             } else {
-                                parent.addClass('choosed');
-
-                                $.each(appSwitch, function () {
-                                    if (!($(this).hasClass('choosed'))) {
-                                        $(this).stop(true, true).animate({opacity: 0}, animSpeed / 2, function () {
-                                            $(this).slideUp(animSpeed / 2);
-                                        })
-                                    } else {
-                                        parent.find('>.bootstrap-switch').stop(true, true).animate({'margin-left': 40}, animSpeed / 2);
-                                        parent.find('a.slide.left').stop(true, true).animate({left: '1%', 'opacity': 1}, animSpeed / 2)
-                                        parent.find('a.slide.right').stop(true, true).animate({right: '-50px', 'opacity': 0}, animSpeed / 2)
-                                    }
-                                })
-
-                                var autoHeight = subAppList.css('height', 'auto').outerHeight() + 20;
-
-                                subAppList.css({'right': -width, opacity: 0}).height(0).show().stop(true, true).animate({height: autoHeight}, animSpeed / 2, function () {
-                                    subAppList.stop(true, true).animate({right: 0, opacity: 1, height: 'auto'}, animSpeed);
-                                });
+                                powiadomieniaModal.options.modal.find('.modal-body .datasets .datasetsList .checkbox input').removeAttr('checked');
                             }
                         })
                     }
-                }, 200
-            );
+                }
+            }, 200);
         }
     }
 }(jQuery));

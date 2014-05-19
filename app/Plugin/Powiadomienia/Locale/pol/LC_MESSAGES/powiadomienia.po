@@ -109,6 +109,15 @@ msgstr "Pochodzące z następujących aplikacji:"
 msgid "LC_POWIADOMIENIA_POWIADOMENIA_MODAL_NO_DATASETS"
 msgstr "Brak aplikacji"
 
+msgid "LC_POWIADOMIENIA_POWIADOMENIA_MODAL_DATASETS_LIST_LABEL"
+msgstr "Dostępne zbiory danych:"
+
+msgid "LC_POWIADOMIENIA_POWIADOMENIA_MODAL_DATASETS_LIST_OPTIONS_MARK_ALL"
+msgstr "zaznacz wszystkie"
+
+msgid "LC_POWIADOMIENIA_POWIADOMENIA_MODAL_DATASETS_LIST_OPTIONS_MARK_NONE"
+msgstr "oznacz wszystkie"
+
 msgid "LC_POWIADOMIENIA_POWIADOMENIA_MODAL_KEYWORDS"
 msgstr "Otrzymuj powiadomienia zawierające następujące słowa kluczowe:"
 
