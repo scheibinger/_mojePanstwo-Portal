@@ -350,6 +350,8 @@ var powiadomieniaModal;
                     powiadomieniaModal.options.modal.find('.modal-body .datasets .datasetsContent > .switchCheckbox .bootstrap-switch-container > input').on('switchChange.bootstrapSwitch', function (event, state) {
                         if (state) {
                             $(this).parents('.switchCheckbox').find('.datasetsList .checkbox.disabled').removeClass('disabled').find('input').removeAttr('disabled');
+                            if ($(this).parents('.switchCheckbox').find('.datasetsList .checkbox input:checked').length == 0)
+                                $(this).parents('.switchCheckbox').find('.datasetsList .checkbox input').attr('checked', 'checked');
                         } else {
                             $(this).parents('.switchCheckbox').find('.datasetsList .checkbox').addClass('disabled').find('input').attr('disabled', 'disabled');
                         }
