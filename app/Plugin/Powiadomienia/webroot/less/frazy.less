@@ -1,4 +1,4 @@
-.addPhrase {
+.addPhraseShape {
     @font: 18px;
 
     font-family: "Lato", sans-serif;
@@ -18,8 +18,8 @@
             height: @size;
         }
         .btn {
-            &.addPhrase
-        ;
+
+            .addPhraseShape;
             width: @size;
             height: @size;
 
@@ -70,10 +70,11 @@
             .addphrase {
                 @size: 28px;
 
-                .addPhrase;
+                .addPhraseShape;
                 height: @size;
                 width: @size;
                 margin-right: 25px;
+                display: none;
             }
         }
 
@@ -121,7 +122,7 @@
 
                     > div.inner {
                         .options {
-                            visibility: visible;
+                            //visibility: visible;
                         }
                         .options:hover {
                             &:before {
