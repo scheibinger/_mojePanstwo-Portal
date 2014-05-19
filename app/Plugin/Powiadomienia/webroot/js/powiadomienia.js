@@ -422,7 +422,10 @@
                             loadMoreContentIntervalRunable = true;
                         } else {
                             clearInterval(loadMoreContentIntervalMain);
+                            if (showData.children().length == 0)
+                                showData.addClass('text-center').text(_mPHeart.translation.LC_POWIADOMIENIA_DANE_NO_KEYWORDS);
                             loadMoreContent.remove();
+
                         }
                     },
                     complete: function () {

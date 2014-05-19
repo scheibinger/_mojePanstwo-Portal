@@ -204,9 +204,9 @@ var powiadomieniaModal;
                             )
                             $.each(app.datasets, function (index, subApp) {
                                 powiadomieniaModal.options.modal.find('.modal-body .datasets .datasetsList:last').append(
-                                    $('<div></div>').addClass('checkbox').append(
+                                    $('<div></div>').addClass('checkbox disabled').append(
                                         $('<label></label>').text(subApp.name).append(
-                                            $('<input />').attr({'type': 'checkbox', 'name': 'subapps[' + app.name + '][' + subApp.name + ']'}).data({'size': 'small'}).val(subApp.id)
+                                            $('<input />').attr({'type': 'checkbox', 'name': 'subapps[' + app.name + '][' + subApp.name + ']'}).data({'size': 'small'}).val(subApp.id).prop('disabled', 'disabled')
                                         )
                                     )
                                 )
@@ -217,13 +217,11 @@ var powiadomieniaModal;
                             $.each(data.apps, function (index, app) {
                                 var checkedApp = powiadomieniaModal.options.modal.find('.modal-body .datasets input[name="apps[' + app.name + ']"]');
                                 checkedApp.attr('checked', 'checked');
-
-                                //checkedApp.parents('.switchCheckbox').find('.datasetsList input').removeAttr('disabled');
+                                checkedApp.parents('.switchCheckbox').find('.datasetsList .checkbox.disabled').removeClass('disabled').find('input').removeAttr('disabled');
 
                                 $.each(app.datasets, function (index, subapp) {
                                     var checkedSubApp = powiadomieniaModal.options.modal.find('.modal-body .datasets input[name="subapps[' + app.name + '][' + subapp.name + ']"]');
                                     checkedSubApp.attr('checked', 'checked');
-                                    checkedSubApp.removeAttr('disabled');
                                 });
                             })
                         }
@@ -351,9 +349,9 @@ var powiadomieniaModal;
 
                     powiadomieniaModal.options.modal.find('.modal-body .datasets .datasetsContent > .switchCheckbox .bootstrap-switch-container > input').on('switchChange.bootstrapSwitch', function (event, state) {
                         if (state) {
-                            $(this).parents('.switchCheckbox').find('.datasetsList .checkbox input').removeAttr('disabled');
+                            $(this).parents('.switchCheckbox').find('.datasetsList .checkbox.disabled').removeClass('disabled').find('input').removeAttr('disabled');
                         } else {
-                            $(this).parents('.switchCheckbox').find('.datasetsList .checkbox input').attr('disabled', 'disabled');
+                            $(this).parents('.switchCheckbox').find('.datasetsList .checkbox').addClass('disabled').find('input').attr('disabled', 'disabled');
                         }
                     });
 

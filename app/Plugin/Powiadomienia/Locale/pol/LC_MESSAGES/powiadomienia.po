@@ -20,7 +20,7 @@ msgid "LC_POWIADOMIENIA_DANE_ALLREADED"
 msgstr "Oznacz wszystko jako przeczytane"
 
 msgid "LC_POWIADOMIENIA_DANE_NO_KEYWORDS"
-msgstr "Brak nowych powiadomień dla wybranych słów kluczowych"
+msgstr "Brak powiadomień"
 
 msgid "LC_POWIADOMIENIA_JS_NO_PHRASE_ADDED_YET"
 msgstr 'Nie dodałeś jeszcze żadnych słów kluczowych.'
