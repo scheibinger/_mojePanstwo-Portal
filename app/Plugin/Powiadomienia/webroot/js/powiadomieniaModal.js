@@ -74,7 +74,7 @@ var powiadomieniaModal;
         },
         editTitle: function () {
             if (powiadomieniaModal.options.title == '')
-                powiadomieniaModal.options.modal.find('.modal-header h4.modal-title').text('...');
+                powiadomieniaModal.options.modal.find('.modal-header h4.modal-title').text(_mPHeart.translation.LC_POWIADOMIENIA_POWIADOMENIA_MODAL_TITLE_PLACEHOLDER);
 
             powiadomieniaModal.options.modal.find('.modal-header h4.modal-title').click(function () {
                 powiadomieniaModal.options.modal.find('.modal-header h4.modal-title').addClass('hide').focus();
@@ -99,7 +99,7 @@ var powiadomieniaModal;
             if (powiadomieniaModal.options.modal.find('.modal-header .edit.modal-title textarea').val() != powiadomieniaModal.options.modal.find('.modal-header h4.modal-title').text()) {
                 powiadomieniaModal.options.title = $.trim(powiadomieniaModal.options.modal.find('.modal-header .edit.modal-title textarea').val());
                 if (powiadomieniaModal.options.title == '')
-                    powiadomieniaModal.options.modal.find('.modal-header h4.modal-title').text('...');
+                    powiadomieniaModal.options.modal.find('.modal-header h4.modal-title').text(_mPHeart.translation.LC_POWIADOMIENIA_POWIADOMENIA_MODAL_TITLE_PLACEHOLDER);
                 else
                     powiadomieniaModal.options.modal.find('.modal-header h4.modal-title').text(powiadomieniaModal.options.title);
             }

@@ -177,7 +177,7 @@
             }
         });
 
-        if (!(parm.group.PowiadomieniaGroup.title != null && parm.group.PowiadomieniaGroup.title != "" && parm.group.PowiadomieniaGroup.title != '...'))
+        if (!(parm.group.PowiadomieniaGroup.title != null && parm.group.PowiadomieniaGroup.title != "" && parm.group.PowiadomieniaGroup.title != _mPHeart.translation.LC_POWIADOMIENIA_POWIADOMENIA_MODAL_TITLE_PLACEHOLDER))
             serializePowiadomieniaSaveAlert('title')
         else if (!(parm.group.phrases.length != 0 && !(parm.group.phrases.length == 1 && parm.group.phrases[0] == "")))
             serializePowiadomieniaSaveAlert('phrase')
@@ -188,7 +188,7 @@
             (
                 parm.group.PowiadomieniaGroup.title != null
                     && parm.group.PowiadomieniaGroup.title != ""
-                    && parm.group.PowiadomieniaGroup.title != '...'
+                    && parm.group.PowiadomieniaGroup.title != _mPHeart.translation.LC_POWIADOMIENIA_POWIADOMENIA_MODAL_TITLE_PLACEHOLDER
                 ) && (
                 parm.group.phrases.length != 0 && !(parm.group.phrases.length == 1 && parm.group.phrases[0] == "")
                 ) &&
