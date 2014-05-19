@@ -66,9 +66,8 @@ var powiadomieniaModal;
                 );
                 powiadomieniaModal.options.modal.find('.modal-content').append(powiadomieniaModal.options.footer);
             }
-
-            powiadomieniaModal.options.modal.find('.modal-footer button.closed').click(powiadomieniaModal.options.modal.modal('toggle'));
             powiadomieniaModal.options.modal.modal();
+            powiadomieniaModal.options.modal.find('.modal-footer .closed').click(powiadomieniaModal.options.modal.modal('toggle'));
             powiadomieniaModal.additionalInfo();
         },
         editTitle: function () {
