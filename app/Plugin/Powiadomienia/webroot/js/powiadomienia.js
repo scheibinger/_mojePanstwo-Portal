@@ -2,6 +2,7 @@
 
 (function ($) {
     var dataContent = $('.dataContent'),
+        keywords = $('.keywords'),
         newNotification = dataContent.find('.objects .powiadomienia'),
         checkTime = 3000,
         newNotificationIntervalMain,
@@ -219,6 +220,215 @@
         }
     }
 
+    function phrase() {
+        if ((phraseContent = $('#powiadomienia').find('.frazy')).length > 0) {
+            phraseContent.find('.keywords ul li a.options').click(function (e) {
+                var that = $(this),
+                    parent = that.parents('li'),
+                    modalBottom = $('<div></div>');
+
+                e.preventDefault();
+
+                modalBottom.addClass('modal-footer').append(
+                        $('<div></div>').addClass('btn-group pull-left show').append(
+                                $('<button></button>').addClass('btn btn-default dropdown-toggle').attr({'data-toggle': 'dropdown', 'type': 'button'}).text(_mPHeart.translation.LC_POWIADOMIENIA_POWIADOMENIA_MODAL_WIECEJ).append(
+                                    $('<span></span>').addClass("caret")
+                                )
+                            ).append(
+                                $('<ul></ul>').addClass('dropdown-menu').attr('role', 'menu')
+                                    /*.append(
+                                     $('<li></li>').append(
+                                     $('<a></a>').addClass('duplicate').attr('href', '#').text(_mPHeart.translation.LC_POWIADOMIENIA_POWIADOMENIA_MODAL_DUPLIKUJ)
+                                     )
+                                     ).append(
+                                     $('<li></li>').addClass('divider')
+                                     )*/.append(
+                                        $('<li></li>').append(
+                                            $('<a></a>').addClass('delete').attr('href', '#').text(_mPHeart.translation.LC_POWIADOMIENIA_POWIADOMENIA_MODAL_USUN)
+                                        )
+                                    )
+                            )
+                    ).append(
+                        $('<button></button>').addClass('btn save btn-primary pull-right').attr({'type': 'button'}).text(_mPHeart.translation.LC_POWIADOMIENIA_POWIADOMENIA_MODAL_ZAPISZ)
+                    );
+
+                /*DELETE*/
+                modalBottom.find('a.delete').click(function () {
+                    if ($(this).hasClass('disabled')) return;
+
+                    var parm = serializePowiadomienia();
+
+                    $.ajax({
+                        type: 'DELETE',
+                        url: '/powiadomienia/groups/' + parm.group.PowiadomieniaGroup.id + '.json',
+                        dataType: "json",
+                        beforeSend: function () {
+                            modalBottom.find('.btn', '.btn-group').addClass('disabled');
+                            modalBottom.find('.btn.delete').addClass('loading');
+                        },
+                        complete: function () { /*TODO: zamienic na success gdy beda juz AJAX REQUEST gotowe*/
+                            powiadomieniaModal.options.modal.modal('toggle');
+                            parent.addClass('hide');
+                        }
+                    })
+                });
+
+                /*DUPLICATE*/
+                modalBottom.find('a.duplicate').click(function () {
+                    if ($(this).hasClass('disabled')) return;
+
+                    var parm = serializePowiadomienia();
+
+                    $.ajax({
+                        type: 'GET',
+                        url: '/',
+                        data: {
+                            id: parent.data('id'),
+                            action: 'duplicate'
+                        },
+                        dataType: 'JSON',
+                        beforeSend: function () {
+                            modalBottom.find('.btn', '.btn-group').addClass('disabled');
+                            modalBottom.find('.btn.duplicate').addClass('loading');
+                        },
+                        complete: function () { /*TODO: zamienic na success gdy beda juz AJAX REQUEST gotowe*/
+                            powiadomieniaModal.options.modal.modal('toggle');
+                        }
+                    })
+                });
+
+                /*SAVE*/
+                modalBottom.find('.btn.save').click(function () {
+                    if ($(this).hasClass('disabled')) return;
+
+                    var parm = serializePowiadomienia();
+
+                    if (serializePowiadomieniaSave(parm)) {
+                        $.ajax({
+                            type: 'POST',
+                            url: '/powiadomienia/groups/' + parm.group.PowiadomieniaGroup.id + '.json',
+                            data: parm,
+                            dataType: "json",
+                            beforeSend: function () {
+                                modalBottom.find('.btn', '.btn-group').addClass('disabled');
+                                modalBottom.find('.btn.save').addClass('loading');
+                            },
+                            success: function (data) {
+                                if (data.status) {
+                                    $.ajax({
+                                        type: 'GET',
+                                        url: '/powiadomienia/groups.json',
+                                        dataType: "json",
+                                        success: function (data) {
+                                            keywords.find('> ul').html(data);
+                                            phrase();
+                                            powiadomieniaModal.options.modal.modal('toggle');
+                                        }
+                                    })
+
+                                    var page = Number(loadMoreContent.data('currentpage')) + 1,
+                                        groupId = (loadMoreContent.data('groupid') !== '') ? '&groupid=' + Number(loadMoreContent.data('groupid')) : '',
+                                        mode = '&mode=' + Number(loadMoreContent.data('mode'));
+
+                                    loadMoreContentIntervalRunable = false;
+
+                                    $.ajax({
+                                        type: "GET",
+                                        url: "powiadomienia/powiadomienia.json?page=" + page + mode + groupId,
+                                        beforeSend: function () {
+                                            loadMoreContent.addClass('loading');
+                                        },
+                                        success: function (data) {
+                                            loadMoreContent.removeClass('loading');
+                                            if (data) {
+                                                loadMoreContent.data('currentpage', page);
+                                                showData.html(data);
+                                                addAlertsButtonEvent(showData);
+                                                loadMoreContentIntervalRunable = true;
+                                            } else {
+                                                clearInterval(loadMoreContentIntervalMain);
+                                                if (showData.children().length == 0)
+                                                    showData.addClass('text-center').text(_mPHeart.translation.LC_POWIADOMIENIA_DANE_NO_KEYWORDS);
+                                                loadMoreContent.remove();
+
+                                            }
+                                        },
+                                        complete: function () {
+                                            loadMoreContent.removeClass('loading');
+                                        }
+                                    });
+                                } else {
+                                    modalBottom.find('.btn').removeClass('disabled');
+                                    modalBottom.find('.btn.save').removeClass('loading');
+                                    serializePowiadomieniaSaveAlert();
+                                }
+                            }
+                        })
+                    } else {
+                        /*ERROR - BRAK TITLE, KEYWORDS, APPS*/
+                    }
+                });
+                powiadomieniaModal.init({
+                    footer: modalBottom,
+                    title: $.trim(parent.find('label a.wrap').text()),
+                    hiddenInput: {
+                        'data[Dataobject][ids]': parent.data('id')
+                    },
+                    additionalInfoList: appList,
+                    ajax: {
+                        saveUrl: '/',
+                        saveParm: {id: parent.data('id')},
+                        additionalUrl: '/powiadomienia/groups/' + parent.data('id') + '.json'
+                    }
+                })
+            });
+        }
+    }
+
+    if ($('.loadMoreContent').length) {
+        var loadMoreContentIntervalRunable = true,
+            loadMoreContent = $('.dataContent .loadMoreContent'),
+            showData = $('.dataContent .powiadomienia'),
+            loadMoreContentIntervalMain = null;
+
+        loadMoreContentIntervalMain = setInterval(function () {
+            if (isElementVisibled('.loadMoreContent') && loadMoreContentIntervalRunable) {
+                var page = Number(loadMoreContent.data('currentpage')) + 1,
+                    groupId = (loadMoreContent.data('groupid') !== '') ? '&groupid=' + Number(loadMoreContent.data('groupid')) : '',
+                    mode = '&mode=' + Number(loadMoreContent.data('mode'));
+
+                loadMoreContentIntervalRunable = false;
+
+                $.ajax({
+                    type: "GET",
+                    url: "powiadomienia/powiadomienia.json?page=" + page + mode + groupId,
+                    beforeSend: function () {
+                        loadMoreContent.addClass('loading');
+                    },
+                    success: function (data) {
+                        loadMoreContent.removeClass('loading');
+                        if (data) {
+                            loadMoreContent.data('currentpage', page);
+                            showData.append(data);
+                            addAlertsButtonEvent(showData);
+                            loadMoreContentIntervalRunable = true;
+                        } else {
+                            clearInterval(loadMoreContentIntervalMain);
+                            if (showData.children().length == 0)
+                                showData.addClass('text-center').text(_mPHeart.translation.LC_POWIADOMIENIA_DANE_NO_KEYWORDS);
+                            loadMoreContent.remove();
+
+                        }
+                    },
+                    complete: function () {
+                        loadMoreContent.removeClass('loading');
+                    }
+                });
+            }
+
+        }, 1500);
+    }
+
     $.ajax({
         url: "/powiadomienia/apps.json",
         type: "GET",
@@ -265,176 +475,29 @@
                             modalBottom.find('.btn').addClass('disabled');
                             modalBottom.find('.btn.save').addClass('loading');
                         },
-                        complete: function () {/*TODO: zamienic na success gdy beda juz AJAX REQUEST gotowe*/
-                            powiadomieniaModal.options.modal.modal('toggle');
+                        success: function (data) {
+                            if (data.status) {
+                                $.ajax({
+                                    type: 'GET',
+                                    url: '/powiadomienia/groups.json',
+                                    dataType: "json",
+                                    success: function (data) {
+                                        keywords.find('> ul').html(data);
+                                        phrase();
+                                        powiadomieniaModal.options.modal.modal('toggle');
+                                    }
+                                })
+                            } else {
+                                modalBottom.find('.btn').removeClass('disabled');
+                                modalBottom.find('.btn.save').removeClass('loading');
+                                serializePowiadomieniaSaveAlert();
+                            }
                         }
                     })
 
                 }
             });
         });
-    }
-
-    if ((phraseContent = $('#powiadomienia').find('.frazy')).length > 0) {
-        phraseContent.find('.keywords ul li a.options').click(function (e) {
-            var that = $(this),
-                parent = that.parents('li'),
-                modalBottom = $('<div></div>');
-
-            e.preventDefault();
-
-            modalBottom.addClass('modal-footer').append(
-                    $('<div></div>').addClass('btn-group pull-left show').append(
-                            $('<button></button>').addClass('btn btn-default dropdown-toggle').attr({'data-toggle': 'dropdown', 'type': 'button'}).text(_mPHeart.translation.LC_POWIADOMIENIA_POWIADOMENIA_MODAL_WIECEJ).append(
-                                $('<span></span>').addClass("caret")
-                            )
-                        ).append(
-                            $('<ul></ul>').addClass('dropdown-menu').attr('role', 'menu')
-                                /*.append(
-                                 $('<li></li>').append(
-                                 $('<a></a>').addClass('duplicate').attr('href', '#').text(_mPHeart.translation.LC_POWIADOMIENIA_POWIADOMENIA_MODAL_DUPLIKUJ)
-                                 )
-                                 ).append(
-                                 $('<li></li>').addClass('divider')
-                                 )*/.append(
-                                    $('<li></li>').append(
-                                        $('<a></a>').addClass('delete').attr('href', '#').text(_mPHeart.translation.LC_POWIADOMIENIA_POWIADOMENIA_MODAL_USUN)
-                                    )
-                                )
-                        )
-                ).append(
-                    $('<button></button>').addClass('btn save btn-primary pull-right').attr({'type': 'button'}).text(_mPHeart.translation.LC_POWIADOMIENIA_POWIADOMENIA_MODAL_ZAPISZ)
-                );
-
-            /*DELETE*/
-            modalBottom.find('a.delete').click(function () {
-                if ($(this).hasClass('disabled')) return;
-
-                var parm = serializePowiadomienia();
-
-                $.ajax({
-                    type: 'DELETE',
-                    url: '/powiadomienia/groups/' + parm.group.PowiadomieniaGroup.id + '.json',
-                    dataType: "json",
-                    beforeSend: function () {
-                        modalBottom.find('.btn', '.btn-group').addClass('disabled');
-                        modalBottom.find('.btn.delete').addClass('loading');
-                    },
-                    complete: function () { /*TODO: zamienic na success gdy beda juz AJAX REQUEST gotowe*/
-                        powiadomieniaModal.options.modal.modal('toggle');
-                        parent.addClass('hide');
-                    }
-                })
-            });
-
-            /*DUPLICATE*/
-            modalBottom.find('a.duplicate').click(function () {
-                if ($(this).hasClass('disabled')) return;
-
-                var parm = serializePowiadomienia();
-
-                $.ajax({
-                    type: 'GET',
-                    url: '/',
-                    data: {
-                        id: parent.data('id'),
-                        action: 'duplicate'
-                    },
-                    dataType: 'JSON',
-                    beforeSend: function () {
-                        modalBottom.find('.btn', '.btn-group').addClass('disabled');
-                        modalBottom.find('.btn.duplicate').addClass('loading');
-                    },
-                    complete: function () { /*TODO: zamienic na success gdy beda juz AJAX REQUEST gotowe*/
-                        powiadomieniaModal.options.modal.modal('toggle');
-                    }
-                })
-            });
-
-            /*SAVE*/
-            modalBottom.find('.btn.save').click(function () {
-                if ($(this).hasClass('disabled')) return;
-
-                var parm = serializePowiadomienia();
-
-                if (serializePowiadomieniaSave(parm)) {
-                    $.ajax({
-                        type: 'POST',
-                        url: '/powiadomienia/groups/' + parm.group.PowiadomieniaGroup.id + '.json',
-                        data: parm,
-                        dataType: "json",
-                        beforeSend: function () {
-                            modalBottom.find('.btn', '.btn-group').addClass('disabled');
-                            modalBottom.find('.btn.save').addClass('loading');
-                        },
-                        complete: function () {/*TODO: zamienic na success gdy beda juz AJAX REQUEST gotowe*/
-                            powiadomieniaModal.options.modal.modal('toggle');
-                            parent.find('label a.wrap').text(parm.group.PowiadomieniaGroup.title)
-                        }
-                    })
-                } else {
-                    /*ERROR - BRAK TITLE, KEYWORDS, APPS*/
-                }
-            });
-            powiadomieniaModal.init({
-                footer: modalBottom,
-                title: $.trim(parent.find('label a.wrap').text()),
-                hiddenInput: {
-                    'data[Dataobject][ids]': parent.data('id')
-                },
-                additionalInfoList: appList,
-                ajax: {
-                    saveUrl: '/',
-                    saveParm: {id: parent.data('id')},
-                    additionalUrl: '/powiadomienia/groups/' + parent.data('id') + '.json'
-                }
-            })
-        });
-    }
-
-
-    if ($('.loadMoreContent').length) {
-        var loadMoreContentIntervalRunable = true,
-            loadMoreContent = $('.dataContent .loadMoreContent'),
-            showData = $('.dataContent .powiadomienia'),
-            loadMoreContentIntervalMain = null;
-
-        loadMoreContentIntervalMain = setInterval(function () {
-            if (isElementVisibled('.loadMoreContent') && loadMoreContentIntervalRunable) {
-                var page = Number(loadMoreContent.data('currentpage')) + 1,
-                    groupId = (loadMoreContent.data('groupid') !== '') ? '&groupid=' + Number(loadMoreContent.data('groupid')) : '',
-                    mode = '&mode=' + Number(loadMoreContent.data('mode'));
-
-                loadMoreContentIntervalRunable = false;
-
-                $.ajax({
-                    type: "GET",
-                    url: "powiadomienia/powiadomienia.json?page=" + page + mode + groupId,
-                    beforeSend: function () {
-                        loadMoreContent.addClass('loading');
-                    },
-                    success: function (data) {
-                        loadMoreContent.removeClass('loading');
-                        if (data) {
-                            loadMoreContent.data('currentpage', page);
-                            showData.append(data);
-                            addAlertsButtonEvent(showData);
-                            loadMoreContentIntervalRunable = true;
-                        } else {
-                            clearInterval(loadMoreContentIntervalMain);
-                            if (showData.children().length == 0)
-                                showData.addClass('text-center').text(_mPHeart.translation.LC_POWIADOMIENIA_DANE_NO_KEYWORDS);
-                            loadMoreContent.remove();
-
-                        }
-                    },
-                    complete: function () {
-                        loadMoreContent.removeClass('loading');
-                    }
-                });
-            }
-
-        }, 1500);
     }
 
     $('.additionalOptions .markReadAfterThreeSec').change(function () {
@@ -449,6 +512,7 @@
         optionsMarkAllAsRead($(this));
     });
 
+    phrase();
     optionsMarkAsRead();
     addAlertsButtonEvent($('.showResults .objectRender'));
 }(jQuery));
