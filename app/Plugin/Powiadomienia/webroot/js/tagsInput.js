@@ -112,7 +112,7 @@
                 if ($('.tagsInput .tagsList span.tag').length != 0) {
                     newTag.insertAfter('.tagsInput .tagsList span.tag:last');
                 } else {
-                    $('<div></div>').addClass('tagsList').append(newTag).insertAfter('#' + id + '_addTag');
+                    $('<div></div>').addClass('tagsList').append(newTag).insertBefore('#' + id + '_addTag');
                 }
 
                 tagslist.push(value);

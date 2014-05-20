@@ -71,6 +71,11 @@
                     margin: 5px 1%;
                     width: 98%;
                     display: inline-block;
+                    position: relative;
+
+                    h5 {
+                        font-weight: bold;
+                    }
                 }
 
                 .keywords .tagsList, .datasets .datasetsContent {
@@ -79,127 +84,153 @@
                     max-height: 200px;
                     overflow-x: hidden;
                     overflow-y: auto;
-                    padding-right: 10px;
                     width: 100%;
-                    padding: 5px 0 0 5px;
-                    background-color: #FFF;
-
-                    &:after {
-                        content: '';
-                        width: 100%;
-                        height: 25px;
-                        position: absolute;
-                        left: 0;
-                        bottom: 0;
-
-                        background: -moz-linear-gradient(top, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 70%);
-                        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(255, 255, 255, 0)), color-stop(70%, rgba(255, 255, 255, 1)));
-                        background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 70%);
-                        background: -o-linear-gradient(top, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 70%);
-                        background: -ms-linear-gradient(top, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 70%);
-                        background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 70%);
-                        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00ffffff', endColorstr='#ffffff', GradientType=0);
-                    }
+                    padding: 5px 15px 0 5px;
                 }
 
                 .datasets {
-                    .switchCheckbox {
-                        margin: 1% 0;
-                        position: relative;
+                    .datasetsContent {
+                        background-color: #FFF;
 
-                        &:last-child {
-                            margin-bottom: 20px;
+                        &:before {
+                            content: '';
+                            width: 100%;
+                            height: 25px;
+                            position: absolute;
+                            left: 0;
+                            top: 35px;
+                            z-index: 1;
+
+                            background: -moz-linear-gradient(top, rgba(255, 255, 255, 1) 30%, rgba(255, 255, 255, 0) 100%);
+                            background: -webkit-gradient(linear, left top, left bottom, color-stop(30%, rgba(255, 255, 255, 1)), color-stop(100%, rgba(255, 255, 255, 0)));
+                            background: -webkit-linear-gradient(top, rgba(255, 255, 255, 1) 30%, rgba(255, 255, 255, 0) 100%);
+                            background: -o-linear-gradient(top, rgba(255, 255, 255, 1) 30%, rgba(255, 255, 255, 0) 100%);
+                            background: -ms-linear-gradient(top, rgba(255, 255, 255, 1) 30%, rgba(255, 255, 255, 0) 100%);
+                            background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 30%, rgba(255, 255, 255, 0) 100%);
+                            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#00ffffff', GradientType=0);
                         }
 
-                        label {
-                            cursor: pointer;
+                        &:after {
+                            content: '';
+                            width: 100%;
+                            height: 25px;
+                            position: absolute;
+                            left: 0;
+                            bottom: 0;
+                            z-index: 1;
+
+                            background: -moz-linear-gradient(top, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 70%);
+                            background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(255, 255, 255, 0)), color-stop(70%, rgba(255, 255, 255, 1)));
+                            background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 70%);
+                            background: -o-linear-gradient(top, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 70%);
+                            background: -ms-linear-gradient(top, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 70%);
+                            background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 70%);
+                            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00ffffff', endColorstr='#ffffff', GradientType=0);
                         }
 
-                        .bootstrap-switch {
-                            margin-right: 10px;
-                        }
-                        .datasetsList {
-                            display: none;
-                            border-top: 1px solid #dedede;
-                            margin-top: 10px;
-                            padding-top: 5px;
-                            padding-left: 40px;
+                        .switchCheckbox {
+                            margin: 1% 0;
                             position: relative;
 
-                            .head, .checkbox {
-                                width: 100%;
-                                float: left;
+                            &:first-child {
+                                margin-top: 5px;
                             }
 
-                            .head {
-                                margin-top: 10px;
-                                margin-left: -10px;
+                            &:last-child {
+                                margin-bottom: 15px;
+                            }
 
-                                .label {
-                                    padding-top: 5px;
-                                    margin-left: -10px;
-                                    font-size: 14px;
-                                    color: #000000;
+                            label {
+                                cursor: pointer;
+                                font-weight: normal;
+                            }
+
+                            .bootstrap-switch {
+                                margin-right: 10px;
+                            }
+                            .datasetsList {
+                                display: none;
+                                border-top: 1px solid #dedede;
+                                margin-top: 10px;
+                                padding-top: 5px;
+                                padding-left: 40px;
+                                position: relative;
+
+                                .head, .checkbox {
+                                    width: 100%;
+                                    float: left;
                                 }
 
-                                .datasetOptions {
-                                    .btn {
-                                        margin-right: 10px;
+                                .head {
+                                    margin-top: 10px;
+                                    margin-left: -10px;
+
+                                    .label {
+                                        padding-top: 5px;
+                                        margin-left: -10px;
+                                        font-size: 14px;
+                                        color: #000000;
+                                    }
+
+                                    .datasetOptions {
+                                        .btn {
+                                            margin-right: 10px;
+                                        }
+                                    }
+                                }
+
+                                .checkbox {
+                                    &.disabled {
+                                        opacity: .7;
                                     }
                                 }
                             }
+                            .slide {
+                                @size: 20px;
 
-                            .checkbox {
-                                &.disabled {
-                                    opacity: .7;
+                                width: @size;
+                                height: @size;
+                                position: absolute;
+                                top: 2px;
+
+                                &.left {
+                                    left: -50px;
+                                    opacity: 0;
+
+                                    &:before {
+                                        content: '\e609';
+                                    }
                                 }
-                            }
-                        }
-                        .slide {
-                            @size: 20px;
+                                &.right {
+                                    right: 1%;
 
-                            width: @size;
-                            height: @size;
-                            position: absolute;
-                            top: 2px;
-
-                            &.left {
-                                left: -50px;
-                                opacity: 0;
+                                    &:before {
+                                        content: '\e60b';
+                                    }
+                                }
+                                &.up {
+                                    &:before {
+                                        content: '\e60a';
+                                    }
+                                }
+                                &.down {
+                                    &:before {
+                                        content: '\e608';
+                                    }
+                                }
 
                                 &:before {
-                                    content: '\e609';
+                                    font-size: 22px;
+                                    font-family: 'mojePanstwo';
+                                    speak: none;
+                                    font-style: normal;
+                                    font-weight: normal;
+                                    font-variant: normal;
+                                    text-transform: none;
+                                    line-height: 1;
+                                    -webkit-font-smoothing: antialiased;
+                                    -moz-osx-font-smoothing: grayscale;
                                 }
-                            }
-                            &.right {
-                                right: 1%;
-
-                                &:before {
-                                    content: '\e60b';
-                                }
-                            }
-                            &.up {
-                                &:before {
-                                    content: '\e60a';
-                                }
-                            }
-                            &.down {
-                                &:before {
-                                    content: '\e608';
-                                }
-                            }
-
-                            &:before {
-                                font-size: 22px;
-                                font-family: 'mojePanstwo';
-                                speak: none;
-                                font-style: normal;
-                                font-weight: normal;
-                                font-variant: normal;
-                                text-transform: none;
-                                line-height: 1;
-                                -webkit-font-smoothing: antialiased;
-                                -moz-osx-font-smoothing: grayscale;
                             }
                         }
                     }
@@ -211,9 +242,9 @@
                 }
             }
             .modal-footer {
-            	
-            	margin-top: 0;
-            	
+
+                margin-top: 0;
+
                 .btn {
                     &.loading {
                         background-image: url(../../img/loader/search-loading.png);
@@ -263,6 +294,6 @@
 }
 
 div.tagsInput {
-	padding: 0 !important;
-	background: inherit !important;
+    padding: 0 !important;
+    background: inherit !important;
 }

@@ -122,7 +122,7 @@ msgid "LC_POWIADOMIENIA_POWIADOMENIA_MODAL_KEYWORDS"
 msgstr "Otrzymuj powiadomienia zawierające następujące słowa kluczowe:"
 
 msgid "LC_POWIADOMIENIA_POWIADOMENIA_MODAL_KEYWORDS_INPUT"
-msgstr "Wpisz słowo kluczowe..."
+msgstr "Dodaj słowo kluczowe..."
 
 msgid "LC_POWIADOMIENIA_POWIADOMENIA_MODAL_USUN"
 msgstr "Usuń"
