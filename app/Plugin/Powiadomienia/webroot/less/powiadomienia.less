@@ -57,6 +57,7 @@
                 padding-bottom: 5px;
                 overflow-x: hidden;
                 position: relative;
+                background-color: #EEE;
 
                 .loading {
                     background: url(../../img/loader/ajax-loader-square-blue.gif) center center no-repeat;
@@ -80,6 +81,8 @@
                     overflow-y: auto;
                     padding-right: 10px;
                     width: 100%;
+                    padding: 5px 0 0 5px;
+                    background-color: #FFF;
 
                     &:after {
                         content: '';
@@ -204,9 +207,13 @@
 
                 hr {
                     margin-top: 5px;
+                    margin-bottom: 0;
                 }
             }
             .modal-footer {
+            	
+            	margin-top: 0;
+            	
                 .btn {
                     &.loading {
                         background-image: url(../../img/loader/search-loading.png);
@@ -253,4 +260,9 @@
             }
         }
     }
+}
+
+div.tagsInput {
+	padding: 0 !important;
+	background: inherit !important;
 }
