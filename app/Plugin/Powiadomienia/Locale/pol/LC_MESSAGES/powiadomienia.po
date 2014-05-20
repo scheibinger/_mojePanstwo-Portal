@@ -1,5 +1,5 @@
-msgid "LC_POWIADOMIENIA_FRAZY_USER"
-msgstr "Twoje słowa kluczowe"
+msgid "LC_POWIADOMIENIA_GRUPY_USER"
+msgstr "Twoje grupy powiadomień"
 
 msgid "LC_POWIADOMIENIA_FRAZY_NOKEYWORDS"
 msgstr "Brak słów kluczowych"
@@ -20,7 +20,7 @@ msgid "LC_POWIADOMIENIA_DANE_ALLREADED"
 msgstr "Oznacz wszystko jako przeczytane"
 
 msgid "LC_POWIADOMIENIA_DANE_NO_KEYWORDS"
-msgstr "Brak nowych powiadomień dla wybranych słów kluczowych"
+msgstr "Brak powiadomień"
 
 msgid "LC_POWIADOMIENIA_JS_NO_PHRASE_ADDED_YET"
 msgstr 'Nie dodałeś jeszcze żadnych słów kluczowych.'
@@ -92,6 +92,58 @@ msgid "LC_POWIADOMIENIA_OPTIONS_MARK_ALL_READED"
 msgstr "Oznacz wszystko jako przeczytane"
 
 msgid "LC_POWIADOMIENIA_OPTIONS_MARK_ALL_READED_KEYWORD"
-msgstr "Oznacz słowo kluczowe jako przeczytane"
+msgstr "Oznacz wszystko w tej grupie jako przeczytane"
 
+msgid "LC_POWIADOMIENIA_OPTIONS_ALERT_BUTTON_READ"
+msgstr "Przeczytane"
 
+msgid "LC_POWIADOMIENIA_OPTIONS_ALERT_BUTTON_UNREAD"
+msgstr "Nieprzeczytane"
+
+msgid "LC_POWIADOMIENIA_POWIADOMENIA_MODAL_TITLE_PLACEHOLDER"
+msgstr "Podaj tytuł grupy..."
+
+msgid "LC_POWIADOMIENIA_POWIADOMENIA_MODAL_DATASETS"
+msgstr "Pochodzące z następujących aplikacji:"
+
+msgid "LC_POWIADOMIENIA_POWIADOMENIA_MODAL_NO_DATASETS"
+msgstr "Brak aplikacji"
+
+msgid "LC_POWIADOMIENIA_POWIADOMENIA_MODAL_DATASETS_LIST_LABEL"
+msgstr "Dostępne zbiory danych:"
+
+msgid "LC_POWIADOMIENIA_POWIADOMENIA_MODAL_DATASETS_LIST_OPTIONS_MARK_ALL"
+msgstr "zaznacz wszystkie"
+
+msgid "LC_POWIADOMIENIA_POWIADOMENIA_MODAL_DATASETS_LIST_OPTIONS_MARK_NONE"
+msgstr "oznacz wszystkie"
+
+msgid "LC_POWIADOMIENIA_POWIADOMENIA_MODAL_KEYWORDS"
+msgstr "Otrzymuj powiadomienia zawierające następujące słowa kluczowe:"
+
+msgid "LC_POWIADOMIENIA_POWIADOMENIA_MODAL_KEYWORDS_INPUT"
+msgstr "Dodaj słowo kluczowe..."
+
+msgid "LC_POWIADOMIENIA_POWIADOMENIA_MODAL_USUN"
+msgstr "Usuń"
+
+msgid "LC_POWIADOMIENIA_POWIADOMENIA_MODAL_DUPLIKUJ"
+msgstr "Duplikuj"
+
+msgid "LC_POWIADOMIENIA_POWIADOMENIA_MODAL_ZAPISZ"
+msgstr "Zapisz"
+
+msgid "LC_POWIADOMIENIA_POWIADOMENIA_MODAL_WIECEJ"
+msgstr "Więcej"
+
+msgid "LC_POWIADOMIENIA_POWIADOMENIA_MODAL_ALERT_TITLE"
+msgstr "Błąd! Nie wpisano tytułu dla grupy powiadomień."
+
+msgid "LC_POWIADOMIENIA_POWIADOMENIA_MODAL_ALERT_PHRASE"
+msgstr "Błąd! Nie wybrano żadnych słów kluczowych."
+
+msgid "LC_POWIADOMIENIA_POWIADOMENIA_MODAL_ALERT_APPS"
+msgstr "Błąd! Nie wybrano żadnych aplikacji bądź datasetów do śledzenia."
+
+msgid "LC_POWIADOMIENIA_POWIADOMENIA_MODAL_ALERT_DEFAULT"
+msgstr "Błąd! Wystąpił błąd podczas zapisu. Prosze spróbować ponownie później."

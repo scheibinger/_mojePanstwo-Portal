@@ -170,20 +170,7 @@
                 <div class="_mojePanstwoCockpitUserName">
                     <a href="<?php echo $this->Html->url(array('plugin' => 'paszport', 'controller' => 'users', 'action' => 'index')); ?>"><?php echo $this->Session->read('Auth.User.username'); ?></a>
                 </div>
-                <?php if (count($_STREAMS) > 1) { ?>
-                    <div class="_mojePanstwoCockpitUserStreams">
-                        <form method="get"
-                              action="<?php echo $this->Html->url(array('plugin' => 'paszport', 'controller' => 'users', 'action' => 'switchstreams')); ?>">
-                            <select class="selectpicker" autocomplete="off" name="stream" onchange="this.form.submit()"
-                                >
-                                <?php foreach ($_STREAMS as $stream) { ?>
-                                    <option <? if ($stream['selected']) { ?>selected="selected"
-                                            <? } ?>value="<?= $stream['id'] ?>"><?= $stream['name'] ?></option>
-                                <?php } ?>
-                            </select>
-                        </form>
-                    </div>
-                <?php } ?>
+                
                 <? /*
                     <ul class="_mojePanstwoCockpitUserNameDropdownList">
                         <li class="_mojePanstwoCockpitUserNameDropdownListStream">Streams

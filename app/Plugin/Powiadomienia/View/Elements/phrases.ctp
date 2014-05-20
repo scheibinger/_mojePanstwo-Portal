@@ -26,8 +26,8 @@
         </div>
     </div>
     <ul>
-        <?php if ($phrases) {
-            foreach ($phrases as $index => $phrase) {
+        <?php if ($groups) {
+            foreach ($groups as $index => $group) {
                 ?>
                 <li class="<?php if (isset($this->request->query['keyword']) == false || $this->request->query['keyword'] == $phrase['Phrase']['id']) echo 's'; ?><?php if ($phrase['UserPhrase']['alerts_unread_count']) { ?> nonzero<?php } ?>"
                     data-id="<?php echo $phrase['Phrase']['id']; ?>"
@@ -54,14 +54,7 @@
                                     <?= $phrase['UserPhrase']['alerts_unread_count']; ?>
                                 </span>
                             </div>
-                            <a href="<?php echo $this->Html->url(array(
-                            	'controller' => 'phrases',
-                            	'action' => 'remove', 
-                            	$phrase['Phrase']['id']
-                            )); ?>"
-                               class="delete pull-right"
-                               data-icon="&#xe601;">
-                            </a>
+                            <a href="#options" class="options" data-icon="&#xe612;"></a>
                         </label>
                     </div>
                 </li>

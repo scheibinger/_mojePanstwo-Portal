@@ -34,7 +34,6 @@ var filtersController = function () {
                     jQuery.each((filterNotChecked.slice(limit - filterChecked.length, filterNotChecked.length)), function () {
                         jQuery(this).parents('li.option').hide();
                     });
-
                 }
             }
 

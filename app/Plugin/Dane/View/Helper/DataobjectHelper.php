@@ -85,7 +85,10 @@ class DataobjectHelper extends AppHelper
         $forceLabel = isset($options['forceLabel']) ? $options['forceLabel'] : false;
         $file = isset($options['file']) ? $options['file'] : false;
 
-
+		$class = isset($options['class']) ? $options['class'] : false;
+		$alertsButtons = isset($options['alertsButtons']) ? $options['alertsButtons'] : false;
+		$alertsStatus = isset($options['alertsStatus']) ? $options['alertsStatus'] : false;
+		
         $this->setObject($object);
         if (!empty($routes))
             $object->addRoutes($routes);
@@ -112,6 +115,9 @@ class DataobjectHelper extends AppHelper
             'gid' => @$this->object->id,
             'file' => $file,
             'options' => $options,
+            'class' => $class,
+            'alertsButtons' => $alertsButtons,
+            'alertsStatus' => $alertsStatus,
         );
         return $this->_View->element($theme, $params, array('plugin' => 'Dane'));
     }

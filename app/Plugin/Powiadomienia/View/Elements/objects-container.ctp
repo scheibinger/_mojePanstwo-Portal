@@ -4,12 +4,14 @@
             <div class="objects">
                 <?php if (true) { //@ TODO : przywrocic?>
                     <div
-                        class="powiadomienia<?php if (isset($this->request->query['mode']) && $this->request->query['mode'] == 2) echo(' readed'); ?>">
+                        class="powiadomienia">
                         <? echo $this->element('objects', array(
                             'objects' => $objects,
                         )); ?>
                     </div>
-                    <div class="loadMoreContent" data-currentpage="1"></div>
+                    <div class="loadMoreContent" data-currentpage="1"
+                         data-mode="<?php echo(isset($this->request->query['mode']) ? $this->request->query['mode'] : 1); ?>"
+                         data-groupid="<?php echo(isset($this->request->query['group_id']) ? $this->request->query['group_id'] : null); ?>"></div>
                     <div class="loading"></div>
                 <?php } else { ?>
                     <div class="msg">

@@ -34,7 +34,8 @@
             <div class="col-md-12">
                 <div class="graphContent">
                     <div class="lawMapContent content">
-                        <a class="lawMapNav top"
+
+                        <a class="lawMapNav top hide"
                            href="#prevSlide"><?php echo __d('mapaprawa', 'LC_MAPAPRAWA_POPRZEDNIE_ETAPY') ?></a>
 
                         <div id="lawMap" class="lawMap">
@@ -51,7 +52,8 @@
                                      data-slide="<?= $p['id'] ?>">
                                     <div class="date"><?= $this->Czas->dataSlownie($p['date']) ?></div>
                                     <div class="desc">
-                                        <p><?= $p['label'] ?></p>
+
+                                    <p><?= $p['label'] ?></p>
                                     </div>
                                     <div class="lastIcon icon icon-<?= $p['icon'] ?>"></div>
                                     <div class="path">
@@ -90,7 +92,8 @@
                                 </div>
                             <?php } ?>
                         </div>
-                        <a class="lawMapNav bottom"
+
+                        <a class="lawMapNav bottom  hide"
                            href="#nextSlide"><?php echo __d('mapaprawa', 'LC_MAPAPRAWA_NASTEPNE_ETAPY') ?></a>
                     </div>
                 </div>
