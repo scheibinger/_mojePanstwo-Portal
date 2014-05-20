@@ -25,7 +25,7 @@
                                 <div class="map">
                                     <a href="<?= $this->here ?>/<?= $option['data']['id'] ?>">
                                         <img width="216" height="200"
-                                             src="http://resources.sds.tiktalik.com/BDL_wymiary_kombinacje/<?= $object->getId() ?>.png"
+                                             src="http://resources.sds.tiktalik.com/BDL_wymiary_kombinacje/<?= $option['data']['id'] ?>.png"
                                              class="imageInside"/>
                                     </a>
                                 </div>
