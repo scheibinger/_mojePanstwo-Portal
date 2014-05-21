@@ -360,14 +360,17 @@ var DataObjectesAjax = {
                 }, { duration: delay, queue: false });
             },
             complete: function (status) {
-                var modalBackground,
+                var modal,
+                    modalBackground,
                     data = status.responseJSON;
 
-                /*REMOVE MODAL BACKGROUND*/
-                if ((modalBackground = jQuery('.modal-backdrop')).length > 0) {
-                    modalBackground.fadeOut(300, function () {
+                /*CLOSE ALL MODAL THINGS*/
+                if ((modal = jQuery('.modal')).is(':visible')) {
+                    modal.modal('hide');
+                    jQuery('.modal-backdrop').fadeOut(300, function () {
                         jQuery(this).remove();
                     });
+                    jQuery('body').removeClass('modal-open');
                 }
 
                 /*REMOVE LOADING TWIRL*/
