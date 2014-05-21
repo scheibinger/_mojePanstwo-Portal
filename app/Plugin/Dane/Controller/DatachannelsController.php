@@ -2,6 +2,7 @@
 
 class DatachannelsController extends DaneAppController
 {
+    public $components = array('RequestHandler');
 
     public function index()
     {
