@@ -6,15 +6,17 @@ class ZamowieniaPubliczneController extends AppController
     public $helpers = array(
         'Dane.Dataobject',
         'Dane.DataobjectsSlider',
+        'Waluta',
     );
 
     public function index()
     {
 
-        $stats = $this->API->ZamowieniaPubliczne()->getStats();
+        $stats = $this->API->ZamowieniaPubliczne()->getNewStats();
         $this->set('stats', $stats);
 
-
+		
+		/*
         $api = $this->API->Dane();
 
 
@@ -43,6 +45,7 @@ class ZamowieniaPubliczneController extends AppController
             ),
         ));
         $this->set('roboty', $api->getObjects());
+        */
 
         $application = $this->getApplication();
         $this->set('title_for_layout', $application['Application']['name']);

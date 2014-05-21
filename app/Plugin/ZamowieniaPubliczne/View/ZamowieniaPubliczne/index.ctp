@@ -8,34 +8,54 @@
 <?php $this->Combinator->add_libs('js', 'Dane.dataobjectsslider') ?>
 
 <div class="container" id="zamowienia">
+	
+	<div class="banner">
+		<p>W ciągu ostatniego miesiąca, Twoje Państwo udzieliło zamówień na </p>
 
+		<p class="number"><?= $this->Waluta->slownie($stats['zamowienia']['total']) ?></p>
+		
+		<p>w tym:</p>
+	</div>
+	
+	<div class="row">
+		
+		<? foreach( $stats['zamowienia']['rodzaje'] as $rodzaj ) { ?>
+		<div class="col-lg-4">
+			
+			<p class="number small"><?= $this->Waluta->slownie($rodzaj['total']) ?></p>
+
+			<h2><span>na</span> <?= $rodzaj['nazwa'] ?></h2>
+			
+			<h3>Najwięcej zamówili:</h3>
+			
+			<ul>
+			<? foreach( $rodzaj['zamawiajacy'] as $zamawiajacy ) {?>
+				<li>
+					<p><?= $zamawiajacy['nazwa'] ?></p>
+					<p><?= pl_dopelniacz($zamawiajacy['liczba_zamowien'], 'zamówienie', 'zamówienia', 'zamówień') ?> na kwotę <?= $this->Waluta->slownie($zamawiajacy['wartosc']) ?></p>
+				</li>
+			<?}?>
+			</ul>			
+						
+		</div>
+		<? } ?>
+		
+	</div>
+	
+	
+	
+	
+	
+	<? /*
     <div class="banner">
         <h1><?php echo __d('zamowienia_publiczne', "LC_ZAMOWIENIA_PUBLICZNE_HEADLINE"); ?></h1>
 
         <p><?php echo __d('zamowienia_publiczne', "LC_ZAMOWIENIA_PUBLICZNE_SUBHEADLINE"); ?></p>
     </div>
-
-    <div id="highchartContainer">
-        <script type="text/javascript">
-            var chartData = <?= json_encode( $stats['days'] ) ?>;
-        </script>
-    </div>
-
-    <div class="searchDiv">
-        <div class="col-lg-10 col-lg-offset-1">
-            <form action="/dane/zamowienia_publiczne">
-                <div class="input-group main_input">
-                    <input name="q" type="text"
-                           placeholder="<?= __d('zamowienia_publiczne', 'LC_SEARCH_ALL_TENDERS') ?>"
-                           class="form-control input-lg">
-				            <span class="input-group-btn">
-                                  <button class="btn btn-success btn-lg" type="submit" data-icon="&#xe600;"></button>
-				            </span>
-                </div>
-            </form>
-        </div>
-    </div>
-
+	*/ ?>
+    
+	
+	<? /*
     <div class="dataobjectsSliderRow">
         <div class="row header">
             <div class="col-xs-12 col-sm-6 left">
@@ -83,6 +103,7 @@
             <?php echo $this->dataobjectsSlider->render($roboty, array('rowNumber' => 1)); ?>
         </div>
     </div>
+    */ ?>
 
 
 </div>
