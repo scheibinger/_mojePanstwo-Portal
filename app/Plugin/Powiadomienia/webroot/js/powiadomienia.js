@@ -291,8 +291,55 @@
                             modalBottom.find('.btn', '.btn-group').addClass('disabled');
                             modalBottom.find('.btn.duplicate').addClass('loading');
                         },
-                        complete: function () { /*TODO: zamienic na success gdy beda juz AJAX REQUEST gotowe*/
-                            powiadomieniaModal.options.modal.modal('toggle');
+                        success: function (data) {
+                            if (data.status) {
+                                $.ajax({
+                                    type: 'GET',
+                                    url: '/powiadomienia/groups.json',
+                                    dataType: "json",
+                                    success: function (data) {
+                                        keywords.find('> ul').html(data);
+                                        phrase();
+                                        powiadomieniaModal.options.modal.modal('toggle');
+                                    }
+                                })
+
+                                var page = Number(loadMoreContent.data('currentpage')) + 1,
+                                    groupId = (loadMoreContent.data('groupid') !== '') ? '&groupid=' + Number(loadMoreContent.data('groupid')) : '',
+                                    mode = '&mode=' + Number(loadMoreContent.data('mode'));
+
+                                loadMoreContentIntervalRunable = false;
+
+                                $.ajax({
+                                    type: "GET",
+                                    url: "powiadomienia/powiadomienia.json?page=" + page + mode + groupId,
+                                    beforeSend: function () {
+                                        loadMoreContent.addClass('loading');
+                                    },
+                                    success: function (data) {
+                                        loadMoreContent.removeClass('loading');
+                                        if (data) {
+                                            loadMoreContent.data('currentpage', page);
+                                            showData.html(data);
+                                            addAlertsButtonEvent(showData);
+                                            loadMoreContentIntervalRunable = true;
+                                        } else {
+                                            clearInterval(loadMoreContentIntervalMain);
+                                            if (showData.children().length == 0)
+                                                showData.addClass('text-center').text(_mPHeart.translation.LC_POWIADOMIENIA_DANE_NO_KEYWORDS);
+                                            loadMoreContent.remove();
+
+                                        }
+                                    },
+                                    complete: function () {
+                                        loadMoreContent.removeClass('loading');
+                                    }
+                                });
+                            } else {
+                                modalBottom.find('.btn').removeClass('disabled');
+                                modalBottom.find('.btn.save').removeClass('loading');
+                                serializePowiadomieniaSaveAlert();
+                            }
                         }
                     })
                 });
