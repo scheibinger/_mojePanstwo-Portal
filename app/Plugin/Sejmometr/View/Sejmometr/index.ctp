@@ -1,6 +1,7 @@
 <?php $this->Combinator->add_libs('css', $this->Less->css('dataobject', array('plugin' => 'Dane'))) ?>
 <?php $this->Combinator->add_libs('css', $this->Less->css('dataobjectslider', array('plugin' => 'Dane'))) ?>
 <?php $this->Combinator->add_libs('css', $this->Less->css('sejmometr', array('plugin' => 'Sejmometr'))) ?>
+<?php $this->Combinator->add_libs('css', $this->Less->css('new-look')) ?>
 
 <?php $this->Combinator->add_libs('js', '../plugins/highcharts/js/highcharts'); ?>
 <?php $this->Combinator->add_libs('js', '../plugins/highcharts/locals'); ?>
@@ -8,164 +9,76 @@
 <?php $this->Combinator->add_libs('js', 'Sejmometr.sejmometr.js'); ?>
 <?php echo $this->Html->script('../plugins/TimelineJS/build/js/storyjs-embed.js', array('block' => 'scriptBlock')); ?>
 
+<div id="sejmometr" class="newLayout">
 
+    <div class="headline block">
+        <div class="container">
+            <h1 class="header text-center">Sejmometr</h1>
 
+            <h5 class="col-xs-11 col-md-10 col-md-offset-1">Sejm jest organem władzy ustawodawczej w Polsce. Tworzą
+                go posłowie, którzy są
+                reprezentantami Narodu dlatego mogą, a nawet powinni być przez ten Naród oceniani. Szerokie
+                udostępnianie informacji o poselskich działaniach leży w interesie każdego z 460 posłów. Obywatele
+                nie
+                mający dostępu do takich danych swoje poglądy wyrobią w oparciu o inne, niekoniecznie obiektywne
+                źródła
+                informacji. Postanowiliśmy wesprzeć tych, którzy chcieliby wiedzieć jak pracują nasi posłowie i w
+                jakich
+                warunkach wykonują swój mandat poselski. Stworzyliśmy aplikację, która prezentuje rozmaite dane
+                związane
+                z sejmową codziennością!
+            </h5>
 
-    <div id="sejmometr">
-
-        <div class="innerContent">
-            <div class="col-xs-12 col-sm-8 col-sm-offset-2">
-
-                <form class="searchInput" action="/sejmometr/szukaj">
-                    <div class="input-group main_input">
+            <div class="searchInput search col-xs-12">
+                <form action="/sejmometr/szukaj">
+                    <div class="input-group">
                         <input name="q" value="" type="text" autocomplete="off"
                                placeholder="Szukaj w pracach Sejmu..."
                                class="form-control input-lg">
 	                <span class="input-group-btn">
-	                      <button class="btn btn-success btn-lg" type="submit" data-icon="&#xe600;"></button>
+	                      <button class="btn btn-success btn-lg button big" type="submit" data-icon="&#xe600;"></button>
 	                </span>
                     </div>
                 </form>
+            </div>
 
-                <div id="shortcuts">
-                    <ul>
-                        <li>
-                            <a href="/dane/legislacja_projekty_ustaw">Projekty ustaw</a>
-                        </li>
-                        <li>
-                            <a href="/dane/sejm_druki">Druki sejmowe</a>
-                        </li>
-                        <li>
-                            <a href="/dane/poslowie" target="_self">Posłowie</a>
-                        </li>
-                        <li>
-                            <a href="/dane/sejm_kluby" target="_self">Kluby parlamentarne</a>
-                        </li>
-                        <li>
-                            <a href="/dane/sejm_interpelacje" target="_self">Interpelacje</a>
-                        </li>
-                    </ul>
-                </div>
-
+            <div class="shortcut submenu">
+                <ul class="col-xs-12">
+                    <li class="active">
+                        <a href="/sejmometr">Sejmometr</a>
+                    </li>
+                    <li>
+                        <a href="/dane/legislacja_projekty_ustaw">Projekty ustaw</a>
+                    </li>
+                    <li>
+                        <a href="/dane/sejm_druki">Druki sejmowe</a>
+                    </li>
+                    <li>
+                        <a href="/dane/poslowie" target="_self">Posłowie</a>
+                    </li>
+                    <li>
+                        <a href="/dane/sejm_kluby" target="_self">Kluby parlamentarne</a>
+                    </li>
+                    <li>
+                        <a href="/dane/sejm_interpelacje" target="_self">Interpelacje</a>
+                    </li>
+                </ul>
             </div>
         </div>
-		
-		<div class="mpanel">
-	        <div class="container">
-	            <div class="posiedzenie">
-	                <div class="row">
-	                    <h2><a href="/sejm_posiedzenia">Posiedzenia Sejmu</a></h2>
-	                </div>
-	            </div>
-	        </div>
-		</div>
-
-        <div id="timeline-embed" data-source="1"></div>
-
-		
-		<div class="mpanel">
-			<div class="container">
-
-	            <div class="dataobjectsSliderRow">
-	
-	                <div class="row header">
-	                    <div class="col-xs-12 col-sm-8 left">
-	                        <h2>
-	                            <a href="#">Najnowsze projekty ustaw</a>
-	                        </h2>
-	                    </div>
-	                    <div class="col-xs-4 col-xs-offset-4 col-sm-4 col-sm-offset-0 right"></div>
-	                </div>
-	
-	                <div class="blockContent">
-	                    <?
-	                    $group = $posiedzenie->getRelatedGroup('przyjete_ustawy');
-	                    echo $this->dataobjectsSlider->render($group['objects'], array(
-	                        'rowNumber' => 1,
-	                        'perGroup' => 3,
-	                    ));
-	                    ?>
-	                </div>
-	
-	            </div>
-	            
-            
-	            <div class="row header">
-                    <div class="col-xs-12 col-sm-8 left">
-                        <h2>
-                            <a href="#">Autorzy projektów w Sejmie</a>
-                        </h2>
-                    </div>
-                    <div class="col-xs-4 col-xs-offset-4 col-sm-4 col-sm-offset-0 right"></div>
-                </div>
-                
-                <div class="blockContent">
-                	<div id="sejm_projekty_chart"></div>
-                </div>
-            
-	            
-	
-	        </div>
-		</div>
-		
-        
     </div>
 
+    <div class="mpanel block">
+        <div class="container">
+            <div class="col-xs-12">
+                <h2>Posiedzenia <strong>Sejmu</strong></h2>
+            </div>
+        </div>
+    </div>
 
-<? /*
-<div class="container app">
-	
-	<div class="mpanel">
-	
-		<div class="block">
-		
-			<h2 class="underline">Posiedzenia Sejmu</h2>
-			
-			<div class="block_content">
-				
-				<div class="last_session">
-					<p>Ostatnie posiedzenie Sejmu odbyło się 13 maja 2014. <a class="btn btn-primary btn-xs" href="#">Szczegóły &raquo;</a></p>
-					<p>Rozpatrywano 23 projekty. Przyjęto 5, odrzucono 1.</p>
-				</div>
-				
-				<h3>Projekty przyjęte na ostatnim posiedzeniu</h3>
-							
-				
-			</div>
-			
-		</div>
-		
-		<div class="block">
-		
-			<h2 class="underline">Legislacja</h2>
-			
-			<div class="block_content">
-				
-			</div>
-			
-		</div>
-		
-		<div class="block">
-		
-			<h2 class="underline">Posłowie</h2>
-			
-			<div class="block_content">
-				
-			</div>
-			
-		</div>
-		
-		<div class="block">
-		
-			<h2 class="underline">Kluby parlamentarne</h2>
-			
-			<div class="block_content">
-				
-			</div>
-			
-		</div>
-	
-	</div>
+    <div id="timeline-embed" data-source="1"></div>
+
+    <div class="mpanel">
+
+    </div>
 
 </div>
-*/
