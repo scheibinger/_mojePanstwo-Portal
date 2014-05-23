@@ -13,6 +13,15 @@ class KrsPodmiotyController extends DataobjectsController
         'hlFields' => array(),
         'bigTitle' => true,
     );
+    
+    public function beforeFilter()
+    {
+    	
+    	parent::beforeFilter();
+        $this->Auth->deny('pobierz_odpis');
+        
+    }
+
 
     /*
     public $menuMode = 'vertical';
@@ -256,5 +265,24 @@ class KrsPodmiotyController extends DataobjectsController
             $this->set('_serialize', 'data');
 
         } else return false;
+    }
+    
+    public function pobierz_odpis()
+    {
+	    
+	    parent::view();
+	    $odpis = $this->object->loadLayer('odpis');
+	    
+	    if( isset($odpis['status']) && $odpis['status'] ) {
+		    
+		    $this->redirect( $odpis['url'] );
+		    
+	    } else {
+		    
+		    $this->redirect( $this->referer() );
+		    
+	    }
+	    
+	   	    
     }
 }

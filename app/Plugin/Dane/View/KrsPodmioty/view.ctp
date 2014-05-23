@@ -161,6 +161,9 @@ $this->Combinator->add_libs('js', 'Dane.view-krspodmioty');
 
 
         </div>
+        
+        
+        <p><a href="/dane/krs_podmioty/<?= $object->getId() ?>/pobierz_odpis">Pobierz aktualny odpis za darmo</a></p>
 
     </div>
 
