@@ -18,92 +18,26 @@ class KrsPodmiotyController extends DataobjectsController
     {
     	
     	parent::beforeFilter();
-        $this->Auth->deny('pobierz_odpis');
-        
+        $this->Auth->deny(array('pobierz_odpis', 'odpis'));        
     }
 
-
-    /*
-    public $menuMode = 'vertical';
-    protected function prepareMenu()
-    {
-
-        $liczba_reprezentantow = (int)$this->object->getData('liczba_reprezentantow');
-        if ($liczba_reprezentantow)
-            $this->menu[] = array(
-                'id' => 'reprezentacja',
-                'label' => _ucfirst($this->object->getData('nazwa_organu_reprezentacji')),
-            );
-
-
-        $liczba_nadzorcow = (int)$this->object->getData('liczba_nadzorcow');
-        if ($liczba_nadzorcow)
-            $this->menu[] = array(
-                'id' => 'nadzor',
-                'label' => _ucfirst($this->object->getData('nazwa_organu_nadzoru')),
-            );
-
-
-        $liczba_wspolnikow = (int)$this->object->getData('liczba_wspolnikow');
-        if ($liczba_wspolnikow)
-            $this->menu[] = array(
-                'id' => 'wspolnicy',
-                'label' => 'Wspólnicy',
-            );
-
-
-        $liczba_czlonkow_komitetu_zal = (int)$this->object->getData('liczba_czlonkow_komitetu_zal');
-        if ($liczba_czlonkow_komitetu_zal)
-            $this->menu[] = array(
-                'id' => 'komitetZalozycielski',
-                'label' => 'Komitet założycielski',
-            );
-
-
-        $liczba_jedynych_akcjonariuszy = (int)$this->object->getData('liczba_jedynych_akcjonariuszy');
-        if ($liczba_jedynych_akcjonariuszy)
-            $this->menu[] = array(
-                'id' => 'jedynyAkcjonariusz',
-                'label' => 'Jedyny akcjonariusz',
-            );
-
-
-        $liczba_oddzialow = (int)$this->object->getData('liczba_oddzialow');
-        if ($liczba_oddzialow)
-            $this->menu[] = array(
-                'id' => 'oddzialy',
-                'label' => 'Oddziały',
-            );
-
-
-        $liczba_emisji_akcji = (int)$this->object->getData('liczba_emisji_akcji');
-        if ($liczba_emisji_akcji)
-            $this->menu[] = array(
-                'id' => 'emisjeAkcji',
-                'label' => 'Emisje akcji',
-            );
-
-
-        $liczba_zmian_umow = (int)$this->object->getData('liczba_zmian_umow');
-        if ($liczba_zmian_umow)
-            $this->menu[] = array(
-                'id' => 'zmianyUmow',
-                'label' => ($this->object->getData('forma_prawna_id') == '1') ? 'Zmiany statutów' : 'Zmiany umów',
-            );
-
-
-    }
-    */
 
     public function view()
     {
-        parent::view();
-		
-		if( isset($this->request->query['odpis']) ) {
-			
-		}
+        parent::view();		
 		
 
+		if( $this->Session->read('KRS.odpis')==$this->object->getId() )	{
+			
+			$odpis = $this->object->loadLayer('odpis');
+			if( $odpis['status'] )
+				$this->set('odpis', $odpis['url']);
+			
+		}
+
+		$this->Session->delete('KRS.odpis');
+		
+		
         $indicators = array(
             array(
                 'label' => 'Numer KRS',
@@ -271,22 +205,13 @@ class KrsPodmiotyController extends DataobjectsController
         } else return false;
     }
     
-    public function pobierz_odpis()
+    public function odpis()
     {
+	    	    
+	    $id = (int) $this->request->params['id'];
+	    $this->Session->write('KRS.odpis', $id);
+	    $this->redirect('/dane/krs_podmioty/' . $id);
 	    
-	    parent::view();
-	    $odpis = $this->object->loadLayer('odpis');
-	    
-	    if( isset($odpis['status']) && $odpis['status'] ) {
-		    
-		    $this->redirect( $odpis['url'] );
-		    
-	    } else {
-		    
-		    $this->redirect( $this->referer() );
-		    
-	    }
-	    
-	   	    
     }
+    
 }
