@@ -76,6 +76,9 @@ msgstr "Podany użytkownik nie istenieje w serwisie"
 msgid "LC_PASZPORT_SECURITY_TOKEN_EXPIRED"
 msgstr "Czas żywotności tokena minął"
 
+msgid "LC_PASZPORT_SECURITY_TOKEN_INVALID"
+msgstr "Podany token jest niepoprawny"
+
 #: Controller/UsersController.php:353
 msgid "LC_PASZPORT_PASSWORD_RESET_SUCCESS"
 msgstr "Reset hasła zakończony sukcesem"
