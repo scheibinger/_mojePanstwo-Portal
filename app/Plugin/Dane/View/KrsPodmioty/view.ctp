@@ -154,10 +154,10 @@ $this->Combinator->add_libs('js', 'Dane.view-krspodmioty');
             <div class="banner">
                 <?php echo $this->Html->image('Dane.banners/krspodmioty_banner.png', array('alt' => 'Aktualny odpis z KRS za darmo', 'class' => 'pull-right')); ?>
                 <p>Pobierz aktualny odpis z KRS <strong>za darmo</strong></p>
-                <button type="button" class="btn btn-primary">Kliknij aby pobrać</button>
+                <a href="#" class="btn btn-primary">Kliknij aby pobrać</a>
             </div>
         </div>
-    </div>
+        </div>
 
     <div class="col-lg-9 objectMain">
         <div class="object mpanel">
@@ -181,7 +181,7 @@ $this->Combinator->add_libs('js', 'Dane.view-krspodmioty');
                         <p><?= $object->getData('adres_kod_pocztowy') ?> <?= $object->getData('adres_poczta') ?></p>
 
                         <p><?= $object->getData('adres_kraj') ?></p>
-                        <a class="btn btn-info" href="#"><?= __d('dane', 'LC_DANE_VIEW_KRSPODMIOTY_OTWORZ_MAPE') ?></a>
+                        <button class="btn btn-info"><?= __d('dane', 'LC_DANE_VIEW_KRSPODMIOTY_OTWORZ_MAPE') ?></button>
                     </div>
                 </div>
                 <div id="googleMap">
