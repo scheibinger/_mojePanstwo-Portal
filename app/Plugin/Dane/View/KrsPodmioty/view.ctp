@@ -1,4 +1,7 @@
 <?
+if( isset($odpis) && $odpis ) {			
+	$this->Html->meta( array('http-equiv' => "refresh", 'content' => "0;URL='$odpis'"), null, array('inline' => false));
+}
 
 echo $this->Element('dataobject/pageBegin');
 echo $this->Html->script('Dane.d3/d3', array('block' => 'scriptBlock'));
@@ -154,10 +157,11 @@ $this->Combinator->add_libs('js', 'Dane.view-krspodmioty');
             <div class="banner">
                 <?php echo $this->Html->image('Dane.banners/krspodmioty_banner.png', array('width' => '69', 'alt' => 'Aktualny odpis z KRS za darmo', 'class' => 'pull-right')); ?>
                 <p>Pobierz aktualny odpis z KRS <strong>za darmo</strong></p>
-                <a href="#" class="btn btn-primary">Kliknij aby pobrać</a>
+                <a href="/dane/krs_podmioty/<?= $object->getId() ?>/odpis" class="btn btn-primary">Kliknij aby pobrać</a>
             </div>
         </div>
-        </div>
+    </div>
+
 
     <div class="col-lg-9 objectMain">
         <div class="object mpanel">
