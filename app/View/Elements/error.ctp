@@ -1,4 +1,8 @@
 <?php $this->Combinator->add_libs('css', $this->Less->css('missing')) ?>
+<?php
+    if (!isset($code_desc)) { $code_desc = 'Coś poszło nie tak'; }
+    if (!isset($action)) { $action = 'main_page'; }
+?>
 
 <div class="container">
     <div class="informationBlock missing col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
@@ -156,12 +160,24 @@
             </math>
         </div>
         <div class="col-xs-12 information">
-            <h4>404</h4>
+            <h4><?php echo $code; ?></h4>
 
-            <h2><strong>Ups!</strong>Coś poszło nie tak</h2>
+            <h2><strong>Ups!</strong><?php echo $code_desc; ?></h2>
 
-            <h3>Nie znaleźliśmy poszukiwanego elementu<br/>bądź jeszcze nie posiadamy takiej możliwości.</h3>
-            <a class="btn btn-info" href="/" target="_self">Wróc na stronę główną</a>
+            <h3><?php echo $message; ?></h3>
+            <?php if ($action == 'refresh') { ?>
+                <a class="btn btn-info" href="<? echo Router::reverse($this->params); ?>" target="_self">Odśwież stronę</a>
+            <?php } else { ?>
+                <a class="btn btn-info" href="/" target="_self">Wróc na stronę główną</a>
+            <?php } ?>
         </div>
     </div>
 </div>
+
+<? if (Configure::read('debug') > 0) { ?>
+<div class="error-description">
+    <h3><?php echo get_class($error); ?></h3>
+    <p><?php echo $error->getMessage(); ?></p>
+    <?php echo $this->element('exception_stack_trace'); ?>
+</div>
+<? } ?>

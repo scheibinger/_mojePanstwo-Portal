@@ -98,7 +98,11 @@ class KrsPodmiotyController extends DataobjectsController
     public function view()
     {
         parent::view();
-
+		
+		if( isset($this->request->query['odpis']) ) {
+			
+		}
+		
 
         $indicators = array(
             array(
