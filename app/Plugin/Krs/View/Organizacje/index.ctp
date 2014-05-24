@@ -61,10 +61,9 @@
         </div>
     </div>
 
-    <? /*
     <div class="poslowie">
         <div class="container">
-            <h3><?= __d('krs', 'LC_KRS_POSLOWIE_HEADLINE') ?></h3>
+            <h2><?= __d('krs', 'LC_KRS_POSLOWIE_HEADLINE') ?></h2>
 
             <div class="row">
                 <div class="blockInfo col-xs-6 col-md-3">
@@ -150,6 +149,5 @@
             </div>
         </div>
     </div>
-    */
-    ?>
+
 </div>
