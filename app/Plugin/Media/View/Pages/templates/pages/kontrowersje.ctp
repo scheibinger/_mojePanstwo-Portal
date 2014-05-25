@@ -3,7 +3,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-10">
-                <h2><?= __d('panstwo_internet', 'LC_PANSTWOINTERNET_KONTROWERSJE_HEADLINE') ?></h2>
+                <h2><?= __d('media', 'LC_PANSTWOINTERNET_KONTROWERSJE_HEADLINE') ?></h2>
             </div>
         </div>
     </div>
@@ -12,19 +12,19 @@
 <div class="row">
 <div class="col-md-10 col-md-offset-1 separator-top">
 <div class="desc">
-<p><?= __d('panstwo_internet', 'LC_PANSTWOINTERNET_KONTROWERSJE_TEXT') ?></p>
+<p><?= __d('media', 'LC_PANSTWOINTERNET_KONTROWERSJE_TEXT') ?></p>
 
-<h3><?= __d('panstwo_internet', 'LC_PANSTWOINTERNET_KONTROWERSJE_TOPIC_1') ?></h3>
+<h3><?= __d('media', 'LC_PANSTWOINTERNET_KONTROWERSJE_TOPIC_1') ?></h3>
 
-<p><?= __d('panstwo_internet', 'LC_PANSTWOINTERNET_KONTROWERSJE_TEXT_1-1') ?></p>
+<p><?= __d('media', 'LC_PANSTWOINTERNET_KONTROWERSJE_TEXT_1-1') ?></p>
 
-<p><?= __d('panstwo_internet', 'LC_PANSTWOINTERNET_KONTROWERSJE_TEXT_1-2') ?></p>
+<p><?= __d('media', 'LC_PANSTWOINTERNET_KONTROWERSJE_TEXT_1-2') ?></p>
 
-<h3><?= __d('panstwo_internet', 'LC_PANSTWOINTERNET_KONTROWERSJE_TOPIC_2') ?></h3>
+<h3><?= __d('media', 'LC_PANSTWOINTERNET_KONTROWERSJE_TOPIC_2') ?></h3>
 
-<p><?= __d('panstwo_internet', 'LC_PANSTWOINTERNET_KONTROWERSJE_TEXT_2-1') ?></p>
+<p><?= __d('media', 'LC_PANSTWOINTERNET_KONTROWERSJE_TEXT_2-1') ?></p>
 
-<p><?= __d('panstwo_internet', 'LC_PANSTWOINTERNET_KONTROWERSJE_TEXT_2-2') ?></p>
+<p><?= __d('media', 'LC_PANSTWOINTERNET_KONTROWERSJE_TEXT_2-2') ?></p>
 <? /*
 
                     <ul>
@@ -33,16 +33,16 @@
                         <li>Katarzyna Szaran (specjalista)</li>
                     </ul>
                     
-                    <p><?= __d('panstwo_internet', 'LC_PANSTWOINTERNET_KONTROWERSJE_TEXT_2-3') ?></p>
+                    <p><?= __d('media', 'LC_PANSTWOINTERNET_KONTROWERSJE_TEXT_2-3') ?></p>
 
 					                    */
 ?>
 
-<p><?= __d('panstwo_internet', 'LC_PANSTWOINTERNET_KONTROWERSJE_TEXT_2-4') ?></p>
+<p><?= __d('media', 'LC_PANSTWOINTERNET_KONTROWERSJE_TEXT_2-4') ?></p>
 
-<h3><?= __d('panstwo_internet', 'LC_PANSTWOINTERNET_KONTROWERSJE_TOPIC_3') ?></h3>
+<h3><?= __d('media', 'LC_PANSTWOINTERNET_KONTROWERSJE_TOPIC_3') ?></h3>
 
-<p><?= __d('panstwo_internet', 'LC_PANSTWOINTERNET_KONTROWERSJE_TEXT_3-1') ?></p>
+<p><?= __d('media', 'LC_PANSTWOINTERNET_KONTROWERSJE_TEXT_3-1') ?></p>
 
 <ul class="fakeTwitterAccounts">
     <li>
@@ -156,24 +156,24 @@
     </li>
 </ul>
 
-<p><?= __d('panstwo_internet', 'LC_PANSTWOINTERNET_KONTROWERSJE_TEXT_3-2') ?></p>
+<p><?= __d('media', 'LC_PANSTWOINTERNET_KONTROWERSJE_TEXT_3-2') ?></p>
 
-<h3><?= __d('panstwo_internet', 'LC_PANSTWOINTERNET_KONTROWERSJE_TOPIC_4') ?></h3>
+<h3><?= __d('media', 'LC_PANSTWOINTERNET_KONTROWERSJE_TOPIC_4') ?></h3>
 
-<p><?= __d('panstwo_internet', 'LC_PANSTWOINTERNET_KONTROWERSJE_TEXT_4-1') ?></p>
+<p><?= __d('media', 'LC_PANSTWOINTERNET_KONTROWERSJE_TEXT_4-1') ?></p>
 
-<h3 id="twitter-wpadki"><?= __d('panstwo_internet', 'LC_PANSTWOINTERNET_KONTROWERSJE_TOPIC_5') ?></h3>
+<h3 id="twitter-wpadki"><?= __d('media', 'LC_PANSTWOINTERNET_KONTROWERSJE_TOPIC_5') ?></h3>
 
 <div class="twoColumn">
     <div class="columnLeft">
         <div class="block">
             <h4>
                 <a href="http://natemat.pl/81695,wpadka-nbp-na-twitterze-idz-sie-leczyc-do-jaroslawa-kuzniara"
-                   target="_blank"><?= __d('panstwo_internet', 'LC_PANSTWOINTERNET_KONTROWERSJE_TOPIC_5-1') ?></a>
+                   target="_blank"><?= __d('media', 'LC_PANSTWOINTERNET_KONTROWERSJE_TOPIC_5-1') ?></a>
             </h4>
 
             <p>
-                <?= __d('panstwo_internet', 'LC_PANSTWOINTERNET_KONTROWERSJE_TEXT_5-1-1') ?>
+                <?= __d('media', 'LC_PANSTWOINTERNET_KONTROWERSJE_TEXT_5-1-1') ?>
                 <img alt="&quot;Idź się leczyć&quot; napisał ktoś z konta NBP do Jarosława Kuźniara"
                      src="http://m.natemat.pl/4b46f824e1833c7dddcd9ccdb348e6c1,641,0,0,0.jpg"/>
             </p>
@@ -181,22 +181,22 @@
         <div class="block">
             <h4>
                 <a href="http://trojmiasto.gazeta.pl/trojmiasto/1,35636,15035844,Wpadka_prezydenta_Gdanska_na_Twitterze___Caly_czas.html"
-                   target="_blank"><?= __d('panstwo_internet', 'LC_PANSTWOINTERNET_KONTROWERSJE_TOPIC_5-2') ?></a>
+                   target="_blank"><?= __d('media', 'LC_PANSTWOINTERNET_KONTROWERSJE_TOPIC_5-2') ?></a>
             </h4>
 
             <p>
-                <?= __d('panstwo_internet', 'LC_PANSTWOINTERNET_KONTROWERSJE_TEXT_5-2-1') ?>
+                <?= __d('media', 'LC_PANSTWOINTERNET_KONTROWERSJE_TEXT_5-2-1') ?>
                 <img src="http://bi.gazeta.pl/im/ce/68/e5/z15034574Q,TT_PA.jpg" alt=""/>
             </p>
         </div>
         <div class="block">
             <h4>
                 <a href="http://www.polskieradio.pl/5/3/Artykul/513084,Jak-polscy-politycy-korzystaja-z-Twittera"
-                   target="_blank"><?= __d('panstwo_internet', 'LC_PANSTWOINTERNET_KONTROWERSJE_TOPIC_5-5') ?></a>
+                   target="_blank"><?= __d('media', 'LC_PANSTWOINTERNET_KONTROWERSJE_TOPIC_5-5') ?></a>
             </h4>
 
             <p>
-                <?= __d('panstwo_internet', 'LC_PANSTWOINTERNET_KONTROWERSJE_TEXT_5-5-1') ?>
+                <?= __d('media', 'LC_PANSTWOINTERNET_KONTROWERSJE_TEXT_5-5-1') ?>
             </p>
         </div>
     </div>
@@ -204,11 +204,11 @@
         <div class="block">
             <h4>
                 <a href="http://wiadomosci.dziennik.pl/polityka/artykuly/377673,wislawa-szymborska-nie-zyje-nowicka-na-twitterze-zegna-wislocka.html"
-                   target="_blank"><?= __d('panstwo_internet', 'LC_PANSTWOINTERNET_KONTROWERSJE_TOPIC_5-3') ?></a>
+                   target="_blank"><?= __d('media', 'LC_PANSTWOINTERNET_KONTROWERSJE_TOPIC_5-3') ?></a>
             </h4>
 
             <p>
-                <?= __d('panstwo_internet', 'LC_PANSTWOINTERNET_KONTROWERSJE_TEXT_5-3-1') ?>
+                <?= __d('media', 'LC_PANSTWOINTERNET_KONTROWERSJE_TEXT_5-3-1') ?>
                 <img src="http://7.s.dziennik.pl/pliki/3040000/3040941-wanda-nowicka-na-twitterze-300-227.jpg"
                      alt="Wanda Nowicka na Twitterze"/>
             </p>
@@ -216,11 +216,11 @@
         <div class="block">
             <h4>
                 <a href="http://natemat.pl/73745,piotr-guzial-milcz-jestes-idiota-mozesz-zarazic-ludzi-zdrowych-psychicznie-czyli-zlote-mysli-burmistrza-ursynowa"
-                   target="_blank"><?= __d('panstwo_internet', 'LC_PANSTWOINTERNET_KONTROWERSJE_TOPIC_5-4') ?></a>
+                   target="_blank"><?= __d('media', 'LC_PANSTWOINTERNET_KONTROWERSJE_TOPIC_5-4') ?></a>
             </h4>
 
             <p>
-                <?= __d('panstwo_internet', 'LC_PANSTWOINTERNET_KONTROWERSJE_TEXT_5-4-1') ?>
+                <?= __d('media', 'LC_PANSTWOINTERNET_KONTROWERSJE_TEXT_5-4-1') ?>
                 <img src="http://m.natemat.pl/7e13574a491309d8303112baab46ad9f,641,0,0,0.jpg" alt=""/>
             </p>
         </div>

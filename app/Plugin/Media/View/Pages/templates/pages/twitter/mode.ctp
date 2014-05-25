@@ -20,7 +20,7 @@
                         if ($group['field'] == 'liczba_tweetow_wlasnych_2013') {
                             $per_day = $object->getData($group['field']) / 365;
                             ?>
-                            <p class="subcounter"><?= pl_dopelniacz(round($per_day), 'tweet', 'tweety', 'tweetów') . ' ' . __d('panstwo_internet', 'LC_PANSTWOINTERNET_PER_DAY') ?></p>
+                            <p class="subcounter"><?= pl_dopelniacz(round($per_day), 'tweet', 'tweety', 'tweetów') . ' ' . __d('media', 'LC_PANSTWOINTERNET_PER_DAY') ?></p>
                         <? } ?>
                     </div>
                 </li>
@@ -175,14 +175,14 @@
 
                                 <p class="_counter"><?= number_format($object->getData('liczba_retweetow'), 0, '.', ' ') ?></p>
 
-                                <p class="_label"><?= __d('panstwo_internet', 'LC_PANSTWOINTERNET_RETWEET') ?></p>
+                                <p class="_label"><?= __d('media', 'LC_PANSTWOINTERNET_RETWEET') ?></p>
 
                             </div>
                             <div class="col-lg-6">
 
                                 <p class="_counter"><?= $object->getData('liczba_odpowiedzi') ?></p>
 
-                                <p class="_label"><?= __d('panstwo_internet', 'LC_PANSTWOINTERNET_ODPOWIEDZI') ?></p>
+                                <p class="_label"><?= __d('media', 'LC_PANSTWOINTERNET_ODPOWIEDZI') ?></p>
 
                             </div>
                         </div>
@@ -216,7 +216,7 @@
     ?>
 
     <div class="buttons">
-        <a href="<?= $href ?>"><?= __d('panstwo_internet', 'LC_PANSTWOINTERNET_RANKING') ?></a>
+        <a href="<?= $href ?>"><?= __d('media', 'LC_PANSTWOINTERNET_RANKING') ?></a>
     </div>
 
 <? } ?>

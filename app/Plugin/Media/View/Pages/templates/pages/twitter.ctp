@@ -1,14 +1,14 @@
 <div id="twitter" class="chapter">
     <div class="col-md-12 header-row">
         <div class="container">
-            <h2><?= __d('panstwo_internet', 'LC_PANSTWOINTERNET_TWITTER_HEADLINE') ?></h2>
+            <h2><?= __d('media', 'LC_PANSTWOINTERNET_TWITTER_HEADLINE') ?></h2>
         </div>
     </div>
 
     <div id="twitter" class="container innerContent">
         <div class="col-md-12">
             <div class="desc">
-                <p><?= __d('panstwo_internet', 'LC_PANSTWOINTERNET_TWITTER_TOPIC') ?></p>
+                <p><?= __d('media', 'LC_PANSTWOINTERNET_TWITTER_TOPIC') ?></p>
             </div>
         </div>
 

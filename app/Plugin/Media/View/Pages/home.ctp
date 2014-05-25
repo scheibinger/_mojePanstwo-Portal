@@ -1,15 +1,15 @@
 <?
-$this->Combinator->add_libs('css', $this->Less->css('panstwointernet', array('plugin' => 'PanstwoInternet')));
+$this->Combinator->add_libs('css', $this->Less->css('media', array('plugin' => 'Media')));
 $this->Combinator->add_libs('js', 'jquery-tags-cloud-min');
-$this->Combinator->add_libs('js', 'PanstwoInternet.panstwointernet');
+$this->Combinator->add_libs('js', 'Media.media');
 ?>
 
     <div class="col-lg-12 plate">
         <div class="container">
             <div class="header">
-                <h1><?= __d('panstwo_internet', 'LC_PANSTWOINTERNET_HEADLINE') ?></h1>
+                <h1><?= __d('media', 'LC_PANSTWOINTERNET_HEADLINE') ?></h1>
 
-                <p class="subtitle"><?= __d('panstwo_internet', 'LC_PANSTWOINTERNET_SUBTITLE') ?></p>
+                <p class="subtitle"><?= __d('media', 'LC_PANSTWOINTERNET_SUBTITLE') ?></p>
                 <? include('templates/stats.ctp'); ?>
             </div>
             <? include('templates/intro.ctp'); ?>

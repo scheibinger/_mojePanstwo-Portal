@@ -3,7 +3,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-10">
-                <h2><?= __d('panstwo_internet', 'LC_PANSTWOINTERNET_MEDIA_HEADLINE') ?></h2>
+                <h2><?= __d('media', 'LC_PANSTWOINTERNET_MEDIA_HEADLINE') ?></h2>
             </div>
         </div>
     </div>
@@ -12,7 +12,7 @@
 <div class="bgcontent container innerContent">
 <div class="row">
 <div class="col-md-10 col-md-offset-1">
-    <h3 class="separator-top"><?= __d('panstwo_internet', 'LC_PANSTWOINTERNET_MEDIA_TOPIC') ?>:</h3>
+    <h3 class="separator-top"><?= __d('media', 'LC_PANSTWOINTERNET_MEDIA_TOPIC') ?>:</h3>
 </div>
 
 <div class=" col-md-12">
@@ -415,13 +415,13 @@
 <div class="row">
     <div class="col-md-10 col-md-offset-1 separator-top">
         <div class="desc">
-            <p><?= __d('panstwo_internet', 'LC_PANSTWOINTERNET_MEDIA_TEXT_1') ?></p>
+            <p><?= __d('media', 'LC_PANSTWOINTERNET_MEDIA_TEXT_1') ?></p>
 
-            <p><?= __d('panstwo_internet', 'LC_PANSTWOINTERNET_MEDIA_TEXT_2') ?></p>
+            <p><?= __d('media', 'LC_PANSTWOINTERNET_MEDIA_TEXT_2') ?></p>
 
-            <p><?= __d('panstwo_internet', 'LC_PANSTWOINTERNET_MEDIA_TEXT_3') ?>:</p>
+            <p><?= __d('media', 'LC_PANSTWOINTERNET_MEDIA_TEXT_3') ?>:</p>
 
-            <p><?= __d('panstwo_internet', 'LC_PANSTWOINTERNET_MEDIA_TEXT_4') ?></p>
+            <p><?= __d('media', 'LC_PANSTWOINTERNET_MEDIA_TEXT_4') ?></p>
 
         </div>
     </div>

@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-10">
-                <h2><?= __d('panstwo_internet', 'LC_PANSTWOINTERNET_PRAWO_HEADLINE') ?></h2>
+                <h2><?= __d('media', 'LC_PANSTWOINTERNET_PRAWO_HEADLINE') ?></h2>
             </div>
         </div>
     </div>
@@ -14,47 +14,47 @@
 <div class="col-md-10 col-md-offset-1 separator-top">
 <div class="desc">
 
-<p><?= __d('panstwo_internet', 'LC_PANSTWOINTERNET_PRAWO_TOPIC') ?></p>
+<p><?= __d('media', 'LC_PANSTWOINTERNET_PRAWO_TOPIC') ?></p>
 
-<p><?= __d('panstwo_internet', 'LC_PANSTWOINTERNET_PRAWO_TEXT_1') ?></p>
+<p><?= __d('media', 'LC_PANSTWOINTERNET_PRAWO_TEXT_1') ?></p>
 
-<blockquote><?= __d('panstwo_internet', 'LC_PANSTWOINTERNET_PRAWO_QUOTE_1') ?></blockquote>
+<blockquote><?= __d('media', 'LC_PANSTWOINTERNET_PRAWO_QUOTE_1') ?></blockquote>
 
-<p><?= __d('panstwo_internet', 'LC_PANSTWOINTERNET_PRAWO_TEXT_2') ?></p>
+<p><?= __d('media', 'LC_PANSTWOINTERNET_PRAWO_TEXT_2') ?></p>
 
-<blockquote><?= __d('panstwo_internet', 'LC_PANSTWOINTERNET_PRAWO_QUOTE_2') ?></blockquote>
+<blockquote><?= __d('media', 'LC_PANSTWOINTERNET_PRAWO_QUOTE_2') ?></blockquote>
 
-<p><?= __d('panstwo_internet', 'LC_PANSTWOINTERNET_PRAWO_QUOTE_2_WYROK') ?></p>
-
-<p>
-    <a target="_blank"
-       href="http://orzeczenia.nsa.gov.pl/doc/0D4EE4C3F8"><?= __d('panstwo_internet', 'LC_PANSTWOINTERNET_PRAWO_SOURCE') ?></a>
-</p>
-
-<blockquote><?= __d('panstwo_internet', 'LC_PANSTWOINTERNET_PRAWO_QUOTE_3') ?></blockquote>
-
-<p><?= __d('panstwo_internet', 'LC_PANSTWOINTERNET_PRAWO_QUOTE_3_WYROK') ?></p>
+<p><?= __d('media', 'LC_PANSTWOINTERNET_PRAWO_QUOTE_2_WYROK') ?></p>
 
 <p>
     <a target="_blank"
-       href="http://orzeczenia.nsa.gov.pl/doc/0D4EE4C3F8"><?= __d('panstwo_internet', 'LC_PANSTWOINTERNET_PRAWO_SOURCE') ?></a>
+       href="http://orzeczenia.nsa.gov.pl/doc/0D4EE4C3F8"><?= __d('media', 'LC_PANSTWOINTERNET_PRAWO_SOURCE') ?></a>
 </p>
 
-<p><?= __d('panstwo_internet', 'LC_PANSTWOINTERNET_PRAWO_TEXT_3') ?></p>
+<blockquote><?= __d('media', 'LC_PANSTWOINTERNET_PRAWO_QUOTE_3') ?></blockquote>
 
-<p><?= __d('panstwo_internet', 'LC_PANSTWOINTERNET_PRAWO_TEXT_4') ?></p>
+<p><?= __d('media', 'LC_PANSTWOINTERNET_PRAWO_QUOTE_3_WYROK') ?></p>
 
-<p><?= __d('panstwo_internet', 'LC_PANSTWOINTERNET_PRAWO_TEXT_5') ?></p>
+<p>
+    <a target="_blank"
+       href="http://orzeczenia.nsa.gov.pl/doc/0D4EE4C3F8"><?= __d('media', 'LC_PANSTWOINTERNET_PRAWO_SOURCE') ?></a>
+</p>
 
-<blockquote><?= __d('panstwo_internet', 'LC_PANSTWOINTERNET_PRAWO_QUOTE_4') ?></blockquote>
+<p><?= __d('media', 'LC_PANSTWOINTERNET_PRAWO_TEXT_3') ?></p>
 
-<p><?= __d('panstwo_internet', 'LC_PANSTWOINTERNET_PRAWO_TEXT_6') ?></p>
+<p><?= __d('media', 'LC_PANSTWOINTERNET_PRAWO_TEXT_4') ?></p>
 
-<blockquote><?= __d('panstwo_internet', 'LC_PANSTWOINTERNET_PRAWO_QUOTE_5') ?></blockquote>
+<p><?= __d('media', 'LC_PANSTWOINTERNET_PRAWO_TEXT_5') ?></p>
 
-<p><?= __d('panstwo_internet', 'LC_PANSTWOINTERNET_PRAWO_TEXT_7') ?></p>
+<blockquote><?= __d('media', 'LC_PANSTWOINTERNET_PRAWO_QUOTE_4') ?></blockquote>
 
-<p><?= __d('panstwo_internet', 'LC_PANSTWOINTERNET_PRAWO_TEXT_8') ?></p>
+<p><?= __d('media', 'LC_PANSTWOINTERNET_PRAWO_TEXT_6') ?></p>
+
+<blockquote><?= __d('media', 'LC_PANSTWOINTERNET_PRAWO_QUOTE_5') ?></blockquote>
+
+<p><?= __d('media', 'LC_PANSTWOINTERNET_PRAWO_TEXT_7') ?></p>
+
+<p><?= __d('media', 'LC_PANSTWOINTERNET_PRAWO_TEXT_8') ?></p>
 
 <ul>
     <li>Ministerstwo Finansów,</li>
@@ -71,7 +71,7 @@
     <li>Ministerstwo Pracy i Polityki Społecznej.</li>
 </ul>
 
-<p><?= __d('panstwo_internet', 'LC_PANSTWOINTERNET_PRAWO_TEXT_9') ?></p>
+<p><?= __d('media', 'LC_PANSTWOINTERNET_PRAWO_TEXT_9') ?></p>
 
 <div class=" col-md-12">
 
