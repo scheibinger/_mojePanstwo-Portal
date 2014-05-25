@@ -238,11 +238,14 @@ $this->Combinator->add_libs('js', 'Dane.view-krspodmioty');
                             <? if ($organ['content']) { ?>
                             <div class="list-group less-borders">
                                 <? foreach ($organ['content'] as $osoba) { ?>
+                                
                                 <? if (@$osoba['osoba_id']) { ?>
-                                <a class="list-group-item" href="/dane/krs_osoby/<?= $osoba['osoba_id'] ?>">
-                                    <? } else { ?>
+	                                <a class="list-group-item" href="/dane/krs_osoby/<?= $osoba['osoba_id'] ?>">
+	                            <? } elseif (@$osoba['krs_id']) { ?>
+	                                <a class="list-group-item" href="/dane/krs_podmioty/<?= $osoba['krs_id'] ?>">
+                                <? } else { ?>
                                     <div class="list-group-item">
-                                        <? } ?>
+                                <? } ?>
 
                                         <h4 class="list-group-item-heading">
                                             <?= $osoba['nazwa'] ?>
@@ -264,9 +267,10 @@ $this->Combinator->add_libs('js', 'Dane.view-krspodmioty');
                                             </p>
                                         <? } ?>
 
-                                        <? if (@$osoba['osoba_id']) { ?>
+                                        <? if( @$osoba['osoba_id'] || @$osoba['krs_id'] ) { ?>
                                 </a>
                                 <? } else { ?>
+                            
                             </div>
                         <? } ?>
                         <? } ?>

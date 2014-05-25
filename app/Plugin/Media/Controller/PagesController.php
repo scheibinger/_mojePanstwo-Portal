@@ -1,6 +1,6 @@
 <?php
 
-class PagesController extends PanstwoInternetAppController
+class PagesController extends MediaAppController
 {
     public $components = array(
         'Session',
