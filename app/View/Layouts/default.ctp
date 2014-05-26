@@ -4,9 +4,10 @@
     <title><?= htmlspecialchars(strip_tags($title_for_layout)) ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php echo $this->Html->meta('favicon.ico', '/img/favicon/fav.ico', array('type' => 'icon')); ?>
-    <link rel="apple-touch-icon" href="/img/favicon/apple-touch-icon.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="/img/favicon/apple-touch-icon-72x72.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="/img/favicon/apple-touch-icon-114x114.png">
+    <?php echo $this->Html->meta('favicon.ico', '/img/favicon/apple-touch-icon.ico', array('type' => 'icon', 'rel' => 'apple-touch-icon')); ?>
+    <?php echo $this->Html->meta('favicon.ico', '/img/favicon/apple-touch-icon-72x72.ico', array('type' => 'icon', 'rel' => 'apple-touch-icon', 'sizes' => '72x72')); ?>
+    <?php echo $this->Html->meta('favicon.ico', '/img/favicon/apple-touch-icon-114x114.ico', array('type' => 'icon', 'rel' => 'apple-touch-icon', 'sizes' => '114x114')); ?>
+
     <?php
     echo $this->Html->meta(array('property' => 'og:url', 'content' => Router::url($this->here, true)));
     echo $this->Html->meta(array('property' => 'og:type', 'content' => 'website'));
