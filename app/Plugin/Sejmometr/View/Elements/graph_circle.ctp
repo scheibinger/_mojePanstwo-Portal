@@ -7,11 +7,16 @@
         <ul>
             <?php foreach ($items as $item) { ?>
                 <li class="col-xs-6 col-sm-4 col-md-hack-20">
-                    <div class="graph" data-title="<?php echo $item['title'] ?>"
-                         data-setup='<?php echo json_encode($item["setup"]) ?>'></div>
-                    <div class="setup">
-                        <div class="men"></div>
-                        <div class="women"></div>
+                    <div class="graphTitle"><?php echo $item['title'] ?></div>
+                    <div class="graph">
+                        <div class="graphLogo">
+                            <img src="<?php echo $item['img_src']; ?>" alt="<?php echo $item['title'] ?>"/>
+                        </div>
+                        <div class="graphInner" data-setup='<?php echo json_encode($item["setup"]) ?>'></div>
+                    </div>
+                    <div class="split">
+                        <div class="part men"><?php echo $item['setup'][0][1]; ?>%</div>
+                        <div class="part women"><?php echo $item['setup'][1][1]; ?>%</div>
                     </div>
                 </li>
             <?php } ?>

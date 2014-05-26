@@ -330,9 +330,110 @@
                         li {
                             padding: 0;
 
-                            .graph {
-                                height: 350px;
+                            .graphTitle {
+                                font-size: 18px;
+                                font-weight: 600;
+                                padding-top: 15px;
+                                text-align: center;
+                                height: 80px;
                             }
+
+                            .graph {
+                                display: block;
+                                position: relative;
+                                width: 100%;
+                                height: 200px;
+
+                                .graphLogo {
+                                    @padding: 6px;
+                                    @size: 36px + (2*@padding);
+
+                                    height: @size;
+                                    left: 50%;
+                                    margin-left: -(@size/2);
+                                    margin-top: -(@size/2);
+                                    position: absolute;
+                                    text-align: center;
+                                    top: 50%;
+                                    width: @size;
+                                    z-index: 1;
+                                    padding: @padding;
+
+                                    background-color: #FFFFFF;
+                                    border: 1px solid #ffffff;
+                                    -moz-border-radius: 250px; /*Firefox*/
+                                    -webkit-border-radius: 250px; /*Safari, Chrome*/
+                                    border-radius: 250px;
+                                }
+
+                                .graphInner {
+                                    height: 200px;
+                                }
+                            }
+                            .split {
+                                float: left;
+                                height: 48px;
+                                width: 100%;
+
+                                .part {
+                                    float: left;
+                                    font-size: 18px;
+                                    font-weight: 600;
+                                    width: 50%;
+                                    position: relative;
+
+                                    &:before {
+                                        content: ' ';
+                                        width: 25px;
+                                        height: 25px;
+                                        position: absolute;
+                                    }
+                                    &.men {
+                                        border-right: 1px solid #EAEAEB;
+                                        color: #12669F;
+                                        padding-left: 10%;
+                                        text-align: left;
+
+                                        &:before {
+                                            right: 6px;
+                                            background: url(../Sejmometr/img/split_men.png) center right no-repeat;
+                                        }
+
+                                    }
+                                    &.women {
+                                        color: #00B1ED;
+                                        padding-right: 10%;
+                                        text-align: right;
+
+                                        &:before {
+                                            left: 6px;
+                                            background: url(../Sejmometr/img/split_women.png) center left no-repeat;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                &.words {
+                    padding-bottom: 30px;
+
+                    p, ul {
+                        margin-bottom: 15px;
+                    }
+
+                    strong {
+                        font-size: 18px;
+                        color: #14679f
+                    }
+
+                    ul {
+                        list-style: none;
+                        padding: 0;
+
+                        li:before {
+                            content: '- ';
                         }
                     }
                 }

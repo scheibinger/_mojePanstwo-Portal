@@ -35,17 +35,17 @@ function prepare_slide(current_slide) {
     /*if (!(slide_div.hasClass('prepared'))) {
      slide_div.addClass('prepared');
 
-        var title_element = jQuery(jQuery('.slider-item-container').children()[63]).find('h3');
-        var title_element_text = title_element.text();
+     var title_element = jQuery(jQuery('.slider-item-container').children()[63]).find('h3');
+     var title_element_text = title_element.text();
 
-        if (title_element_text[0] == '#') {
-            // podmieniamy tytuł
-        }
+     if (title_element_text[0] == '#') {
+     // podmieniamy tytuł
+     }
      }*/
 }
 
 function graphPoslankiPoslowie() {
-    jQuery('#sejmometr').find('.poslowieGraphCircle li > .graph').each(function () {
+    jQuery('#sejmometr').find('.poslowieGraphCircle li > .graph .graphInner').each(function () {
         var that = jQuery(this);
         that.highcharts({
             debug: true,
@@ -55,7 +55,7 @@ function graphPoslankiPoslowie() {
                 plotShadow: false
             },
             title: {
-                text: that.data('title')
+                text: ' '
             },
             plotOptions: {
                 pie: {
@@ -70,7 +70,8 @@ function graphPoslankiPoslowie() {
                 {
                     type: 'pie',
                     name: 'Ilość[%]:',
-                    data: that.data('setup')
+                    data: that.data('setup'),
+                    innerSize: '40%'
                 }
             ]
         });

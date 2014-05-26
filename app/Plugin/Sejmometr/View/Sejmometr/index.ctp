@@ -32,8 +32,8 @@
             </h5>
 
             <div class="searchInput search col-xs-12 col-md-10 col-md-offset-1">
-            <form action="/sejmometr/szukaj">
-                    <div class="input-group">
+                <form action="/sejmometr/szukaj">
+                <div class="input-group">
                         <input name="q" value="" type="text" autocomplete="off"
                                placeholder="Szukaj w pracach Sejmu..."
                                class="form-control input-lg">
@@ -46,8 +46,8 @@
 
             <div class="shortcut submenu">
                 <ul>
-                <li class="active">
-                        <a href="/sejmometr">Sejmometr</a>
+                    <li class="active">
+                    <a href="/sejmometr">Sejmometr</a>
                     </li>
                     <li>
                         <a href="/dane/legislacja_projekty_ustaw">Projekty ustaw</a>
@@ -312,6 +312,158 @@
 
             echo $this->element('Sejmometr.graph_circle', array('page' => $page, 'items' => $items));
             /* POSLANKI POSLOWIE END BLOCK */
+            ?>
+
+
+            <?php
+            /* POLSKIE PRZELOTY BLOCK */
+            $items = array();
+            /*TEMP VARIABLE*/
+            for ($i = 1; $i <= 15; $i++) {
+                array_push($items, array('posel_id' => '1', 'posel_name' => 'Abramowicz Adam', 'posel_img' => 'http://resources.sejmometr.pl/mowcy/a/0/1.jpg', 'icon_src' => 'http://resources.sejmometr.pl/s_kluby/2_a_t.png', 'icon_name' => 'Prawo i Sprawiedliwość', 'number' => 192));
+            }
+
+            $page = array(
+                'class' => 'przeloty',
+                'title' => 'Poselskie przeloty',
+                'text' => 'Poseł ma prawo do bezpłatnych przelotów w krajowym przewozie lotniczym. W celu zapewnienia realizacji na rzecz posłów krajowej usługi lotniczej, Kancelaria Sejmu zawiera umowy z przewoźnikami lotniczymi. Posłowie mają również prawo do doraźnego korzystania z usług innych przewoźników lotniczych, z którymi Kancelaria Sejmu nie zawarła stosownych umów. W takim przypadku posłowie kupują bilet w kasie przewoźnika, a następnie należność przez nich uiszczona zwracana jest im przez Kancelarię Sejmu na zasadzie refundacji, na podstawie oryginału faktury, rachunku albo biletu wystawionego przez przewoźnika. Poniżej przedstawiamy nazwiska posłów, którzy latali najczęściej w 2013 roku.',
+                'link' => '#rankingLink'
+            );
+
+            echo $this->element('Sejmometr.list', array('page' => $page, 'items' => $items));
+            /* POLSKIE PRZELOTY END BLOCK  */
+            ?>
+
+
+            <?php
+            /* POLSKIE PRZEJAZDY BLOCK */
+            $items = array();
+            /*TEMP VARIABLE*/
+            for ($i = 1; $i <= 15; $i++) {
+                array_push($items, array('posel_id' => '1', 'posel_name' => 'Abramowicz Adam', 'posel_img' => 'http://resources.sejmometr.pl/mowcy/a/0/1.jpg', 'icon_src' => 'http://resources.sejmometr.pl/s_kluby/2_a_t.png', 'icon_name' => 'Prawo i Sprawiedliwość', 'number' => 192));
+            }
+
+            $page = array(
+                'class' => 'przeloty',
+                'title' => 'Poselskie przejazdy',
+                'text' => 'Posłowie w ramach wykonywania swojej pracy mogą korzystać ze służbowych samochodów, którymi dysponuje Kancelaria Sejmu. Zobacz kto w 2013 roku najczęściej był w drodze.',
+                'link' => '#rankingLink'
+            );
+
+            echo $this->element('Sejmometr.list', array('page' => $page, 'items' => $items));
+            /* POLSKIE PRZEJAZDY END BLOCK  */
+            ?>
+
+
+            <?php
+            /* KWATERY PRYWATNE POSLOW BLOCK */
+            $items = array();
+            /*TEMP VARIABLE*/
+            for ($i = 1; $i <= 15; $i++) {
+                array_push($items, array('posel_id' => '1', 'posel_name' => 'Abramowicz Adam', 'posel_img' => 'http://resources.sejmometr.pl/mowcy/a/0/1.jpg', 'icon_src' => 'http://resources.sejmometr.pl/s_kluby/2_a_t.png', 'icon_name' => 'Prawo i Sprawiedliwość', 'number' => 192));
+            }
+
+            $page = array(
+                'class' => 'kwatery',
+                'title' => 'Kwatery prywatne posłów',
+                'text' => 'Jeżeli dla posłów, którzy nie są zameldowani na pobyt stały w Warszawie i nie posiadają innego uprawnienia do zakwaterowania na terenie tego miasta, brakuje miejsc w Domu Poselskim, mogą wtedy wynająć kwatery prywatne na podstawie zawartych przez siebie umów najmu. Z tego tytułu posłowie mogą otrzymać maksymalnie 2200 zł miesięcznie kwoty refundacji. Sprawdźcie w jakim stopniu parlamentarzyści w 2013 r. skorzystali z refundacji.',
+                'link' => '#rankingLink'
+            );
+
+            echo $this->element('Sejmometr.list', array('page' => $page, 'items' => $items));
+            /* KWATERY PRYWATNE POSLOW END BLOCK  */
+            ?>
+
+
+            <?php
+            /* KWATERY PRYWATNE POSLOW BLOCK */
+            $items = array();
+            /*TEMP VARIABLE*/
+            for ($i = 1; $i <= 15; $i++) {
+                array_push($items, array('posel_id' => '1', 'posel_name' => 'Abramowicz Adam', 'posel_img' => 'http://resources.sejmometr.pl/mowcy/a/0/1.jpg', 'icon_src' => 'http://resources.sejmometr.pl/s_kluby/2_a_t.png', 'icon_name' => 'Prawo i Sprawiedliwość', 'number' => 192));
+            }
+
+            $page = array(
+                'class' => 'wnioskiImmunitet',
+                'title' => 'Wnioski o uchylenie immunitetu',
+                'text' => 'W sytuacji gdy poseł narusza prawo, odpowiedni organ np. Komenda Policji może skierować do Marszałka Sejmu wniosek o uchylenie poselskiego immunitetu. Poniżej przedstawiamy ranking posłów, których w 2013 r. najczęściej dotyczyły wnioski o wyrażenie zgody na pociągniecie posłów do odpowiedzialności.',
+                'link' => '#rankingLink'
+            );
+
+            echo $this->element('Sejmometr.list', array('page' => $page, 'items' => $items));
+            /* KWATERY PRYWATNE POSLOW END BLOCK  */
+            ?>
+
+
+            <?php
+            /* DOM POSELSKI BLOCK */
+            $page = array(
+                'class' => 'dom',
+                'title' => 'Dom poselski',
+                'text' => '<p>Posłowie, którzy nie są zameldowani na pobyt stały w Warszawie i nie posiadają innego uprawnienia do zakwaterowania na terenie tego miasta, mogą korzystać z Domu Poselskiego.</p><p><strong>W 2013 r. w Domu Poselskim udzielono posłom 21, 152 zakwaterowań (w dobach).</strong></p>'
+            );
+
+            echo $this->element('Sejmometr.text', array('page' => $page));
+            /* DOM POSELSKI END BLOCK  */
+            ?>
+
+
+            <?php
+            /* ZAROBKI POSLOW BLOCK */
+            $items = array();
+            /*TEMP VARIABLE*/
+            for ($i = 1; $i <= 15; $i++) {
+                array_push($items, array('posel_id' => '1', 'posel_name' => 'Abramowicz Adam', 'posel_img' => 'http://resources.sejmometr.pl/mowcy/a/0/1.jpg', 'icon_src' => 'http://resources.sejmometr.pl/s_kluby/2_a_t.png', 'icon_name' => 'Prawo i Sprawiedliwość', 'number' => 192));
+            }
+
+            $page = array(
+                'class' => 'zarobki',
+                'title' => 'Zarobki posłów',
+                'text' => '<p><strong>Zobacz, kto nie pobierał uposażenia poselskiego w 2013 roku!</strong></p><p>Posłom w okresie sprawowania mandatu, licząc od pierwszego posiedzenia Sejmu, przysługuje uposażenie poselskie. Świadczenie jest wypłacane miesięcznie (także za niepełne miesiące sprawowania mandatu) i wynosi obecnie 9892,30 zł brutto. Jednak nie wszyscy posłowie otrzymują uposażenie poselskie. Posłom, którzy:</p><ul><li>pracują i nie zdecydowali się na bezpłatny urlop na czas wykonywnia mandatu,</li><li>prowadzą działalność gospodarczą,</li><li>nie zawiesili prawa do emerytury lub renty</li><li>uposażenie poselskie nie przysługuje.</li></ul><p><strong>Zobacz, kto nie pobierał uposażenia poselskiego w 2013 roku!</strong></p>',
+                'link' => '#rankingLink'
+            );
+
+            echo $this->element('Sejmometr.list', array('page' => $page, 'items' => $items));
+            /* ZAROBKI POSLOW END BLOCK  */
+            ?>
+
+
+            <?php
+            /* DODATKI DO UPOSAZENIA I DIETA BLOCK */
+            $page = array(
+                'class' => 'dodatki',
+                'title' => 'Dodatki do uposażenia i dieta poselska',
+                'text' => '<p>Posłom, którzy pełnią dodatkowe funkcje przysługują dodatki do uposażenia w wysokości:</p><ul><li>20 % uposażenia - dla pełniących funkcję przewodniczącego komisji,</li><li>15 % uposażenia - dla pełniących funkcję zastępcy przewodniczącego komisji,</li><li>10 % uposażenia - dla pełniących funkcję przewodniczących stałych podkomisji,</li><li>Łączna wysokość dodatków nie może jednak przekroczyć 35% uposażenia poselskiego.</li></ul><p>Wszystkim posłom przysługuje dieta poselska czyli środki finansowe na pokrycie kosztów związanych z wydatkami poniesionymi w związku z wykonywaniem mandatu na terenie kraju. Dieta poselska wynosi 25 % uposażenia miesięcznego czyli <strong>2473,08 zł brutto</strong>. Świadczenie jest wolne od podatku dochodowego od osób fizycznych.</p>'
+            );
+
+            echo $this->element('Sejmometr.text', array('page' => $page));
+            /* DODATKI DO UPOSAZENIA I DIETA END BLOCK  */
+            ?>
+
+
+            <?php
+            /* POZYCZKI BLOCK */
+            $page = array(
+                'class' => 'pozyczki',
+                'title' => 'Pożyczki',
+                'text' => '<p>Jeżeli poseł potrzebuje pieniędzy w związku z zakupem domu czy remontem mieszkania może złożyć wniosek o udzielenie pożyczki na cele mieszkaniowe. Świadczenie przynawane jest na podstawie decyzji Marszałka Sejmu po zasięgnięciu opinii Zespołu do Spraw Pomocy Socjalnej. Wysokość oprocentowania pożyczki wynosi 3% jeśli została udzielona na okres do 12 miesięcy, lub 4% jeśli została udzielona na okres do 24 miesięcy.</p><p><strong>W 2013 r. w Domu Poselskim udzielono posłom 21, 152 zakwaterowań (w dobach).</strong></p>'
+            );
+
+            echo $this->element('Sejmometr.text', array('page' => $page));
+            /* POZYCZKI END BLOCK  */
+            ?>
+
+
+            <?php
+            /* ZAPOMOGI BLOCK */
+            $page = array(
+                'class' => 'zapomogi',
+                'title' => 'Zapomogi',
+                'text' => '<p>Posłowie mogą otrzymać pomoc materialną udzielaną w formie zapomogi bezzwrotnej. Taka zapomoga przysługuje posłom, którzy znajdują się w trudnej sytuacji materialnej i nie mogą zaspokoić podstawowych potrzeb życiowych. O zapomogę mogą również starać się ci posłowie, którzy zostali dotknięci wypadkiem losowym np. chorobą.</p><p><strong>W 2013 roku udzielono posłom 4 zapomogi na łączną kwotę 41 000 zł.</strong></p>'
+            );
+
+            echo $this->element('Sejmometr.text', array('page' => $page));
+            /* ZAPOMOGI END BLOCK  */
             ?>
         </div>
     </div>

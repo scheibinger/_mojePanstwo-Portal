@@ -1,7 +1,7 @@
 <div class="detailBlock list <?php echo $page['class'] ?>">
     <h3><?php echo $page['title'] ?></h3>
 
-    <p class="text"><?php echo $page['text'] ?></p>
+    <div class="text"><?php echo $page['text'] ?></div>
 
     <div class="poslowieList">
         <ul>
