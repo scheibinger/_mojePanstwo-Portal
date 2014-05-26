@@ -22,7 +22,7 @@
 
 <p><?php echo $api['description'] ?></p>
 
-<a href="<?php echo $this->Html->url(array('action' => 'view', 'slug' => $api['slug'])); ?>">Zobacz</a>
+<a href="<?php echo $this->Html->url(array('action' => 'view', 'version' => $version, 'slug' => $api['slug'])); ?>">Zobacz</a>
 
 <?php } ?>
 
