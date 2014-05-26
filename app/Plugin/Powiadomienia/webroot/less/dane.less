@@ -5,15 +5,37 @@
     padding: 0;
 
     .powiadomienia {
-        &.readed .objectRender {
-            background-color: #FFFFFF;
-        }
-
         .objectRender {
             background-color: #FFFFE0;
 
             &.readed {
                 background-color: #FFFFFF;
+
+                .alertsButtons {
+                    .read {
+                        display: block;
+                    }
+                    .unread {
+                        display: none;
+                    }
+                }
+            }
+
+            .alertsButtons {
+                margin-top: 10px;
+
+                .read {
+                    border-color: #999999;
+                    background-color: #999999;
+                    color: #FFFFFF;
+                    display: none;
+                }
+                .unread {
+                    border-color: #DD5600;
+                    background-color: #DD5600;
+                    color: #FFFFFF;
+                    display: block;
+                }
             }
 
             .content {
@@ -68,7 +90,7 @@
                     font-size: 18px;
                     font-weight: 300;
                     padding: 15px 30px;
-                    color: @color;
+                    color: fade(@colorHighlight, 50%);
                 }
 
                 > input {
@@ -100,12 +122,16 @@
 
                 &.s {
                     color: #2f2f2f;
-                    border: 1px solid #CCC;
-                    border-bottom-color: #FFF;
+                    border: 1px solid #CCCCCC;
+                    border-bottom-color: #FFFFFF;
                     background: #ffffff;
 
                     a {
-                        color: @colorHighlight;
+                        color: #969696;
+                    }
+
+                    a:before {
+                        color: #DD5600;
                     }
                 }
 
@@ -283,7 +309,7 @@
 
 @media (min-width: 1155px) {
     #powiadomienia .dane .tabsBlock .additionalOptions {
-        margin-top: 20px;
+        margin-top: 15px;
     }
 }
 

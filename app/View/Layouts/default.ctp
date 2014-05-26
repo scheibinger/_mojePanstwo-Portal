@@ -33,6 +33,9 @@
     /*BOOTSTRAP SELECT LOOKS LIKE BOOTSTRAP BUTTONS*/
     echo $this->Html->css('../plugins/bootstrap-select/bootstrap-select.min.css');
 
+    /*BOOTSTRAP CHECKBOX LOOKS SWITCH BUTTONS*/
+    echo $this->Html->css('../plugins/bootstrap-switch/bootstrap-switch.css');
+
     /* SOCIAL BUTTONS */
     echo $this->Html->css('//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css');
     $this->Combinator->add_libs('css', $this->Less->css('social-buttons'), false);
@@ -46,6 +49,9 @@
 
     /* ENHANCE SCRIPTS */
     echo $this->Html->script('enhance');
+    
+    /* VIEW SPECIFIC HEAD */
+    echo $scripts_for_layout;
     ?>
 
     <!--[if lt IE 9]>
@@ -133,7 +139,8 @@ echo $this->Html->script('//netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap
 /* PACKAGES FROM VENDOR */
 echo $this->Html->script('../plugins/browserstate/history.js/scripts/bundled/html4+html5/jquery.history.js');
 echo $this->Html->script('../plugins/carhartl/jquery-cookie/jquery.cookie.js');
-echo $this->Html->script('../plugins/bootstrap-select/bootstrap-select.min.js'); ?>
+echo $this->Html->script('../plugins/bootstrap-select/bootstrap-select.min.js');
+echo $this->Html->script('../plugins/bootstrap-switch/bootstrap-switch.js');?>
 
 <?php /*PHP DATA FOR JS */ ?>
 <script type="text/javascript">

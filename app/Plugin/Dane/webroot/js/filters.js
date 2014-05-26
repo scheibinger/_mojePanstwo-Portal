@@ -34,7 +34,6 @@ var filtersController = function () {
                     jQuery.each((filterNotChecked.slice(limit - filterChecked.length, filterNotChecked.length)), function () {
                         jQuery(this).parents('li.option').hide();
                     });
-
                 }
             }
 
@@ -42,7 +41,7 @@ var filtersController = function () {
             if ((filter.find('li:hidden')).length > 0) {
                 var showMoreButton = jQuery('<span></span>')
                     .addClass('showMoreFilters btn btn-default btn-sm')
-                    .data({'toogle': 'modal', 'target': '#filtersHiddenModal'})
+                    .attr({'data-toggle': 'modal', 'data-target': '#filtersHiddenModal'})
                     .text(_mPHeart.translation.LC_DANE_SHOW_ALL_OPTIONS);
 
                 filter.after(showMoreButton);
@@ -94,7 +93,7 @@ var filtersController = function () {
                                         }).text(_mPHeart.translation.LC_DANE_FILTER)
                                     )
                             )
-                    )
+                )
                 )
         );
 
@@ -130,7 +129,6 @@ var filtersController = function () {
             });
 
             modalFilter.modal('show');
-
         });
 
         /*DATE FILTERS*/

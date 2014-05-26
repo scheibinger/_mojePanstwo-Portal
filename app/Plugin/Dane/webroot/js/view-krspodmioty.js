@@ -467,9 +467,9 @@ jQuery(document).ready(function () {
                     jQuery.each(node.data, function (label, value) {
                         if (label == 'mp_id') {
                             if (node.label == "podmiot") {
-                                linkEl.attr('href', '/dane/podmiot/' + value);
+                                linkEl.attr('href', '/dane/krs_podmioty/' + value);
                             } else if (node.label == "osoba") {
-                                linkEl.attr('href', '/dane/osoba/' + value);
+                                linkEl.attr('href', '/dane/krs_osoby/' + value);
                             }
                         } else {
                             var tr = jQuery('<tr></tr>');

@@ -17,7 +17,7 @@ if (in_array($object->getDataset(), array('rady_posiedzenia', 'rady_gmin_debaty'
 $this->Dataobject->setObject($object);
 
 ?>
-<div class="objectRender"
+<div class="objectRender<? if($alertsStatus) echo " unreaded"; else echo " readed"; ?>"
      oid="<?php echo $item['data']['id'] ?>" gid="<?php echo $gid ?>">
     <div class="row">
         <? if ($this->Dataobject->getDate()) { ?>
@@ -54,14 +54,19 @@ $this->Dataobject->setObject($object);
                             <?php if ($object->getUrl() != false) { ?>
                         </a>
                     <?php } ?>
-                    </div>                    
-                    <?
-                    	$size = $object_content_sizes[1];
-                    	if( !$object->getThumbnailUrl($thumbSize) && $object->getPosition() )
-                    		$size--;
-                    ?>
-                    <div class="content col-md-<?= $size ?>">
 
+                    </div>
+                    <div class="content col-md-<?= $object_content_sizes[1] ?>">
+						
+						<? if($alertsButtons) {?>
+                            <div class="alertsButtons pull-right">
+                                <input class="btn btn-xs read" type="button"
+                                       value="<?php echo __d('powiadomienia', 'LC_POWIADOMIENIA_OPTIONS_ALERT_BUTTON_READ'); ?>"/>
+                                <input class="btn btn-xs unread" type="button"
+                                       value="<?php echo __d('powiadomienia', 'LC_POWIADOMIENIA_OPTIONS_ALERT_BUTTON_UNREAD'); ?>"/>
+                            </div>
+						<? } ?>
+												
                         <? if ($object->force_hl_fields || $forceLabel) { ?>
                             <p class="header">
                                 <?= $object->getLabel(); ?>
@@ -100,7 +105,16 @@ $this->Dataobject->setObject($object);
 
                 <? } else { ?>
                     <div class="content">
-
+						
+						<? if($alertsButtons) {?>
+                            <div class="alertsButtons pull-right">
+                                <input class="btn btn-xs read" type="button"
+                                       value="<?php echo __d('powiadomienia', 'LC_POWIADOMIENIA_OPTIONS_ALERT_BUTTON_READ'); ?>"/>
+                                <input class="btn btn-xs unread" type="button"
+                                       value="<?php echo __d('powiadomienia', 'LC_POWIADOMIENIA_OPTIONS_ALERT_BUTTON_UNREAD'); ?>"/>
+                            </div>
+						<? } ?>
+						
                         <? if ($object->force_hl_fields || $forceLabel) { ?>
                             <p class="header">
                                 <?= $object->getLabel(); ?>

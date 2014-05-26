@@ -1006,19 +1006,25 @@ msgid "LC_DANE_VIEW_ZAMOWIENIAPUBLICZNE_przedmiot"
 msgstr "Przedmiot zamówienia"
 
 msgid "LC_DANE_VIEW_ZAMOWIENIAPUBLICZNE_uprawnienie"
-msgstr "Uprawnienia"
+msgstr "Uprawnienia do wykonywania określonej działalności lub czynności"
 
 msgid "LC_DANE_VIEW_ZAMOWIENIAPUBLICZNE_wiedza"
-msgstr "Wiedza i oś"
+msgstr "Wiedza i doświadczenie"
 
 msgid "LC_DANE_VIEW_ZAMOWIENIAPUBLICZNE_potencjal"
 msgstr "Potencjał techniczny"
 
 msgid "LC_DANE_VIEW_ZAMOWIENIAPUBLICZNE_osoby_zdolne"
-msgstr "Osoby zdolne"
+msgstr "Osoby zdolne do wykonania zamówienia"
 
 msgid "LC_DANE_VIEW_ZAMOWIENIAPUBLICZNE_sytuacja_ekonomiczna"
-msgstr "Sytuacja ekonomiczna"
+msgstr "Sytuacja ekonomiczna i finansowa wykonawcy"
+
+msgid "LC_DANE_VIEW_ZAMOWIENIAPUBLICZNE_le_wymagania"
+msgstr "Wymagania dotyczące rejestracji w licytacji"
+
+msgid "LC_DANE_VIEW_ZAMOWIENIAPUBLICZNE_le_postapien"
+msgstr "Sposób postępowania w toku licytacji"
 
 msgid "LC_DANE_VIEW_ZAMOWIENIAPUBLICZNE_zal_pprawna"
 msgstr "Podstawa prawna prowadzenia postępowania w trybie zapytanie o cenę"
@@ -1036,7 +1042,7 @@ msgid "LC_DANE_VIEW_ZAMOWIENIAPUBLICZNE_wybor_wykonawcow"
 msgstr "Wybór wykonawców"
 
 msgid "LC_DANE_VIEW_ZAMOWIENIAPUBLICZNE_zmieniona_umowa"
-msgstr "Zmieniona umowa"
+msgstr "Dopuszczalność zmiany umowy"
 
 msgid "LC_DANE_VIEW_ZAMOWIENIAPUBLICZNE_aukcja_www"
 msgstr "Aukajca WWW"

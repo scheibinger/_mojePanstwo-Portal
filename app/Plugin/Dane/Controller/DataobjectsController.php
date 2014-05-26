@@ -121,8 +121,11 @@ class DataobjectsController extends DaneAppController
 
 
             if ($this->Session->read('Auth.User.id'))
-                $this->API->Powiadomienia()->flagObject($this->object->id);
-
+            {
+                $this->API->Powiadomienia()->flagObject($this->object->id);				
+				$queries = $this->API->Powiadomienia()->getAlertsQueries($this->object->id);
+				$this->set('_ALERT_QUERIES', $queries);
+			}
 
         } else {
 

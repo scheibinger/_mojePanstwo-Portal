@@ -88,7 +88,12 @@ if (!function_exists('array_column')) {
 function dataSlownie($data)
 {
     $_data = $data;
-
+	
+	if( strpos($data, '/') ) {
+		$parts = explode('/', $data);
+		$data = $parts[2] . '-' . $parts[1] . '-' . $parts[0];
+	}
+	
     $timestamp = strtotime($data);
     if (!$timestamp)
         return false;
@@ -165,7 +170,8 @@ if (!function_exists('endsWith')) {
 
 function _currency($value)
 {
-	return '<span class="_currency">' . number_format($value, $decimals = 2, $dec_point = '<span class="_subcurrency">,', $thousands_sep = ' ') . ' PLN</span></span>';
+	$parts = explode(',', number_format($value, 2, ',', ' '));	
+	return '<span class="_currency">' . $parts[0] . '<span class="_subcurrency">,' . $parts[1] . ' PLN</span></span>';
 }
 
 function _number($value)

@@ -1,4 +1,7 @@
 <?
+if( isset($odpis) && $odpis ) {			
+	$this->Html->meta( array('http-equiv' => "refresh", 'content' => "0;URL='$odpis'"), null, array('inline' => false));
+}
 
 echo $this->Element('dataobject/pageBegin');
 echo $this->Html->script('Dane.d3/d3', array('block' => 'scriptBlock'));
@@ -8,13 +11,14 @@ $this->Combinator->add_libs('js', 'Dane.view-krspodmioty');
 
 ?>
     <div class="krsPodmioty row">
-
-
     <div class="col-lg-3 objectSide">
-
-
         <div class="objectSideInner">
             <ul class="dataHighlights side">
+                <? if ($object->getData('wykreslony')) { ?>
+                    <li class="dataHighlight">
+                        <span class="label label-danger">Podmiot wykreślony z KRS</span>
+                    </li>
+                <? } ?>
 
                 <? if ($object->getData('krs')) { ?>
                     <li class="dataHighlight big">
@@ -43,7 +47,7 @@ $this->Combinator->add_libs('js', 'Dane.view-krspodmioty');
 
 
                 <? if ($object->getData('wartosc_kapital_zakladowy')) { ?>
-                    <li class="dataHighlight">
+                    <li class="dataHighlight topborder">
                         <p class="_label">Kapitał zakładowy</p>
 
                         <p class="_value"><?= _currency($object->getData('wartosc_kapital_zakladowy')); ?></p>
@@ -51,7 +55,7 @@ $this->Combinator->add_libs('js', 'Dane.view-krspodmioty');
                 <? } ?>
 
                 <? if ($object->getData('wartosc_czesc_kapitalu_wplaconego')) { ?>
-                    <li class="dataHighlight topborder">
+                    <li class="dataHighlight">
                         <p class="_label">Część kapitału wpłaconego</p>
 
                         <p class="_value"><?= _currency($object->getData('wartosc_czesc_kapitalu_wplaconego')); ?></p>
@@ -110,11 +114,6 @@ $this->Combinator->add_libs('js', 'Dane.view-krspodmioty');
                 <? } ?>
             </ul>
 
-            <p class="text-center showHideSide">
-                <a class="a-more">Więcej &darr;</a>
-                <a class="a-less hide">Mniej &uarr;</a>
-            </p>
-
             <ul class="dataHighlights side hide">
                 <? if ($object->getData('forma_prawna_str')) { ?>
                     <li class="dataHighlight inl topborder">
@@ -148,18 +147,24 @@ $this->Combinator->add_libs('js', 'Dane.view-krspodmioty');
                     </li>
                 <? } ?>
 
-
             </ul>
 
+            <p class="text-center showHideSide">
+                <a class="a-more">Więcej &darr;</a>
+                <a class="a-less hide">Mniej &uarr;</a>
+            </p>
 
+            <div class="banner">
+                <?php echo $this->Html->image('Dane.banners/krspodmioty_banner.png', array('width' => '69', 'alt' => 'Aktualny odpis z KRS za darmo', 'class' => 'pull-right')); ?>
+                <p>Pobierz aktualny odpis z KRS <strong>za darmo</strong></p>
+                <a href="/dane/krs_podmioty/<?= $object->getId() ?>/odpis" class="btn btn-primary">Kliknij aby pobrać</a>
+            </div>
         </div>
-
     </div>
 
 
     <div class="col-lg-9 objectMain">
         <div class="object mpanel">
-
             <?
             $adres = $object->getData('adres_ulica');
             $adres .= ' ' . $object->getData('adres_numer');
@@ -190,10 +195,7 @@ $this->Combinator->add_libs('js', 'Dane.view-krspodmioty');
                 </div>
             </div>
 
-
             <div class="block-group">
-
-
                 <? if ($object->getData('cel_dzialania')) { ?>
                     <div class="dzialanie block">
 
@@ -229,8 +231,8 @@ $this->Combinator->add_libs('js', 'Dane.view-krspodmioty');
                             <div class="block-header"><h2 class="label" id="<?= $organ['idTag'] ?>"
                                                           class="normalizeText"><?= $organ['title'] ?></h2></div>
                             <? /* if (isset($organ['label']) && $organ['label']) { ?>
-				                <p class="label label-primary"><?= $organ['label'] ?></p>
-				            <? } */
+                                    <p class="label label-primary"><?= $organ['label'] ?></p>
+                                <? } */
                             ?>
 
                             <? if ($organ['content']) { ?>
@@ -243,10 +245,16 @@ $this->Combinator->add_libs('js', 'Dane.view-krspodmioty');
                                         <? } ?>
 
                                         <h4 class="list-group-item-heading">
-                                            <?= $osoba['nazwa'] ?><? if (isset($osoba['wiek']) && $osoba['wiek']) { ?>
-                                                <span class="wiek">,
-                                                    <?= pl_dopelniacz($osoba['wiek'], 'rok', 'lata', 'lat') ?>
-				                                                </span>
+                                            <?= $osoba['nazwa'] ?>
+                                            <? if (
+                                                ($osoba['privacy_level'] != '1') &&
+                                                $osoba['data_urodzenia'] &&
+                                                $osoba['data_urodzenia'] != '0000-00-00'
+                                            ) {
+                                                ?>
+                                                <span class="wiek">
+                                                        <?= pl_dopelniacz(pl_wiek($osoba['data_urodzenia']), 'rok', 'lata', 'lat') ?>
+                                                    </span>
                                             <? } ?>
                                         </h4>
 
@@ -265,7 +273,7 @@ $this->Combinator->add_libs('js', 'Dane.view-krspodmioty');
                         </div>
                         <? } ?>
                     </div>
-                </div>
+                    </div>
             <? } ?>
             <? } ?>
             </div>
@@ -292,15 +300,11 @@ $this->Combinator->add_libs('js', 'Dane.view-krspodmioty');
                             <? } ?>
                         </div>
                     </div>
-                </div>
+                    </div>
             <? } ?>
 
         </div>
-
     </div>
-    </div>
-
-
     </div>
 
 <?= $this->Element('dataobject/pageEnd'); ?>

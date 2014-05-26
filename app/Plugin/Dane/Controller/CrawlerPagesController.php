@@ -41,8 +41,10 @@ class CrawlerPagesController extends DataobjectsController
     }
 
     public function offline()
-    {
+    {	
         parent::_prepareView();
+        $offline = $this->object->loadLayer('offline');
+	    $this->set('offline', $offline);
     }
 
     public function iframe()

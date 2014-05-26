@@ -394,7 +394,7 @@ class UsersController extends PaszportAppController
                         $this->Session->write('User.id', $user['User']['id']);
                         $this->redirect(array('action' => 'reset'));
                     } else {
-                        $this->Session->setFlash(__d('paszport', 'LC_PASZPORT_USER_DOES_NOT_EXIST', true), 'alert', array('class' => 'alert-error'));
+                        $this->Session->setFlash(__d('paszport', 'LC_PASZPORT_SECURITY_TOKEN_INVALID', true), 'alert', array('class' => 'alert-error'));
                     }
                 }
 
