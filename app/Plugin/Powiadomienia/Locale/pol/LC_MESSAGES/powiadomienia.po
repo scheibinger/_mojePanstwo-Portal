@@ -116,7 +116,7 @@ msgid "LC_POWIADOMIENIA_POWIADOMENIA_MODAL_DATASETS_LIST_OPTIONS_MARK_ALL"
 msgstr "zaznacz wszystkie"
 
 msgid "LC_POWIADOMIENIA_POWIADOMENIA_MODAL_DATASETS_LIST_OPTIONS_MARK_NONE"
-msgstr "oznacz wszystkie"
+msgstr "odznacz wszystkie"
 
 msgid "LC_POWIADOMIENIA_POWIADOMENIA_MODAL_KEYWORDS"
 msgstr "Otrzymuj powiadomienia zawierające następujące słowa kluczowe:"
