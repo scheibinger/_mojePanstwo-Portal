@@ -194,9 +194,9 @@ var powiadomieniaModal;
                                                     jQuery('<span></span>').addClass('label pull-left').text(_mPHeart.translation.LC_POWIADOMIENIA_POWIADOMENIA_MODAL_DATASETS_LIST_LABEL)
                                                 ).append(
                                                     jQuery('<span></span>').addClass('datasetOptions pull-right').append(
-                                                            jQuery('<button></button>').addClass('markAll btn btn-default btn-xs disabled').text(_mPHeart.translation.LC_POWIADOMIENIA_POWIADOMENIA_MODAL_DATASETS_LIST_OPTIONS_MARK_ALL)
+                                                            jQuery('<button></button>').addClass('markAll btn btn-link btn-xs disabled').text(_mPHeart.translation.LC_POWIADOMIENIA_POWIADOMENIA_MODAL_DATASETS_LIST_OPTIONS_MARK_ALL)
                                                         ).append(
-                                                            jQuery('<button></button>').addClass('markNone btn btn-default btn-xs disabled').text(_mPHeart.translation.LC_POWIADOMIENIA_POWIADOMENIA_MODAL_DATASETS_LIST_OPTIONS_MARK_NONE)
+                                                            jQuery('<button></button>').addClass('markNone btn btn-link btn-xs disabled').text(_mPHeart.translation.LC_POWIADOMIENIA_POWIADOMENIA_MODAL_DATASETS_LIST_OPTIONS_MARK_NONE)
                                                         )
                                                 )
                                         )
@@ -240,9 +240,9 @@ var powiadomieniaModal;
                                                     jQuery('<span></span>').addClass('label pull-left').text(_mPHeart.translation.LC_POWIADOMIENIA_POWIADOMENIA_MODAL_DATASETS_LIST_LABEL)
                                                 ).append(
                                                     jQuery('<span></span>').addClass('datasetOptions pull-right').append(
-                                                            jQuery('<button></button>').addClass('markAll btn btn-default btn-xs disabled').text(_mPHeart.translation.LC_POWIADOMIENIA_POWIADOMENIA_MODAL_DATASETS_LIST_OPTIONS_MARK_ALL)
+                                                            jQuery('<button></button>').addClass('markAll btn btn-link btn-xs disabled').text(_mPHeart.translation.LC_POWIADOMIENIA_POWIADOMENIA_MODAL_DATASETS_LIST_OPTIONS_MARK_ALL)
                                                         ).append(
-                                                            jQuery('<button></button>').addClass('markNone btn btn-default btn-xs disabled').text(_mPHeart.translation.LC_POWIADOMIENIA_POWIADOMENIA_MODAL_DATASETS_LIST_OPTIONS_MARK_NONE)
+                                                            jQuery('<button></button>').addClass('markNone btn btn-link btn-xs disabled').text(_mPHeart.translation.LC_POWIADOMIENIA_POWIADOMENIA_MODAL_DATASETS_LIST_OPTIONS_MARK_NONE)
                                                         )
                                                 )
                                         )
