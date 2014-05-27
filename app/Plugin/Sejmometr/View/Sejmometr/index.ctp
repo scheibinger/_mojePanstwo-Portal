@@ -38,7 +38,7 @@
                                placeholder="Szukaj w pracach Sejmu..."
                                class="form-control input-lg">
 	                <span class="input-group-btn">
-	                      <button class="btn btn-success btn-lg button big" type="submit" data-icon="&#xe600;"></button>
+	                      <button class="btn btn-success button big" type="submit" data-icon="&#xe600;"></button>
 	                </span>
                     </div>
                 </form>
@@ -132,7 +132,7 @@
                 </li>
             </ul>
             <div class="getMore text-center">
-                <a class="btn btn-primary btn-lg" href="http://mojepanstwo.pl/dane/poslowie"
+                <a class="btn btn-primary" href="http://mojepanstwo.pl/dane/poslowie"
                    target="_self">Pokaż całą listę</a>
             </div>
         </div>
@@ -149,7 +149,7 @@
                 Tyle kosztowały wydatki związane z pracą posłów w 2013 roku
             </div>
             <div class="checkIt">
-                <a class="btn btn-primary btn-lg" href="#" onclick="return false;">Zobacz historię wydatków
+                <a class="btn btn-primary" href="#" onclick="return false;">Zobacz historię wydatków
                     <small>(już wkrótce)</small>
                 </a>
             </div>
