@@ -6,8 +6,8 @@
     <div class="poslowieList">
         <ul>
             <?php foreach ($items as $item) { ?>
-                <li class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
-                    <a href="http://mojepanstwo.pl/dane/poslowie/<?php echo $item['posel_id'] ?>" target="_self">
+                <li class="col-xs-6 col-sm-4 col-md-hack-20">
+                <a href="http://mojepanstwo.pl/dane/poslowie/<?php echo $item['posel_id'] ?>" target="_self">
                         <img class="avatar" src="<?php echo $item['posel_img'] ?>"
                              alt="<?php echo $item['posel_name'] ?>"/>
 
@@ -25,7 +25,7 @@
         </ul>
 
         <div class="checkIt text-center">
-            <a class="btn btn-primary btn-lg" href="<?php echo $page['link'] ?>" target="_self">Zobacz pełen ranking</a>
+            <a class="btn btn-primary" href="<?php echo $page['link'] ?>" target="_self">Zobacz pełen ranking</a>
         </div>
     </div>
 </div>

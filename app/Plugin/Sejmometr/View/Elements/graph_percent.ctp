@@ -15,7 +15,7 @@
         </ul>
 
         <div class="checkIt text-center">
-            <a class="btn btn-primary btn-lg" href="<?php echo $page['link'] ?>" target="_self">Zobacz całą listę</a>
+            <a class="btn btn-primary" href="<?php echo $page['link'] ?>" target="_self">Zobacz całą listę</a>
         </div>
     </div>
 </div>
