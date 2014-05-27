@@ -10,7 +10,16 @@ class PagesController extends MediaAppController
     public function home()
     {
 
-
+		
+		$ranges = array('24h', '3d', '7d', '1m', '1y');
+		$range = ( isset($this->request->query['range']) && in_array($this->request->query['range'], $ranges) ) ? 
+			$this->request->query['range'] : 
+			$ranges[0];
+		
+		
+		
+		
+		
         $toc = array(
             array(
                 'name' => 'media',
@@ -101,6 +110,8 @@ class PagesController extends MediaAppController
         );
         $font['diff'] = $font['max'] - $font['min'];
 
+        
+        /*
         $stats = $this->API->getAnnualTwitterStats(2013);
 
         $tags = $stats['tags'];
@@ -127,6 +138,7 @@ class PagesController extends MediaAppController
 
 
         $this->set('stats', $stats);
+        */
 
 
         $accounts_types = $this->API->getTwitterAccountsTypes();
@@ -135,6 +147,93 @@ class PagesController extends MediaAppController
         $accounts_types_klasy = array_column($accounts_types, 'class', 'id');
 
         $ranks = array(
+            
+            
+            
+            array(
+                'title' => 'Najczęściej retweetowane treści',
+                'name' => 'retweetowane_tresci',
+                'groups' => array(
+                    array(
+                        'mode' => 'tweet',
+                        'field' => 'liczba_retweetow',
+                        'order' => 'liczba_retweetow desc',
+                        'link' => array(
+                            'dataset' => 'twitter',
+                        ),
+                    ),
+                ),
+            ),
+			
+			/*
+            array(
+                'title' => 'Najczęściej retweetowani',
+                'name' => 'retweetowani',
+                'groups' => array(
+                    array(
+                        'mode' => 'account',
+                        'field' => 'liczba_retweetow_wlasnych_2013',
+                        'order' => 'liczba_retweetow_wlasnych_2013 desc',
+                        'desc' => 'Ranking na podstawie sumarycznej ilości wszystkich retweetów, które uzyskały tweety danego użytkownika.',
+                        'link' => array(
+                            'dataset' => 'twitter_accounts',
+                        ),
+                    ),
+                ),
+            ),
+            */
+            
+            array(
+                'title' => 'Najbardziej dyskutowane tweety',
+                'name' => 'dyskutowane_tweety',
+                'groups' => array(
+                    array(
+                        'mode' => 'tweet',
+                        'field' => 'liczba_odpowiedzi',
+                        'order' => 'liczba_odpowiedzi desc',
+                        'link' => array(
+                            'dataset' => 'twitter',
+                        ),
+                    ),
+                ),
+            ),
+            
+            
+            array(
+                'title' => 'Największy przyrost oberwujących',
+                'name' => 'obserwujacy',
+                'groups' => array(
+                    array(
+                        'mode' => 'account',
+                        'preset' => 'followers',
+                        'desc' => '',
+                        'link' => array(
+                            'dataset' => 'twitter_accounts',
+                        ),
+                    ),
+                ),
+            ),
+            
+            /*
+            array(
+                'title' => 'Najaktywniejsi',
+                'name' => 'najaktywniejsi',
+                'groups' => array(
+                    array(
+                        'mode' => 'account',
+                        'field' => 'liczba_tweetow_wlasnych_2013',
+                        'order' => 'liczba_tweetow_wlasnych_2013 desc',
+                        'desc' => 'Ranking na podstawie nowych, własnych tweetów. Pod uwagę nie są brane retweety.',
+                        'link' => array(
+                            'dataset' => 'twitter_accounts',
+                        ),
+                    ),
+                ),
+            ),
+            */
+            
+			/*
+            
             array(
                 'title' => 'Najbardziej obserwowani',
                 'name' => 'obserwowani',
@@ -151,53 +250,14 @@ class PagesController extends MediaAppController
                 ),
             ),
 
-            array(
-                'title' => 'Najaktywniejsi',
-                'name' => 'najaktywniejsi',
-                'groups' => array(
-                    array(
-                        'mode' => 'account',
-                        'field' => 'liczba_tweetow_wlasnych_2013',
-                        'order' => 'liczba_tweetow_wlasnych_2013 desc',
-                        'desc' => 'Ranking na podstawie nowych, własnych tweetów. Pod uwagę nie są brane retweety.',
-                        'link' => array(
-                            'dataset' => 'twitter_accounts',
-                        ),
-                    ),
-                ),
-            ),
-
-            array(
-                'title' => 'Najczęściej retweetowani',
-                'name' => 'retweetowani',
-                'groups' => array(
-                    array(
-                        'mode' => 'account',
-                        'field' => 'liczba_retweetow_wlasnych_2013',
-                        'order' => 'liczba_retweetow_wlasnych_2013 desc',
-                        'desc' => 'Ranking na podstawie sumarycznej ilości wszystkich retweetów, które uzyskały tweety danego użytkownika.',
-                        'link' => array(
-                            'dataset' => 'twitter_accounts',
-                        ),
-                    ),
-                ),
-            ),
+            
+			
+			
+			
+			
 
 
-            array(
-                'title' => 'Najczęściej retweetowane treści',
-                'name' => 'retweetowane_tresci',
-                'groups' => array(
-                    array(
-                        'mode' => 'tweet',
-                        'field' => 'liczba_retweetow',
-                        'order' => 'liczba_retweetow desc',
-                        'link' => array(
-                            'dataset' => 'twitter',
-                        ),
-                    ),
-                ),
-            ),
+            
 
 
             array(
@@ -257,20 +317,7 @@ class PagesController extends MediaAppController
                 ),
             ),
 
-            array(
-                'title' => 'Najbardziej dyskutowane tweety',
-                'name' => 'dyskutowane_tweety',
-                'groups' => array(
-                    array(
-                        'mode' => 'tweet',
-                        'field' => 'liczba_odpowiedzi',
-                        'order' => 'liczba_odpowiedzi desc',
-                        'link' => array(
-                            'dataset' => 'twitter',
-                        ),
-                    ),
-                ),
-            ),
+            
 
             array(
                 'title' => 'Najczęściej używane aplikacje',
@@ -281,16 +328,33 @@ class PagesController extends MediaAppController
                     ),
                 ),
             ),
+            
+            */
+            
+            
         );
 
 
         foreach ($ranks as &$rank) {
 
             foreach ($rank['groups'] as &$group) {
+				
+				if( @$group['preset'] == 'followers' ) {
+					
+					$types = $this->API->getTwitterAccountsGroupByTypes($range, $accounts_types_ids, $group['preset']);
+                    foreach ($types as &$type)
+                        $type = array_merge($type, array(
+                            'title' => $accounts_types_nazwy[$type['id']],
+                            'class' => $accounts_types_klasy[$type['id']],
+                        ));
 
-                if ($group['mode'] == 'account') {
+                    $group = array_merge($group, array(
+                        'types' => $types,
+                    ));
+					
+                } elseif ($group['mode'] == 'account') {
 
-                    $types = $this->API->getTwitterAccountsGroupByTypes($accounts_types_ids, $group['field']);
+                    $types = $this->API->getTwitterAccountsGroupByTypes($range, $accounts_types_ids, $group['field']);
                     foreach ($types as &$type)
                         $type = array_merge($type, array(
                             'title' => $accounts_types_nazwy[$type['id']],
@@ -303,8 +367,8 @@ class PagesController extends MediaAppController
 
                 } elseif ($group['mode'] == 'tweet') {
 
-                    $types = $this->API->getTwitterTweetsGroupByTypes($accounts_types_ids, $group['field']);
-
+                    $types = $this->API->getTwitterTweetsGroupByTypes($range, $accounts_types_ids, $group['field']);
+										
                     foreach ($types as &$type)
                         $type = array_merge($type, array(
                             'title' => $accounts_types_nazwy[$type['id']],
@@ -332,11 +396,12 @@ class PagesController extends MediaAppController
             }
 
         }
-
+		
 
         // var_export( $ranks ); die();
+        $this->set('range', $range);
         $this->set('ranks', $ranks);
-        $this->set('title_for_layout', 'Państwo w mediach społecznościowych');
+        $this->set('title_for_layout', 'Państwo w Mediach Społecznościowych');
 
     }
 

@@ -157,9 +157,9 @@
                         </div>
                         <div class="data">
 
-                            <p><?= $this->Czas->dataSlownie($object->getData('czas_utworzenia')) ?></p>
+                            <p class="date"><?= $this->Czas->dataSlownie($object->getData('czas_utworzenia')) ?> <?= substr($object->getData('czas_utworzenia'), 11, 5) ?></p>
 
-                            <p><?= $object->getData('twitter_accounts.twitter_name') ?></p>
+                            <p class="account"><a href="/dane/twitter_accounts/<?= $object->getData('twitter_accounts.id') ?>"><?= $object->getData('twitter_accounts.name') ?></a></p>
 
                         </div>
                     </div>
@@ -171,18 +171,18 @@
                     <div class="tweet_stats">
                         <div class="row">
                             <div class="col-lg-6">
+								
 
-
-                                <p class="_counter"><?= number_format($object->getData('liczba_retweetow'), 0, '.', ' ') ?></p>
-
-                                <p class="_label"><?= __d('media', 'LC_PANSTWOINTERNET_RETWEET') ?></p>
+                                <p class="_counter"><a href="/dane/twitter/<?= $object->getId() ?>"><span class="glyphicon glyphicon-retweet"></span> <?= number_format($object->getData('liczba_retweetow'), 0, '.', ' ') ?></a></p>
+								
+                                <? /*<p class="_label"><?= __d('media', 'LC_PANSTWOINTERNET_RETWEET') ?></p> */ ?>
 
                             </div>
                             <div class="col-lg-6">
 
-                                <p class="_counter"><?= $object->getData('liczba_odpowiedzi') ?></p>
+                                <p class="_counter"><a href="/dane/twitter/<?= $object->getId() ?>"><span class="glyphicon glyphicon-transfer"></span> <?= $object->getData('liczba_odpowiedzi') ?></a></p>
 
-                                <p class="_label"><?= __d('media', 'LC_PANSTWOINTERNET_ODPOWIEDZI') ?></p>
+                                <? /*<p class="_label"><?= __d('media', 'LC_PANSTWOINTERNET_ODPOWIEDZI') ?></p> */ ?>
 
                             </div>
                         </div>
@@ -214,9 +214,11 @@
 
     $href = '/dane/' . $group['link']['dataset'] . '?' . http_build_query($params);
     ?>
-
+	
+	<? /*
     <div class="buttons">
         <a href="<?= $href ?>"><?= __d('media', 'LC_PANSTWOINTERNET_RANKING') ?></a>
     </div>
+    */ ?>
 
 <? } ?>
