@@ -420,7 +420,7 @@ class OAuthComponent extends Component implements IOAuth2Storage, IOAuth2Refresh
      * @ingroup oauth2_section_3
      */
     public function checkClientCredentials($client_id, $client_secret = NULL) {
-        return $this>getClientDetails() !== false;
+        return $this->getClientDetails($client_id) !== false;
     }
 
     /**
@@ -589,19 +589,30 @@ class OAuthComponent extends Component implements IOAuth2Storage, IOAuth2Refresh
     }
 
     /**
-     * Grant type: authorization_code
+     * Fetch authorization code data (probably the most common grant type).
      *
-     * @see IOAuth2GrantCode::getAuthCode()
+     * Retrieve the stored data for the given authorization code.
      *
-     * @param string $code
-     * @return AuthCode if valid, null of not
+     * Required for OAuth2::GRANT_TYPE_AUTH_CODE.
+     *
+     * @param $code
+     * Authorization code to be check with.
+     *
+     * @return
+     * An associative array as below, and NULL if the code is invalid:
+     * - client_id: Stored client identifier.
+     * - redirect_uri: Stored redirect URI.
+     * - expires: Stored expiration in unix timestamp.
+     * - scope: (optional) Stored scope values in space-separated string.
+     *
+     * @see http://tools.ietf.org/html/draft-ietf-oauth-v2-20#section-4.1
+     *
+     * @ingroup oauth2_section_4
      */
     public function getAuthCode($code)
     {
-        $authCode = $this->AuthCode->find('first', array(
-            'conditions' => array('code' => $code),
-            'recursive' => -1
-        ));
+        $authCode = $this->AuthCode->findByCode($code);
+
         if ($authCode) {
             return $authCode['AuthCode'];
         }

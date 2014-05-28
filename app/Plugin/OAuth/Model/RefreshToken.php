@@ -1,4 +1,4 @@
-<?php
+f<?php
 
 App::uses('OAuthAppModel', 'OAuth.Model');
 
