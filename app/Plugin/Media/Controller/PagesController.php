@@ -111,8 +111,7 @@ class PagesController extends MediaAppController
         $font['diff'] = $font['max'] - $font['min'];
 
         
-        /*
-        $stats = $this->API->getAnnualTwitterStats(2013);
+        $stats = $this->API->getTwitterStats( $range );
 
         $tags = $stats['tags'];
         $_stats = array(
@@ -133,12 +132,11 @@ class PagesController extends MediaAppController
                 'size' => $font['min'] + $score * $font['diff'],
             ));
         }
-
+		
+		shuffle($tags);
         $stats['tags'] = $tags;
 
-
         $this->set('stats', $stats);
-        */
 
 
         $accounts_types = $this->API->getTwitterAccountsTypes();
@@ -165,23 +163,6 @@ class PagesController extends MediaAppController
                 ),
             ),
 			
-			/*
-            array(
-                'title' => 'Najczęściej retweetowani',
-                'name' => 'retweetowani',
-                'groups' => array(
-                    array(
-                        'mode' => 'account',
-                        'field' => 'liczba_retweetow_wlasnych_2013',
-                        'order' => 'liczba_retweetow_wlasnych_2013 desc',
-                        'desc' => 'Ranking na podstawie sumarycznej ilości wszystkich retweetów, które uzyskały tweety danego użytkownika.',
-                        'link' => array(
-                            'dataset' => 'twitter_accounts',
-                        ),
-                    ),
-                ),
-            ),
-            */
             
             array(
                 'title' => 'Najbardziej dyskutowane tweety',
@@ -194,6 +175,30 @@ class PagesController extends MediaAppController
                         'link' => array(
                             'dataset' => 'twitter',
                         ),
+                    ),
+                ),
+            ),
+            
+            array(
+                'title' => 'Najpopularniejsze hashtagi',
+                'name' => 'hashtagi',
+                'groups' => array(
+                    array(
+                        'desc' => 'Najczęściej używane hashtagi.',
+                        'mode' => 'tags',
+                    ),
+                    array(
+                        'mode' => 'tag',
+                    ),
+                ),
+            ),
+            
+            array(
+                'title' => 'Najczęściej używane aplikacje',
+                'name' => 'aplikacje',
+                'groups' => array(
+                    array(
+                        'mode' => 'source',
                     ),
                 ),
             ),
@@ -216,14 +221,13 @@ class PagesController extends MediaAppController
             
             /*
             array(
-                'title' => 'Najaktywniejsi',
-                'name' => 'najaktywniejsi',
+                'title' => 'Najmniejszy przyrost oberwujących',
+                'name' => 'nieobserwujacy',
                 'groups' => array(
                     array(
                         'mode' => 'account',
-                        'field' => 'liczba_tweetow_wlasnych_2013',
-                        'order' => 'liczba_tweetow_wlasnych_2013 desc',
-                        'desc' => 'Ranking na podstawie nowych, własnych tweetów. Pod uwagę nie są brane retweety.',
+                        'preset' => 'defollowers',
+                        'desc' => '',
                         'link' => array(
                             'dataset' => 'twitter_accounts',
                         ),
@@ -232,47 +236,7 @@ class PagesController extends MediaAppController
             ),
             */
             
-			/*
             
-            array(
-                'title' => 'Najbardziej obserwowani',
-                'name' => 'obserwowani',
-                'groups' => array(
-                    array(
-                        'mode' => 'account',
-                        'field' => 'liczba_obserwujacych',
-                        'order' => 'liczba_obserwujacych desc',
-                        'desc' => 'Ranking na podstawie ilości osób obserwujących danego użytkownika',
-                        'link' => array(
-                            'dataset' => 'twitter_accounts',
-                        ),
-                    ),
-                ),
-            ),
-
-            
-			
-			
-			
-			
-
-
-            
-
-
-            array(
-                'title' => 'Najpopularniejsze hashtagi',
-                'name' => 'hashtagi',
-                'groups' => array(
-                    array(
-                        'desc' => 'Najczęściej tweetowane tagi przez monitorowanych użytkowników.',
-                        'mode' => 'tags',
-                    ),
-                    array(
-                        'mode' => 'tag',
-                    ),
-                ),
-            ),
 
 
             array(
@@ -284,53 +248,77 @@ class PagesController extends MediaAppController
                     ),
                 ),
             ),
-
-            array(
-                'title' => 'Najczęściej wzmiankowani',
-                'name' => 'wzmiankowani',
+			
+			
+			array(
+                'title' => 'Najaktywniejsi',
+                'name' => 'najaktywniejsi',
                 'groups' => array(
                     array(
-                        'mode' => 'account',
-                        'field' => 'liczba_wzmianek_rts_2013',
-                        'order' => 'liczba_wzmianek_rts_2013 desc',
-                        'desc' => 'Ranking na podstawie sumy tweetów i retweetów wzmiankujących danego użytkownika.',
+                        'mode' => 'stats',
+                        'preset' => 'accounts-activity',
+                        'field' => 'liczba_tweetow_wlasnych_2013',
+                        'order' => 'liczba_tweetow_wlasnych_2013 desc',
+                        'desc' => 'Liczba nowych, własnych tweetów. Pod uwagę nie są brane retweety.',
                         'link' => array(
                             'dataset' => 'twitter_accounts',
                         ),
                     ),
                 ),
             ),
+			
+			
+			array(
+                'title' => 'Najczęściej retweetowani',
+                'name' => 'retweetowani',
+                'groups' => array(
+                    array(
+                    	'mode' => 'stats',
+                        'preset' => 'accounts-retweet',
+                        'field' => 'liczba_retweetow_wlasnych_2013',
+                        'order' => 'liczba_retweetow_wlasnych_2013 desc',
+                        'desc' => 'Liczba retweetów tweetów z danego konta.',
+                        'link' => array(
+                            'dataset' => 'twitter_accounts',
+                        ),
+                    ),
+                ),
+            ),
+			
 
             array(
                 'title' => 'Najczęściej wywołujący dyskusje',
                 'name' => 'wywolujacy_dyskusje',
                 'groups' => array(
                     array(
-                        'mode' => 'account',
+                    	'mode' => 'stats',
+                        'preset' => 'accounts-discussions',
                         'field' => 'liczba_odpowiedzi_rts_2013',
                         'order' => 'liczba_odpowiedzi_rts_2013 desc',
-                        'desc' => 'Ranking na podstawie sumy tweetów i retweetów będących odpowiedziami na tweety danego użytkownika.',
+                        'desc' => 'Liczba komentarzy do tweetów z danego konta. Powiększona o liczbę retweetów tych komentarzy.',
                         'link' => array(
                             'dataset' => 'twitter_accounts',
                         ),
                     ),
                 ),
             ),
-
             
-
             array(
-                'title' => 'Najczęściej używane aplikacje',
-                'name' => 'aplikacje',
+                'title' => 'Najczęściej wzmiankowani',
+                'name' => 'wzmiankowani',
                 'groups' => array(
                     array(
-                        'mode' => 'source',
+                        'mode' => 'stats',
+                        'preset' => 'accounts-mentions',
+                        'field' => 'liczba_wzmianek_rts_2013',
+                        'order' => 'liczba_wzmianek_rts_2013 desc',
+                        'desc' => 'Liczba tweetów wzmiankujących dane konto. Powiększona o retweety.',
+                        'link' => array(
+                            'dataset' => 'twitter_accounts',
+                        ),
                     ),
                 ),
             ),
-            
-            */
-            
             
         );
 
@@ -339,31 +327,42 @@ class PagesController extends MediaAppController
 
             foreach ($rank['groups'] as &$group) {
 				
-				if( @$group['preset'] == 'followers' ) {
+				if ($group['mode'] == 'account') {
 					
-					$types = $this->API->getTwitterAccountsGroupByTypes($range, $accounts_types_ids, $group['preset']);
-                    foreach ($types as &$type)
-                        $type = array_merge($type, array(
-                            'title' => $accounts_types_nazwy[$type['id']],
-                            'class' => $accounts_types_klasy[$type['id']],
-                        ));
-
-                    $group = array_merge($group, array(
-                        'types' => $types,
-                    ));
 					
-                } elseif ($group['mode'] == 'account') {
-
-                    $types = $this->API->getTwitterAccountsGroupByTypes($range, $accounts_types_ids, $group['field']);
-                    foreach ($types as &$type)
-                        $type = array_merge($type, array(
-                            'title' => $accounts_types_nazwy[$type['id']],
-                            'class' => $accounts_types_klasy[$type['id']],
-                        ));
-
-                    $group = array_merge($group, array(
-                        'types' => $types,
-                    ));
+					if( @$group['preset'] ) {
+					
+					
+						$types = $this->API->getTwitterAccountsGroupByTypes($range, $accounts_types_ids, $group['preset']);
+						
+	                    foreach ($types as &$type)
+	                        $type = array_merge($type, array(
+	                            'title' => $accounts_types_nazwy[$type['id']],
+	                            'class' => $accounts_types_klasy[$type['id']],
+	                        ));
+	
+	                    $group = array_merge($group, array(
+	                        'types' => $types,
+	                    ));
+						
+						
+	                } else {
+	                
+	                
+	                    $types = $this->API->getTwitterAccountsGroupByTypes($range, $accounts_types_ids, $group['field']);
+	                    foreach ($types as &$type)
+	                        $type = array_merge($type, array(
+	                            'title' => $accounts_types_nazwy[$type['id']],
+	                            'class' => $accounts_types_klasy[$type['id']],
+	                        ));
+	
+	                    $group = array_merge($group, array(
+	                        'types' => $types,
+	                    ));
+                    
+                    
+                    }
+                    
 
                 } elseif ($group['mode'] == 'tweet') {
 
@@ -381,16 +380,30 @@ class PagesController extends MediaAppController
 
                 } elseif ($group['mode'] == 'tag') {
 
-                    $group['types'] = $stats['tags_by_groups'];
+                    $group['types'] = @$stats['tags_by_groups'];
 
                 } elseif ($group['mode'] == 'url') {
 
-                    $group['types'] = $stats['urls_by_groups'];
+                    $group['types'] = @$stats['urls_by_groups'];
 
                 } elseif ($group['mode'] == 'source') {
 
-                    $group['types'] = $stats['sources_by_groups'];
+                    $group['types'] = @$stats['sources_by_groups'];
 
+                }  elseif ($group['mode'] == 'stats') {
+					
+					$types = @$stats[ $group['preset'] . '_by_groups' ];
+					
+					foreach ($types as &$type)
+                        $type = array_merge($type, array(
+                            'title' => $accounts_types_nazwy[$type['id']],
+                            'class' => $accounts_types_klasy[$type['id']],
+                        ));
+					
+					$group = array_merge($group, array(
+                        'types' => $types,
+                    ));
+					
                 }
 
             }

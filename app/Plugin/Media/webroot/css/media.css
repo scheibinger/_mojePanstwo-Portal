@@ -41,7 +41,7 @@ blockquote p {
 #_main h3 {
   display: inline-block;
   font-size: 26px;
-  font-weight: 300;
+  font-weight: 400;
   margin: 10px 0;
 }
 #_main h4 {
@@ -259,7 +259,7 @@ blockquote p {
   min-height: 73px;
 }
 #_main .rank-row-block .rank-row .rank-col ul li.tweet {
-  border-bottom: 1px solid #EEE;
+  border-bottom: 1px solid #DDD;
   padding-bottom: 10px;
   margin-bottom: 10px;
 }
@@ -274,6 +274,15 @@ blockquote p {
   font-size: 12px;
 }
 #_main .rank-row-block .rank-row .rank-col ul li.tweet:last-child {
+  border-bottom: none;
+  margin-bottom: none;
+}
+#_main .rank-row-block .rank-row .rank-col ul li.account {
+  border-bottom: 1px solid #DDD;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
+#_main .rank-row-block .rank-row .rank-col ul li.account:last-child {
   border-bottom: none;
   margin-bottom: none;
 }
@@ -299,6 +308,15 @@ blockquote p {
 #_main .rank-row-block .rank-row .rank-col ul li .tweet_stats p._counter {
   font-family: "Lato", sans-serif;
   font-size: 16px;
+}
+#_main .rank-row-block .rank-row .rank-col ul li .tweet_stats p._counter.small {
+  font-size: 13px;
+}
+#_main .rank-row-block .rank-row .rank-col ul li .tweet_stats p._counter.plus {
+  color: #5CB85C;
+}
+#_main .rank-row-block .rank-row .rank-col ul li .tweet_stats p._counter.minus {
+  color: #D9534F;
 }
 #_main .rank-row-block .rank-row .rank-col ul li .tweet_stats p._counter a {
   color: #AAA;
@@ -329,17 +347,9 @@ blockquote p {
   font-size: 16px;
   margin-bottom: 5px;
 }
-#_main .rank-row-block .rank-row .rank-col ul li .name a {
-  color: #333;
-}
-#_main .rank-row-block .rank-row .rank-col ul li .name a:hover {
-  color: #157AB5;
-}
 #_main .rank-row-block .rank-row .rank-col ul li .counter {
   font-family: "Lato", sans-serif;
-  font-size: 22px;
-  font-weight: 300;
-  color: #AAA;
+  font-size: 20px;
 }
 #_main .rank-row-block .rank-row .rank-col ul li .subcounter {
   font-family: "Lato", sans-serif;
