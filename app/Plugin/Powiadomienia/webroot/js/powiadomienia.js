@@ -214,6 +214,9 @@
             case('apps'):
                 modalAlert.text(_mPHeart.translation.LC_POWIADOMIENIA_POWIADOMENIA_MODAL_ALERT_APPS);
                 break;
+            case('timeout'):
+                modalAlert.text(_mPHeart.translation.LC_POWIADOMIENIA_POWIADOMENIA_MODAL_ALERT_ERROR_TIMEOUT);
+                break;
             default:
                 modalAlert.text(_mPHeart.translation.LC_POWIADOMIENIA_POWIADOMENIA_MODAL_ALERT_DEFAULT);
                 break;
@@ -338,6 +341,16 @@
                             } else {
                                 modalBottom.find('.btn').removeClass('disabled');
                                 modalBottom.find('.btn.save').removeClass('loading');
+                                /*ERROR - OTHER ERROR*/
+                                serializePowiadomieniaSaveAlert();
+                            }
+                        },
+                        error: function (x, t, m) {
+                            if (t === "timeout") {
+                                /*ERROR - TIMEOUT*/
+                                serializePowiadomieniaSaveAlert('timeout');
+                            } else {
+                                /*ERROR - OTHER ERROR*/
                                 serializePowiadomieniaSaveAlert();
                             }
                         }
@@ -407,12 +420,23 @@
                                 } else {
                                     modalBottom.find('.btn').removeClass('disabled');
                                     modalBottom.find('.btn.save').removeClass('loading');
+                                    /*ERROR - OTHER ERROR*/
+                                    serializePowiadomieniaSaveAlert();
+                                }
+                            },
+                            error: function (x, t, m) {
+                                if (t === "timeout") {
+                                    /*ERROR - TIMEOUT*/
+                                    serializePowiadomieniaSaveAlert('timeout');
+                                } else {
+                                    /*ERROR - OTHER ERROR*/
                                     serializePowiadomieniaSaveAlert();
                                 }
                             }
                         })
                     } else {
                         /*ERROR - BRAK TITLE, KEYWORDS, APPS*/
+                        serializePowiadomieniaSaveAlert('title');
                     }
                 });
                 powiadomieniaModal.init({
@@ -537,6 +561,16 @@
                             } else {
                                 modalBottom.find('.btn').removeClass('disabled');
                                 modalBottom.find('.btn.save').removeClass('loading');
+                                /*ERROR - OTHER ERROR*/
+                                serializePowiadomieniaSaveAlert();
+                            }
+                        },
+                        error: function (x, t, m) {
+                            if (t === "timeout") {
+                                /*ERROR - TIMEOUT*/
+                                serializePowiadomieniaSaveAlert('timeout');
+                            } else {
+                                /*ERROR - OTHER ERROR*/
                                 serializePowiadomieniaSaveAlert();
                             }
                         }
