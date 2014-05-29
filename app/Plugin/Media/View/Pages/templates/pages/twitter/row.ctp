@@ -10,7 +10,7 @@
         </ul>
     <? } else { ?>
         <? foreach ($group['types'] as $type) { ?>
-            <div class="col-lg-3 rank-col">
+            <div class="col-md-2 rank-col">
                 <h4 class="label label-<?= $type['class'] ?>"><?= $type['title'] ?></h4>
                 <? include('mode.ctp'); ?>
             </div>

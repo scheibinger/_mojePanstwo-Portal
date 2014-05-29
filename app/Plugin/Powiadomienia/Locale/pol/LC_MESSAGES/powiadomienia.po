@@ -145,5 +145,8 @@ msgstr "Błąd! Nie wybrano żadnych słów kluczowych."
 msgid "LC_POWIADOMIENIA_POWIADOMENIA_MODAL_ALERT_APPS"
 msgstr "Błąd! Nie wybrano żadnych aplikacji bądź datasetów do śledzenia."
 
+msgid "LC_POWIADOMIENIA_POWIADOMENIA_MODAL_ALERT_ERROR_TIMEOUT"
+msgstr "Błąd! Nasze serwery są chwilowo przeciążone. Prosze spróbować ponownie później."
+
 msgid "LC_POWIADOMIENIA_POWIADOMENIA_MODAL_ALERT_DEFAULT"
 msgstr "Błąd! Wystąpił błąd podczas zapisu. Prosze spróbować ponownie później."

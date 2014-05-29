@@ -1,3 +1,6 @@
+.container {
+  width: 99%;
+}
 blockquote {
   background: #f9f9f9;
   border-left: 10px solid #ccc;
@@ -246,6 +249,10 @@ blockquote p {
 }
 #_main .rank-row-block .rank-row .rank-col {
   border-right: 1px solid #CCC;
+  width: 20%;
+}
+#_main .rank-row-block .rank-row .rank-col:last-child {
+  border-right: none;
 }
 #_main .rank-row-block .rank-row .rank-col ul {
   padding: 0;
