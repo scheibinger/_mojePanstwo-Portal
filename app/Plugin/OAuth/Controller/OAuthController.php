@@ -52,8 +52,9 @@ class OAuthController extends OAuthAppController
     {
         parent::beforeFilter();
 
-        // user has to be logged in
-        $this->Auth->deny();
+        // user has to be logged in to authorize
+        $this->Auth->allow();
+        $this->Auth->deny('authorize');
 
         $this->OAuth->authenticate = array('fields' => array('username' => 'email'), 'userModel' => 'Paszport.User');
         $this->Auth->authError = 'Proszę się zalogować';
@@ -151,6 +152,7 @@ class OAuthController extends OAuthAppController
                 'big_square' => $user['photo'],
                 'small_square' => $user['photo_small'],
             ),
+            'group_id' => $user['group_id'],
         );
         $this->set(compact('user'));
     }
