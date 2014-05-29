@@ -404,46 +404,44 @@ class OAuthComponent extends Component implements IOAuth2Storage, IOAuth2Refresh
      */
 
     /**
-     * Check client details are valid
+     * Make sure that the client credentials is valid.
      *
-     * @see IOAuth2Storage::checkClientCredentials().
+     * @param $client_id
+     * Client identifier to be check with.
+     * @param $client_secret
+     * (optional) If a secret is required, check that they've given the right one.
      *
-     * @param string $client_id
-     * @param string $client_secret
-     * @return mixed array of client credentials if valid, false if not
+     * @return
+     * TRUE if the client credentials are valid, and MUST return FALSE if it isn't.
+     * @endcode
+     *
+     * @see http://tools.ietf.org/html/draft-ietf-oauth-v2-20#section-3.1
+     *
+     * @ingroup oauth2_section_3
      */
-    public function checkClientCredentials($client_id, $client_secret = null)
-    {
-        $conditions = array('client_id' => $client_id);
-        if ($client_secret) {
-            $conditions['client_secret'] = $client_secret;
-        }
-        $client = $this->Client->find('first', array(
-            'conditions' => $conditions,
-            'recursive' => -1
-        ));
-        if ($client) {
-            return $client['Client'];
-        };
-        return false;
+    public function checkClientCredentials($client_id, $client_secret = NULL) {
+        return $this>getClientDetails() !== false;
     }
 
     /**
-     * Get client details
+     * Get client details corresponding client_id.
      *
-     * @see IOAuth2Storage::getClientDetails().
+     * OAuth says we should store request URIs for each registered client.
+     * Implement this function to grab the stored URI for a given client id.
      *
-     * @param string $client_id
-     * @return boolean
+     * @param $client_id
+     * Client identifier to be check with.
+     *
+     * @return array
+     * Client details. Only mandatory item is the "registered redirect URI", and MUST
+     * return FALSE if the given client does not exist or is invalid.
+     *
+     * @ingroup oauth2_section_4
      */
-    public function getClientDetails($client_id)
-    {
-        $client = $this->Client->find('first', array(
-            'conditions' => array('client_id' => $client_id),
-            'fields' => array('client_id', 'redirect_uri'),
-            'recursive' => -1
-        ));
-        if ($client) {
+    public function getClientDetails($client_id) {
+        $client = $this->Client->getRedirectURL($client_id);
+
+        if (isset($client['Client'])) {
             return $client['Client'];
         }
         return false;
