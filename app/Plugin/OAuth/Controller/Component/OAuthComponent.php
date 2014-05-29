@@ -319,7 +319,7 @@ class OAuthComponent extends Component implements IOAuth2Storage, IOAuth2Refresh
                 'conditions' => array('oauth_token' => $token),
                 'recursive' => 1
             ));
-            if (!$data) {
+            if (!isset($data['User']['id']) || empty($data['User']['id'])) {
                 return false;
             }
             $this->_user = $data['User'];
