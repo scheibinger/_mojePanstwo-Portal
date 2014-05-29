@@ -152,6 +152,7 @@ class OAuthController extends OAuthAppController
                 'big_square' => $user['photo'],
                 'small_square' => $user['photo_small'],
             ),
+            'group_id' => $user['group_id'],
         );
         $this->set(compact('user'));
     }
