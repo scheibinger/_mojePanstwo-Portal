@@ -161,7 +161,7 @@
             $i = 0;
             foreach ($type['objects'] as $object) {
                 $i++;
-                $href = '/dane/twitter/?tags=' . $object['id'] . '&twitter_accounts%3Atyp_id=' . $type['id'];
+                $href = '/dane/twitter/?!bez_retweetow=1&tags[]=' . $object['id'] . '&twitter_accounts%3Atyp_id[]=' . $type['id'];
                 ?>
                 <li class="list-group-item">
                     <span class="badge"><?= number_format($object['count'], 0, '.', ' ') ?></span>
