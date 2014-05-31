@@ -109,19 +109,19 @@
                             
                             <div class="col-lg-4">
                             	
-                            	<p class="_counter small"><span class="glyphicon glyphicon-unchecked"></span> <?= number_format($object['followers_count'], 0, '.', ' ') ?></p>
+                            	<p class="_counter small _tooltip" data-toggle="tooltip" data-placement="bottom" title="Aktualna liczba obserwujących"><span class="glyphicon glyphicon-unchecked"></span> <?= number_format($object['followers_count'], 0, '.', ' ') ?></p>
                             	
                             </div>
                             
                             <div class="col-lg-4">
 								
 
-                                <p class="_counter plus small"><span class="glyphicon glyphicon-log-in"></span> <?= number_format($object['followers_add_' . $range], 0, '.', ' ') ?></p>
+                                <p class="_counter plus small _tooltip" data-toggle="tooltip" data-placement="bottom" title="Liczba nowych subskrypcji"><span class="glyphicon glyphicon-log-in"></span> <?= number_format($object['followers_add_' . $range], 0, '.', ' ') ?></p>
 									
                             </div>
                             <div class="col-lg-4">
 
-                                <p class="_counter minus small"><?= number_format($object['followers_diff_' . $range], 0, '.', ' ') ?> <span class="glyphicon glyphicon-log-out"></span></p>
+                                <p class="_counter minus small _tooltip" data-toggle="tooltip" data-placement="bottom" title="Liczba usuniętych subskrypcji"><?= number_format($object['followers_diff_' . $range], 0, '.', ' ') ?> <span class="glyphicon glyphicon-log-out"></span></p>
 	
                             </div>
                         </div>
@@ -243,6 +243,7 @@
 
 <? } elseif ($group['mode'] == 'tweet') { ?>
 
+	
     <? if (isset($type['objects']) && is_array($type['objects']) && !empty($type['objects'])) { ?>
         <ul>
 
@@ -303,6 +304,8 @@
             ?>
 
         </ul>
+        
+        <p><a class="btn btn-default btn-sm" href="/dane/twitter/?!bez_retweetow=1&twitter_accounts:typ_id[]=<?= $type['id'] ?>&date=LAST_<?= $range ?>&order=<?= $group['field'] ?>%20desc">Więcej &raquo;</a>
 
     <? } ?>
 
