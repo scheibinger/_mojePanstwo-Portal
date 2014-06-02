@@ -68,7 +68,17 @@ class KrsPodmiotyController extends DataobjectsController
 
         $this->set('indicators', $indicators);
 
-
+		
+		$zamowienia = $this->API->search(array(
+            'limit' => 9,
+            'conditions' => array(
+	            '_source' => 'krs_podmioty.zamowienia:' . $this->object->getId(),
+	            'dataset' => 'zamowienia_publiczne',
+            ),
+        ));
+        $this->set('zamowienia', $this->API->getObjects());
+		
+		
         $obszary = new MP\Obszary();
         $this->set('obszar', $obszary->getMiejscowosc(array(
             'conditions' => array(
@@ -211,6 +221,19 @@ class KrsPodmiotyController extends DataobjectsController
 	    $id = (int) $this->request->params['id'];
 	    $this->Session->write('KRS.odpis', $id);
 	    $this->redirect('/dane/krs_podmioty/' . $id);
+	    
+    }
+    
+    public function zamowienia()
+    {
+	    
+	    parent::_prepareView();
+        $this->dataobjectsBrowserView(array(
+            'source' => 'krs_podmioty.zamowienia:' . $this->object->getId(),
+            'dataset' => 'zamowienia_publiczne',
+            'title' => 'Zamówienia publiczne udzielone organizacji',
+            'noResultsTitle' => 'Brak zamówień publicznych',
+        ));
 	    
     }
     

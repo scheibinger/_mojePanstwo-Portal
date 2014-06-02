@@ -7,6 +7,7 @@ echo $this->Element('dataobject/pageBegin');
 echo $this->Html->script('Dane.d3/d3', array('block' => 'scriptBlock'));
 
 $this->Combinator->add_libs('css', $this->Less->css('view-krspodmioty', array('plugin' => 'Dane')));
+$this->Combinator->add_libs('css', $this->Less->css('dataobjectslider', array('plugin' => 'Dane')));
 $this->Combinator->add_libs('js', 'Dane.view-krspodmioty');
 
 ?>
@@ -201,6 +202,30 @@ $this->Combinator->add_libs('js', 'Dane.view-krspodmioty');
             </div>
 
             <div class="block-group">
+            	
+            	<? if ($zamowienia) { ?>
+                    <div id="zamowienia" class="block">
+                        <div class="block-header">
+                            <h2 class="label pull-left">Udzielone zamówienia publiczne</h2>
+                            <a class="btn btn-default btn-sm pull-right"
+                               href="/dane/krs_podmioty/<?= $object->getId() ?>/zamowienia">Zobacz wszystkie</a>
+                        </div>
+
+                        <div class="content">
+                            <div class="dataobjectsSliderRow row">
+                                <div>
+                                    <?php echo $this->dataobjectsSlider->render($zamowienia, array(
+                                        'perGroup' => 3,
+                                        'rowNumber' => 1,
+                                        'labelMode' => 'none',
+                                        'dfFields' => array('data'),
+                                    )) ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <? } ?>
+            	
                 <? if ($object->getData('cel_dzialania')) { ?>
                     <div class="dzialanie block">
 

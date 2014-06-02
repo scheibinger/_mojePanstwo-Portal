@@ -6,6 +6,10 @@
             $i = 0;
             foreach ($type['objects'] as $object) {
                 $i++;
+                
+                if( $i>3 )
+                	break;
+                
                 ?>
 
                 <li class="account">
@@ -17,15 +21,15 @@
                         </p>
 						
 						
-						<? if( $group['preset'] == 'accounts-activity' ) { ?>
+						<? if( $group['preset'] == 'twitter_account_id' ) { ?>
 						
-							<p class="counter"><?= number_format($object['count'], 0, '.', ' ') ?></p>
+							<p class="counter"><a href="/dane/twitter/?!bez_retweetow=1&twitter_account_id[]=<?= $object['id'] ?>&date=LAST_24H"><?= number_format($object['count'], 0, '.', ' ') ?></a></p>
 						
 						<? } elseif( $group['preset'] == 'accounts-retweet' ) { ?>
 						
-							<p class="counter"><?= number_format($object['count'], 0, '.', ' ') ?></p>
+							<p class="counter"><a href="/dane/twitter/?!bez_retweetow=1&twitter_account_id[]=<?= $object['id'] ?>&date=LAST_24H"><?= number_format($object['count'], 0, '.', ' ') ?></a></p>
 						
-						<? } elseif( $group['preset'] == 'accounts-discussions' ) { ?>
+						<? } elseif( $group['preset'] == 'in_reply_to_account_id' ) { ?>
 						
 							<p class="counter"><?= number_format($object['count'], 0, '.', ' ') ?></p>
 						
