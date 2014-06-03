@@ -20,7 +20,9 @@ class UsersController extends PaszportAppController
     public function beforeFilter()
     {
         // save login redirect because it will be overwritten by AppController::beforeFilter
-        if ($this->Session->read("Auth.loginRedirect") != Router::url(array('action'=>'login'), true) && $this->Session->read("Auth.loginRedirect") != (Router::url('/', true) . 'oauth/login')) {
+        if ($this->Session->read("Auth.loginRedirect") != Router::url(array('action'=>'login'), true)
+            && $this->Session->read("Auth.loginRedirect") != Router::url(array('action'=>'fblogin'), true)
+            && $this->Session->read("Auth.loginRedirect") != (Router::url('/', true) . 'oauth/login')) {
             $this->Auth->loginRedirect = $this->Session->read("Auth.loginRedirect");
         }
 
@@ -102,6 +104,9 @@ class UsersController extends PaszportAppController
             }
         } else { # we do have access to user details
             $user_data = $this->Connect->FB->api('/me/?fields=id,first_name,last_name,email,gender,picture.type(square).width(200),birthday,locale');
+            if ($user_data == null) {
+                $this->redirect($this->Connect->FB->getLoginUrl(array('scope' => 'email,user_birthday')));
+            }
 
             $conds = array(
                 'conditions' => array(
@@ -114,7 +119,7 @@ class UsersController extends PaszportAppController
             );
 
             $user = $this->PassportApi->find('users', $conds);
-            if (!isset($user['user'])) {
+            if (!isset($user['user']) || empty($user['user'])) {
                 $user = false;
             } else {
                 $user = $user['user'];
@@ -127,6 +132,7 @@ class UsersController extends PaszportAppController
                     $session = $this->Session->read('API.session');
                     $this->externalgate($service, $session);
                 }
+
                 $this->redirect($this->Auth->redirectUrl());
 
             } else { # if not we will attempt to create new user based on his facebook data or we will merge his existing account
