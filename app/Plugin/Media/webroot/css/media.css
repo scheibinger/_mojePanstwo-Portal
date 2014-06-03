@@ -53,6 +53,9 @@ blockquote p {
   font-weight: 400;
   margin: 10px 0;
 }
+#_main h4.label a {
+  color: #FFF;
+}
 #_main .plate {
   font-family: "Lato", sans-serif;
   font-size: 16px;
@@ -317,7 +320,7 @@ blockquote p {
   font-size: 16px;
 }
 #_main .rank-row-block .rank-row .rank-col ul li .tweet_stats p._counter.small {
-  font-size: 13px;
+  font-size: 12px;
 }
 #_main .rank-row-block .rank-row .rank-col ul li .tweet_stats p._counter.plus {
   color: #5CB85C;
