@@ -17,22 +17,12 @@
         <h1 class="header text-center">Sejmometr</h1>
 
         <div class="content-container col-xs-12">
-            <h5>Sejm jest organem władzy ustawodawczej w Polsce. Tworzą
-                go posłowie, którzy są
-                reprezentantami Narodu dlatego mogą, a nawet powinni być przez ten Naród oceniani. Szerokie
-                udostępnianie informacji o poselskich działaniach leży w interesie każdego z 460 posłów. Obywatele
-                nie
-                mający dostępu do takich danych swoje poglądy wyrobią w oparciu o inne, niekoniecznie obiektywne
-                źródła
-                informacji. Postanowiliśmy wesprzeć tych, którzy chcieliby wiedzieć jak pracują nasi posłowie i w
-                jakich
-                warunkach wykonują swój mandat poselski. Stworzyliśmy aplikację, która prezentuje rozmaite dane
-                związane
-                z sejmową codziennością!
+            <h5>Sejm jest organem władzy ustawodawczej w Polsce. Tworzą go posłowie, którzy są reprezentantami Narodu dlatego mogą, a nawet powinni być przez ten Naród oceniani. Szerokie udostępnianie informacji o poselskich działaniach leży w interesie każdego z 460 posłów. Obywatele nie mający dostępu do takich danych swoje poglądy wyrobią w oparciu o inne, niekoniecznie obiektywne źródła informacji. Postanowiliśmy wesprzeć tych, którzy chcieliby wiedzieć jak pracują nasi posłowie i w jakich warunkach wykonują swój mandat poselski. Stworzyliśmy aplikację, która prezentuje rozmaite dane związane z sejmową codziennością!
+
             </h5>
 
             <div class="searchInput search col-xs-12 col-md-10 col-md-offset-1">
-                <form action="/sejmometr/szukaj">
+                <form action="<? echo Router::url(array('plugin' => 'Dane', 'controller' => 'datachannels', 'action' => 'view', 'alias' => 'sejm')); ?>">
                 <div class="input-group">
                         <input name="q" value="" type="text" autocomplete="off"
                                placeholder="Szukaj w pracach Sejmu..."
