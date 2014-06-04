@@ -112,7 +112,7 @@ CakePlugin::loadAll(
         'Api' => array('routes' => true, 'bootstrap' => false),
         'MojaGmina' => array('routes' => true, 'bootstrap' => false),
         'Powiadomienia' => array('routes' => true, 'bootstrap' => false),
-        'PanstwoInternet' => array('routes' => true, 'bootstrap' => false),
+        'Media' => array('routes' => true, 'bootstrap' => false),
         'OAuth' => array('bootstrap' => false, 'routes' => true),
         'Combinator' => array('bootstrap' => false, 'routes' => false),
         'Mapaprawa' => array('routes' => true, 'bootstrap' => false),

@@ -194,9 +194,9 @@ var powiadomieniaModal;
                                                     jQuery('<span></span>').addClass('label pull-left').text(_mPHeart.translation.LC_POWIADOMIENIA_POWIADOMENIA_MODAL_DATASETS_LIST_LABEL)
                                                 ).append(
                                                     jQuery('<span></span>').addClass('datasetOptions pull-right').append(
-                                                            jQuery('<button></button>').addClass('markAll btn btn-default btn-xs').text(_mPHeart.translation.LC_POWIADOMIENIA_POWIADOMENIA_MODAL_DATASETS_LIST_OPTIONS_MARK_ALL)
+                                                            jQuery('<button></button>').addClass('markAll btn btn-link btn-xs disabled').text(_mPHeart.translation.LC_POWIADOMIENIA_POWIADOMENIA_MODAL_DATASETS_LIST_OPTIONS_MARK_ALL)
                                                         ).append(
-                                                            jQuery('<button></button>').addClass('markNone btn btn-default btn-xs').text(_mPHeart.translation.LC_POWIADOMIENIA_POWIADOMENIA_MODAL_DATASETS_LIST_OPTIONS_MARK_NONE)
+                                                            jQuery('<button></button>').addClass('markNone btn btn-link btn-xs disabled').text(_mPHeart.translation.LC_POWIADOMIENIA_POWIADOMENIA_MODAL_DATASETS_LIST_OPTIONS_MARK_NONE)
                                                         )
                                                 )
                                         )
@@ -216,12 +216,13 @@ var powiadomieniaModal;
                         if (data.apps && data.apps.length > 0) {
                             $.each(data.apps, function (index, app) {
                                 var checkedApp = powiadomieniaModal.options.modal.find('.modal-body .datasets input[name="apps[' + app.name + ']"]');
-                                checkedApp.attr('checked', 'checked');
+                                checkedApp.prop('checked', true);
                                 checkedApp.parents('.switchCheckbox').find('.datasetsList .checkbox.disabled').removeClass('disabled').find('input').removeAttr('disabled');
+                                checkedApp.parents('.switchCheckbox').find('.datasetOptions > button.disabled').removeClass('disabled');
 
                                 $.each(app.datasets, function (index, subapp) {
                                     var checkedSubApp = powiadomieniaModal.options.modal.find('.modal-body .datasets input[name="subapps[' + app.name + '][' + subapp.name + ']"]');
-                                    checkedSubApp.attr('checked', 'checked');
+                                    checkedSubApp.prop('checked', true);
                                 });
                             })
                         }
@@ -239,9 +240,9 @@ var powiadomieniaModal;
                                                     jQuery('<span></span>').addClass('label pull-left').text(_mPHeart.translation.LC_POWIADOMIENIA_POWIADOMENIA_MODAL_DATASETS_LIST_LABEL)
                                                 ).append(
                                                     jQuery('<span></span>').addClass('datasetOptions pull-right').append(
-                                                            jQuery('<button></button>').addClass('markAll btn btn-default btn-xs').text(_mPHeart.translation.LC_POWIADOMIENIA_POWIADOMENIA_MODAL_DATASETS_LIST_OPTIONS_MARK_ALL)
+                                                            jQuery('<button></button>').addClass('markAll btn btn-link btn-xs disabled').text(_mPHeart.translation.LC_POWIADOMIENIA_POWIADOMENIA_MODAL_DATASETS_LIST_OPTIONS_MARK_ALL)
                                                         ).append(
-                                                            jQuery('<button></button>').addClass('markNone btn btn-default btn-xs').text(_mPHeart.translation.LC_POWIADOMIENIA_POWIADOMENIA_MODAL_DATASETS_LIST_OPTIONS_MARK_NONE)
+                                                            jQuery('<button></button>').addClass('markNone btn btn-link btn-xs disabled').text(_mPHeart.translation.LC_POWIADOMIENIA_POWIADOMENIA_MODAL_DATASETS_LIST_OPTIONS_MARK_NONE)
                                                         )
                                                 )
                                         )
@@ -348,23 +349,32 @@ var powiadomieniaModal;
                     })
 
                     powiadomieniaModal.options.modal.find('.modal-body .datasets .datasetsContent > .switchCheckbox .bootstrap-switch-container > input').on('switchChange.bootstrapSwitch', function (event, state) {
+                        var switchCheckBox = $(this).parents('.switchCheckbox');
+
                         if (state) {
-                            $(this).parents('.switchCheckbox').find('.datasetsList .checkbox.disabled').removeClass('disabled').find('input').removeAttr('disabled');
-                            if ($(this).parents('.switchCheckbox').find('.datasetsList .checkbox input:checked').length == 0)
-                                $(this).parents('.switchCheckbox').find('.datasetsList .checkbox input').attr('checked', 'checked');
+                            switchCheckBox.find('.datasetsList .checkbox.disabled').removeClass('disabled').find('input').removeAttr('disabled');
+                            switchCheckBox.find('.datasetOptions > button.disabled').removeClass('disabled');
+                            if (switchCheckBox.find('.datasetsList .checkbox input:checked').length == 0)
+                                switchCheckBox.find('.datasetsList .checkbox input').prop('checked', true);
                         } else {
-                            $(this).parents('.switchCheckbox').find('.datasetsList .checkbox').addClass('disabled').find('input').attr('disabled', 'disabled');
+                            switchCheckBox.find('.datasetsList .checkbox').addClass('disabled').find('input').attr('disabled', 'disabled');
+                            switchCheckBox.find('.datasetOptions > button').addClass('disabled');
+
                         }
                     });
 
                     if (powiadomieniaModal.options.modal.find('.modal-body .datasets .datasetsList .datasetOptions').length > 0) {
                         powiadomieniaModal.options.modal.find('.modal-body .datasets .datasetsList .datasetOptions button').click(function (e) {
+                            var that = $(this);
                             e.preventDefault();
 
-                            if ($(this).hasClass('markAll')) {
-                                powiadomieniaModal.options.modal.find('.modal-body .datasets .datasetsList .checkbox input').attr('checked', 'checked');
+                            if (that.hasClass('disabled'))
+                                return false;
+
+                            if (that.hasClass('markAll')) {
+                                that.parents('.datasetsList').find('.checkbox input').prop('checked', true);
                             } else {
-                                powiadomieniaModal.options.modal.find('.modal-body .datasets .datasetsList .checkbox input').removeAttr('checked');
+                                that.parents('.datasetsList').find('.checkbox input').prop('checked', false);
                             }
                         })
                     }

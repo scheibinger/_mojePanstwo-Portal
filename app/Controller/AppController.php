@@ -179,23 +179,8 @@ class AppController extends Controller
 
     public function addStatusbarCrumb($item)
     {
-
         $this->statusbarCrumbs[] = $item;
         $this->set('statusbarCrumbs', $this->statusbarCrumbs);
 
     }
-
-//@TODO : needs to be improved
-    /*    public function appError($e)
-        {
-            if (get_class($e) == 'MissingControllerException' && !isset($this->params->query['redirect'])) {
-                if (is_numeric($this->params->action)) {
-                    $this->redirect(array('plugin' => 'Dane', 'controller' => $this->params->controller, 'action' => 'view', 'id' => $this->params->action, '?' => array('redirect' => true)), '301');
-                } else {
-                    $this->redirect(array('plugin' => 'Dane', 'controller' => 'datasets', 'action' => 'view', $this->params->controller, '?' => array('redirect' => true)), '301');
-                }
-            }
-        }
-    */
-
 }

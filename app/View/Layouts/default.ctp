@@ -50,6 +50,9 @@
 
     /* ENHANCE SCRIPTS */
     echo $this->Html->script('enhance');
+    
+    /* VIEW SPECIFIC HEAD */
+    echo $scripts_for_layout;
     ?>
 
     <!--[if lt IE 9]>
