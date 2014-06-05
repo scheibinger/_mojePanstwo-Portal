@@ -9,20 +9,78 @@ class SejmometrController extends SejmometrAppController
     private function klub_img_src($klub_id) {
         return "http://resources.sejmometr.pl/s_kluby/" . $klub_id . "_a_t.png";
     }
+
+    private function posel_img_src($posel) {
+        // TODO
+        return "http://resources.sejmometr.pl/mowcy/a/0/1.jpg";
+    }
+
+    private function posel_data($posel) {
+        return array(
+            'imie' => 'Adam',
+            'nazwisko' => 'Abramowicz',
+            'url' => Router::url(array('plugin' => 'dane', 'controller' => 'poslowie', 'action' => 'view', 1)),
+            'klub_img_src' => $this->klub_img_src(2),
+            'posel_img_src' => $this->posel_img_src(array()),
+            'klub' => 'Prawo i Sprawiedliwość',
+        );
+    }
 	
     public function index()
     {
 		$API = $this->API->Dane();
 		
 		// LISTA POSLOW 4x7
-        $poslowie_base_url =
-        $poslowie = array_fill(0, 12, array(
-            'imie' => 'Adam',
-            'nazwisko' => 'Abramowicz',
-            'url' => Router::url(array('plugin' => 'dane', 'controller' => 'poslowie', 'action' => 'view', 1)),
-            'klub_img_src' => $this->klub_img_src(2),
-            'klub' => 'Prawo i Sprawiedliwość',
-        ));
+        $poslowie = array_fill(0, 12, $this->posel_data(array()));
+
+        // WYSTAPIENIA
+        $wystapienia = array_fill(0, 10, $this->posel_data(array()));
+
+        // FREKWENCJA
+        $frekwencja = array_fill(0, 10, $this->posel_data(array()));
+
+        // BUNTY
+        $bunty = array_fill(0, 10, $this->posel_data(array()));
+
+        // INTERPELACJE
+        $interpelacje = array_fill(0, 10, $this->posel_data(array()));
+
+        // ETYKA
+        $etyka = array_fill(0, 10, $this->posel_data(array()));
+
+        // PRZELOTY
+        $przeloty = array_fill(0, 10, $this->posel_data(array()));
+
+        // PRZEJAZDY
+        $przejazdy = array_fill(0, 10, $this->posel_data(array()));
+
+        // KWATERY PRYWATNE
+        $kwatery = array_fill(0, 10, $this->posel_data(array()));
+
+        // WNIOSKI O UCHYLENIE IMMUNITETU
+        $immunitet = array_fill(0, 4, $this->posel_data(array()));
+
+        // ZAROBKI
+        $zarobki = array_fill(0, 10, $this->posel_data(array()));
+
+        // ZAWODY
+        $zawody =  array(
+            array('percent' => 65, 'job' => 'Prawnicy', 'more_link' => '#'),
+            array('percent' => 15, 'job' => 'Nauczyciele', 'more_link' => '#'),
+            array('percent' => 15, 'job' => 'Przedsiębiorcy', 'more_link' => '#'),
+            array('percent' => 15, 'job' => 'Przedsiębiorcy', 'more_link' => '#'),
+            array('percent' => 15, 'job' => 'Inne', 'more_link' => '#')
+        );
+
+        // POSLANKI POSLOWIE
+        $genderyzm = array(
+            array('title' => 'Sejm RP', 'img_src' => 'http://resources.sejmometr.pl/s_kluby/2_a_t.png', 'setup' => array(array('Mężczyźni', 65), array('Kobiety', 35))),
+            array('title' => 'Platforma Obywatelska', 'img_src' => 'http://resources.sejmometr.pl/s_kluby/2_a_t.png', 'setup' => array(array('Mężczyźni', 65), array('Kobiety', 35))),
+            array('title' => 'Prawo i Sprawiedliwość', 'img_src' => 'http://resources.sejmometr.pl/s_kluby/2_a_t.png', 'setup' => array(array('Mężczyźni', 65), array('Kobiety', 35))),
+            array('title' => 'Twój Ruch', 'img_src' => 'http://resources.sejmometr.pl/s_kluby/2_a_t.png', 'setup' => array(array('Mężczyźni', 65), array('Kobiety', 35))),
+            array('title' => 'Polskie Stronnictwo Ludowe', 'img_src' => 'http://resources.sejmometr.pl/s_kluby/2_a_t.png', 'setup' => array(array('Mężczyźni', 65), array('Kobiety', 35)))
+        );
+
 		
 		// OSTATNIE POSIEDZENIE
 		$posiedzenie = $API->searchDataset('sejm_posiedzenia', array(
@@ -34,7 +92,8 @@ class SejmometrController extends SejmometrAppController
 		$posiedzenie = $posiedzenie[0];
 		$related = $posiedzenie->loadRelated();
 				
-		$this->set(compact('posiedzenie', 'poslowie'));
+		$this->set(compact('posiedzenie', 'poslowie', 'wystapienia', 'frekwencja', 'bunty', 'interpelacje', 'etyka',
+            'przeloty', 'przejazdy', 'kwatery', 'immunitet', 'zarobki', 'zawody', 'genderyzm'));
 		
 
     }
