@@ -29,7 +29,9 @@ class SejmometrController extends SejmometrAppController
     public function index()
     {
 		$API = $this->API->Dane();
-		
+
+        $poslowie_url = Router::url(array('plugin' => 'dane', 'controller' => 'poslowie'));
+
 		// LISTA POSLOW 4x7
         $poslowie = array_fill(0, 12, $this->posel_data(array()));
 
@@ -93,7 +95,7 @@ class SejmometrController extends SejmometrAppController
 		$related = $posiedzenie->loadRelated();
 				
 		$this->set(compact('posiedzenie', 'poslowie', 'wystapienia', 'frekwencja', 'bunty', 'interpelacje', 'etyka',
-            'przeloty', 'przejazdy', 'kwatery', 'immunitet', 'zarobki', 'zawody', 'genderyzm'));
+            'przeloty', 'przejazdy', 'kwatery', 'immunitet', 'zarobki', 'zawody', 'genderyzm', 'poslowie_url'));
 		
 
     }

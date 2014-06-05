@@ -77,7 +77,7 @@
         <div class="head col-xs-12">
             <h2>Posłowie tej kadencji</h2>
 
-            <form action="<?= Router::url(array('plugin' => 'dane', 'controller' => 'poslowie')); ?>">
+            <form action="<?= $poslowie_url ?>">
                 <div class="input-group">
                     <input name="q" value="" type="text" autocomplete="off"
                            placeholder="Wpisz nazwisko posła lub nazwę miejscowości albo kod pocztowy, aby wyszukać posłów z danego okręgu"
@@ -191,7 +191,7 @@
                 'anchor' => 'wystapienia',
                 'title' => 'Wystąpienia',
                 'text' => 'Posłowie w ramach sprawowania mandatu wypowiadają się na posiedzeniach Sejmu. Zobacz, którzy z nich są najbardziej aktywni',
-                'link' => '#rankingLink'
+                'link' => $poslowie_url . '?order=liczba_wypowiedzi%20desc'
             );
 
             echo $this->element('Sejmometr.list', array('page' => $page, 'items' => $wystapienia));
@@ -204,7 +204,7 @@
                 'anchor' => 'frekwencja',
                 'title' => 'Frekwencja',
                 'text' => 'Poseł musi być obecny na posiedzeniach Sejmu i powinien czynnie w nich uczestniczyć. To poselski obowiązek, którego zaniedbanie powoduje konsekwencje finansowe. Jeżeli poseł ma nieusprawiedliwione nieobecności Marszałek Sejmu zarządza obniżenie uposażenia i diety parlamentarnej albo jednego z tych świadczeń, jeżeli tylko ono przysługuje posłowi. Poseł ze swoich świadczeń traci 1/30 za każdy dzień nieusprawiedliwionej nieobecności na posiedzeniu Sejmu lub za niewzięcie w danym dniu udziału w więcej niż 1/5 głosowań. Sprawdź, który z posłów najcześciej omija sejmowe posiedzenia.',
-                'link' => '#rankingLink'
+                'link' => $poslowie_url . '?order=frekwencja%20desc'
             );
 
             echo $this->element('Sejmometr.list', array('page' => $page, 'items' => $frekwencja));
@@ -217,7 +217,7 @@
                 'anchor' => 'bunty',
                 'title' => 'Bunty',
                 'text' => 'Poprzez "bunty" określamy sytuacje polegające na tym, że poseł głosuje przeciwnie niż większość klubu parlamentarnego, do którego należy. Partie zabezpieczają się przed buntami stosując dyscyplinę głosowania. Narzucają tym samym sposób w jaki dany poseł ma zagłosować. Za naruszenie dyscypliny grozi nawet kara finansowa. Powstaje pytanie jak narzędzie dyscypliny głosowania ma się do konstytucyjnego zapisu o tym, że posłowie są przedstawicielami Narodu. W momencie gdy poseł oddaje swój głos zgodnie z wytycznymi partyjnego lidera jest przedstawicielami partii, a nie Narodu. Wydaje się, że dyscyplina poselska nie wpływa korzystnie na interesy obywateli. W sytuacji jej zastosowania na decyzję posła podczas głosowania mają wpływ nie merytoryczne rozważania, ale obawy przed sankcjami, które może wymierzyć partia. W naszym zestawieniu prezentujemy największych buntowników w Sejmie, którzy głosują inaczej niż większość ich klubu parlamentarnego.',
-                'link' => '#rankingLink'
+                'link' => $poslowie_url . '?order=liczba_glosowan_zbuntowanych%20desc'
             );
 
             echo $this->element('Sejmometr.list', array('page' => $page, 'items' => $bunty));
