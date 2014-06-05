@@ -5,16 +5,26 @@ class SejmometrController extends SejmometrAppController
 	
 	public $helpers = array('Dane.DataobjectsSlider', 'Dane.Dataobject', 'Dane.Filter');
 	public $components = array('RequestHandler');
+
+    private function klub_img_src($klub_id) {
+        return "http://resources.sejmometr.pl/s_kluby/" . $klub_id . "_a_t.png";
+    }
 	
     public function index()
     {
-		
 		$API = $this->API->Dane();
 		
-		
+		// LISTA POSLOW 4x7
+        $poslowie_base_url =
+        $poslowie = array_fill(0, 12, array(
+            'imie' => 'Adam',
+            'nazwisko' => 'Abramowicz',
+            'url' => Router::url(array('plugin' => 'dane', 'controller' => 'poslowie', 'action' => 'view', 1)),
+            'klub_img_src' => $this->klub_img_src(2),
+            'klub' => 'Prawo i Sprawiedliwość',
+        ));
 		
 		// OSTATNIE POSIEDZENIE
-		
 		$posiedzenie = $API->searchDataset('sejm_posiedzenia', array(
 			'order' => 'data_stop desc',
 			'limit' => 1,
@@ -24,7 +34,7 @@ class SejmometrController extends SejmometrAppController
 		$posiedzenie = $posiedzenie[0];
 		$related = $posiedzenie->loadRelated();
 				
-		$this->set('posiedzenie', $posiedzenie);
+		$this->set(compact('posiedzenie', 'poslowie'));
 		
 
     }

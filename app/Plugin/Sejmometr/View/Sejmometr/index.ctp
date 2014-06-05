@@ -75,54 +75,38 @@
 <div class="poslowie strip">
     <div class="container">
         <div class="head col-xs-12">
-            <h2>Aktualni <strong>Posłowie</strong></h2>
+            <h2>Posłowie tej kadencji</h2>
 
-            <div class="pull-right">
-                <button type="button" class="btn btn-default">Lista alfabetyczna</button>
-                <button type="button" class="btn btn-link">Według okręgów mandatowych</button>
-            </div>
+            <form action="<?= Router::url(array('plugin' => 'dane', 'controller' => 'poslowie')); ?>">
+                <div class="input-group">
+                    <input name="q" value="" type="text" autocomplete="off"
+                           placeholder="Wpisz nazwisko posła lub nazwę miejscowości albo kod pocztowy, aby wyszukać posłów z danego okręgu"
+                           class="form-control input-lg">
+	                <span class="input-group-btn">
+	                      <button class="btn btn-success button big" type="submit" data-icon="&#xe600;"></button>
+	                </span>
+                </div>
+            </form>
+
             <div class="pull-left">
                 <p>Kliknij na nazwisko posła, aby pokazać jego szczegółowe dane.</p>
             </div>
         </div>
         <div class="content-container col-xs-12">
             <ul>
+                <? foreach($poslowie as $p) { ?>
                 <li class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-                    <a href="http://mojepanstwo.pl/dane/poslowie/1">Abramowicz Adam<img
-                            src="http://resources.sejmometr.pl/s_kluby/2_a_t.png" alt="Prawo i Sprawiedliwość"></a>
+                    <a href="<?= $p['url'] ?>"><?= $p['nazwisko'] . ' ' . $p['imie'] ?><img
+                            src="<?= $p['klub_img_src'] ?>" alt="<?= $p['klub'] ?>"></a>
                 </li>
-                <li class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-                    <a href="http://mojepanstwo.pl/dane/poslowie/1">Abramowicz Adam<img
-                            src="http://resources.sejmometr.pl/s_kluby/2_a_t.png" alt="Prawo i Sprawiedliwość"></a>
-                </li>
-                <li class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-                    <a href="http://mojepanstwo.pl/dane/poslowie/1">Abramowicz Adam<img
-                            src="http://resources.sejmometr.pl/s_kluby/2_a_t.png" alt="Prawo i Sprawiedliwość"></a>
-                </li>
-                <li class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-                    <a href="http://mojepanstwo.pl/dane/poslowie/1">Abramowicz Adam<img
-                            src="http://resources.sejmometr.pl/s_kluby/2_a_t.png" alt="Prawo i Sprawiedliwość"></a>
-                </li>
-
-                <li class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-                    <a href="http://mojepanstwo.pl/dane/poslowie/1">Abramowicz Adam<img
-                            src="http://resources.sejmometr.pl/s_kluby/2_a_t.png" alt="Prawo i Sprawiedliwość"></a>
-                </li>
-                <li class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-                    <a href="http://mojepanstwo.pl/dane/poslowie/1">Abramowicz Adam<img
-                            src="http://resources.sejmometr.pl/s_kluby/2_a_t.png" alt="Prawo i Sprawiedliwość"></a>
-                </li>
-                <li class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-                    <a href="http://mojepanstwo.pl/dane/poslowie/1">Abramowicz Adam<img
-                            src="http://resources.sejmometr.pl/s_kluby/2_a_t.png" alt="Prawo i Sprawiedliwość"></a>
-                </li>
+                <? } ?>
                 <li class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
                     <a href="http://mojepanstwo.pl/dane/poslowie/1">Abramowicz Adam<img
                             src="http://resources.sejmometr.pl/s_kluby/2_a_t.png" alt="Prawo i Sprawiedliwość"></a>
                 </li>
             </ul>
             <div class="getMore text-center">
-                <a class="btn btn-primary" href="http://mojepanstwo.pl/dane/poslowie"
+                <a class="btn btn-primary" href="<?= Router::url(array('plugin' => 'dane', 'controller' => 'poslowie')); ?>"
                    target="_self">Pokaż całą listę</a>
             </div>
         </div>
