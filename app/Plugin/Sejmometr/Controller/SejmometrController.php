@@ -182,4 +182,36 @@ class SejmometrController extends SejmometrAppController
 	    
     }
 
+    public function zawody_poslow() {
+        $zawody = array_fill(0, 20, array(
+            'name' => 'Prawnicy',
+            'percent' => 10,
+            'number' => 1,
+        ));
+
+        $total = 0;
+        foreach($zawody as $z) {
+            $total += $z['number'];
+        }
+
+        $chart_max_percent = 3;
+        $chart_max_items = 18;
+        $ppl_in_graph = 0;
+        $zawody_chart = array();
+        for($i =0; $i < $chart_max_items; $i++) {
+            if ($zawody[$i]['percent'] < $chart_max_percent) {
+                break;
+            }
+
+            array_push($zawody_chart, $zawody[$i]);
+            $ppl_in_graph += $z['number'];
+        }
+        array_push($zawody_chart, array(
+            'name' => 'Inne',
+            'percent' => ($total - $ppl_in_graph) * 1000 / $total * 0.1,
+            'number' => $total - $ppl_in_graph
+        ));
+
+        $this->set(compact('zawody_chart', 'zawody'));
+    }
 }
