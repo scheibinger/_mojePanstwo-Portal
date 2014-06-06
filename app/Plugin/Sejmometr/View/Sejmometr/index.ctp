@@ -243,7 +243,7 @@
                 'anchor' => 'zawody',
                 'title' => 'Kim posłowie są z zawodu?',
                 'text' => 'Wśród parlamentarzystów pojawia się wiele różnych profesji. Nie ma jednak jednolitych zasad jeśli chodzi o wskazywanie przez posłów swoich zawodów. Niektórzy z posłów jako swój zawód podają ten, który wynika z ich wykształcenia, inni natomiast zawód ostatnio wykonywany. Część posłów wskazuje, że są posłami zawodowymi czyli takimi, którzy poza wykonywaniem mandatu parlamentarnego nie pracują, ani nie prowadzą działalności gospodarczej. W naszym zestawieniu przedstawiamy czym najczęściej zawodowo zajmują się posłowie.',
-                'link' => '#rankingLink'
+                'link' => Router::url(array('action' => 'zawody_poslow'))
             );
 
             echo $this->element('Sejmometr.graph_percent', array('page' => $page, 'items' => $zawody));
@@ -269,7 +269,6 @@
                 'anchor' => 'poslankiPoslowie',
                 'title' => 'Posłanki i posłowie',
                 'text' => 'Ilość kobiet i mężczyzn w Sejmie i w poszczególnych partiach',
-                'link' => '#rankingLink'
             );
 
             echo $this->element('Sejmometr.graph_circle', array('page' => $page, 'items' => $genderyzm));
