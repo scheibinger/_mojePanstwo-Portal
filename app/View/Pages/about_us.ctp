@@ -95,6 +95,10 @@
                         <p class="info">Portal jest budowany dzięki wsparciu: </p>
 
                         <p id="logotypy">
+                            <a target="_blank" href="http://www.eeagrants.org" title="Projekt realizowany w ramach programu Obywatele dla Demokracji, finansowanego z Funduszy EOG">
+                                <img class="eog" src="/img/partnerzy/eog.png"/>
+                            </a>
+                            <br/>
                             <a target="_blank" href="http://www.batory.org.pl/" title="Fundacja Batorego">
                                 <img class="batory" src="/img/partnerzy/p.gif"/>
                             </a>
