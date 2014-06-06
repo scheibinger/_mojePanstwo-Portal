@@ -7,23 +7,42 @@ class SejmometrController extends SejmometrAppController
 	public $components = array('RequestHandler');
 
     private function klub_img_src($klub_id) {
+        // TODO use MP\Dane\Sejm_kluby::getThumbnailSrc
         return "http://resources.sejmometr.pl/s_kluby/" . $klub_id . "_a_t.png";
     }
 
-    private function posel_img_src($posel) {
-        // TODO
-        return "http://resources.sejmometr.pl/mowcy/a/0/1.jpg";
-    }
+    private function poslowie($sort = 'nazwa_odwrocona asc', $limit = 10, $metrics = NULL) {
+        $this->loadModel('Dane.Dataobject');
 
-    private function posel_data($posel) {
-        return array(
-            'imie' => 'Adam',
-            'nazwisko' => 'Abramowicz',
-            'url' => Router::url(array('plugin' => 'dane', 'controller' => 'poslowie', 'action' => 'view', 1)),
-            'klub_img_src' => $this->klub_img_src(2),
-            'posel_img_src' => $this->posel_img_src(array()),
-            'klub' => 'Prawo i Sprawiedliwość',
-        );
+        $objects = $this->Dataobject->find('all', array(
+            'conditions' => array('dataset' => 'poslowie'),
+            'order' => $sort,
+            'limit' => $limit,
+            'maxLimit' => $limit,
+            //'facets' => true
+            //'paramType' => 'querystring',
+        ));
+
+        $r = array();
+        foreach($objects as $object) {
+            $o = $object['Dataobject']->data;
+            $entry = array(
+                'imie' => $o['imie_pierwsze'],
+                'nazwisko' => $o['nazwisko'],
+                'url' => $object['Dataobject']->getUrl(),
+                'klub_img_src' => $this->klub_img_src($o['klub_id']),
+                'posel_img_src' => $object['Dataobject']->getThumbnailUrl(),
+                'klub' => $o['sejm_kluby.nazwa'],
+            );
+
+            if (!empty($metrics)) {
+                $entry['number'] = $o[$metrics];
+            }
+
+            array_push($r, $entry);
+        }
+
+        return $r;
     }
 	
     public function index()
@@ -33,37 +52,37 @@ class SejmometrController extends SejmometrAppController
         $poslowie_url = Router::url(array('plugin' => 'dane', 'controller' => 'poslowie'));
 
 		// LISTA POSLOW 4x7
-        $poslowie = array_fill(0, 12, $this->posel_data(array()));
+        $poslowie = $this->poslowie('nazwa_odwrocona asc', 12);
 
         // WYSTAPIENIA
-        $wystapienia = array_fill(0, 10, $this->posel_data(array()));
+        $wystapienia = $this->poslowie('liczba_wypowiedzi desc', 10, 'liczba_wypowiedzi');
 
         // FREKWENCJA
-        $frekwencja = array_fill(0, 10, $this->posel_data(array()));
+        $frekwencja = $this->poslowie('frekwencja desc', 10, 'frekwencja');
 
         // BUNTY
-        $bunty = array_fill(0, 10, $this->posel_data(array()));
+        $bunty = $this->poslowie('liczba_glosowan_zbuntowanych desc', 10, 'liczba_glosowan_zbuntowanych');
 
         // INTERPELACJE
-        $interpelacje = array_fill(0, 10, $this->posel_data(array()));
+        $interpelacje = $this->poslowie();
 
         // ETYKA
-        $etyka = array_fill(0, 10, $this->posel_data(array()));
+        $etyka = $this->poslowie();
 
         // PRZELOTY
-        $przeloty = array_fill(0, 10, $this->posel_data(array()));
+        $przeloty = $this->poslowie();
 
         // PRZEJAZDY
-        $przejazdy = array_fill(0, 10, $this->posel_data(array()));
+        $przejazdy = $this->poslowie();
 
         // KWATERY PRYWATNE
-        $kwatery = array_fill(0, 10, $this->posel_data(array()));
+        $kwatery = $this->poslowie();
 
         // WNIOSKI O UCHYLENIE IMMUNITETU
-        $immunitet = array_fill(0, 4, $this->posel_data(array()));
+        $immunitet = $this->poslowie();
 
         // ZAROBKI
-        $zarobki = array_fill(0, 10, $this->posel_data(array()));
+        $zarobki = $this->poslowie();
 
         // ZAWODY
         $zawody =  array(
