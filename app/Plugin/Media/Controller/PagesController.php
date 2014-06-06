@@ -105,14 +105,16 @@ class PagesController extends MediaAppController
 
 
         $font = array(
-            'min' => 10,
+            'min' => 15,
             'max' => 100,
         );
         $font['diff'] = $font['max'] - $font['min'];
 
         
         $stats = $this->API->getTwitterStats( $range );
-
+		// debug( $stats ); die();
+		
+		
         $tags = $stats['tags']['*']['objects'];        
         
         $_stats = array(
@@ -137,7 +139,7 @@ class PagesController extends MediaAppController
 		shuffle($tags);
         $stats['tags']['*']['objects'] = $tags;
 		
-		
+		// debug( $stats ); die();
         $this->set('stats', $stats);
 
 
@@ -182,13 +184,11 @@ class PagesController extends MediaAppController
             ),
             
             
-            /*
             array(
                 'title' => 'Najpopularniejsze hashtagi',
                 'name' => 'hashtagi',
                 'groups' => array(
                     array(
-                        'desc' => 'Najczęściej używane hashtagi.',
                         'mode' => 'tags',
                     ),
                     array(
@@ -207,7 +207,7 @@ class PagesController extends MediaAppController
                 ),
             ),
             
-            
+            /*
             array(
                 'title' => 'Największy przyrost oberwujących',
                 'name' => 'obserwujacy',
@@ -222,7 +222,7 @@ class PagesController extends MediaAppController
                     ),
                 ),
             ),
-            
+            */
                       
             
 
@@ -237,7 +237,6 @@ class PagesController extends MediaAppController
                 ),
             ),
 			
-			*/
 			array(
                 'title' => 'Najaktywniejsi',
                 'name' => 'najaktywniejsi',
@@ -290,7 +289,7 @@ class PagesController extends MediaAppController
             ),
             
             array(
-                'title' => 'Najczęściej wzmiankowani przedstawiciele grup',
+                'title' => 'Najczęściej wzmiankowani',
                 'name' => 'wzmiankowani',
                 'groups' => array(
                     array(
@@ -304,50 +303,58 @@ class PagesController extends MediaAppController
                         ),
                     ),
                 ),
-            ),            
+            ),
+            
+            
+            /*
+            array(
+                'title' => 'Najczęściej wzmiankowani przez przedstawicieli grup',
+                'name' => 'wzmiankowani',
+                'groups' => array(
+                    array(
+                        'mode' => 'stats',
+                        'preset' => 'mentions',
+                        'field' => 'liczba_wzmianek_rts_2013',
+                        'order' => 'liczba_wzmianek_rts_2013 desc',
+                        'desc' => 'Liczba tweetów wzmiankujących dane konto.',
+                        'link' => array(
+                            'dataset' => 'twitter_accounts',
+                        ),
+                    ),
+                ),
+            ),
+            */
+            
+            
+                      
             
         );
 
 
         foreach ($ranks as &$rank) {
 
-            foreach ($rank['groups'] as &$group) {
+            foreach ($rank['groups'] as $g => $group) {
 				
 				if ($group['mode'] == 'account') {
 					
+										
 					
-					if( @$group['preset'] ) {
+					$data = $this->API->getTwitterAccountsGroupByTypes($range, $accounts_types_ids, $group['preset']);
+					$types = $data['types'];
 					
 					
-						$types = $this->API->getTwitterAccountsGroupByTypes($range, $accounts_types_ids, $group['preset']);
+                    foreach ($types as &$type)
+                        $type = array_merge($type, array(
+                            'nazwa' => $accounts_types_nazwy[$type['id']],
+                            'class' => $accounts_types_klasy[$type['id']],
+                        ));
+
+                    $rank['groups'][$g] = array_merge($group, array(
+                        'types' => $types,
+                        'desc' => 'Zakres czasowy: ' . dataSlownie( $data['date'] ),
+                    ));
 						
-	                    foreach ($types as &$type)
-	                        $type = array_merge($type, array(
-	                            'title' => $accounts_types_nazwy[$type['id']],
-	                            'class' => $accounts_types_klasy[$type['id']],
-	                        ));
-	
-	                    $group = array_merge($group, array(
-	                        'types' => $types,
-	                    ));
 						
-						
-	                } else {
-	                
-	                
-	                    $types = $this->API->getTwitterAccountsGroupByTypes($range, $accounts_types_ids, $group['field']);
-	                    foreach ($types as &$type)
-	                        $type = array_merge($type, array(
-	                            'title' => $accounts_types_nazwy[$type['id']],
-	                            'class' => $accounts_types_klasy[$type['id']],
-	                        ));
-	
-	                    $group = array_merge($group, array(
-	                        'types' => $types,
-	                    ));
-                    
-                    
-                    }
                     
 
                 } elseif ($group['mode'] == 'tweet') {
@@ -360,33 +367,27 @@ class PagesController extends MediaAppController
                             'class' => $accounts_types_klasy[$type['id']],
                         ));
 
-                    $group = array_merge($group, array(
+                    $rank['groups'][$g] = array_merge($group, array(
                         'types' => $types,
                     ));
 
                 } elseif ($group['mode'] == 'tag') {
-
-                    $group['types'] = @$stats['tags_by_groups'];
+										
+                    $rank['groups'][$g]['types'] = $stats['tags']['source_types'];
 
                 } elseif ($group['mode'] == 'url') {
-
-                    $group['types'] = @$stats['urls_by_groups'];
+					
+                    $rank['groups'][$g]['types'] = $stats['urls']['source_types'];
 
                 } elseif ($group['mode'] == 'source') {
 
-                    $group['types'] = @$stats['sources_by_groups'];
+                    $rank['groups'][$g]['types'] = $stats['source_id']['source_types'];
 
                 }  elseif ($group['mode'] == 'stats') {
 					
-										
+				
+					$rank['groups'][$g]['types'] = $stats[ $group['preset'] ]['source_types'];
 					
-					$types = $accounts_types;
-					for( $i=0; $i<count($types); $i++ ) {
-						
-						$types[$i]['objects'] = @$stats[ $group['preset'] ]['source_types'][ $types[$i]['id'] ]['objects'];
-						
-					}
-					$group['types'] = $types;
 					
                 }
 
@@ -395,6 +396,7 @@ class PagesController extends MediaAppController
         }
 		
 
+		
         // debug( $ranks ); die();
         $this->set('range', $range);
         $this->set('ranks', $ranks);

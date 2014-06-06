@@ -715,6 +715,9 @@ blockquote {
         margin: 0;
 		
 		.header-a {
+			a {
+				font-size: 13px;
+			}
 			.label {
 				position: relative;
 				top: -1px;
@@ -881,5 +884,57 @@ blockquote {
     &.btn-glos-3 {
         background-color: #EBEBEB;
         border-color: #ADADAD;
+    }
+}
+
+
+.tweet_stats {
+    
+    text-align: center;
+    color: #AAAAAA;
+    overflow: hidden;
+    padding: 10px;
+
+    p {
+        margin: 0;
+        padding: 0;
+
+        &._counter {
+            font-family: "Lato", sans-serif;
+            font-size: 16px;
+            
+            &.small {
+                font-size: 12px;
+            }
+            
+            &.plus {
+                color: #5CB85C;
+            }
+            
+            &.minus {
+                color: #D9534F;
+            }
+            
+            a {
+            	
+            	color: #AAA;
+            	
+            	&:hover {
+                	color: #157AB5;
+            	}
+            	
+                span {
+                    margin-right: 3px;
+                    top: 2px;
+                }
+            
+            }
+        }
+
+        &._label {
+            font-family: "Lato", sans-serif;
+            font-size: 11px;
+            margin-bottom: 3px;
+        }
     }
 }

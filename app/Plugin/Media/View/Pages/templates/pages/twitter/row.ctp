@@ -2,10 +2,10 @@
     <? if ($group['mode'] == 'tags') { ?>
         <ul id="tagsCloud">
             <?
-            foreach ($stats['tags'] as $tag) {
-                $href = '/dane/twitter/?!bez_retweetow=1&tags[]=' . $tag['id'];
+            foreach ($stats['tags']['*']['objects'] as $tag) {
+                $href = '/dane/twitter/?!bez_retweetow=1&tags[]=' . $tag['id'] . '&date=LAST_' . $range;
                 ?>
-                <li style="font-size: <?= $tag['size'] ?>px;"><a href="<?= $href ?>"><?= $tag['tag'] ?></a></li>
+                <li style="font-size: <?= $tag['size'] ?>px;"><a href="<?= $href ?>"><?= $tag['name'] ?></a></li>
             <? } ?>
         </ul>
     <? } else { ?>
