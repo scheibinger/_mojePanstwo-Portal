@@ -1,17 +1,10 @@
 <div id="_mojePanstwoCockpit">
     <div class="_mojePanstwoCockpitContent">
-        <div <? /*HACK FOR BETA LOGO CHANGE*/ ?>
-            class="_mojePanstwoCockpitLogo<?php if (isset($_COOKIE['_mPFirstTime']) && ($_COOKIE['_mPFirstTime'] == '1')) { ?> firstTime<? } ?>">
-            <img src="/img/beta.png"/>
-            <?php if (isset($_COOKIE['_mPFirstTime']) && ($_COOKIE['_mPFirstTime'] == '1')) { ?>
-                <div class="morph">
-                    <img height="18" src="/img/sejmometr-logo.png">
-                    <small>zmienia się w</small>
-                </div>
-            <?php } ?>
+        
+        <div class="_mojePanstwoCockpitLogo">
             <p>
                 <a href="/" target="_self">
-                    <strong>_moje</strong>Państwo
+					<strong>_moje</strong>Państwo
                 </a>
             </p>
         </div>
