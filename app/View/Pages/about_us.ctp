@@ -92,30 +92,46 @@
 
                 <div class="sector">
                     <div id="fundatorzy">
-                        <p class="info">Portal jest budowany dzięki wsparciu: </p>
+                        <div class="part">
+                            <p class="info">Projekt realizowany w ramach programu Obywatele dla Demokracji,
+                                finansowanego z Funduszy EOG:</p>
 
-                        <p id="logotypy">
-                            <a target="_blank" href="http://www.eeagrants.org" title="Projekt realizowany w ramach programu Obywatele dla Demokracji, finansowanego z Funduszy EOG">
-                                <img class="eog" src="/img/partnerzy/eog.png"/>
-                            </a>
-                            <br/>
-                            <a target="_blank" href="http://www.batory.org.pl/" title="Fundacja Batorego">
-                                <img class="batory" src="/img/partnerzy/p.gif"/>
-                            </a>
-                            <a target="_blank" title="Open Society Institute Information Program"
-                               href="http://www.soros.org/initiatives/information">
-                                <img class="osi" src="/img/partnerzy/p.gif"/>
-                            </a>
-                            <a title="MySociety" class="mysociety" target="_blank" href="http://www.mysociety.org/">
-                                <img class="mysociety" src="/img/partnerzy/p.gif"/>
-                            </a>
-                            <a target="_blank" href="http://www.omidyar.com/">
-                                <img style="position: relative; top: -5px;" src="/img/partnerzy/on_logo.png"/>
-                            </a>
-                            <a target="_blank" href="http://www.ceetrust.org/">
-                                <img style="position: relative; top: -5px;" src="/img/partnerzy/cee_logo.png"/>
-                            </a>
-                        </p>
+                            <div class="logotypy">
+                                <a target="_blank" href="http://www.eeagrants.org/" title="EEA Grants">
+                                    <img class="image" src="/img/partnerzy/eea_grants.png"/>
+                                </a>
+                                <a target="_blank" href="http://www.batory.org.pl/"
+                                   title="Fundacja im. Stefana Batorego">
+                                    <img class="image" src="/img/partnerzy/fundacja_batorego.png"/>
+                                </a>
+                                <a target="_blank" href="http://www.pcyf.org.pl/"
+                                   title="Polska Fundacja Dzieci i Młodzieży">
+                                    <img class="image" src="/img/partnerzy/polska_fundacja_dzieci_i_mlodziezy.png"/>
+                                </a>
+
+                            </div>
+                        </div>
+
+                        <div class="part">
+                            <p class="info">Portal jest budowany dzięki wsparciu:</p>
+
+                            <div class="logotypy">
+                                <a target="_blank" href="http://www.soros.org/initiatives/information"
+                                   title="Open Society Foundations (OSF) Information Program">
+                                    <img class="image" src="/img/partnerzy/open_society_institute.png"/>
+                                </a>
+                                <a target="_blank" href="http://www.mysociety.org/" title="mySociety">
+                                    <img class="image" src="/img/partnerzy/mysociety.png"/>
+                                </a>
+                                <a target="_blank" href="http://www.omidyar.com/" title="Omidyar Network">
+                                    <img class="image" src="/img/partnerzy/omidyar_network.png"/>
+                                </a>
+                                <a target="_blank" href="http://www.ceetrust.org/"
+                                   title="CEE TRUST - Trust for Civil Society in Central and Eastern Europe">
+                                    <img class="image" src="/img/partnerzy/cee_logo.gif"/>
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
