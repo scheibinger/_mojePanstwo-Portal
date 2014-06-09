@@ -154,6 +154,7 @@
                 </a>
             </div>
         </div>
+        <?php echo $this->element('Sejmometr.inner-story'); ?>
     </div>
 </div>
 

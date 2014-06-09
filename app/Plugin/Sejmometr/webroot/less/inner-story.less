@@ -1,0 +1,78 @@
+#storyLine {
+    display: block;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 100;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: #41a8de;
+
+    .innerStory {
+        @minWidth: 1204px;
+
+        height: 100%;
+        position: relative;
+        width: 100%;
+
+        .far, .medium, .near {
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: block;
+            width: 11 * @minWidth;
+            height: 100%;
+        }
+
+        .far {
+            /*chmury*/
+        }
+
+        .medium {
+            .scene {
+                min-width: @minWidth;
+                width: 100%;
+                height: 100%;
+                float: left;
+
+                &.intro {
+                    background: url(../Sejmometr/img/inner-story/default_green.png) bottom left repeat-x;
+                }
+                &.sejm {
+                    background: url(../Sejmometr/img/inner-story/scene_01_sejm.png) bottom left no-repeat, url(../Sejmometr/img/inner-story/default_road.png) bottom left repeat-x;
+                }
+                &.biuro {
+                    background: url(../Sejmometr/img/inner-story/scene_02_biuro.png) bottom left no-repeat, url(../Sejmometr/img/inner-story/default_road.png) bottom left repeat-x;
+                }
+                &.szpital {
+                    background: url(../Sejmometr/img/inner-story/scene_03_skrzynka.png) bottom left no-repeat, url(../Sejmometr/img/inner-story/scene_04_szpital.png) bottom right no-repeat, url(../Sejmometr/img/inner-story/default_road.png) bottom left repeat-x;
+                }
+                &.bank {
+                    background: url(../Sejmometr/img/inner-story/scene_05_bank.png) bottom center no-repeat, url(../Sejmometr/img/inner-story/default_road.png) bottom left repeat-x;
+                }
+                &.spotkanie {
+                    background: url(../Sejmometr/img/inner-story/scene_06_spotkanie.png) bottom left no-repeat, url(../Sejmometr/img/inner-story/default_road.png) bottom left repeat-x;
+                }
+                &.tlumaczenia {
+                    background: url(../Sejmometr/img/inner-story/scene_07_tlumaczenia.png) bottom right no-repeat, url(../Sejmometr/img/inner-story/default_road.png) bottom left repeat-x;
+                }
+                &.dom {
+                    background: url(../Sejmometr/img/inner-story/scene_08_dom.png) bottom right no-repeat, url(../Sejmometr/img/inner-story/default_road.png) bottom left repeat-x;
+                }
+                &.droga {
+                    background: url(../Sejmometr/img/inner-story/default_road.png) bottom left repeat-x;
+                }
+                &.lotnisko {
+                    background: url(../Sejmometr/img/inner-story/scene_09_lotnisko.png) bottom left no-repeat, url(../Sejmometr/img/inner-story/default_airport.png) bottom left repeat-x;
+                }
+                &.lot {
+                    background: url(../Sejmometr/img/inner-story/default_airport.png) bottom left repeat-x;
+                }
+            }
+        }
+        .near {
+            /*ludzie, samochod, samolot*/
+        }
+    }
+}
