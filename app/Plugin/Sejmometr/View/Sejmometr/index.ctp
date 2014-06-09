@@ -17,22 +17,12 @@
         <h1 class="header text-center">Sejmometr</h1>
 
         <div class="content-container col-xs-12">
-            <h5>Sejm jest organem władzy ustawodawczej w Polsce. Tworzą
-                go posłowie, którzy są
-                reprezentantami Narodu dlatego mogą, a nawet powinni być przez ten Naród oceniani. Szerokie
-                udostępnianie informacji o poselskich działaniach leży w interesie każdego z 460 posłów. Obywatele
-                nie
-                mający dostępu do takich danych swoje poglądy wyrobią w oparciu o inne, niekoniecznie obiektywne
-                źródła
-                informacji. Postanowiliśmy wesprzeć tych, którzy chcieliby wiedzieć jak pracują nasi posłowie i w
-                jakich
-                warunkach wykonują swój mandat poselski. Stworzyliśmy aplikację, która prezentuje rozmaite dane
-                związane
-                z sejmową codziennością!
+            <h5>Sejm jest organem władzy ustawodawczej w Polsce. Tworzą go posłowie, którzy są reprezentantami Narodu dlatego mogą, a nawet powinni być przez ten Naród oceniani. Szerokie udostępnianie informacji o poselskich działaniach leży w interesie każdego z 460 posłów. Obywatele nie mający dostępu do takich danych swoje poglądy wyrobią w oparciu o inne, niekoniecznie obiektywne źródła informacji. Postanowiliśmy wesprzeć tych, którzy chcieliby wiedzieć jak pracują nasi posłowie i w jakich warunkach wykonują swój mandat poselski. Stworzyliśmy aplikację, która prezentuje rozmaite dane związane z sejmową codziennością!
+
             </h5>
 
             <div class="searchInput search col-xs-12 col-md-10 col-md-offset-1">
-                <form action="/sejmometr/szukaj">
+                <form action="<? echo Router::url(array('plugin' => 'Dane', 'controller' => 'datachannels', 'action' => 'view', 'alias' => 'sejm')); ?>">
                 <div class="input-group">
                         <input name="q" value="" type="text" autocomplete="off"
                                placeholder="Szukaj w pracach Sejmu..."
@@ -85,54 +75,34 @@
 <div class="poslowie strip">
     <div class="container">
         <div class="head col-xs-12">
-            <h2>Aktualni <strong>Posłowie</strong></h2>
+            <h2>Posłowie tej kadencji</h2>
 
-            <div class="pull-right">
-                <button type="button" class="btn btn-default">Lista alfabetyczna</button>
-                <button type="button" class="btn btn-link">Według okręgów mandatowych</button>
-            </div>
+            <form action="<?= $poslowie_url ?>">
+                <div class="input-group">
+                    <input name="q" value="" type="text" autocomplete="off"
+                           placeholder="Wpisz nazwisko posła lub nazwę miejscowości albo kod pocztowy, aby wyszukać posłów z danego okręgu"
+                           class="form-control input-lg">
+	                <span class="input-group-btn">
+	                      <button class="btn btn-success button big" type="submit" data-icon="&#xe600;"></button>
+	                </span>
+                </div>
+            </form>
+
             <div class="pull-left">
                 <p>Kliknij na nazwisko posła, aby pokazać jego szczegółowe dane.</p>
             </div>
         </div>
         <div class="content-container col-xs-12">
             <ul>
+                <? foreach($poslowie as $p) { ?>
                 <li class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-                    <a href="http://mojepanstwo.pl/dane/poslowie/1">Abramowicz Adam<img
-                            src="http://resources.sejmometr.pl/s_kluby/2_a_t.png" alt="Prawo i Sprawiedliwość"></a>
+                    <a href="<?= $p['url'] ?>"><?= $p['nazwisko'] . ' ' . $p['imie'] ?><img
+                            src="<?= $p['klub_img_src'] ?>" alt="<?= $p['klub'] ?>"></a>
                 </li>
-                <li class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-                    <a href="http://mojepanstwo.pl/dane/poslowie/1">Abramowicz Adam<img
-                            src="http://resources.sejmometr.pl/s_kluby/2_a_t.png" alt="Prawo i Sprawiedliwość"></a>
-                </li>
-                <li class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-                    <a href="http://mojepanstwo.pl/dane/poslowie/1">Abramowicz Adam<img
-                            src="http://resources.sejmometr.pl/s_kluby/2_a_t.png" alt="Prawo i Sprawiedliwość"></a>
-                </li>
-                <li class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-                    <a href="http://mojepanstwo.pl/dane/poslowie/1">Abramowicz Adam<img
-                            src="http://resources.sejmometr.pl/s_kluby/2_a_t.png" alt="Prawo i Sprawiedliwość"></a>
-                </li>
-
-                <li class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-                    <a href="http://mojepanstwo.pl/dane/poslowie/1">Abramowicz Adam<img
-                            src="http://resources.sejmometr.pl/s_kluby/2_a_t.png" alt="Prawo i Sprawiedliwość"></a>
-                </li>
-                <li class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-                    <a href="http://mojepanstwo.pl/dane/poslowie/1">Abramowicz Adam<img
-                            src="http://resources.sejmometr.pl/s_kluby/2_a_t.png" alt="Prawo i Sprawiedliwość"></a>
-                </li>
-                <li class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-                    <a href="http://mojepanstwo.pl/dane/poslowie/1">Abramowicz Adam<img
-                            src="http://resources.sejmometr.pl/s_kluby/2_a_t.png" alt="Prawo i Sprawiedliwość"></a>
-                </li>
-                <li class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-                    <a href="http://mojepanstwo.pl/dane/poslowie/1">Abramowicz Adam<img
-                            src="http://resources.sejmometr.pl/s_kluby/2_a_t.png" alt="Prawo i Sprawiedliwość"></a>
-                </li>
+                <? } ?>
             </ul>
             <div class="getMore text-center">
-                <a class="btn btn-primary" href="http://mojepanstwo.pl/dane/poslowie"
+                <a class="btn btn-primary" href="<?= Router::url(array('plugin' => 'dane', 'controller' => 'poslowie')); ?>"
                    target="_self">Pokaż całą listę</a>
             </div>
         </div>
@@ -174,298 +144,247 @@
                 <li>
                     <a href="#bunty">Bunty</a>
                 </li>
+
+                <li>
+                    <a href="#interpelacje">Interpelacje</a>
+                </li>
+                <li>
+                    <a href="#zawody">Kim są posłowie z zawodu</a>
+                </li>
+                <li>
+                    <a href="#etyka_poselska">Etyka poselska</a>
+                </li>
+                <li>
+                    <a href="#poslankiPoslowie">Posłanki i posłowie</a>
+                </li>
+                <li>
+                    <a href="#przeloty">Poselskie przeloty</a>
+                </li>
+                <li>
+                    <a href="#przejazdy">Poselskie przejazdy</a>
+                </li>
+                <li>
+                    <a href="#wnioskiImmunitet">Wnioski o uchylenie immunitetu</a>
+                </li>
+                <li>
+                    <a href="#domPoselski">Dom poselski</a>
+                </li>
+                <li>
+                    <a href="#zarobki">Zarobki posłów</a>
+                </li>
+                <li>
+                    <a href="#dodatki">Dodatki do uposażenia i dieta poselska</a>
+                </li>
+                <li>
+                    <a href="#pozyczki">Pożyczki</a>
+                </li>
+                <li>
+                    <a href="#zapomogi">Zapomogi</a>
+                </li>
             </ul>
         </div>
         <div class="content-container col-xs-12 col-sm-8 col-md-10">
             <?php
             /* WYSTAPAPIENIA BLOCK */
-            $items = array();
-            /*TEMP VARIABLE*/
-            for ($i = 1; $i <= 15; $i++) {
-                array_push($items, array('posel_id' => '1', 'posel_name' => 'Abramowicz Adam', 'posel_img' => 'http://resources.sejmometr.pl/mowcy/a/0/1.jpg', 'icon_src' => 'http://resources.sejmometr.pl/s_kluby/2_a_t.png', 'icon_name' => 'Prawo i Sprawiedliwość', 'number' => 192));
-            }
 
             $page = array(
                 'class' => 'wystapienia',
+                'anchor' => 'wystapienia',
                 'title' => 'Wystąpienia',
                 'text' => 'Posłowie w ramach sprawowania mandatu wypowiadają się na posiedzeniach Sejmu. Zobacz, którzy z nich są najbardziej aktywni',
-                'link' => '#rankingLink'
+                'link' => $poslowie_url . '?order=liczba_wypowiedzi%20desc'
             );
 
-            echo $this->element('Sejmometr.list', array('page' => $page, 'items' => $items));
-            /* WYSTAPAPIENIA END BLOCK */
-            ?>
+            echo $this->element('Sejmometr.list', array('page' => $page, 'items' => $wystapienia));
 
 
-            <?php
             /* FREKWENCJA BLOCK */
-            $items = array();
-            /*TEMP VARIABLE*/
-            for ($i = 1; $i <= 15; $i++) {
-                array_push($items, array('posel_id' => '1', 'posel_name' => 'Abramowicz Adam', 'posel_img' => 'http://resources.sejmometr.pl/mowcy/a/0/1.jpg', 'icon_src' => 'http://resources.sejmometr.pl/s_kluby/2_a_t.png', 'icon_name' => 'Prawo i Sprawiedliwość', 'number' => 192));
-            }
 
             $page = array(
                 'class' => 'frekwencja',
+                'anchor' => 'frekwencja',
                 'title' => 'Frekwencja',
                 'text' => 'Poseł musi być obecny na posiedzeniach Sejmu i powinien czynnie w nich uczestniczyć. To poselski obowiązek, którego zaniedbanie powoduje konsekwencje finansowe. Jeżeli poseł ma nieusprawiedliwione nieobecności Marszałek Sejmu zarządza obniżenie uposażenia i diety parlamentarnej albo jednego z tych świadczeń, jeżeli tylko ono przysługuje posłowi. Poseł ze swoich świadczeń traci 1/30 za każdy dzień nieusprawiedliwionej nieobecności na posiedzeniu Sejmu lub za niewzięcie w danym dniu udziału w więcej niż 1/5 głosowań. Sprawdź, który z posłów najcześciej omija sejmowe posiedzenia.',
-                'link' => '#rankingLink'
+                'link' => $poslowie_url . '?order=frekwencja%20desc'
             );
 
-            echo $this->element('Sejmometr.list', array('page' => $page, 'items' => $items));
-            /* FREKWENCJA END BLOCK */
-            ?>
+            echo $this->element('Sejmometr.list', array('page' => $page, 'items' => $frekwencja));
 
-            <?php
+
             /* BUNTY BLOCK */
-            $items = array();
-            /*TEMP VARIABLE*/
-            for ($i = 1; $i <= 15; $i++) {
-                array_push($items, array('posel_id' => '1', 'posel_name' => 'Abramowicz Adam', 'posel_img' => 'http://resources.sejmometr.pl/mowcy/a/0/1.jpg', 'icon_src' => 'http://resources.sejmometr.pl/s_kluby/2_a_t.png', 'icon_name' => 'Prawo i Sprawiedliwość', 'number' => 192));
-            }
 
             $page = array(
                 'class' => 'bunty',
+                'anchor' => 'bunty',
                 'title' => 'Bunty',
                 'text' => 'Poprzez "bunty" określamy sytuacje polegające na tym, że poseł głosuje przeciwnie niż większość klubu parlamentarnego, do którego należy. Partie zabezpieczają się przed buntami stosując dyscyplinę głosowania. Narzucają tym samym sposób w jaki dany poseł ma zagłosować. Za naruszenie dyscypliny grozi nawet kara finansowa. Powstaje pytanie jak narzędzie dyscypliny głosowania ma się do konstytucyjnego zapisu o tym, że posłowie są przedstawicielami Narodu. W momencie gdy poseł oddaje swój głos zgodnie z wytycznymi partyjnego lidera jest przedstawicielami partii, a nie Narodu. Wydaje się, że dyscyplina poselska nie wpływa korzystnie na interesy obywateli. W sytuacji jej zastosowania na decyzję posła podczas głosowania mają wpływ nie merytoryczne rozważania, ale obawy przed sankcjami, które może wymierzyć partia. W naszym zestawieniu prezentujemy największych buntowników w Sejmie, którzy głosują inaczej niż większość ich klubu parlamentarnego.',
-                'link' => '#rankingLink'
+                'link' => $poslowie_url . '?order=liczba_glosowan_zbuntowanych%20desc'
             );
 
-            echo $this->element('Sejmometr.list', array('page' => $page, 'items' => $items));
-            /* BUNTY END BLOCK */
-            ?>
+            echo $this->element('Sejmometr.list', array('page' => $page, 'items' => $bunty));
 
-            <?php
+
             /* INTERPELACJE BLOCK */
-            $items = array();
-            /*TEMP VARIABLE*/
-            for ($i = 1; $i <= 15; $i++) {
-                array_push($items, array('posel_id' => '1', 'posel_name' => 'Abramowicz Adam', 'posel_img' => 'http://resources.sejmometr.pl/mowcy/a/0/1.jpg', 'icon_src' => 'http://resources.sejmometr.pl/s_kluby/2_a_t.png', 'icon_name' => 'Prawo i Sprawiedliwość', 'number' => 192));
-            }
 
             $page = array(
                 'class' => 'interpelacje',
+                'anchor' => 'interpelacje',
                 'title' => 'Interpelacje',
                 'text' => 'Składanie interpelacji jest jednym z poselskich uprawnień. Każdy z posłów może zapytać Prezesa Rady Ministrów lub konkretnego ministra o sprawę, która dotyczy polityki państwa. Członkowie Rady Ministrów muszą udzielić posłowi odpowiedzi nie później niż w ciągu 21 dni od otrzymania interpelacji. Zobacz, który z posłów najczęściej zadaje pytania!',
                 'link' => '#rankingLink'
             );
 
-            echo $this->element('Sejmometr.list', array('page' => $page, 'items' => $items));
-            /* INTERPELACJE END BLOCK */
-            ?>
+            echo $this->element('Sejmometr.list', array('page' => $page, 'items' => $interpelacje));
 
-            <?php
+
             /* KIM SA Z ZAWODU BLOCK */
-            $items = array(
-                array('percent' => 65, 'job' => 'Prawnicy', 'more_link' => '#'),
-                array('percent' => 15, 'job' => 'Nauczyciele', 'more_link' => '#'),
-                array('percent' => 15, 'job' => 'Przedsiębiorcy', 'more_link' => '#'),
-                array('percent' => 15, 'job' => 'Przedsiębiorcy', 'more_link' => '#'),
-                array('percent' => 15, 'job' => 'Inne', 'more_link' => '#')
-            );
 
             $page = array(
                 'class' => 'zawod',
+                'anchor' => 'zawody',
                 'title' => 'Kim posłowie są z zawodu?',
                 'text' => 'Wśród parlamentarzystów pojawia się wiele różnych profesji. Nie ma jednak jednolitych zasad jeśli chodzi o wskazywanie przez posłów swoich zawodów. Niektórzy z posłów jako swój zawód podają ten, który wynika z ich wykształcenia, inni natomiast zawód ostatnio wykonywany. Część posłów wskazuje, że są posłami zawodowymi czyli takimi, którzy poza wykonywaniem mandatu parlamentarnego nie pracują, ani nie prowadzą działalności gospodarczej. W naszym zestawieniu przedstawiamy czym najczęściej zawodowo zajmują się posłowie.',
-                'link' => '#rankingLink'
+                'link' => Router::url(array('action' => 'zawody_poslow'))
             );
 
-            echo $this->element('Sejmometr.graph_percent', array('page' => $page, 'items' => $items));
-            /* KIM SA Z ZAWODU */
-            ?>
+            echo $this->element('Sejmometr.graph_percent', array('page' => $page, 'items' => $zawody));
 
-            <?php
+
             /* ETYKA POSELSKA BLOCK */
-            $items = array();
-            /*TEMP VARIABLE*/
-            for ($i = 1; $i <= 15; $i++) {
-                array_push($items, array('posel_id' => '1', 'posel_name' => 'Abramowicz Adam', 'posel_img' => 'http://resources.sejmometr.pl/mowcy/a/0/1.jpg', 'icon_src' => 'http://resources.sejmometr.pl/s_kluby/2_a_t.png', 'icon_name' => 'Prawo i Sprawiedliwość', 'number' => 192));
-            }
 
             $page = array(
                 'class' => 'etyka_poselska',
+                'anchor' => 'etyka_poselska',
                 'title' => 'Etyka poselska',
                 'text' => 'Kwestiami związanymi z etyką parlamentarzystów zajmuje się Komisja Etyki Poselskiej. Zadaniem komisji jest m. in. rozpatrywanie spraw posłów, którzy zachowują się w sposób nieodpowiadający poselskiej godności. Zobacz czyje zachowanie najczęściej było przedmiotem uchwał Komisji Etyki Poselskiej.',
                 'link' => '#rankingLink'
             );
 
-            echo $this->element('Sejmometr.list', array('page' => $page, 'items' => $items));
-            /* TYKA POSELSKA END BLOCK */
-            ?>
+            echo $this->element('Sejmometr.list', array('page' => $page, 'items' => $etyka));
 
-            <?php
+
             /* POSLANKI POSLOWIE BLOCK */
-            $items = array(
-                array('title' => 'Sejm RP', 'img_src' => 'http://resources.sejmometr.pl/s_kluby/2_a_t.png', 'setup' => array(array('Mężczyźni', 65), array('Kobiety', 35))),
-                array('title' => 'Platforma Obywatelska', 'img_src' => 'http://resources.sejmometr.pl/s_kluby/2_a_t.png', 'setup' => array(array('Mężczyźni', 65), array('Kobiety', 35))),
-                array('title' => 'Prawo i Sprawiedliwość', 'img_src' => 'http://resources.sejmometr.pl/s_kluby/2_a_t.png', 'setup' => array(array('Mężczyźni', 65), array('Kobiety', 35))),
-                array('title' => 'Twój Ruch', 'img_src' => 'http://resources.sejmometr.pl/s_kluby/2_a_t.png', 'setup' => array(array('Mężczyźni', 65), array('Kobiety', 35))),
-                array('title' => 'Polskie Stronnictwo Ludowe', 'img_src' => 'http://resources.sejmometr.pl/s_kluby/2_a_t.png', 'setup' => array(array('Mężczyźni', 65), array('Kobiety', 35)))
-            );
 
             $page = array(
                 'class' => 'poslankiPoslowie',
+                'anchor' => 'poslankiPoslowie',
                 'title' => 'Posłanki i posłowie',
                 'text' => 'Ilość kobiet i mężczyzn w Sejmie i w poszczególnych partiach',
-                'link' => '#rankingLink'
             );
 
-            echo $this->element('Sejmometr.graph_circle', array('page' => $page, 'items' => $items));
-            /* POSLANKI POSLOWIE END BLOCK */
-            ?>
+            echo $this->element('Sejmometr.graph_circle', array('page' => $page, 'items' => $genderyzm));
 
 
-            <?php
             /* POLSKIE PRZELOTY BLOCK */
-            $items = array();
-            /*TEMP VARIABLE*/
-            for ($i = 1; $i <= 15; $i++) {
-                array_push($items, array('posel_id' => '1', 'posel_name' => 'Abramowicz Adam', 'posel_img' => 'http://resources.sejmometr.pl/mowcy/a/0/1.jpg', 'icon_src' => 'http://resources.sejmometr.pl/s_kluby/2_a_t.png', 'icon_name' => 'Prawo i Sprawiedliwość', 'number' => 192));
-            }
 
             $page = array(
                 'class' => 'przeloty',
+                'anchor' => 'przeloty',
                 'title' => 'Poselskie przeloty',
                 'text' => 'Poseł ma prawo do bezpłatnych przelotów w krajowym przewozie lotniczym. W celu zapewnienia realizacji na rzecz posłów krajowej usługi lotniczej, Kancelaria Sejmu zawiera umowy z przewoźnikami lotniczymi. Posłowie mają również prawo do doraźnego korzystania z usług innych przewoźników lotniczych, z którymi Kancelaria Sejmu nie zawarła stosownych umów. W takim przypadku posłowie kupują bilet w kasie przewoźnika, a następnie należność przez nich uiszczona zwracana jest im przez Kancelarię Sejmu na zasadzie refundacji, na podstawie oryginału faktury, rachunku albo biletu wystawionego przez przewoźnika. Poniżej przedstawiamy nazwiska posłów, którzy latali najczęściej w 2013 roku.',
                 'link' => '#rankingLink'
             );
 
-            echo $this->element('Sejmometr.list', array('page' => $page, 'items' => $items));
-            /* POLSKIE PRZELOTY END BLOCK  */
-            ?>
+            echo $this->element('Sejmometr.list', array('page' => $page, 'items' => $przeloty));
 
 
-            <?php
             /* POLSKIE PRZEJAZDY BLOCK */
-            $items = array();
-            /*TEMP VARIABLE*/
-            for ($i = 1; $i <= 15; $i++) {
-                array_push($items, array('posel_id' => '1', 'posel_name' => 'Abramowicz Adam', 'posel_img' => 'http://resources.sejmometr.pl/mowcy/a/0/1.jpg', 'icon_src' => 'http://resources.sejmometr.pl/s_kluby/2_a_t.png', 'icon_name' => 'Prawo i Sprawiedliwość', 'number' => 192));
-            }
 
             $page = array(
                 'class' => 'przeloty',
+                'anchor' => 'przejazdy',
                 'title' => 'Poselskie przejazdy',
                 'text' => 'Posłowie w ramach wykonywania swojej pracy mogą korzystać ze służbowych samochodów, którymi dysponuje Kancelaria Sejmu. Zobacz kto w 2013 roku najczęściej był w drodze.',
                 'link' => '#rankingLink'
             );
 
-            echo $this->element('Sejmometr.list', array('page' => $page, 'items' => $items));
-            /* POLSKIE PRZEJAZDY END BLOCK  */
-            ?>
+            echo $this->element('Sejmometr.list', array('page' => $page, 'items' => $przejazdy));
 
 
-            <?php
             /* KWATERY PRYWATNE POSLOW BLOCK */
-            $items = array();
-            /*TEMP VARIABLE*/
-            for ($i = 1; $i <= 15; $i++) {
-                array_push($items, array('posel_id' => '1', 'posel_name' => 'Abramowicz Adam', 'posel_img' => 'http://resources.sejmometr.pl/mowcy/a/0/1.jpg', 'icon_src' => 'http://resources.sejmometr.pl/s_kluby/2_a_t.png', 'icon_name' => 'Prawo i Sprawiedliwość', 'number' => 192));
-            }
 
             $page = array(
                 'class' => 'kwatery',
+                'anchor' => 'kwatery',
                 'title' => 'Kwatery prywatne posłów',
                 'text' => 'Jeżeli dla posłów, którzy nie są zameldowani na pobyt stały w Warszawie i nie posiadają innego uprawnienia do zakwaterowania na terenie tego miasta, brakuje miejsc w Domu Poselskim, mogą wtedy wynająć kwatery prywatne na podstawie zawartych przez siebie umów najmu. Z tego tytułu posłowie mogą otrzymać maksymalnie 2200 zł miesięcznie kwoty refundacji. Sprawdźcie w jakim stopniu parlamentarzyści w 2013 r. skorzystali z refundacji.',
                 'link' => '#rankingLink'
             );
 
-            echo $this->element('Sejmometr.list', array('page' => $page, 'items' => $items));
-            /* KWATERY PRYWATNE POSLOW END BLOCK  */
-            ?>
+            echo $this->element('Sejmometr.list', array('page' => $page, 'items' => $kwatery));
 
 
-            <?php
-            /* KWATERY PRYWATNE POSLOW BLOCK */
-            $items = array();
-            /*TEMP VARIABLE*/
-            for ($i = 1; $i <= 15; $i++) {
-                array_push($items, array('posel_id' => '1', 'posel_name' => 'Abramowicz Adam', 'posel_img' => 'http://resources.sejmometr.pl/mowcy/a/0/1.jpg', 'icon_src' => 'http://resources.sejmometr.pl/s_kluby/2_a_t.png', 'icon_name' => 'Prawo i Sprawiedliwość', 'number' => 192));
-            }
+            /* WMIOSKI O UCHYLENIE IMMUNITETU BLOCK */
 
             $page = array(
                 'class' => 'wnioskiImmunitet',
+                'anchor' => 'wnioskiImmunitet',
                 'title' => 'Wnioski o uchylenie immunitetu',
                 'text' => 'W sytuacji gdy poseł narusza prawo, odpowiedni organ np. Komenda Policji może skierować do Marszałka Sejmu wniosek o uchylenie poselskiego immunitetu. Poniżej przedstawiamy ranking posłów, których w 2013 r. najczęściej dotyczyły wnioski o wyrażenie zgody na pociągniecie posłów do odpowiedzialności.',
                 'link' => '#rankingLink'
             );
 
-            echo $this->element('Sejmometr.list', array('page' => $page, 'items' => $items));
-            /* KWATERY PRYWATNE POSLOW END BLOCK  */
-            ?>
+            echo $this->element('Sejmometr.list', array('page' => $page, 'items' => $immunitet));
 
 
-            <?php
             /* DOM POSELSKI BLOCK */
             $page = array(
                 'class' => 'dom',
+                'anchor' => 'domPoselski',
                 'title' => 'Dom poselski',
                 'text' => '<p>Posłowie, którzy nie są zameldowani na pobyt stały w Warszawie i nie posiadają innego uprawnienia do zakwaterowania na terenie tego miasta, mogą korzystać z Domu Poselskiego.</p><p><strong>W 2013 r. w Domu Poselskim udzielono posłom 21, 152 zakwaterowań (w dobach).</strong></p>'
             );
 
             echo $this->element('Sejmometr.text', array('page' => $page));
-            /* DOM POSELSKI END BLOCK  */
-            ?>
 
 
-            <?php
             /* ZAROBKI POSLOW BLOCK */
-            $items = array();
-            /*TEMP VARIABLE*/
-            for ($i = 1; $i <= 15; $i++) {
-                array_push($items, array('posel_id' => '1', 'posel_name' => 'Abramowicz Adam', 'posel_img' => 'http://resources.sejmometr.pl/mowcy/a/0/1.jpg', 'icon_src' => 'http://resources.sejmometr.pl/s_kluby/2_a_t.png', 'icon_name' => 'Prawo i Sprawiedliwość', 'number' => 192));
-            }
 
             $page = array(
                 'class' => 'zarobki',
+                'anchor' => 'zarobki',
                 'title' => 'Zarobki posłów',
                 'text' => '<p><strong>Zobacz, kto nie pobierał uposażenia poselskiego w 2013 roku!</strong></p><p>Posłom w okresie sprawowania mandatu, licząc od pierwszego posiedzenia Sejmu, przysługuje uposażenie poselskie. Świadczenie jest wypłacane miesięcznie (także za niepełne miesiące sprawowania mandatu) i wynosi obecnie 9892,30 zł brutto. Jednak nie wszyscy posłowie otrzymują uposażenie poselskie. Posłom, którzy:</p><ul><li>pracują i nie zdecydowali się na bezpłatny urlop na czas wykonywnia mandatu,</li><li>prowadzą działalność gospodarczą,</li><li>nie zawiesili prawa do emerytury lub renty</li><li>uposażenie poselskie nie przysługuje.</li></ul><p><strong>Zobacz, kto nie pobierał uposażenia poselskiego w 2013 roku!</strong></p>',
                 'link' => '#rankingLink'
             );
 
-            echo $this->element('Sejmometr.list', array('page' => $page, 'items' => $items));
-            /* ZAROBKI POSLOW END BLOCK  */
-            ?>
+            echo $this->element('Sejmometr.list', array('page' => $page, 'items' => $zarobki));
 
 
-            <?php
             /* DODATKI DO UPOSAZENIA I DIETA BLOCK */
             $page = array(
                 'class' => 'dodatki',
+                'anchor' => 'dodatki',
                 'title' => 'Dodatki do uposażenia i dieta poselska',
                 'text' => '<p>Posłom, którzy pełnią dodatkowe funkcje przysługują dodatki do uposażenia w wysokości:</p><ul><li>20 % uposażenia - dla pełniących funkcję przewodniczącego komisji,</li><li>15 % uposażenia - dla pełniących funkcję zastępcy przewodniczącego komisji,</li><li>10 % uposażenia - dla pełniących funkcję przewodniczących stałych podkomisji,</li><li>Łączna wysokość dodatków nie może jednak przekroczyć 35% uposażenia poselskiego.</li></ul><p>Wszystkim posłom przysługuje dieta poselska czyli środki finansowe na pokrycie kosztów związanych z wydatkami poniesionymi w związku z wykonywaniem mandatu na terenie kraju. Dieta poselska wynosi 25 % uposażenia miesięcznego czyli <strong>2473,08 zł brutto</strong>. Świadczenie jest wolne od podatku dochodowego od osób fizycznych.</p>'
             );
 
             echo $this->element('Sejmometr.text', array('page' => $page));
-            /* DODATKI DO UPOSAZENIA I DIETA END BLOCK  */
-            ?>
 
 
-            <?php
             /* POZYCZKI BLOCK */
             $page = array(
                 'class' => 'pozyczki',
+                'anchor' => 'pozyczki',
                 'title' => 'Pożyczki',
                 'text' => '<p>Jeżeli poseł potrzebuje pieniędzy w związku z zakupem domu czy remontem mieszkania może złożyć wniosek o udzielenie pożyczki na cele mieszkaniowe. Świadczenie przynawane jest na podstawie decyzji Marszałka Sejmu po zasięgnięciu opinii Zespołu do Spraw Pomocy Socjalnej. Wysokość oprocentowania pożyczki wynosi 3% jeśli została udzielona na okres do 12 miesięcy, lub 4% jeśli została udzielona na okres do 24 miesięcy.</p><p><strong>W 2013 r. w Domu Poselskim udzielono posłom 21, 152 zakwaterowań (w dobach).</strong></p>'
             );
 
             echo $this->element('Sejmometr.text', array('page' => $page));
-            /* POZYCZKI END BLOCK  */
-            ?>
 
 
-            <?php
             /* ZAPOMOGI BLOCK */
             $page = array(
                 'class' => 'zapomogi',
+                'anchor' => 'zapomogi',
                 'title' => 'Zapomogi',
                 'text' => '<p>Posłowie mogą otrzymać pomoc materialną udzielaną w formie zapomogi bezzwrotnej. Taka zapomoga przysługuje posłom, którzy znajdują się w trudnej sytuacji materialnej i nie mogą zaspokoić podstawowych potrzeb życiowych. O zapomogę mogą również starać się ci posłowie, którzy zostali dotknięci wypadkiem losowym np. chorobą.</p><p><strong>W 2013 roku udzielono posłom 4 zapomogi na łączną kwotę 41 000 zł.</strong></p>'
             );
 
             echo $this->element('Sejmometr.text', array('page' => $page));
-            /* ZAPOMOGI END BLOCK  */
             ?>
         </div>
     </div>
+</div>
+
 </div>

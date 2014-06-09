@@ -1,4 +1,4 @@
-<div class="detailBlock graph circle <?php echo $page['class'] ?>">
+<div id="<?= $page['anchor'] ?>" class="detailBlock graph circle <?php echo $page['class'] ?>">
     <h3><?php echo $page['title'] ?></h3>
 
     <p class="text"><?php echo $page['text'] ?></p>
@@ -22,8 +22,10 @@
             <?php } ?>
         </ul>
 
+        <? if (isset($page['link'])) { ?>
         <div class="checkIt text-center">
             <a class="btn btn-primary" href="<?php echo $page['link'] ?>" target="_self">Pokaż całość</a>
         </div>
+        <? } ?>
     </div>
 </div>
