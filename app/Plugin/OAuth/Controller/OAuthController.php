@@ -52,11 +52,12 @@ class OAuthController extends OAuthAppController
     {
         parent::beforeFilter();
 
-        // user has to be logged in
-        $this->Auth->deny();
+        // user has to be logged in to authorize
+        $this->Auth->allow();
+        $this->Auth->deny('authorize');
 
         $this->OAuth->authenticate = array('fields' => array('username' => 'email'), 'userModel' => 'Paszport.User');
-        $this->Auth->authError = __('LC_UNAUTHORIZED', true);
+        $this->Auth->authError = 'Proszę się zalogować';
         $this->Security->blackHoleCallback = 'blackHole';
     }
 
@@ -74,70 +75,29 @@ class OAuthController extends OAuthAppController
     public function authorize()
     {
         $this->set('title_for_layout', 'LC_GIVE_ACCESS');
-//        if (!$this->Auth->loggedIn()) {
-//            $this->redirect(array('action' => 'login', '?' => $this->request->query));
-//        }
 
-      //  if ($this->request->is('post')) {
-        // always authorize
-            $this->validateRequest();
+        $this->validateRequest();
 
-            $userId = $this->Auth->user('id');
+        $userId = $this->Auth->user('id');
 
-            if ($this->Session->check('OAuth.logout')) {
-                $this->Auth->logout();
-                $this->Session->delete('OAuth.logout');
-            }
-
-            //Did they accept the form? Adjust accordingly
-            $accepted = true; // $this->request->data['accept'] == __('LC_AUTHORIZE');
-            try {
-                $this->OAuth->finishClientAuthorization($accepted, $userId, $this->Session->read('OAuth.params'));
-            } catch (OAuth2RedirectException $e) {
-                $e->sendHttpResponse();
-            }
-       // }
-        // Clickjacking prevention (supported by IE8+, FF3.6.9+, Opera10.5+, Safari4+, Chrome 4.1.249.1042+)
-        $this->response->header('X-Frame-Options: DENY');
-
-        if ($this->Session->check('OAuth.params')) {
-            $OAuthParams = $this->Session->read('OAuth.params');
-            $this->Session->delete('OAuth.params');
-        } else {
-            try {
-                $OAuthParams = $this->OAuth->getAuthorizeParams();
-            } catch (Exception $e) {
-                $e->sendHttpResponse();
-            }
+        if ($this->Session->check('OAuth.logout')) {
+            $this->Auth->logout();
+            $this->Session->delete('OAuth.logout');
         }
-        $this->loadModel('OAuth.Client');
-        $client = $this->Client->find('first', array('conditions' => array('Client.client_id' => $OAuthParams['client_id'])));
-        // TODO około 400 access token / authcode / refreshtoken; po co to jest tutaj przekazywane?
-        //@TODO : switch to php client
-        $this->set(compact('OAuthParams', 'client'));
-    }
 
-    /**
-     * Example Login Action
-     *
-     * Users must authorize themselves before granting the app authorization
-     * Allows login state to be maintained after authorization
-     *
-     */
-    public function login()
-    {
-        $OAuthParams = $this->OAuth->getAuthorizeParams();
+        //Did they accept the form? Adjust accordingly
+        $accepted = true; // $this->request->data['accept'] == __('LC_AUTHORIZE');
+        try {
+            $OAuthParams = $this->OAuth->getAuthorizeParams();
+        } catch (Exception $e) {
+            $e->sendHttpResponse();
+        }
 
-                //Write this to session so we can log them out after authenticating TODO
-                $this->Session->write('OAuth.logout', true);
-
-                //Write the auth params to the session for later
-                $this->Session->write('OAuth.params', $OAuthParams);
-
-                //Off we go
-                $this->redirect(array('action' => 'authorize'));
-
-        $this->set(compact('OAuthParams'));
+        try {
+            $this->OAuth->finishClientAuthorization($accepted, $userId, $OAuthParams);
+        } catch (OAuth2RedirectException $e) {
+            $e->sendHttpResponse();
+        }
     }
 
     /**
@@ -192,6 +152,7 @@ class OAuthController extends OAuthAppController
                 'big_square' => $user['photo'],
                 'small_square' => $user['photo_small'],
             ),
+            'group_id' => $user['group_id'],
         );
         $this->set(compact('user'));
     }

@@ -14,6 +14,8 @@ $this->Combinator->add_libs('js', 'Dane.view-krspodmioty');
     <div class="col-lg-3 objectSide">
         <div class="objectSideInner">
             <ul class="dataHighlights side">
+            
+            	
                 <? if ($object->getData('wykreslony')) { ?>
                     <li class="dataHighlight">
                         <span class="label label-danger">Podmiot wykreślony z KRS</span>
@@ -153,12 +155,15 @@ $this->Combinator->add_libs('js', 'Dane.view-krspodmioty');
                 <a class="a-more">Więcej &darr;</a>
                 <a class="a-less hide">Mniej &uarr;</a>
             </p>
-
+			
+			
+			<? if( !$object->getData('wykreslony') ) {?>
             <div class="banner">
                 <?php echo $this->Html->image('Dane.banners/krspodmioty_banner.png', array('width' => '69', 'alt' => 'Aktualny odpis z KRS za darmo', 'class' => 'pull-right')); ?>
                 <p>Pobierz aktualny odpis z KRS <strong>za darmo</strong></p>
                 <a href="/dane/krs_podmioty/<?= $object->getId() ?>/odpis" class="btn btn-primary">Kliknij aby pobrać</a>
             </div>
+            <? }?>
         </div>
     </div>
 
@@ -238,11 +243,14 @@ $this->Combinator->add_libs('js', 'Dane.view-krspodmioty');
                             <? if ($organ['content']) { ?>
                             <div class="list-group less-borders">
                                 <? foreach ($organ['content'] as $osoba) { ?>
+                                
                                 <? if (@$osoba['osoba_id']) { ?>
-                                <a class="list-group-item" href="/dane/krs_osoby/<?= $osoba['osoba_id'] ?>">
-                                    <? } else { ?>
+	                                <a class="list-group-item" href="/dane/krs_osoby/<?= $osoba['osoba_id'] ?>">
+	                            <? } elseif (@$osoba['krs_id']) { ?>
+	                                <a class="list-group-item" href="/dane/krs_podmioty/<?= $osoba['krs_id'] ?>">
+                                <? } else { ?>
                                     <div class="list-group-item">
-                                        <? } ?>
+                                <? } ?>
 
                                         <h4 class="list-group-item-heading">
                                             <?= $osoba['nazwa'] ?>
@@ -264,9 +272,10 @@ $this->Combinator->add_libs('js', 'Dane.view-krspodmioty');
                                             </p>
                                         <? } ?>
 
-                                        <? if (@$osoba['osoba_id']) { ?>
+                                        <? if( @$osoba['osoba_id'] || @$osoba['krs_id'] ) { ?>
                                 </a>
                                 <? } else { ?>
+                            
                             </div>
                         <? } ?>
                         <? } ?>

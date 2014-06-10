@@ -185,7 +185,7 @@
 						foreach( $czesci as $czesc ) {
 				?>
 				
-				<? if( $liczba_czesci==1 ) {?>
+				<? if( $liczba_czesci==0 ) {?>
 				
 				<div class="block">
                     <div class="block-header">
@@ -198,9 +198,12 @@
 				
 				<?} else {?>
 				<div class="block">
+				
+					<? if( $liczba_czesci>1 ) {?>
 					<div class="block-header">
 						<h2 class="pull-left label">Część #<?= $czesc['numer'] ?> - <?= $czesc['nazwa'] ?></h2>
 					</div>
+					<? }?>
 					
 					
 					<div class="content">
@@ -210,7 +213,7 @@
 							<div class="row header-details dataHighlights">
 								
 								<? if( !empty($czesc['wykonawcy']) ) {?>
-								<div class="dataHighlight col-lg-4">
+								<div class="dataHighlight col-lg-8">
 			                		<p class="_label">Wykonawca</p>
 			                		<? foreach($czesc['wykonawcy'] as $wykonawca) {?>
 			                		<p class="_value"><a href="/dane/zamowienia_publiczne_wykonawcy/<?= $wykonawca['id'] ?>"><?= $wykonawca['nazwa']; ?></a></p>
@@ -218,7 +221,7 @@
 			                	</div>
 			                	<?}?>
 			                	
-			                	<? if( $czesc['cena'] ) {?>
+			                	<? if( $liczba_czesci>1 && $czesc['cena'] ) {?>
 			                	<div class="dataHighlight col-lg-4">
 			                		<p class="_label">Cena</p>
 			                		<p class="_value big"><?= _currency( $czesc['cena'] ); ?></p>
@@ -230,7 +233,7 @@
 							
 							<div class="row part-details dataHighlights">
 																		
-								<? if( ($czesc['kryterium']=='A') || ($czesc['kryterium']=='B') ) {?>	
+								<? if( (@$czesc['kryterium']=='A') || (@$czesc['kryterium']=='B') ) {?>	
 								<div class="dataHighlight col-lg-4">
 									<p class="_label">Kryteria</p>
 									
@@ -314,12 +317,23 @@
 							
 							</div>
 							
+							<? if( isset($czesc['opis']) ) {?>
 							<p class="opis"><?= nl2br($czesc['opis']) ?></p>
+							<? }?> 
 							
 						</div>
 					</div>
 					
 				</div>
+				
+				<div class="block">
+                    <div class="block-header">
+	                    <h2 class="pull-left label">Przedmiot zamówienia</h2>
+                    </div>
+                    <div class="content">
+                        <div class="textBlock"><?php echo( nl2br($details['przedmiot']) ); ?></div>
+                    </div>
+                </div>
 				<?}?>
 				
 				<?

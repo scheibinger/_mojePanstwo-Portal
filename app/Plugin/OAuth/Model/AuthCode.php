@@ -101,10 +101,10 @@ class AuthCode extends OAuthAppModel
         return $ret;
     }
 
-    public function find($type, $queryData)
+    public function findByCode($code)
     {
         $api = mpapiComponent::getApi()->OAuth()->AuthCode();
-        return $api->find($type, $queryData);
+        return $api->findByCode($code);
 
     }
 
