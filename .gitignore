@@ -18,6 +18,7 @@ app/[Cc]onfig/email.php
 /app/tmp/*.log.*
 /app/tmp/cake*
 /app/tmp/userbar*
+/app/tmp/
 /lib/Cake/Console/Templates/skel/tmp/
 /plugins
 /vendors
