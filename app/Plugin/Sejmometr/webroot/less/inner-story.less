@@ -23,10 +23,20 @@
             display: block;
             width: 11 * @minWidth;
             height: 100%;
+            transition-property: left;
+            transition-duration: 400ms;
+            transition-timing-function: linear;
         }
 
         .far {
-            /*chmury*/
+            background: url(../Sejmometr/img/inner-story/background_sky.png) bottom left repeat-x #3ca6dd;
+
+            .clouds {
+                background: url(../Sejmometr/img/inner-story/background_clouds.png) bottom left no-repeat;
+                width: 100%;
+                height: 100%;
+                float: left;
+            }
         }
 
         .medium {

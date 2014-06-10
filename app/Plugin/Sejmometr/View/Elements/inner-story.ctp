@@ -1,10 +1,11 @@
 <?php $this->Combinator->add_libs('css', $this->Less->css('inner-story', array('plugin' => 'Sejmometr'))); ?>
+<?php $this->Combinator->add_libs('js', 'Sejmometr.jquery.mousewheel.js'); ?>
 <?php $this->Combinator->add_libs('js', 'Sejmometr.inner-story.js'); ?>
 
 <div id="storyLine">
     <div class="innerStory">
         <div class="far">
-
+            <div class="clouds"></div>
         </div>
         <div class="medium">
             <div class="scene intro" data-scene="1">
