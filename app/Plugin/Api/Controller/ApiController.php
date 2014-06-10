@@ -38,4 +38,8 @@ class ApiController extends AppController
 
         $this->set(compact('api'));
     }
+
+    public function technical_info() {
+
+    }
 }
