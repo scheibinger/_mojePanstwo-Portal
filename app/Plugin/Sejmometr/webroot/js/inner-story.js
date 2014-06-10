@@ -7,9 +7,12 @@
         sceneCount = $medium.find('.scene:last').data('scene'),
         minScreenWidth = 1204,
         screenWidth = ($body.innerWidth() < minScreenWidth) ? minScreenWidth : $body.innerWidth(),
+        rightBorder = $medium.width() - screenWidth,
         screenPosPrev = 0,
         screenPos = 0,
-        sceneAnimationDelayInterval;
+        screenPosHeading = false,
+        sceneAnimationDelayInterval,
+        sceneAnimationAllow = true;
 
     /*SET SCREEN SIZE*/
     $story.find('.far, .medium, .near').css('width', sceneCount * screenWidth);
@@ -19,27 +22,8 @@
     /*BLOCK WINDOW*/
     $body.addClass('modal-open');
 
-    function whichTransitionEvent() {
-        var t;
-        var el = document.createElement('fakeelement');
-        var transitions = {
-            'transition': 'transitionend',
-            'OTransition': 'oTransitionEnd',
-            'MozTransition': 'transitionend',
-            'WebkitTransition': 'webkitTransitionEnd'
-        }
-
-        for (t in transitions) {
-            if (el.style[t] !== undefined) {
-                return transitions[t];
-            }
-        }
-    }
-
     var mouseScrollDirection = function (event, delta) {
-        var s = 0, id = event.currentTarget.id || event.currentTarget.nodeName;
-
-        o = '#' + id + ':';
+        var s = 0;
 
         if (delta > 0)
             s += delta;
@@ -63,18 +47,22 @@
     };
 
     var _sceneAnimationDelay = function (step) {
-        clearInterval(sceneAnimationDelayInterval);
-        sceneAnimationDelayInterval = setInterval(function () {
-            if (step == screenPosPrev) return;
-
-            var transitionEnd = whichTransitionEvent();
-            $medium[0].addEventListener(transitionEnd, _sceneAnimation(step), false);
-        }, 100);
+        clearTimeout(sceneAnimationDelayInterval);
+        sceneAnimationDelayInterval = setTimeout(function () {
+            if (step == screenPosHeading) return;
+            _sceneAnimation(step);
+        }, 20);
     };
 
     var _sceneAnimation = function (step) {
-        var rightBorder = $medium.width() - screenWidth;
-        console.log(step, (Math.abs(step - screenPosPrev)) * 10);
+        var speedSet;
+
+        if (screenPosHeading == false) screenPosHeading = step;
+
+        if ((step != screenPosHeading) && !sceneAnimationAllow) {
+            $story.find('.far, .medium, .near').stop();
+            screenPosPrev = parseInt($medium.css('left'), 10);
+        }
 
         /*check if we didn't reach end of infograph*/
         if (Math.abs(step) >= rightBorder) {
@@ -83,13 +71,16 @@
             return;
         }
 
-        $story.find('.far, .medium, .near').css('transition-duration', (Math.abs(step - screenPosPrev)) * 10 + 'ms');
+        screenPosHeading = step;
+        speedSet = Math.floor((Math.abs(step - screenPosPrev)) * 3);
+        sceneAnimationAllow = false;
 
-        $far.css('left', (step * .4) + 'px');
-        $medium.css('left', step + 'px');
-        $near.css('left', step + 'px');
-
-        screenPosPrev = step;
+        $far.animate({'left': (step * .4)}, {duration: speedSet});
+        $medium.animate({'left': step}, {duration: speedSet, complete: function () {
+            screenPosPrev = screenPos = screenPosHeading;
+            sceneAnimationAllow = true;
+        }});
+        $near.animate({'left': step}, {duration: speedSet});
     };
 
     $(document).mousewheel(function (event, delta) {
