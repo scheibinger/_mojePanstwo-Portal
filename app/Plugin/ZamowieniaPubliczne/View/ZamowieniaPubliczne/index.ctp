@@ -50,7 +50,7 @@
 				<ul>
 				<? foreach( $stats['zamowienia']['*']['zamawiajacy'] as $zamawiajacy ) {?>
 					<li>
-						<p class="title"><a href="#" title="<?= addslashes($zamawiajacy['nazwa']) ?>"><?= $this->Text->truncate($zamawiajacy['nazwa'], 100); ?></a></p>
+						<p class="title"><a href="/dane/zamowienia_publiczne/?zamawiajacy_id[]=<?= $zamawiajacy['id'] ?>&data_publikacji=LAST_1M&search=web" title="<?= addslashes($zamawiajacy['nazwa']) ?>"><?= $this->Text->truncate($zamawiajacy['nazwa'], 100); ?></a></p>
 						<p class="desc"><?= pl_dopelniacz($zamawiajacy['liczba_zamowien'], 'zamówienie', 'zamówienia', 'zamówień') ?> na kwotę <?= $this->Waluta->slownie($zamawiajacy['wartosc']) ?></p>
 					</li>
 				<?}?>

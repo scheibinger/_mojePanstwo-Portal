@@ -238,9 +238,6 @@ class DataobjectsBrowserComponent extends Component
         }
 
 
-        foreach ($conditions as $key => &$cond)
-            if (preg_match('/data_/', $key) && $cond)
-                $cond = preg_replace('/\:/', '\:', CakeTime::toAtom($cond));
 
 
         if ($this->mode == 'dataset') {
@@ -304,8 +301,7 @@ class DataobjectsBrowserComponent extends Component
                 $filters = $_filters;
 
             }
-
-
+			
         } elseif ($this->mode == 'datachannel') {
 
 
@@ -389,7 +385,7 @@ class DataobjectsBrowserComponent extends Component
         // ŁADOWANIE OBIEKTÓW
         // $controller->Dataobject = ClassRegistry::init('Dane.Dataobject');		
         $controller->loadModel('Dane.Dataobject');
-
+		
 
         $queryData = array(
             'q' => $q,
