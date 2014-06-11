@@ -8,40 +8,80 @@
 <?php $this->Combinator->add_libs('js', 'Dane.dataobjectsslider') ?>
 
 <div class="container" id="zamowienia">
+		
+	<div class="main-alert alert alert-dismissable alert-danger">
+		<button type="button" class="close" data-dismiss="alert">×</button>
+		<h4>Uwaga!</h4>
+		<p>To jest eksperymentalna wersja aplikacji Zamówienia Publiczne, oparta na analize <b><?= $stats['zamowienia']['progress'] ?>%</b> zamowień publicznych, ogłaszanych przez Urząd Zamówień Publicznych. Więcej danych i funkcjonalności pojawi się wkrótce.</p>
+	</div>
 	
 	<div class="banner">
-		<p>W ciągu ostatniego miesiąca, Twoje Państwo udzieliło zamówień na </p>
-
-		<p class="number"><?= $this->Waluta->slownie($stats['zamowienia']['total']) ?></p>
+		<p>W ciągu <b>ostatniego miesiąca</b>, Twoje Państwo udzieliło zamówień za </p>
 		
-		<p>w tym:</p>
+		
+		<p class="number"><?= $this->Waluta->slownie($stats['zamowienia']['*']['total']) ?></p>
+		
+		<p>w tym na:</p>
 	</div>
 	
-	<div class="row">
+	<div>
+	
+		<div class="row zam-block">
+			
+			<? $i = 0; foreach( $stats['zamowienia']['rodzaje'] as $rodzaj ) { $i++; ?>
+			<div class="col-lg-4 column block">
+				
+				<p class="text-center na"><span class="label label-primary"><?= $rodzaj['nazwa'] ?></span></p>
+	
+				<p class="number small text-center"><?= $this->Waluta->slownie($rodzaj['total']) ?></p>			
+				
+				
+			</div>
+			<? if($i>2) break; } ?>
+			
+		</div>	
 		
-		<? foreach( $stats['zamowienia']['rodzaje'] as $rodzaj ) { ?>
-		<div class="col-lg-4">
+		<div class="row zam-block">
 			
-			<p class="number small"><?= $this->Waluta->slownie($rodzaj['total']) ?></p>
+			<div class="col-lg-6 column block">
+								
+				<h2 class="label">Najwięcej zamówili:</h2>
+				
+				<ul>
+				<? foreach( $stats['zamowienia']['*']['zamawiajacy'] as $zamawiajacy ) {?>
+					<li>
+						<p class="title"><a href="#" title="<?= addslashes($zamawiajacy['nazwa']) ?>"><?= $this->Text->truncate($zamawiajacy['nazwa'], 100); ?></a></p>
+						<p class="desc"><?= pl_dopelniacz($zamawiajacy['liczba_zamowien'], 'zamówienie', 'zamówienia', 'zamówień') ?> na kwotę <?= $this->Waluta->slownie($zamawiajacy['wartosc']) ?></p>
+					</li>
+				<?}?>
+				</ul>			
+							
+			</div>
+			
+			<div class="col-lg-6 column block">
 
-			<h2><span>na</span> <?= $rodzaj['nazwa'] ?></h2>
+				<h2 class="label">Najwięcej zamówień otrzymali:</h2>
+				
+				
+				<p class="soon">Dostępne wkrótce</p>
+				
+				<? /*
+				<ul>
+				<? foreach( $rodzaj['zamawiajacy'] as $zamawiajacy ) {?>
+					<li>
+						<p class="title"><a href="#" title="<?= addslashes($zamawiajacy['nazwa']) ?>"><?= $this->Text->truncate($zamawiajacy['nazwa'], 100); ?></a></p>
+						<p class="desc"><?= pl_dopelniacz($zamawiajacy['liczba_zamowien'], 'zamówienie', 'zamówienia', 'zamówień') ?> na kwotę <?= $this->Waluta->slownie($zamawiajacy['wartosc']) ?></p>
+					</li>
+				<?}?>
+				</ul>	
+				*/ ?>		
+							
+			</div>
+
 			
-			<h3>Najwięcej zamówili:</h3>
-			
-			<ul>
-			<? foreach( $rodzaj['zamawiajacy'] as $zamawiajacy ) {?>
-				<li>
-					<p><?= $zamawiajacy['nazwa'] ?></p>
-					<p><?= pl_dopelniacz($zamawiajacy['liczba_zamowien'], 'zamówienie', 'zamówienia', 'zamówień') ?> na kwotę <?= $this->Waluta->slownie($zamawiajacy['wartosc']) ?></p>
-				</li>
-			<?}?>
-			</ul>			
-						
 		</div>
-		<? } ?>
-		
-	</div>
 	
+	</div>
 	
 	
 	
