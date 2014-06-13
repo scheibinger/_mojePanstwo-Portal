@@ -7,17 +7,18 @@ if (isset($items) && !empty($items)) {
                 <img class="avatar" src="<?= $item['posel_img_src'] ?>"
                      alt="<?= $item['nazwisko'] . ' ' . $item['imie'] ?>"/>
 
-	            <div class="poselLabel">
-	                <?= $item['nazwisko'] . ' ' . $item['imie'] ?>
-	                <img class="club" src="<?= $item['klub_img_src'] ?>"
-	                     alt="<?php echo $item['klub'] ?>"/>
-	            </div>
-	            <div class="poselInfo">
-	                <?php echo $item['display']; ?>
-	            </div>
-	        </a>
-	    </li>
-<?
-		}
-	}
+                <div class="poselLabel">
+	                <span><?= $item['nazwisko'] . ' ' . $item['imie'] ?>
+                        <img class="club" src="<?= $item['klub_img_src'] ?>"
+                             alt="(<?php echo $item['klub'] ?>)"/>
+                        </span>
+                </div>
+                <div class="poselInfo">
+                    <?php echo $item['display']; ?>
+                </div>
+            </a>
+        </li>
+    <?
+    }
+}
 ?>
