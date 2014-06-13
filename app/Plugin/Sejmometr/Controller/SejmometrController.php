@@ -15,7 +15,16 @@ class SejmometrController extends SejmometrAppController
         
         if( !$preset )
         	return false;
-        	
+		
+		
+		if( $preset=='zawody' ) {
+			
+			$api = $this->API->Sejmometr();
+			return $api->zawody();
+			
+		}
+		
+		
         $_map = array(
         	'wystapienia' => array(
         		'order' => 'liczba_wypowiedzi desc',
@@ -41,12 +50,8 @@ class SejmometrController extends SejmometrAppController
 	        		return pl_dopelniacz($object->getData('liczba_interpelacji'), 'interpelacja', 'interpelacje', 'interpelacji');	
         		},
         	),
-        	
-        	
-        	
-        	
         );
-        
+       
         $_map_keys = array_keys($_map);
         if( !in_array($preset, $_map_keys) )
         	return false;
@@ -120,9 +125,15 @@ class SejmometrController extends SejmometrAppController
 	    	return false;
 	    
 	    $view = new View($this, false);
-
-        $html = $view->element('Sejmometr.list_inner', array(
-            'items' => $this->poslowie($id),
+		
+		$element = 'list_inner';
+		if( $id=='zawody' )
+			$element = 'zawody';
+		
+		$items = $this->poslowie($id);
+		
+        $html = $view->element('Sejmometr.' . $element, array(
+            'items' => $items,
         ));
 	    
 	    $this->set('id', $id);
