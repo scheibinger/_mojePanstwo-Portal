@@ -20,47 +20,71 @@
             <h5>Sejm jest organem władzy ustawodawczej w Polsce. Tworzą go posłowie, którzy są reprezentantami Narodu dlatego mogą, a nawet powinni być przez ten Naród oceniani. Szerokie udostępnianie informacji o poselskich działaniach leży w interesie każdego z 460 posłów. Obywatele nie mający dostępu do takich danych swoje poglądy wyrobią w oparciu o inne, niekoniecznie obiektywne źródła informacji. Postanowiliśmy wesprzeć tych, którzy chcieliby wiedzieć jak pracują nasi posłowie i w jakich warunkach wykonują swój mandat poselski. Stworzyliśmy aplikację, która prezentuje rozmaite dane związane z sejmową codziennością!
 
             </h5>
-
-            <div class="searchInput search col-xs-12 col-md-10 col-md-offset-1">
-                <form action="<? echo Router::url(array('plugin' => 'Dane', 'controller' => 'datachannels', 'action' => 'view', 'alias' => 'sejm')); ?>">
-                <div class="input-group">
-                        <input name="q" value="" type="text" autocomplete="off"
-                               placeholder="Szukaj w pracach Sejmu..."
-                               class="form-control input-lg">
-	                <span class="input-group-btn">
-	                      <button class="btn btn-success button big" type="submit" data-icon="&#xe600;"></button>
-	                </span>
-                    </div>
-                </form>
-            </div>
-
-            <div class="shortcut submenu">
-                <ul>
-                    <li class="active">
-                    <a href="/sejmometr">Sejmometr</a>
-                    </li>
-                    <li>
-                        <a href="/dane/legislacja_projekty_ustaw">Projekty ustaw</a>
-                    </li>
-                    <li>
-                        <a href="/dane/sejm_druki">Druki sejmowe</a>
-                    </li>
-                    <li>
-                        <a href="/dane/poslowie" target="_self">Posłowie</a>
-                    </li>
-                    <li>
-                        <a href="/dane/sejm_kluby" target="_self">Kluby parlamentarne</a>
-                    </li>
-                    <li>
-                        <a href="/dane/sejm_interpelacje" target="_self">Interpelacje</a>
-                    </li>
-                </ul>
-            </div>
+			
+			
+			<div class="row sejm-menu">
+				<div class="col-lg-3 link">
+					<a href="/dane/poslowie">Znajdź i sprawdź swojego posła!</a>
+				</div>
+				<div class="col-lg-3 link">
+					<a href="/dane/sejm_posiedzenia">Posiedzenia Sejmu</a>
+				</div>
+				<div class="col-lg-3 link">
+					<a href="/dane/legislacja_projekty_ustaw">Projekty utaw</a>
+				</div>
+				<div class="col-lg-3 link">
+					<a href="/sejmometr/kasa">Ile to kosztuje?</a>
+				</div>
+			</div>
+			
+			
+			<div style="display: none;">
+	            <div class="searchInput search col-xs-12 col-md-10 col-md-offset-1">
+	                <form action="<? echo Router::url(array('plugin' => 'Dane', 'controller' => 'datachannels', 'action' => 'view', 'alias' => 'sejm')); ?>">
+	                <div class="input-group">
+	                        <input name="q" value="" type="text" autocomplete="off"
+	                               placeholder="Szukaj w pracach Sejmu..."
+	                               class="form-control input-lg">
+		                <span class="input-group-btn">
+		                      <button class="btn btn-success button big" type="submit" data-icon="&#xe600;"></button>
+		                </span>
+	                    </div>
+	                </form>
+	            </div>
+	
+	            <div class="shortcut submenu">
+	                <ul>
+	                    <li class="active">
+	                    <a href="/sejmometr">Sejmometr</a>
+	                    </li>
+	                    <li>
+	                        <a href="/dane/legislacja_projekty_ustaw">Projekty ustaw</a>
+	                    </li>
+	                    <li>
+	                        <a href="/dane/sejm_druki">Druki sejmowe</a>
+	                    </li>
+	                    <li>
+	                        <a href="/dane/poslowie" target="_self">Posłowie</a>
+	                    </li>
+	                    <li>
+	                        <a href="/dane/sejm_kluby" target="_self">Kluby parlamentarne</a>
+	                    </li>
+	                    <li>
+	                        <a href="/dane/sejm_interpelacje" target="_self">Interpelacje</a>
+	                    </li>
+	                </ul>
+	            </div>
+			</div>
+        
+        
         </div>
     </div>
 </div>
 
+
 <?php /* BEGIN TIMELINE strip li */ ?>
+
+<? /*
 <div class="timeline strip">
     <div class="container">
         <div class="head col-xs-12">
@@ -70,8 +94,11 @@
 </div>
 
 <div id="timeline-embed" data-source="1"></div>
+*/ ?>
 <?php /* END TIMELINE strip */ ?>
 
+
+<? /*
 <div class="poslowie strip">
     <div class="container">
         <div class="head col-xs-12">
@@ -124,9 +151,11 @@
                 </a>
             </div>
         </div>
-        <?php echo $this->element('Sejmometr.inner-story'); ?>
+        <?php // echo $this->element('Sejmometr.inner-story'); ?>
     </div>
 </div>
+
+*/ ?>
 
 <div class="detailPoslowie strip">
     <div class="container">
@@ -191,11 +220,11 @@
                 'class' => 'wystapienia',
                 'anchor' => 'wystapienia',
                 'title' => 'Wystąpienia',
-                'text' => 'Posłowie w ramach sprawowania mandatu wypowiadają się na posiedzeniach Sejmu. Zobacz, którzy z nich są najbardziej aktywni',
+                'text' => 'Posłowie w ramach sprawowania mandatu wypowiadają się na posiedzeniach Sejmu. Zobacz, którzy z nich są najbardziej aktywni.',
                 'link' => $poslowie_url . '?order=liczba_wypowiedzi%20desc'
             );
 
-            echo $this->element('Sejmometr.list', array('page' => $page, 'items' => $wystapienia));
+            echo $this->element('Sejmometr.list', array('page' => $page));
 
 
             /* FREKWENCJA BLOCK */
@@ -208,7 +237,7 @@
                 'link' => $poslowie_url . '?order=frekwencja%20desc'
             );
 
-            echo $this->element('Sejmometr.list', array('page' => $page, 'items' => $frekwencja));
+            echo $this->element('Sejmometr.list', array('page' => $page));
 
 
             /* BUNTY BLOCK */
@@ -221,7 +250,7 @@
                 'link' => $poslowie_url . '?order=liczba_glosowan_zbuntowanych%20desc'
             );
 
-            echo $this->element('Sejmometr.list', array('page' => $page, 'items' => $bunty));
+            echo $this->element('Sejmometr.list', array('page' => $page));
 
 
             /* INTERPELACJE BLOCK */
@@ -234,7 +263,7 @@
                 'link' => '#rankingLink'
             );
 
-            echo $this->element('Sejmometr.list', array('page' => $page, 'items' => $interpelacje));
+            echo $this->element('Sejmometr.list', array('page' => $page));
 
 
             /* KIM SA Z ZAWODU BLOCK */
@@ -247,7 +276,7 @@
                 'link' => Router::url(array('action' => 'zawody_poslow'))
             );
 
-            echo $this->element('Sejmometr.graph_percent', array('page' => $page, 'items' => $zawody));
+            echo $this->element('Sejmometr.graph_percent', array('page' => $page));
 
 
             /* ETYKA POSELSKA BLOCK */
@@ -260,7 +289,7 @@
                 'link' => '#rankingLink'
             );
 
-            echo $this->element('Sejmometr.list', array('page' => $page, 'items' => $etyka));
+            echo $this->element('Sejmometr.list', array('page' => $page));
 
 
             /* POSLANKI POSLOWIE BLOCK */
@@ -272,7 +301,7 @@
                 'text' => 'Ilość kobiet i mężczyzn w Sejmie i w poszczególnych partiach',
             );
 
-            echo $this->element('Sejmometr.graph_circle', array('page' => $page, 'items' => $genderyzm));
+            echo $this->element('Sejmometr.graph_circle', array('page' => $page));
 
 
             /* POLSKIE PRZELOTY BLOCK */
@@ -285,7 +314,7 @@
                 'link' => '#rankingLink'
             );
 
-            echo $this->element('Sejmometr.list', array('page' => $page, 'items' => $przeloty));
+            echo $this->element('Sejmometr.list', array('page' => $page));
 
 
             /* POLSKIE PRZEJAZDY BLOCK */
@@ -298,7 +327,7 @@
                 'link' => '#rankingLink'
             );
 
-            echo $this->element('Sejmometr.list', array('page' => $page, 'items' => $przejazdy));
+            echo $this->element('Sejmometr.list', array('page' => $page));
 
 
             /* KWATERY PRYWATNE POSLOW BLOCK */
@@ -311,7 +340,7 @@
                 'link' => '#rankingLink'
             );
 
-            echo $this->element('Sejmometr.list', array('page' => $page, 'items' => $kwatery));
+            echo $this->element('Sejmometr.list', array('page' => $page));
 
 
             /* WMIOSKI O UCHYLENIE IMMUNITETU BLOCK */
@@ -324,7 +353,7 @@
                 'link' => '#rankingLink'
             );
 
-            echo $this->element('Sejmometr.list', array('page' => $page, 'items' => $immunitet));
+            echo $this->element('Sejmometr.list', array('page' => $page));
 
 
             /* DOM POSELSKI BLOCK */
@@ -348,7 +377,7 @@
                 'link' => '#rankingLink'
             );
 
-            echo $this->element('Sejmometr.list', array('page' => $page, 'items' => $zarobki));
+            echo $this->element('Sejmometr.list', array('page' => $page));
 
 
             /* DODATKI DO UPOSAZENIA I DIETA BLOCK */

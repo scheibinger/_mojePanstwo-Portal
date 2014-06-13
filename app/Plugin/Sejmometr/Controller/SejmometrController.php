@@ -11,79 +11,60 @@ class SejmometrController extends SejmometrAppController
         return "http://resources.sejmometr.pl/s_kluby/" . $klub_id . "_a_t.png";
     }
 
-    private function poslowie($sort = 'nazwa_odwrocona asc', $limit = 10, $metrics = NULL) {
-        $this->loadModel('Dane.Dataobject');
-
-        $objects = $this->Dataobject->find('all', array(
-            'conditions' => array('dataset' => 'poslowie'),
-            'order' => $sort,
-            'limit' => $limit,
-            'maxLimit' => $limit,
-            //'facets' => true
-            //'paramType' => 'querystring',
+    private function poslowie($preset) {
+        
+        if( !$preset )
+        	return false;
+        	
+        $_map = array(
+        	'wystapienia' => array(
+        		'order' => 'liczba_wypowiedzi desc',
+        	),
+        );
+        
+        $_map_keys = array_keys($_map);
+        if( !in_array($preset, $_map_keys) )
+        	return false;
+        
+        $preset_data = $_map[ $preset ];
+        
+        
+        $api = $this->API->Dane();
+		$api->searchDataset('poslowie', array(
+            'limit' => 10,
+            // 'conditions' => array(),
+            'order' => $preset_data['order'],
         ));
-
+        $objects = $api->getObjects();
+                
+        
         $r = array();
         foreach($objects as $object) {
-            $o = $object['Dataobject']->data;
-            $entry = array(
-                'imie' => $o['imie_pierwsze'],
-                'nazwisko' => $o['nazwisko'],
-                'url' => $object['Dataobject']->getUrl(),
-                'klub_img_src' => $this->klub_img_src($o['klub_id']),
-                'posel_img_src' => $object['Dataobject']->getThumbnailUrl(),
-                'klub' => $o['sejm_kluby.nazwa'],
-            );
 
-            if (!empty($metrics)) {
-                $entry['number'] = $o[$metrics];
-            }
+            $entry = array(
+                'imie' => $object->getData('imie_pierwsze'),
+                'nazwisko' => $object->getData('nazwisko'),
+                'url' => $object->getUrl(),
+                'klub_img_src' => $this->klub_img_src($object->getData('klub_id')),
+                'posel_img_src' => $object->getThumbnailUrl(),
+                'klub' => $object->getData('sejm_kluby.nazwa'),
+            );
 
             array_push($r, $entry);
         }
-
+		
         return $r;
     }
 	
     public function index()
     {
 		$API = $this->API->Dane();
-
+		
         $poslowie_url = Router::url(array('plugin' => 'dane', 'controller' => 'poslowie'));
+		$this->set('poslowie_url', $poslowie_url);
 
-		// LISTA POSLOW 4x7
-        $poslowie = $this->poslowie('nazwa_odwrocona asc', 12);
 
-        // WYSTAPIENIA
-        $wystapienia = $this->poslowie('liczba_wypowiedzi desc', 10, 'liczba_wypowiedzi');
-
-        // FREKWENCJA
-        $frekwencja = $this->poslowie('frekwencja desc', 10, 'frekwencja');
-
-        // BUNTY
-        $bunty = $this->poslowie('liczba_glosowan_zbuntowanych desc', 10, 'liczba_glosowan_zbuntowanych');
-
-        // INTERPELACJE
-        $interpelacje = $this->poslowie();
-
-        // ETYKA
-        $etyka = $this->poslowie();
-
-        // PRZELOTY
-        $przeloty = $this->poslowie();
-
-        // PRZEJAZDY
-        $przejazdy = $this->poslowie();
-
-        // KWATERY PRYWATNE
-        $kwatery = $this->poslowie();
-
-        // WNIOSKI O UCHYLENIE IMMUNITETU
-        $immunitet = $this->poslowie();
-
-        // ZAROBKI
-        $zarobki = $this->poslowie();
-
+		/*
         // ZAWODY
         $zawody =  array(
             array('percent' => 65, 'job' => 'Prawnicy', 'more_link' => '#'),
@@ -100,23 +81,28 @@ class SejmometrController extends SejmometrAppController
             array('title' => 'Prawo i Sprawiedliwość', 'img_src' => 'http://resources.sejmometr.pl/s_kluby/2_a_t.png', 'setup' => array(array('Mężczyźni', 65), array('Kobiety', 35))),
             array('title' => 'Twój Ruch', 'img_src' => 'http://resources.sejmometr.pl/s_kluby/2_a_t.png', 'setup' => array(array('Mężczyźni', 65), array('Kobiety', 35))),
             array('title' => 'Polskie Stronnictwo Ludowe', 'img_src' => 'http://resources.sejmometr.pl/s_kluby/2_a_t.png', 'setup' => array(array('Mężczyźni', 65), array('Kobiety', 35)))
-        );
-
-		
-		// OSTATNIE POSIEDZENIE
-		$posiedzenie = $API->searchDataset('sejm_posiedzenia', array(
-			'order' => 'data_stop desc',
-			'limit' => 1,
-		));
-		
-		$posiedzenie = $API->getObjects();
-		$posiedzenie = $posiedzenie[0];
-		$related = $posiedzenie->loadRelated();
-				
-		$this->set(compact('posiedzenie', 'poslowie', 'wystapienia', 'frekwencja', 'bunty', 'interpelacje', 'etyka',
-            'przeloty', 'przejazdy', 'kwatery', 'immunitet', 'zarobki', 'zawody', 'genderyzm', 'poslowie_url'));
+        );            
+       */
 		
 
+    }
+    
+    public function detailBlock() {
+	    
+	    $id = $this->request->query['id'];
+	    if( !$id )
+	    	return false;
+	    
+	    $view = new View($this, false);
+
+        $html = $view->element('Sejmometr.list_inner', array(
+            'items' => $this->poslowie($id),
+        ));
+	    
+	    $this->set('id', $id);
+	    $this->set('html', $html);
+	    $this->set('_serialize', array('html', 'id'));
+	    
     }
     
     public function posiedzenia_timeline()
