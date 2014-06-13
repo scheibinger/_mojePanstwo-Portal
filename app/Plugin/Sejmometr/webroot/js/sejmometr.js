@@ -26,8 +26,18 @@ jQuery(document).ready(function () {
 
         });
     }
-	
-	detailBlocks();
+
+    var $sideMenu = $('.sideMenu > ul');
+
+    $sideMenu.css('width', $sideMenu.width()).affix({
+        offset: {
+            top: function () {
+                return this.top = Math.floor($('.sideMenu').position().top) - $('header').outerHeight(true);
+            }
+        }
+    });
+
+    detailBlocks();
     graphPoslankiPoslowie();
 });
 
@@ -81,53 +91,53 @@ function graphPoslankiPoslowie() {
 
 var ajaxQueue = $({});
 
-$.ajaxQueue = function( ajaxOpts ) {
-	
-	// Hold the original complete function.
-	var oldComplete = ajaxOpts.complete;
-	
-	// Queue our ajax request.
-	ajaxQueue.queue(function( next ) {
-		
-		// Create a complete callback to fire the next event in the queue.
-		ajaxOpts.complete = function() {
-			
-			// Fire the original complete if it was there.
-			if ( oldComplete ) {
-				oldComplete.apply( this, arguments );
-			}
-			
-			// Run the next query in the queue.
-			next();
-		};
-		
-		// Run the query.
-		$.ajax( ajaxOpts );
-	
-	});
+$.ajaxQueue = function (ajaxOpts) {
+
+    // Hold the original complete function.
+    var oldComplete = ajaxOpts.complete;
+
+    // Queue our ajax request.
+    ajaxQueue.queue(function (next) {
+
+        // Create a complete callback to fire the next event in the queue.
+        ajaxOpts.complete = function () {
+
+            // Fire the original complete if it was there.
+            if (oldComplete) {
+                oldComplete.apply(this, arguments);
+            }
+
+            // Run the next query in the queue.
+            next();
+        };
+
+        // Run the query.
+        $.ajax(ajaxOpts);
+
+    });
 
 };
 
 function detailBlocks() {
-	
-	$( ".detailBlock" ).each(function( idx ) {
-		
-		// Queue up an ajax request.
-		$.ajaxQueue({
-			url: "/sejmometr/detailBlock.json",
-			data: {
-				id: $( this ).attr('id')
-			},
-			// dataType: 'json',
-			type: "GET",
-			success: function(data) {
-				
-				console.log('success', $('.detailBlock[id='+data.id+']'));		
-				$('.detailBlock[id='+data.id+']').find('ul').removeClass('loading').html( data.html );
-				
-			}
-		});
-		
-	});
-	
+
+    $(".detailBlock").each(function (idx) {
+
+        // Queue up an ajax request.
+        $.ajaxQueue({
+            url: "/sejmometr/detailBlock.json",
+            data: {
+                id: $(this).attr('id')
+            },
+            // dataType: 'json',
+            type: "GET",
+            success: function (data) {
+
+                console.log('success', $('.detailBlock[id=' + data.id + ']'));
+                $('.detailBlock[id=' + data.id + ']').find('ul').removeClass('loading').html(data.html);
+
+            }
+        });
+
+    });
+
 }
