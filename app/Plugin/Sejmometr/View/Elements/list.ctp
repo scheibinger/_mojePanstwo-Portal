@@ -4,7 +4,7 @@
     <div class="text"><?php echo $page['text'] ?></div>
 
     <div class="poslowieList">
-        <ul class="loading"></ul>
+        <ul class="display loading"></ul>
 
         <div class="checkIt text-center">
             <a class="btn btn-primary" href="<?php echo $page['link'] ?>" target="_self">Zobacz pełen ranking</a>
