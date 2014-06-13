@@ -13,7 +13,7 @@
                      alt="<?php echo $item['klub'] ?>"/>
             </div>
             <div class="poselInfo">
-                <?php echo pl_dopelniacz(5, 'wystąpienie', 'wystąpienia', 'wystąpień'); ?>
+                <?php echo $item['display']; ?>
             </div>
         </a>
     </li>

@@ -19,6 +19,15 @@ class SejmometrController extends SejmometrAppController
         $_map = array(
         	'wystapienia' => array(
         		'order' => 'liczba_wypowiedzi desc',
+        		'display_callback' => function($object){
+	        		return pl_dopelniacz($object->getData('liczba_wypowiedzi'), 'wystąpienie', 'wystąpienia', 'wystąpień');	
+        		},
+        	),
+        	'frekwencja' => array(
+        		'order' => 'frekwencja asc',
+        		'display_callback' => function($object){
+	        		return $object->getData('frekwencja') . '%';	
+        		},
         	),
         );
         
@@ -36,11 +45,11 @@ class SejmometrController extends SejmometrAppController
             'order' => $preset_data['order'],
         ));
         $objects = $api->getObjects();
-                
         
+		        
         $r = array();
         foreach($objects as $object) {
-
+						
             $entry = array(
                 'imie' => $object->getData('imie_pierwsze'),
                 'nazwisko' => $object->getData('nazwisko'),
@@ -48,6 +57,7 @@ class SejmometrController extends SejmometrAppController
                 'klub_img_src' => $this->klub_img_src($object->getData('klub_id')),
                 'posel_img_src' => $object->getThumbnailUrl(),
                 'klub' => $object->getData('sejm_kluby.nazwa'),
+                'display' => $preset_data['display_callback']($object),
             );
 
             array_push($r, $entry);

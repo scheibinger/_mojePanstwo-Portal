@@ -160,7 +160,7 @@
 <div class="detailPoslowie strip">
     <div class="container">
         <div class="head col-xs-12">
-            <h2><strong>Zobacz dane dotyczące aktywności posłow</strong></h2>
+            <h2 class="text-center"><strong>Zobacz dane dotyczące aktywności posłów</strong></h2>
         </div>
         <div class="sideMenu col-xs-12 col-sm-4 col-md-2">
             <ul>
