@@ -245,4 +245,9 @@ class SejmometrController extends SejmometrAppController
 
         $this->set(compact('zawody_chart', 'zawody'));
     }
+
+    public function info()
+    {
+        $this->set(compact('info'));
+    }
 }

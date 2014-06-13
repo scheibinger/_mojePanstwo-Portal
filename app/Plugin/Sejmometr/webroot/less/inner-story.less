@@ -1,27 +1,24 @@
+.ScrollSceneIndicators {
+    z-index: 1 !important;
+}
+
 #storyLine {
     display: block;
-    position: fixed;
-    left: 0;
-    top: 0;
-    z-index: 100;
-    width: 100%;
+    min-width: 100%;
     height: 100%;
-    overflow: hidden;
     background-color: #41a8de;
+    white-space: nowrap;
 
     .innerStory {
-        @minWidth: 1204px;
-
+        min-width: 100%;
         height: 100%;
         position: relative;
-        width: 100%;
 
         .far, .medium, .near {
             position: absolute;
             top: 0;
             left: 0;
             display: block;
-            width: 11 * @minWidth;
             height: 100%;
         }
 
@@ -38,10 +35,11 @@
 
         .medium {
             .scene {
-                min-width: @minWidth;
-                width: 100%;
+                min-width: 100%;
                 height: 100%;
-                float: left;
+                display: inline-block;
+                vertical-align: top;
+                white-space: nowrap;
 
                 &.intro {
                     background: url(../Sejmometr/img/inner-story/default_green.png) bottom left repeat-x;
@@ -79,7 +77,54 @@
             }
         }
         .near {
-            /*ludzie, samochod, samolot*/
+            .posel {
+                display: block;
+                width: 60px;
+                height: 110px;
+                background: url(../Sejmometr/img/inner-story/animated_posel.png) top left no-repeat;
+
+                position: absolute;
+                left: -999px;
+                bottom: 122px;
+            }
+            .samochod {
+                display: block;
+                width: 291px;
+                height: 96px;
+                background: url(../Sejmometr/img/inner-story/animated_samochod.png) top left no-repeat;
+
+                position: absolute;
+                left: -999px;
+                bottom: 105px;
+
+                &.in {
+                    background-position: bottom left;
+                }
+            }
+            .taxi {
+                display: block;
+                width: 303px;
+                height: 109px;
+                background: url(../Sejmometr/img/inner-story/animated_taxi.png) top left no-repeat;
+
+                position: absolute;
+                left: -999px;
+                bottom: 105px;
+
+                &.in {
+                    background-position: bottom left;
+                }
+            }
+            .samolot {
+                display: block;
+                width: 776px;
+                height: 273px;
+                background: url(../Sejmometr/img/inner-story/animated_samolot.png) top left no-repeat;
+
+                position: absolute;
+                left: -999px;
+                bottom: 40px;
+            }
         }
     }
 }

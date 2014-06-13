@@ -1,5 +1,5 @@
 <?php $this->Combinator->add_libs('css', $this->Less->css('inner-story', array('plugin' => 'Sejmometr'))); ?>
-<?php $this->Combinator->add_libs('js', 'Sejmometr.jquery.mousewheel.js'); ?>
+<?php $this->Combinator->add_libs('js', 'Sejmometr.inner-story-libs.js'); ?>
 <?php $this->Combinator->add_libs('js', 'Sejmometr.inner-story.js'); ?>
 
 <div id="storyLine">
@@ -9,10 +9,31 @@
         </div>
         <div class="medium">
             <div class="scene intro" data-scene="1">
+                <div class="title">
+                    <h3>Środki finansowe ogółem do rozliczenia</h3>
 
+                    <h2>1 209 340
+                        <small>PLN</small>
+                    </h2>
+                </div>
+                <div class="infoIcon biuro">Wydatki na biuro poselskie</div>
+                <div class="scrollHint"></div>
             </div>
             <div class="scene sejm" data-scene="2">
-
+                <div class="stat posel zarobki">
+                    <p>Zarobki posła</p>
+                    <strong>209 304
+                        <small>PLN/rok</small>
+                    </strong>
+                    <span>wydatki na posła</span>
+                </div>
+                <div class="stat posel przejazd">
+                    <p>Przejazd posła<br>samochodem własnym lub innym</p>
+                    <strong>209 304
+                        <small>PLN/rok</small>
+                    </strong>
+                    <span>wydatki na biuro poselskie</span>
+                </div>
             </div>
             <div class="scene szpital" data-scene="3">
 
@@ -43,7 +64,10 @@
             </div>
         </div>
         <div class="near">
-
+            <div class="posel"></div>
+            <div class="samochod"></div>
+            <div class="taxi"></div>
+            <div class="samolot"></div>
         </div>
     </div>
 </div>
