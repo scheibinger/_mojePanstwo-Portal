@@ -1,5 +1,5 @@
 <div id="_mojePanstwoCockpit">
-    <div class="_mojePanstwoCockpitContent">
+    <div class="_mojePanstwoCockpitContent container">
         
         <div class="_mojePanstwoCockpitLogo">
             <p>
