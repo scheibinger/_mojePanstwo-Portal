@@ -29,6 +29,22 @@ class SejmometrController extends SejmometrAppController
 	        		return $object->getData('frekwencja') . '%';	
         		},
         	),
+        	'bunty' => array(
+        		'order' => 'zbuntowanie desc',
+        		'display_callback' => function($object){
+	        		return $object->getData('zbuntowanie') . '%';	
+        		},
+        	),
+        	'interpelacje' => array(
+        		'order' => 'liczba_interpelacji desc',
+        		'display_callback' => function($object){
+	        		return pl_dopelniacz($object->getData('liczba_interpelacji'), 'interpelacja', 'interpelacje', 'interpelacji');	
+        		},
+        	),
+        	
+        	
+        	
+        	
         );
         
         $_map_keys = array_keys($_map);
