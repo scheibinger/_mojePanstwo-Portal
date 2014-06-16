@@ -171,6 +171,7 @@ class SejmPosiedzeniaController extends DataobjectsController
             'conditions' => array(
                 'posiedzenie_id' => $this->object->getId(),
             ),
+            'order' => 'numer asc',
         ));
         $this->set('punkty', $this->API->getObjects());
 

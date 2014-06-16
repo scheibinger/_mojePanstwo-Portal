@@ -191,7 +191,7 @@ class SejmometrController extends SejmometrAppController
             $output['timeline']['date'][] = array(
 	            'startDate' => $startDate,
 	            'endDate' => $stopDate,
-	            'headline' => '#' . $object->getData('numer'),
+	            'headline' => '<a href="/dane/sejm_posiedzenia/' . $object->getData('id') . '">#' . $object->getData('numer') . '</a>',
 	            'text' => '<p>Statystyki posiedzenia</p>',
 	            'classname' => 'klasa',
                 'asset' => $asset,
@@ -263,5 +263,11 @@ class SejmometrController extends SejmometrAppController
     public function info()
     {
         $this->set(compact('info'));
+    }
+    
+    public function posiedzenia(){
+	    
+	    
+	    
     }
 }

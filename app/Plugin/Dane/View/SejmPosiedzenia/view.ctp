@@ -1,5 +1,6 @@
 <?
 $this->Combinator->add_libs('css', $this->Less->css('dataobjectslider', array('plugin' => 'Dane')));
+$this->Combinator->add_libs('css', $this->Less->css('view-sejmposiedzenia', array('plugin' => 'Dane')));
 echo $this->Element('dataobject/pageBegin');
 ?>
 
@@ -9,11 +10,8 @@ echo $this->Element('dataobject/pageBegin');
         <div class="col-md-2">
             <div class="objectMenu vertical">
                 <ul class="nav nav-pills nav-stacked row">
-                    <li class="active">
-                        <a href="#info" class="normalizeText">Info</a>
-                    </li>
                     <? foreach ($_menu as $m) { ?>
-                        <li>
+                        <li class="active">
                             <a class="normalizeText" href="#<?= $m['id'] ?>"><?= $m['label'] ?></a>
                         </li>
                     <? } ?>
@@ -27,32 +25,52 @@ echo $this->Element('dataobject/pageBegin');
 
                     <div class="block-group">
 
-
+						<? /*
                         <div class="block">
                             <?php echo $this->Dataobject->hlTable($hldata, array(
                                 'col_width' => 3,
                             )); ?>
                         </div>
+                        */ ?>
 
 
                         <? if ($punkty) { ?>
-                            <div id="wystapienia" class="block">
+                            <div class="block">
                                 <div class="block-header">
-                                    <h2 class="pull-left">Punkty porządku dziennego</h2>
-                                    <a class="btn btn-default btn-sm pull-right"
-                                       href="/dane/sejm_posiedzenia/<?= $object->getId() ?>/punkty">Zobacz wszystkie</a>
+                                    <h2>Punkty porządku dziennego</h2>
                                 </div>
 
                                 <div class="content">
-                                    <div class="dataobjectsSliderRow row">
-                                        <div>
-                                            <?php echo $this->dataobjectsSlider->render($punkty, array(
-                                                'perGroup' => 3,
-                                                'rowNumber' => 1,
-                                                'labelMode' => 'none',
-                                            )) ?>
-                                        </div>
-                                    </div>
+                                    
+									<ul id="punkty">
+										<? foreach( $punkty as $punkt ) {?>
+										<li class="row">
+											<div class="col-md-1 counter text-center">
+											
+												<p class="">#<?= $punkt->getData('numer') ?></p>
+											
+											</div><div class="col-md-9 display">
+											
+											
+												<h3><a href="/dane/sejm_posiedzenia/<?= $punkt->getId() ?>"><?= $punkt->getData('tytul') ?></a></h3>
+												
+												<p class="stats">
+															<? if( $punkt->getData('liczba_wystapien') ) {?><img src="http://resources.sejmometr.pl/stenogramy/punkty/<?= $punkt->getId() ?>.jpg" /><?}?>
+															<?= $punkt->getData('stats_str') ?>
+														</p>
+												
+												
+																									
+											
+											</div><div class="col-md-2">
+												
+												<p class="status"><?= $punkt->getData('opis') ?></p>
+												
+											</div>
+										</li>
+										<? } ?>
+									</ul>
+                                    
                                 </div>
                             </div>
                         <? } ?>

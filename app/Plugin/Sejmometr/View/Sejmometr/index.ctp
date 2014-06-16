@@ -8,8 +8,6 @@
 
 <?php $this->Combinator->add_libs('js', 'Sejmometr.sejmometr.js'); ?>
 
-<?php echo $this->Html->script('../plugins/TimelineJS/build/js/storyjs-embed.js', array('block' => 'scriptBlock')); ?>
-
 <div id="sejmometr" class="newLayout">
 
 <div class="headline strip">
@@ -33,7 +31,7 @@
                     <a class="poslowie" href="/dane/poslowie"><span>Znajdź<br/>i sprawdź swojego posła!</span></a>
                 </div>
                 <div class="col-lg-3 link">
-                    <a class="posiedzenia" href="/dane/sejm_posiedzenia"><span>Posiedzenia Sejmu</span></a>
+                    <a class="posiedzenia" href="/sejmometr/posiedzenia"><span>Posiedzenia Sejmu</span></a>
                 </div>
                 <div class="col-lg-3 link">
                     <a class="projekty" href="/dane/legislacja_projekty_ustaw"><span>Projekty ustaw</span></a>
