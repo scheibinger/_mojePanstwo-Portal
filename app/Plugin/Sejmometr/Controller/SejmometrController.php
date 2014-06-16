@@ -89,7 +89,10 @@ class SejmometrController extends SejmometrAppController
 	
     public function index()
     {
-		$API = $this->API->Dane();
+		
+		$api = $this->API->Sejmometr();
+		$stats = $api->getStats();
+		
 		
         $poslowie_url = Router::url(array('plugin' => 'dane', 'controller' => 'poslowie'));
 		$this->set('poslowie_url', $poslowie_url);
