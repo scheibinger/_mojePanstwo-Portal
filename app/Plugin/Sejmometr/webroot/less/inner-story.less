@@ -2,12 +2,23 @@
     z-index: 1 !important;
 }
 
+#_wrapper header {
+    position: fixed;
+    top: 0;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+}
+
 #storyLine {
     display: block;
     min-width: 100%;
     height: 100%;
     background-color: #41a8de;
     white-space: nowrap;
+    margin-bottom: -40px;
 
     .innerStory {
         min-width: 100%;
@@ -35,11 +46,12 @@
 
         .medium {
             .scene {
-                min-width: 100%;
+                width: 1204px;
                 height: 100%;
                 display: inline-block;
                 vertical-align: top;
                 white-space: nowrap;
+                margin-right: -4px;
 
                 &.intro {
                     background: url(../Sejmometr/img/inner-story/default_green.png) bottom left repeat-x;
@@ -73,6 +85,9 @@
                 }
                 &.lot {
                     background: url(../Sejmometr/img/inner-story/default_airport.png) bottom left repeat-x;
+                }
+                &.stats {
+                    background-color: #41a8de;
                 }
             }
         }
