@@ -17,23 +17,29 @@
         <h1 class="header text-center">Sejmometr</h1>
 
         <div class="content-container col-xs-12">
-            <h5>Sejm jest organem władzy ustawodawczej w Polsce. Tworzą go posłowie, którzy są reprezentantami Narodu dlatego mogą, a nawet powinni być przez ten Naród oceniani. Szerokie udostępnianie informacji o poselskich działaniach leży w interesie każdego z 460 posłów. Obywatele nie mający dostępu do takich danych swoje poglądy wyrobią w oparciu o inne, niekoniecznie obiektywne źródła informacji. Postanowiliśmy wesprzeć tych, którzy chcieliby wiedzieć jak pracują nasi posłowie i w jakich warunkach wykonują swój mandat poselski. Stworzyliśmy aplikację, która prezentuje rozmaite dane związane z sejmową codziennością!
+            <h5>Sejm jest organem władzy ustawodawczej w Polsce. Tworzą go posłowie, którzy są reprezentantami Narodu
+                dlatego mogą, a nawet powinni być przez ten Naród oceniani. Szerokie udostępnianie informacji o
+                poselskich działaniach leży w interesie każdego z 460 posłów. Obywatele nie mający dostępu do takich
+                danych swoje poglądy wyrobią w oparciu o inne, niekoniecznie obiektywne źródła informacji.
+                Postanowiliśmy wesprzeć tych, którzy chcieliby wiedzieć jak pracują nasi posłowie i w jakich warunkach
+                wykonują swój mandat poselski. Stworzyliśmy aplikację, która prezentuje rozmaite dane związane z sejmową
+                codziennością!
 
             </h5>
 
 
             <div class="row sejm-menu">
                 <div class="col-lg-3 link">
-                    <a href="/dane/poslowie">Znajdź i sprawdź swojego posła!</a>
+                    <a class="poslowie" href="/dane/poslowie"><span>Znajdź<br/>i sprawdź swojego posła!</span></a>
                 </div>
                 <div class="col-lg-3 link">
-                    <a href="/dane/sejm_posiedzenia">Posiedzenia Sejmu</a>
+                    <a class="posiedzenia" href="/dane/sejm_posiedzenia"><span>Posiedzenia Sejmu</span></a>
                 </div>
                 <div class="col-lg-3 link">
-                    <a href="/dane/legislacja_projekty_ustaw">Projekty utaw</a>
+                    <a class="projekty" href="/dane/legislacja_projekty_ustaw"><span>Projekty ustaw</span></a>
                 </div>
                 <div class="col-lg-3 link">
-                    <a href="/sejmometr/kasa">Ile to kosztuje?</a>
+                    <a class="koszty" href="/sejmometr/kasa"><span>Ile to kosztuje?</span></a>
                 </div>
             </div>
 
@@ -95,7 +101,8 @@
 </div>
 
 <div id="timeline-embed" data-source="1"></div>
-*/ ?>
+*/
+?>
 <?php /* END TIMELINE strip */ ?>
 
 
@@ -156,7 +163,8 @@
     </div>
 </div>
 
-*/ ?>
+*/
+?>
 
 <div class="detailPoslowie strip">
 <div class="container">

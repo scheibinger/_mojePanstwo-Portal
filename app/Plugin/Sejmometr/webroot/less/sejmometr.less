@@ -1,3 +1,12 @@
+/* FONTS */
+@font-face {
+    font-family: 'sejmometr_app';
+    src: url('../Sejmometr/fonts/sejmometr_app.eot');
+    src: url('../Sejmometr/fonts/mojePanstwo.eot?#iefix') format('embedded-opentype'), url('../Sejmometr/fonts/sejmometr_app.ttf') format('truetype'), url('../Sejmometr/fonts/sejmometr_app.woff') format('woff'), url('../Sejmometr/fonts/sejmometr_app.svg#sejmometr_app') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
 #sejmometr {
     @mainColor: #3C3C3C;
     @lightColor: #949899;
@@ -92,9 +101,64 @@
         .link {
             a {
                 display: block;
-                background-color: #DDD;
-                text-align: center;
-                padding: 30px 0;
+                background-color: #0f436a;
+                color: #FFFFFF;
+
+                border: 1px solid #0f436a;
+                -moz-border-radius: 5px; /*Firefox*/
+                -webkit-border-radius: 5px; /*Safari, Chrome*/
+                border-radius: 5px;
+                height: 90px;
+                padding: 0 55px;
+                line-height: 90px;
+
+                span {
+                    display: inline-block;
+                    vertical-align: middle;
+                    line-height: 1.1em;
+                    font-size: 16px;
+                }
+
+                &:before, &:after {
+                    position: absolute;
+                    top: 50%;
+                    width: 30px;
+                    height: 30px;
+                    display: block;
+                    margin-top: -15px;
+                    font-family: 'sejmometr_app';
+                    font-size: 30px;
+                    speak: none;
+                    font-style: normal;
+                    font-weight: normal;
+                    font-variant: normal;
+                    text-transform: none;
+                    line-height: 1;
+                    -webkit-font-smoothing: antialiased;
+                    -moz-osx-font-smoothing: grayscale;
+                }
+
+                &:before {
+                    left: 25px;
+                }
+
+                &:after {
+                    content: '\e604';
+                    right: 20px;
+                }
+
+                &.poslowie:before {
+                    content: '\e602';
+                }
+                &.posiedzenia:before {
+                    content: '\e601';
+                }
+                &.projekty:before {
+                    content: '\e600';
+                }
+                &.koszty:before {
+                    content: '\e603';
+                }
             }
         }
 
