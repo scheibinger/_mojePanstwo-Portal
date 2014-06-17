@@ -34,7 +34,7 @@
                     <a class="posiedzenia" href="/sejmometr/posiedzenia"><span>Posiedzenia Sejmu</span></a>
                 </div>
                 <div class="col-lg-3 link">
-                    <a class="projekty" href="/dane/legislacja_projekty_ustaw"><span>Projekty ustaw</span></a>
+                    <a class="projekty" href="/dane/prawo_projekty"><span>Projekty aktów prawnych</span></a>
                 </div>
                 <div class="col-lg-3 link">
                     <a class="koszty" href="/sejmometr/kasa"><span>Ile to kosztuje?</span></a>
