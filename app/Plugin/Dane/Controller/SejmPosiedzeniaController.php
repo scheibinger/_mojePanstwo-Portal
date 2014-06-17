@@ -124,10 +124,14 @@ class SejmPosiedzeniaController extends DataobjectsController
         parent::view();
 
 
-
-
+		
+		$this->object->loadLayer('projekty');
+		
+		
+		/*
+		
         // PREPARING HIGHLIGHTS TABLE
-
+		
         $hldata = array();
         foreach( $this->hlmap as $item )
         {
@@ -151,12 +155,12 @@ class SejmPosiedzeniaController extends DataobjectsController
                 );
             }
         }
-
+	    */
 
 
 
         // PREPARE MENU
-
+		/*
         $menu = array(
             array(
                 'id' => 'punkty',
@@ -171,13 +175,14 @@ class SejmPosiedzeniaController extends DataobjectsController
             'conditions' => array(
                 'posiedzenie_id' => $this->object->getId(),
             ),
+            'order' => 'numer asc',
         ));
         $this->set('punkty', $this->API->getObjects());
+		*/
 
 
-
-        $this->set('hldata', $hldata);
-        $this->set('_menu', $menu);
+        // $this->set('hldata', $hldata);
+        // $this->set('_menu', $menu);
 
     }
 

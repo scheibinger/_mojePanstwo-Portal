@@ -8,8 +8,6 @@
 
 <?php $this->Combinator->add_libs('js', 'Sejmometr.sejmometr.js'); ?>
 
-<?php echo $this->Html->script('../plugins/TimelineJS/build/js/storyjs-embed.js', array('block' => 'scriptBlock')); ?>
-
 <div id="sejmometr" class="newLayout">
 
 <div class="headline strip">
@@ -33,10 +31,10 @@
                     <a class="poslowie" href="/dane/poslowie"><span>Znajdź<br/>i sprawdź swojego posła!</span></a>
                 </div>
                 <div class="col-lg-3 link">
-                    <a class="posiedzenia" href="/dane/sejm_posiedzenia"><span>Posiedzenia Sejmu</span></a>
+                    <a class="posiedzenia" href="/sejmometr/posiedzenia"><span>Posiedzenia Sejmu</span></a>
                 </div>
                 <div class="col-lg-3 link">
-                    <a class="projekty" href="/dane/legislacja_projekty_ustaw"><span>Projekty ustaw</span></a>
+                    <a class="projekty" href="/dane/prawo_projekty"><span>Projekty aktów prawnych</span></a>
                 </div>
                 <div class="col-lg-3 link">
                     <a class="koszty" href="/sejmometr/kasa"><span>Ile to kosztuje?</span></a>
@@ -230,10 +228,10 @@
         'anchor' => 'wystapienia',
         'title' => 'Wystąpienia',
         'text' => 'Posłowie w ramach sprawowania mandatu wypowiadają się na posiedzeniach Sejmu. Zobacz, którzy z nich są najbardziej aktywni.',
-        'link' => $poslowie_url . '?order=liczba_wypowiedzi%20desc'
+        'link' => $poslowie_url . '?order='. $liczba_wypowiedzi['order']
     );
 
-    echo $this->element('Sejmometr.list', array('page' => $page));
+    echo $this->element('Sejmometr.list', array('page' => $page, 'items' => $liczba_wypowiedzi['items']));
 
 
     /* FREKWENCJA BLOCK */
@@ -243,10 +241,10 @@
         'anchor' => 'frekwencja',
         'title' => 'Frekwencja',
         'text' => 'Poseł musi być obecny na posiedzeniach Sejmu i powinien czynnie w nich uczestniczyć. To poselski obowiązek, którego zaniedbanie powoduje konsekwencje finansowe. Jeżeli poseł ma nieusprawiedliwione nieobecności Marszałek Sejmu zarządza obniżenie uposażenia i diety parlamentarnej albo jednego z tych świadczeń, jeżeli tylko ono przysługuje posłowi. Poseł ze swoich świadczeń traci 1/30 za każdy dzień nieusprawiedliwionej nieobecności na posiedzeniu Sejmu lub za niewzięcie w danym dniu udziału w więcej niż 1/5 głosowań. Sprawdź, który z posłów najcześciej omija sejmowe posiedzenia.',
-        'link' => $poslowie_url . '?order=frekwencja%20desc'
+        'link' => $poslowie_url . '?order'. $frekwencja['order']
     );
 
-    echo $this->element('Sejmometr.list', array('page' => $page));
+    echo $this->element('Sejmometr.list', array('page' => $page, 'items' => $frekwencja['items']));
 
 
     /* BUNTY BLOCK */
@@ -256,10 +254,11 @@
         'anchor' => 'bunty',
         'title' => 'Bunty',
         'text' => 'Poprzez "bunty" określamy sytuacje polegające na tym, że poseł głosuje przeciwnie niż większość klubu parlamentarnego, do którego należy. Partie zabezpieczają się przed buntami stosując dyscyplinę głosowania. Narzucają tym samym sposób w jaki dany poseł ma zagłosować. Za naruszenie dyscypliny grozi nawet kara finansowa. Powstaje pytanie jak narzędzie dyscypliny głosowania ma się do konstytucyjnego zapisu o tym, że posłowie są przedstawicielami Narodu. W momencie gdy poseł oddaje swój głos zgodnie z wytycznymi partyjnego lidera jest przedstawicielami partii, a nie Narodu. Wydaje się, że dyscyplina poselska nie wpływa korzystnie na interesy obywateli. W sytuacji jej zastosowania na decyzję posła podczas głosowania mają wpływ nie merytoryczne rozważania, ale obawy przed sankcjami, które może wymierzyć partia. W naszym zestawieniu prezentujemy największych buntowników w Sejmie, którzy głosują inaczej niż większość ich klubu parlamentarnego.',
-        'link' => $poslowie_url . '?order=liczba_glosowan_zbuntowanych%20desc'
+        //'link' => $poslowie_url . '?order=liczba_glosowan_zbuntowanych%20desc'
+        'link' => $poslowie_url . '?order'. $zbuntowanie['order']
     );
 
-    echo $this->element('Sejmometr.list', array('page' => $page));
+    echo $this->element('Sejmometr.list', array('page' => $page, 'items' => $zbuntowanie['items']));
 
 
     /* INTERPELACJE BLOCK */
@@ -269,10 +268,10 @@
         'anchor' => 'interpelacje',
         'title' => 'Interpelacje',
         'text' => 'Składanie interpelacji jest jednym z poselskich uprawnień. Każdy z posłów może zapytać Prezesa Rady Ministrów lub konkretnego ministra o sprawę, która dotyczy polityki państwa. Członkowie Rady Ministrów muszą udzielić posłowi odpowiedzi nie później niż w ciągu 21 dni od otrzymania interpelacji. Zobacz, który z posłów najczęściej zadaje pytania!',
-        'link' => '#rankingLink'
+        'link' => $poslowie_url . '?order'. $liczba_interpelacji['order']
     );
 
-    echo $this->element('Sejmometr.list', array('page' => $page));
+    echo $this->element('Sejmometr.list', array('page' => $page, 'items' => $liczba_interpelacji['items']));
 
 
     /* KIM SA Z ZAWODU BLOCK */
@@ -285,7 +284,7 @@
         'link' => Router::url(array('action' => 'zawody_poslow'))
     );
 
-    echo $this->element('Sejmometr.graph_percent', array('page' => $page));
+    echo $this->element('Sejmometr.graph_percent', array('page' => $page, 'items' => $zawody));
 
 
     /* ETYKA POSELSKA BLOCK */
@@ -310,7 +309,7 @@
         'text' => 'Ilość kobiet i mężczyzn w Sejmie i w poszczególnych partiach',
     );
 
-    echo $this->element('Sejmometr.graph_circle', array('page' => $page));
+    echo $this->element('Sejmometr.graph_circle', array('page' => $page, 'items' => $poslanki_poslowie));
 
 
     /* POLSKIE PRZELOTY BLOCK */
