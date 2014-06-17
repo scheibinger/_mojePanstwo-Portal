@@ -36,9 +36,6 @@ jQuery(document).ready(function () {
             }
         }
     });
-
-    detailBlocks();
-    graphPoslankiPoslowie();
 });
 
 function prepare_slide(current_slide) {

@@ -32,9 +32,13 @@ function graphPoslankiPoslowie() {
     });
 }
 
-var ajaxQueue = $({});
+jQuery(document).ready(function () {
+    graphPoslankiPoslowie();
+});
 
-$.ajaxQueue = function (ajaxOpts) {
+var ajaxQueue = jQuery({});
+
+jQuery.ajaxQueue = function (ajaxOpts) {
 
     // Hold the original complete function.
     var oldComplete = ajaxOpts.complete;
@@ -55,32 +59,8 @@ $.ajaxQueue = function (ajaxOpts) {
         };
 
         // Run the query.
-        $.ajax(ajaxOpts);
+        jQuery.ajax(ajaxOpts);
 
     });
 
 };
-
-function detailBlocks() {
-
-    $(".detailBlock").each(function (idx) {
-
-        // Queue up an ajax request.
-        $.ajaxQueue({
-            url: "/sejmometr/detailBlock.json",
-            data: {
-                id: $(this).attr('id')
-            },
-            // dataType: 'json',
-            type: "GET",
-            success: function (data) {
-
-                console.log('success', $('.detailBlock[id=' + data.id + ']'));
-                $('.detailBlock[id=' + data.id + ']').find('ul').removeClass('loading').html(data.html);
-
-            }
-        });
-
-    });
-
-}
