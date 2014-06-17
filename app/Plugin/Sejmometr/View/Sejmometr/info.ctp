@@ -35,33 +35,16 @@
                     <span>wydatki na biuro poselskie</span>
                 </div>
             </div>
-            <div class="scene szpital" data-scene="3">
-
-            </div>
-            <div class="scene bank" data-scene="4">
-
-            </div>
-            <div class="scene spotkanie" data-scene="5">
-
-            </div>
-            <div class="scene tlumaczenia" data-scene="6">
-
-            </div>
-            <div class="scene dom" data-scene="7">
-
-            </div>
-            <div class="scene droga" data-scene="8">
-
-            </div>
-            <div class="scene lotnisko" data-scene="9">
-
-            </div>
-            <div class="scene lot" data-scene="10">
-
-            </div>
-            <div class="scene stats" data-scene="11">
-
-            </div>
+            <div class="scene biuro" data-scene="3"></div>
+            <div class="scene szpital" data-scene="4"></div>
+            <div class="scene bank" data-scene="5"></div>
+            <div class="scene spotkanie" data-scene="6"></div>
+            <div class="scene tlumaczenia" data-scene="7"></div>
+            <div class="scene dom" data-scene="8"></div>
+            <div class="scene droga" data-scene="9"></div>
+            <div class="scene lotnisko" data-scene="10"></div>
+            <div class="scene lot" data-scene="11"></div>
+            <div class="scene stats" data-scene="12"></div>
         </div>
         <div class="near">
             <div class="posel"></div>
