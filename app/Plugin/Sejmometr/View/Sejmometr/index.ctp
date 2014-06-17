@@ -309,7 +309,7 @@
         'text' => 'Ilość kobiet i mężczyzn w Sejmie i w poszczególnych partiach',
     );
 
-    echo $this->element('Sejmometr.graph_circle', array('page' => $page));
+    echo $this->element('Sejmometr.graph_circle', array('page' => $page, 'items' => $poslanki_poslowie));
 
 
     /* POLSKIE PRZELOTY BLOCK */
