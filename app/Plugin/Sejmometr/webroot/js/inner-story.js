@@ -19,6 +19,11 @@ jQuery(function ($) {
         posMap,
         scrollDest = 0,
         duration = 1000,
+        pins = [],
+
+        transformOrigin,
+        top = ($window.height() - 600) / 2 | 0,
+        center = $window.width() / 2 | 0,
 
         smallJump = '20%',
         keyMap = {
@@ -33,11 +38,6 @@ jQuery(function ($) {
         },
         keyThrottle = true,
         controller,
-        center,
-        scale = 1,
-        sum = 0,
-        anchors = function () {
-        },
         lastCloudsOffset,
         images = {},
         positions = {};
@@ -81,6 +81,40 @@ jQuery(function ($) {
         });
     }
 
+    function sortedIndex(arr, n) {
+        var i, l, ret = arr[0][1];
+        for (i = 0, l = arr.length; i < l; i += 1) {
+            if (arr[i][0] > n) {
+                return ret;
+            }
+            ret = arr[i][1];
+        }
+        return ret;
+    }
+
+    function convertArr(arr, names) {
+        var i, l;
+        for (i = 0, l = arr.length; i < l; i += 1) {
+            arr[i][1] = names[arr[i][1]];
+        }
+        return arr;
+    }
+
+    function savePositions() {
+        $.each([".posel", ".samochod", ".taxi", ".samolot"], function (i, selector) {
+            var elem = $(selector),
+                top = elem.css('top') || elem.position().top,
+                left = elem.css('left') || elem.position().left;
+            positions[selector] = { position: 'absolute', top: top, left: left };
+        });
+    }
+
+    function restorePositions() {
+        $.each(positions, function (selector, css) {
+            $(selector).css(css);
+        });
+    }
+
     function keyHandler(e) {
         var keyCode = e.which || e.keyCode || e.originalEvent.keyCode;
 
@@ -94,6 +128,121 @@ jQuery(function ($) {
             }, 0);
             return false;
         }
+    }
+
+    function pos(x) {
+        var localSum = 0;
+        $.each(pins, function (i, pin) {
+            if (x <= pin[0]) {
+                return false;
+            }
+            localSum += pin[1];
+        });
+        return x + localSum + center;
+    }
+
+    function tickHandler() {
+        var offset = $story.offset().left,
+            sl = $window.scrollLeft(),
+            value = sl - 2 * offset;
+        if (lastCloudsOffset !== value) {
+            lastCloudsOffset = value;
+            $far.find('.cloud').css('left', value / 14300 * 3000 | 0);
+
+            $.each(images, function (selector, obj) {
+                var src = 'images/' + sortedIndex(obj.arr, sl);
+                if (obj.elem[0].src !== src) {
+                    obj.elem[0].src = src;
+                }
+            });
+        }
+    }
+
+    function onResize() {
+        transformOrigin = center + 'px ' + center * 6 + 'px';
+
+        if (controller) {
+            // TODO: destroy controller
+            controller.destroy();
+        }
+
+        /*SET SCREEN SIZE*/
+        $medium.find('.scene').css('width', screenWidth);
+        $story.css({'width': screenWidth, 'height': $body.innerHeight() - $header.outerHeight(true)});
+        $story.find('.far, .medium, .near').css({'width': $medium.outerWidth(true)});
+
+        restorePositions();
+
+        infoController = controller = new ScrollMagic({
+            vertical: false
+        });
+
+        var setup = new TimelineMax()
+            .add(TweenMax.from($near.find('.posel'), 0, {left: $medium.find('.scene.sejm').position().left + 600}))
+            .add(TweenMax.from($near.find('.samochod'), 0, {left: $medium.find('.scene.sejm').position().left + 850}));
+
+        var sejmPosel = new TimelineMax()
+            .add(TweenMax.fromTo($near.find('.posel'), 0.5, { left: $medium.find('.scene.sejm').position().left + 600}, { left: $medium.find('.scene.sejm').position().left + 770}))
+            .add(TweenMax.fromTo($medium.find('.scene.sejm .stat.zarobki'), 0.3, {left: $medium.find('.scene.sejm').position().left + 770, opacity: 0}, {left: $medium.find('.scene.sejm').position().left + 770, opacity: 1}))
+            .add(TweenMax.to($near.find('.posel'), 0.5, {left: $('.near .samochod').position().left + ($('.near .samochod').width() / 2) - 70}))
+            .add(TweenMax.to($near.find('.posel'), 0.2, {bottom: "-=15"}))
+            .add(TweenMax.to($near.find('.posel'), 0.1, {bottom: "+=20", height: "-=50"}));
+
+        var sejmSamochod = new TimelineMax()
+            .add(TweenMax.fromTo($medium.find('.scene.sejm .stat.samochod'), 0.3, {left: $medium.find('.scene.sejm').position().left + 850, opacity: 0}, {left: $medium.find('.scene.sejm').position().left + 850, opacity: 1}))
+            .add(TweenMax.to($near.find('.samochod'), 1, { left: $medium.find('.scene.biuro').position().left + 50}));
+
+        var biuroPosel = new TimelineMax()
+            .add(TweenMax.fromTo($near.find('.posel'), 0.1, {left: $('.near .samochod').position().left + ($('.near .samochod').width() / 2) - 70}, {left: $('.near .samochod').position().left + ($('.near .samochod').width() / 2) - 70, bottom: "-=20", height: "+=50"}))
+            .add(TweenMax.to($near.find('.posel'), 0.2, {bottom: "+=15"}))
+            .add(TweenMax.to($near.find('.posel'), 0.5, {left: $medium.find('.scene.biuro').position().left}));
+
+        new ScrollScene({
+            offset: -200,
+            duration: 0
+        }).on("end", function () {
+                $near.find('.posel').removeClass('hide').css({'height': "", 'bottom': ""});
+                $near.find('.samochod').removeClass('in');
+            })
+            .setTween(setup)
+            .addTo(controller);
+
+        new ScrollScene({
+            offset: $medium.find('.scene.sejm').position().left - $medium.find('.scene.sejm').width() / 2,
+            duration: 1000
+        }).on("end", function () {
+                $near.find('.posel').addClass('hide');
+                $near.find('.samochod').addClass('in');
+            })
+            .setTween(sejmPosel)
+            .addTo(controller);
+
+        new ScrollScene({
+            offset: $medium.find('.scene.sejm').position().left,
+            duration: 1000
+        }).on("end", function () {
+                $near.find('.posel').removeClass('hide');
+                $near.find('.samochod').removeClass('in');
+            })
+            .setTween(sejmSamochod)
+            .addTo(controller);
+
+        new ScrollScene({
+            offset: $medium.find('.scene.biuro').position().left - $medium.find('.scene.biuro').width() / 2,
+            duration: 1000
+        })
+            .setTween(biuroPosel)
+            .addTo(controller);
+
+        /*images = {
+         '.posel': {
+         elem: $('.posel'),
+         arr: convertArr([
+         [pos(0), 0],
+         [pos(100 + 1), 1]
+         ], ['posel-front.png', 'posel-stand.png', 'posel-walk.png', 'posel-back.png'])
+         }
+         };*/
     }
 
     $window.scroll(function () {
@@ -124,33 +273,13 @@ jQuery(function ($) {
     calculateOffsets();
     setTimeout(function () {
         scrollTo(0);
+        restorePositions();
     }, 100);
+    savePositions();
+    onResize();
 
-    function onResize() {
-        var transform, transformOrigin, pins = [],
-            top = ($(window).height() - 600) / 2 | 0,
-            sum = 0,
-            center = $(window).width() / 2 | 0;
+    $window.resize(onResize);
 
-        transformOrigin = center + 'px ' + center * 6 + 'px';
-
-        /*SET SCREEN SIZE*/
-        $medium.find('.scene:first, .scene:last').css('width', screenWidth);
-        $story.css({'width': screenWidth, 'height': $body.innerHeight() - $header.outerHeight(true)});
-        $story.find('.far, .medium, .near').css({'width': $medium.outerWidth(true)});
-
-
-        /*ANIMATED ELEMENTS SETUP*/
-        $far.find('.clouds').css('marginLeft', screenWidth);
-        $near.find('.posel').css('left', $medium.find('.sejm').position().left + 770);
-        $near.find('.samochod').css('left', $medium.find('.sejm').position().left + 880);
-        $near.find('.taxi').css('left', $medium.find('.dom').position().left + screenWidth - 400);
-        $near.find('.samolot').css('left', $medium.find('.lotnisko').position().left + 880);
-
-        //$story.css({ left: center * 2 });
-
-        var maxHeight = 0;
-
-    }
-
-});
+    TweenLite.ticker.addEventListener('tick', tickHandler);
+})
+;
