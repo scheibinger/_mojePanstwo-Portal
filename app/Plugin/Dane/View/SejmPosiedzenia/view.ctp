@@ -1,13 +1,19 @@
 <?
 	$this->Combinator->add_libs('css', $this->Less->css('dataobjectslider', array('plugin' => 'Dane')));
 	$this->Combinator->add_libs('css', $this->Less->css('view-sejmposiedzenia', array('plugin' => 'Dane')));
+	$this->Combinator->add_libs('css', $this->Less->css('view-sejmposiedzenia-databrowser-fix', array('plugin' => 'Dane')));
+	
 	$projekty = $object->getLayer('projekty');
 
 	echo $this->Element('dataobject/pageBegin');
+	echo $this->Element('dataobject/menuTabs', array(
+		'menu' => $_menu,
+	));
 ?>
 
 
-<div class="poslowie row mpanel">
+
+<div class="poslowie mpanel">
 	<div class="column col-md-4">
 	
 		<h2 class="label label-success">Przyjęto</h2>
