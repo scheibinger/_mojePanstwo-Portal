@@ -5716,9 +5716,9 @@ if (typeof VMM != 'undefined' && typeof VMM.Slider == 'undefined') {
          goToSlide(n, ease, duration);
          ================================================== */
         function goToSlide(n, ease, duration, fast, firstrun) {
-            
+
             window.timelinejs_current_slide = n; // #hack
-            
+
             var _ease = config.ease,
                 _duration = config.duration,
                 is_last = false,
@@ -8954,7 +8954,6 @@ if (typeof VMM.Timeline != 'undefined' && typeof VMM.Timeline.TimeNav == 'undefi
             $timebackground = VMM.appendAndGetElement(layout, "<div>", "timenav-background");
             $timenavline = VMM.appendAndGetElement($timebackground, "<div>", "timenav-line");
             $timenavindicator = VMM.appendAndGetElement($timebackground, "<div>", "timenav-indicator");
-            $timeintervalbackground = VMM.appendAndGetElement($timebackground, "<div>", "timenav-interval-background", "<div class='top-highlight'></div>");
             $toolbar = VMM.appendAndGetElement(layout, "<div>", "vco-toolbar");
 
 

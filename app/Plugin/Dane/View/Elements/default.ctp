@@ -77,7 +77,7 @@ $this->Dataobject->setObject($object);
                             <?php if ($object->getUrl() != false) { ?>
                             <a href="<?= $object->getUrl() ?>" title="<?= strip_tags($object->getTitle()) ?>">
                                 <?php } ?>
-                                <?= $shortTitle ?>
+                                <?= $this->Text->truncate($shortTitle, 200) ?>
                                 <?php if ($object->getUrl() != false) { ?>
                             </a> <?
                         }

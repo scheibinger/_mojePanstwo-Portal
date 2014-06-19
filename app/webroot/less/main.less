@@ -23,6 +23,33 @@ a {
     color: @linkColor;
 }
 
+.loading {
+	background: url(../img/loader/loading-small.png) center center no-repeat;
+    min-height: 30px;
+    -webkit-transition: 0.2s ease-in-out; 
+	-moz-transition: 0.2s ease-in-out; 
+	-o-transition: 0.2s ease-in-out; 
+	transition: 0.2s ease-in-out;
+}
+
+.loadingTwirl {
+    width: 30px;
+    height: 30px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin-top: -15px;
+    margin-left: -15px;
+    z-index: 9999;
+    background: url(../img/loader/loading-small.png) center center no-repeat;
+}
+
+@media (min-width: 768px) {
+    .loadingTwirl {
+        margin-left: 7%;
+    }
+}
+
 /*SHOWING ERRORS FROM CAKEPHP HIDDEN UNDER HEADER*/
 body > pre:first-child {
     margin-top: 50px;

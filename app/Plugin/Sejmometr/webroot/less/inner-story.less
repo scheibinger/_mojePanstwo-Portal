@@ -1,0 +1,286 @@
+.shadow() {
+    -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=1, Direction=90, Color=#333333)"; /*IE 8*/
+    text-shadow: 0px 0px 1px #333333; /* FF3.5+, Opera 9+, Saf1+, Chrome, IE10 */
+    filter: progid:DXImageTransform.Microsoft.Shadow(Strength=1, Direction=90, Color=#333333); /*IE 5.5-7*/
+}
+
+.ScrollSceneIndicators {
+    z-index: 1 !important;
+}
+
+#_wrapper header {
+    position: fixed;
+    top: 0;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+}
+
+#storyLine {
+    display: block;
+    min-width: 100%;
+    height: 100%;
+    background-color: #41a8de;
+    white-space: nowrap;
+    margin-bottom: -40px;
+
+    .innerStory {
+        min-width: 100%;
+        height: 100%;
+        position: relative;
+
+        .far, .medium, .near {
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: block;
+            height: 100%;
+        }
+
+        .far {
+            background: url(../Sejmometr/img/inner-story/background_sky.png) bottom left repeat-x #3ca6dd;
+            position: relative;
+
+            .clouds {
+                background: url(../Sejmometr/img/inner-story/background_clouds.png) bottom left no-repeat;
+                width: 100%;
+                height: 100%;
+                position: absolute;
+            }
+        }
+
+        .medium {
+            .stat {
+                border-left: 6px solid #FFFFFF;
+                color: #FFFFFF;
+                padding-left: 25px;
+                opacity: 0;
+                position: absolute;
+                top: auto;
+
+                &.out {
+                    opacity: 1;
+                }
+
+                > p {
+                    font-size: 28px;
+                    line-height: 28px;
+                    .shadow();
+                }
+
+                > strong {
+                    font-size: 72px;
+                    line-height: 72px;
+                    .shadow();
+
+                    small {
+                        font-size: 24px;
+                        .shadow();
+                    }
+                }
+
+                > span {
+                    display: inline-block;
+                    float: left;
+                    font-size: 10px;
+                    padding-left: 4px;
+                    text-transform: uppercase;
+                    .shadow();
+
+                    &:before {
+                        content: x;
+                        width: 36px;
+                        height: 36px;
+                    }
+                }
+            }
+
+            .scene {
+                width: 1204px;
+                height: 100%;
+                display: inline-block;
+                vertical-align: top;
+                white-space: nowrap;
+                margin-right: -4px;
+                position: relative;
+
+                &.intro {
+                    background: url(../Sejmometr/img/inner-story/default_green.png) bottom left repeat-x;
+
+                    .title {
+                        padding: 10px 65px;
+
+                        h3 {
+                            color: #ffffff;
+                            font-size: 34px;
+                            .shadow();
+                        }
+                        h2 {
+                            color: #ffffff;
+                            font-size: 210px;
+                            font-weight: bold;
+                            .shadow();
+
+                            small {
+                                color: #ffffff;
+                                font-size: 70px;
+                                font-weight: bold;
+                                margin-left: -55px;
+                                .shadow();
+                            }
+                        }
+                    }
+                }
+                &.sejm {
+                    background: url(../Sejmometr/img/inner-story/scene_01_sejm.png) bottom left no-repeat, url(../Sejmometr/img/inner-story/default_road.png) bottom left repeat-x;
+
+                    .stat.zarobki {
+                        bottom: 485px;
+                        left: 615px;
+                    }
+
+                    .stat.przejazd {
+                        bottom: 250px;
+                        left: 925px;
+                    }
+                }
+                &.biuro {
+                    background: url(../Sejmometr/img/inner-story/scene_02_biuro.png) bottom right no-repeat, url(../Sejmometr/img/inner-story/default_road.png) bottom left repeat-x;
+
+                    .stat.biura {
+                        bottom: 420px;
+                        right: 150px;
+                    }
+                }
+                &.szpital {
+                    background: url(../Sejmometr/img/inner-story/scene_03_skrzynka.png) bottom left no-repeat, url(../Sejmometr/img/inner-story/scene_04_szpital.png) bottom right no-repeat, url(../Sejmometr/img/inner-story/default_road.png) bottom left repeat-x;
+
+                    .stat.korespondencja {
+                        bottom: 260px;
+                        left: 25px;
+                    }
+                    .stat.biuro.badania {
+                        bottom: 470px;
+                        right: -140px;
+                    }
+                }
+                &.bank {
+                    background: url(../Sejmometr/img/inner-story/scene_05_bank.png) bottom center no-repeat, url(../Sejmometr/img/inner-story/default_road.png) bottom left repeat-x;
+
+                    .stat.rachunki {
+                        bottom: 520px;
+                        left: 50%;
+                        margin-left: 195px;
+                    }
+                }
+                &.spotkanie {
+                    background: url(../Sejmometr/img/inner-story/scene_06_spotkanie.png) bottom left no-repeat, url(../Sejmometr/img/inner-story/default_road.png) bottom left repeat-x;
+
+                    .stat.sala {
+                        bottom: 450px;
+                        left: 370px;
+                    }
+                }
+                &.tlumaczenia {
+                    background: url(../Sejmometr/img/inner-story/scene_07_tlumaczenia.png) bottom right no-repeat, url(../Sejmometr/img/inner-story/default_road.png) bottom left repeat-x;
+
+                    .stat.ekspertyzy {
+                        bottom: 510px;
+                        right: -320px;
+                    }
+                }
+                &.dom {
+                    background: url(../Sejmometr/img/inner-story/scene_08_dom.png) bottom right no-repeat, url(../Sejmometr/img/inner-story/default_road.png) bottom left repeat-x;
+
+                    .stat.prywatny {
+                        bottom: 500px;
+                        right: -540px;
+                    }
+                    .stat.dom {
+                        bottom: 290px;
+                        right: -540px;
+                    }
+                }
+                &.droga {
+                    background: url(../Sejmometr/img/inner-story/default_road.png) bottom left repeat-x;
+
+                    .stat.taksowka {
+                        bottom: 220px;
+                        left: 50%;
+                        margin-left: -250px;
+                    }
+                }
+                &.lotnisko {
+                    background: url(../Sejmometr/img/inner-story/scene_09_lotnisko.png) bottom left no-repeat, url(../Sejmometr/img/inner-story/default_airport.png) bottom left repeat-x;
+
+                    .stat.loty {
+                        bottom: 470px;
+                        left: 200px;
+                    }
+                }
+                &.lot {
+                    background: url(../Sejmometr/img/inner-story/default_airport.png) bottom left repeat-x;
+                }
+                &.stats {
+                    background-color: #41a8de;
+                }
+            }
+        }
+        .near {
+            .posel {
+                display: block;
+                width: 60px;
+                height: 110px;
+                background: url(../Sejmometr/img/inner-story/animated_posel.png) top left no-repeat;
+
+                position: absolute;
+                left: -999px;
+                bottom: 122px;
+
+                &.outfit {
+                    background-position: top right;
+                }
+            }
+            .samochod {
+                display: block;
+                width: 291px;
+                height: 96px;
+                background: url(../Sejmometr/img/inner-story/animated_samochod.png) top left no-repeat;
+
+                position: absolute;
+                left: -999px;
+                bottom: 105px;
+
+                &.in {
+                    background-position: bottom left;
+                }
+            }
+            .taxi {
+                display: block;
+                width: 303px;
+                height: 109px;
+                background: url(../Sejmometr/img/inner-story/animated_taxi.png) top left no-repeat;
+
+                position: absolute;
+                left: -999px;
+                bottom: 105px;
+
+                &.in {
+                    background-position: bottom left;
+                }
+            }
+            .samolot {
+                display: block;
+                width: 776px;
+                height: 273px;
+                background: url(../Sejmometr/img/inner-story/animated_samolot.png) top left no-repeat;
+
+                position: absolute;
+                left: -999px;
+                bottom: 40px;
+            }
+        }
+    }
+}
