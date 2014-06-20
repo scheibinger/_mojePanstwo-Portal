@@ -166,9 +166,6 @@
 
 <div class="detailPoslowie strip">
 <div class="container">
-<div class="head col-xs-12">
-    <h2 class="text-center"><strong>Zobacz dane dotyczące aktywności posłów</strong></h2>
-</div>
 <div class="sideMenu col-xs-12 col-sm-4 col-md-2">
     <ul>
         <li class="active">
@@ -226,7 +223,7 @@
     $page = array(
         'class' => 'wystapienia',
         'anchor' => 'wystapienia',
-        'title' => 'Wystąpienia',
+        'title' => 'Wystąpienia na forum Sejmu',
         'text' => 'Posłowie w ramach sprawowania mandatu wypowiadają się na posiedzeniach Sejmu. Zobacz, którzy z nich są najbardziej aktywni.',
         'link' => $poslowie_url . '?order='. $liczba_wypowiedzi['order']
     );
@@ -239,7 +236,7 @@
     $page = array(
         'class' => 'frekwencja',
         'anchor' => 'frekwencja',
-        'title' => 'Frekwencja',
+        'title' => 'Frekwencja posłów na głosowaniach',
         'text' => 'Poseł musi być obecny na posiedzeniach Sejmu i powinien czynnie w nich uczestniczyć. To poselski obowiązek, którego zaniedbanie powoduje konsekwencje finansowe. Jeżeli poseł ma nieusprawiedliwione nieobecności Marszałek Sejmu zarządza obniżenie uposażenia i diety parlamentarnej albo jednego z tych świadczeń, jeżeli tylko ono przysługuje posłowi. Poseł ze swoich świadczeń traci 1/30 za każdy dzień nieusprawiedliwionej nieobecności na posiedzeniu Sejmu lub za niewzięcie w danym dniu udziału w więcej niż 1/5 głosowań. Sprawdź, który z posłów najcześciej omija sejmowe posiedzenia.',
         'link' => $poslowie_url . '?order'. $frekwencja['order']
     );
@@ -252,7 +249,7 @@
     $page = array(
         'class' => 'bunty',
         'anchor' => 'bunty',
-        'title' => 'Bunty',
+        'title' => 'Bunty poselskie',
         'text' => 'Poprzez "bunty" określamy sytuacje polegające na tym, że poseł głosuje przeciwnie niż większość klubu parlamentarnego, do którego należy. Partie zabezpieczają się przed buntami stosując dyscyplinę głosowania. Narzucają tym samym sposób w jaki dany poseł ma zagłosować. Za naruszenie dyscypliny grozi nawet kara finansowa. Powstaje pytanie jak narzędzie dyscypliny głosowania ma się do konstytucyjnego zapisu o tym, że posłowie są przedstawicielami Narodu. W momencie gdy poseł oddaje swój głos zgodnie z wytycznymi partyjnego lidera jest przedstawicielami partii, a nie Narodu. Wydaje się, że dyscyplina poselska nie wpływa korzystnie na interesy obywateli. W sytuacji jej zastosowania na decyzję posła podczas głosowania mają wpływ nie merytoryczne rozważania, ale obawy przed sankcjami, które może wymierzyć partia. W naszym zestawieniu prezentujemy największych buntowników w Sejmie, którzy głosują inaczej niż większość ich klubu parlamentarnego.',
         //'link' => $poslowie_url . '?order=liczba_glosowan_zbuntowanych%20desc'
         'link' => $poslowie_url . '?order'. $zbuntowanie['order']
