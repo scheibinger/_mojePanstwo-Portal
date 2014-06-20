@@ -12,7 +12,7 @@
 
 <div class="headline strip">
     <div class="container">
-        <h1 class="header text-center">Sejmometr</h1>
+        <h1 class="header text-center"><a href="/sejmometr">Sejmometr</a></h1>
 
         <div class="content-container col-xs-12">
             <h5>Sejm jest organem władzy ustawodawczej w Polsce. Tworzą go posłowie, którzy są reprezentantami Narodu
@@ -34,10 +34,10 @@
                     <a class="posiedzenia" href="/sejmometr/posiedzenia"><span>Posiedzenia Sejmu</span></a>
                 </div>
                 <div class="col-lg-3 link">
-                    <a class="projekty" href="/dane/prawo_projekty"><span>Projekty aktów prawnych</span></a>
+                    <a class="projekty" href="/sejmometr/prace"><span>Projekty aktów prawnych</span></a>
                 </div>
                 <div class="col-lg-3 link">
-                    <a class="koszty" href="/sejmometr/kasa"><span>Ile to kosztuje?</span></a>
+                    <a class="koszty" href="/sejmometr/info"><span>Ile to kosztuje?</span></a>
                 </div>
             </div>
 

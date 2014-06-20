@@ -5462,6 +5462,9 @@ if (typeof VMM != 'undefined' && typeof VMM.Slider == 'undefined') {
         }
 
         function preloadSlides(skip) {
+            
+            VMM.fireEvent(layout, 'FINISH');
+            
             var i = 0;
 
             if (skip) {
@@ -5500,7 +5503,9 @@ if (typeof VMM != 'undefined' && typeof VMM.Slider == 'undefined') {
                     }
                 }
             }
-
+			
+			VMM.fireEvent(layout, 'FINISH');
+			
             sizeSlides();
         }
 

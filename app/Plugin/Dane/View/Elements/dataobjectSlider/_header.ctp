@@ -6,7 +6,7 @@
         <p><?= $object->getFullLabel(); ?></p>
     <?
     }
-
+		
     if (isset($options['dfFields']) && !empty($options['dfFields'])) {
         $fields = $object->getHiglightedFields($options['dfFields']);
         foreach ($fields as $field) {

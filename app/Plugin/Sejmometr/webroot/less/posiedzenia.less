@@ -1,1 +1,83 @@
 #_wrapper {background-color: #FFF;}
+
+.projekty {
+	
+	overflow: auto;
+	
+	.column {
+		
+		border-right: 1px solid #CCC;
+		padding-top: 15px;
+		padding-bottom: 15px;
+		text-align: center;
+		width: 30%;
+		
+		h2 {
+			
+			font-size: 18px;
+		    font-weight: 300;
+		    margin: 10px 0;
+		    display: inline-block;
+			
+		}
+		
+		&:last-child {
+			border-right: none;
+		}
+		
+		> ul {
+			margin: 0;
+			padding: 0;
+			list-style: none;
+			text-align: left;
+			
+			> li {
+				margin: 0;
+				padding: 15px 0;
+				list-style: none;
+				border-bottom: 1px solid #DDD;
+				
+				.title {
+					font-size: 16px;
+					margin-bottom: 0;
+				}
+				
+				.desc {
+					font-size: 12px;
+					
+					p {
+						padding: 10px;
+						color: #555;
+					}
+				}
+				
+				&:last-child {
+					border-bottom: none;
+				}
+				
+				.button {
+					text-align: center;
+				}			
+			}
+		}
+		
+		.__autorzy_html_ul {
+			
+			list-style: none;
+			margin-top: 10px;
+			
+			li {
+				list-style: none;
+				font-size: 12px;
+				
+				img {
+					margin-right: 4px;
+				}
+				
+			}
+			
+		}
+		
+	}
+	
+}

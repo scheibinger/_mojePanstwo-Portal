@@ -24,10 +24,6 @@
         clear: both;
     }
 
-    .strip {
-        width: 100%;
-        float: left;
-    }
     .head, .content-container {
         display: block;
         float: left;
@@ -42,7 +38,7 @@
         color: @whiteColor;
         padding-top: 0px;
 
-        h1 {
+        h1, h1 a {
             text-align: center;
             margin-bottom: 46px;
             color: @whiteColor;
@@ -173,8 +169,8 @@
 
             .text {
                 vertical-align: top !important;
-                width: 60% !important;
-                max-width: 60% !important;
+                width: 80% !important;
+                max-width: 80% !important;
 
                 .container {
                     padding: 0 !important;
@@ -196,9 +192,16 @@
                     border-width: 0;
                 }
             }
+            
+            .media .media-wrapper .media-container .media-frame, .media .media-wrapper .media-container .media-image img {
+	            max-width: 200px !important;
+            }
         }
     }
-
+    
+    .slide_content {
+    }
+    
     .poslowie {
         padding-top: 20px;
 

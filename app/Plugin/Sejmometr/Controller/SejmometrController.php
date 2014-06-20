@@ -132,15 +132,15 @@ class SejmometrController extends SejmometrAppController
             $stopDate = $object->getData('data_stop');
             $dateParts = explode('-', $stopDate);
             $stopDate = $dateParts[0] . ',' . $dateParts[1] . ',' . $dateParts[2];
-
+			
             if (!$object->getData('komunikat_id')) {
-                $asset = array( /*IMAGE DONT EXIST - DEFAULT IMG*/
+                $asset = array(
                     'media' => '/Sejmometr/img/default.jpg',
                     'thumbnail' => '/Sejmometr/img/default-thumbnail.jpg',
                     'credit' => '',
                 );
             } else {
-                $asset = array( /*PATH TO EXIST IMAGES*/
+                $asset = array(
                     'media' => 'http://resources.sejmometr.pl/sejm_komunikaty/img/' . $object->getData('komunikat_id') . '-0.jpg',
                     'thumbnail' => 'http://resources.sejmometr.pl/sejm_komunikaty/img/' . $object->getData('komunikat_id') . '-1.jpg',
                     'credit' => '® Kancelaria Sejmu',
@@ -151,7 +151,7 @@ class SejmometrController extends SejmometrAppController
 	            'startDate' => $startDate,
 	            'endDate' => $stopDate,
 	            'headline' => '<a href="/dane/sejm_posiedzenia/' . $object->getData('id') . '">#' . $object->getData('numer') . '</a>',
-	            'text' => '<p>Statystyki posiedzenia</p>',
+	            'text' => '<div class="slide_content" data-posiedzenie_id="' . $object->getId() . '">Ładowanie...</div>',
 	            'classname' => 'klasa',
                 'asset' => $asset,
             );
@@ -160,6 +160,148 @@ class SejmometrController extends SejmometrAppController
         
         $this->set('data', $output);
         $this->set('_serialize', 'data');
+	    
+    }
+    
+    public function posiedzenie()
+    {
+	    
+	    $id = (int) $this->request->params['id'];
+	    if( !$id )
+	    	return false;
+	    
+	    $API = $this->API->Dane();
+	    $object = $API->getObject('sejm_posiedzenia', $id);
+	    
+	    
+	    $projekty = $object->loadLayer('projekty');
+	    
+	    $view = new View($this, false);
+		$html = $view->element('Dane.sejmposiedzenie-projekty-cont', array(
+			'projekty' => $projekty,
+        ));
+			
+		
+		$this->set('id', $id);
+		$this->set('data', $object->getData());
+		$this->set('projekty_html', $html);
+	    $this->set('_serialize', array('id', 'data', 'projekty_html'));
+	    
+    }
+    
+    public function prace()
+    {
+	    
+	    $q = (string)@$this->request->query['q'];
+
+        $queryData = array(
+            'includeContent' => true,
+        );
+
+        if ($q)
+            $queryData['conditions']['q'] = $q;
+			
+		$API = $this->API->Sejmometr();
+        $data = $API->getLatestData($queryData);
+		
+		$chapters = array(
+			array(
+				'id' => 'projekty_ustaw',
+				'title' => 'Projekty ustaw',
+			),
+			array(
+				'id' => 'projekty_uchwal',
+				'title' => 'Projekty uchwał',
+			),
+			array(
+				'id' => 'sprawozdania_kontrolne',
+				'title' => 'Sprawozdania kontrolne',
+			),
+			array(
+				'id' => 'umowy',
+				'title' => 'Umowy międzynarodowe',
+			),
+			array(
+				'id' => 'powolania_odwolania',
+				'title' => 'Powołania i odwołania ze stanowisk',
+			),
+			array(
+				'id' => 'sklady_komisji',
+				'title' => 'Zmiany w składach komisji sejmowych',
+			),
+			array(
+				'id' => 'referenda',
+				'title' => 'Wnioski o referenda',
+			),
+			array(
+				'id' => 'inne',
+				'title' => 'Inne projekty',
+			),
+		);
+		
+		foreach( $chapters as &$chapter )
+			$chapter['search'] = $data[ $chapter['id'] ];
+			
+		
+		
+		
+		
+		
+		
+		$this->set('chapters', $chapters);
+		
+		
+		/*
+        if ($q && !empty($channels)) {
+            foreach ($channels as &$ch) {
+
+                $datachannel_count = 0;
+
+                $facets = $ch['facets'];
+                if (!empty($facets)) {
+
+                    $facets = array_column($facets, 'params', 'field');
+
+                    if (array_key_exists('dataset', $facets) &&
+                        isset($facets['dataset']['options']) &&
+                        !empty($facets['dataset']['options'])
+                    ) {
+
+                        $datasets = array_column($facets['dataset']['options'], 'count', 'id');
+
+                        foreach ($ch['Dataset'] as &$d) {
+
+                            if (array_key_exists($d['alias'], $datasets)) {
+                                $d['count'] = $datasets[$d['alias']];
+                                $datachannel_count += $d['count'];
+                            } else {
+                                $d['count'] = 0;
+                            }
+
+                        }
+
+                    }
+                }
+
+                $ch['Datachannel']['score'] = 0;
+                $ch['Datachannel']['count'] = $datachannel_count;
+
+
+                if (!empty($ch['dataobjects']))
+                    $ch['Datachannel']['score'] = $ch['dataobjects'][0]->getScore();
+
+            }
+
+            uasort($channels, array($this, 'channelsCompareMethod'));
+
+        }
+
+
+        $this->set('q', $q);
+        $this->set('channels', $channels);
+        $this->set('title_for_layout', 'Dane publiczne');
+        */
+        
 	    
     }
     
