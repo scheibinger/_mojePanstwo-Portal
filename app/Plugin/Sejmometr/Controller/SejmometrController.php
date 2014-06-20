@@ -56,8 +56,24 @@ class SejmometrController extends SejmometrAppController
 
         // rankingi agregowane
         $data['zawody'] = $stats['zawody'];
-        $data['poslanki_poslowie'] = $stats['poslanki_poslowie'];
-        
+
+        $pp_totals = $stats['poslanki_poslowie']['*'];
+        $data['poslanki_poslowie'] = array(array(
+            'title' => 'Sejm RP',
+            'img_src' =>  $this->klub_img_src('sejm'),
+            'setup' => array(
+                array('Kobiety', round($pp_totals['stats']['K'] * 100 / $pp_totals['total'])),
+                array('Mężczyźni', round($pp_totals['stats']['M'] * 100 / $pp_totals['total'])))
+        ));
+        foreach($stats['poslanki_poslowie']['kluby'] as $klub) {
+            $data['poslanki_poslowie'][] = array(
+                'title' => $klub['nazwa'],
+                'img_src' => $this->klub_img_src($klub['klub_id']),
+                'setup' => array(
+                    array('Kobiety', round($klub['stats']['K']* 100 / $klub['total'])),
+                    array('Mężczyźni', round($klub['stats']['M'] * 100 / $klub['total'])))
+            );
+        }
 
         $poslowie_url = Router::url(array('plugin' => 'dane', 'controller' => 'poslowie'));
 		$this->set('poslowie_url', $poslowie_url);
