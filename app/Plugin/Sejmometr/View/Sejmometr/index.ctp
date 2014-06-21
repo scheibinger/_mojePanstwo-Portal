@@ -293,8 +293,8 @@
         'text' => 'Kwestiami związanymi z etyką parlamentarzystów zajmuje się Komisja Etyki Poselskiej. Zadaniem komisji jest m. in. rozpatrywanie spraw posłów, którzy zachowują się w sposób nieodpowiadający poselskiej godności. Zobacz czyje zachowanie najczęściej było przedmiotem uchwał Komisji Etyki Poselskiej.',
         'link' => '#rankingLink'
     );
-
-    echo $this->element('Sejmometr.list', array('page' => $page));
+		
+    echo $this->element('Sejmometr.list', array('page' => $page, 'items' => $uchwaly_komisji_etyki['items']));
 
 
     /* POSLANKI POSLOWIE BLOCK */
@@ -319,7 +319,7 @@
         'link' => '#rankingLink'
     );
 
-    echo $this->element('Sejmometr.list', array('page' => $page));
+    echo $this->element('Sejmometr.list', array('page' => $page, 'items' => $przeloty));
 
 
     /* POLSKIE PRZEJAZDY BLOCK */
@@ -332,7 +332,7 @@
         'link' => '#rankingLink'
     );
 
-    echo $this->element('Sejmometr.list', array('page' => $page));
+    echo $this->element('Sejmometr.list', array('page' => $page, 'items' => $przejazdy));
 
 
     /* KWATERY PRYWATNE POSLOW BLOCK */
@@ -345,11 +345,12 @@
         'link' => '#rankingLink'
     );
 
-    echo $this->element('Sejmometr.list', array('page' => $page));
+    echo $this->element('Sejmometr.list', array('page' => $page, 'items' => $kwatery_prywatne));
 
 
     /* WMIOSKI O UCHYLENIE IMMUNITETU BLOCK */
-
+	
+	/*
     $page = array(
         'class' => 'wnioskiImmunitet',
         'anchor' => 'wnioskiImmunitet',
@@ -359,7 +360,7 @@
     );
 
     echo $this->element('Sejmometr.list', array('page' => $page));
-
+	*/
 
     /* DOM POSELSKI BLOCK */
     $page = array(
@@ -373,7 +374,8 @@
 
 
     /* ZAROBKI POSLOW BLOCK */
-
+	
+	/*
     $page = array(
         'class' => 'zarobki',
         'anchor' => 'zarobki',
@@ -383,7 +385,7 @@
     );
 
     echo $this->element('Sejmometr.list', array('page' => $page));
-
+	*/
 
     /* DODATKI DO UPOSAZENIA I DIETA BLOCK */
     $page = array(
@@ -393,7 +395,7 @@
         'text' => '<p>Posłom, którzy pełnią dodatkowe funkcje przysługują dodatki do uposażenia w wysokości:</p><ul><li>20 % uposażenia - dla pełniących funkcję przewodniczącego komisji,</li><li>15 % uposażenia - dla pełniących funkcję zastępcy przewodniczącego komisji,</li><li>10 % uposażenia - dla pełniących funkcję przewodniczących stałych podkomisji,</li><li>Łączna wysokość dodatków nie może jednak przekroczyć 35% uposażenia poselskiego.</li></ul><p>Wszystkim posłom przysługuje dieta poselska czyli środki finansowe na pokrycie kosztów związanych z wydatkami poniesionymi w związku z wykonywaniem mandatu na terenie kraju. Dieta poselska wynosi 25 % uposażenia miesięcznego czyli <strong>2473,08 zł brutto</strong>. Świadczenie jest wolne od podatku dochodowego od osób fizycznych.</p>'
     );
 
-    echo $this->element('Sejmometr.text', array('page' => $page));
+    echo $this->element('Sejmometr.text', array('page' => $page, 'items' => $uposazenia));
 
 
     /* POZYCZKI BLOCK */

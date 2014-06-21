@@ -18,17 +18,32 @@ class SejmometrController extends SejmometrAppController
 
         $display_callbacks = array(
             'liczba_wypowiedzi' => function($object){
-                        return pl_dopelniacz($object->getData('liczba_wypowiedzi'), 'wystąpienie', 'wystąpienia', 'wystąpień');
-                    },
+                return pl_dopelniacz($object->getData('liczba_wypowiedzi'), 'wystąpienie', 'wystąpienia', 'wystąpień');
+            },
             'frekwencja' =>  function($object){
-                        return $object->getData('frekwencja') . '%';
-                    },
+                return $object->getData('frekwencja') . '%';
+            },
             'zbuntowanie' => function($object){
-                        return $object->getData('zbuntowanie') . '%';
-                    },
+                return $object->getData('zbuntowanie') . '%';
+            },
             'liczba_interpelacji' =>  function($object){
-                        return pl_dopelniacz($object->getData('liczba_interpelacji'), 'interpelacja', 'interpelacje', 'interpelacji');
-                    },
+                return pl_dopelniacz($object->getData('liczba_interpelacji'), 'interpelacja', 'interpelacje', 'interpelacji');
+            },
+            'uchwaly_komisji_etyki' => function($object){
+                return pl_dopelniacz($object->getData('liczba_uchwal_komisji_etyki'), 'uchwała', 'uchwały', 'uchwał');
+            },
+            'przeloty' => function($object){
+                return pl_dopelniacz($object->getData('liczba_przelotow'), 'przelot', 'przeloty', 'przelotów');
+            },
+            'przejazdy' => function($object){
+                return pl_dopelniacz($object->getData('liczba_przelotow'), 'przejazd', 'przejazdy', 'przejazdów');
+            },
+            'kwatery_prywatne' => function($object){
+                return $object->getData('wartosc_refundacja_kwater_pln');
+            },
+            'uposazenia' => function($object){
+                return $object->getData('wartosc_uposazenia_pln');
+            },
         );
 
         // ranking poslow
@@ -66,13 +81,18 @@ class SejmometrController extends SejmometrAppController
                 array('Mężczyźni', round($pp_totals['stats']['M'] * 100 / $pp_totals['total'])))
         ));
         foreach($stats['poslanki_poslowie']['kluby'] as $klub) {
+            
+            $k = isset( $klub['stats']['K'] ) ? round($klub['stats']['K']* 100 / $klub['total']) : 0;
+            $m = isset( $klub['stats']['M'] ) ? round($klub['stats']['M']* 100 / $klub['total']) : 0;
+            
             $data['poslanki_poslowie'][] = array(
                 'title' => $klub['nazwa'],
                 'img_src' => $this->klub_img_src($klub['klub_id']),
                 'setup' => array(
-                    array('Kobiety', round($klub['stats']['K']* 100 / $klub['total'])),
-                    array('Mężczyźni', round($klub['stats']['M'] * 100 / $klub['total'])))
-            );
+                    array('Kobiety', $k),
+                    array('Mężczyźni', $m),
+	            )
+	        );
         }
 
         $poslowie_url = Router::url(array('plugin' => 'dane', 'controller' => 'poslowie'));
