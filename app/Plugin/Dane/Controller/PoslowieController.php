@@ -15,7 +15,53 @@ class PoslowieController extends DataobjectsController
     {
 
         parent::view();
-
+		
+		$this->object->loadLayer('wydatki');
+		
+		$this->API->searchDataset('prawo_projekty', array(
+            'limit' => 8,
+            'conditions' => array(
+                'poslowie_za' => $this->object->getId(),
+            ),
+            'order' => 'data_status desc',
+        ));
+        $this->set('projekty_za', $this->API->getObjects());
+        
+        
+        
+        $this->API->searchDataset('prawo_projekty', array(
+            'limit' => 8,
+            'conditions' => array(
+                'poslowie_przeciw' => $this->object->getId(),
+            ),
+            'order' => 'data_status desc',
+        ));
+        $this->set('projekty_przeciw', $this->API->getObjects());
+        
+        
+        
+        $this->API->searchDataset('prawo_projekty', array(
+            'limit' => 8,
+            'conditions' => array(
+                'poslowie_wstrzymali' => $this->object->getId(),
+            ),
+            'order' => 'data_status desc',
+        ));
+        $this->set('projekty_wstrzymania', $this->API->getObjects());
+        
+        
+        
+        $this->API->searchDataset('prawo_projekty', array(
+            'limit' => 8,
+            'conditions' => array(
+                'poslowie_nieobecni' => $this->object->getId(),
+            ),
+            'order' => 'data_status desc',
+        ));
+        $this->set('poslowie_nieobecni', $this->API->getObjects());
+		
+		
+		/*
         $menu = array(
             array(
                 'id' => 'wystapienia',
@@ -35,7 +81,7 @@ class PoslowieController extends DataobjectsController
             ),
         );
 
-
+		
         $this->API->searchDataset('sejm_wystapienia', array(
             'limit' => 9,
             'conditions' => array(
@@ -74,8 +120,58 @@ class PoslowieController extends DataobjectsController
         // $this->set('stats', $this->object->loadLayer('stat'));
 
         $this->set('_menu', $menu);
+        */
     }
 
+    public function wydatki()
+    {
+
+        parent::_prepareView();
+        $wydatki = $this->object->loadLayer('wydatki');
+        $rok = @$this->request->params['pass'][0];
+                
+        if( $rok && ($roczniki = $wydatki['roczniki']) ) {                
+	        			
+	        $founded = false;
+	        
+	        foreach( $roczniki as $rocznik )
+	        	if( $rocznik['rok'] == $rok ) {
+	        		$founded = true;
+	        		break;
+	        	}
+	        
+	        if( !$founded )
+	        	$this->redirect('/dane/poslowie/' . $this->object->getId() . '/wydatki');
+	        	        
+	        $package = 1;
+	        $document = $this->API->document($rocznik['dokument_id']);
+	        	        
+	        if ($this->request->isAjax()) {
+	            
+	            $this->set('html', $document->loadHtml($package));
+	            $this->set('_serialize', 'html');
+	        
+	        } else {
+	            	            
+	            $this->set(array(
+	                'docs' => array(),
+	                'document' => $document,
+	                'documentPackage' => $package,
+	                'rocznik' => $rocznik,
+	                'title_for_layout' => 'Wydatki biura ' . $this->object->getData('dopelniacz') . ' w ' . $rok . ' roku',
+	            ));
+	            $this->render('wydatki_rok');
+	
+	        }
+	        		        
+        } else {
+        	
+        	$this->set('title_for_layout', 'Wydatki biura ' . $this->object->getData('dopelniacz'));
+        	
+        }
+
+    }
+    
     public function aktywnosci()
     {
 
@@ -95,6 +191,8 @@ class PoslowieController extends DataobjectsController
             'noResultsTitle' => 'Brak wystąpień',
             'hlFields' => array('sejm_debaty.tytul'),
         ));
+        
+        $this->set('title_for_layout', 'Wystąpienia sejmowe ' . $this->object->getData('dopelniacz'));
     }
 
     public function interpelacje()
@@ -129,7 +227,90 @@ class PoslowieController extends DataobjectsController
             'noResultsTitle' => 'Brak wyników głosowań',
         ));
     }
+    
+    public function prawo_projekty()
+    {
+        parent::_prepareView();
+        $this->dataobjectsBrowserView(array(
+            'source' => 'poslowie.prawo_projekty:' . $this->object->getId(),
+            'dataset' => 'prawo_projekty',
+            'title' => 'Projekty wniesionych aktów prawnych',
+            'noResultsTitle' => 'Brak projektów',
+        ));
 
+        $this->set('title_for_layout', 'Projekty aktów prawnych, które wniósł do Sejmu ' . $this->object->getData('nazwa'));
+
+    }
+    
+    public function prawo_projekty_za()
+    {
+        parent::_prepareView();
+        $this->dataobjectsBrowserView(array(
+            'source' => 'poslowie.prawo_projekty_za:' . $this->object->getId(),
+            'dataset' => 'prawo_projekty',
+            'title' => 'Projekty aktów prawnych, za którymi głosował poseł',
+            'noResultsTitle' => 'Brak projektów',
+        ));
+
+        $this->set('title_for_layout', 'Projekty aktów prawnych, za którymi głosował ' . $this->object->getData('nazwa'));
+
+    }
+    
+    public function prawo_projekty_przeciw()
+    {
+        parent::_prepareView();
+        $this->dataobjectsBrowserView(array(
+            'source' => 'poslowie.prawo_projekty_przeciw:' . $this->object->getId(),
+            'dataset' => 'prawo_projekty',
+            'title' => 'Projekty aktów prawnych, przeciw którym głosował poseł',
+            'noResultsTitle' => 'Brak projektów',
+        ));
+
+        $this->set('title_for_layout', 'Projekty aktów prawnych, przeciw którym głosował ' . $this->object->getData('nazwa'));
+
+    }
+    
+    public function prawo_projekty_wstrzymanie()
+    {
+        parent::_prepareView();
+        $this->dataobjectsBrowserView(array(
+            'source' => 'poslowie.prawo_projekty_wstrzymanie:' . $this->object->getId(),
+            'dataset' => 'prawo_projekty',
+            'title' => 'Projekty aktów prawnych, nad którymi poseł wstrzymał się od głosu',
+            'noResultsTitle' => 'Brak projektów',
+        ));
+
+        $this->set('title_for_layout', 'Projekty aktów prawnych, nad którymi ' . $this->object->getData('nazwa') . ' wstrzymał się od głosu');
+
+    }
+    
+    public function prawo_projekty_nieobecnosc()
+    {
+        parent::_prepareView();
+        $this->dataobjectsBrowserView(array(
+            'source' => 'poslowie.prawo_projekty_nieobecnosc:' . $this->object->getId(),
+            'dataset' => 'prawo_projekty',
+            'title' => 'Projekty aktów prawnych, dla których poseł nie przyszedł na głosowanie',
+            'noResultsTitle' => 'Brak projektów',
+        ));
+
+        $this->set('title_for_layout', 'Projekty aktów prawnych, dla których ' . $this->object->getData('nazwa') . ' nie przyszedł na głosowanie');
+
+    }
+	
+	public function komisja_etyki_uchwaly()
+	{
+		parent::_prepareView();
+        $this->dataobjectsBrowserView(array(
+            'source' => 'poslowie.komisja_etyki_uchwaly:' . $this->object->getId(),
+            'dataset' => 'sejm_komisje_uchwaly',
+            'title' => 'Uchwały Komisji Etyki wobec posła',
+            'noResultsTitle' => 'Brak uchwał',
+        ));
+
+        $this->set('title_for_layout', 'Uchwały Komisji Etyki wobec ' . $this->object->getData('dopelniacz'));
+	}
+	
     public function timeline()
     {
 

@@ -31,18 +31,20 @@
 
 
             <div class="row sejm-menu">
-                <div class="col-lg-3 link">
+                <div class="col-lg-4 link">
                     <a class="poslowie" href="/dane/poslowie"><span>Znajdź<br/>i sprawdź swojego posła!</span></a>
                 </div>
-                <div class="col-lg-3 link">
-                    <a class="posiedzenia" href="/sejmometr/posiedzenia"><span>Posiedzenia Sejmu</span></a>
-                </div>
-                <div class="col-lg-3 link">
+                <div class="col-lg-4 link">
                     <a class="projekty" href="/sejmometr/prace"><span>Projekty aktów prawnych</span></a>
                 </div>
+                <div class="col-lg-4 link">
+                    <a class="posiedzenia" href="/sejmometr/posiedzenia"><span>Posiedzenia Sejmu</span></a>
+                </div>
+                <? /*
                 <div class="col-lg-3 link">
                     <a class="koszty" href="/sejmometr/info"><span>Ile to kosztuje?</span></a>
                 </div>
+                */ ?>
             </div>
             
         </div>        

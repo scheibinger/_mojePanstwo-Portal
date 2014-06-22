@@ -1,10 +1,4 @@
-<? if( $object->getDate() ) {?>
-	<div class="slide_header">
-		<p class="label label-default"><?= dataSlownie($object->getDate()) ?></p>
-	</div>
-<?}?>
-
-<div class="attachment col-md-4">
+<div class="attachment col-md-3">
     <a href="<?= $object->getUrl() ?>">
         <img onerror="imgFixer(this)" src="<?= $object->getThumbnailUrl('1') ?>"
              alt="<?= strip_tags($object->getTitle()) ?>"
@@ -12,7 +6,7 @@
             />
     </a>
 </div>
-<div class="content col-md-8">
+<div class="content col-md-9">
 	
 <?
     $title_truncate_length = 120;
