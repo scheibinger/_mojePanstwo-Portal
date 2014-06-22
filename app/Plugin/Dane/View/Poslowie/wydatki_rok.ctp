@@ -10,7 +10,7 @@
 	<div class="block">
 		<div class="block-header">
 	        <h2 class="label">Wydatki biura poselskiego w <?= $rocznik['rok'] ?> roku</h2> 
-	        <a href="/dane/poslowie/<?= $object->getId() ?>/wydatki">Wszystkie wydarki &raquo;</a>
+	        <a href="/dane/poslowie/<?= $object->getId() ?>/finanse">Wszystkie wydatki &raquo;</a>
 	    </div>
 	</div>
 	

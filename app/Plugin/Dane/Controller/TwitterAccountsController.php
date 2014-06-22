@@ -21,6 +21,17 @@ class TwitterAccountsController extends DataobjectsController
 
 
         parent::_prepareView();
+        $powiazania = $this->object->loadLayer('powiazania');
+        
+        if(
+        	isset( $powiazania['posel_id'] ) && 
+        	$powiazania['posel_id'] 
+        ) {
+	        
+	        return $this->redirect('/dane/poslowie/' . $powiazania['posel_id'] . '/twitter');
+	        
+        }
+        
         $this->object->loadLayer('followers_chart');
         
         $this->API->searchDataset('twitter', array(

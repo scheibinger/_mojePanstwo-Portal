@@ -16,6 +16,17 @@ class KrsOsobyController extends DataobjectsController
     public function view()
     {
         parent::view();
+        $powiazania = $this->object->loadLayer('powiazania');
+        
+        if(
+        	isset( $powiazania['posel_id'] ) && 
+        	$powiazania['posel_id'] 
+        ) {
+	        
+	        return $this->redirect('/dane/poslowie/' . $powiazania['posel_id'] . '/finanse');
+	        
+        }
+        
         $this->object->loadLayer('organizacje');
     }
 }

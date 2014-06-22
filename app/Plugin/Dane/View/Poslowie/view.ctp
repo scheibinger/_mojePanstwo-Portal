@@ -4,6 +4,9 @@ $this->Combinator->add_libs('css', $this->Less->css('dataobjectslider', array('p
 $this->Combinator->add_libs('js', 'Dane.view-poslowie.js');
 
 echo $this->Element('dataobject/pageBegin');
+echo $this->Element('Dane.dataobject/menuTabs', array(
+	'menu' => $_menu,
+));
 ?>
 
 	
@@ -73,23 +76,7 @@ echo $this->Element('dataobject/pageBegin');
 	                        <? if( $object->getData('liczba_interpelacji') ) {?><p class="pull-right nopadding"><a class="btn btn-sm btn-default" href="/dane/poslowie/<?= $object->getId() ?>/interpelacje">Zobacz &raquo;</a></p><?}?>
 						</div>
                     </li>
-                    
-                    <li class="dataHighlight topborder big">
-                        <p class="_label">Liczba przejazdów samochodami służbowymi Sejmu w 2013 r.</p>
-
-                        <p class="_value"><?= $object->getData('liczba_przejazdow'); ?></p>
-                    </li>
-                    
-                    <li class="dataHighlight big">
-                        <p class="_label">Liczba przelotów na koszt Sejmu w 2013 r.</p>
-
-                        <p class="_value"><?= $object->getData('liczba_przelotow'); ?></p>
-                    </li>
-                    
-                    <p class="text-center">
-                    	<a class="btn btn-sm btn-default" href="/dane/poslowie/<?= $object->getId() ?>/wydatki">Więcej informacji o wydatkach &raquo;</a>
-                    </p>
-                    
+                                        
                     <? /* ?>
                     <? if($object->getData('wartosc_refundacja_kwater_pln')) {?>
                     <li class="dataHighlight">
