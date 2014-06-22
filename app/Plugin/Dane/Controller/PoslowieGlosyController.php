@@ -4,6 +4,7 @@ App::uses('DataobjectsController', 'Dane.Controller');
 
 class PoslowieGlosyController extends DataobjectsController
 {
+	public $breadcrumbsMode = 'app';
     public function view()
     {
         parent::view();

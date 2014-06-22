@@ -6,6 +6,7 @@ App::uses('Sanitize', 'Utility');
 class SejmInterpelacjeController extends DataobjectsController
 {
     public $menu = array();
+	public $breadcrumbsMode = 'app';
 
     public function view($package = 1)
     {

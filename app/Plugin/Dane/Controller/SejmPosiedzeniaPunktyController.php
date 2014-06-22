@@ -8,6 +8,7 @@ class SejmPosiedzeniaPunktyController extends DataobjectsController
     public $helpers = array('Dane.Dataobject');
     public $menu = array();
     public $autoRelated = false;
+	public $breadcrumbsMode = 'app';
     
     public $objectOptions = array(
     	'hlFields' => array('sejm_posiedzenia.tytul', 'numer'),

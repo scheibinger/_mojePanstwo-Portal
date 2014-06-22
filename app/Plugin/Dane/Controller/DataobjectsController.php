@@ -19,7 +19,9 @@ class DataobjectsController extends DaneAppController
     public $menuMode = 'horizontal';
     public $autoRelated = true;
     public $mode = false;
-
+	
+	public $breadcrumbsMode = 'datachannel';
+	
     public function index()
     {
         $conditions = $this->request->query;
@@ -102,11 +104,21 @@ class DataobjectsController extends DaneAppController
                     break;
                 }
             }
-
-            $this->addStatusbarCrumb(array(
-                'href' => '/dane/kanal/' . $this->dataset['Datachannel']['slug'],
-                'text' => $this->dataset['Datachannel']['nazwa'],
-            ));
+									
+			if( $this->breadcrumbsMode == 'datachannel' ) {
+	            
+	            $this->addStatusbarCrumb(array(
+	                'href' => '/dane/kanal/' . $this->dataset['Datachannel']['slug'],
+	                'text' => $this->dataset['Datachannel']['nazwa'],
+	            ));
+	        
+	        } elseif( ($this->breadcrumbsMode == 'app') && isset($this->dataset['App']) ) {
+		        		        
+		        $this->set('_APPLICATION', array(
+		        	'Application' => $this->dataset['App'],
+		        ));
+		        
+	        }
 
             $this->addStatusbarCrumb(array(
                 'href' => '/dane/' . $this->object->getDataset(),

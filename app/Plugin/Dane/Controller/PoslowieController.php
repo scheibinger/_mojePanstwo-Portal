@@ -11,6 +11,8 @@ class PoslowieController extends DataobjectsController
 
     public $menu = array();
 
+	public $breadcrumbsMode = 'app';
+	
     public function view()
     {
 
