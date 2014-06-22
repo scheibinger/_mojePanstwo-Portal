@@ -11,6 +11,7 @@ class TwitterAccountsController extends DataobjectsController
     public $uses = array('Dane.Dataobject');
 
     public $menu = array();
+	public $breadcrumbsMode = 'app';
 
 	public $objectOptions = array(
         'hlFields' => array(),
