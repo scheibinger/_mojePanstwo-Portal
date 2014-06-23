@@ -475,7 +475,6 @@ jQuery(document).ready(function () {
                             }
                         } else {
                             var tr = jQuery('<tr></tr>');
-                            2
 
                             if (label == 'privacy_level' && Number(value) == 1)
                                 birthdayPrivacy = true;
