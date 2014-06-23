@@ -456,6 +456,8 @@ jQuery(document).ready(function () {
                 }
 
                 function detailInfo(node) {
+                    var birthdayPrivacy = false;
+
                     connectionGraph.find('.dataContent').remove();
 
                     var dataContent = jQuery('<div></div>').addClass('dataContent').css('width', d3Data.width / 2);
@@ -473,32 +475,40 @@ jQuery(document).ready(function () {
                             }
                         } else {
                             var tr = jQuery('<tr></tr>');
+                            2
 
-                            if (label == 'data_urodzenia')
+                            if (label == 'privacy_level' && Number(value) == 1)
+                                birthdayPrivacy = true;
+
+                            if (label == 'data_urodzenia') {
+                                if (birthdayPrivacy)
+                                    return
                                 label = _mPHeart.translation.LC_DANE_VIEW_KRSPODMIOTY_DATA_URODZENIA;
-                            if (label == 'plec') {
+                            } else if (label == 'plec') {
                                 label = _mPHeart.translation.LC_DANE_VIEW_KRSPODMIOTY_PLEC;
                                 if (value == 'K')
                                     value = _mPHeart.translation.LC_DANE_VIEW_KRSPODMIOTY_KOBIETA;
                                 else if (value == 'M')
                                     value = _mPHeart.translation.LC_DANE_VIEW_KRSPODMIOTY_MEZCZYZNA;
                             }
-                            if (label == 'nazwisko')
+                            else if (label == 'nazwisko')
                                 label = _mPHeart.translation.LC_DANE_VIEW_KRSPODMIOTY_NAZWISKO;
-                            if (label == 'imiona')
+                            else if (label == 'imiona')
                                 label = _mPHeart.translation.LC_DANE_VIEW_KRSPODMIOTY_IMIONA;
-                            if (label == 'krs')
+                            else if (label == 'krs')
                                 label = _mPHeart.translation.LC_DANE_VIEW_KRSPODMIOTY_KRS;
-                            if (label == 'kapital_zakladowy')
+                            else if (label == 'kapital_zakladowy')
                                 label = _mPHeart.translation.LC_DANE_VIEW_KRSPODMIOTY_KAPITAL_ZAKLADOWY;
-                            if (label == 'miejscowosc')
+                            else if (label == 'miejscowosc')
                                 label = _mPHeart.translation.LC_DANE_VIEW_KRSPODMIOTY_MIEJSCOWOSC;
-                            if (label == 'data_rejestracji')
+                            else if (label == 'data_rejestracji')
                                 label = _mPHeart.translation.LC_DANE_VIEW_KRSPODMIOTY_REJESTRACJI;
-                            if (label == 'forma')
+                            else if (label == 'forma')
                                 label = _mPHeart.translation.LC_DANE_VIEW_KRSPODMIOTY_FORMA_PRAWNA;
-                            if (label == 'nazwa')
+                            else if (label == 'nazwa')
                                 label = _mPHeart.translation.LC_DANE_VIEW_KRSPODMIOTY_NAZWA;
+                            else
+                                return;
                             tr.append(jQuery('<td></td>').text(label));
                             tr.append(jQuery('<td></td>').text(value));
                             dataContent.find('table').append(tr);
