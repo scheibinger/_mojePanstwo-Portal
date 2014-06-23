@@ -22,9 +22,9 @@
 
                     <div class="sector">
                         <p>
-                            Telefon: <a href="skype:224074204">(22) 40 74 204</a>
+                            E-mail: <a href="mailto:biuro@epf.org.pl">biuro@epf.org.pl</a>
                             <br/>
-                            Email: <a href="mailto:biuro@epf.org.pl">biuro@epf.org.pl</a>
+                            Telefon: <a href="skype:224074204">(22) 40 74 204</a>
                         </p>
                     </div>
 
@@ -113,7 +113,7 @@
                         </div>
 
                         <div class="part">
-                            <p class="info">Portal jest budowany dzięki wsparciu:</p>
+                            <p class="info">Wspierają nas także:</p>
 
                             <div class="logotypy">
                                 <a target="_blank" href="http://www.soros.org/initiatives/information"

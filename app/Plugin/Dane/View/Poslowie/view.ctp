@@ -15,14 +15,31 @@ echo $this->Element('Dane.dataobject/menuTabs', array(
 	        <div class="objectSideInner">
 	            <ul class="dataHighlights side">
 	            
-	                <? if ($object->getData('deleted')=='1') { ?>
+	                <? if ($object->getData('data_wygasniecia_mandatu') && ( $object->getData('data_wygasniecia_mandatu')!='0000-00-00' ) ) { ?>
 	                    <li class="dataHighlight">
 	                        <span class="label label-default">Ta osoba nie jest już posłem</span>
+	                    </li>
+	                    <li class="dataHighlight">
+	                        <p class="_label">Data wygaśnięcia mandatu</p>
+							
+							<div>
+		                        <p class="_value"><?= $this->Czas->dataSlownie($object->getData('data_wygasniecia_mandatu')); ?></p>
+							</div>
+	                    </li>
+	                <? } ?>
+	                
+	                <? if ($object->getData('data_slubowania') && ( $object->getData('data_slubowania')!='0000-00-00' ) ) { ?>
+	                    <li class="dataHighlight">
+	                        <p class="_label">Data ślubowania</p>
+							
+							<div>
+		                        <p class="_value"><?= $this->Czas->dataSlownie($object->getData('data_slubowania')); ?></p>
+							</div>
 	                    </li>
 	                <? } ?>
 					
 					
-                    <li class="dataHighlight big">
+                    <li class="dataHighlight big<? if( ( $object->getData('data_wygasniecia_mandatu') && ( $object->getData('data_wygasniecia_mandatu')!='0000-00-00' ) ) || ( $object->getData('data_slubowania') && ( $object->getData('data_slubowania')!='0000-00-00' ) ) ) { ?> topborder<? } ?>">
                         <p class="_label">Liczba wystąpień na forum Sejmu</p>
 						
 						<div>
