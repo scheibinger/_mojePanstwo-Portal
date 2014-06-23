@@ -83,6 +83,17 @@ jQuery(function ($) {
         });
     }
 
+    function sortedIndex(arr, n) {
+        var i, l, ret = arr[0][1];
+        for (i = 0, l = arr.length; i < l; i += 1) {
+            if (arr[i][0] > n) {
+                return ret;
+            }
+            ret = arr[i][1];
+        }
+        return ret;
+    }
+
     function convertArr(arr, names) {
         var i, l;
         for (i = 0, l = arr.length; i < l; i += 1) {
@@ -129,6 +140,7 @@ jQuery(function ($) {
             }
             localSum += pin[1];
         });
+
         return x + localSum + center;
     }
 
@@ -140,6 +152,13 @@ jQuery(function ($) {
             lastCloudsOffset = value;
             $far.find('.clouds').css('left', (value / 14300 * 3000) * 1.5 | 0);
         }
+
+        $.each(images, function (selector, obj) {
+            var src = 'images/' + sortedIndex(obj.arr, sl);
+            if (obj.elem[0].src !== src) {
+                obj.elem[0].src = src;
+            }
+        });
     }
 
     function onResize() {
@@ -160,7 +179,7 @@ jQuery(function ($) {
 
         infoController = controller = new ScrollMagic({
             vertical: false,
-            loglevel: 3
+            loglevel: 1
         });
 
         $near.find('.posel').removeClass('hide').css({height: "", bottom: ""});
@@ -254,15 +273,15 @@ jQuery(function ($) {
             .setTween(poselWalk)
             .addTo(controller);
 
-        /*images = {
-         '.posel': {
-         elem: $('.posel'),
-         arr: convertArr([
-         [pos(0), 0],
-         [pos(100 + 1), 1]
-         ], ['posel-front.png', 'posel-stand.png', 'posel-walk.png', 'posel-back.png'])
-         }
-         };*/
+        images = {
+            '.posel': {
+                elem: $('.posel'),
+                arr: convertArr([
+                    [pos(0), 0],
+                    [pos(100 + 1), 1]
+                ], ['posel-front.png', 'posel-stand.png', 'posel-walk.png', 'posel-back.png'])
+            }
+        };
     }
 
     $window.scroll(function () {
@@ -284,6 +303,7 @@ jQuery(function ($) {
             delta = e.detail * 40;
         }
         scrollTo(String(delta));
+
         return false;
     });
 
