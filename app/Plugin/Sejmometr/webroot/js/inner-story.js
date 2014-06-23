@@ -161,24 +161,23 @@ jQuery(function ($) {
             .add(TweenMax.fromTo($medium.find('.scene.bank .stat.rachunki'), 0.5, {opacity: 0}, {opacity: 1}))
             .add(TweenMax.to($near.find('.posel'), 4, {left: $medium.find('.scene.spotkanie').position().left + 490}))
             .add(TweenMax.fromTo($medium.find('.scene.spotkanie .stat.sala'), 0.5, {opacity: 0}, {opacity: 1}))
-            .add(TweenMax.to($near.find('.posel'), 4, {left: $medium.find('.scene.tlumaczenia').position().left + $medium.find('.scene.tlumaczenia').width() - 170}))
+            .add(TweenMax.to($near.find('.posel'), 6, {left: $medium.find('.scene.tlumaczenia').position().left + $medium.find('.scene.tlumaczenia').width() - 170}))
             .add(TweenMax.fromTo($medium.find('.scene.tlumaczenia .stat.ekspertyzy'), 0.5, {opacity: 0}, {opacity: 1}))
-            .add(TweenMax.to($near.find('.posel'), 3, {left: $medium.find('.scene.dom').position().left + $medium.find('.scene.dom').width() - 290}))
-            .add(TweenMax.fromTo($medium.find('.scene.dom .stat.prywatny'), 0.5, {opacity: 0}, {opacity: 1}))
-            .add(TweenMax.fromTo($medium.find('.scene.dom .stat.dom'), 0.5, {opacity: 0}, {opacity: 1}));
+            .add(TweenMax.to($near.find('.posel'), 5, {left: $medium.find('.scene.dom').position().left + $medium.find('.scene.dom').width() - 290}))
+            .add(TweenMax.fromTo($medium.find('.scene.dom .stat.prywatny'), 0.25, {opacity: 0}, {opacity: 1}))
+            .add(TweenMax.fromTo($medium.find('.scene.dom .stat.dom'), 0.25, {opacity: 0}, {opacity: 1}));
 
         /*POSEL TAXI - WALK + CALL*/
         var poselTaxi = new TimelineMax()
-            .add(TweenMax.fromTo($near.find('.taksowka'), 4, {left: $medium.find('.scene.tlumaczenia').position().left}, { left: $medium.find('.scene.dom').position().left + $medium.find('.scene.dom').width() - 800}));
-    .
-        add(TweenMax.to($near.find('.posel'), 0.1, {bottom: "-=15"}))
+            .add(TweenMax.fromTo($near.find('.taksowka'), 4, {left: $medium.find('.scene.tlumaczenia').position().left}, { left: $medium.find('.scene.dom').position().left + $medium.find('.scene.dom').width() - 800}))
+            .add(TweenMax.to($near.find('.posel'), 0.1, {bottom: "-=15"}))
             .add(TweenMax.to($near.find('.posel'), 0.1, {bottom: "+=20", height: "-=50"}));
 
         /*START*/
         new ScrollScene({
             duration: 1
         }).on("end", function () {
-                $near.find('.posel').removeClass('hide outfit').css({left: $medium.find('.scene.sejm').position().left + 600, height: "", bottom: ""});
+                $near.find('.posel').removeClass('hide outfit').css({left: $medium.find('.scene.sejm').position().left + 600, height: "", bottom: ""})
                 $near.find('.samochod').removeClass('in').css({left: $medium.find('.scene.sejm').position().left + 850});
                 scrollTo(0);
             })
