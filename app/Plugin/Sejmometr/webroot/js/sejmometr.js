@@ -2,7 +2,6 @@ function graphPoslankiPoslowie() {
     jQuery('#sejmometr').find('.poslowieGraphCircle li > .graph .graphInner').each(function () {
         var that = jQuery(this);
         that.highcharts({
-            debug: true,
             chart: {
                 plotBackgroundColor: null,
                 plotBorderWidth: null,
@@ -28,6 +27,15 @@ function graphPoslankiPoslowie() {
                     innerSize: '40%'
                 }
             ]
+        }, function (chart) {
+            var img = new Image();
+            img.src = that.data('logo');
+
+            var imgWidthCheck = (img.width > Math.floor(that.width() * .4)) ? img.width - Math.floor(that.width() * .4) + 10 : 0;
+            var imgHeightCheck = (img.height > Math.floor(that.height() * .4)) ? img.height - Math.floor(that.height() * .4) + 10 : 0;
+            var imgResize = (imgWidthCheck > imgHeightCheck) ? imgWidthCheck : imgHeightCheck;
+
+            chart.renderer.image(that.data('logo'), (that.width() / 2) - ((img.width - imgResize) / 2), (that.height() / 2) - ((img.height - imgResize) / 2), (img.width - imgResize), (img.height - imgResize)).add();
         });
     });
 }
@@ -43,6 +51,9 @@ jQuery(document).ready(function () {
             }
         }
     });
+
+    $('body').scrollspy({ target: '.sideMenu' })
+
 
     graphPoslankiPoslowie();
 

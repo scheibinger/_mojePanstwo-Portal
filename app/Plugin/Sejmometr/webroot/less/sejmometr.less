@@ -303,7 +303,8 @@
                         display: block;
                         padding: 5px 0;
                         font-size: 15px;
-                        color: @mainColor
+                        color: @mainColor;
+                        line-height: 15px;
                     }
                 }
             }
@@ -316,6 +317,7 @@
                 float: left;
                 width: 100%;
                 border-top: 1px solid #e7e7e7;
+                padding: 30px 0 20px;
 
                 &:first-child {
                     border-top: none;
@@ -369,40 +371,37 @@
                                     margin-left: auto;
                                     margin-right: auto;
                                 }
-								
-								.poselInfo {
-									background: -moz-linear-gradient(top,  rgba(66,139,202,0) 0%, rgba(66,139,202,1) 100%); /* FF3.6+ */
-background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(66,139,202,0)), color-stop(100%,rgba(66,139,202,1))); /* Chrome,Safari4+ */
-background: -webkit-linear-gradient(top,  rgba(66,139,202,0) 0%,rgba(66,139,202,1) 100%); /* Chrome10+,Safari5.1+ */
-background: -o-linear-gradient(top,  rgba(66,139,202,0) 0%,rgba(66,139,202,1) 100%); /* Opera 11.10+ */
-background: -ms-linear-gradient(top,  rgba(66,139,202,0) 0%,rgba(66,139,202,1) 100%); /* IE10+ */
-background: linear-gradient(to bottom,  rgba(66,139,202,0) 0%,rgba(66,139,202,1) 100%); /* W3C */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00428bca', endColorstr='#428bca',GradientType=0 ); /* IE6-9 */
 
+                                .poselInfo {
+                                    background: -moz-linear-gradient(top, rgba(66, 139, 202, 0) 0%, rgba(66, 139, 202, 1) 100%); /* FF3.6+ */
+                                    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(66, 139, 202, 0)), color-stop(100%, rgba(66, 139, 202, 1))); /* Chrome,Safari4+ */
+                                    background: -webkit-linear-gradient(top, rgba(66, 139, 202, 0) 0%, rgba(66, 139, 202, 1) 100%); /* Chrome10+,Safari5.1+ */
+                                    background: -o-linear-gradient(top, rgba(66, 139, 202, 0) 0%, rgba(66, 139, 202, 1) 100%); /* Opera 11.10+ */
+                                    background: -ms-linear-gradient(top, rgba(66, 139, 202, 0) 0%, rgba(66, 139, 202, 1) 100%); /* IE10+ */
+                                    background: linear-gradient(to bottom, rgba(66, 139, 202, 0) 0%, rgba(66, 139, 202, 1) 100%); /* W3C */
+                                    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00428bca', endColorstr='#428bca', GradientType=0); /* IE6-9 */
 
+                                    color: #FFFFFF;
+                                    display: block;
+                                    font-size: 12px;
+                                    font-weight: 300;
+                                    height: 44px;
+                                    margin: -55px auto 10px;
+                                    overflow: hidden;
+                                    padding: 0;
+                                    position: relative;
+                                    width: 110px;
 
+                                    strong {
+                                        color: #FFFFFF;
+                                        display: block;
+                                        font-size: 32px;
+                                        font-weight: 300;
+                                        margin: 0;
+                                        padding: 0;
+                                    }
+                                }
 
-								    color: #FFFFFF;
-								    display: block;
-								    font-size: 12px;
-								    font-weight: 300;
-								    height: 44px;
-								    margin: -55px auto 10px;
-								    overflow: hidden;
-								    padding: 0;
-								    position: relative;
-								    width: 110px;
-								    
-								    strong {
-									    color: #FFFFFF;
-									    display: block;
-									    font-size: 32px;
-									    font-weight: 300;
-									    margin: 0;
-									    padding: 0;
-								    }
-								}
-								
                                 .poselLabel {
                                     display: inline-block;
                                     line-height: 1em;
@@ -435,7 +434,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00428bca', e
 
                         li {
                             .percent {
-                                font-size: 60px;
+                                font-size: 50px;
                                 font-weight: bold;
                                 color: #12669f;
                                 height: 70px;
@@ -472,28 +471,6 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00428bca', e
                                 position: relative;
                                 width: 100%;
                                 height: 200px;
-
-                                .graphLogo {
-                                    @padding: 6px;
-                                    @size: 36px + (2*@padding);
-
-                                    height: @size;
-                                    left: 50%;
-                                    margin-left: -(@size/2);
-                                    margin-top: -(@size/2);
-                                    position: absolute;
-                                    text-align: center;
-                                    top: 50%;
-                                    width: @size;
-                                    z-index: 1;
-                                    padding: @padding;
-
-                                    background-color: #FFFFFF;
-                                    border: 1px solid #ffffff;
-                                    -moz-border-radius: 250px; /*Firefox*/
-                                    -webkit-border-radius: 250px; /*Safari, Chrome*/
-                                    border-radius: 250px;
-                                }
 
                                 .graphInner {
                                     height: 200px;

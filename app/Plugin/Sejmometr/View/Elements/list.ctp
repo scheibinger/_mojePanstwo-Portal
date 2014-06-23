@@ -17,12 +17,12 @@
 		                </a>
 		                <a href="<?= $item['url'] ?>" target="_self">
 	                        <div class="poselLabel">
-	                            <?= $item['nazwisko'] . ' ' . $item['imie'] ?>
-	                            <? if( $item['klub_id']!='7' ) {?>
+	                            <span><?= $item['nazwisko'] . ' ' . $item['imie'] ?>
+                                    <? if( $item['klub_id']!='7' ) {?>
 	                            <img class="club" src="<?= $item['klub_img_src'] ?>"
 	                                 alt="<?php echo $item['klub'] ?>"/>
-	                            <? }?>
-	                        </div>	                        
+                                    <? } ?></span>
+                            </div>
 		                </a>
                 	</div>
                 </li>

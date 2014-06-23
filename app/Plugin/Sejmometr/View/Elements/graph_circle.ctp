@@ -9,10 +9,8 @@
                 <li class="col-xs-6 col-sm-4 col-md-hack-20">
                     <div class="graphTitle"><?php echo $item['title'] ?></div>
                     <div class="graph">
-                        <div class="graphLogo">
-                            <img src="<?php echo $item['img_src']; ?>" alt="<?php echo $item['title'] ?>"/>
-                        </div>
-                        <div class="graphInner" data-setup='<?php echo json_encode($item["setup"]) ?>'></div>
+                        <div class="graphInner" data-logo='<?php echo $item['img_src']; ?>'
+                             data-setup='<?php echo json_encode($item["setup"]) ?>'></div>
                     </div>
                     <div class="split">
                         <div class="part men"><?php echo $item['setup'][1][1]; ?>%</div>
@@ -23,9 +21,9 @@
         </ul>
 
         <? if (isset($page['link'])) { ?>
-        <div class="checkIt text-center">
-            <a class="btn btn-primary" href="<?php echo $page['link'] ?>" target="_self">Pokaż całość</a>
-        </div>
+            <div class="checkIt text-center">
+                <a class="btn btn-primary" href="<?php echo $page['link'] ?>" target="_self">Pokaż całość</a>
+            </div>
         <? } ?>
     </div>
 </div>

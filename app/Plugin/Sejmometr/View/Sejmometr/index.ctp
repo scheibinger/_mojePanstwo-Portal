@@ -168,9 +168,9 @@
 
 <div class="detailPoslowie strip">
 <div class="container">
-<div class="sideMenu col-xs-12 col-sm-4 col-md-2">
-    <ul>
-        <li class="active">
+<div class="sideMenu hidden-xs col-sm-4 col-md-2">
+    <ul class="nav">
+    <li class="active">
             <a href="#wystapienia">Wystąpienia</a>
         </li>
         <li>
