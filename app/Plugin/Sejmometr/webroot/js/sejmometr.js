@@ -33,34 +33,30 @@ function graphPoslankiPoslowie() {
 }
 
 jQuery(document).ready(function () {
-    graphPoslankiPoslowie();
-});
+    var $sideMenu = $('.sideMenu > ul'),
+        ajaxQueue = jQuery({});
 
-var ajaxQueue = jQuery({});
-
-jQuery.ajaxQueue = function (ajaxOpts) {
-
-    // Hold the original complete function.
-    var oldComplete = ajaxOpts.complete;
-
-    // Queue our ajax request.
-    ajaxQueue.queue(function (next) {
-
-        // Create a complete callback to fire the next event in the queue.
-        ajaxOpts.complete = function () {
-
-            // Fire the original complete if it was there.
-            if (oldComplete) {
-                oldComplete.apply(this, arguments);
+    $sideMenu.css('width', $sideMenu.width()).affix({
+        offset: {
+            top: function () {
+                return this.top = Math.floor($('.sideMenu').position().top) - $('header').outerHeight(true);
             }
-
-            // Run the next query in the queue.
-            next();
-        };
-
-        // Run the query.
-        jQuery.ajax(ajaxOpts);
-
+        }
     });
 
-};
+    graphPoslankiPoslowie();
+
+    jQuery.ajaxQueue = function (ajaxOpts) {
+        var oldComplete = ajaxOpts.complete;
+
+        ajaxQueue.queue(function (next) {
+            ajaxOpts.complete = function () {
+                if (oldComplete) {
+                    oldComplete.apply(this, arguments);
+                }
+                next();
+            };
+            jQuery.ajax(ajaxOpts);
+        });
+    };
+});
