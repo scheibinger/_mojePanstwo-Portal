@@ -123,7 +123,7 @@ jQuery(function ($) {
 
         infoController = controller = new ScrollMagic({
             vertical: false,
-            loglevel: 1
+            loglevel: 2
         });
 
         $near.find('.posel').removeClass('hide').css({height: "", bottom: ""});
@@ -142,19 +142,20 @@ jQuery(function ($) {
 
         /*SAMOCHOD SEJM - BIURO*/
         var sejmSamochod = new TimelineMax()
-            .add(TweenMax.fromTo($near.find('.samochod'), 1, {left: $medium.find('.scene.sejm').position().left + 850}, { left: $medium.find('.scene.biuro').position().left + $medium.find('.scene.biuro').width() - 1000}));
+            .add(TweenMax.fromTo($near.find('.samochod'), 1, {left: $medium.find('.scene.sejm').position().left + 850}, { left: $medium.find('.scene.biuro').position().left + $medium.find('.scene.biuro').width() - 1100}));
 
         /*POSEL WALK - BIURO + INSIDE*/
         var biuroPosel = new TimelineMax()
-            .add(TweenMax.fromTo($near.find('.posel'), 0.1, {left: $medium.find('.scene.biuro').position().left + $medium.find('.scene.biuro').width() - 920}, {left: $medium.find('.scene.biuro').position().left + $medium.find('.scene.biuro').width() - 920, bottom: "-=20", height: "+=50"}))
+            .add(TweenMax.fromTo($near.find('.posel'), 1.5, {left: $medium.find('.scene.biuro').position().left + $medium.find('.scene.biuro').width() - 1150}, {left: $medium.find('.scene.biuro').position().left + $medium.find('.scene.biuro').width() - 1020}))
+            .add(TweenMax.to($near.find('.posel'), 0.1, {bottom: "-=20", height: "+=50"}))
             .add(TweenMax.to($near.find('.posel'), 0.1, {bottom: "+=15"}))
-            .add(TweenMax.to($near.find('.posel'), 0.2, {left: $medium.find('.scene.biuro').position().left + $medium.find('.scene.biuro').width() - 700}));
+            .add(TweenMax.to($near.find('.posel'), 1, {left: $medium.find('.scene.biuro').position().left + $medium.find('.scene.biuro').width() - 700}));
 
         /*POSEL WALK - BIURO, SZPITAL, BANK, SPOTKANIE, TLUMACZ, DOM*/
         var poselWalk = new TimelineMax()
-            .add(TweenMax.fromTo($near.find('.posel'), 0.5, {left: $medium.find('.scene.biuro').position().left + $medium.find('.scene.biuro').width() - 700}, {left: $medium.find('.scene.szpital').position().left + 20}))
+            .add(TweenMax.fromTo($near.find('.posel'), 1, {left: $medium.find('.scene.biuro').position().left + $medium.find('.scene.biuro').width() - 700}, {left: $medium.find('.scene.szpital').position().left + 20}))
             .add(TweenMax.fromTo($medium.find('.scene.szpital .stat.korespondencja'), 0.5, {opacity: 0}, {opacity: 1}))
-            .add(TweenMax.to($near.find('.posel'), 3, {left: $medium.find('.scene.szpital').position().left + $medium.find('.scene.szpital').width() - 250}))
+            .add(TweenMax.to($near.find('.posel'), 2, {left: $medium.find('.scene.szpital').position().left + $medium.find('.scene.szpital').width() - 250}))
             .add(TweenMax.fromTo($medium.find('.scene.szpital .stat.badania'), 0.5, {opacity: 0}, {opacity: 1}))
             .add(TweenMax.to($near.find('.posel'), 4, {left: $medium.find('.scene.bank').position().left + $medium.find('.scene.bank').width() / 2}))
             .add(TweenMax.fromTo($medium.find('.scene.bank .stat.rachunki'), 0.5, {opacity: 0}, {opacity: 1}))
@@ -162,15 +163,21 @@ jQuery(function ($) {
             .add(TweenMax.fromTo($medium.find('.scene.spotkanie .stat.sala'), 0.5, {opacity: 0}, {opacity: 1}))
             .add(TweenMax.to($near.find('.posel'), 6, {left: $medium.find('.scene.tlumaczenia').position().left + $medium.find('.scene.tlumaczenia').width() - 170}))
             .add(TweenMax.fromTo($medium.find('.scene.tlumaczenia .stat.ekspertyzy'), 0.5, {opacity: 0}, {opacity: 1}))
-            .add(TweenMax.to($near.find('.posel'), 4, {left: $medium.find('.scene.dom').position().left + $medium.find('.scene.dom').width() - 290}))
-            .add(TweenMax.fromTo($medium.find('.scene.dom .stat.prywatny'), 0.5, {opacity: 0}, {opacity: 1}))
-            .add(TweenMax.fromTo($medium.find('.scene.dom .stat.dom'), 0.5, {opacity: 0}, {opacity: 1}));
+            .add(TweenMax.to($near.find('.posel'), 5, {left: $medium.find('.scene.dom').position().left + $medium.find('.scene.dom').width() - 290}))
+            .add(TweenMax.fromTo($medium.find('.scene.dom .stat.prywatny'), 0.25, {opacity: 0}, {opacity: 1}))
+            .add(TweenMax.fromTo($medium.find('.scene.dom .stat.dom'), 0.25, {opacity: 0}, {opacity: 1}));
+
+        /*POSEL TAXI - WALK + CALL*/
+        var poselTaxi = new TimelineMax()
+            .add(TweenMax.fromTo($near.find('.taksowka'), 4, {left: $medium.find('.scene.tlumaczenia').position().left}, { left: $medium.find('.scene.dom').position().left + $medium.find('.scene.dom').width() - 800}))
+            .add(TweenMax.to($near.find('.posel'), 0.1, {bottom: "-=15"}))
+            .add(TweenMax.to($near.find('.posel'), 0.1, {bottom: "+=20", height: "-=50"}));
 
         /*START*/
         new ScrollScene({
             duration: 1
         }).on("end", function () {
-                $near.find('.posel').removeClass('hide outfit').css({left: $medium.find('.scene.sejm').position().left + 600, height: "", bottom: ""});
+                $near.find('.posel').removeClass('hide outfit').css({left: $medium.find('.scene.sejm').position().left + 600, height: "", bottom: ""})
                 $near.find('.samochod').removeClass('in').css({left: $medium.find('.scene.sejm').position().left + 850});
                 scrollTo(0);
             })
@@ -208,7 +215,7 @@ jQuery(function ($) {
             }).on("end", function () {
                 $medium.find('.scene.biuro, .scene.szpital, .scene.bank, .scene.spotkanie, .scene.tlumaczenia, .scene.dom').find('.stat').addClass('out');
             })
-            .triggerElement($medium.find('.scene.biuro .stat.biura'))
+            .triggerElement($medium.find('.scene.biuro'))
             .setTween(biuroPosel)
             .addTo(controller);
 
@@ -218,8 +225,16 @@ jQuery(function ($) {
         }).on("end", function () {
             })
             .triggerElement($medium.find('.scene.szpital'))
-            .triggerHook("onEnter")
             .setTween(poselWalk)
+            .addTo(controller);
+
+        /*POSEL TAXI - WALK + CALL*/
+        new ScrollScene({
+            duration: ($medium.find('.scene.dom').width() / 2)
+        }).on("end", function () {
+            })
+            .triggerElement($medium.find('.scene.dom'))
+            .setTween(poselTaxi)
             .addTo(controller);
     }
 
