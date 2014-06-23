@@ -21,10 +21,10 @@ class SejmometrController extends SejmometrAppController
                 return pl_dopelniacz($object->getData('liczba_wypowiedzi'), 'wystąpienie', 'wystąpienia', 'wystąpień');
             },
             'frekwencja' =>  function($object){
-                return $object->getData('frekwencja') . '%';
+                return '<strong>' . $object->getData('frekwencja') . '%</strong>';
             },
             'zbuntowanie' => function($object){
-                return $object->getData('zbuntowanie') . '%';
+                return '<strong>' . $object->getData('zbuntowanie') . '%</strong>';
             },
             'liczba_interpelacji' =>  function($object){
                 return pl_dopelniacz($object->getData('liczba_interpelacji'), 'interpelacja', 'interpelacje', 'interpelacji');
@@ -36,13 +36,13 @@ class SejmometrController extends SejmometrAppController
                 return pl_dopelniacz($object->getData('liczba_przelotow'), 'przelot', 'przeloty', 'przelotów');
             },
             'przejazdy' => function($object){
-                return pl_dopelniacz($object->getData('liczba_przelotow'), 'przejazd', 'przejazdy', 'przejazdów');
+                return pl_dopelniacz($object->getData('liczba_przejazdow'), 'przejazd', 'przejazdy', 'przejazdów');
             },
             'kwatery_prywatne' => function($object){
-                return $object->getData('wartosc_refundacja_kwater_pln');
+                return '<strong>' . $object->getData('wartosc_refundacja_kwater_pln') . '</strong>';
             },
             'uposazenia' => function($object){
-                return $object->getData('wartosc_uposazenia_pln');
+                return '<strong>' . $object->getData('wartosc_uposazenia_pln') . '</strong>';
             },
         );
 
@@ -61,6 +61,7 @@ class SejmometrController extends SejmometrAppController
                     'imie' => $object->getData('imie_pierwsze'),
                     'nazwisko' => $object->getData('nazwisko'),
                     'url' => $object->getUrl(),
+                    'klub_id' => $object->getData('klub_id'),
                     'klub_img_src' => $this->klub_img_src($object->getData('klub_id')),
                     'posel_img_src' => $object->getThumbnailUrl(),
                     'klub' => $object->getData('sejm_kluby.nazwa'),
@@ -140,12 +141,18 @@ class SejmometrController extends SejmometrAppController
 	    $API = $this->API->Dane();
 		$API->searchDataset('sejm_posiedzenia', array(
 			'order' => 'data_stop desc',
+			'conditions' => array(
+				'numer' => '[1 TO *]',
+			),
 			'limit' => 100,
 		));
 		
 		foreach( $API->getObjects() as $object )
 		{
-	    		    	
+	    		   
+	    	if( $object->getData('numer')=='0' )
+	    		continue;
+	    	 	
 	    	$startDate = $object->getData('data_start');
             $dateParts = explode('-', $startDate);
             $startDate = $dateParts[0] . ',' . $dateParts[1] . ',' . $dateParts[2];

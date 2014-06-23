@@ -15,7 +15,9 @@ class SejmPosiedzeniaController extends DataobjectsController
     public $objectOptions = array(
         'bigTitle' => true,
     );
-	
+
+	public $breadcrumbsMode = 'app';
+
 	public $hlmap = array(
 		array(
 			'id' => 'liczba_wystapien',

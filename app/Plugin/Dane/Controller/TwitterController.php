@@ -5,6 +5,8 @@ App::uses('Set', 'Utility');
 class TwitterController extends DataobjectsController
 {
 
+	public $breadcrumbsMode = 'app';
+
     public $components = array(
         'RequestHandler',
     );

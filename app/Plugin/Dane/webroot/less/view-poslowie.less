@@ -1,5 +1,6 @@
 .objectsPage .objectsPageWindow {
     padding-top: 5px;
+    margin-bottom: 20px;
 
     .anchor {
         @padding: 10px;
@@ -11,6 +12,20 @@
         position: fixed;
         top: 50px;
     }
+    
+    .table-wydatki {
+    	td, th {
+	    	text-align: center;
+	    	&.zero {
+		    	color: #BBB;
+	    	}
+    	}
+	    .label_td {
+		    width: 50%;
+		    text-align: left;
+	    }
+    }
+    
     /*
     .row {
         margin-bottom: 15px;

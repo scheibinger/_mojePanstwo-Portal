@@ -7,19 +7,24 @@
         <ul>
             <?php foreach ($items as $item) { ?>
                 <li class="col-xs-6 col-sm-4 col-md-hack-20">
-                <a href="<?= $item['url'] ?>" target="_self">
-                        <img class="avatar" src="<?= $item['posel_img_src'] ?>"
-                             alt="<?= $item['nazwisko'] . ' ' . $item['imie'] ?>"/>
-
-                        <div class="poselLabel">
-                            <?= $item['nazwisko'] . ' ' . $item['imie'] ?>
-                            <img class="club" src="<?= $item['klub_img_src'] ?>"
-                                 alt="<?php echo $item['klub'] ?>"/>
-                        </div>
-                        <div class="poselInfo">
-                            <?php echo $item['display'] ?>
-                        </div>
-                    </a>
+                	<div class="a_cont">
+		                <a href="<?= $item['url'] ?><?if( isset($page['item_path']) ){?>/<?= $page['item_path'] ?><?}?>" target="_self">
+			                <img class="avatar" src="<?= $item['posel_img_src'] ?>" alt="<?= $item['nazwisko'] . ' ' . $item['imie'] ?>"/>
+							
+							<div class="poselInfo">
+			                    <?php echo $item['display'] ?>
+			                </div>
+		                </a>
+		                <a href="<?= $item['url'] ?>" target="_self">
+	                        <div class="poselLabel">
+	                            <?= $item['nazwisko'] . ' ' . $item['imie'] ?>
+	                            <? if( $item['klub_id']!='7' ) {?>
+	                            <img class="club" src="<?= $item['klub_img_src'] ?>"
+	                                 alt="<?php echo $item['klub'] ?>"/>
+	                            <? }?>
+	                        </div>	                        
+		                </a>
+                	</div>
                 </li>
             <?php } ?>
         </ul>

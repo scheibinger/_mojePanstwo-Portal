@@ -6,6 +6,7 @@ class SejmDebatyController extends DataobjectsController
 {
     public $uses = array('Dane.Dataobject');
     public $menu = array();
+	public $breadcrumbsMode = 'app';
 
     public function view()
     {

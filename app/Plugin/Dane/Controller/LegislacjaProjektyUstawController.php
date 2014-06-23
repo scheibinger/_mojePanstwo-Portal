@@ -5,6 +5,7 @@ App::uses('DataobjectsController', 'Dane.Controller');
 class LegislacjaProjektyUstawController extends DataobjectsController
 {
     public $menu = array();
+	public $breadcrumbsMode = 'app';
 
     public $objectOptions = array(
         'hlFields' => array('status_str'),

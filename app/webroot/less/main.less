@@ -133,6 +133,21 @@ body > pre:first-child {
 	        white-space: normal !important;
 	        line-height: 24px;
 	        text-align: left;
+	        
+	        &.za {
+		        background-color: #73A839;
+		        color: #FFF;
+	        }
+	        
+	        &.przeciw {
+		        background-color: #C71C22;
+		        color: #FFF;
+	        }
+	        
+	        &.wstrzymanie {
+		        background-color: #2FA4E7;
+		        color: #FFF;
+	        }
         }
     }
 
@@ -287,6 +302,10 @@ body > pre:first-child {
     	margin-top: 10px;
     	list-style: none;
     	
+    	p {
+	    	margin-bottom: 0;
+    	}
+    	
     	&.topborder {
 	    	border-top: 1px solid #CCC;
 	    	padding-top: 20px;
@@ -313,6 +332,20 @@ body > pre:first-child {
 	            font-weight: 300;	
 	        }
         }
+        
+        .btn {
+            border-color: #F3F3F3;
+            color: #AAA;
+            background-color: #F3F3F3;
+            margin: 2px;
+        }
+        
+        &:hover .btn {
+            border-color: #CCC;
+            color: #333;
+            background-color: #FFF;
+        }
+        
     }
     
 }

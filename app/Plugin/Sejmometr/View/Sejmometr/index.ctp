@@ -27,18 +27,20 @@
 
 
             <div class="row sejm-menu">
-                <div class="col-lg-3 link">
+                <div class="col-lg-4 link">
                     <a class="poslowie" href="/dane/poslowie"><span>Znajdź<br/>i sprawdź swojego posła!</span></a>
                 </div>
-                <div class="col-lg-3 link">
-                    <a class="posiedzenia" href="/sejmometr/posiedzenia"><span>Posiedzenia Sejmu</span></a>
-                </div>
-                <div class="col-lg-3 link">
+                <div class="col-lg-4 link">
                     <a class="projekty" href="/sejmometr/prace"><span>Projekty aktów prawnych</span></a>
                 </div>
+                <div class="col-lg-4 link">
+                    <a class="posiedzenia" href="/sejmometr/posiedzenia"><span>Posiedzenia Sejmu</span></a>
+                </div>
+                <? /*
                 <div class="col-lg-3 link">
                     <a class="koszty" href="/sejmometr/info"><span>Ile to kosztuje?</span></a>
                 </div>
+                */ ?>
             </div>
 
 
@@ -196,18 +198,22 @@
         <li>
             <a href="#przejazdy">Poselskie przejazdy</a>
         </li>
+        <? /*
         <li>
             <a href="#wnioskiImmunitet">Wnioski o uchylenie immunitetu</a>
         </li>
+        */ ?>
         <li>
             <a href="#domPoselski">Dom poselski</a>
         </li>
+        <? /*
         <li>
             <a href="#zarobki">Zarobki posłów</a>
         </li>
         <li>
             <a href="#dodatki">Dodatki do uposażenia i dieta poselska</a>
         </li>
+        */ ?>
         <li>
             <a href="#pozyczki">Pożyczki</a>
         </li>
@@ -225,9 +231,10 @@
         'anchor' => 'wystapienia',
         'title' => 'Wystąpienia na forum Sejmu',
         'text' => 'Posłowie w ramach sprawowania mandatu wypowiadają się na posiedzeniach Sejmu. Zobacz, którzy z nich są najbardziej aktywni.',
-        'link' => $poslowie_url . '?order='. $liczba_wypowiedzi['order']
+        'link' => $poslowie_url . '?order='. $liczba_wypowiedzi['order'],
+        'item_path' => 'wystapienia',
     );
-
+	
     echo $this->element('Sejmometr.list', array('page' => $page, 'items' => $liczba_wypowiedzi['items']));
 
 
@@ -238,7 +245,8 @@
         'anchor' => 'frekwencja',
         'title' => 'Frekwencja posłów na głosowaniach',
         'text' => 'Poseł musi być obecny na posiedzeniach Sejmu i powinien czynnie w nich uczestniczyć. To poselski obowiązek, którego zaniedbanie powoduje konsekwencje finansowe. Jeżeli poseł ma nieusprawiedliwione nieobecności Marszałek Sejmu zarządza obniżenie uposażenia i diety parlamentarnej albo jednego z tych świadczeń, jeżeli tylko ono przysługuje posłowi. Poseł ze swoich świadczeń traci 1/30 za każdy dzień nieusprawiedliwionej nieobecności na posiedzeniu Sejmu lub za niewzięcie w danym dniu udziału w więcej niż 1/5 głosowań. Sprawdź, który z posłów najcześciej omija sejmowe posiedzenia.',
-        'link' => $poslowie_url . '?order'. $frekwencja['order']
+        'link' => $poslowie_url . '?order='. $frekwencja['order'],
+        'item_path' => 'glosowania/?glos_id[]=4',
     );
 
     echo $this->element('Sejmometr.list', array('page' => $page, 'items' => $frekwencja['items']));
@@ -252,7 +260,8 @@
         'title' => 'Bunty poselskie',
         'text' => 'Poprzez "bunty" określamy sytuacje polegające na tym, że poseł głosuje przeciwnie niż większość klubu parlamentarnego, do którego należy. Partie zabezpieczają się przed buntami stosując dyscyplinę głosowania. Narzucają tym samym sposób w jaki dany poseł ma zagłosować. Za naruszenie dyscypliny grozi nawet kara finansowa. Powstaje pytanie jak narzędzie dyscypliny głosowania ma się do konstytucyjnego zapisu o tym, że posłowie są przedstawicielami Narodu. W momencie gdy poseł oddaje swój głos zgodnie z wytycznymi partyjnego lidera jest przedstawicielami partii, a nie Narodu. Wydaje się, że dyscyplina poselska nie wpływa korzystnie na interesy obywateli. W sytuacji jej zastosowania na decyzję posła podczas głosowania mają wpływ nie merytoryczne rozważania, ale obawy przed sankcjami, które może wymierzyć partia. W naszym zestawieniu prezentujemy największych buntowników w Sejmie, którzy głosują inaczej niż większość ich klubu parlamentarnego.',
         //'link' => $poslowie_url . '?order=liczba_glosowan_zbuntowanych%20desc'
-        'link' => $poslowie_url . '?order'. $zbuntowanie['order']
+        'link' => $poslowie_url . '?order='. $zbuntowanie['order'],
+        'item_path' => 'glosowania/?bunt[]=1',
     );
 
     echo $this->element('Sejmometr.list', array('page' => $page, 'items' => $zbuntowanie['items']));
@@ -265,7 +274,8 @@
         'anchor' => 'interpelacje',
         'title' => 'Interpelacje',
         'text' => 'Składanie interpelacji jest jednym z poselskich uprawnień. Każdy z posłów może zapytać Prezesa Rady Ministrów lub konkretnego ministra o sprawę, która dotyczy polityki państwa. Członkowie Rady Ministrów muszą udzielić posłowi odpowiedzi nie później niż w ciągu 21 dni od otrzymania interpelacji. Zobacz, który z posłów najczęściej zadaje pytania!',
-        'link' => $poslowie_url . '?order'. $liczba_interpelacji['order']
+        'link' => $poslowie_url . '?order='. $liczba_interpelacji['order'],
+        'item_path' => 'interpelacje',
     );
 
     echo $this->element('Sejmometr.list', array('page' => $page, 'items' => $liczba_interpelacji['items']));
@@ -291,7 +301,8 @@
         'anchor' => 'etyka_poselska',
         'title' => 'Etyka poselska',
         'text' => 'Kwestiami związanymi z etyką parlamentarzystów zajmuje się Komisja Etyki Poselskiej. Zadaniem komisji jest m. in. rozpatrywanie spraw posłów, którzy zachowują się w sposób nieodpowiadający poselskiej godności. Zobacz czyje zachowanie najczęściej było przedmiotem uchwał Komisji Etyki Poselskiej.',
-        'link' => '#rankingLink'
+        'link' => '/dane/sejm_komisje_uchwaly',
+        'item_path' => 'komisja_etyki_uchwaly',
     );
 		
     echo $this->element('Sejmometr.list', array('page' => $page, 'items' => $uchwaly_komisji_etyki['items']));
@@ -316,10 +327,10 @@
         'anchor' => 'przeloty',
         'title' => 'Poselskie przeloty',
         'text' => 'Poseł ma prawo do bezpłatnych przelotów w krajowym przewozie lotniczym. W celu zapewnienia realizacji na rzecz posłów krajowej usługi lotniczej, Kancelaria Sejmu zawiera umowy z przewoźnikami lotniczymi. Posłowie mają również prawo do doraźnego korzystania z usług innych przewoźników lotniczych, z którymi Kancelaria Sejmu nie zawarła stosownych umów. W takim przypadku posłowie kupują bilet w kasie przewoźnika, a następnie należność przez nich uiszczona zwracana jest im przez Kancelarię Sejmu na zasadzie refundacji, na podstawie oryginału faktury, rachunku albo biletu wystawionego przez przewoźnika. Poniżej przedstawiamy nazwiska posłów, którzy latali najczęściej w 2013 roku.',
-        'link' => '#rankingLink'
+        'link' => $poslowie_url . '?order=liczba_przelotow desc',
     );
 
-    echo $this->element('Sejmometr.list', array('page' => $page, 'items' => $przeloty));
+    echo $this->element('Sejmometr.list', array('page' => $page, 'items' => $przeloty['items']));
 
 
     /* POLSKIE PRZEJAZDY BLOCK */
@@ -329,13 +340,13 @@
         'anchor' => 'przejazdy',
         'title' => 'Poselskie przejazdy',
         'text' => 'Posłowie w ramach wykonywania swojej pracy mogą korzystać ze służbowych samochodów, którymi dysponuje Kancelaria Sejmu. Zobacz kto w 2013 roku najczęściej był w drodze.',
-        'link' => '#rankingLink'
+        'link' => $poslowie_url . '?order=liczba_przejazdow desc',
     );
 
-    echo $this->element('Sejmometr.list', array('page' => $page, 'items' => $przejazdy));
-
+    echo $this->element('Sejmometr.list', array('page' => $page, 'items' => $przejazdy['items']));
 
     /* KWATERY PRYWATNE POSLOW BLOCK */
+	/*
 
     $page = array(
         'class' => 'kwatery',
@@ -345,7 +356,8 @@
         'link' => '#rankingLink'
     );
 
-    echo $this->element('Sejmometr.list', array('page' => $page, 'items' => $kwatery_prywatne));
+    echo $this->element('Sejmometr.list', array('page' => $page, 'items' => $kwatery_prywatne['items']));
+    */
 
 
     /* WMIOSKI O UCHYLENIE IMMUNITETU BLOCK */
@@ -395,7 +407,7 @@
         'text' => '<p>Posłom, którzy pełnią dodatkowe funkcje przysługują dodatki do uposażenia w wysokości:</p><ul><li>20 % uposażenia - dla pełniących funkcję przewodniczącego komisji,</li><li>15 % uposażenia - dla pełniących funkcję zastępcy przewodniczącego komisji,</li><li>10 % uposażenia - dla pełniących funkcję przewodniczących stałych podkomisji,</li><li>Łączna wysokość dodatków nie może jednak przekroczyć 35% uposażenia poselskiego.</li></ul><p>Wszystkim posłom przysługuje dieta poselska czyli środki finansowe na pokrycie kosztów związanych z wydatkami poniesionymi w związku z wykonywaniem mandatu na terenie kraju. Dieta poselska wynosi 25 % uposażenia miesięcznego czyli <strong>2473,08 zł brutto</strong>. Świadczenie jest wolne od podatku dochodowego od osób fizycznych.</p>'
     );
 
-    echo $this->element('Sejmometr.text', array('page' => $page, 'items' => $uposazenia));
+    echo $this->element('Sejmometr.text', array('page' => $page, 'items' => $uposazenia['items']));
 
 
     /* POZYCZKI BLOCK */
@@ -403,7 +415,8 @@
         'class' => 'pozyczki',
         'anchor' => 'pozyczki',
         'title' => 'Pożyczki',
-        'text' => '<p>Jeżeli poseł potrzebuje pieniędzy w związku z zakupem domu czy remontem mieszkania może złożyć wniosek o udzielenie pożyczki na cele mieszkaniowe. Świadczenie przynawane jest na podstawie decyzji Marszałka Sejmu po zasięgnięciu opinii Zespołu do Spraw Pomocy Socjalnej. Wysokość oprocentowania pożyczki wynosi 3% jeśli została udzielona na okres do 12 miesięcy, lub 4% jeśli została udzielona na okres do 24 miesięcy.</p><p><strong>W 2013 r. w Domu Poselskim udzielono posłom 21, 152 zakwaterowań (w dobach).</strong></p>'
+        // 'text' => '<p>Jeżeli poseł potrzebuje pieniędzy w związku z zakupem domu czy remontem mieszkania może złożyć wniosek o udzielenie pożyczki na cele mieszkaniowe. Świadczenie przynawane jest na podstawie decyzji Marszałka Sejmu po zasięgnięciu opinii Zespołu do Spraw Pomocy Socjalnej. Wysokość oprocentowania pożyczki wynosi 3% jeśli została udzielona na okres do 12 miesięcy, lub 4% jeśli została udzielona na okres do 24 miesięcy.</p><p><strong>W 2013 r. w Domu Poselskim udzielono posłom 21, 152 zakwaterowań (w dobach).</strong></p>'
+        'text' => '<p>Jeżeli poseł potrzebuje pieniędzy w związku z zakupem domu czy remontem mieszkania może złożyć wniosek o udzielenie pożyczki na cele mieszkaniowe. Świadczenie przynawane jest na podstawie decyzji Marszałka Sejmu po zasięgnięciu opinii Zespołu do Spraw Pomocy Socjalnej. Wysokość oprocentowania pożyczki wynosi 3% jeśli została udzielona na okres do 12 miesięcy, lub 4% jeśli została udzielona na okres do 24 miesięcy.</p>'
     );
 
     echo $this->element('Sejmometr.text', array('page' => $page));
