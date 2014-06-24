@@ -134,7 +134,17 @@ footer {
                     }
                 }
                 &.sejm {
-                    background: url(../Sejmometr/img/inner-story/scene_01_sejm.png) bottom left no-repeat, url(../Sejmometr/img/inner-story/default_road.png) bottom left repeat-x;
+                    background: url(../Sejmometr/img/inner-story/scene_01_sejm_background.png) bottom left no-repeat, url(../Sejmometr/img/inner-story/default_road.png) bottom left repeat-x;
+
+                    .building {
+                        background: url(../Sejmometr/img/inner-story/scene_01_sejm_building.png) left top no-repeat;
+                        bottom: 117px;
+                        height: 413px;
+                        left: 160px;
+                        position: absolute;
+                        width: 590px;
+                        z-index: 3;
+                    }
 
                     .stat.zarobki {
                         bottom: 485px;
@@ -178,6 +188,21 @@ footer {
                 &.spotkanie {
                     background: url(../Sejmometr/img/inner-story/scene_06_spotkanie.png) bottom left no-repeat, url(../Sejmometr/img/inner-story/default_road.png) bottom left repeat-x;
 
+                    .name {
+                        bottom: 302px;
+                        color: #ffffff;
+                        display: block;
+                        font-size: 26px;
+                        height: 88px;
+                        left: 313px;
+                        line-height: 30px;
+                        padding: 14px 15px;
+                        position: absolute;
+                        text-align: center;
+                        text-transform: uppercase;
+                        width: 342px;
+                    }
+
                     .stat.sala {
                         bottom: 450px;
                         left: 370px;
@@ -209,11 +234,21 @@ footer {
                     .stat.taksowka {
                         bottom: 220px;
                         left: 50%;
-                        margin-left: -250px;
+                        margin-left: -100px;
                     }
                 }
                 &.lotnisko {
-                    background: url(../Sejmometr/img/inner-story/scene_09_lotnisko.png) bottom left no-repeat, url(../Sejmometr/img/inner-story/default_airport.png) bottom left repeat-x;
+                    background: url(../Sejmometr/img/inner-story/scene_09_lotnisko_background.png) bottom left no-repeat, url(../Sejmometr/img/inner-story/default_airport.png) bottom left repeat-x;
+
+                    .building {
+                        background: url(../Sejmometr/img/inner-story/scene_09_lotnisko_building.png) top left no-repeat;
+                        bottom: 116px;
+                        height: 336px;
+                        left: 0;
+                        position: absolute;
+                        width: 434px;
+                        z-index: 1;
+                    }
 
                     .stat.loty {
                         bottom: 470px;
@@ -225,6 +260,7 @@ footer {
                 }
                 &.stats {
                     background-color: #41a8de;
+                    z-index: 1;
                 }
             }
         }
@@ -234,6 +270,7 @@ footer {
                 width: 60px;
                 height: 110px;
                 background: url(../Sejmometr/img/inner-story/animated_posel.png) top left no-repeat;
+                z-index: 1;
 
                 position: absolute;
                 left: -999px;
@@ -248,6 +285,7 @@ footer {
                 width: 291px;
                 height: 96px;
                 background: url(../Sejmometr/img/inner-story/animated_samochod.png) top left no-repeat;
+                z-index: 2;
 
                 position: absolute;
                 left: -999px;
@@ -262,6 +300,9 @@ footer {
                 width: 303px;
                 height: 109px;
                 background: url(../Sejmometr/img/inner-story/animated_taxi.png) top left no-repeat;
+                z-index: 2;
+
+                opacity: 0;
 
                 position: absolute;
                 left: -999px;
@@ -279,7 +320,7 @@ footer {
 
                 position: absolute;
                 left: -999px;
-                bottom: 40px;
+                bottom: 138px;
             }
         }
     }
