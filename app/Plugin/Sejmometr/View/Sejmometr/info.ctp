@@ -21,6 +21,7 @@
                 <div class="scrollHint"></div>
             </div>
             <div class="scene sejm" data-scene="2">
+                <div class="building"></div>
                 <div class="stat posel zarobki">
                     <p>Zarobki posła</p>
                     <strong>209 304
@@ -71,6 +72,7 @@
                 </div>
             </div>
             <div class="scene spotkanie" data-scene="6">
+                <div class="name">Spotkanie z posłem<br/>imię i nazwisko</div>
                 <div class="stat biuro sala">
                     <p>Koszty wynajmowania sal<br>na spotkanie z wyborcami</p>
                     <strong>209 304
@@ -114,6 +116,7 @@
                 </div>
             </div>
             <div class="scene lotnisko" data-scene="10">
+                <div class="building"></div>
                 <div class="stat posel loty">
                     <p>Podróże służbowe pracowników<br>biura poselskiego</p>
                     <strong>209 304
