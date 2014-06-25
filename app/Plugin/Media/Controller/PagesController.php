@@ -112,7 +112,6 @@ class PagesController extends MediaAppController
 
         
         $stats = $this->API->getTwitterStats( $range );
-		// debug( $stats ); die();
 		
 		
         $tags = $stats['tags']['*']['objects'];        
@@ -137,13 +136,10 @@ class PagesController extends MediaAppController
         }
 		
 		shuffle($tags);
-        $stats['tags']['*']['objects'] = $tags;
-		
-		// debug( $stats ); die();
+        $stats['tags']['*']['objects'] = $tags;		
         $this->set('stats', $stats);
         
         
-        debug( $stats ); die();
 
 
         $accounts_types = $this->API->getTwitterAccountsTypes();
@@ -402,7 +398,6 @@ class PagesController extends MediaAppController
 		
 
 		
-        // debug( $ranks ); die();
         $this->set('range', $range);
         $this->set('ranks', $ranks);
         $this->set('title_for_layout', 'Państwo w Mediach Społecznościowych');
