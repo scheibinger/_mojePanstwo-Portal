@@ -23,11 +23,11 @@
             <div class="scene sejm" data-scene="2">
                 <div class="building"></div>
                 <div class="stat posel zarobki">
-                    <p>Zarobki posła</p>
-                    <strong>209 304
-                        <small>PLN/rok</small>
+                    <p>Uposażenie poselskie</p>
+                    <strong>9 304
+                        <small>PLN/miesiąc</small>
                     </strong>
-                    <span>wydatki na posła</span>
+                    <span>wydatki na posła - stan na 31.12.2013</span>
                 </div>
                 <div class="stat biuro przejazd">
                 <p>Przejazd posła<br>samochodem własnym lub innym</p>
