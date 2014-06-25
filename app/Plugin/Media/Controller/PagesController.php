@@ -141,6 +141,9 @@ class PagesController extends MediaAppController
 		
 		// debug( $stats ); die();
         $this->set('stats', $stats);
+        
+        
+        debug( $stats ); die();
 
 
         $accounts_types = $this->API->getTwitterAccountsTypes();
@@ -196,18 +199,9 @@ class PagesController extends MediaAppController
                     ),
                 ),
             ),
-            
-            array(
-                'title' => 'Najczęściej używane aplikacje',
-                'name' => 'aplikacje',
-                'groups' => array(
-                    array(
-                        'mode' => 'source',
-                    ),
-                ),
-            ),
-            
-            /*
+
+
+
             array(
                 'title' => 'Największy przyrost oberwujących',
                 'name' => 'obserwujacy',
@@ -222,10 +216,20 @@ class PagesController extends MediaAppController
                     ),
                 ),
             ),
-            */
-                      
+            
+            
+            array(
+                'title' => 'Najczęściej używane aplikacje',
+                'name' => 'aplikacje',
+                'groups' => array(
+                    array(
+                        'mode' => 'source',
+                    ),
+                ),
+            ),
             
 
+                 
 
             array(
                 'title' => 'Najczęściej udostępniane adresy WWW',
@@ -351,9 +355,10 @@ class PagesController extends MediaAppController
 
                     $rank['groups'][$g] = array_merge($group, array(
                         'types' => $types,
-                        'desc' => 'Zakres czasowy: ' . dataSlownie( $data['date'] ),
                     ));
-						
+					
+					if( $range == '24h' )
+						$rank['groups'][$g]['desc']	= 'Zakres czasowy: ' . dataSlownie( $data['date'] );					
 						
                     
 
