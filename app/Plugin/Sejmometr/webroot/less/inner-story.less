@@ -8,6 +8,10 @@
     z-index: 1 !important;
 }
 
+#_wrapper header, footer {
+    z-index: 999;
+}
+
 #_wrapper header {
     position: fixed;
     top: 0;
@@ -105,6 +109,15 @@ footer {
                 margin-right: -4px;
                 position: relative;
 
+                .marker {
+                    //background-color: red;
+                    display: block;
+                    height: 500px;
+                    position: absolute;
+                    width: 5px;
+                    bottom: 0;
+                }
+
                 &.intro {
                     background: url(../Sejmometr/img/inner-story/default_green.png) bottom left repeat-x;
 
@@ -177,6 +190,10 @@ footer {
                         bottom: 420px;
                         right: 150px;
                     }
+
+                    .marker {
+                        right: 300px;
+                    }
                 }
                 &.szpital {
                     background: url(../Sejmometr/img/inner-story/scene_03_skrzynka.png) bottom left no-repeat, url(../Sejmometr/img/inner-story/scene_04_szpital.png) bottom right no-repeat, url(../Sejmometr/img/inner-story/default_road.png) bottom left repeat-x;
@@ -205,7 +222,7 @@ footer {
                     .name {
                         bottom: 302px;
                         color: #ffffff;
-                        display: block;
+                        display: table;
                         font-size: 26px;
                         height: 88px;
                         left: 313px;
@@ -215,6 +232,11 @@ footer {
                         text-align: center;
                         text-transform: uppercase;
                         width: 342px;
+
+                        p {
+                            display: table-cell;
+                            vertical-align: middle;
+                        }
                     }
 
                     .stat.sala {
@@ -250,6 +272,10 @@ footer {
                         left: 50%;
                         margin-left: -100px;
                     }
+
+                    .marker {
+                        left: 150px;
+                    }
                 }
                 &.lotnisko {
                     background: url(../Sejmometr/img/inner-story/scene_09_lotnisko_background.png) bottom left no-repeat, url(../Sejmometr/img/inner-story/default_airport.png) bottom left repeat-x;
@@ -267,6 +293,9 @@ footer {
                     .stat.loty {
                         bottom: 470px;
                         left: 200px;
+                    }
+                    .marker {
+                        right: 250px;
                     }
                 }
                 &.lot {
@@ -350,8 +379,13 @@ footer {
                                 text-align: center;
                             }
 
+                            .options {
+                                margin-top: 25px;
+                                margin-bottom: 10px;
+                            }
+
                             ul {
-                                margin-top: 55px;
+                                margin-top: 15px;
                                 padding: 0;
                                 list-style: none;
 
