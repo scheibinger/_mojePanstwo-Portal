@@ -197,7 +197,7 @@ class PagesController extends MediaAppController
             ),
 
 
-
+			/*
             array(
                 'title' => 'Największy przyrost oberwujących',
                 'name' => 'obserwujacy',
@@ -212,7 +212,7 @@ class PagesController extends MediaAppController
                     ),
                 ),
             ),
-            
+            */
             
             array(
                 'title' => 'Najczęściej używane aplikacje',
