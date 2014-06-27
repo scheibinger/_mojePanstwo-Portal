@@ -83,6 +83,7 @@
     <div class="name">
         <p>Spotkanie z posłem</p>
     </div>
+    <div class="men"></div>
     <div class="stat sala">
         <p>Koszty wynajmowania sal<br>na spotkania z wyborcami</p>
         <strong>209 304
@@ -145,33 +146,6 @@
 </div>
 <div class="scene lot" data-scene="11"></div>
 <div class="scene stats" data-scene="12">
-    <?php /*
-        <div class="screen">
-            <div class="container">
-                <div class="col-xs-12">
-                    <div class="moneyLeft">
-                        <div class="title">
-                            <h3>Pozostało</h3>
-
-                            <h2>1 209 340
-                                <small>PLN</small>
-                            </h2>
-                        </div>
-                        <div class="infoIcon icon big biuro">Wydatki na biuro poselskie</div>
-                        <div class="moreLinks">
-                            <div class="button icon big biuro col-xs-12 col-md-5 pull-left">
-                                <a href="#">Zobacz listę wszystkich wydatków na biuro poselskie</a>
-                            </div>
-                            <div class="button icon big posel col-xs-12 col-md-5 pull-right">
-                                <a href="#">Zobacz listę wszystkich wydatków na posła</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        */
-    ?>
     <div class="screen">
         <div class="container">
             <div class="col-xs-12">
