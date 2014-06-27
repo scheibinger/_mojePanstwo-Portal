@@ -3,8 +3,15 @@
 }
 
 /*OVERRIDE*/
+.vco-timeline .vco-navigation {
+    height: 140px !important;
+}
+
 .vco-storyjs {
     .date, .vco-feature {
+        .slider-item .media {
+            width: 332px;
+        }
         .projekty {
             h1, h2, h3, h4, h5, h6 {
                 a {
@@ -39,9 +46,9 @@
             img {
                 border-width: 0;
             }
-            
+
             .btn {
-            	
+
             }
         }
     }
@@ -52,12 +59,14 @@
         color: #777777 !important;
         font-size: 11px !important;
     }
-    > h3 > a {
-        color: #157AB5 !important;
-        font-size: 22px;
-        line-height: 1.2em;
-        text-decoration: none;
-        font-family: "Lato", sans-serif; /*TODO: new layout with Helvetica or old with Lato - @Danielmacyszyn decide*/
+    > h3 {
+        > a, > a:hover {
+            color: #157AB5 !important;
+            font-size: 22px;
+            line-height: 1.2em;
+            text-decoration: none;
+            font-family: "Lato", sans-serif; /*TODO: new layout with Helvetica or old with Lato - @Danielmacyszyn decide*/
+        }
     }
 }
 
@@ -101,6 +110,7 @@
 
                 .title {
                     font-size: 16px;
+                    margin-top: 0;
                     margin-bottom: 0;
                 }
 
@@ -108,6 +118,7 @@
                     font-size: 12px;
 
                     p {
+                        margin: 0 0 10px;
                         padding: 10px;
                         color: #555;
                         font-size: 12px;
@@ -120,6 +131,14 @@
 
                 .button {
                     text-align: center;
+
+                    > a, > a:hover {
+                        font-size: 12px;
+                        line-height: 1.5;
+                        border: 1px solid #ccc;
+                        padding: 5px 10px;
+                        color: #333;
+                    }
                 }
             }
         }
