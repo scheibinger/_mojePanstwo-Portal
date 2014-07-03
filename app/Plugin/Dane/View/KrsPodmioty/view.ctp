@@ -171,6 +171,15 @@ $this->Combinator->add_libs('js', 'Dane.view-krspodmioty');
 
     <div class="col-lg-9 objectMain">
         <div class="object mpanel">
+            
+            
+            <? if ($object->getData('wykreslony')) { ?>
+            <div class="alert alert-dismissable alert-danger">
+				<button type="button" class="close" data-dismiss="alert">×</button>
+				Prezentowane dane dotyczą chwili, w której podmiot był wykreślany z KRS.
+			</div>
+			<? } ?>
+            
             <?
             $adres = $object->getData('adres_ulica');
             $adres .= ' ' . $object->getData('adres_numer');

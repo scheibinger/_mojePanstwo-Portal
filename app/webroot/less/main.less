@@ -44,6 +44,14 @@ a {
     background: url(../img/loader/loading-small.png) center center no-repeat;
 }
 
+.pagination-neighbours {
+	float: right;
+	margin-top: 5px;
+	&.pagination > li > a, &.pagination > li > span {
+		background-color: inherit;
+	}
+}
+
 @media (min-width: 768px) {
     .loadingTwirl {
         margin-left: 7%;
@@ -80,6 +88,10 @@ body > pre:first-child {
     
 }
 
+.row.bottomborder {
+	border-bottom: 1px solid #DDD;
+}
+
 .block {
     padding: 30px 30px 0;
 
@@ -91,12 +103,20 @@ body > pre:first-child {
     &.bottompadding {
         padding-bottom: 20px;
     }
+    
+    &.nobottomborder {
+	    border-bottom: none;
+    }
 
     .block-header {
         display: inline-block;
         width: 100%;
         min-height: 45px;
         margin-top: -10px;
+        
+        .btn {
+	        margin-top: 7px;
+        }
     }
 
     &.bg {

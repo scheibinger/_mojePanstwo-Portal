@@ -1,6 +1,10 @@
 <?
 $object = $this->viewVars['object'];
 $objectOptions = $this->viewVars['objectOptions'];
+
+if( isset($titleTag) )
+	$objectOptions['titleTag'] = $titleTag;
+
 $menu = $this->viewVars['menu'];
 
 $buttons = isset($objectOptions['buttons']) ? $objectOptions['buttons'] : array('shoutIt');

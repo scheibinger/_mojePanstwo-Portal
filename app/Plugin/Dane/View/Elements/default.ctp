@@ -142,6 +142,12 @@ $this->Dataobject->setObject($object);
                         else
                             echo $this->Dataobject->highlights($hlFields, $hlFieldsPush);
                         ?>
+                        
+                        <? if( $object->getDescription() ){?>
+                        <div class="description">
+                        	<?= $this->Text->truncate($object->getDescription(), 250) ?>
+                        </div>
+                        <?}?>
 
                     </div>
                 <? } ?>

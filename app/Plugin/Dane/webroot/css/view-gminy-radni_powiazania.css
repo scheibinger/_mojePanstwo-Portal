@@ -1,0 +1,25 @@
+.objectsPage .objectsPageWindow .objectsPageContent h1 {
+  font-weight: 300;
+  margin: 20px !important;
+  font-size: 22px;
+}
+#powiazania .block {
+  margin: 20px 0;
+}
+#powiazania .block img {
+  width: 100%;
+  margin-bottom: 10px;
+}
+#powiazania .block ul li {
+  padding: 5px;
+}
+#powiazania .block ul li a {
+  font-size: 15px;
+}
+#powiazania .block h2.label {
+  font-weight: 400;
+}
+#powiazania .block-header .desc {
+  font-size: 12px;
+  margin: 10px 5px;
+}

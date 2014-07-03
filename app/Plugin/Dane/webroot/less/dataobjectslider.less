@@ -76,11 +76,25 @@
                     padding-right: 5px;
                     padding-left: 5px;
                 }
-
-                .dataHighlight {
-                    ._label {
-                        display: none;
-                    }
+				
+				.dataHighlights {
+					
+					padding: 0;
+                    margin-top: 0;
+					
+	                .dataHighlight {
+	                    	                    
+	                    ._label {
+	                        display: none;
+	                    }
+	                    
+	                    &.showLabels {
+	                    	._label {
+			                    display: block;
+			                }
+	                    }
+	                    
+	                }
                 }
 
                 .description {

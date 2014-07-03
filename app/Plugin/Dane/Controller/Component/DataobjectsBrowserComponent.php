@@ -16,6 +16,7 @@ class DataobjectsBrowserComponent extends Component
     public $hlFields = false;
     public $hlFieldsPush = false;
     public $routes = array();
+    public $inline = false;
 
     public $excludeFilters = array();
 
@@ -61,7 +62,10 @@ class DataobjectsBrowserComponent extends Component
 
         if (isset($settings['routes']))
             $this->routes = $settings['routes'];
-
+            
+        if (isset($settings['routes']))
+            $this->routes = $settings['routes'];
+				
         $add_source_params = array();
         $source_params = array();
 

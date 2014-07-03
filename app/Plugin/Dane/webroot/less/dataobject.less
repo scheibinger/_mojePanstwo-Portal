@@ -44,14 +44,41 @@ blockquote {
         color: @colorLabel;
         font-family: "Lato", sans-serif;
         margin-left: -10px;
+        
+        .glyphicon {
+	        margin-right: 10px;
+        }
     }
 
     h2 {
-        font-size: 20px;
+        font-size: 26px;
         margin-left: 0;
         color: #555;
     }
-
+    
+    &.subobject {
+	    h1 {
+	        font-size: 26px;
+	        margin-left: 0;
+	        color: #555;
+        }
+    }
+    
+    .subtitle {
+	    margin-top: 0;
+	    margin-bottom: 10px !important;
+	    font-size: 11px;
+	    color: #777;
+	    font-family: "Lato",sans-serif;
+	    
+	    a {
+		    color: #777;
+		    &:hover {
+			    color: #157ab5;
+		    }
+	    }
+    }
+    
 }
 
 .filterCount {
@@ -530,7 +557,7 @@ blockquote {
     }
 
     .title {
-        font-size: 17px;
+        font-size: 18px;
         line-height: 1.2em;
         padding: 0 5px;
         margin: 5px 0 5px;
@@ -803,6 +830,10 @@ blockquote {
 
 }
 
+.dataBrowser .objectRender .title {
+	font-size: 18px;
+}
+
 .sejm_glosowania img.kluby {
     height: 20px;
 }
@@ -829,6 +860,9 @@ blockquote {
         background-color: #DDDDDD;
     }
 }
+
+
+
 
 .legislacjaProjekty > .object {
     padding: 40px 0;

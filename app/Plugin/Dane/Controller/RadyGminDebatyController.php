@@ -7,6 +7,10 @@ class RadyGminDebatyController extends DataobjectsController
     public function view()
     {
         parent::_prepareView();
+        
+        $this->redirect('/dane/gminy/' . $this->object->getData('gminy.id') . '/debaty/' . $this->object->getId());
+        die();
+        
         $this->object->loadLayer('wystapienia');
         $wystapienia = array();
         foreach ($this->object->layers['wystapienia'] as $wystapienie) {
