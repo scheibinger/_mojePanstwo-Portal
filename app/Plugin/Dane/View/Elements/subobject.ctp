@@ -3,7 +3,7 @@ $path = App::path('Plugin');
 $file = $path[0] . '/Dane/View/Elements/' . $theme . '/' . $object->getDataset() . '.ctp';
 $file_exists = file_exists($file);
 
-if (in_array($object->getDataset(), array('rady_posiedzenia', 'rady_gmin_debaty', 'rady_gmin_wystapienia'))) {
+if (in_array($object->getDataset(), array('rady_posiedzenia'))) {
     $object_content_sizes = array(3, 9);
 } else {
     $object_content_sizes = array(2, 10);

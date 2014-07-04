@@ -282,6 +282,7 @@ class GminyController extends DataobjectsController
 	            'routes' => array(
 	                'date' => false,
 	            ),
+	            'limit' => 100,
 	        ));
 			
 	    	$this->render('posiedzenie');
