@@ -19,7 +19,7 @@
 		)
 	));
 	
-	echo $this->Element('Dane.dataobjectsBrowser/view', array(
+	echo $this->Element('Dane.DataobjectsBrowser/view', array(
 		'page' => $page,
 		'pagination' => $pagination,
 		'filters' => $filters,
