@@ -17,6 +17,7 @@ class DataobjectsBrowserComponent extends Component
     public $hlFieldsPush = false;
     public $routes = array();
     public $inline = false;
+    public $limit = 20;
 
     public $excludeFilters = array();
 
@@ -65,6 +66,9 @@ class DataobjectsBrowserComponent extends Component
             
         if (isset($settings['routes']))
             $this->routes = $settings['routes'];
+            
+        if (isset($settings['limit']))
+            $this->limit = max(min($settings['limit'], 100), 0);
 				
         $add_source_params = array();
         $source_params = array();
@@ -396,6 +400,7 @@ class DataobjectsBrowserComponent extends Component
             'conditions' => $conditions,
             'paramType' => 'querystring',
             'facets' => true,
+            'limit' => $this->limit,
         );
 
 

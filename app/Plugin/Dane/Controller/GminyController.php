@@ -597,6 +597,7 @@ class GminyController extends DataobjectsController
 	                'gmina_id', 'gminy.powiat_id', 'gminy.wojewodztwo_id'
 	            ),
 	            'hlFields' => array('nazwa', 'liczba_glosow'),
+	            'limit' => 100,
 	        );
 	        
 	        if( $this->object->getData('id')=='903' )
