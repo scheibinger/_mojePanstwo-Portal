@@ -100,20 +100,22 @@ $this->Combinator->add_libs('js', 'Dane.view-krspodmioty');
                 <? } ?>
 
 
-                <? if ($object->getData('www')) { ?>
+                <? 
+                	if( $www = $object->getData('www') ) {
+						$url = ( stripos($www, 'http')===false ) ? 'http://' . $www : $www;
+                ?>
                     <li class="dataHighlight inl topborder">
                         <p class="_label">Strona WWW</p>
 
-                        <p class="_value"><?= $object->getData('www'); ?></p>
+	                    <p class="_value"><a target="_blank" title="<?= addslashes($object->getTitle()) ?>" href="<?= $url ?>"><?= $www; ?></a></p>
                     </li>
                 <? } ?>
 
-                <? if ($object->getData('email')) { ?>
-                    <li class="dataHighlight inl">
-                        <p class="_label">Adres email</p>
-
-                        <p class="_value"><?= $object->getData('email'); ?></p>
-                    </li>
+                <? if( $email = $object->getData('email') ) {?>
+	                <li class="dataHighlight inl">
+	                    <p class="_label">Adres e-mail</p>
+	                    <p class="_value"><a target="_blank" href="mailto:<?= $email ?>"><?= $email; ?></a></p>
+	                </li>
                 <? } ?>
             </ul>
 

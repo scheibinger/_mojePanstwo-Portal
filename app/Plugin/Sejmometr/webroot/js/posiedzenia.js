@@ -38,7 +38,7 @@ function prepare_slide(current_slide) {
         $timelineEmbed.find(".content-container").height(h + 'px');
         $timelineEmbed.find('.vco-feature .vco-slider >div').height(h - $timelineEmbed.find('.vco-navigation').outerHeight() - 10 + 'px');
 
-        title_element.append(
+        title_element.html(
             jQuery('<a></a>').attr('href', '/dane/sejm_posiedzenia/' + posiedzenie_id).text('Posiedzenie Sejmu ' + title_element_text)
         );
 
