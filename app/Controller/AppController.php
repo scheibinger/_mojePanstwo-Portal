@@ -138,11 +138,23 @@ class AppController extends Controller
     {
 
         if (defined('PORTAL_DOMAIN')) {
-            $pieces = parse_url(Router::url('/', true));
-            if ($pieces['host'] != PORTAL_DOMAIN) {
+            
+            $pieces = parse_url( Router::url( $this->here, true ) );
+            
+            if( defined('PK_DOMAIN') && ($pieces['host'] == PK_DOMAIN) ) {
+	            	            
+	            $output = $this->requestAction('/dane/gminy/903', array('return'));
+	            
+	            echo "OUTPUT= ";
+	            debug( $output ); die();
+	            
+            } elseif ($pieces['host'] != PORTAL_DOMAIN) {
+                
                 $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
                 $this->redirect($protocol . PORTAL_DOMAIN . $this->here, 301);
+            
             }
+        
         }
 
         $this->response->header('Access-Control-Allow-Origin', $this->request->header('Origin'));
