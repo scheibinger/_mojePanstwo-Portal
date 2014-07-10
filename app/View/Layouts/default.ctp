@@ -21,7 +21,7 @@
 
     echo $this->Html->css('//fonts.googleapis.com/css?family=Lato:200,300,400,700,900,400italic');
 
-    echo $this->Html->css('../libs/jqueryui/1.10.4/css/ui-darkness/jquery-ui.min.css');
+    echo $this->Html->css('../libs/jqueryui/1.11.0/cupertino/jquery-ui.min.css');
 
     $this->Combinator->add_libs('css', $this->Less->css('jquery/jquery-ui-customize'), false);
     $this->Combinator->add_libs('css', $this->Less->css('statusbar'), false);
