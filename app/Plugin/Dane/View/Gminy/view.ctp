@@ -150,7 +150,7 @@
 			        	<div id="rada" class="block nobottomborder">
 				            <div class="block-header">
 				                <h2 class="pull-left label"><?php echo __d('dane', 'LC_GMINY_WYNIKI_WYBOROW'); ?></h2>
-				                <a class="btn btn-default btn-sm pull-right" href="/dane/gminy/<?= $object->getId() ?>/radni">Zobacz
+				                <a class="btn btn-default btn-sm pull-right" href="<?= Router::url(array('action' => 'radni', 'id' => $object->getId())) ?>">Zobacz
 				                    wszystkich radnych</a>
 				            </div>
 							
@@ -173,7 +173,7 @@
 		            	<div id="organizacje" class="block nobottomborder">
 				            <div class="block-header">
 				                <h2 title="Największe spółki pod względem kapitału zakładowego" class="pull-left label">Największe spółki</h2>
-				                <a class="btn btn-default btn-sm pull-right" href="/dane/gminy/<?= $object->getId() ?>/organizacje">Zobacz
+				                <a class="btn btn-default btn-sm pull-right" href="<?= Router::url(array('action' => 'organizacje', 'id' => $object->getId())) ?>">Zobacz
 				                    wszystkie</a>
 				            </div>
 				
@@ -194,7 +194,7 @@
             			<div id="organizacje" class="block nobottomborder">
 				            <div class="block-header">
 				                <h2 title="Organizacje pozarządowe w gminie" class="pull-left label">Organizacje pozarządowe</h2>
-				                <a class="btn btn-default btn-sm pull-right" href="/dane/gminy/<?= $object->getId() ?>/organizacje">Zobacz
+				                <a class="btn btn-default btn-sm pull-right" href="<?= Router::url(array('action' => 'organizacje', 'id' => $object->getId())) ?>">Zobacz
 				                    wszystkie</a>
 				            </div>
 				
@@ -211,7 +211,7 @@
 						                	$i++;						                
 							    ?>
 							    
-				                	<li class="list-group-item"><span class="badge"><?= number_format_h($ngo['count']) ?></span><a href="/dane/gminy/<?= $object->getId()?>/organizacje?forma_prawna_id=<?= $ngo['id'] ?>" title="<?= addslashes( $ngo['label'] ) ?>"><?= $this->Text->truncate($ngo['label'], 25); ?></a></li>
+				                	<li class="list-group-item"><span class="badge"><?= number_format_h($ngo['count']) ?></span><a href="<?= Router::url(array('action' => 'organizacje', 'id' => $object->getId(), '?' => array('forma_prawna_id' =>  $ngo['id']))) ?>" title="<?= addslashes( $ngo['label'] ) ?>"><?= $this->Text->truncate($ngo['label'], 25); ?></a></li>
 							    <?            
 							                if( $i==$limit )
 							                	break;							                
@@ -233,7 +233,7 @@
 		            <div id="rada" class="block">
 		                <div class="block-header">
 		                    <h2 class="pull-left label">Posiedzenia rady miasta</h2>
-		                    <a class="btn btn-default btn-sm pull-right" href="/dane/gminy/<?= $object->getId() ?>/posiedzenia">Zobacz
+		                    <a class="btn btn-default btn-sm pull-right" href="<?= Router::url(array('action' => 'posiedzenia', 'id' => $object->getId())) ?>">Zobacz
 		                        wszystkie</a>
 		                </div>
 		
@@ -254,7 +254,7 @@
 		            <div id="prawo" class="block">
 		                <div class="block-header">
 		                    <h2 class="pull-left label">Najnowsze uchwały rady miasta</h2>
-		                    <a class="btn btn-default btn-sm pull-right" href="/dane/gminy/<?= $object->getId() ?>/rada_uchwaly">Zobacz
+		                    <a class="btn btn-default btn-sm pull-right" href="<?= Router::url(array('action' => 'rada_uchwaly', 'id' => $object->getId())) ?>">Zobacz
 		                        wszystkie</a>
 		                </div>
 		
@@ -275,7 +275,7 @@
 		            <div id="materialy" class="block">
 		                <div class="block-header">
 		                    <h2 class="pull-left label">Materiały na posiedzenia rady miasta</h2>
-		                    <a class="btn btn-default btn-sm pull-right" href="/dane/gminy/<?= $object->getId() ?>/druki">Zobacz
+		                    <a class="btn btn-default btn-sm pull-right" href="<?= Router::url(array('action' => 'druki', 'id' => $object->getId())) ?>">Zobacz
 		                        wszystkie</a>
 		                </div>
 		
@@ -303,13 +303,13 @@
 			            		<div id="rada">
 						            <div class="block-header">
 						                <h2 class="label pull-left"><?php echo __d('dane', 'LC_GMINY_WYNIKI_WYBOROW'); ?></h2>
-						                <a class="btn btn-default btn-sm pull-right" href="/dane/gminy/<?= $object->getId() ?>/radni">Zobacz wszystkich radnych</a>
+						                <a class="btn btn-default btn-sm pull-right" href="<?= Router::url(array('action' => 'radni', 'id' => $object->getId())) ?>">Zobacz wszystkich radnych</a>
 						            </div>
 						
 						            <div class="content wynikiWyborow">
 						                <?php foreach ($object->getLayer('rada_komitety') as $rada) { ?>
 						                    <div class="wynik">
-						                        <a href="/dane/gminy/<?= $object->getId() ?>/radni?komitet_id=<?= $rada['pl_gminy_radni']['komitet_id'] ?>">
+						                        <a href="<?= Router::url(array('action' => 'radni', 'id' => $object->getId(), '?' => array('komitet_id' => $rada['pl_gminy_radni']['komitet_id']))) ?>">
 						                            <?php echo $rada['pkw_komitety']['nazwa']; ?>
 						                        </a>
 						                        <small><?php echo pl_dopelniacz($rada[0]['count'], 'radny', 'radnych', 'radnych'); ?></small>
@@ -332,7 +332,7 @@
 			            		
 			            		<div class="block-header">
 					                <h2 class="labe pull-left">Radni dzielnic</h2>
-					                <a class="btn btn-default btn-sm pull-right" href="/dane/gminy/<?= $object->getId() ?>/radni_dzielnic">Zobacz wszystkich radnych</a>
+					                <a class="btn btn-default btn-sm pull-right" href="<?= Router::url(array('action' => 'radni_dzielnic', 'id' => $object->getId())) ?>">Zobacz wszystkich radnych</a>
 					            </div>
 					
 					            <div class="content dzielnice">
@@ -366,7 +366,7 @@
 		        <div id="zamowienia_publiczne_otwarte" class="block">
 		            <div class="block-header">
 		                <h2 class="pull-left label">Najnowsze ogłoszenia o zamówieniach publicznych</h2>
-		                <a class="btn btn-default btn-sm pull-right" href="/dane/gminy/<?= $object->getId() ?>/zamowienia">Zobacz
+		                <a class="btn btn-default btn-sm pull-right" href="<?= Router::url(array('action' => 'zamowienia', 'id' => $object->getId())) ?>">Zobacz
 		                    wszystkie</a>
 		            </div>
 		
@@ -387,7 +387,7 @@
 		        <div id="zamowienia_publiczne_zamkniete" class="block">
 		            <div class="block-header">
 		                <h2 class="pull-left label">Najnowsze rozstrzygnięcia zamówień publicznych</h2>
-		                <a class="btn btn-default btn-sm pull-right" href="/dane/gminy/<?= $object->getId() ?>/zamowienia">Zobacz
+		                <a class="btn btn-default btn-sm pull-right" href="<?= Router::url(array('action' => 'zamowienia', 'id' => $object->getId())) ?>">Zobacz
 		                    wszystkie</a>
 		            </div>
 		
@@ -409,7 +409,7 @@
 		        <div id="dotacje_unijne" class="block">
 		            <div class="block-header">
 		                <h2 class="pull-left label">Dotacje unijne</h2>
-		                <a class="btn btn-default btn-sm pull-right" href="/dane/gminy/<?= $object->getId() ?>/dotacje_ue">Zobacz
+		                <a class="btn btn-default btn-sm pull-right" href="<?= Router::url(array('action' => 'dotacje_ue', 'id' => $object->getId())) ?>">Zobacz
 		                    wszystkie</a>
 		            </div>
 		

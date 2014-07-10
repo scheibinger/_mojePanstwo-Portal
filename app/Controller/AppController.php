@@ -143,10 +143,7 @@ class AppController extends Controller
             
             if( defined('PK_DOMAIN') && ($pieces['host'] == PK_DOMAIN) ) {
 	            	            
-	            $output = $this->requestAction('/dane/gminy/903', array('return'));
-	            
-	            echo "OUTPUT= ";
-	            debug( $output ); die();
+	            // do nothing, pass
 	            
             } elseif ($pieces['host'] != PORTAL_DOMAIN) {
                 
