@@ -136,14 +136,26 @@ class AppController extends Controller
 
     public function beforeFilter()
     {
-
+				
         if (defined('PORTAL_DOMAIN')) {
             
             $pieces = parse_url( Router::url( $this->here, true ) );
             
             if( defined('PK_DOMAIN') && ($pieces['host'] == PK_DOMAIN) ) {
 	            	            
-	            // do nothing, pass
+	            // only certain actions are allowed in this domain
+	            // for other actions we are immediatly redirecting to PORTAL_DOMAIN
+	           		           	        
+	            if( 
+	            	$this->request->params['controller'] != 'gminy' || 
+	            	!in_array($this->request->params['action'], array('view', 'okregi_wyborcze', 'interpelacje', 'posiedzenia', 'debaty', 'rada_uchwaly', 'druki', 'radni_powiazania', 'radni', 'radni_dzielnic', 'darczyncy', 'wskazniki', 'zamowienia', 'organizacje', 'biznes', 'ngo', 'spzoz', 'dotacje_ue', 'rady_gmin_wystapienia', 'map', 'zamowienia_publiczne')) 
+	            ) {
+		            
+		            $this->redirect('http://' . PORTAL_DOMAIN . $_SERVER['REQUEST_URI']);
+		            die();
+	            
+	            }
+	            
 	            
             } elseif ($pieces['host'] != PORTAL_DOMAIN) {
                 

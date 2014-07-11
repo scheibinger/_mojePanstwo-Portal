@@ -41,7 +41,29 @@ class GminyController extends DataobjectsController
     public $objectOptions = array(
         'bigTitle' => true,
     );
-
+	
+	public function _prepareView(){
+			
+		if(
+			defined('PORTAL_DOMAIN') && 
+			defined('PK_DOMAIN') && 
+			( $pieces = parse_url( Router::url($this->here, true) ) ) &&
+			($pieces['host'] == PK_DOMAIN)
+		) {
+            
+            if( $this->params->id != 903 ) {
+            
+				$this->redirect('http://' . PORTAL_DOMAIN . $_SERVER['REQUEST_URI']);
+	            die();
+            
+            }
+            
+        }		
+		
+		return parent::_prepareView();
+				
+	}
+	
     public function view()
     {
 
