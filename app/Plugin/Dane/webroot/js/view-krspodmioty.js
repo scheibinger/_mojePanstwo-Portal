@@ -148,7 +148,7 @@ jQuery(document).ready(function () {
                     'osoba': "#24333A"
                 },
                 size: {
-                    'distance': 50,
+                    'distance': 200,
                     'linksLength': 80,
                     'linksWidth': 1,
                     'linkText': '8px',

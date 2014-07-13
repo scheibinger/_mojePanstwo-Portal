@@ -111,8 +111,9 @@ class KrsPodmiotyController extends DataobjectsController
                 'label' => $this->object->getData('nazwa_organu_reprezentacji'),
             );
         }
-
+		
         $wspolnicy = $this->object->loadLayer('wspolnicy');
+		/*
         if (!empty($wspolnicy)) {
             $organy[] = array(
                 'title' => 'Wspólnicy',
@@ -124,6 +125,7 @@ class KrsPodmiotyController extends DataobjectsController
                 'label' => 'Wspólnicy',
             );
         }
+        */
 
         $akcjonariusze = $this->object->loadLayer('jedynyAkcjonariusz');
         if (!empty($akcjonariusze)) {
