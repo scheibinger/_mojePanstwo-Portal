@@ -50,7 +50,7 @@ class GminyController extends DataobjectsController
 			( $pieces = parse_url( Router::url($this->here, true) ) ) &&
 			($pieces['host'] == PK_DOMAIN)
 		) {
-            
+                             
             if( $this->params->id != 903 ) {
             
 				$this->redirect('http://' . PORTAL_DOMAIN . $_SERVER['REQUEST_URI']);
@@ -213,7 +213,7 @@ class GminyController extends DataobjectsController
     public function okregi_wyborcze()
     {
     
-        parent::_prepareView();
+        $this->_prepareView();
         $this->request->params['action'] = 'wybory';
 		
     	if( isset($this->request->params['pass'][0]) && is_numeric($this->request->params['pass'][0]) ) {
@@ -246,7 +246,7 @@ class GminyController extends DataobjectsController
     public function interpelacje()
     {
     
-        parent::_prepareView();
+        $this->_prepareView();
         $this->request->params['action'] = 'interpelacje';
 		
     	if( isset($this->request->params['pass'][0]) && is_numeric($this->request->params['pass'][0]) ) {
@@ -278,7 +278,7 @@ class GminyController extends DataobjectsController
     
     public function posiedzenia()
     {
-        parent::_prepareView();
+        $this->_prepareView();
     	$this->request->params['action'] = 'posiedzenia';
     	
     	if( isset($this->request->params['pass'][0]) && is_numeric($this->request->params['pass'][0]) ) {
@@ -326,7 +326,7 @@ class GminyController extends DataobjectsController
     public function debaty()
     {
     	$this->request->params['action'] = 'debaty';
-        parent::_prepareView();
+        $this->_prepareView();
         
         if( isset($this->request->params['pass'][0]) && is_numeric($this->request->params['pass'][0]) ) {
         	
@@ -363,7 +363,7 @@ class GminyController extends DataobjectsController
     public function wystapienia()
     {
     	$this->request->params['action'] = 'rada_wystapienia';
-        parent::_prepareView();
+        $this->_prepareView();
         $this->dataobjectsBrowserView(array(
             'dataset' => 'rady_gmin_wystapienia',
             'title' => 'Wystąpienia podczas posiedzeń',
@@ -377,7 +377,7 @@ class GminyController extends DataobjectsController
 
     public function rada_uchwaly()
     {
-        parent::_prepareView();
+        $this->_prepareView();
         $this->request->params['action'] = 'rada_uchwaly';
         
         if( isset($this->request->params['pass'][0]) && is_numeric($this->request->params['pass'][0]) ) {
@@ -408,7 +408,7 @@ class GminyController extends DataobjectsController
 
     public function druki()
     {
-        parent::_prepareView();
+        $this->_prepareView();
         $this->request->params['action'] = 'druki';
 		
 		if( isset($this->request->params['pass'][0]) && is_numeric($this->request->params['pass'][0]) ) {
@@ -441,7 +441,7 @@ class GminyController extends DataobjectsController
     public function radni_powiazania()
     {        
         
-        parent::_prepareView();
+        $this->_prepareView();
         $this->request->params['action'] = 'radni_powiazania';
         
         $this->object->loadLayer('radni_powiazania');
@@ -452,7 +452,7 @@ class GminyController extends DataobjectsController
     public function radni()
     {        
         
-        parent::_prepareView();
+        $this->_prepareView();
         $this->request->params['action'] = 'radni';
 		
     	if( isset($this->request->params['pass'][0]) && is_numeric($this->request->params['pass'][0]) ) {
@@ -635,7 +635,7 @@ class GminyController extends DataobjectsController
     
     public function radni_dzielnic()
     {
-        parent::_prepareView();
+        $this->_prepareView();
         $this->dataobjectsBrowserView(array(
             'source' => 'gminy.radni_dzielnic:' . $this->object->getId(),
             'dataset' => 'radni_dzielnic',
@@ -648,7 +648,7 @@ class GminyController extends DataobjectsController
 
     public function darczyncy()
     {
-        parent::_prepareView();
+        $this->_prepareView();
         $this->dataobjectsBrowserView(array(
             'dataset' => 'wybory_darczyncy',
             'title' => 'Wpłaty na komitety wyborcze',
@@ -659,7 +659,7 @@ class GminyController extends DataobjectsController
 
     public function wskazniki()
     {
-        parent::_prepareView();
+        $this->_prepareView();
         $this->innerSearch('bdl_wskazniki', array(
             'fields' => 'id, dataset, object_id, score, _data_*',
             '_multidata_gmina_id' => $this->object->object_id,
@@ -670,7 +670,7 @@ class GminyController extends DataobjectsController
 
     public function zamowienia()
     {
-        parent::_prepareView();
+        $this->_prepareView();
         $this->dataobjectsBrowserView(array(
             'source' => 'gminy.zamowienia_publiczne:' . $this->object->getId(),
             'dataset' => 'zamowienia_publiczne',
@@ -685,7 +685,7 @@ class GminyController extends DataobjectsController
 
     public function organizacje()
     {
-        parent::_prepareView();
+        $this->_prepareView();
         $this->dataobjectsBrowserView(array(
             'source' => 'gminy.organizacje:' . $this->object->getId(),
             'dataset' => 'krs_podmioty',
@@ -700,7 +700,7 @@ class GminyController extends DataobjectsController
     public function biznes()
     {
     	$this->request->params['action'] = 'biznes';
-        parent::_prepareView();
+        $this->_prepareView();
         $this->dataobjectsBrowserView(array(
             'source' => 'gminy.biznes:' . $this->object->getId(),
             'dataset' => 'krs_podmioty',
@@ -716,7 +716,7 @@ class GminyController extends DataobjectsController
 	public function ngo()
     {
     	$this->request->params['action'] = 'ngo';
-        parent::_prepareView();
+        $this->_prepareView();
         $this->dataobjectsBrowserView(array(
             'source' => 'gminy.ngo:' . $this->object->getId(),
             'dataset' => 'krs_podmioty',
@@ -732,7 +732,7 @@ class GminyController extends DataobjectsController
     public function spzoz()
     {
     	$this->request->params['action'] = 'spzoz';
-        parent::_prepareView();
+        $this->_prepareView();
         $this->dataobjectsBrowserView(array(
             'source' => 'gminy.spzoz:' . $this->object->getId(),
             'dataset' => 'krs_podmioty',
@@ -748,7 +748,7 @@ class GminyController extends DataobjectsController
 	
     public function dotacje_ue()
     {
-        parent::_prepareView();
+        $this->_prepareView();
         $this->dataobjectsBrowserView(array(
             'source' => 'gminy.dotacje_ue:' . $this->object->getId(),
             'dataset' => 'dotacje_ue',
@@ -765,7 +765,7 @@ class GminyController extends DataobjectsController
 
     public function rady_gmin_wystapienia()
     {
-        parent::_prepareView();
+        $this->_prepareView();
 
         $title_for_layout = 'Wystąpienia podczas wszystkich posiedzeń rady gminy ' . $this->object->getData('nazwa');
         $this->innerSearch('rady_gmin_wystapienia', array('rady_gmin_debaty.gmina_id' => $this->object->getId()), array(
@@ -777,7 +777,7 @@ class GminyController extends DataobjectsController
 
     public function map()
     {
-        parent::_prepareView();
+        $this->_prepareView();
         $this->set('spat', $this->object->loadLayer('enspat'));
     }
 
