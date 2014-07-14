@@ -840,10 +840,7 @@ class GminyController extends DataobjectsController
     public function beforeRender()
 	{
         // PREPARE MENU
-		$href_base = Router::url(array('action' => 'view', 'id' => $this->request->params['id']));
-        if ($href_base == '/') {
-            $href_base = '';
-        }
+		$href_base = $this->object->getUrl();
         
         $menu = array(
             'items' => array(
