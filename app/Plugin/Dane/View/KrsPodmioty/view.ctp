@@ -262,7 +262,7 @@ $this->Combinator->add_libs('js', 'Dane.view-krspodmioty');
                     </div>
                 <? } ?>
 
-                <div class="organy">
+                <div class="organy block">
                 <div class="row">
                     <?
                     
@@ -339,9 +339,9 @@ $this->Combinator->add_libs('js', 'Dane.view-krspodmioty');
 
 
             <? if( $wspolnicy = $object->getLayer('wspolnicy') ) { ?>
-            
-            <div class="graph block">
-                <div class="block-header"><h2 class="label">Wspólnicy</h2></div>
+
+            <div class="wspolnicy block">
+            <div class="block-header"><h2 class="label">Wspólnicy</h2></div>
 
                 <div id="wspolnicy_graph">
                 	<div class="list-group less-borders wspolnicy">
@@ -387,13 +387,13 @@ $this->Combinator->add_libs('js', 'Dane.view-krspodmioty');
             </div>
             
             <? } ?>
-            
-            
-            <div class="graph block">
-                <div class="block-header"><h2 class="label">Powiązania</h2></div>
 
-                <div id="connectionGraph" class="col-xs-12" data-id="<?php echo $object->getId() ?>">
-                    <script>var connectionGraphObject = <?php echo json_encode($object) ?>;</script>
+
+        <div class="powiazania block">
+            <div class="block-header"><h2 class="label">Powiązania</h2></div>
+
+            <div id="connectionGraph" data-id="<?php echo $object->getId() ?>">
+            <script>var connectionGraphObject = <?php echo json_encode($object) ?>;</script>
                 </div>
             </div>
 
