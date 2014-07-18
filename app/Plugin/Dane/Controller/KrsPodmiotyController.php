@@ -14,9 +14,10 @@ class KrsPodmiotyController extends DataobjectsController
         'bigTitle' => true,
     );
     
+    public $initLayers = array('counters');
+    
     public function beforeFilter()
     {
-    	
     	parent::beforeFilter();
         $this->Auth->deny(array('pobierz_odpis', 'odpis'));        
     }
@@ -24,12 +25,17 @@ class KrsPodmiotyController extends DataobjectsController
 
     public function view()
     {
-        parent::view();		
+    	
+    	$this->addInitLayers(array('reprezentacja', 'wspolnicy', 'jedynyAkcjonariusz', 'prokurenci', 'nadzor', 'komitetZalozycielski', 'dzialalnosci', 'graph', 'stats'));
+    	
+    	if( $this->Session->read('KRS.odpis')==$this->params->id )
+    		$this->addInitLayers('odpis');
+    
+        parent::view();
 		
-
 		if( $this->Session->read('KRS.odpis')==$this->object->getId() )	{
 			
-			$odpis = $this->object->loadLayer('odpis');
+			$odpis = $this->object->getLayer('odpis');
 			if( $odpis['status'] )
 				$this->set('odpis', $odpis['url']);
 			
@@ -78,7 +84,7 @@ class KrsPodmiotyController extends DataobjectsController
         ));
         $this->set('zamowienia', $this->API->getObjects());
 		
-		
+		/*
         $obszary = new MP\Obszary();
         $this->set('obszar', $obszary->getMiejscowosc(array(
             'conditions' => array(
@@ -93,12 +99,12 @@ class KrsPodmiotyController extends DataobjectsController
                 'Wojewodztwo.nazwa'
             ),
         )));
-
+        */
 
         $organy = array();
         $menu = array();
 
-        $reprezentacja = $this->object->loadLayer('reprezentacja');
+        $reprezentacja = $this->object->getLayer('reprezentacja');
         if (!empty($reprezentacja)) {
             $organy[] = array(
                 'title' => $this->object->getData('nazwa_organu_reprezentacji'),
@@ -112,7 +118,7 @@ class KrsPodmiotyController extends DataobjectsController
             );
         }
 		
-        $wspolnicy = $this->object->loadLayer('wspolnicy');
+        $wspolnicy = $this->object->getLayer('wspolnicy');
 		/*
         if (!empty($wspolnicy)) {
             $organy[] = array(
@@ -127,7 +133,7 @@ class KrsPodmiotyController extends DataobjectsController
         }
         */
 
-        $akcjonariusze = $this->object->loadLayer('jedynyAkcjonariusz');
+        $akcjonariusze = $this->object->getLayer('jedynyAkcjonariusz');
         if (!empty($akcjonariusze)) {
             $organy[] = array(
                 'title' => 'Jedyny akcjonariusz',
@@ -140,7 +146,7 @@ class KrsPodmiotyController extends DataobjectsController
             );
         }
 
-        $prokurenci = $this->object->loadLayer('prokurenci');
+        $prokurenci = $this->object->getLayer('prokurenci');
         if (!empty($prokurenci)) {
             $organy[] = array(
                 'title' => 'Prokurenci',
@@ -153,7 +159,7 @@ class KrsPodmiotyController extends DataobjectsController
             );
         }
 
-        $nadzor = $this->object->loadLayer('nadzor');
+        $nadzor = $this->object->getLayer('nadzor');
         if (!empty($nadzor)) {
             $organy[] = array(
                 'title' => $this->object->getData('nazwa_organu_nadzoru'),
@@ -167,7 +173,7 @@ class KrsPodmiotyController extends DataobjectsController
             );
         }
 
-        $komitetZalozycielski = $this->object->loadLayer('komitetZalozycielski');
+        $komitetZalozycielski = $this->object->getLayer('komitetZalozycielski');
         if (!empty($komitetZalozycielski)) {
             $organy[] = array(
                 'title' => 'Komitet założycielski',
@@ -184,7 +190,7 @@ class KrsPodmiotyController extends DataobjectsController
         $this->set('organy', $organy);
 
 
-        $dzialalnosc = $this->object->loadLayer('dzialalnosci');
+        $dzialalnosc = $this->object->getLayer('dzialalnosci');
         if ($dzialalnosc)
             $dzialalnosci = array(
                 'title' => 'Działalność',
@@ -209,7 +215,7 @@ class KrsPodmiotyController extends DataobjectsController
         if ($this->request->params['ext'] == 'json') {
 
             $this->_prepareView();
-            $data = $this->object->loadLayer('graph');
+            $data = $this->object->getLayer('graph');
 
             $this->set('data', $data);
             $this->set('_serialize', 'data');
@@ -229,7 +235,7 @@ class KrsPodmiotyController extends DataobjectsController
     public function zamowienia()
     {
 	    
-	    parent::_prepareView();
+	    $this->_prepareView();
         $this->dataobjectsBrowserView(array(
             'source' => 'krs_podmioty.zamowienia:' . $this->object->getId(),
             'dataset' => 'zamowienia_publiczne',
@@ -238,5 +244,81 @@ class KrsPodmiotyController extends DataobjectsController
         ));
 	    
     }
+    
+    public function emisje_akcji()
+    {
+	    
+	    $this->addInitLayers('emisje_akcji');	    
+	    $this->_prepareView();
+        $this->set('title_for_layout', 'Emisje akcji spółki ' . $this->object->getTitle());
+	    
+    }
+    
+    public function oddzialy()
+    {
+	    
+	    $this->addInitLayers('oddzialy');
+	    $this->_prepareView();        
+        $this->set('title_for_layout', 'Oddziały ' . $this->object->getTitle());
+	    
+    }
+    
+    public function zmiany_umow()
+    {
+	    
+	    $this->addInitLayers('zmiany_umow');
+	    $this->_prepareView();        
+        $this->set('title_for_layout', 'Zmiany umów ' . $this->object->getTitle());
+	    
+    }
+    
+    public function beforeRender()
+	{
+		
+		$counters = $this->object->getLayers('counters');
+		
+        // PREPARE MENU		
+		$href_base = '/dane/krs_podmioty/' . $this->request->params['id'];
+        
+        $menu = array(
+            'items' => array(
+	            array(
+	            	'id' => '',
+	                'href' => $href_base,
+	                'label' => 'Informacje i powiązania',
+	            ),
+	        )
+	    );
+		
+		if( $counters['liczba_oddzialow'] )
+			$menu['items'][] = array(
+				'id' => 'oddzialy',
+				'href' => $href_base . '/oddzialy',
+				'label' => 'Oddziały',
+				'count' => $counters['liczba_oddzialow'],
+		    );
+	    
+
+		if( $counters['liczba_zmian_umow'] )
+		    $menu['items'][] = array(
+				'id' => 'zmiany_umow',
+				'href' => $href_base . '/zmiany_umow',
+				'label' => 'Zmiany umów',
+				'count' => $counters['liczba_zmian_umow'],
+		    );
+		    
+		if( $counters['liczba_emisji_akcji'] )
+		    $menu['items'][] = array(
+				'id' => 'emisje_akcji',
+				'href' => $href_base . '/emisje_akcji',
+				'label' => 'Emisje akcji',
+				'count' => $counters['liczba_emisji_akcji'],
+		    );
+			    
+        $menu['selected'] = ( $this->request->params['action'] == 'view' ) ? '' : $this->request->params['action'];
+        
+        $this->set('_menu', $menu);
+		
+	}
     
 }

@@ -4,6 +4,10 @@ if( isset($odpis) && $odpis ) {
 }
 
 echo $this->Element('dataobject/pageBegin');
+echo $this->Element('Dane.dataobject/menuTabs', array(
+	'menu' => $_menu,
+));
+
 echo $this->Html->script('Dane.d3/d3', array('block' => 'scriptBlock'));
 
 $this->Combinator->add_libs('css', $this->Less->css('view-krspodmioty', array('plugin' => 'Dane')));
@@ -217,7 +221,7 @@ $this->Combinator->add_libs('js', 'Dane.view-krspodmioty');
             	<? if ($zamowienia) { ?>
                     <div id="zamowienia" class="block">
                         <div class="block-header">
-                            <h2 class="label pull-left">Udzielone zamówienia publiczne</h2>
+                            <h2 class="label pull-left">Realizowane zamówienia publiczne</h2>
                             <a class="btn btn-default btn-sm pull-right"
                                href="/dane/krs_podmioty/<?= $object->getId() ?>/zamowienia">Zobacz wszystkie</a>
                         </div>

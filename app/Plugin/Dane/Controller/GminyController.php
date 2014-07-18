@@ -66,7 +66,9 @@ class GminyController extends DataobjectsController
 	
     public function view()
     {
-
+		
+		$this->addInitLayers(array('rada_komitety', 'szef', '', '', ''));
+		
         parent::view();
         
         $menu = array(
@@ -96,8 +98,7 @@ class GminyController extends DataobjectsController
 
         $this->set('_menu', $menu);
 
-        $this->object->loadLayer('rada_komitety');
-        $szef = $this->object->loadLayer('szef');
+        $szef = $this->object->getLayer('szef');
 
         $this->API->searchDataset('zamowienia_publiczne', array(
             'limit' => 8,
@@ -212,14 +213,16 @@ class GminyController extends DataobjectsController
 
     public function okregi_wyborcze()
     {
-    
+    	
+    	
         $this->_prepareView();
         $this->request->params['action'] = 'wybory';
 		
     	if( isset($this->request->params['pass'][0]) && is_numeric($this->request->params['pass'][0]) ) {
 	    	
-	    	$okreg = $this->API->getObject('gminy_okregi_wyborcze', $this->request->params['pass'][0]);
-			$okreg->loadLayer('kandydaci');
+	    	$okreg = $this->API->getObject('gminy_okregi_wyborcze', $this->request->params['pass'][0], array(
+	    		'layers' => array('kandydaci'),
+	    	));
 			
 	    	$this->set('okreg', $okreg);
 	        $this->set('title_for_layout', $okreg->getTitle());
@@ -251,8 +254,9 @@ class GminyController extends DataobjectsController
 		
     	if( isset($this->request->params['pass'][0]) && is_numeric($this->request->params['pass'][0]) ) {
 	    	
-	    	$interpelacja = $this->API->getObject('rady_gmin_interpelacje', $this->request->params['pass'][0]);
-			$interpelacja->loadLayer('neighbours');
+	    	$interpelacja = $this->API->getObject('rady_gmin_interpelacje', $this->request->params['pass'][0], array(
+	    		'layers' => array('neighbours'),
+	    	));
 			$document = $this->API->document($interpelacja->getData('dokument_id'));
 	    	$this->set('interpelacja', $interpelacja);
 			$this->set('document', $document);
@@ -283,8 +287,9 @@ class GminyController extends DataobjectsController
     	
     	if( isset($this->request->params['pass'][0]) && is_numeric($this->request->params['pass'][0]) ) {
     		    		
-    		$posiedzenie = $this->API->getObject('rady_posiedzenia', $this->request->params['pass'][0]);    		
-			$posiedzenie->loadLayer('neighbours');
+    		$posiedzenie = $this->API->getObject('rady_posiedzenia', $this->request->params['pass'][0], array(
+    			'layers' => array('neighbours'),
+    		));    		
 	    	$this->set('posiedzenie', $posiedzenie);
 			$this->set('title_for_layout', strip_tags($posiedzenie->getData('fullTitle')));
 			
@@ -330,11 +335,12 @@ class GminyController extends DataobjectsController
         
         if( isset($this->request->params['pass'][0]) && is_numeric($this->request->params['pass'][0]) ) {
         	
-        	$debata = $this->API->getObject('rady_gmin_debaty', $this->request->params['pass'][0]);    		
-			$debata->loadLayer('neighbours');
+        	$debata = $this->API->getObject('rady_gmin_debaty', $this->request->params['pass'][0], array(
+        		'layers' => array('neighbours', 'wystapienia'),
+        	));    		
 	    	$this->set('debata', $debata);
 	    	
-	    	$_wystapienia = $debata->loadLayer('wystapienia');
+	    	$_wystapienia = $debata->getLayer('wystapienia');
 	        $wystapienia = array();
 	        foreach( $_wystapienia as $wystapienie ) {
 	            $wystapienia[$wystapienie['rady_posiedzenia_wystapienia']['id']] = array('mowca_str' => $wystapienie['rady_posiedzenia_wystapienia']['mowca_str'], 'video_start' => $wystapienie['rady_posiedzenia_wystapienia']['video_start']);
@@ -382,8 +388,9 @@ class GminyController extends DataobjectsController
         
         if( isset($this->request->params['pass'][0]) && is_numeric($this->request->params['pass'][0]) ) {
 			
-			$uchwala = $this->API->getObject('prawo_lokalne', $this->request->params['pass'][0]);
-			$uchwala->loadLayer('neighbours');
+			$uchwala = $this->API->getObject('prawo_lokalne', $this->request->params['pass'][0], array(
+				'layers' => array('neighbours'),
+			));
 			$document = $this->API->document($uchwala->getData('dokument_id'));
 	    	$this->set('uchwala', $uchwala);
 			$this->set('document', $document);
@@ -413,8 +420,9 @@ class GminyController extends DataobjectsController
 		
 		if( isset($this->request->params['pass'][0]) && is_numeric($this->request->params['pass'][0]) ) {
 			
-			$druk = $this->API->getObject('rady_druki', $this->request->params['pass'][0]);
-			$druk->loadLayer('neighbours');
+			$druk = $this->API->getObject('rady_druki', $this->request->params['pass'][0], array(
+				'layers' => 'neighbours',
+			));
 			$document = $this->API->document($druk->getData('dokument_id'));
 	    	$this->set('druk', $druk);
 			$this->set('document', $document);
@@ -441,28 +449,29 @@ class GminyController extends DataobjectsController
     public function radni_powiazania()
     {        
         
+        $this->addInitLayers('radni_powiazania');
+        
         $this->_prepareView();
         $this->request->params['action'] = 'radni_powiazania';
-        
-        $this->object->loadLayer('radni_powiazania');
-                
+                        
         $this->set('title_for_layout', 'Powiązania radnych gminy  ' . $this->object->getData('nazwa') . ' z organizacjami w Krajowym Rejestrze Sądowym');
     }
     
     public function radni()
     {        
         
-        $this->_prepareView();
+        
         $this->request->params['action'] = 'radni';
 		
     	if( isset($this->request->params['pass'][0]) && is_numeric($this->request->params['pass'][0]) ) {
 	    	
 	    	$subaction = (isset( $this->request->params['pass'][1] ) && $this->request->params['pass'][1]) ? $this->request->params['pass'][1] : 'view';
 	    	$sub_id = (isset( $this->request->params['pass'][2] ) && $this->request->params['pass'][2]) ? $this->request->params['pass'][2] : false;
-							    	
-	    	$radny = $this->API->getObject('radni_gmin', $this->request->params['pass'][0]);			
-			$dyzur = $radny->loadLayer('najblizszy_dyzur');
-			$radny->loadLayer('neighbours');
+			
+	    	$radny = $this->API->getObject('radni_gmin', $this->request->params['pass'][0], array(
+	    		'layers' => array('najblizszy_dyzur', 'neighbours'),
+	    	));			
+			$radny->getLayer('neighbours');
 			// debug( $dyzur ); die();
 			$title_for_layout = $radny->getTitle();
 			
@@ -553,6 +562,11 @@ class GminyController extends DataobjectsController
 					
 				}
 			}
+			
+			
+			
+			$this->_prepareView();
+			
 			
 
 			if( $this->object->getId()==903 ) {

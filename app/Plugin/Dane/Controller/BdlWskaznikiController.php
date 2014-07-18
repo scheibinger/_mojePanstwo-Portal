@@ -10,6 +10,8 @@ class BdlWskaznikiController extends DataobjectsController
     public $objectOptions = array(
         'bigTitle' => true,
     );
+    
+    public $initLayers = array('dimennsions');
 
     private function _view($dimension = array())
     {
@@ -17,7 +19,7 @@ class BdlWskaznikiController extends DataobjectsController
         parent::_prepareView();
 
         $expand_dimension = isset($this->request->query['i']) ? (int)$this->request->query['i'] : $this->object->getData('i');
-        $dims = $this->object->loadLayer('dimennsions');
+        $dims = $this->object->getLayer('dimennsions');
         $expanded_dimension = array();
 
 
