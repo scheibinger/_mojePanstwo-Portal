@@ -1,16 +1,21 @@
-<div class="customObject krakow903 col-md-12">
-    <div class="row">
-        <div class="logo col-md-4 pull-left">
-            <img align="left" alt="Przejrzysty Kraków" src="/dane/img/customObject/krakow/logo_pkrk.jpg">
-        </div>
-        <div class="textline col-md-6">
-            Program Przejrzysty Kraków, prowadzony przez Fundację Stańczyka, ma na celu wieloaspektowy monitoring
-            życia publicznego w Krakowie. W ramach programu prowadzony jest obecnie monitoring Rady Miasta i
-            Dzielnic Krakowa.
-        </div>
-        <div class="logo col-md-2 pull-right">
-            <img align="right" alt="Fundacja Stańczyk"
-                 src="/dane/img/customObject/krakow/logo_fundacja_stanczyk.jpg">
+<div id="fundatorzy" class="customObject krakow903 col-md-12">
+    <div class="part">
+        <p class="info">Projekt realizowany w ramach programu Obywatele dla Demokracji,
+            finansowanego z Funduszy EOG:</p>
+
+        <div class="logotypy">
+            <a target="_blank" href="http://www.eeagrants.org/" title="EEA Grants">
+                <img class="image" src="/img/partnerzy/eea_grants.png"/>
+            </a>
+            <a target="_blank" href="http://www.batory.org.pl/"
+               title="Fundacja im. Stefana Batorego">
+                <img class="image" src="/img/partnerzy/fundacja_batorego.png"/>
+            </a>
+            <a target="_blank" href="http://www.pcyf.org.pl/"
+               title="Polska Fundacja Dzieci i Młodzieży">
+                <img class="image" src="/img/partnerzy/polska_fundacja_dzieci_i_mlodziezy.png"/>
+            </a>
+
         </div>
     </div>
 </div>

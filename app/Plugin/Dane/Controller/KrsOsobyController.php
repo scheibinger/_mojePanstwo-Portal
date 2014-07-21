@@ -13,10 +13,12 @@ class KrsOsobyController extends DataobjectsController
         'hlFields' => array(),
     );
 
+	public $initLayers = array('powiazania');
+	
     public function view()
     {
         parent::view();
-        $powiazania = $this->object->loadLayer('powiazania');
+        $powiazania = $this->object->getLayer('powiazania', 'organizacje');
         
         if(
         	isset( $powiazania['posel_id'] ) && 
@@ -27,6 +29,5 @@ class KrsOsobyController extends DataobjectsController
 	        
         }
         
-        $this->object->loadLayer('organizacje');
     }
 }

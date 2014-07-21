@@ -22,6 +22,8 @@ class DataobjectsController extends DaneAppController
 	
 	public $breadcrumbsMode = 'datachannel';
 	
+	public $initLayers = array();
+	
     public function index()
     {
         $conditions = $this->request->query;
@@ -40,7 +42,17 @@ class DataobjectsController extends DaneAppController
     {
         $this->_prepareView();
     }
-
+	
+	public function addInitLayers($layers)
+	{
+		
+		if( is_array($layers) )
+			$this->initLayers = array_merge($this->initLayers, $layers);
+		else
+			$this->initLayers[] = $layers;
+		
+	}
+	
     public function related()
     {    	
         $this->_prepareView();
@@ -56,7 +68,14 @@ class DataobjectsController extends DaneAppController
     {
     	
     	try {
-	    	$this->object = $this->API->getObject($this->params->controller, $this->params->id);        
+									
+	    	$this->object = $this->API->getObject($this->params->controller, $this->params->id, array(
+	    		'layers' => $this->initLayers,
+	    		'dataset' => true,
+	    		'flag' => (boolean) $this->Session->read('Auth.User.id'),
+	    		'alerts_queries' => true,
+	    	));
+	      
         } catch (Exception $e) {
 		    
 		    $data = $e->getData();
@@ -70,40 +89,11 @@ class DataobjectsController extends DaneAppController
 		}
         
         if (is_object($this->object)) {
-
-			$this->dataset = $this->API->getDataset($this->params->controller);
-	        $this->set('dataset', $this->dataset);
 			
-			if( $this->autoRelated )
-			{
-            
-	            $this->object->loadRelated();
-	
-	            if ($this->object->hasRelated())
-	                foreach ($this->menu as $item) {
-	                    if ($item['id'] == 'related') {
-	                        break;
-	                    }
-	                    $this->menu[] = array(
-	                        'id' => 'related',
-	                        'label' => 'Powiązania',
-	                        'icon' => 'related',
-	                    );
-	                }
-			
-			}
+			$this->dataset = $this->object->getLayer('dataset');
 			
             $this->set('object', $this->object);
             $this->set('objectOptions', $this->objectOptions);
-
-            $this->prepareMenu();
-
-            foreach ($this->menu as &$item) {
-                if ($item['id'] == $this->params->action) {
-                    $item['selected'] = true;
-                    break;
-                }
-            }
 									
 			if( $this->breadcrumbsMode == 'datachannel' ) {
 	            
@@ -129,15 +119,7 @@ class DataobjectsController extends DaneAppController
 
             $this->set('menu', $this->menu);
             $this->set('menuMode', $this->menuMode);
-            $this->set('title_for_layout', $title_for_layout);
-
-
-            if ($this->Session->read('Auth.User.id'))
-            {
-                $this->API->Powiadomienia()->flagObject($this->object->id);				
-				$queries = $this->API->Powiadomienia()->getAlertsQueries($this->object->id);
-				$this->set('_ALERT_QUERIES', $queries);
-			}
+            $this->set('title_for_layout', $title_for_layout);            
 
         } else {
 

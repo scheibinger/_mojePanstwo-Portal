@@ -9,10 +9,4 @@ class DotacjeUeController extends DataobjectsController
         'hlFields' => array('symbol'),
     );
 
-    public function view()
-    {
-
-        parent::view();
-
-    }
 }
