@@ -93,7 +93,7 @@ var filtersController = function () {
                                         }).text(_mPHeart.translation.LC_DANE_FILTER)
                                     )
                             )
-                )
+                    )
                 )
         );
 

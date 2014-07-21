@@ -2,8 +2,8 @@
 
 class DataobjectsBrowserComponent extends Component
 {
-	
-	public $settings = array();
+
+    public $settings = array();
     public $source = array();
     public $title = false;
     public $noResultsTitle = false;
@@ -35,9 +35,9 @@ class DataobjectsBrowserComponent extends Component
     {
 
         parent::__construct($collection, $settings);
-		
-		$this->settings = $settings;
-			
+
+        $this->settings = $settings;
+
         if (isset($settings['title'])) {
             $this->showTitle = true;
             $this->title = $settings['title'];
@@ -63,13 +63,13 @@ class DataobjectsBrowserComponent extends Component
 
         if (isset($settings['routes']))
             $this->routes = $settings['routes'];
-            
+
         if (isset($settings['routes']))
             $this->routes = $settings['routes'];
-            
+
         if (isset($settings['limit']))
             $this->limit = max(min($settings['limit'], 100), 0);
-				
+
         $add_source_params = array();
         $source_params = array();
 
@@ -106,7 +106,7 @@ class DataobjectsBrowserComponent extends Component
             $this->mode = 'datachannel';
             $this->tag = $source_params['datachannel'];
         } else {
-	        $this->mode = '*';
+            $this->mode = '*';
         }
 
     }
@@ -123,8 +123,8 @@ class DataobjectsBrowserComponent extends Component
         $filters = array();
         $switchers = array();
         $orders = array();
-		
-		$controller->mode = 'dataobjectsBrowser';
+
+        $controller->mode = 'dataobjectsBrowser';
 
         if (
             isset($controller->request->query['dataset']) &&
@@ -179,12 +179,12 @@ class DataobjectsBrowserComponent extends Component
             $conditions['_source'] = implode(' ', $source_parts);
 
         }
-		
-		if( !isset($controller->request->query['order']) && isset($this->settings['order']) )
-	        $controller->request->query['order'] = $this->settings['order'];
-		
-        $query_keys = array_keys($controller->request->query);        
-	    	                
+
+        if (!isset($controller->request->query['order']) && isset($this->settings['order']))
+            $controller->request->query['order'] = $this->settings['order'];
+
+        $query_keys = array_keys($controller->request->query);
+
         foreach ($query_keys as $key) {
 
             $value = $controller->request->query[$key];
@@ -244,8 +244,6 @@ class DataobjectsBrowserComponent extends Component
 
             }
         }
-
-
 
 
         if ($this->mode == 'dataset') {
@@ -309,7 +307,7 @@ class DataobjectsBrowserComponent extends Component
                 $filters = $_filters;
 
             }
-			
+
         } elseif ($this->mode == 'datachannel') {
 
 
@@ -393,7 +391,7 @@ class DataobjectsBrowserComponent extends Component
         // ŁADOWANIE OBIEKTÓW
         // $controller->Dataobject = ClassRegistry::init('Dane.Dataobject');		
         $controller->loadModel('Dane.Dataobject');
-		
+
 
         $queryData = array(
             'q' => $q,
@@ -429,11 +427,11 @@ class DataobjectsBrowserComponent extends Component
 
 
         $pagination = $controller->Dataobject->pagination;
-        $pagination['page'] = (int) @$controller->request->query['page'];
-        if( !$pagination['page'] )
-        	$pagination['page'] = 1;
-        	
-        
+        $pagination['page'] = (int)@$controller->request->query['page'];
+        if (!$pagination['page'])
+            $pagination['page'] = 1;
+
+
         $facets = $controller->Dataobject->facets;
 
 
@@ -458,25 +456,22 @@ class DataobjectsBrowserComponent extends Component
         $controller->set('dataBrowser', $this);
 
 
-        if( @$controller->request->params['ext'] == 'json') {
-						
-			if( $controller->request->is('ajax') )
-			{
-			
-	            $view = new View($controller, false);
-	
-	            $controller->set('objects', $view->element('Dane.DataobjectsBrowser/objects', compact('objects')));
-	            $controller->set('header', $view->element('Dane.DataobjectsBrowser/header', compact('pagination', 'orders', 'page')));
-	            $controller->set('filters', $view->element('Dane.DataobjectsBrowser/filters', compact('filters', 'switchers', 'facets', 'page')));
-	            $controller->set('pagination', $view->element('Dane.DataobjectsBrowser/pagination'));
-	            $controller->set('_serialize', array('objects', 'header', 'filters', 'pagination'));
-            
-            }
-            else
-            {
-				
-	            $controller->set('_serialize', array('pagination', 'objects'));
-		            
+        if (@$controller->request->params['ext'] == 'json') {
+
+            if ($controller->request->is('ajax')) {
+
+                $view = new View($controller, false);
+
+                $controller->set('objects', $view->element('Dane.DataobjectsBrowser/objects', compact('objects')));
+                $controller->set('header', $view->element('Dane.DataobjectsBrowser/header', compact('pagination', 'orders', 'page')));
+                $controller->set('filters', $view->element('Dane.DataobjectsBrowser/filters', compact('filters', 'switchers', 'facets', 'page')));
+                $controller->set('pagination', $view->element('Dane.DataobjectsBrowser/pagination'));
+                $controller->set('_serialize', array('objects', 'header', 'filters', 'pagination'));
+
+            } else {
+
+                $controller->set('_serialize', array('pagination', 'objects'));
+
             }
 
         } else {

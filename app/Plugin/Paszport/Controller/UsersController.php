@@ -20,9 +20,10 @@ class UsersController extends PaszportAppController
     public function beforeFilter()
     {
         // save login redirect because it will be overwritten by AppController::beforeFilter
-        if ($this->Session->read("Auth.loginRedirect") != Router::url(array('action'=>'login'), true)
-            && $this->Session->read("Auth.loginRedirect") != Router::url(array('action'=>'fblogin'), true)
-            && $this->Session->read("Auth.loginRedirect") != (Router::url('/', true) . 'oauth/login')) {
+        if ($this->Session->read("Auth.loginRedirect") != Router::url(array('action' => 'login'), true)
+            && $this->Session->read("Auth.loginRedirect") != Router::url(array('action' => 'fblogin'), true)
+            && $this->Session->read("Auth.loginRedirect") != (Router::url('/', true) . 'oauth/login')
+        ) {
             $this->Auth->loginRedirect = $this->Session->read("Auth.loginRedirect");
         }
 
@@ -149,7 +150,7 @@ class UsersController extends PaszportAppController
                     $this->redirect(array('action' => 'index')); // show profile for user to verify it
 
                 } else { # new user
-                    $to_save = array( 'User' => array(
+                    $to_save = array('User' => array(
                         'personal_name' => $user_data['first_name'],
                         'personal_lastname' => $user_data['last_name'],
                         'username' => $user_data['first_name'] . '' . $user_data['last_name'] . rand(0, 999),
@@ -467,11 +468,11 @@ class UsersController extends PaszportAppController
                 $this->Session->setFlash(__d('paszport', 'LC_PASZPORT_REGISTRATION_FAILED'), 'alert', array('class' => 'alert-error'));
 
                 $this->loadModel('Paszport.User');
-                $__p = function($translation_key) {
+                $__p = function ($translation_key) {
                     return __d('paszport', $translation_key);
                 };
 
-                foreach($user['errors'] as $key => $err_list) {
+                foreach ($user['errors'] as $key => $err_list) {
                     $this->User->validationErrors[$key] = array_map($__p, $err_list);
                 }
             }

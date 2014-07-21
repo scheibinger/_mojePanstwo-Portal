@@ -175,7 +175,8 @@ class Client extends OAuthAppModel
         return true;
     }
 
-    public function getRedirectURL($client_id) {
+    public function getRedirectURL($client_id)
+    {
         $api = mpapiComponent::getApi()->OAuth()->Client();
         return $api->getRedirectURL($client_id);
     }

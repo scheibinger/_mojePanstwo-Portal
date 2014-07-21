@@ -21,87 +21,91 @@ $this->Dataobject->setObject($object);
         <div class="data col-md-<?= $this->Dataobject->getDate() ? '11' : '12' ?>">
             <div class="row">
                 <? if ($object->getThumbnailUrl($thumbSize)) { ?>
-                    <div class="attachment col-md-<?= $object_content_sizes[0] ?> text-center">
-                        <?php if ($object->getUrl() != false) { ?>
-                        <a class="thumb_cont" href="<?= $object->getUrl() ?>">
-                            <?php } ?>
-                            <img class="thumb" onerror="imgFixer(this)" src="<?= $object->getThumbnailUrl($thumbSize) ?>"
-                                 alt="<?= strip_tags($object->getTitle()) ?>"/>
-                            <?php if ($object->getUrl() != false) { ?>
-                        </a>
-                    <?php } ?>
-                    </div>
-                    <div class="content col-md-<?= $object_content_sizes[1] ?>">
-                        <p class="header">
-                            <?= $object->getShortLabel(); ?>
-                        </p>
-
-                        <? if ($object->getShortTitle()) { ?>
-                            <<?= $titleTag ?> class="title trimTitle<? if ($bigTitle) { ?> big<? } ?>"
-                                title="<?= htmlspecialchars($object->getShortTitle()) ?>"
-                                data-trimlength="200">
-                                <?php if (($object->getUrl() != false) && !empty($this->request)) { ?>
-                                <a href="<?= $object->getUrl() ?>" title="<?= strip_tags($object->getTitle()) ?>">
-                                    <?php } ?>
-                                    <?= $object->getShortTitle() ?>
-                                    <?php if (($object->getUrl() != false) && !empty($this->request)) { ?>
-                                </a> <? if ($object->getTitleAddon()) echo '<small>' . $object->getTitleAddon() . '</small>'; ?>
-                            <?php } ?>
-                            </<?= $titleTag ?>>
-                        <? } ?>
-
-                        <?
-                        if ($file_exists)
-                            echo $this->element('Dane.' . $theme . '/' . $object->getDataset(), array(
-                                'item' => $item,
-                                'object' => $object
-                            ));
-                        else {
-                            echo $this->Dataobject->highlights($hlFields);
-                            if( $object->getDescription() ){?>
-	                        <div class="description">
-	                        	<?= $object->getDescription() ?>
-	                        </div>
-	                        <? }
-                        }
-                        ?>
-                    </div>
-
-                <? } else { ?>
-                    <div class="content">
-                        <p class="header">
-                            <?= $object->getShortLabel(); ?>
-                        </p>
-						
-                        <<?= $titleTag ?> class="title<? if ($bigTitle) { ?> big<? } ?>">
-                            <?php if ($object->getUrl() != false){ ?>
-                            <a class="trimTitle" href="<?= $object->getUrl() ?>"
-                               title="<?= strip_tags($object->getTitle()) ?>">
-                                <?php } ?>
-                                <?= $object->getShortTitle() ?>
-                                <?php if ($object->getUrl() != false){ ?>
-                            </a> <? if ($object->getTitleAddon()) echo '<small>' . $object->getTitleAddon() . '</small>'; ?>
+                <div class="attachment col-md-<?= $object_content_sizes[0] ?> text-center">
+                    <?php if ($object->getUrl() != false) { ?>
+                    <a class="thumb_cont" href="<?= $object->getUrl() ?>">
                         <?php } ?>
-                        </<?= $titleTag ?>>
-                        <?
-                        if ($file_exists)
-                            echo $this->element('Dane.' . $theme . '/' . $object->getDataset(), array(
-                                'item' => $item,
-                                'object' => $object
-                            ));
-                        else {
-                            echo $this->Dataobject->highlights($hlFields);
-                            if( $object->getDescription() ){?>
-	                        <div class="description">
-	                        	<?= $object->getDescription() ?>
-	                        </div>
-	                        <? }
-                        }
-                        ?>
+                        <img class="thumb" onerror="imgFixer(this)" src="<?= $object->getThumbnailUrl($thumbSize) ?>"
+                             alt="<?= strip_tags($object->getTitle()) ?>"/>
+                        <?php if ($object->getUrl() != false) { ?>
+                    </a>
+                <?php } ?>
+                </div>
+                <div class="content col-md-<?= $object_content_sizes[1] ?>">
+                    <p class="header">
+                        <?= $object->getShortLabel(); ?>
+                    </p>
 
-                    </div>
-                <? } ?>
+                    <? if ($object->getShortTitle()) { ?>
+                    <<?= $titleTag ?> class="title trimTitle<? if ($bigTitle) { ?> big<? } ?>"
+                    title="<?= htmlspecialchars($object->getShortTitle()) ?>"
+                    data-trimlength="200">
+                    <?php if (($object->getUrl() != false) && !empty($this->request)) { ?>
+                    <a href="<?= $object->getUrl() ?>" title="<?= strip_tags($object->getTitle()) ?>">
+                        <?php } ?>
+                        <?= $object->getShortTitle() ?>
+                        <?php if (($object->getUrl() != false) && !empty($this->request)) { ?>
+                    </a> <? if ($object->getTitleAddon()) echo '<small>' . $object->getTitleAddon() . '</small>'; ?>
+                <?php } ?>
+                </<?= $titleTag ?>>
+            <? } ?>
+
+                <?
+                if ($file_exists)
+                    echo $this->element('Dane.' . $theme . '/' . $object->getDataset(), array(
+                        'item' => $item,
+                        'object' => $object
+                    ));
+                else {
+                    echo $this->Dataobject->highlights($hlFields);
+                    if ($object->getDescription()) {
+                        ?>
+                        <div class="description">
+                            <?= $object->getDescription() ?>
+                        </div>
+                    <?
+                    }
+                }
+                ?>
             </div>
+
+            <? } else { ?>
+            <div class="content">
+                <p class="header">
+                    <?= $object->getShortLabel(); ?>
+                </p>
+
+                <<?= $titleTag ?> class="title<? if ($bigTitle) { ?> big<? } ?>">
+                <?php if ($object->getUrl() != false){ ?>
+                <a class="trimTitle" href="<?= $object->getUrl() ?>"
+                   title="<?= strip_tags($object->getTitle()) ?>">
+                    <?php } ?>
+                    <?= $object->getShortTitle() ?>
+                    <?php if ($object->getUrl() != false){ ?>
+                </a> <? if ($object->getTitleAddon()) echo '<small>' . $object->getTitleAddon() . '</small>'; ?>
+            <?php } ?>
+            </<?= $titleTag ?>>
+            <?
+            if ($file_exists)
+                echo $this->element('Dane.' . $theme . '/' . $object->getDataset(), array(
+                    'item' => $item,
+                    'object' => $object
+                ));
+            else {
+                echo $this->Dataobject->highlights($hlFields);
+                if ($object->getDescription()) {
+                    ?>
+                    <div class="description">
+                        <?= $object->getDescription() ?>
+                    </div>
+                <?
+                }
+            }
+            ?>
+
         </div>
+    <? } ?>
     </div>
+</div>
+</div>
 </div>

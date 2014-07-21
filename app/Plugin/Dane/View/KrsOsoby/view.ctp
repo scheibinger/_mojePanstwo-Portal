@@ -7,11 +7,12 @@
 if ($organizacje = $object->getLayer('organizacje')) {
     ?>
     <div class="object">
-		
-		<?= $this->Element('Dane.objects/krs_osoby/organizacje', array(
-			'organizacje' => $organizacje,
-		)); ?>
-        
+
+        <?=
+        $this->Element('Dane.objects/krs_osoby/organizacje', array(
+            'organizacje' => $organizacje,
+        )); ?>
+
     </div>
 <? } ?>
 

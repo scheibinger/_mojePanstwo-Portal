@@ -26,7 +26,7 @@
  * its action called 'display', and we pass a param to select the view file
  * to use (in this case, /app/View/Pages/home.ctp)...
  */
-if($_SERVER['HTTP_HOST'] == PK_DOMAIN) { // HTTP_X_FORWARDED_HOST
+if ($_SERVER['HTTP_HOST'] == PK_DOMAIN) { // HTTP_X_FORWARDED_HOST
     Router::connect('/', array('plugin' => 'Dane', 'controller' => 'gminy', 'action' => 'view', 'id' => 903));
     Router::connect('/:action', array('plugin' => 'Dane', 'controller' => 'gminy', 'id' => 903));
     Router::connect('/:action/*', array('plugin' => 'Dane', 'controller' => 'gminy', 'id' => 903));

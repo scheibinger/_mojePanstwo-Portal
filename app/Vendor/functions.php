@@ -88,12 +88,12 @@ if (!function_exists('array_column')) {
 function dataSlownie($data)
 {
     $_data = $data;
-	
-	if( strpos($data, '/') ) {
-		$parts = explode('/', $data);
-		$data = $parts[2] . '-' . $parts[1] . '-' . $parts[0];
-	}
-	
+
+    if (strpos($data, '/')) {
+        $parts = explode('/', $data);
+        $data = $parts[2] . '-' . $parts[1] . '-' . $parts[0];
+    }
+
     $timestamp = strtotime($data);
     if (!$timestamp)
         return false;
@@ -170,25 +170,25 @@ if (!function_exists('endsWith')) {
 
 function _currency($value)
 {
-	$parts = explode(',', number_format($value, 2, ',', ' '));	
-	return '<span class="_currency">' . $parts[0] . '<span class="_subcurrency">,' . $parts[1] . ' PLN</span></span>';
+    $parts = explode(',', number_format($value, 2, ',', ' '));
+    return '<span class="_currency">' . $parts[0] . '<span class="_subcurrency">,' . $parts[1] . ' PLN</span></span>';
 }
 
 function _number($value)
 {
-	return '<span class="_number">' . number_format($value, $decimals = 0, $dec_point = '', $thousands_sep = ' ') . '</span>';
+    return '<span class="_number">' . number_format($value, $decimals = 0, $dec_point = '', $thousands_sep = ' ') . '</span>';
 }
 
 function number_format_h($n, $decimals = 0, $dec_point = '.', $thousands_sep = ' ')
 {
     // first strip any formatting;
     $n = (0 + str_replace(",", "", $n));
-	
+
     // is this a number?
     if (!is_numeric($n)) return false;
-	
-	$_n = abs( $n );
-	
+
+    $_n = abs($n);
+
     // now filter it;
     if ($_n > 1000000000000000) return round(($n / 1000000000000000), 1) . ' Bld';
     else if ($_n > 1000000000000) return round(($n / 1000000000000), 1) . ' B';

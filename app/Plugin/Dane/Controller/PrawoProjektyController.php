@@ -15,12 +15,12 @@ class PrawoProjektyController extends DataobjectsController
 
         parent::view();
 
-        if( $this->object->getData('nadrzedny_projekt_id') ) {
+        if ($this->object->getData('nadrzedny_projekt_id')) {
             $this->redirect(array(
-            	'plugin' => 'Dane', 
-            	'controller' => 'prawo_projekty',
-            	'action' => '',
-            	'id' => $this->object->getData('nadrzedny_projekt_id')
+                'plugin' => 'Dane',
+                'controller' => 'prawo_projekty',
+                'action' => '',
+                'id' => $this->object->getData('nadrzedny_projekt_id')
             ), '301');
         }
 

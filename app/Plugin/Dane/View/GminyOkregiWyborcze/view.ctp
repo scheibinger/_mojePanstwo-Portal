@@ -8,6 +8,6 @@
 
 <?php echo $this->Element('dataobject/pageBegin'); ?>
 <?php echo $this->Element('dataobject/objects/gminy_okregi_wyborcze/page', array(
-	'object' => $object,
+    'object' => $object,
 )); ?>;
 <?php echo $this->Element('dataobject/pageEnd'); ?>

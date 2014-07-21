@@ -5,18 +5,18 @@
 <script src="../../d3.js"></script>
 <script>
 
-var body = d3.select("body");
+    var body = d3.select("body");
 
-var div = body.append("div")
-    .style("width", "1000px")
-    .style("height", "500px")
-    .style("border", "solid black 1px")
-    .style("cursor", "crosshair");
+    var div = body.append("div")
+            .style("width", "1000px")
+            .style("height", "500px")
+            .style("border", "solid black 1px")
+            .style("cursor", "crosshair");
 
-var span = body.append("span");
+    var span = body.append("span");
 
-d3.select(window).on("mousemove", function() {
-  span.text(d3.mouse(div[0][0]));
-});
+    d3.select(window).on("mousemove", function () {
+        span.text(d3.mouse(div[0][0]));
+    });
 
 </script>

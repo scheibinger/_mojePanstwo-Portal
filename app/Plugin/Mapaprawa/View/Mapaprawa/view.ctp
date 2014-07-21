@@ -53,7 +53,7 @@
                                     <div class="date"><?= $this->Czas->dataSlownie($p['date']) ?></div>
                                     <div class="desc">
 
-                                    <p><?= $p['label'] ?></p>
+                                        <p><?= $p['label'] ?></p>
                                     </div>
                                     <div class="lastIcon icon icon-<?= $p['icon'] ?>"></div>
                                     <div class="path">

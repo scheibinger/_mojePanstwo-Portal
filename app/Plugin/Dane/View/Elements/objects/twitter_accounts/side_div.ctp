@@ -32,7 +32,7 @@
 </p>
 
 <ul class="dataHighlights side hide">
-<li class="dataHighlight inl topborder">
+    <li class="dataHighlight inl topborder">
         <p class="_label">Liczba tweetów w 2013 r.</p>
 
         <p class="_value"><?= _number($object->getData('liczba_tweetow_wlasnych_2013')); ?></p>

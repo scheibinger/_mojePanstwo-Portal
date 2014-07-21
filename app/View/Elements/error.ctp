@@ -1,7 +1,11 @@
 <?php $this->Combinator->add_libs('css', $this->Less->css('missing')) ?>
 <?php
-    if (!isset($code_desc)) { $code_desc = 'Coś poszło nie tak'; }
-    if (!isset($action)) { $action = 'main_page'; }
+if (!isset($code_desc)) {
+    $code_desc = 'Coś poszło nie tak';
+}
+if (!isset($action)) {
+    $action = 'main_page';
+}
 ?>
 
 <div class="container">
@@ -166,7 +170,8 @@
 
             <h3><?php echo $message; ?></h3>
             <?php if ($action == 'refresh') { ?>
-                <a class="btn btn-info" href="<? echo Router::reverse($this->params); ?>" target="_self">Odśwież stronę</a>
+                <a class="btn btn-info" href="<? echo Router::reverse($this->params); ?>" target="_self">Odśwież
+                    stronę</a>
             <?php } else { ?>
                 <a class="btn btn-info" href="/" target="_self">Wróc na stronę główną</a>
             <?php } ?>
@@ -175,9 +180,10 @@
 </div>
 
 <? if (Configure::read('debug') > 0) { ?>
-<div class="error-description">
-    <h3><?php echo get_class($error); ?></h3>
-    <p><?php echo $error->getMessage(); ?></p>
-    <?php echo $this->element('exception_stack_trace'); ?>
-</div>
+    <div class="error-description">
+        <h3><?php echo get_class($error); ?></h3>
+
+        <p><?php echo $error->getMessage(); ?></p>
+        <?php echo $this->element('exception_stack_trace'); ?>
+    </div>
 <? } ?>

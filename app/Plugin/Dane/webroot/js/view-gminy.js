@@ -72,14 +72,14 @@ $(document).ready(function () {
         banner.find('.bg img').css('width', banner.width() + 'px');
 
         /*ASYNCHRONIZE ACTION FOR GOOGLE MAP*/
-        
+
         window.onload = loadScript();
 
         /*
-        banner.find('.bg .btn').click(function () {
-            banner.find('.bg').fadeOut()
-        });
-        */
+         banner.find('.bg .btn').click(function () {
+         banner.find('.bg').fadeOut()
+         });
+         */
     }
 
     /*STICKY MENU*/
@@ -122,18 +122,18 @@ $(document).ready(function () {
 
 
 $(function () {
-    
-    if( !wyniki_wyborow )
-    	return false;
-    	
+
+    if (!wyniki_wyborow)
+        return false;
+
     var data = [];
-    for( var i=0; i<wyniki_wyborow.length; i++ ) {
-	    
-	    var d = wyniki_wyborow[i];
-	    data.push([d['nazwa'], Number( wyniki_wyborow[i][0]['count'] )]);
-	    
+    for (var i = 0; i < wyniki_wyborow.length; i++) {
+
+        var d = wyniki_wyborow[i];
+        data.push([d['nazwa'], Number(wyniki_wyborow[i][0]['count'])]);
+
     }
-       
+
     $('#komitety_chart').highcharts({
         chart: {
             plotBackgroundColor: null,
@@ -145,11 +145,11 @@ $(function () {
             text: null
         },
         tooltip: {
-    	    pointFormat: '{series.name}: <b>{point.y}</b>'
+            pointFormat: '{series.name}: <b>{point.y}</b>'
         },
         plotOptions: {
             pie: {
-            	size: 70,
+                size: 70,
                 allowPointSelect: true,
                 cursor: 'pointer',
                 center: ["50%", "80%"],
@@ -165,7 +165,7 @@ $(function () {
                 cursor: 'pointer',
                 point: {
                     events: {
-                        click: function() {
+                        click: function () {
                             location.href = this.options.url;
                         }
                     }
@@ -173,12 +173,14 @@ $(function () {
             }
         },
         credits: {
-	        enabled: false
+            enabled: false
         },
-        series: [{
-	        type: 'pie',
-	        name: 'Liczba radnych',
-	        data: data
-	    }]
+        series: [
+            {
+                type: 'pie',
+                name: 'Liczba radnych',
+                data: data
+            }
+        ]
     });
 });

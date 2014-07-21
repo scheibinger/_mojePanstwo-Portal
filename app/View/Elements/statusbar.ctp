@@ -1,10 +1,10 @@
 <div id="_mojePanstwoCockpit">
     <div class="_mojePanstwoCockpitContent container">
-        
+
         <div class="_mojePanstwoCockpitLogo">
             <p>
                 <a href="/" target="_self">
-					<strong>_moje</strong>Państwo
+                    <strong>_moje</strong>Państwo
                 </a>
             </p>
         </div>
@@ -163,7 +163,7 @@
                 <div class="_mojePanstwoCockpitUserName">
                     <a href="<?php echo $this->Html->url(array('plugin' => 'paszport', 'controller' => 'users', 'action' => 'index')); ?>"><?php echo $this->Session->read('Auth.User.username'); ?></a>
                 </div>
-                
+
                 <? /*
                     <ul class="_mojePanstwoCockpitUserNameDropdownList">
                         <li class="_mojePanstwoCockpitUserNameDropdownListStream">Streams

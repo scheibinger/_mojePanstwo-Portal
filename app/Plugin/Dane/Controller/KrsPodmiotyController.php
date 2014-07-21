@@ -13,37 +13,37 @@ class KrsPodmiotyController extends DataobjectsController
         'hlFields' => array(),
         'bigTitle' => true,
     );
-    
+
     public $initLayers = array('counters');
-    
+
     public function beforeFilter()
     {
-    	parent::beforeFilter();
-        $this->Auth->deny(array('pobierz_odpis', 'odpis'));        
+        parent::beforeFilter();
+        $this->Auth->deny(array('pobierz_odpis', 'odpis'));
     }
 
 
     public function view()
     {
-    	
-    	$this->addInitLayers(array('reprezentacja', 'wspolnicy', 'jedynyAkcjonariusz', 'prokurenci', 'nadzor', 'komitetZalozycielski', 'dzialalnosci', 'graph', 'stats'));
-    	
-    	if( $this->Session->read('KRS.odpis')==$this->params->id )
-    		$this->addInitLayers('odpis');
-    
-        parent::view();
-		
-		if( $this->Session->read('KRS.odpis')==$this->object->getId() )	{
-			
-			$odpis = $this->object->getLayer('odpis');
-			if( $odpis['status'] )
-				$this->set('odpis', $odpis['url']);
-			
-		}
 
-		$this->Session->delete('KRS.odpis');
-		
-		
+        $this->addInitLayers(array('reprezentacja', 'wspolnicy', 'jedynyAkcjonariusz', 'prokurenci', 'nadzor', 'komitetZalozycielski', 'dzialalnosci', 'graph', 'stats'));
+
+        if ($this->Session->read('KRS.odpis') == $this->params->id)
+            $this->addInitLayers('odpis');
+
+        parent::view();
+
+        if ($this->Session->read('KRS.odpis') == $this->object->getId()) {
+
+            $odpis = $this->object->getLayer('odpis');
+            if ($odpis['status'])
+                $this->set('odpis', $odpis['url']);
+
+        }
+
+        $this->Session->delete('KRS.odpis');
+
+
         $indicators = array(
             array(
                 'label' => 'Numer KRS',
@@ -74,17 +74,17 @@ class KrsPodmiotyController extends DataobjectsController
 
         $this->set('indicators', $indicators);
 
-		
-		$zamowienia = $this->API->search(array(
+
+        $zamowienia = $this->API->search(array(
             'limit' => 9,
             'conditions' => array(
-	            '_source' => 'krs_podmioty.zamowienia:' . $this->object->getId(),
-	            'dataset' => 'zamowienia_publiczne',
+                '_source' => 'krs_podmioty.zamowienia:' . $this->object->getId(),
+                'dataset' => 'zamowienia_publiczne',
             ),
         ));
         $this->set('zamowienia', $this->API->getObjects());
-		
-		/*
+
+        /*
         $obszary = new MP\Obszary();
         $this->set('obszar', $obszary->getMiejscowosc(array(
             'conditions' => array(
@@ -117,9 +117,9 @@ class KrsPodmiotyController extends DataobjectsController
                 'label' => $this->object->getData('nazwa_organu_reprezentacji'),
             );
         }
-		
+
         $wspolnicy = $this->object->getLayer('wspolnicy');
-		/*
+        /*
         if (!empty($wspolnicy)) {
             $organy[] = array(
                 'title' => 'Wspólnicy',
@@ -222,103 +222,103 @@ class KrsPodmiotyController extends DataobjectsController
 
         } else return false;
     }
-    
+
     public function odpis()
     {
-	    	    
-	    $id = (int) $this->request->params['id'];
-	    $this->Session->write('KRS.odpis', $id);
-	    $this->redirect('/dane/krs_podmioty/' . $id);
-	    
+
+        $id = (int)$this->request->params['id'];
+        $this->Session->write('KRS.odpis', $id);
+        $this->redirect('/dane/krs_podmioty/' . $id);
+
     }
-    
+
     public function zamowienia()
     {
-	    
-	    $this->_prepareView();
+
+        $this->_prepareView();
         $this->dataobjectsBrowserView(array(
             'source' => 'krs_podmioty.zamowienia:' . $this->object->getId(),
             'dataset' => 'zamowienia_publiczne',
             'title' => 'Zamówienia publiczne udzielone organizacji',
             'noResultsTitle' => 'Brak zamówień publicznych',
         ));
-	    
+
     }
-    
+
     public function emisje_akcji()
     {
-	    
-	    $this->addInitLayers('emisje_akcji');	    
-	    $this->_prepareView();
+
+        $this->addInitLayers('emisje_akcji');
+        $this->_prepareView();
         $this->set('title_for_layout', 'Emisje akcji spółki ' . $this->object->getTitle());
-	    
+
     }
-    
+
     public function oddzialy()
     {
-	    
-	    $this->addInitLayers('oddzialy');
-	    $this->_prepareView();        
+
+        $this->addInitLayers('oddzialy');
+        $this->_prepareView();
         $this->set('title_for_layout', 'Oddziały ' . $this->object->getTitle());
-	    
+
     }
-    
+
     public function zmiany_umow()
     {
-	    
-	    $this->addInitLayers('zmiany_umow');
-	    $this->_prepareView();        
+
+        $this->addInitLayers('zmiany_umow');
+        $this->_prepareView();
         $this->set('title_for_layout', 'Zmiany umów ' . $this->object->getTitle());
-	    
+
     }
-    
+
     public function beforeRender()
-	{
-		
-		$counters = $this->object->getLayers('counters');
-		
+    {
+
+        $counters = $this->object->getLayers('counters');
+
         // PREPARE MENU		
-		$href_base = '/dane/krs_podmioty/' . $this->request->params['id'];
-        
+        $href_base = '/dane/krs_podmioty/' . $this->request->params['id'];
+
         $menu = array(
             'items' => array(
-	            array(
-	            	'id' => '',
-	                'href' => $href_base,
-	                'label' => 'Informacje i powiązania',
-	            ),
-	        )
-	    );
-		
-		if( $counters['liczba_oddzialow'] )
-			$menu['items'][] = array(
-				'id' => 'oddzialy',
-				'href' => $href_base . '/oddzialy',
-				'label' => 'Oddziały',
-				'count' => $counters['liczba_oddzialow'],
-		    );
-	    
+                array(
+                    'id' => '',
+                    'href' => $href_base,
+                    'label' => 'Informacje i powiązania',
+                ),
+            )
+        );
 
-		if( $counters['liczba_zmian_umow'] )
-		    $menu['items'][] = array(
-				'id' => 'zmiany_umow',
-				'href' => $href_base . '/zmiany_umow',
-				'label' => 'Zmiany umów',
-				'count' => $counters['liczba_zmian_umow'],
-		    );
-		    
-		if( $counters['liczba_emisji_akcji'] )
-		    $menu['items'][] = array(
-				'id' => 'emisje_akcji',
-				'href' => $href_base . '/emisje_akcji',
-				'label' => 'Emisje akcji',
-				'count' => $counters['liczba_emisji_akcji'],
-		    );
-			    
-        $menu['selected'] = ( $this->request->params['action'] == 'view' ) ? '' : $this->request->params['action'];
-        
+        if ($counters['liczba_oddzialow'])
+            $menu['items'][] = array(
+                'id' => 'oddzialy',
+                'href' => $href_base . '/oddzialy',
+                'label' => 'Oddziały',
+                'count' => $counters['liczba_oddzialow'],
+            );
+
+
+        if ($counters['liczba_zmian_umow'])
+            $menu['items'][] = array(
+                'id' => 'zmiany_umow',
+                'href' => $href_base . '/zmiany_umow',
+                'label' => 'Zmiany umów',
+                'count' => $counters['liczba_zmian_umow'],
+            );
+
+        if ($counters['liczba_emisji_akcji'])
+            $menu['items'][] = array(
+                'id' => 'emisje_akcji',
+                'href' => $href_base . '/emisje_akcji',
+                'label' => 'Emisje akcji',
+                'count' => $counters['liczba_emisji_akcji'],
+            );
+
+        $menu['selected'] = ($this->request->params['action'] == 'view') ? '' : $this->request->params['action'];
+
         $this->set('_menu', $menu);
-		
-	}
-    
+
+    }
+
 }

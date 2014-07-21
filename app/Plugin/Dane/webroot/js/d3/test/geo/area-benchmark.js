@@ -6,7 +6,7 @@ var formatNumber = d3.format(",.02r"),
     then = Date.now();
 
 for (var i = 0; i < n; i++) {
-  d3.geo.area(o);
+    d3.geo.area(o);
 }
 
 console.log("circle.angle(30°): " + formatNumber((Date.now() - then) / i) + "ms/op.");

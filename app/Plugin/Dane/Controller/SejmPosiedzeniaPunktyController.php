@@ -8,10 +8,10 @@ class SejmPosiedzeniaPunktyController extends DataobjectsController
     public $helpers = array('Dane.Dataobject');
     public $menu = array();
     public $autoRelated = false;
-	public $breadcrumbsMode = 'app';
-    
+    public $breadcrumbsMode = 'app';
+
     public $objectOptions = array(
-    	'hlFields' => array('sejm_posiedzenia.tytul', 'numer'),
+        'hlFields' => array('sejm_posiedzenia.tytul', 'numer'),
     );
 
     public function view()
@@ -20,13 +20,14 @@ class SejmPosiedzeniaPunktyController extends DataobjectsController
         parent::view();
         $this->object->loadRelated();
         $debaty = $this->object->getRelatedGroup('debaty');
-        
-        if( $debaty && isset($debaty['objects']) && !empty($debaty['objects']) ) {
-	        
-	        $debata = $debaty['objects'][0];
-	        $this->redirect('/dane/sejm_debaty/' . $debata->getId());
-	        
-        } return false;
+
+        if ($debaty && isset($debaty['objects']) && !empty($debaty['objects'])) {
+
+            $debata = $debaty['objects'][0];
+            $this->redirect('/dane/sejm_debaty/' . $debata->getId());
+
+        }
+        return false;
 
     }
 

@@ -5,7 +5,7 @@ $path = App::path('Plugin');
 $element = (isset($file) && $file) ?
     $file :
     $object->getDataset();
-    
+
 $element_exists = $element ?
     file_exists($path[0] . '/Dane/View/Elements/' . $theme . '/' . $element . '.ctp') :
     false;
@@ -25,14 +25,14 @@ $element_exists = $element ?
             ?>
 
             <? if ($object->getThumbnailUrl()) { ?>
-                
-                
-                <? if( $object->getDate() ) {?>
-                	<div class="slide_header">
-                		<p class="label label-default"><?= dataSlownie($object->getDate()) ?></p>
-                	</div>
-                <?}?>
-                
+
+
+                <? if ($object->getDate()) { ?>
+                    <div class="slide_header">
+                        <p class="label label-default"><?= dataSlownie($object->getDate()) ?></p>
+                    </div>
+                <? } ?>
+
                 <div class="attachment col-md-4">
                     <a href="<?= $object->getUrl() ?>">
                         <img onerror="imgFixer(this)" src="<?= $object->getThumbnailUrl('1') ?>"
@@ -50,13 +50,13 @@ $element_exists = $element ?
 
                 </div>
             <? } else { ?>
-            	
-            	<? if( $object->getDate() ) {?>
-                	<div class="slide_header">
-                		<p class="label label-default"><?= dataSlownie($object->getDate()) ?></p>
-                	</div>
-                <?}?>
-            	
+
+                <? if ($object->getDate()) { ?>
+                    <div class="slide_header">
+                        <p class="label label-default"><?= dataSlownie($object->getDate()) ?></p>
+                    </div>
+                <? } ?>
+
                 <div class="content col-md-12">
 
                     <?php echo $this->element('Dane.dataobjectSlider/_content', array(

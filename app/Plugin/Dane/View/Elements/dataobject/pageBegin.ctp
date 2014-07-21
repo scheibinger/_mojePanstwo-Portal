@@ -2,8 +2,8 @@
 $object = $this->viewVars['object'];
 $objectOptions = $this->viewVars['objectOptions'];
 
-if( isset($titleTag) )
-	$objectOptions['titleTag'] = $titleTag;
+if (isset($titleTag))
+    $objectOptions['titleTag'] = $titleTag;
 
 $menu = $this->viewVars['menu'];
 
@@ -39,16 +39,16 @@ $buttons = isset($objectOptions['buttons']) ? $objectOptions['buttons'] : array(
                 </div>
             </div>
             <div class="col-md-3">
-            	<div class="row">
-	                <ul class="objectButtons">
-	                    <? foreach ($buttons as $button) { ?>
-	                        <li><?=
-	                            $this->Element('dataobject/buttons/' . $button, array(
-	                                'base_url' => '/dane/' . $object->getDataset() . '/' . $object->getId(),
-	                            )); ?></li>
-	                    <? } ?>
-	                </ul>
-            	</div>
+                <div class="row">
+                    <ul class="objectButtons">
+                        <? foreach ($buttons as $button) { ?>
+                            <li><?=
+                                $this->Element('dataobject/buttons/' . $button, array(
+                                    'base_url' => '/dane/' . $object->getDataset() . '/' . $object->getId(),
+                                )); ?></li>
+                        <? } ?>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>

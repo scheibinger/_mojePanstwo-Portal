@@ -13,20 +13,23 @@
                 <div class="content col-md-9">
 
                     <<?= $titleTag ?> class="title trimTitle<? if ($bigTitle) { ?> big<? } ?>"
-                        title="<?= htmlspecialchars($object->getShortTitle()) ?>"
-                        data-trimlength="200">
-                        <a href="http://przejrzystykrakow.pl" title="<?= strip_tags($object->getTitle()) ?>">
-                            Przejrzysty Kraków
-                        </a>
-                    </<?= $titleTag ?>>
-                    
-                    <p class="header">
-                        Program Przejrzysty Kraków, prowadzony przez <a href="http://mojepanstwo.pl/dane/krs_podmioty/325617">Fundację Stańczyka</a>, ma na celu wieloaspektowy monitoring życia publicznego w Krakowie. W ramach programu prowadzony jest obecnie monitoring Rady Miasta i Dzielnic Krakowa.
-                    </p>
-                    
-                </div>
-                
+                    title="<?= htmlspecialchars($object->getShortTitle()) ?>"
+                    data-trimlength="200">
+                    <a href="http://przejrzystykrakow.pl" title="<?= strip_tags($object->getTitle()) ?>">
+                        Przejrzysty Kraków
+                    </a>
+                </<?= $titleTag ?>>
+
+                <p class="header">
+                    Program Przejrzysty Kraków, prowadzony przez <a
+                        href="http://mojepanstwo.pl/dane/krs_podmioty/325617">Fundację Stańczyka</a>, ma na celu
+                    wieloaspektowy monitoring życia publicznego w Krakowie. W ramach programu prowadzony jest obecnie
+                    monitoring Rady Miasta i Dzielnic Krakowa.
+                </p>
+
             </div>
+
         </div>
     </div>
+</div>
 </div>

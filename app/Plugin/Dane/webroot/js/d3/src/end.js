@@ -1,8 +1,9 @@
-  if (typeof define === "function" && define.amd) {
+if (typeof define === "function" && define.amd) {
     define(d3);
-  } else if (typeof module === "object" && module.exports) {
+} else if (typeof module === "object" && module.exports) {
     module.exports = d3;
-  } else {
+} else {
     this.d3 = d3;
-  }
-}();
+}
+}
+();
