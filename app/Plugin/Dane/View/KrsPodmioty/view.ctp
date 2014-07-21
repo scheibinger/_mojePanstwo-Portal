@@ -4,9 +4,14 @@ if( isset($odpis) && $odpis ) {
 }
 
 echo $this->Element('dataobject/pageBegin');
+echo $this->Element('Dane.dataobject/menuTabs', array(
+	'menu' => $_menu,
+));
+
 echo $this->Html->script('Dane.d3/d3', array('block' => 'scriptBlock'));
 
 $this->Combinator->add_libs('css', $this->Less->css('view-krspodmioty', array('plugin' => 'Dane')));
+$this->Combinator->add_libs('css', $this->Less->css('dataobjectslider', array('plugin' => 'Dane')));
 $this->Combinator->add_libs('js', 'Dane.view-krspodmioty');
 
 ?>
@@ -99,20 +104,22 @@ $this->Combinator->add_libs('js', 'Dane.view-krspodmioty');
                 <? } ?>
 
 
-                <? if ($object->getData('www')) { ?>
+                <? 
+                	if( $www = $object->getData('www') ) {
+						$url = ( stripos($www, 'http')===false ) ? 'http://' . $www : $www;
+                ?>
                     <li class="dataHighlight inl topborder">
                         <p class="_label">Strona WWW</p>
 
-                        <p class="_value"><?= $object->getData('www'); ?></p>
+	                    <p class="_value"><a target="_blank" title="<?= addslashes($object->getTitle()) ?>" href="<?= $url ?>"><?= $www; ?></a></p>
                     </li>
                 <? } ?>
 
-                <? if ($object->getData('email')) { ?>
-                    <li class="dataHighlight inl">
-                        <p class="_label">Adres email</p>
-
-                        <p class="_value"><?= $object->getData('email'); ?></p>
-                    </li>
+                <? if( $email = $object->getData('email') ) {?>
+	                <li class="dataHighlight inl">
+	                    <p class="_label">Adres e-mail</p>
+	                    <p class="_value"><a target="_blank" href="mailto:<?= $email ?>"><?= $email; ?></a></p>
+	                </li>
                 <? } ?>
             </ul>
 
@@ -170,6 +177,15 @@ $this->Combinator->add_libs('js', 'Dane.view-krspodmioty');
 
     <div class="col-lg-9 objectMain">
         <div class="object mpanel">
+            
+            
+            <? if ($object->getData('wykreslony')) { ?>
+            <div class="alert alert-dismissable alert-danger">
+				<button type="button" class="close" data-dismiss="alert">×</button>
+				Prezentowane dane dotyczą chwili, w której podmiot był wykreślany z KRS.
+			</div>
+			<? } ?>
+            
             <?
             $adres = $object->getData('adres_ulica');
             $adres .= ' ' . $object->getData('adres_numer');
@@ -201,6 +217,30 @@ $this->Combinator->add_libs('js', 'Dane.view-krspodmioty');
             </div>
 
             <div class="block-group">
+            	
+            	<? if ($zamowienia) { ?>
+                    <div id="zamowienia" class="block">
+                        <div class="block-header">
+                            <h2 class="label pull-left">Realizowane zamówienia publiczne</h2>
+                            <a class="btn btn-default btn-sm pull-right"
+                               href="/dane/krs_podmioty/<?= $object->getId() ?>/zamowienia">Zobacz wszystkie</a>
+                        </div>
+
+                        <div class="content">
+                            <div class="dataobjectsSliderRow row">
+                                <div>
+                                    <?php echo $this->dataobjectsSlider->render($zamowienia, array(
+                                        'perGroup' => 3,
+                                        'rowNumber' => 1,
+                                        'labelMode' => 'none',
+                                        'dfFields' => array('data'),
+                                    )) ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <? } ?>
+            	
                 <? if ($object->getData('cel_dzialania')) { ?>
                     <div class="dzialanie block">
 
@@ -222,17 +262,26 @@ $this->Combinator->add_libs('js', 'Dane.view-krspodmioty');
                     </div>
                 <? } ?>
 
-                <div class="organy block row">
-                    <? $organy_count = count($organy);
+                <div class="organy block">
+                <div class="row">
+                    <?
+                    
+                    $organy_count = count($organy);
                     if ($organy_count) {
-                    if ($organy_count < 5)
-                        $column_width = 12 / $organy_count;
-                    else
-                        $column_width = 3;
+                    
+	                    if( $organy_count==1 )
+							$column_width = 12;
+						elseif( $organy_count==2 )
+							$column_width = 6;
+						elseif( $organy_count==3 )
+							$column_width = 4;
+						else
+							$column_width = 6; 
+	                    
                     ?>
                     <? foreach ($organy as $organ) { ?>
                     <div class="col-lg-<?= $column_width ?>">
-                        <div class="block small">
+                        <div class="block small nobottomborder">
                             <div class="block-header"><h2 class="label" id="<?= $organ['idTag'] ?>"
                                                           class="normalizeText"><?= $organ['title'] ?></h2></div>
                             <? /* if (isset($organ['label']) && $organ['label']) { ?>
@@ -244,27 +293,27 @@ $this->Combinator->add_libs('js', 'Dane.view-krspodmioty');
                             <div class="list-group less-borders">
                                 <? foreach ($organ['content'] as $osoba) { ?>
                                 
-                                <? if (@$osoba['osoba_id']) { ?>
-	                                <a class="list-group-item" href="/dane/krs_osoby/<?= $osoba['osoba_id'] ?>">
-	                            <? } elseif (@$osoba['krs_id']) { ?>
-	                                <a class="list-group-item" href="/dane/krs_podmioty/<?= $osoba['krs_id'] ?>">
-                                <? } else { ?>
-                                    <div class="list-group-item">
-                                <? } ?>
+	                                <? if (@$osoba['osoba_id']) { ?>
+		                                <a class="list-group-item" href="/dane/krs_osoby/<?= $osoba['osoba_id'] ?>">
+		                            <? } elseif (@$osoba['krs_id']) { ?>
+		                                <a class="list-group-item" href="/dane/krs_podmioty/<?= $osoba['krs_id'] ?>">
+	                                <? } else { ?>
+	                                    <div class="list-group-item">
+	                                <? } ?>
 
-                                        <h4 class="list-group-item-heading">
-                                            <?= $osoba['nazwa'] ?>
-                                            <? if (
-                                                ($osoba['privacy_level'] != '1') &&
-                                                $osoba['data_urodzenia'] &&
-                                                $osoba['data_urodzenia'] != '0000-00-00'
-                                            ) {
-                                                ?>
-                                                <span class="wiek">
-                                                        <?= pl_dopelniacz(pl_wiek($osoba['data_urodzenia']), 'rok', 'lata', 'lat') ?>
-                                                    </span>
-                                            <? } ?>
-                                        </h4>
+                                    <h4 class="list-group-item-heading">
+                                        <?= $osoba['nazwa'] ?>
+                                        <? if (
+                                            ($osoba['privacy_level'] != '1') &&
+                                            $osoba['data_urodzenia'] &&
+                                            $osoba['data_urodzenia'] != '0000-00-00'
+                                        ) {
+                                            ?>
+                                            <span class="wiek">
+                                                    <?= pl_dopelniacz(pl_wiek($osoba['data_urodzenia']), 'rok', 'lata', 'lat') ?>
+                                                </span>
+                                        <? } ?>
+                                    </h4>
 
                                         <? if (isset($osoba['funkcja']) && $osoba['funkcja']) { ?>
                                             <p class="list-group-item-text normalizeText">
@@ -286,12 +335,65 @@ $this->Combinator->add_libs('js', 'Dane.view-krspodmioty');
             <? } ?>
             <? } ?>
             </div>
+            </div>
 
-            <div class="graph block">
-                <div class="block-header"><h2 class="label">Powiązania</h2></div>
 
-                <div id="connectionGraph" class="col-xs-12" data-id="<?php echo $object->getId() ?>">
-                    <script>var connectionGraphObject = <?php echo json_encode($object) ?>;</script>
+            <? if( $wspolnicy = $object->getLayer('wspolnicy') ) { ?>
+
+            <div class="wspolnicy block">
+            <div class="block-header"><h2 class="label">Wspólnicy</h2></div>
+
+                <div id="wspolnicy_graph">
+                	<div class="list-group less-borders wspolnicy">
+                            <? foreach ($wspolnicy as $osoba) { ?>
+                            
+                                <? if (@$osoba['osoba_id']) { ?>
+	                                <a class="list-group-item row" href="/dane/krs_osoby/<?= $osoba['osoba_id'] ?>">
+	                            <? } elseif (@$osoba['krs_id']) { ?>
+	                                <a class="list-group-item row" href="/dane/krs_podmioty/<?= $osoba['krs_id'] ?>">
+                                <? } else { ?>
+                                    <div class="list-group-item row">
+                                <? } ?>
+
+                                <h4 class="list-group-item-heading col-md-6">
+                                    <?= $osoba['nazwa'] ?>
+                                    <? if (
+                                        ($osoba['privacy_level'] != '1') &&
+                                        $osoba['data_urodzenia'] &&
+                                        $osoba['data_urodzenia'] != '0000-00-00'
+                                    ) {
+                                        ?>
+                                        <span class="wiek">
+                                                <?= pl_dopelniacz(pl_wiek($osoba['data_urodzenia']), 'rok', 'lata', 'lat') ?>
+                                            </span>
+                                    <? } ?>
+                                </h4>
+
+                                    <? if (isset($osoba['funkcja']) && $osoba['funkcja']) { ?>
+                                        <p class="list-group-item-text normalizeText col-md-6">
+                                            <?= $osoba['funkcja'] ?>
+                                        </p>
+                                    <? } ?>
+
+                                    <? if( @$osoba['osoba_id'] || @$osoba['krs_id'] ) { ?>
+                            </a>
+                            <? } else { ?>
+                        
+                        </div>
+                    <? } ?>
+                    <? } ?>
+                    </div>
+                </div>
+            </div>
+            
+            <? } ?>
+
+
+        <div class="powiazania block">
+            <div class="block-header"><h2 class="label">Powiązania</h2></div>
+
+            <div id="connectionGraph" data-id="<?php echo $object->getId() ?>">
+            <script>var connectionGraphObject = <?php echo json_encode($object) ?>;</script>
                 </div>
             </div>
 

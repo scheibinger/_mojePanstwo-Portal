@@ -1,5 +1,6 @@
 .container {
-  width: 99%;
+  width: 100%;
+  max-width: 1600px;
 }
 blockquote {
   background: #f9f9f9;
@@ -199,6 +200,10 @@ blockquote p {
   font-size: 16px;
   margin-bottom: 30px;
 }
+#_main .chapter .main_desc {
+  padding: 0;
+  margin: 0;
+}
 #_main .chapter .bgcontent {
   background-color: #FFF;
   font-family: "Lato", sans-serif;
@@ -237,6 +242,9 @@ blockquote p {
 }
 #_main .rank-row-block {
   margin-top: 40px;
+  max-width: 1600px;
+  margin-left: auto;
+  margin-right: auto;
 }
 #_main .rank-row-block .desc {
   font-family: "Lato", sans-serif;
@@ -360,6 +368,12 @@ blockquote p {
 #_main .rank-row-block .rank-row .rank-col ul li .counter {
   font-family: "Lato", sans-serif;
   font-size: 20px;
+}
+#_main .rank-row-block .rank-row .rank-col ul li .counter a {
+  color: #333;
+}
+#_main .rank-row-block .rank-row .rank-col ul li .counter a:hover {
+  color: #157AB5;
 }
 #_main .rank-row-block .rank-row .rank-col ul li .subcounter {
   font-family: "Lato", sans-serif;

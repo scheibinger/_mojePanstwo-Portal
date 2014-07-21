@@ -1,7 +1,23 @@
 .objectsPage {
-
+	
+	.subobject {
+		margin: 5px 15px;
+		p {
+			margin-bottom: 20px;
+		}
+	}
+	
     .objectPageHeaderContainer {
-
+		
+		&.subobjectContainer {
+			margin-top: -15px;
+			margin-left: 5px;
+			
+			.container .objectRender .header {
+				margin-bottom: 5px;
+			}
+		}
+		
         .container {
             padding: 5px 0;
 
@@ -12,7 +28,7 @@
                     font-size: 11px;
                 }
 
-                h1.title {
+                .title {
                     font-size: 22px;
 
                     small {
@@ -42,6 +58,7 @@
     .objectsPageWindow {
         //padding-bottom: 20px;
         overflow: hidden;
+		
 		
 		.objectMain {
 			padding-left: 0;
@@ -95,6 +112,15 @@
             min-height: 400px;
             position: relative;
             top: -4px;
+			
+			.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
+				background-color: #F3F3F3;
+				cursor: pointer;
+			}
+			
+			.nav-tabs > li {
+				margin-top: 4px;
+			}
 			
             .dataBrowser {
                 position: relative;
@@ -189,9 +215,11 @@
 	                        .add {
 	                            display: none;
 	                        }
+	                        
+	                        
 	
 	                    }
-	
+	                    	
 	                    .__autorzy_html_ul {
 	                        font-size: 12px;
 	                        margin: 0;
@@ -217,6 +245,14 @@
 	            }
             
             }
+        }
+        
+        .subsubtitle {
+	        
+	        font-size: 11px;
+	        font-family: "Lato",sans-serif;
+	        margin: -5px 0 15px 15px;
+	        
         }
     }
 }
@@ -266,7 +302,7 @@
 
 .dataobjectsSlider {
     .carousel .carousel-inner {
-        margin: 0;
+        margin: 0 !important;
     }
     .carousel .item .object {
         padding-top: 0;

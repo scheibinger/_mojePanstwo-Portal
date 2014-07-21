@@ -326,6 +326,7 @@
 					
 				</div>
 				
+				<? if( $liczba_czesci<=1 ) {?>
 				<div class="block">
                     <div class="block-header">
 	                    <h2 class="pull-left label">Przedmiot zamówienia</h2>
@@ -334,6 +335,8 @@
                         <div class="textBlock"><?php echo( nl2br($details['przedmiot']) ); ?></div>
                     </div>
                 </div>
+                <?}?>
+                
 				<?}?>
 				
 				<?

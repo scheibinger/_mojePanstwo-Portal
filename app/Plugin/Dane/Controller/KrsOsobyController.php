@@ -13,9 +13,21 @@ class KrsOsobyController extends DataobjectsController
         'hlFields' => array(),
     );
 
+	public $initLayers = array('powiazania');
+	
     public function view()
     {
         parent::view();
-        $this->object->loadLayer('organizacje');
+        $powiazania = $this->object->getLayer('powiazania', 'organizacje');
+        
+        if(
+        	isset( $powiazania['posel_id'] ) && 
+        	$powiazania['posel_id'] 
+        ) {
+	        
+	        return $this->redirect('/dane/poslowie/' . $powiazania['posel_id'] . '/finanse');
+	        
+        }
+        
     }
 }

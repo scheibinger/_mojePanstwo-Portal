@@ -17,6 +17,7 @@ view-kolejelinie.css
 view-kolejestacje.css
 view-krsosoby.css
 view-krspodmioty.css
+view-legislacja.css
 view-miejscowosci.css
 view-poslowie.css
 view-radnigmin.css
@@ -27,6 +28,7 @@ view-sejmglosowania.css
 view-sejminterpelacje.css
 view-sejmkomunikaty.css
 view-sejmposiedzenia.css
+view-sejmposiedzenia-databrowser-fix.css
 view-sejmposiedzeniapunkty.css
 view-sejmwystapienia.css
 view-sporzeczenia.css

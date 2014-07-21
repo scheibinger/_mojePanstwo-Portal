@@ -16,6 +16,8 @@ class DataobjectsBrowserComponent extends Component
     public $hlFields = false;
     public $hlFieldsPush = false;
     public $routes = array();
+    public $inline = false;
+    public $limit = 20;
 
     public $excludeFilters = array();
 
@@ -61,7 +63,13 @@ class DataobjectsBrowserComponent extends Component
 
         if (isset($settings['routes']))
             $this->routes = $settings['routes'];
-
+            
+        if (isset($settings['routes']))
+            $this->routes = $settings['routes'];
+            
+        if (isset($settings['limit']))
+            $this->limit = max(min($settings['limit'], 100), 0);
+				
         $add_source_params = array();
         $source_params = array();
 
@@ -238,9 +246,6 @@ class DataobjectsBrowserComponent extends Component
         }
 
 
-        foreach ($conditions as $key => &$cond)
-            if (preg_match('/data_/', $key) && $cond)
-                $cond = preg_replace('/\:/', '\:', CakeTime::toAtom($cond));
 
 
         if ($this->mode == 'dataset') {
@@ -304,8 +309,7 @@ class DataobjectsBrowserComponent extends Component
                 $filters = $_filters;
 
             }
-
-
+			
         } elseif ($this->mode == 'datachannel') {
 
 
@@ -389,13 +393,14 @@ class DataobjectsBrowserComponent extends Component
         // ŁADOWANIE OBIEKTÓW
         // $controller->Dataobject = ClassRegistry::init('Dane.Dataobject');		
         $controller->loadModel('Dane.Dataobject');
-
+		
 
         $queryData = array(
             'q' => $q,
             'conditions' => $conditions,
             'paramType' => 'querystring',
             'facets' => true,
+            'limit' => $this->limit,
         );
 
 

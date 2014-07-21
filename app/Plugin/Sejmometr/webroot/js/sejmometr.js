@@ -1,190 +1,73 @@
-jQuery(document).ready(function () {
-    if ((timelineEmbed = jQuery("#timeline-embed")).length > 0) {
-        createStoryJS({
-            start_at_end: true,
-            width: "100%",
-            height: '500',
-            source: '/sejmometr/posiedzenia_timeline.json',
-            embed_id: 'timeline-embed',
-            css: '/plugins/TimelineJS/build/css/timeline-2rows.css',
-            js: '/plugins/TimelineJS/build/js/timeline-2rows.js',
-            lang: _mPHeart.language.twoDig
-        });
-
-        $(window).on('DATAREADY', function () {
-            var vcoNavigation = jQuery('.vco-navigation');
-
-            vcoNavigation.on("UPDATE", function () {
-                if (window.timelinejs_current_slide !== null)
-                    prepare_slide(window.timelinejs_current_slide);
-            });
-
-            vcoNavigation.on("LOADED", function () {
-                if (window.timelinejs_current_slide !== null)
-                    prepare_slide(window.timelinejs_current_slide);
-            });
-
-        });
-    }
-
-    if (jQuery('#sejm_projekty_chart').length > 0) {
-        $.ajax({
-            url: '/sejmometr/autorzy_projektow.json',
-            type: 'GET',
-            async: true,
-            dataType: "json",
-            success: function (data) {
-                displayChart(data);
-            }
-        });
-    }
-});
-
-var prepare_slide = function (current_slide) {
-    var slide_div = jQuery('.slider-item-container').children()[ current_slide ];
-    if (!slide_div.hasClass('prepared')) {
-        slide_div.addClass('prepared');
-
-        var title_element = jQuery(jQuery('.slider-item-container').children()[63]).find('h3');
-        var title_element_text = title_element.text();
-
-        if (title_element_text[0] == '#') {
-            // podmieniamy tytuł
-        }
-    }
-};
-
-function displayChart(data) {
-    var colors = Highcharts.getOptions().colors,
-        mainData = {
-            const: {
-                name: '',
-                colors: Highcharts.getOptions().colors,
-                total: 0
+function graphPoslankiPoslowie() {
+    jQuery('#sejmometr').find('.poslowieGraphCircle li > .graph .graphInner').each(function () {
+        var that = jQuery(this);
+        that.highcharts({
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false
             },
-            kategoriaData: [
-                {
-                    name: 'Poselskie',
-                    count: 0,
-                    color: colors[4]
-                },
-                {
-                    name: 'Komisyjne',
-                    count: 0,
-                    color: colors[1]
-                },
-                {
-                    name: 'Rządowe',
-                    count: 0,
-                    color: colors[3]
-                },
-                {
-                    name: 'Inne',
-                    count: 0,
-                    color: colors[2]
-                }
-            ],
-            autorzyRawData: {
-                poselskie: [],
-                komisyjne: [],
-                rzadowe: [],
-                inne: []
-            },
-            autorzyData: []
-        };
-
-    for (var i = 0; i < data.length; i++) {
-        var brightness = 0.2 - (i / data.length) / 5,
-            collectInnerData, collectOuterData;
-
-        if (data[i].typ_id == '1') {
-            collectInnerData = mainData.kategoriaData[0];
-            collectOuterData = mainData.autorzyRawData.poselskie;
-        } else if (data[i].typ_id == '2') {
-            collectInnerData = mainData.kategoriaData[1];
-            collectOuterData = mainData.autorzyRawData.komisyjne;
-        } else if (data[i].typ_id == '3') {
-            collectInnerData = mainData.kategoriaData[2];
-            collectOuterData = mainData.autorzyRawData.rzadowe;
-        } else if (data[i].typ_id == '4') {
-            collectInnerData = mainData.kategoriaData[3];
-            collectOuterData = mainData.autorzyRawData.inne;
-        }
-
-        mainData.const.total += Number(data[i].count);
-
-        collectInnerData.count += Number(data[i].count);
-
-        collectOuterData.push({
-            name: data[i].nazwa,
-            count: Number(data[i].count),
-            color: Highcharts.Color(collectInnerData.color).brighten(brightness).get()
-        });
-    }
-
-    for (var j = 0; j < mainData.kategoriaData.length; j++) {
-        mainData.kategoriaData[j].y = Math.round(((mainData.kategoriaData[j].count / mainData.const.total) * 100) * 100) / 100;
-    }
-
-    jQuery.each(mainData.autorzyRawData, function () {
-        for (var k = 0; k < this.length; k++) {
-            mainData.autorzyData.push({
-                name: this[k].name,
-                count: this[k].count,
-                y: Math.round(((this[k].count / mainData.const.total) * 100) * 100) / 100,
-                color: this[k].color
-            });
-        }
-    });
-
-    jQuery('#sejm_projekty_chart').highcharts({
-        chart: {
-            type: 'pie',
-            height: 600
-        },
-        title: {
-            text: mainData.const.name
-        },
-        yAxis: {
             title: {
-                text: ''
-            }
-        },
-        plotOptions: {
-            pie: {
-                shadow: false,
-                center: ['50%', '50%']
-            }
-        },
-        tooltip: {
-            pointFormat: 'Ilość projektów: <b>{point.count}</b>'
-        },
-        series: [
-            {
-                name: 'Kategoria',
-                data: mainData.kategoriaData,
-                size: '60%',
-                dataLabels: {
-                    formatter: function () {
-                        return this.y > 5 ? this.point.name : null;
-                    },
-                    color: 'white',
-                    distance: -50
-                }
+                text: ' '
             },
-            {
-                name: 'Autorzy',
-                data: mainData.autorzyData,
-                size: '80%',
-                innerSize: '60%',
-                dataLabels: {
-                    formatter: function () {
-                        // display only if larger than 1
-                        return this.y > 1 ? '<b>' + this.point.name + ':</b> ' + this.point.count : null;
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: false
                     }
                 }
+            },
+            series: [
+                {
+                    type: 'pie',
+                    name: 'Ilość[%]:',
+                    data: that.data('setup'),
+                    innerSize: '40%'
+                }
+            ]
+        }, function (chart) {
+            var img = new Image();
+            img.src = that.data('logo');
 
-            }
-        ]
+            var imgWidthCheck = (img.width > Math.floor(that.width() * .4)) ? img.width - Math.floor(that.width() * .4) + 10 : 0;
+            var imgHeightCheck = (img.height > Math.floor(that.height() * .4)) ? img.height - Math.floor(that.height() * .4) + 10 : 0;
+            var imgResize = (imgWidthCheck > imgHeightCheck) ? imgWidthCheck : imgHeightCheck;
+
+            chart.renderer.image(that.data('logo'), (that.width() / 2) - ((img.width - imgResize) / 2), (that.height() / 2) - ((img.height - imgResize) / 2), (img.width - imgResize), (img.height - imgResize)).add();
+        });
     });
-};
+}
+
+jQuery(document).ready(function () {
+    var $sideMenu = $('.sideMenu > ul'),
+        ajaxQueue = jQuery({});
+
+    $sideMenu.css('width', $sideMenu.width()).affix({
+        offset: {
+            top: function () {
+                return this.top = Math.floor($('.sideMenu').position().top) - $('header').outerHeight(true);
+            }
+        }
+    });
+
+    $('body').scrollspy({ target: '.sideMenu' })
+
+
+    graphPoslankiPoslowie();
+
+    jQuery.ajaxQueue = function (ajaxOpts) {
+        var oldComplete = ajaxOpts.complete;
+
+        ajaxQueue.queue(function (next) {
+            ajaxOpts.complete = function () {
+                if (oldComplete) {
+                    oldComplete.apply(this, arguments);
+                }
+                next();
+            };
+            jQuery.ajax(ajaxOpts);
+        });
+    };
+});

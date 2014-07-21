@@ -1,5 +1,7 @@
 <?php echo $this->Element('notlogged'); ?>
 
+<?php $this->Combinator->add_libs('css', $this->Less->css('login_page')) ?>
+
 <?php echo $this->Session->flash('flash', array('element' => 'alert')); ?>
 <?php echo $this->Session->flash('auth', array('element' => 'alert')); ?>
 

@@ -8,12 +8,14 @@ class ZamowieniaPubliczneController extends DataobjectsController
     public $objectOptions = array(
         'hlFields' => array('status_id', 'tryb_id', 'rodzaj_id'),
     );
+    
+    public $initLayers = array('details', 'sources', 'czesci');
 
     public function view()
     {
 		
         parent::view();
-        $_details = $this->object->loadLayer('details');
+        $_details = $this->object->getLayer('details');
         $details = array();
         $text_details = array();
         
@@ -50,20 +52,6 @@ class ZamowieniaPubliczneController extends DataobjectsController
         
         $this->set('details', $details);
         $this->set('text_details', $text_details);
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        $this->object->loadLayer('sources');
-        $this->object->loadLayer('czesci');
         
     }
 } 

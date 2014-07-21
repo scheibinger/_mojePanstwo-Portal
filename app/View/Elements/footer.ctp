@@ -7,7 +7,7 @@
     </div>
 <?php } ?>
 <footer>
-    <div>
+    <div class="container">
         <div class="col-lg-4 pull-left">
             <?php echo $this->Html->link(__('LC_FOOTER_ABOUT_US'), '/oportalu', array('target' => '_self')); ?>
             <span class="separator">|</span>

@@ -4,23 +4,24 @@
     <title><?= htmlspecialchars(strip_tags($title_for_layout)) ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php echo $this->Html->meta('favicon.ico', '/img/favicon/fav.ico', array('type' => 'icon')); ?>
-    <link rel="apple-touch-icon" href="/img/favicon/apple-touch-icon.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="/img/favicon/apple-touch-icon-72x72.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="/img/favicon/apple-touch-icon-114x114.png">
+    <?php echo $this->Html->meta('favicon.ico', '/img/favicon/apple-touch-icon.ico', array('type' => 'icon', 'rel' => 'apple-touch-icon')); ?>
+    <?php echo $this->Html->meta('favicon.ico', '/img/favicon/apple-touch-icon-72x72.ico', array('type' => 'icon', 'rel' => 'apple-touch-icon', 'sizes' => '72x72')); ?>
+    <?php echo $this->Html->meta('favicon.ico', '/img/favicon/apple-touch-icon-114x114.ico', array('type' => 'icon', 'rel' => 'apple-touch-icon', 'sizes' => '114x114')); ?>
+
     <?php
     echo $this->Html->meta(array('property' => 'og:url', 'content' => Router::url($this->here, true)));
     echo $this->Html->meta(array('property' => 'og:type', 'content' => 'website'));
     echo $this->Html->meta(array('property' => 'og:title', 'content' => strip_tags($title_for_layout)));
     echo $this->Html->meta(array('property' => 'og:description', 'content' => strip_tags(__('LC_MAINHEADER_TEXT'))));
-    echo $this->Html->meta(array('property' => 'og:image', 'content' => FULL_BASE_URL .
-        '/img/favicon/facebook-400x400.png'));
+    echo $this->Html->meta(array('property' => 'og:image', 'content' => FULL_BASE_URL . '/img/favicon/facebook-400x400.png'));
     echo $this->Html->meta(array('property' => 'fb:admins', 'content' => '100000234760647'));
     echo $this->Html->meta(array('property' => 'fb:admins', 'content' => '100000078295509'));
     echo $this->Html->meta(array('property' => 'fb:admins', 'content' => '616010705'));
     echo $this->Html->meta(array('property' => 'fb:app_id', 'content' => FACEBOOK_appId));
 
     echo $this->Html->css('//fonts.googleapis.com/css?family=Lato:200,300,400,700,900,400italic');
-    echo $this->Html->css('//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/ui-darkness/jquery-ui.min.css');
+
+    echo $this->Html->css('../libs/jqueryui/1.11.0/cupertino/jquery-ui.min.css');
 
     $this->Combinator->add_libs('css', $this->Less->css('jquery/jquery-ui-customize'), false);
     $this->Combinator->add_libs('css', $this->Less->css('statusbar'), false);
@@ -37,11 +38,11 @@
     echo $this->Html->css('../plugins/bootstrap-switch/bootstrap-switch.css');
 
     /* SOCIAL BUTTONS */
-    echo $this->Html->css('//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css');
+    echo $this->Html->css('../libs/font-awesome/4.1.0/css/font-awesome.min.css');
     $this->Combinator->add_libs('css', $this->Less->css('social-buttons'), false);
 
     /* HAD TO BE EXCLUDED CAUSE ERRORS AT BOOTSTRAP */
-    echo $this->Html->css('//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css');
+    echo $this->Html->css('../libs/bootstrap/3.1.1/css/bootstrap.min.css');
     echo $this->Combinator->scripts('css');
 
     /* BLOCK FOR SPECIAL STYLES THAT CANNOT BE MERGE TO ONE FILE*/
@@ -49,7 +50,7 @@
 
     /* ENHANCE SCRIPTS */
     echo $this->Html->script('enhance');
-    
+
     /* VIEW SPECIFIC HEAD */
     echo $scripts_for_layout;
     ?>
@@ -130,11 +131,11 @@
 </script>
 
 <?php
-echo $this->Html->script('//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js');
-echo $this->Html->script('//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js');
-echo $this->Html->script('//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/i18n/jquery-ui-i18n.min.js');
+echo $this->Html->script('../libs/jquery/2.1.1/jquery.min.js');
+echo $this->Html->script('../libs/jqueryui/1.10.4/js/jquery-ui.min.js');
+echo $this->Html->script('../libs/jqueryui/1.10.4/development-bundle/ui/minified/i18n/jquery-ui-i18n.min.js');
 
-echo $this->Html->script('//netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js');
+echo $this->Html->script('../libs/bootstrap/3.1.1/js/bootstrap.min.js');
 
 /* PACKAGES FROM VENDOR */
 echo $this->Html->script('../plugins/browserstate/history.js/scripts/bundled/html4+html5/jquery.history.js');

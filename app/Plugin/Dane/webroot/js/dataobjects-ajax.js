@@ -119,6 +119,7 @@ var DataObjectesAjax = {
             'dateFormat': 'yy-mm-dd',
             'changeMonth': true,
             'changeYear': true,
+            'yearRange': "1900:" + new Date().getFullYear(),
             'onSelect': function (date) {
                 var that = this,
                     there = jQuery(that),

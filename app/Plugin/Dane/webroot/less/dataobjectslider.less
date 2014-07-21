@@ -47,7 +47,15 @@
                     }
 
                 }
-
+				
+				.slide_header {
+					.label {
+						background-color: #D9EDF7;
+						color: #666666;
+						font-weight: normal;
+					}
+				}
+				
                 .data {
                     padding-left: 0;
                 }
@@ -68,15 +76,31 @@
                     padding-right: 5px;
                     padding-left: 5px;
                 }
-
-                .dataHighlight {
-                    ._label {
-                        display: none;
-                    }
+				
+				.dataHighlights {
+					
+					padding: 0;
+                    margin-top: 0;
+					
+	                .dataHighlight {
+	                    	                    
+	                    ._label {
+	                        display: none;
+	                    }
+	                    
+	                    &.showLabels {
+	                    	._label {
+			                    display: block;
+			                }
+	                    }
+	                    
+	                }
                 }
 
                 .description {
                     padding: 5px;
+                    line-height: 1.2em;
+                    font-size: 14px;
                 }
             }
 

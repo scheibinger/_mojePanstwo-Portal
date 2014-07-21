@@ -10,6 +10,7 @@ class SejmGlosowaniaController extends DataobjectsController
             'label' => 'LC_INDYWIDUALNE_WYNIKI_GLOSWANIA',
         ),
     );
+	public $breadcrumbsMode = 'app';
 
     public function view()
     {

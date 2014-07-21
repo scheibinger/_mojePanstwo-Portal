@@ -77,7 +77,7 @@ $this->Dataobject->setObject($object);
                             <?php if ($object->getUrl() != false) { ?>
                             <a href="<?= $object->getUrl() ?>" title="<?= strip_tags($object->getTitle()) ?>">
                                 <?php } ?>
-                                <?= $shortTitle ?>
+                                <?= $this->Text->truncate($shortTitle, 200) ?>
                                 <?php if ($object->getUrl() != false) { ?>
                             </a> <?
                         }
@@ -142,6 +142,12 @@ $this->Dataobject->setObject($object);
                         else
                             echo $this->Dataobject->highlights($hlFields, $hlFieldsPush);
                         ?>
+                        
+                        <? if( $object->getDescription() ){?>
+                        <div class="description">
+                        	<?= $this->Text->truncate($object->getDescription(), 250) ?>
+                        </div>
+                        <?}?>
 
                     </div>
                 <? } ?>

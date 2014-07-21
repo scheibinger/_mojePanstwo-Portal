@@ -5,6 +5,7 @@ class AppExceptionRenderer extends ExceptionRenderer
 {
     public function render()
     {
+    	    	
         if ($this->error instanceof MP\ApiConnectionException) {
             $url = $this->controller->request->here();
             $code = 500;
@@ -19,9 +20,19 @@ class AppExceptionRenderer extends ExceptionRenderer
             $this->template = str_replace('mP\\', 'mp/', $this->template);
             $this->_outputMessage($this->template);
 
+        } elseif( $this->error instanceof MissingControllerException ) {
+            
+            if( is_numeric($this->controller->request->params['action']) ) {
+	            
+	            $url = '/dane' . $this->controller->request->here();
+	            $this->controller->redirect( $url );
+	            
+            } else return parent::render();
+            
         } else {
-            parent::render();
+        
+            return parent::render();
+        
         }
     }
-
 }

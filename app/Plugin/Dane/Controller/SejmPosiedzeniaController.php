@@ -15,7 +15,9 @@ class SejmPosiedzeniaController extends DataobjectsController
     public $objectOptions = array(
         'bigTitle' => true,
     );
-	
+
+	public $breadcrumbsMode = 'app';
+
 	public $hlmap = array(
 		array(
 			'id' => 'liczba_wystapien',
@@ -117,67 +119,64 @@ class SejmPosiedzeniaController extends DataobjectsController
 	);
 	
 	
+	public function beforeRender()
+	{
+		
+        // PREPARE MENU		
+		$href_base = '/dane/sejm_posiedzenia/' . $this->request->params['id'] . '/';
+        
+        $menu = array(
+            'items' => array(
+	            array(
+	            	'id' => '',
+	                'href' => $href_base,
+	                'label' => 'Rozpatrywane projekty',
+	            ),
+	            array(
+	            	'id' => 'punkty',
+	                'href' => $href_base . 'punkty',
+	                'label' => 'Punkty porządku dziennego',
+	            ),
+	            array(
+	            	'id' => 'wystapienia',
+	                'href' => $href_base . 'wystapienia',
+	                'label' => 'Wystąpienia',
+	            ),
+	            array(
+	            	'id' => 'glosowania',
+	                'href' => $href_base . 'glosowania',
+	                'label' => 'Głosowania',
+	            ),
+            ),
+            'selected' => ( $this->request->params['action'] == 'view' ) ? '' : $this->request->params['action'],
+        );
+        
+        $this->set('_menu', $menu);
+		
+	}
+	
 	
     public function view()
     {
+				
+        parent::view();
+		$this->object->loadLayer('projekty');
+
+    }
+    
+    public function punkty()
+    {
 
         parent::view();
-
-
-
-
-        // PREPARING HIGHLIGHTS TABLE
-
-        $hldata = array();
-        foreach( $this->hlmap as $item )
-        {
-            if( $this->object->getData( $item['id'] ) )
-            {
-
-                $options = array(
-                    'type' => 'integer',
-                );
-
-                if( isset($item['href']) && $item['href'] )
-                    $options['link'] = array(
-                        'href' => '/dane/sejm_posiedzenia/' . $this->object->getId() . '/' . $item['href'],
-                    );
-
-                $hldata[] = array(
-                    'id' => $item['id'],
-                    'label' => $item['label'],
-                    'value' => $this->object->getData( $item['id'] ),
-                    'options' => $options,
-                );
-            }
-        }
-
-
-
-
-        // PREPARE MENU
-
-        $menu = array(
-            array(
-                'id' => 'punkty',
-                'label' => 'Punkty porządku dziennego',
-            ),
-        );
-
-
 
         $this->API->searchDataset('sejm_posiedzenia_punkty', array(
             'limit' => 100,
             'conditions' => array(
                 'posiedzenie_id' => $this->object->getId(),
             ),
+            'order' => 'numer asc',
         ));
         $this->set('punkty', $this->API->getObjects());
-
-
-
-        $this->set('hldata', $hldata);
-        $this->set('_menu', $menu);
 
     }
 
@@ -209,28 +208,5 @@ class SejmPosiedzeniaController extends DataobjectsController
         ));
         
     }
-
-    public function punkty()
-    {
-
-        parent::view();
-        $this->dataobjectsBrowserView(array(
-            'source' => 'sejm_posiedzenia.punkty:' . $this->object->getId(),
-            'dataset' => 'sejm_posiedzenia_punkty',
-            'title' => 'Punkty porządku dziennego',
-            'noResultsTitle' => 'Brak punktów porządku',
-            'hlFields' => array('numer', 'liczba_debat', 'liczba_wystapien', 'liczba_glosowan'),
-            'order' => 'numer asc',
-        ));
-
-    }
-    
-    public function projekty()
-    {
-	    
-	    return $this->related();
-	    
-    }
-
 
 } 

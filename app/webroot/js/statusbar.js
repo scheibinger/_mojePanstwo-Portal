@@ -337,11 +337,8 @@ var _mojePanstwoCockpitSlider = {
             }, 1000, function () {
                 jQuery('._mojePanstwoCockpitLogo.firstTime .morph').remove();
             });
-            jQuery('._mojePanstwoCockpitLogo.firstTime > img').animate({
-                opacity: 1
-            }, 1000);
             jQuery('._mojePanstwoCockpitLogo.firstTime').animate({
-                'width': '155px'
+                'width': '140px'
             }, 1100, function () {
                 jQuery('._mojePanstwoCockpitLogo.firstTime').removeClass('firstTime')
             })

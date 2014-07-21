@@ -84,7 +84,8 @@ class DataobjectHelper extends AppHelper
         $routes = isset($options['routes']) ? $options['routes'] : array();
         $forceLabel = isset($options['forceLabel']) ? $options['forceLabel'] : false;
         $file = isset($options['file']) ? $options['file'] : false;
-
+        $titleTag = isset($options['titleTag']) ? $options['titleTag'] : 'h1';
+        
 		$class = isset($options['class']) ? $options['class'] : false;
 		$alertsButtons = isset($options['alertsButtons']) ? $options['alertsButtons'] : false;
 		$alertsStatus = isset($options['alertsStatus']) ? $options['alertsStatus'] : false;
@@ -118,11 +119,12 @@ class DataobjectHelper extends AppHelper
             'class' => $class,
             'alertsButtons' => $alertsButtons,
             'alertsStatus' => $alertsStatus,
+            'titleTag' => $titleTag,
         );
         return $this->_View->element($theme, $params, array('plugin' => 'Dane'));
     }
 
-    public function highlights($fields = false, $fieldsPush = false)
+    public function highlights($fields = false, $fieldsPush = false, $options = array())
     {
         $output = '';
         $fields = $this->object->getHiglightedFields($fields, $fieldsPush);
@@ -144,7 +146,8 @@ class DataobjectHelper extends AppHelper
                 $col_width = 2;
 
             $output .= '<div class="row dataHighlights dimmed';
-            if ($col_width >= 4)
+            
+            if ( ($col_width >= 4) || ( isset($options['inl']) && $options['inl'] ) )
                 $output .= ' inl';
             $output .= '">';
 

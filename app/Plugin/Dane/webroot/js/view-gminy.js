@@ -72,11 +72,14 @@ $(document).ready(function () {
         banner.find('.bg img').css('width', banner.width() + 'px');
 
         /*ASYNCHRONIZE ACTION FOR GOOGLE MAP*/
+        
         window.onload = loadScript();
 
+        /*
         banner.find('.bg .btn').click(function () {
             banner.find('.bg').fadeOut()
         });
+        */
     }
 
     /*STICKY MENU*/
@@ -115,4 +118,67 @@ $(document).ready(function () {
             }
         }
     }).scroll();
+});
+
+
+$(function () {
+    
+    if( !wyniki_wyborow )
+    	return false;
+    	
+    var data = [];
+    for( var i=0; i<wyniki_wyborow.length; i++ ) {
+	    
+	    var d = wyniki_wyborow[i];
+	    data.push([d['nazwa'], Number( wyniki_wyborow[i][0]['count'] )]);
+	    
+    }
+       
+    $('#komitety_chart').highcharts({
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false,
+            height: 120
+        },
+        title: {
+            text: null
+        },
+        tooltip: {
+    	    pointFormat: '{series.name}: <b>{point.y}</b>'
+        },
+        plotOptions: {
+            pie: {
+            	size: 70,
+                allowPointSelect: true,
+                cursor: 'pointer',
+                center: ["50%", "80%"],
+                dataLabels: {
+                    enabled: true,
+                    format: '{point.name}: <b>{point.y}</b>',
+                    style: {
+                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                    }
+                }
+            },
+            series: {
+                cursor: 'pointer',
+                point: {
+                    events: {
+                        click: function() {
+                            location.href = this.options.url;
+                        }
+                    }
+                }
+            }
+        },
+        credits: {
+	        enabled: false
+        },
+        series: [{
+	        type: 'pie',
+	        name: 'Liczba radnych',
+	        data: data
+	    }]
+    });
 });

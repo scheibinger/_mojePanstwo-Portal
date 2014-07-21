@@ -3,13 +3,25 @@ $path = App::path('Plugin');
 $file = $path[0] . '/Dane/View/Elements/' . $theme . '/' . $object->getDataset() . '.ctp';
 $file_exists = file_exists($file);
 
-if (in_array($object->getDataset(), array('rady_posiedzenia', 'rady_gmin_debaty', 'rady_gmin_wystapienia'))) {
+if (in_array($object->getDataset(), array('rady_posiedzenia'))) {
     $object_content_sizes = array(3, 9);
 } else {
     $object_content_sizes = array(2, 10);
 }
 
 $this->Dataobject->setObject($object);
+
+if( ($object->getDataset()=='gminy') && ($object->getId()=='903') ) {
+	
+	echo $this->element('Dane.przejrzystykrakow_header', array(
+		'item' => $item,
+		'object_content_sizes' => $object_content_sizes,
+		'titleTag' => $titleTag,
+		'bigTitle' => $bigTitle,
+		'thumbSize' => $thumbSize,
+	));
+	
+} else {
 ?>
 <div class="objectRender col-md-12 <?php echo $object->getDataset(); ?>" oid="<?php echo $item['data']['id'] ?>">
     <div class="row">
@@ -37,7 +49,7 @@ $this->Dataobject->setObject($object);
                         </p>
 
                         <? if ($object->getShortTitle()) { ?>
-                            <h1 class="title trimTitle<? if ($bigTitle) { ?> big<? } ?>"
+                            <<?= $titleTag ?> class="title trimTitle<? if ($bigTitle) { ?> big<? } ?>"
                                 title="<?= htmlspecialchars($object->getShortTitle()) ?>"
                                 data-trimlength="200">
                                 <?php if (($object->getUrl() != false) && !empty($this->request)) { ?>
@@ -47,7 +59,7 @@ $this->Dataobject->setObject($object);
                                     <?php if (($object->getUrl() != false) && !empty($this->request)) { ?>
                                 </a> <? if ($object->getTitleAddon()) echo '<small>' . $object->getTitleAddon() . '</small>'; ?>
                             <?php } ?>
-                            </h1>
+                            </<?= $titleTag ?>>
                         <? } ?>
 
                         <?
@@ -72,8 +84,8 @@ $this->Dataobject->setObject($object);
                         <p class="header">
                             <?= $object->getLabel(); ?>
                         </p>
-
-                        <h1 class="title<? if ($bigTitle) { ?> big<? } ?>">
+						
+                        <<?= $titleTag ?> class="title<? if ($bigTitle) { ?> big<? } ?>">
                             <?php if ($object->getUrl() != false){ ?>
                             <a class="trimTitle" href="<?= $object->getUrl() ?>"
                                title="<?= strip_tags($object->getTitle()) ?>">
@@ -82,7 +94,7 @@ $this->Dataobject->setObject($object);
                                 <?php if ($object->getUrl() != false){ ?>
                             </a> <? if ($object->getTitleAddon()) echo '<small>' . $object->getTitleAddon() . '</small>'; ?>
                         <?php } ?>
-                        </h1>
+                        </<?= $titleTag ?>>
                         <?
                         if ($file_exists)
                             echo $this->element('Dane.' . $theme . '/' . $object->getDataset(), array(
@@ -105,3 +117,5 @@ $this->Dataobject->setObject($object);
         </div>
     </div>
 </div>
+
+<? } ?>

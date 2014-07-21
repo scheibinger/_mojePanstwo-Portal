@@ -14,6 +14,8 @@ class RadniGminController extends DataobjectsController
     {
         parent::view();
         
+        $this->redirect('/dane/gminy/' . $this->object->getData('gmina_id') . '/radni/' . $this->object->getId());
+        
         $this->API->searchDataset('rady_gmin_wystapienia', array(
             'limit' => 12,
             'conditions' => array(

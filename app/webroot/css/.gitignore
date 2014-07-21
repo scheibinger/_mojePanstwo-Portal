@@ -1,12 +1,3 @@
-about_us.css
-contact_us.css
-flatly.css
-home.css
-htmlexDocMain.css
-main.css
-missing.css
-regulations.css
-report_bug.css
-searchbar.css
-social-buttons.css
-statusbar.css
+!about_us.css
+!cake.generic.css
+*.css

@@ -2,16 +2,16 @@
     <? if ($group['mode'] == 'tags') { ?>
         <ul id="tagsCloud">
             <?
-            foreach ($stats['tags'] as $tag) {
-                $href = '/dane/twitter/?!bez_retweetow=1&tags[]=' . $tag['id'];
+            foreach ($stats['tags']['*']['objects'] as $tag) {
+                $href = '/dane/twitter/?!bez_retweetow=1&tags[]=' . $tag['id'] . '&date=LAST_' . $range;
                 ?>
-                <li style="font-size: <?= $tag['size'] ?>px;"><a href="<?= $href ?>"><?= $tag['tag'] ?></a></li>
+                <li style="font-size: <?= $tag['size'] ?>px;"><a href="<?= $href ?>"><?= $tag['name'] ?></a></li>
             <? } ?>
         </ul>
     <? } else { ?>
         <? foreach ($group['types'] as $type) { ?>
             <div class="col-md-2 rank-col">
-                <h4 class="label label-<?= $type['class'] ?>"><a href="/dane/twitter_accounts/?typ_id[]=<?= $type['id'] ?>"><?= $type['title'] ?></a></h4>
+                <h4 class="label label-<?= $type['class'] ?>"><a href="/dane/twitter_accounts/?typ_id[]=<?= $type['id'] ?>"><?= $type['nazwa'] ?></a></h4>
                 <? include('mode.ctp'); ?>
             </div>
         <? } ?>
