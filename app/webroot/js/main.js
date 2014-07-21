@@ -237,11 +237,17 @@ jQuery.extend(jQuery.ui.dialog.prototype.options, {
         trimTitle();
 
     /*GLOBAL MODAL FOR LOGIN VIA PASZPORT PLUGIN*/
-    if ((modalPaszportLoginForm = $('#modalPaszportLoginForm')).length > 0)
+    if ((modalPaszportLoginForm = $('#modalPaszportLoginForm')).length > 0) {
         $('#_mojePanstwoCockpit').find('a._mojePanstwoCockpitPowerButton._mojePanstwoCockpitIcons-login').click(function (e) {
             e.preventDefault();
             modalPaszportLoginForm.modal('show');
         });
+        /*SPECIAL CLASS TO POP UP LOGIN BUTTON FOR SPECIAL CASE*/
+        $('._specialCaseLoginButton').click(function (e) {
+            e.preventDefault();
+            modalPaszportLoginForm.modal('show');
+        });
+    }
 
     /*GLOBAL BOOTSTRAP-SELECT FORM SELECTPICKER CLASS*/
     if ((selectPickers = $('.selectpicker')).length > 0)
