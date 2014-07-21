@@ -5,31 +5,23 @@
             <div class="row">
 
                 <div class="attachment col-md-3 text-center">
-                    <?php if ($object->getUrl() != false) { ?>
-                    <a class="thumb_cont" href="<?= $object->getUrl() ?>">
-                        <?php } ?>
+                    <a class="thumb_cont" href="http://przejrzystykrakow.pl">
                         <img class="thumb" onerror="imgFixer(this)" src="/dane/img/customObject/krakow/logo_pkrk.jpg"
                              alt="<?= strip_tags($object->getTitle()) ?>"/>
-                        <?php if ($object->getUrl() != false) { ?>
                     </a>
-                <?php } ?>
                 </div>
                 <div class="content col-md-9">
 
                     <<?= $titleTag ?> class="title trimTitle<? if ($bigTitle) { ?> big<? } ?>"
                         title="<?= htmlspecialchars($object->getShortTitle()) ?>"
                         data-trimlength="200">
-                        <?php if (($object->getUrl() != false) && !empty($this->request)) { ?>
-                        <a href="<?= $object->getUrl() ?>" title="<?= strip_tags($object->getTitle()) ?>">
-                            <?php } ?>
+                        <a href="http://przejrzystykrakow.pl" title="<?= strip_tags($object->getTitle()) ?>">
                             Przejrzysty Kraków
-                            <?php if (($object->getUrl() != false) && !empty($this->request)) { ?>
                         </a>
-                    <?php } ?>
                     </<?= $titleTag ?>>
                     
                     <p class="header">
-                        Program Przejrzysty Kraków, prowadzony przez <a href="/dane/krs_podmioty/325617">Fundację Stańczyka</a>, ma na celu wieloaspektowy monitoring życia publicznego w Krakowie. W ramach programu prowadzony jest obecnie monitoring Rady Miasta i Dzielnic Krakowa.
+                        Program Przejrzysty Kraków, prowadzony przez <a href="http://mojepanstwo.pl/dane/krs_podmioty/325617">Fundację Stańczyka</a>, ma na celu wieloaspektowy monitoring życia publicznego w Krakowie. W ramach programu prowadzony jest obecnie monitoring Rady Miasta i Dzielnic Krakowa.
                     </p>
                     
                 </div>
