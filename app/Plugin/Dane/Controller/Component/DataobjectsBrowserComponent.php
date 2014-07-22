@@ -251,13 +251,17 @@ class DataobjectsBrowserComponent extends Component
             $conditions['dataset'] = $this->tag;
 
 
-            $dataset = $controller->API->getDataset($this->tag);
+            $dataset = $controller->API->getDataset($this->tag, array(
+            	'full' => true,
+            ));
+            
+            
             if (!$this->title)
                 $this->title = $dataset['Dataset']['name'];
 
             // ŁADOWANIE SORTOWAŃ
 
-            $orders = array_merge($orders, $controller->API->getDatasetSortings($this->tag));
+            $orders = array_merge($orders, $dataset['orders']);
 
 
             if (empty($orders) || ((count($orders) === 1) && ($orders[0]['sorting']['field'] == 'score')))
@@ -282,7 +286,7 @@ class DataobjectsBrowserComponent extends Component
 
 
             // ŁADOWANIE PRZEŁĄCZNIKÓW
-            $switchers = $controller->API->getDatasetSwitchers($this->tag);
+            $switchers = $dataset['switchers'];
             if ($useDefaults && !empty($switchers)) {
                 foreach ($switchers as $switcher) {
 
@@ -295,7 +299,7 @@ class DataobjectsBrowserComponent extends Component
 
 
             // ŁADOWANIE FILTRÓW
-            $filters = $controller->API->getDatasetFilters($this->tag, true);
+            $filters = $dataset['filters'];
 
             if (!empty($filters)) {
 
@@ -311,11 +315,14 @@ class DataobjectsBrowserComponent extends Component
         } elseif ($this->mode == 'datachannel') {
 
 
-            $datachannel = $controller->API->getDatachannel($this->tag);
+            $datachannel = $controller->API->getDatachannel($this->tag, array(
+            	'full' => true,
+            ));
+            $datachannel = $datachannel['Datachannel'];
             $this->title = $datachannel['Datachannel']['name'];
 
-            $data = $controller->API->getDatachannel($this->tag);
-            $datachannel = $data['Datachannel'];
+            // $data = $controller->API->getDatachannel($this->tag);
+            // $datachannel = $data['Datachannel'];
             $conditions['datachannel'] = $datachannel['slug'];
 
             $title_for_layout = $datachannel['name'];

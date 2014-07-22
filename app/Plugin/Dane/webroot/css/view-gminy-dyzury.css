@@ -1,16 +1,13 @@
 #dyzury ul li {
-    padding: 15px 0;
-    border-bottom: 1px solid #DDD;
+  padding: 15px 0;
+  border-bottom: 1px solid #DDD;
 }
-
 #dyzury ul li:last-child {
-    border-bottom: none;
+  border-bottom: none;
 }
-
 #dyzury ul li .addthisevent-drop {
-    font-size: 12px;
+  font-size: 12px;
 }
-
 #archive_btn_div {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
