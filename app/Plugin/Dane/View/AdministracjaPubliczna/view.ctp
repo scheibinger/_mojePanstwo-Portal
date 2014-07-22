@@ -32,50 +32,61 @@ $buttons = isset($objectOptions['buttons']) ? $objectOptions['buttons'] : array(
 }?>
     <div class="objectPageHeaderContainer">
         <div class="container">
-            <div class="col-md-9">
+            <div class="col-md-10">
                 <div class="objectPageHeader">
-                    
-                    <?
-                    	$nav = $object->getLayer('nav');
-                    	$posiedzenie = $nav['posiedzenie'];
-                    	$punkty = $posiedzenie['punkty'];
-					?>
                     
                     <div id="collapseDVR3" class="panel-collapse collapse in">
 				        <div class="tree ">
-				            <ul>
-				                <li class="posiedzenie"><a href="#"><span>Posiedzenie Sejmu #<?= $posiedzenie['tytul'] ?></span></a>
-				                    <ul>
-				                    <? foreach( $punkty as $punkt ) {?>
-				                        <li class="punkt"><span>Punkt #<?= $punkt['numer'] ?></span> <i><?= $punkt['tytul'] ?></i>
-				                            <ul>
-				                            <?
-				                            	$debaty = $punkt['debaty'];
-				                            	foreach( $debaty as $debata ) {
-				                            		
-													if( $debata['id'] == $object->getId() ) {
-				                            ?>
-						                                <li class="debata active"><p class="label"><span>Debata</i> </span> <? if( $debata['liczba_wystapien'] ) {?><img src="http://resources.sejmometr.pl/stenogramy/subpunkty/<?= $debata['id'] ?>.jpg" /><?}?> <i><?= $debata['opis'] ?></i></p></li>
-						                    <?
-						                    		} else {
-							                ?>
-						                                <li class="debata"><a class="label" href="/dane/sejm_debaty/<?= $debata['id'] ?>"><span>Debata</i> </span> <? if( $debata['liczba_wystapien'] ) {?><img src="http://resources.sejmometr.pl/stenogramy/subpunkty/<?= $debata['id'] ?>.jpg" /><?}?> <i><?= $debata['opis'] ?></i></a></li>					                
-							                <?
-						                    		}
-				                            	}
-				                            ?>
-				                            </ul>
-				                        </li>
-				                    <? } ?>
-				                    </ul>
-				                </li>
-				            </ul>
+				        
+                    <?
+                    	if( $nav = $object->getLayer('nav') ) {
+					?>
+                    
+                    
+					        
+					        
+					        <? foreach( $nav as $n ) { ?>
+					        	<ul>
+						        	<li>
+					        		<a href="/dane/administracja_publiczna/<?= $n['id'] ?>"><span><?= $n['nazwa']; ?></span></a>
+					        
+					        
+					        <? } ?>
+					        	
+					        	<ul>
+					        		<li class="title">
+					        			<a href="/dane/administracja_publiczna/<?= $object->getId() ?>"><?= $object->getTitle() ?></a></p>
+					        		</li>
+					        	</ul>
+					        	
+					        <? foreach( $nav as $n ) { ?>
+					        	
+						        	</li>
+					        	</ul>				        
+					        
+					        <? } ?>
+					        
+					        </ul>
+					        
+					        							
+
+                    
+                    <? } else { ?>
+                    	
+                    	<ul>
+			        		<li class="title alone">
+			        			<a href="/dane/administracja_publiczna/<?= $object->getId() ?>"><?= $object->getTitle() ?></a></p>
+			        		</li>
+			        	</ul>
+                    	
+                    <? } ?>
+                    
 				        </div>
 				    </div>
                     
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-2">
                 <ul class="objectButtons">
                     <? foreach ($buttons as $button) { ?>
                         <li><?=
@@ -213,16 +224,26 @@ $buttons = isset($objectOptions['buttons']) ? $objectOptions['buttons'] : array(
 	            	) { ?>
 	                <div class="block">
 	                    <div class="block-header">
-	                        <h2 class="label">Podległe instytucje</h2>
+	                    	
+	                    	<div class="tree">
+								<ul>
+									<li>
+										<h2 class="label">Podległe instytucje</h2>
+										<?
+							    			echo $this->Element('Dane.objects/administracja_publiczna/list', array(
+									    		'items' => $items,
+									    		'i' => 0,
+									    	));
+									    ?>
+									</li>
+								</ul>
+										
+		                        
+						    
+                        	</div>
+	                    	
 	                    </div>
-	
-	                    <div class="content">
-	                        <?
-				    			echo $this->Element('Dane.objects/administracja_publiczna/list', array(
-						    		'items' => $items,
-						    	));
-						    ?>
-	                    </div>
+	               
 	                </div>
 		            <? } ?>
 	            
@@ -245,15 +266,21 @@ $buttons = isset($objectOptions['buttons']) ? $objectOptions['buttons'] : array(
 	            	) { ?>
 	                <div class="block">
 	                    <div class="block-header">
-	                        <h2 class="label">Instytucje</h2>
-	                    </div>
-	
-	                    <div class="content">
-	                        <?
-				    			echo $this->Element('Dane.objects/administracja_publiczna/list', array(
-						    		'items' => $items,
-						    	));
-						    ?>
+	                    	
+	                    	<div class="tree">
+								<ul>
+									<li>
+										<h2 class="label">Podległe instytucje</h2>
+										<?
+							    			echo $this->Element('Dane.objects/administracja_publiczna/list', array(
+									    		'items' => $items,
+									    		'i' => 0,
+									    	));
+									    ?>
+									</li>
+								</ul>
+                        	</div>
+	                    	
 	                    </div>
 	                </div>
 		            <? } ?>

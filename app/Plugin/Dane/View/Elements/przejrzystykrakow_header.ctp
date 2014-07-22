@@ -1,4 +1,4 @@
-<div class="objectRender col-md-12 <?php echo $object->getDataset(); ?>" oid="<?php echo $item['data']['id'] ?>">
+<div class="objectRender col-md-12 <?php echo $object->getDataset(); ?>" oid="<?php if( isset($item) ) { echo $item['data']['id']; } ?>">
     <div class="row">
 
         <div class="data col-md-12">
@@ -6,7 +6,7 @@
 
                 <div class="attachment col-md-3 text-center">
                     <?php if ($object->getUrl() != false) { ?>
-                    <a class="thumb_cont" href="<?= $object->getUrl() ?>">
+                    <a class="thumb_cont" href="przejrzystykrakow.pl">
                         <?php } ?>
                         <img class="thumb" onerror="imgFixer(this)" src="/dane/img/customObject/krakow/logo_pkrk.jpg"
                              alt="<?= strip_tags($object->getTitle()) ?>"/>
@@ -20,7 +20,7 @@
                         title="<?= htmlspecialchars($object->getShortTitle()) ?>"
                         data-trimlength="200">
                         <?php if (($object->getUrl() != false) && !empty($this->request)) { ?>
-                        <a href="<?= $object->getUrl() ?>" title="<?= strip_tags($object->getTitle()) ?>">
+                        <a href="przejrzystykrakow.pl" title="<?= strip_tags($object->getTitle()) ?>">
                             <?php } ?>
                             Przejrzysty Kraków
                             <?php if (($object->getUrl() != false) && !empty($this->request)) { ?>

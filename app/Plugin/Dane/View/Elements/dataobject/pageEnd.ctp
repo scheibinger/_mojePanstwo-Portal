@@ -1,17 +1,16 @@
 <?
 	if( 
 		isset($object) && 
-		( $object->getDataset()=='gminy' ) &&
-		( $object->getId() == '903' )
+		(
+			( $object->getDataset()=='gminy' ) &&
+			( $object->getId() == '903' )
+		)
 	) {
 		echo $this->element('Dane.stanczyk_footer');
 	}
 ?>
-</div>
-</div>
-</div>
-<? if ($menuMode == 'vertical') { ?>
-    </div>
-<? } ?>
-</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>

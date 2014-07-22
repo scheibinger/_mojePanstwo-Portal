@@ -242,6 +242,43 @@ class KrsPodmiotyController extends DataobjectsController
             'title' => 'Zamówienia publiczne udzielone organizacji',
             'noResultsTitle' => 'Brak zamówień publicznych',
         ));
+        
+        $this->set('title_for_layout', 'Zamówienia publiczne udzielone organizacji ' . $this->object->getTitle());
+	    
+    }
+    
+    public function umowy()
+    {
+	    
+	    $this->_prepareView();
+        
+        
+        if( isset($this->request->params['pass'][0]) && is_numeric($this->request->params['pass'][0]) ) {
+			
+		    $this->helpers[] = 'Document';
+			$umowa = $this->API->getObject('umowy', $this->request->params['pass'][0], array(
+				'layers' => array('neighbours'),
+			));
+			
+			$document = $this->API->document($umowa->getData('dokument_id'));
+	    	$this->set('umowa', $umowa);
+			$this->set('document', $document);
+	        $this->set('title_for_layout', $umowa->getTitle());
+	    	
+	    	$this->render('umowa');
+			
+		} else {
+        
+	        $this->dataobjectsBrowserView(array(
+	            'source' => 'krs_podmioty.umowy:' . $this->object->getId(),
+	            'dataset' => 'umowy',
+	            'noResultsTitle' => 'Brak umów',
+	            'limit' => 50,
+	        ));
+	
+	        $this->set('title_for_layout', 'Umowy cywilnoprawne podpisane przez ' . $this->object->getTitle());
+        
+        }
 	    
     }
     
@@ -289,6 +326,16 @@ class KrsPodmiotyController extends DataobjectsController
 	            ),
 	        )
 	    );
+	    
+	    if( $this->request->params['id'] == 481129 ) { // KOMITET KONKURSOWY KRAKÓW 2022 
+		    
+		    $menu['items'][] = array(
+				'id' => 'umowy',
+				'href' => $href_base . '/umowy',
+				'label' => 'Podpisane umowy',
+				'count' => 94,
+		    );
+	    }
 		
 		if( $counters['liczba_oddzialow'] )
 			$menu['items'][] = array(

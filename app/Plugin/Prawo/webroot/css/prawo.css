@@ -1,0 +1,61 @@
+body {
+  background-color: #F3F3F3;
+}
+#_wrapper {
+  background-color: inherit;
+}
+#_mojePanstwoCockpit .container {
+  width: 100%;
+}
+footer {
+  position: fixed;
+  bottom: 0;
+  height: 25px;
+  padding: 5px 0;
+  font-size: 10px;
+}
+footer .container {
+  width: 100%;
+  padding: 0;
+}
+.cookieLaw {
+  bottom: 25px !important;
+}
+#prawo #tagsDiv {
+  background-color: #FFF;
+  border-right: 1px solid #DDD;
+}
+#prawo #tagsDiv .input-group {
+  background-color: #F0F0F0;
+  margin: 0;
+  padding: 10px 10px 10px 15px;
+  border-bottom: 1px solid #DDD;
+  position: fixed;
+  left: -7px;
+  width: 25%;
+}
+#prawo #tagsDiv .nav {
+  height: 400px;
+  overflow: scroll;
+  position: fixed;
+  top: 95px;
+  width: 25%;
+  left: 0;
+  background-color: #F0F0F0;
+}
+#prawo #tagsDiv .nav > li > a {
+  font-size: 12px;
+  font-weight: 500;
+  padding: 5px;
+  margin: 5px 15px 5px 10px;
+  text-transform: uppercase;
+}
+#prawo #tagsDiv .nav > li > a:hover,
+#prawo #tagsDiv .nav > li > a:focus {
+  background-color: #DDD;
+}
+#prawo #tagsDiv .nav-pills > li > a > .badge {
+  background-color: inherit;
+  color: #999;
+  font-weight: 300;
+}

@@ -8,20 +8,7 @@ abstract class DocsObjectsController extends DataobjectsController
         'RequestHandler',
     );
     public $menu = array();
-    public $menuMode = 'horizontal';
 
-    public function beforeFilter()
-    {
-        $this->menu = array_merge_recursive(array(
-            array(
-                'id' => 'view',
-                'label' => 'LC_DANE_DOKUMENT',
-                'icon' => 'document',
-            )
-        ), $this->menu);
-        parent::beforeFilter();
-
-    }
 
     public function view($package = 1)
     {

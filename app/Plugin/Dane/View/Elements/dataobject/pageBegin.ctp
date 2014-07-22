@@ -29,16 +29,34 @@ $buttons = isset($objectOptions['buttons']) ? $objectOptions['buttons'] : array(
         'alerts' => $alertArray
     ));
 }?>
-    <div class="objectPageHeaderContainer">
+	
+	
+	<?
+		$krakow = ($object->getDataset()=='krs_podmioty') && ($object->getData('gmina_id')=='903');
+		if( $krakow )
+			$this->Combinator->add_libs('css', $this->Less->css('view-gminy-krakow-outside', array('plugin' => 'Dane')));
+	?>
+
+	
+    <div class="objectPageHeaderContainer<? if( ($object->getDataset()=='gminy') && ($object->getId()=='903') ) {?> krakow<?}?>">
         <div class="container">
-            <div class="col-md-9">
+        	<? if( $krakow ) { ?>
+        	<div class="krakow col-md-2">
+        		
+        		<a title="Program Przejrzysty Kraków, prowadzony przez Fundację Stańczyka, ma na celu wieloaspektowy monitoring życia publicznego w Krakowie. W ramach programu prowadzony jest obecnie monitoring Rady Miasta i Dzielnic Krakowa." href="http://przejrzystykrakow.pl" class="thumb_cont">
+	                <img alt="Przejrzysty Kraków" src="/dane/img/customObject/krakow/logo_pkrk.jpg" onerror="imgFixer(this)" class="thumb">
+	            </a>
+        		
+        	</div>
+        	<? } ?>
+            <div class="objectPageHeaderContainer col-md-<? if( $krakow ) echo '7'; else echo '9'; ?>">
                 <div class="objectPageHeader">
                     <?php
                     echo $this->Dataobject->render($object, 'page', $objectOptions);
                     ?>
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="objectButtonsContainer col-md-3">
             	<div class="row">
 	                <ul class="objectButtons">
 	                    <? foreach ($buttons as $button) { ?>
@@ -54,31 +72,7 @@ $buttons = isset($objectOptions['buttons']) ? $objectOptions['buttons'] : array(
     </div>
 
 
-<? if ($menuMode == 'vertical') { ?>
-    <div class="objectsPageWindow">
-    <div class="container">
-    <div class="row">
-    <? if (count($menu)) { ?>
-    <div class="col-md-2">
-        <?= $this->Element('dataobject/pageMenu'); ?>
-    </div>
-    <div class="col-md-10">
-    <?= $this->Element('dataobject/pageRelated'); ?>
-    <div class="objectsPageContent main<? if (isset($showRelated) && $showRelated) { ?> hide<? } ?>">
-    <? } else { ?>
-    <div class="col-md-12">
-    <?= $this->Element('dataobject/pageRelated'); ?>
-    <div class="objectsPageContent main<? if (isset($showRelated) && $showRelated) { ?> hide<? } ?>">
-    <? } ?>
-
-    <? } elseif ($menuMode == 'horizontal') { ?>
-    <div class="objectsPageWindow">
-    <div class="container">
-    <div class="row">
-    <?= $this->Element('dataobject/pageMenu'); ?>
-    <div class="objectsPageContent main">
-<? } ?>
-
-<?php echo $this->Element('dataobject/pageRelated', array(
-    'showRelated' => isset($showRelated) ? (boolean)$showRelated : false,
-)); ?>
+<div class="objectsPageWindow">
+<div class="container">
+<div class="row">
+<div class="objectsPageContent main">
