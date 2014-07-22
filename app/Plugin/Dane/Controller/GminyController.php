@@ -457,7 +457,7 @@ class GminyController extends DataobjectsController
     public function radni()
     {
 
-
+        $this->_prepareView();
         $this->request->params['action'] = 'radni';
 
         if (isset($this->request->params['pass'][0]) && is_numeric($this->request->params['pass'][0])) {
@@ -469,6 +469,7 @@ class GminyController extends DataobjectsController
                 'layers' => array('najblizszy_dyzur', 'neighbours'),
             ));
             $radny->getLayer('neighbours');
+            $dyzur = $radny->getLayer('najblizszy_dyzur');
             // debug( $dyzur ); die();
             $title_for_layout = $radny->getTitle();
 
@@ -566,8 +567,7 @@ class GminyController extends DataobjectsController
             }
 
 
-            $this->_prepareView();
-
+			
 
             if ($this->object->getId() == 903) {
 
