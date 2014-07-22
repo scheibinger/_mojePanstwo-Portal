@@ -31,45 +31,55 @@ $buttons = isset($objectOptions['buttons']) ? $objectOptions['buttons'] : array(
         <div class="container">
             <div class="col-md-9">
                 <div class="objectPageHeader">
-                    
+
                     <?
-                    	$nav = $object->getLayer('nav');
-                    	$posiedzenie = $nav['posiedzenie'];
-                    	$punkty = $posiedzenie['punkty'];
-					?>
-                    
+                    $nav = $object->getLayer('nav');
+                    $posiedzenie = $nav['posiedzenie'];
+                    $punkty = $posiedzenie['punkty'];
+                    ?>
+
                     <div id="collapseDVR3" class="panel-collapse collapse in">
-				        <div class="tree ">
-				            <ul>
-				                <li class="posiedzenie"><a href="#"><span>Posiedzenie Sejmu #<?= $posiedzenie['tytul'] ?></span></a>
-				                    <ul>
-				                    <? foreach( $punkty as $punkt ) {?>
-				                        <li class="punkt"><span>Punkt #<?= $punkt['numer'] ?></span> <i><?= $punkt['tytul'] ?></i>
-				                            <ul>
-				                            <?
-				                            	$debaty = $punkt['debaty'];
-				                            	foreach( $debaty as $debata ) {
-				                            		
-													if( $debata['id'] == $object->getId() ) {
-				                            ?>
-						                                <li class="debata active"><p class="label"><span>Debata</i> </span> <? if( $debata['liczba_wystapien'] ) {?><img src="http://resources.sejmometr.pl/stenogramy/subpunkty/<?= $debata['id'] ?>.jpg" /><?}?> <i><?= $debata['opis'] ?></i></p></li>
-						                    <?
-						                    		} else {
-							                ?>
-						                                <li class="debata"><a class="label" href="/dane/sejm_debaty/<?= $debata['id'] ?>"><span>Debata</i> </span> <? if( $debata['liczba_wystapien'] ) {?><img src="http://resources.sejmometr.pl/stenogramy/subpunkty/<?= $debata['id'] ?>.jpg" /><?}?> <i><?= $debata['opis'] ?></i></a></li>					                
-							                <?
-						                    		}
-				                            	}
-				                            ?>
-				                            </ul>
-				                        </li>
-				                    <? } ?>
-				                    </ul>
-				                </li>
-				            </ul>
-				        </div>
-				    </div>
-                    
+                        <div class="tree ">
+                            <ul>
+                                <li class="posiedzenie"><a
+                                        href="#"><span>Posiedzenie Sejmu #<?= $posiedzenie['tytul'] ?></span></a>
+                                    <ul>
+                                        <? foreach ($punkty as $punkt) { ?>
+                                            <li class="punkt"><span>Punkt #<?= $punkt['numer'] ?></span>
+                                                <i><?= $punkt['tytul'] ?></i>
+                                                <ul>
+                                                    <?
+                                                    $debaty = $punkt['debaty'];
+                                                    foreach ($debaty as $debata) {
+
+                                                        if ($debata['id'] == $object->getId()) {
+                                                            ?>
+                                                            <li class="debata active"><p class="label">
+                                                                    <span>Debata</i> </span> <? if ($debata['liczba_wystapien']) { ?>
+                                                                        <img
+                                                                        src="http://resources.sejmometr.pl/stenogramy/subpunkty/<?= $debata['id'] ?>.jpg" /><? } ?>
+                                                                    <i><?= $debata['opis'] ?></i></p></li>
+                                                        <?
+                                                        } else {
+                                                            ?>
+                                                            <li class="debata"><a class="label"
+                                                                                  href="/dane/sejm_debaty/<?= $debata['id'] ?>"><span>Debata</i> </span> <? if ($debata['liczba_wystapien']) { ?>
+                                                                        <img
+                                                                        src="http://resources.sejmometr.pl/stenogramy/subpunkty/<?= $debata['id'] ?>.jpg" /><? } ?>
+                                                                    <i><?= $debata['opis'] ?></i></a></li>
+                                                        <?
+                                                        }
+                                                    }
+                                                    ?>
+                                                </ul>
+                                            </li>
+                                        <? } ?>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
                 </div>
             </div>
             <div class="col-md-3">
@@ -115,7 +125,7 @@ $buttons = isset($objectOptions['buttons']) ? $objectOptions['buttons'] : array(
     'showRelated' => isset($showRelated) ? (boolean)$showRelated : false,
 )); ?>
     <div class="col-md-12 row">
-    	    	
+
         <div class="object mpanel">
             <?php foreach ($stenogram['wystapienia'] as $wpis) { ?>
 

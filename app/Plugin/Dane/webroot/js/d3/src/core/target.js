@@ -1,3 +1,3 @@
 function d3_target(d) {
-  return d.target;
+    return d.target;
 }

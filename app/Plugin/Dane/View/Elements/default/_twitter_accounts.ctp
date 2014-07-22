@@ -21,4 +21,4 @@ $number_format = array(
 
     <? echo $this->Dataobject->highlights($hlFields, $hlFieldsPush); ?>
 
-<div>
+    <div>

@@ -6,5 +6,4 @@ class AdministracjaPublicznaController extends DataobjectsController
 {
     public $menu = array();
 	public $initLayers = array('nav', 'tree');
-
 } 

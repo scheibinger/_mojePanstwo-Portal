@@ -83,7 +83,7 @@ $buttons = isset($objectOptions['buttons']) ? $objectOptions['buttons'] : array(
                     
 				        </div>
 				    </div>
-                    
+
                 </div>
             </div>
             <div class="col-md-2">
@@ -101,7 +101,7 @@ $buttons = isset($objectOptions['buttons']) ? $objectOptions['buttons'] : array(
 
 
 <? if ($menuMode == 'vertical') { ?>
-    <div class="objectsPageWindow">
+<div class="objectsPageWindow">
     <div class="container">
     <div class="row">
     <? if (count($menu)) { ?>
@@ -126,10 +126,10 @@ $buttons = isset($objectOptions['buttons']) ? $objectOptions['buttons'] : array(
 <? } ?>
 
 <?
-	
-	echo $this->Element('dataobject/pageRelated', array(
-	    'showRelated' => isset($showRelated) ? (boolean)$showRelated : false,
-	));
+
+echo $this->Element('dataobject/pageRelated', array(
+    'showRelated' => isset($showRelated) ? (boolean)$showRelated : false,
+));
 
 ?>
     <div class="administracjaPubliczna row">

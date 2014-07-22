@@ -1,9 +1,9 @@
 <div class="block">
-    
+
     <div class="block-header">
-	    <h2 class="label">Powiązane organizacje:</h2>
+        <h2 class="label">Powiązane organizacje:</h2>
     </div>
-	
+
     <div class="content">
 
         <ul class="list-group less-borders">
@@ -16,9 +16,10 @@
                     </h3>
 
                     <p class="subtitle">
-                    	<? if($organizacja['wykreslony']=='1') {?><span class="label label-danger">Podmiot wykreślony z KRS</span> <span class="separator">|</span> <? } ?>       	
-                    	<span class="normalizeText"><?= $organizacja['forma_prawna_str'] ?></span>
-                    	<? if ($kapitalZakladowy) { ?>
+                        <? if ($organizacja['wykreslony'] == '1') { ?><span class="label label-danger">Podmiot wykreślony z KRS</span>
+                            <span class="separator">|</span> <? } ?>
+                        <span class="normalizeText"><?= $organizacja['forma_prawna_str'] ?></span>
+                        <? if ($kapitalZakladowy) { ?>
                             <span class="separator">|</span> kapitał zakładowy: <?
                             //setlocale(LC_MONETARY, 'pl_PL');
                             //echo money_format('%i', $organizacja['kapital_zakladowy']);

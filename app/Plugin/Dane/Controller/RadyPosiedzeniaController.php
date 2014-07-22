@@ -14,10 +14,10 @@ class RadyPosiedzeniaController extends DataobjectsController
     {
 
         parent::_prepareView();
-                
-        $this->redirect('/dane/gminy/' . $this->object->getData('gmina_id') . '/posiedzenia/' . $this->object->getId() );
+
+        $this->redirect('/dane/gminy/' . $this->object->getData('gmina_id') . '/posiedzenia/' . $this->object->getId());
         die();
-        
+
         $this->dataobjectsBrowserView(array(
             'source' => 'rady_gmin_debaty.posiedzenie_id:' . $this->object->getId(),
             'dataset' => 'rady_gmin_debaty',

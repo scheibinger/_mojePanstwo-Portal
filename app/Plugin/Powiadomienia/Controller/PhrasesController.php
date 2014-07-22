@@ -19,24 +19,23 @@ class PhrasesController extends PowiadomieniaAppController
             $this->redirect(array('controller' => 'powiadomienia', 'action' => 'index'));
         }
     }
-	
-	public function add()
-	{
-		
-		$status = false;
-		
-		if( isset($this->request->data['add']) )
-		{
-			
-			$status = $this->API->addPhrase( $this->request->data['add'] );
-			
-		}
-		
-		$this->set('status', $status);
-		$this->set('_serialize', 'status');
-		
-	}
-	
+
+    public function add()
+    {
+
+        $status = false;
+
+        if (isset($this->request->data['add'])) {
+
+            $status = $this->API->addPhrase($this->request->data['add']);
+
+        }
+
+        $this->set('status', $status);
+        $this->set('_serialize', 'status');
+
+    }
+
     public function remove($id = null)
     {
         if (!is_null($id)) {

@@ -2,7 +2,7 @@
 <?php // $this->Combinator->add_libs('js', 'Krs.krs.js') ?>
 
 <div id="administracja">
-    
+
     <? /*
     <div class="appHeader">
         <div class="container innerContent">
@@ -23,48 +23,48 @@
 
         </div>
     </div>
-    */ ?>
+    */
+    ?>
 
     <div class="container">
 
 
-        	
-	<? if( $items = $data['files'] ) {?>
-		
-		        	
-    	<div class="content">   
-    		
-    		<? /*
+        <? if ($items = $data['files']) { ?>
+
+
+            <div class="content">
+
+                <? /*
     		<div class="header text-center">
 	    		<p>Kliknij, aby dowiedzieć się więcej</p>
     		</div>
-    		*/ ?>
-    		
-    		<h2>Państwowe instytucje publiczne</h2>    
-    		 
-	        <div class="row items">
-	        <? foreach( $items as $item ) {?>
-	        
-	        	<div class="col-md-<?= $item['width'] ?>">
-	        		<div class="item" data-id="<?=$item['id']?>">
-		        		<a href="/dane/administracja_publiczna/<?= $item['id'] ?>" class="inner">
-			        		<p class="nazwa"><?= $item['nazwa'] ?></p>
-			        		<p class="desc"><?= pl_dopelniacz($item['childsCount'], 'instytucja', 'instytucje', 'instytucji') ?></p>
-		        		</a>
-	        		</div>
-	        	</div>
-	        
-	        <? } ?>
-	        </div>
-	        
-	        
-	        <h2>Instytucje wykonujące zadania publiczne</h2>  
-    	</div>
-	<? }?>
-	
-	
+    		*/
+                ?>
 
-        
+                <h2>Państwowe instytucje publiczne</h2>
+
+                <div class="row items">
+                    <? foreach ($items as $item) { ?>
+
+                        <div class="col-md-<?= $item['width'] ?>">
+                            <div class="item" data-id="<?= $item['id'] ?>">
+                                <a href="/dane/administracja_publiczna/<?= $item['id'] ?>" class="inner">
+                                    <p class="nazwa"><?= $item['nazwa'] ?></p>
+
+                                    <p class="desc"><?= pl_dopelniacz($item['childsCount'], 'instytucja', 'instytucje', 'instytucji') ?></p>
+                                </a>
+                            </div>
+                        </div>
+
+                    <? } ?>
+                </div>
+
+
+                <h2>Instytucje wykonujące zadania publiczne</h2>
+            </div>
+        <? } ?>
+
+
     </div>
 
 </div>

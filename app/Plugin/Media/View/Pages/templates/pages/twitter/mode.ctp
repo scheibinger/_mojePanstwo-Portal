@@ -1,77 +1,93 @@
 <? if ($group['mode'] == 'stats') { ?>
-    
+
     <? if (isset($type['objects']) && is_array($type['objects']) && !empty($type['objects'])) { ?>
         <ul>
             <?
             $i = 0;
             foreach ($type['objects'] as $object) {
                 $i++;
-                
-                if( $i>3 )
-                	break;
-                
+
+                if ($i > 3)
+                    break;
+
                 ?>
 
                 <li class="account">
-                    
-                    <? if( $group['preset'] == 'mentions' ) {?>
-                    	
-                    	<div class="avatar"><? if( $object['account_id'] ) { ?><a href="/dane/twitter_accounts/<?= $object['id'] ?>">
-                            <img src="<?= $object['profile_image_url'] ?>"/></a><? } ?></div>
-	                    <div class="info">
-	                    	<p class="name">
-	                            <? if( $object['account_id'] ) { ?><a href="/dane/twitter_accounts/<?= $object['account_id'] ?>"><? } else { ?><? } ?><a target="_blank" href="https://twitter.com/<?= $object['twitter_screen_name'] ?>"><?= $object['name'] ?></a>
-	                        </p>
-	                        <p class="counter"><a href="/dane/twitter/?!bez_retweetow=1&twitter_account_id[]=<?= $object['id'] ?>&date=LAST_<?= $range ?>"><?= number_format($object['count'], 0, '.', ' ') ?></a></p>
-	                    </div>
-                    	
-					<? } else { ?>
 
-                    <div class="avatar"><a href="/dane/twitter_accounts/<?= $object['id'] ?>">
-                            <img src="<?= $object['profile_image_url'] ?>"/></a></div>
-                    <div class="info">
-                        <p class="name">
-                            <a href="/dane/twitter_accounts/<?= $object['id'] ?>"><?= $object['name'] ?></a>
-                        </p>
-																				
-						<? if( $group['preset'] == 'twitter_account_id' ) { ?>
-						
-							<p class="counter"><a href="/dane/twitter/?!bez_retweetow=1&twitter_account_id[]=<?= $object['id'] ?>&date=LAST_<?= $range ?>"><?= number_format($object['count'], 0, '.', ' ') ?></a></p>
-						
-						<? } elseif( $group['preset'] == 'accounts-retweets' ) { ?>
-						
-							<p class="counter"><a href="/dane/twitter/?!bez_retweetow=1&twitter_account_id[]=<?= $object['id'] ?>&date=LAST_<?= $range ?>"><?= number_format($object['count'], 0, '.', ' ') ?></a></p>
-						
-						<? } elseif( $group['preset'] == 'accounts-discussions' ) { ?>
-						
-							<p class="counter"><a href="/dane/twitter/?!bez_retweetow=1&in_reply_to_account_id[]=<?= $object['id'] ?>&date=LAST_<?= $range ?>"><?= number_format($object['count'], 0, '.', ' ') ?></a></p>
-						
-						<? } elseif( $group['preset'] == 'accounts-mentions' ) { ?>
-						
-							<p class="counter"><a href="/dane/twitter/?!bez_retweetow=1&mentions[]=<?= $object['mention_id'] ?>&date=LAST_<?= $range ?>"><?= number_format($object['count'], 0, '.', ' ') ?></a></p>
-													
-						<? } ?>
-						
-						
-						
-					
-								
-						
-						
-						<? /*
+                    <? if ($group['preset'] == 'mentions') { ?>
+
+                        <div class="avatar"><? if ($object['account_id']) { ?><a
+                                href="/dane/twitter_accounts/<?= $object['id'] ?>">
+                                <img src="<?= $object['profile_image_url'] ?>"/></a><? } ?></div>
+                        <div class="info">
+                            <p class="name">
+                                <? if ($object['account_id']) { ?><a
+                                    href="/dane/twitter_accounts/<?= $object['account_id'] ?>"><? } else { ?><? } ?><a
+                                        target="_blank"
+                                        href="https://twitter.com/<?= $object['twitter_screen_name'] ?>"><?= $object['name'] ?></a>
+                            </p>
+
+                            <p class="counter"><a
+                                    href="/dane/twitter/?!bez_retweetow=1&twitter_account_id[]=<?= $object['id'] ?>&date=LAST_<?= $range ?>"><?= number_format($object['count'], 0, '.', ' ') ?></a>
+                            </p>
+                        </div>
+
+                    <? } else { ?>
+
+                        <div class="avatar"><a href="/dane/twitter_accounts/<?= $object['id'] ?>">
+                                <img src="<?= $object['profile_image_url'] ?>"/></a></div>
+                        <div class="info">
+                            <p class="name">
+                                <a href="/dane/twitter_accounts/<?= $object['id'] ?>"><?= $object['name'] ?></a>
+                            </p>
+
+                            <? if ($group['preset'] == 'twitter_account_id') { ?>
+
+                                <p class="counter"><a
+                                        href="/dane/twitter/?!bez_retweetow=1&twitter_account_id[]=<?= $object['id'] ?>&date=LAST_<?= $range ?>"><?= number_format($object['count'], 0, '.', ' ') ?></a>
+                                </p>
+
+                            <? } elseif ($group['preset'] == 'accounts-retweets') { ?>
+
+                                <p class="counter"><a
+                                        href="/dane/twitter/?!bez_retweetow=1&twitter_account_id[]=<?= $object['id'] ?>&date=LAST_<?= $range ?>"><?= number_format($object['count'], 0, '.', ' ') ?></a>
+                                </p>
+
+                            <? } elseif ($group['preset'] == 'accounts-discussions') { ?>
+
+                                <p class="counter"><a
+                                        href="/dane/twitter/?!bez_retweetow=1&in_reply_to_account_id[]=<?= $object['id'] ?>&date=LAST_<?= $range ?>"><?= number_format($object['count'], 0, '.', ' ') ?></a>
+                                </p>
+
+                            <? } elseif ($group['preset'] == 'accounts-mentions') { ?>
+
+                                <p class="counter"><a
+                                        href="/dane/twitter/?!bez_retweetow=1&mentions[]=<?= $object['mention_id'] ?>&date=LAST_<?= $range ?>"><?= number_format($object['count'], 0, '.', ' ') ?></a>
+                                </p>
+
+                            <? } ?>
+
+
+
+
+
+
+
+                            <? /*
                         <?
                         if ($group['field'] == 'liczba_tweetow_wlasnych_2013') {
                             $per_day = $object->getData($group['field']) / 365;
                             ?>
                             <p class="subcounter"><?= pl_dopelniacz(round($per_day), 'tweet', 'tweety', 'tweetów') . ' ' . __d('media', 'LC_PANSTWOINTERNET_PER_DAY') ?></p>
                         <? } ?>
-                        */ ?>
-                        
-                    </div>
-                    
-					<? } ?>	
+                        */
+                            ?>
 
-                    
+                        </div>
+
+                    <? } ?>
+
+
                 </li>
                 <? if ($i > 10)
                     break;
@@ -82,16 +98,16 @@
 
 
 <? } elseif ($group['mode'] == 'account') { ?>
-    
-    
+
+
     <? if (isset($type['search']) && is_array($type['search']) && !empty($type['search'])) { ?>
         <ul>
             <?
             $i = 0;
             foreach ($type['search'] as $object) {
                 $i++;
-                
-                
+
+
                 ?>
 
                 <li class="account">
@@ -101,46 +117,57 @@
                         <p class="name">
                             <a href="/dane/twitter_accounts/<?= $object['id'] ?>"><?= $object['name'] ?></a>
                         </p>
-						
-						
-						
-                        <p class="counter"><? if( $object['followers_delta_' . $range]>0 ) { echo "+"; }?><?= number_format($object['followers_delta_' . $range], 0, '.', ' ') ?></p>
-						
-						
-						
-						
-						
-						
-						
-						<? /*
+
+
+                        <p class="counter"><? if ($object['followers_delta_' . $range] > 0) {
+                                echo "+";
+                            } ?><?=
+                            number_format($object['followers_delta_' . $range], 0, '.', ' ') ?></p>
+
+
+
+
+
+
+
+                        <? /*
                         <?
                         if ($group['field'] == 'liczba_tweetow_wlasnych_2013') {
                             $per_day = $object->getData($group['field']) / 365;
                             ?>
                             <p class="subcounter"><?= pl_dopelniacz(round($per_day), 'tweet', 'tweety', 'tweetów') . ' ' . __d('media', 'LC_PANSTWOINTERNET_PER_DAY') ?></p>
                         <? } ?>
-                        */ ?>
-                        
+                        */
+                        ?>
+
                     </div>
                     <div class="tweet_stats">
                         <div class="row">
-                            
-                            <div class="col-lg-4">
-                            	
-                            	<p class="_counter small _tooltip" data-toggle="tooltip" data-placement="bottom" title="Aktualna liczba obserwujących"><span class="glyphicon glyphicon-unchecked"></span> <?= number_format($object['followers_count'], 0, '.', ' ') ?></p>
-                            	
-                            </div>
-                            
-                            <div class="col-lg-4">
-								
 
-                                <p class="_counter plus small _tooltip" data-toggle="tooltip" data-placement="bottom" title="Liczba nowych subskrypcji"><span class="glyphicon glyphicon-log-in"></span> <?= number_format($object['followers_add_' . $range], 0, '.', ' ') ?></p>
-									
-                            </div>
                             <div class="col-lg-4">
 
-                                <p class="_counter minus small _tooltip" data-toggle="tooltip" data-placement="bottom" title="Liczba usuniętych subskrypcji"><?= number_format($object['followers_diff_' . $range], 0, '.', ' ') ?> <span class="glyphicon glyphicon-log-out"></span></p>
-	
+                                <p class="_counter small _tooltip" data-toggle="tooltip" data-placement="bottom"
+                                   title="Aktualna liczba obserwujących"><span
+                                        class="glyphicon glyphicon-unchecked"></span> <?= number_format($object['followers_count'], 0, '.', ' ') ?>
+                                </p>
+
+                            </div>
+
+                            <div class="col-lg-4">
+
+
+                                <p class="_counter plus small _tooltip" data-toggle="tooltip" data-placement="bottom"
+                                   title="Liczba nowych subskrypcji"><span
+                                        class="glyphicon glyphicon-log-in"></span> <?= number_format($object['followers_add_' . $range], 0, '.', ' ') ?>
+                                </p>
+
+                            </div>
+                            <div class="col-lg-4">
+
+                                <p class="_counter minus small _tooltip" data-toggle="tooltip" data-placement="bottom"
+                                   title="Liczba usuniętych subskrypcji"><?= number_format($object['followers_diff_' . $range], 0, '.', ' ') ?>
+                                    <span class="glyphicon glyphicon-log-out"></span></p>
+
                             </div>
                         </div>
                     </div>
@@ -165,8 +192,8 @@
 
     $href = '/dane/' . $group['link']['dataset'] . '?' . http_build_query($params);
     ?>
-	
-	<!--
+
+    <!--
     <div class="buttons">
         <a href="<?= $href ?>">Pełny ranking &raquo;</a>
     </div>
@@ -174,7 +201,7 @@
 
 <? } elseif ($group['mode'] == 'tag') { ?>
 
-	
+
     <? if (isset($type['objects']) && is_array($type['objects']) && !empty($type['objects'])) { ?>
         <ul>
             <?
@@ -265,7 +292,7 @@
 
 <? } elseif ($group['mode'] == 'tweet') { ?>
 
-	
+
     <? if (isset($type['objects']) && is_array($type['objects']) && !empty($type['objects'])) { ?>
         <ul>
 
@@ -287,7 +314,9 @@
 
                             <p class="date"><?= $this->Czas->dataSlownie($object->getData('czas_utworzenia')) ?> <?= substr($object->getData('czas_utworzenia'), 11, 5) ?></p>
 
-                            <p class="account"><a href="/dane/twitter_accounts/<?= $object->getData('twitter_accounts.id') ?>"><?= $object->getData('twitter_accounts.name') ?></a></p>
+                            <p class="account"><a
+                                    href="/dane/twitter_accounts/<?= $object->getData('twitter_accounts.id') ?>"><?= $object->getData('twitter_accounts.name') ?></a>
+                            </p>
 
                         </div>
                     </div>
@@ -299,16 +328,22 @@
                     <div class="tweet_stats">
                         <div class="row">
                             <div class="col-lg-6">
-								
 
-                                <p class="_counter"><a title="Liczba retweetów" href="/dane/twitter/<?= $object->getId() ?>"><span class="glyphicon glyphicon-retweet"></span> <?= number_format($object->getData('liczba_retweetow'), 0, '.', ' ') ?></a></p>
-								
+
+                                <p class="_counter"><a title="Liczba retweetów"
+                                                       href="/dane/twitter/<?= $object->getId() ?>"><span
+                                            class="glyphicon glyphicon-retweet"></span> <?= number_format($object->getData('liczba_retweetow'), 0, '.', ' ') ?>
+                                    </a></p>
+
                                 <? /*<p class="_label"><?= __d('media', 'LC_PANSTWOINTERNET_RETWEET') ?></p> */ ?>
 
                             </div>
                             <div class="col-lg-6">
 
-                                <p class="_counter"><a title="Liczba odpowiedzi" href="/dane/twitter/<?= $object->getId() ?>"><span class="glyphicon glyphicon-transfer"></span> <?= $object->getData('liczba_odpowiedzi') ?></a></p>
+                                <p class="_counter"><a title="Liczba odpowiedzi"
+                                                       href="/dane/twitter/<?= $object->getId() ?>"><span
+                                            class="glyphicon glyphicon-transfer"></span> <?= $object->getData('liczba_odpowiedzi') ?>
+                                    </a></p>
 
                                 <? /*<p class="_label"><?= __d('media', 'LC_PANSTWOINTERNET_ODPOWIEDZI') ?></p> */ ?>
 
@@ -326,8 +361,9 @@
             ?>
 
         </ul>
-        
-        <p><a class="btn btn-default btn-sm" href="/dane/twitter/?!bez_retweetow=1&twitter_accounts:typ_id[]=<?= $type['id'] ?>&date=LAST_<?= $range ?>&order=<?= $group['field'] ?>%20desc">Więcej &raquo;</a>
+
+        <p><a class="btn btn-default btn-sm"
+              href="/dane/twitter/?!bez_retweetow=1&twitter_accounts:typ_id[]=<?= $type['id'] ?>&date=LAST_<?= $range ?>&order=<?= $group['field'] ?>%20desc">Więcej &raquo;</a>
 
     <? } ?>
 
@@ -344,11 +380,12 @@
 
     $href = '/dane/' . $group['link']['dataset'] . '?' . http_build_query($params);
     ?>
-	
-	<? /*
+
+    <? /*
     <div class="buttons">
         <a href="<?= $href ?>"><?= __d('media', 'LC_PANSTWOINTERNET_RANKING') ?></a>
     </div>
-    */ ?>
+    */
+    ?>
 
 <? } ?>

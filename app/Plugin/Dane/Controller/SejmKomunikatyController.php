@@ -6,7 +6,7 @@ App::uses('Sanitize', 'Utility');
 class SejmKomunikatyController extends DataobjectsController
 {
     public $menu = array();
-	public $breadcrumbsMode = 'app';
+    public $breadcrumbsMode = 'app';
 
     public function view()
     {

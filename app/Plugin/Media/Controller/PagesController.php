@@ -10,16 +10,13 @@ class PagesController extends MediaAppController
     public function home()
     {
 
-		
-		$ranges = array('24h', '3d', '7d', '1m', '1y');
-		$range = ( isset($this->request->query['range']) && in_array($this->request->query['range'], $ranges) ) ? 
-			$this->request->query['range'] : 
-			$ranges[0];
-		
-		
-		
-		
-		
+
+        $ranges = array('24h', '3d', '7d', '1m', '1y');
+        $range = (isset($this->request->query['range']) && in_array($this->request->query['range'], $ranges)) ?
+            $this->request->query['range'] :
+            $ranges[0];
+
+
         $toc = array(
             array(
                 'name' => 'media',
@@ -110,12 +107,12 @@ class PagesController extends MediaAppController
         );
         $font['diff'] = $font['max'] - $font['min'];
 
-        
-        $stats = $this->API->getTwitterStats( $range );
-		
-		
-        $tags = $stats['tags']['*']['objects'];        
-        
+
+        $stats = $this->API->getTwitterStats($range);
+
+
+        $tags = $stats['tags']['*']['objects'];
+
         $_stats = array(
             'min' => (int)$tags[count($tags) - 1]['count'],
             'max' => (int)$tags[1]['count'],
@@ -134,12 +131,10 @@ class PagesController extends MediaAppController
                 'size' => $font['min'] + $score * $font['diff'],
             ));
         }
-		
-		shuffle($tags);
-        $stats['tags']['*']['objects'] = $tags;		
+
+        shuffle($tags);
+        $stats['tags']['*']['objects'] = $tags;
         $this->set('stats', $stats);
-        
-        
 
 
         $accounts_types = $this->API->getTwitterAccountsTypes();
@@ -148,9 +143,8 @@ class PagesController extends MediaAppController
         $accounts_types_klasy = array_column($accounts_types, 'class', 'id');
 
         $ranks = array(
-            
-            
-            
+
+
             array(
                 'title' => 'Najczęściej retweetowane treści',
                 'name' => 'retweetowane_tresci',
@@ -165,8 +159,8 @@ class PagesController extends MediaAppController
                     ),
                 ),
             ),
-			
-            
+
+
             array(
                 'title' => 'Najbardziej dyskutowane tweety',
                 'name' => 'dyskutowane_tweety',
@@ -181,8 +175,8 @@ class PagesController extends MediaAppController
                     ),
                 ),
             ),
-            
-            
+
+
             array(
                 'title' => 'Najpopularniejsze hashtagi',
                 'name' => 'hashtagi',
@@ -197,7 +191,7 @@ class PagesController extends MediaAppController
             ),
 
 
-			/*
+            /*
             array(
                 'title' => 'Największy przyrost oberwujących',
                 'name' => 'obserwujacy',
@@ -213,7 +207,7 @@ class PagesController extends MediaAppController
                 ),
             ),
             */
-            
+
             array(
                 'title' => 'Najczęściej używane aplikacje',
                 'name' => 'aplikacje',
@@ -223,9 +217,7 @@ class PagesController extends MediaAppController
                     ),
                 ),
             ),
-            
 
-                 
 
             array(
                 'title' => 'Najczęściej udostępniane adresy WWW',
@@ -236,8 +228,8 @@ class PagesController extends MediaAppController
                     ),
                 ),
             ),
-			
-			array(
+
+            array(
                 'title' => 'Najaktywniejsi',
                 'name' => 'najaktywniejsi',
                 'groups' => array(
@@ -253,13 +245,13 @@ class PagesController extends MediaAppController
                     ),
                 ),
             ),
-			
-			array(
+
+            array(
                 'title' => 'Najczęściej retweetowani',
                 'name' => 'retweetowani',
                 'groups' => array(
                     array(
-                    	'mode' => 'stats',
+                        'mode' => 'stats',
                         'preset' => 'accounts-retweets',
                         'field' => 'liczba_retweetow_wlasnych_2013',
                         'order' => 'liczba_retweetow_wlasnych_2013 desc',
@@ -276,7 +268,7 @@ class PagesController extends MediaAppController
                 'name' => 'wywolujacy_dyskusje',
                 'groups' => array(
                     array(
-                    	'mode' => 'stats',
+                        'mode' => 'stats',
                         'preset' => 'accounts-discussions',
                         'field' => 'liczba_odpowiedzi_rts_2013',
                         'order' => 'liczba_odpowiedzi_rts_2013 desc',
@@ -287,7 +279,7 @@ class PagesController extends MediaAppController
                     ),
                 ),
             ),
-            
+
             array(
                 'title' => 'Najczęściej wzmiankowani',
                 'name' => 'wzmiankowani',
@@ -304,8 +296,8 @@ class PagesController extends MediaAppController
                     ),
                 ),
             ),
-            
-            
+
+
             /*
             array(
                 'title' => 'Najczęściej wzmiankowani przez przedstawicieli grup',
@@ -324,25 +316,22 @@ class PagesController extends MediaAppController
                 ),
             ),
             */
-            
-            
-                      
-            
+
+
         );
 
 
         foreach ($ranks as &$rank) {
 
             foreach ($rank['groups'] as $g => $group) {
-				
-				if ($group['mode'] == 'account') {
-					
-										
-					
-					$data = $this->API->getTwitterAccountsGroupByTypes($range, $accounts_types_ids, $group['preset']);
-					$types = $data['types'];
-					
-					
+
+                if ($group['mode'] == 'account') {
+
+
+                    $data = $this->API->getTwitterAccountsGroupByTypes($range, $accounts_types_ids, $group['preset']);
+                    $types = $data['types'];
+
+
                     foreach ($types as &$type)
                         $type = array_merge($type, array(
                             'nazwa' => $accounts_types_nazwy[$type['id']],
@@ -352,16 +341,15 @@ class PagesController extends MediaAppController
                     $rank['groups'][$g] = array_merge($group, array(
                         'types' => $types,
                     ));
-					
-					if( $range == '24h' )
-						$rank['groups'][$g]['desc']	= 'Zakres czasowy: ' . dataSlownie( $data['date'] );					
-						
-                    
+
+                    if ($range == '24h')
+                        $rank['groups'][$g]['desc'] = 'Zakres czasowy: ' . dataSlownie($data['date']);
+
 
                 } elseif ($group['mode'] == 'tweet') {
 
                     $types = $this->API->getTwitterTweetsGroupByTypes($range, $accounts_types_ids, $group['field']);
-										
+
                     foreach ($types as &$type)
                         $type = array_merge($type, array(
                             'nazwa' => $accounts_types_nazwy[$type['id']],
@@ -373,31 +361,30 @@ class PagesController extends MediaAppController
                     ));
 
                 } elseif ($group['mode'] == 'tag') {
-										
+
                     $rank['groups'][$g]['types'] = $stats['tags']['source_types'];
 
                 } elseif ($group['mode'] == 'url') {
-					
+
                     $rank['groups'][$g]['types'] = $stats['urls']['source_types'];
 
                 } elseif ($group['mode'] == 'source') {
 
                     $rank['groups'][$g]['types'] = $stats['source_id']['source_types'];
 
-                }  elseif ($group['mode'] == 'stats') {
-					
-				
-					$rank['groups'][$g]['types'] = $stats[ $group['preset'] ]['source_types'];
-					
-					
+                } elseif ($group['mode'] == 'stats') {
+
+
+                    $rank['groups'][$g]['types'] = $stats[$group['preset']]['source_types'];
+
+
                 }
 
             }
 
         }
-		
 
-		
+
         $this->set('range', $range);
         $this->set('ranks', $ranks);
         $this->set('title_for_layout', 'Państwo w Mediach Społecznościowych');

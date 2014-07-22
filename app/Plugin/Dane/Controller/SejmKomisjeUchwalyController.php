@@ -4,5 +4,5 @@ App::uses('DocsObjectsController', 'Dane.Controller');
 
 class SejmKomisjeUchwalyController extends DocsObjectsController
 {
-	public $breadcrumbsMode = 'app';
+    public $breadcrumbsMode = 'app';
 } 

@@ -10,18 +10,18 @@ class GroupsController extends PowiadomieniaAppController
 
     public function index()
     {
-    
-        $groups = $this->API->getGroups();        
+
+        $groups = $this->API->getGroups();
         if (@$this->request->params['ext'] == 'json') {
-	
+
             $html = '';
             if (!empty($groups)) {
-                
+
                 $view = new View($this, false);
                 $html = $view->element('groups', array(
                     'groups' => $groups,
                 ));
-            
+
             }
 
             $this->set('html', $html);
@@ -29,48 +29,48 @@ class GroupsController extends PowiadomieniaAppController
 
 
         } else {
-			
+
             $groups = $this->API->getGroups();
             $this->set('groups', $groups);
 
         }
-		
+
     }
-	
-	public function view()
-	{
-		
-		$group = $this->API->getGroup( $this->request->params['id'] );		
-		
-		$this->set('group', $group);
-		$this->set('_serialize', array('group'));
-		
-	}
-	
-	public function add()
-	{
-		
-		$data = $this->request->data;		
-		$status = $this->API->saveGroup( $data );
-		
-		$this->set('status', $status);
-		$this->set('_serialize', 'status');
-		
-	}
-	
-	public function edit($id)
-	{
-	
-		$data = $this->request->data;
-		$data['group']['PowiadomieniaGroup']['id'] = $id;
-			
-		$status = $this->API->saveGroup( $data );
-		
-		$this->set('status', $status);
-		$this->set('_serialize', 'status');
-		
-	}
-	
+
+    public function view()
+    {
+
+        $group = $this->API->getGroup($this->request->params['id']);
+
+        $this->set('group', $group);
+        $this->set('_serialize', array('group'));
+
+    }
+
+    public function add()
+    {
+
+        $data = $this->request->data;
+        $status = $this->API->saveGroup($data);
+
+        $this->set('status', $status);
+        $this->set('_serialize', 'status');
+
+    }
+
+    public function edit($id)
+    {
+
+        $data = $this->request->data;
+        $data['group']['PowiadomieniaGroup']['id'] = $id;
+
+        $status = $this->API->saveGroup($data);
+
+        $this->set('status', $status);
+        $this->set('_serialize', 'status');
+
+    }
+
     public function delete($id = null)
     {
         if (!is_null($id)) {

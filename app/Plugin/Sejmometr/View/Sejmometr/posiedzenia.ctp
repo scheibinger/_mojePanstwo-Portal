@@ -9,7 +9,7 @@
 <?php echo $this->Html->script('../plugins/TimelineJS/build/js/storyjs-embed.js', array('block' => 'scriptBlock')); ?>
 
 <div id="sejmometr" class="newLayout">
-	<div id="timeline-embed" data-source="1">
-		
-	</div>
+    <div id="timeline-embed" data-source="1">
+
+    </div>
 </div>

@@ -11,7 +11,8 @@
     <? } else { ?>
         <? foreach ($group['types'] as $type) { ?>
             <div class="col-md-2 rank-col">
-                <h4 class="label label-<?= $type['class'] ?>"><a href="/dane/twitter_accounts/?typ_id[]=<?= $type['id'] ?>"><?= $type['nazwa'] ?></a></h4>
+                <h4 class="label label-<?= $type['class'] ?>"><a
+                        href="/dane/twitter_accounts/?typ_id[]=<?= $type['id'] ?>"><?= $type['nazwa'] ?></a></h4>
                 <? include('mode.ctp'); ?>
             </div>
         <? } ?>

@@ -5,96 +5,112 @@ $this->Combinator->add_libs('js', 'Dane.view-poslowie.js');
 
 echo $this->Element('dataobject/pageBegin');
 echo $this->Element('Dane.dataobject/menuTabs', array(
-	'menu' => $_menu,
+    'menu' => $_menu,
 ));
 ?>
 
-	
-	<div class="poslowie row">
-	    <div class="col-lg-3 objectSide">
-	        <div class="objectSideInner">
-	            <ul class="dataHighlights side">
-	            
-	                <? if ($object->getData('data_wygasniecia_mandatu') && ( $object->getData('data_wygasniecia_mandatu')!='0000-00-00' ) ) { ?>
-	                    <li class="dataHighlight">
-	                        <span class="label label-default">Ta osoba nie jest już posłem</span>
-	                    </li>
-	                    <li class="dataHighlight">
-	                        <p class="_label">Data wygaśnięcia mandatu</p>
-							
-							<div>
-		                        <p class="_value"><?= $this->Czas->dataSlownie($object->getData('data_wygasniecia_mandatu')); ?></p>
-							</div>
-	                    </li>
-	                <? } ?>
-	                
-	                <? if ($object->getData('data_slubowania') && ( $object->getData('data_slubowania')!='0000-00-00' ) ) { ?>
-	                    <li class="dataHighlight">
-	                        <p class="_label">Data ślubowania</p>
-							
-							<div>
-		                        <p class="_value"><?= $this->Czas->dataSlownie($object->getData('data_slubowania')); ?></p>
-							</div>
-	                    </li>
-	                <? } ?>
-					
-					
-                    <li class="dataHighlight big<? if( ( $object->getData('data_wygasniecia_mandatu') && ( $object->getData('data_wygasniecia_mandatu')!='0000-00-00' ) ) || ( $object->getData('data_slubowania') && ( $object->getData('data_slubowania')!='0000-00-00' ) ) ) { ?> topborder<? } ?>">
-                        <p class="_label">Liczba wystąpień na forum Sejmu</p>
-						
-						<div>
-	                        <p class="_value pull-left"><?= $object->getData('liczba_wypowiedzi'); ?></p>
-	                        <? if( $object->getData('liczba_wypowiedzi') ) {?><p class="pull-right nopadding"><a class="btn btn-sm btn-default" href="/dane/poslowie/<?= $object->getId() ?>/wystapienia">Zobacz &raquo;</a></p><?}?>
-						</div>
+
+    <div class="poslowie row">
+    <div class="col-lg-3 objectSide">
+        <div class="objectSideInner">
+            <ul class="dataHighlights side">
+
+                <? if ($object->getData('data_wygasniecia_mandatu') && ($object->getData('data_wygasniecia_mandatu') != '0000-00-00')) { ?>
+                    <li class="dataHighlight">
+                        <span class="label label-default">Ta osoba nie jest już posłem</span>
                     </li>
-                    
-                    <li class="dataHighlight big">
-                        <p class="_label">Frekwencja na głosowaniach</p>
-						
-						<div>
-	                        <p class="_value pull-left"><?= $object->getData('frekwencja'); ?>%</p>
-	                        <p class="pull-right nopadding"><a class="btn btn-sm btn-default" href="/dane/poslowie/<?= $object->getId() ?>/glosowania/?glos_id[]=4">Zobacz &raquo;</a></p>
-						</div>
+                    <li class="dataHighlight">
+                        <p class="_label">Data wygaśnięcia mandatu</p>
+
+                        <div>
+                            <p class="_value"><?= $this->Czas->dataSlownie($object->getData('data_wygasniecia_mandatu')); ?></p>
+                        </div>
                     </li>
-                    
-                    <li class="dataHighlight big">
-                        <p class="_label">Zbuntowanie</p>
-						
-						<div>
-	                        <p class="_value pull-left"><?= $object->getData('zbuntowanie'); ?>%</p>
-	                        <p class="pull-right nopadding"><a class="btn btn-sm btn-default" href="/dane/poslowie/<?= $object->getId() ?>/glosowania?bunt[]=1">Zobacz &raquo;</a></p>
-						</div>
-	                        
-                    </li>                    
-                                        
-                    <li class="dataHighlight big topborder">
-                        <p class="_label">Liczba podpisanych projektów ustaw</p>
-						
-						<div>
-	                        <p class="_value pull-left"><?= $object->getData('liczba_projektow_ustaw'); ?></p>
-	                        <? if( $object->getData('liczba_projektow_ustaw') ) {?><p class="pull-right nopadding"><a class="btn btn-sm btn-default" href="/dane/poslowie/<?= $object->getId() ?>/prawo_projekty?typ_id[]=1">Zobacz &raquo;</a></p><?}?>
-						</div>
+                <? } ?>
+
+                <? if ($object->getData('data_slubowania') && ($object->getData('data_slubowania') != '0000-00-00')) { ?>
+                    <li class="dataHighlight">
+                        <p class="_label">Data ślubowania</p>
+
+                        <div>
+                            <p class="_value"><?= $this->Czas->dataSlownie($object->getData('data_slubowania')); ?></p>
+                        </div>
                     </li>
-                    
-                    <li class="dataHighlight big">
-                        <p class="_label">Liczba podpisanych projektów uchwał</p>
-						
-						<div>
-	                        <p class="_value pull-left"><?= $object->getData('liczba_projektow_uchwal'); ?></p>
-	                        <? if( $object->getData('liczba_projektow_uchwal') ) {?><p class="pull-right nopadding"><a class="btn btn-sm btn-default" href="/dane/poslowie/<?= $object->getId() ?>/prawo_projekty?typ_id[]=2">Zobacz &raquo;</a></p><?}?>
-						</div>
-                    </li>
-                    
-                    <li class="dataHighlight big">
-                        <p class="_label">Liczba wysłanych interpelacji</p>
-						
-						<div>
-	                        <p class="_value pull-left"><?= $object->getData('liczba_interpelacji'); ?></p>
-	                        <? if( $object->getData('liczba_interpelacji') ) {?><p class="pull-right nopadding"><a class="btn btn-sm btn-default" href="/dane/poslowie/<?= $object->getId() ?>/interpelacje">Zobacz &raquo;</a></p><?}?>
-						</div>
-                    </li>
-                                        
-                    <? /* ?>
+                <? } ?>
+
+
+                <li class="dataHighlight big<? if (($object->getData('data_wygasniecia_mandatu') && ($object->getData('data_wygasniecia_mandatu') != '0000-00-00')) || ($object->getData('data_slubowania') && ($object->getData('data_slubowania') != '0000-00-00'))) { ?> topborder<? } ?>">
+                    <p class="_label">Liczba wystąpień na forum Sejmu</p>
+
+                    <div>
+                        <p class="_value pull-left"><?= $object->getData('liczba_wypowiedzi'); ?></p>
+                        <? if ($object->getData('liczba_wypowiedzi')) { ?><p class="pull-right nopadding"><a
+                                class="btn btn-sm btn-default"
+                                href="/dane/poslowie/<?= $object->getId() ?>/wystapienia">Zobacz &raquo;</a></p><? } ?>
+                    </div>
+                </li>
+
+                <li class="dataHighlight big">
+                    <p class="_label">Frekwencja na głosowaniach</p>
+
+                    <div>
+                        <p class="_value pull-left"><?= $object->getData('frekwencja'); ?>%</p>
+
+                        <p class="pull-right nopadding"><a class="btn btn-sm btn-default"
+                                                           href="/dane/poslowie/<?= $object->getId() ?>/glosowania/?glos_id[]=4">Zobacz &raquo;</a>
+                        </p>
+                    </div>
+                </li>
+
+                <li class="dataHighlight big">
+                    <p class="_label">Zbuntowanie</p>
+
+                    <div>
+                        <p class="_value pull-left"><?= $object->getData('zbuntowanie'); ?>%</p>
+
+                        <p class="pull-right nopadding"><a class="btn btn-sm btn-default"
+                                                           href="/dane/poslowie/<?= $object->getId() ?>/glosowania?bunt[]=1">Zobacz &raquo;</a>
+                        </p>
+                    </div>
+
+                </li>
+
+                <li class="dataHighlight big topborder">
+                    <p class="_label">Liczba podpisanych projektów ustaw</p>
+
+                    <div>
+                        <p class="_value pull-left"><?= $object->getData('liczba_projektow_ustaw'); ?></p>
+                        <? if ($object->getData('liczba_projektow_ustaw')) { ?><p class="pull-right nopadding"><a
+                                class="btn btn-sm btn-default"
+                                href="/dane/poslowie/<?= $object->getId() ?>/prawo_projekty?typ_id[]=1">Zobacz &raquo;</a>
+                            </p><? } ?>
+                    </div>
+                </li>
+
+                <li class="dataHighlight big">
+                    <p class="_label">Liczba podpisanych projektów uchwał</p>
+
+                    <div>
+                        <p class="_value pull-left"><?= $object->getData('liczba_projektow_uchwal'); ?></p>
+                        <? if ($object->getData('liczba_projektow_uchwal')) { ?><p class="pull-right nopadding"><a
+                                class="btn btn-sm btn-default"
+                                href="/dane/poslowie/<?= $object->getId() ?>/prawo_projekty?typ_id[]=2">Zobacz &raquo;</a>
+                            </p><? } ?>
+                    </div>
+                </li>
+
+                <li class="dataHighlight big">
+                    <p class="_label">Liczba wysłanych interpelacji</p>
+
+                    <div>
+                        <p class="_value pull-left"><?= $object->getData('liczba_interpelacji'); ?></p>
+                        <? if ($object->getData('liczba_interpelacji')) { ?><p class="pull-right nopadding"><a
+                                class="btn btn-sm btn-default"
+                                href="/dane/poslowie/<?= $object->getId() ?>/interpelacje">Zobacz &raquo;</a></p><? } ?>
+                    </div>
+                </li>
+
+                <? /* ?>
                     <? if($object->getData('wartosc_refundacja_kwater_pln')) {?>
                     <li class="dataHighlight">
                         <p class="_label">Wartość refenduacji w 2013 r.</p>
@@ -110,14 +126,15 @@ echo $this->Element('Dane.dataobject/menuTabs', array(
                         <p class="_value"><?= _currency($object->getData('wartosc_uposazenia_pln')); ?></p>
                     </li>
                     <? } ?>
-                    <? */ ?>
-                    
-	            </ul>  
-                    
-                    
-                    
-                    
-	            <? /*
+                    <? */
+                ?>
+
+            </ul>
+
+
+
+
+            <? /*
 	
 	            <ul class="dataHighlights side hide">
 	                <? if ($object->getData('forma_prawna_str')) { ?>
@@ -167,19 +184,20 @@ echo $this->Element('Dane.dataobject/menuTabs', array(
 	                <a href="/dane/krs_podmioty/<?= $object->getId() ?>/odpis" class="btn btn-primary">Kliknij aby pobrać</a>
 	            </div>
 	            <? }?>
-	            <? */ ?>
-	            
-	        </div>
-	    </div>
-	
-	
-	    <div class="col-lg-9 objectMain">
-	        <div class="object mpanel">
-	            
-	            <div class="block-group">
-	            	
-	            	<? if( $projekty_za ) { ?>
-	            	<div id="projekty_za" class="block">
+	            <? */
+            ?>
+
+        </div>
+    </div>
+
+
+    <div class="col-lg-9 objectMain">
+        <div class="object mpanel">
+
+            <div class="block-group">
+
+                <? if ($projekty_za) { ?>
+                    <div id="projekty_za" class="block">
                         <div class="block-header">
                             <h2 class="label za pull-left">Projekty, za którymi głosował poseł</h2>
                             <a class="btn btn-default btn-sm pull-right"
@@ -198,9 +216,9 @@ echo $this->Element('Dane.dataobject/menuTabs', array(
                             </div>
                         </div>
                     </div>
-                    <? } ?>
-                    
-                    <? if( $projekty_przeciw ) { ?>
+                <? } ?>
+
+                <? if ($projekty_przeciw) { ?>
                     <div id="projekty_przeciw" class="block">
                         <div class="block-header">
                             <h2 class="label przeciw pull-left">Projekty, przeciwko którym głosował poseł</h2>
@@ -220,14 +238,16 @@ echo $this->Element('Dane.dataobject/menuTabs', array(
                             </div>
                         </div>
                     </div>
-                    <? } ?>
-                    
-                    <? if( $projekty_wstrzymania ) { ?>
+                <? } ?>
+
+                <? if ($projekty_wstrzymania) { ?>
                     <div id="projekty_wstrzymania" class="block">
                         <div class="block-header">
-                            <h2 class="label wstrzymanie pull-left">Projekty, nad którymi poseł wstrzymał się od głosu</h2>
+                            <h2 class="label wstrzymanie pull-left">Projekty, nad którymi poseł wstrzymał się od
+                                głosu</h2>
                             <a class="btn btn-default btn-sm pull-right"
-                               href="/dane/poslowie/<?= $object->getId() ?>/prawo_projekty_wstrzymanie">Zobacz wszystkie</a>
+                               href="/dane/poslowie/<?= $object->getId() ?>/prawo_projekty_wstrzymanie">Zobacz
+                                wszystkie</a>
                         </div>
 
                         <div class="content">
@@ -242,14 +262,16 @@ echo $this->Element('Dane.dataobject/menuTabs', array(
                             </div>
                         </div>
                     </div>
-                    <? } ?>
-                    
-                    <? if( $poslowie_nieobecni ) { ?>
+                <? } ?>
+
+                <? if ($poslowie_nieobecni) { ?>
                     <div id="projekty_nieobecni" class="block">
                         <div class="block-header">
-                            <h2 class="label nieobecnosc pull-left">Projekty, dla których poseł nie przyszedł na głosowanie</h2>
+                            <h2 class="label nieobecnosc pull-left">Projekty, dla których poseł nie przyszedł na
+                                głosowanie</h2>
                             <a class="btn btn-default btn-sm pull-right"
-                               href="/dane/poslowie/<?= $object->getId() ?>/prawo_projekty_nieobecnosc">Zobacz wszystkie</a>
+                               href="/dane/poslowie/<?= $object->getId() ?>/prawo_projekty_nieobecnosc">Zobacz
+                                wszystkie</a>
                         </div>
 
                         <div class="content">
@@ -264,11 +286,11 @@ echo $this->Element('Dane.dataobject/menuTabs', array(
                             </div>
                         </div>
                     </div>
-                    <? } ?>
-                    
-	            	
-	            	
-	            	<? /*
+                <? } ?>
+
+
+
+                <? /*
 	            	<? if ($wystapienia) { ?>
                     <div id="wystapienia" class="block">
                         <div class="block-header">
@@ -362,17 +384,18 @@ echo $this->Element('Dane.dataobject/menuTabs', array(
                         </div>
                     </div>
                 <? } ?>
-                <? */ ?>
-	            	
-	            </div>
-	
-	        </div>
-	    </div>
+                <? */
+                ?>
+
+            </div>
+
+        </div>
     </div>
-	
-	
-	
-	
+    </div>
+
+
+
+
 
 
 <?= $this->Element('dataobject/pageEnd'); ?>
