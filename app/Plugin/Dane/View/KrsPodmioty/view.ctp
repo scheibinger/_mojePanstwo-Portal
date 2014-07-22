@@ -199,7 +199,7 @@ $this->Combinator->add_libs('js', 'Dane.view-krspodmioty');
     <div class="profile_baner" data-adres="<?= urlencode($adres) ?>">
         <div class="bg">
             <img
-                src="http://maps.googleapis.com/maps/api/staticmap?center=<?= urlencode($adres) ?>&markers=<?= urlencode($adres) ?>&zoom=15&sensor=false&size=640x140&scale=2&feature:road"/>
+                src="http://maps.googleapis.com/maps/api/staticmap?center=<?= urlencode($adres) ?>&markers=<?= urlencode($adres) ?>&zoom=15&sensor=false&size=640x155&scale=2&feature:road"/>
 
             <div class="content">
                 <p>
@@ -218,6 +218,15 @@ $this->Combinator->add_libs('js', 'Dane.view-krspodmioty');
             </script>
         </div>
     </div>
+
+    <?php if ($object->getId() == '481129') { ?>
+        <div class="special banner">
+            <a href="http://mojepanstwo.pl/dane/krs_podmioty/481129/umowy" target="_blank">
+                <img src="/Dane/img/krakow_special_banner.png"
+                     title="Zobacz umowy podpisywane przez Komitet Konkursowy Kraków 2022" width="885" height="85"/>
+            </a>
+        </div>
+    <?php } ?>
 
     <div class="block-group">
 

@@ -29,7 +29,7 @@ jQuery.extend(jQuery.ui.dialog.prototype.options, {
             //static: Object, dynamic: Function
             var c = s ? {} : function () {
                 this.init.apply(this, arguments);
-            }
+            };
 
             //all of our classes have these in common
             var methods = {
@@ -141,7 +141,7 @@ jQuery.extend(jQuery.ui.dialog.prototype.options, {
                         return false;
                     }
                 }
-            }
+            };
 
             //static: doesn't need a constructor
             s ? delete methods.init : null;

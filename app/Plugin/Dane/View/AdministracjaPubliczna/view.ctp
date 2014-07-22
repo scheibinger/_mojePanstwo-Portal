@@ -201,9 +201,9 @@ echo $this->Element('dataobject/pageRelated', array(
 	            <div class="profile_baner" data-adres="<?= urlencode($adres) ?>">
 	                <div class="bg">
 	                    <img
-	                        src="http://maps.googleapis.com/maps/api/staticmap?center=<?= urlencode($adres) ?>&markers=<?= urlencode($adres) ?>&zoom=15&sensor=false&size=640x140&scale=2&feature:road"/>
-	
-	                    <div class="content">
+                            src="http://maps.googleapis.com/maps/api/staticmap?center=<?= urlencode($adres) ?>&markers=<?= urlencode($adres) ?>&zoom=15&sensor=false&size=640x155&scale=2&feature:road"/>
+
+                        <div class="content">
 	                        <p><?= $object->getData('adres_str') ?></p>
 	                        <button class="btn btn-info"><?= __d('dane', 'LC_DANE_VIEW_KRSPODMIOTY_OTWORZ_MAPE') ?></button>
 	                    </div>

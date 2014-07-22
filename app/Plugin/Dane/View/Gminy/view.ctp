@@ -105,8 +105,15 @@ echo $this->Element('Dane.dataobject/menuTabs', array(
 <div class="col-lg-9 objectMain">
 <div class="object mpanel">
 
-
 <div class="block-group">
+<?php if ($object->getId() == '903') { ?>
+    <div class="special banner">
+        <a href="http://mojepanstwo.pl/dane/krs_podmioty/481129/umowy" target="_blank">
+            <img src="/Dane/img/krakow_special_banner.png"
+                 title="Zobacz umowy podpisywane przez Komitet Konkursowy Kraków 2022" width="885" height="85"/>
+        </a>
+    </div>
+<?php } ?>
 
 <div class="row bottomborder">
     <div class="col-md-4">
