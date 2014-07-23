@@ -82,7 +82,18 @@ class DatachannelsController extends DaneAppController
     {
 
         $alias = (string)@$this->request->params['alias'];
-        $data = $this->API->getDatachannel($alias);
+        $this->dataobjectsBrowserView(array(
+            'source' => 'datachannel:' . $alias,
+            'showTitle' => true,
+            'titleTag' => 'h1',
+        ));
+
+    }
+    
+    public function beforeRender()
+    {
+	    
+	    $data = $this->dataBrowser->datachannel;
         $datachannel = $data['Datachannel'];
 
 
@@ -103,14 +114,7 @@ class DatachannelsController extends DaneAppController
 
         $title_for_layout = $datachannel['name'];
         $this->set('title_for_layout', $title_for_layout);
-
-
-        $this->dataobjectsBrowserView(array(
-            'source' => 'datachannel:' . $alias,
-            'showTitle' => true,
-            'titleTag' => 'h1',
-        ));
-
+	    
     }
 
 }

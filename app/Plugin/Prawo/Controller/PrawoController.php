@@ -30,27 +30,26 @@ class PrawoController extends AppController
             $search = array();
 
             $q = @$this->request->query['q'];
-            if ($q) {
-                $api->searchDataset('ustawy', array(
-                    'conditions' => array(
-                        'q' => $q,
-                        'status_id' => '1',
-                    ),
-                    'limit' => 10,
-                ));
-                $objects = $api->getObjects();
 
-                foreach ($objects as $obj)
-                    $search[] = array_merge($obj->getData(), array(
-                        'data_slowna' => dataSlownie($obj->getData('data_publikacji')),
-                        'hl' => $obj->getHlText(),
-                    ));
-            }
 
-            $this->set('search', $search);
+            $api->searchDataset('prawo', array(
+                'conditions' => array(
+                    'q' => $q,
+                    'status_id' => '1',
+                ),
+                'facet' => array('haslo_id'),
+                'limit' => 10,
+            ));
+            
+            $objects = $api->getObjects();      		                    
+
+            $this->set('search', array(
+            	'objects' => $api->getObjects(),
+            	'facets' => $api->getFacets(), 
+            ));
             $this->set('_serialize', array('search'));
 
-        } else $this->redirect('/ustawy');
+        }
     }
 
 } 
