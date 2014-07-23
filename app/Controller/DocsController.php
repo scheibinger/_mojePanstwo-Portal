@@ -47,5 +47,12 @@ class DocsController extends AppController
         }
 
     }
+    
+    public function tunell()
+    {
+	    
+	    echo file_get_contents('http://docs.sejmometr.pl' . $_SERVER['REQUEST_URI']); die();
+	    
+    }
 
 }
