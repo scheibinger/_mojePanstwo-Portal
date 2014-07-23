@@ -178,7 +178,7 @@ jQuery(document).ready(function () {
                 }
             };
 
-        d3.json(connectionGraph.data('id') + "/graph.json", function (error, results) {
+        d3.json("/dane/krs_podmioty/" + connectionGraph.data('id') + "/graph.json", function (error, results) {
             var graph = results._layers.graph;
 
             var nodes = graph.nodes,
