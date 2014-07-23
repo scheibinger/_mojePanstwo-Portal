@@ -17,10 +17,13 @@ class DatasetsController extends DaneAppController
             'showTitle' => true,
             'titleTag' => 'h1',
         ));
-		
-		
-		/*        
-        $data = $this->API->getDataset($alias);
+
+    }
+    
+    public function beforeRender()
+    {
+	    
+	    $data = $this->dataBrowser->dataset;
         $dataset = $data['Dataset'];
         $datachannel = $data['Datachannel'];
 
@@ -33,8 +36,7 @@ class DatasetsController extends DaneAppController
 
         $title_for_layout = $dataset['name'];
         $this->set('title_for_layout', $title_for_layout);
-        */
-
+	    
     }
 
 }

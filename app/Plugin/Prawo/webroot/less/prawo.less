@@ -57,6 +57,40 @@ footer {
 			
 		}
 		
+		.nav > li {
+			
+			-webkit-transition: left 0.5s ease-in-out;
+			-moz-transition: left 0.5s ease-in-out;
+			-o-transition: left 0.5s ease-in-out;
+			transition: left 0.5s ease-in-out;
+			
+			
+			
+			
+		    left: 0%;
+		    top: 0;
+		    height: 31px;
+		    width: 100%;
+		    display: block;
+		    position: absolute;
+			
+			&._hidden {
+				left: -100%;
+			}
+			
+			&._active {				
+				a, a:hover, a:focus {
+					background-color: #5cb85c;
+					color: #FFF;
+					
+					span {
+						color: #FFF;
+					}
+				}
+			}
+		
+		}
+		
 		.nav > li > a {
 			font-size: 12px;
 		    font-weight: 500;

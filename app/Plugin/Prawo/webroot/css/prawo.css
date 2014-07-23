@@ -43,6 +43,32 @@ footer .container {
   left: 0;
   background-color: #F0F0F0;
 }
+#prawo #tagsDiv .nav > li {
+  -webkit-transition: left 0.5s ease-in-out;
+  -moz-transition: left 0.5s ease-in-out;
+  -o-transition: left 0.5s ease-in-out;
+  transition: left 0.5s ease-in-out;
+  left: 0%;
+  top: 0;
+  height: 31px;
+  width: 100%;
+  display: block;
+  position: absolute;
+}
+#prawo #tagsDiv .nav > li._hidden {
+  left: -100%;
+}
+#prawo #tagsDiv .nav > li._active a,
+#prawo #tagsDiv .nav > li._active a:hover,
+#prawo #tagsDiv .nav > li._active a:focus {
+  background-color: #5cb85c;
+  color: #FFF;
+}
+#prawo #tagsDiv .nav > li._active a span,
+#prawo #tagsDiv .nav > li._active a:hover span,
+#prawo #tagsDiv .nav > li._active a:focus span {
+  color: #FFF;
+}
 #prawo #tagsDiv .nav > li > a {
   font-size: 12px;
   font-weight: 500;

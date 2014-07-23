@@ -17,8 +17,8 @@
 			
 			<ul class="nav nav-pills nav-stacked">
 				<? foreach( $tags as $tag ) {?>
-				<li>
-					<a href="#"><?= $tag['q'] ?> <span class="badge"><?= $tag['liczba_aktow'] ?></span></a>
+				<li class="_hidden">
+					<a data-tag_id="<?= $tag['id'] ?>" href="#"><?= $tag['q'] ?> <span class="badge"><?= $tag['liczba_aktow'] ?></span></a>
 				</li>
 				<? } ?>
 			</ul>

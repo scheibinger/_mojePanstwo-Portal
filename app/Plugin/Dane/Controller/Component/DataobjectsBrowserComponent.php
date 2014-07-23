@@ -18,6 +18,9 @@ class DataobjectsBrowserComponent extends Component
     public $routes = array();
     public $inline = false;
     public $limit = 20;
+    
+    public $dataset = false;
+    public $datachannel = false;
 
     public $excludeFilters = array();
 
@@ -113,7 +116,7 @@ class DataobjectsBrowserComponent extends Component
 
     public function beforeRender(Controller $controller)
     {
-
+		
         $q = '';
         $conditions = array();
         $order = array();
@@ -254,6 +257,7 @@ class DataobjectsBrowserComponent extends Component
             $dataset = $controller->API->getDataset($this->tag, array(
             	'full' => true,
             ));
+            $this->dataset = $dataset;
             
             
             if (!$this->title)
@@ -318,8 +322,10 @@ class DataobjectsBrowserComponent extends Component
             $datachannel = $controller->API->getDatachannel($this->tag, array(
             	'full' => true,
             ));
+			
+            $this->datachannel = $datachannel;
             $datachannel = $datachannel['Datachannel'];
-            $this->title = $datachannel['Datachannel']['name'];
+            $this->title = $datachannel['name'];
 
             // $data = $controller->API->getDatachannel($this->tag);
             // $datachannel = $data['Datachannel'];
