@@ -40,6 +40,7 @@ class ApiController extends AppController
     }
 
     public function technical_info() {
-
+        // TODO doc layers
+        // TODO osobno doc dla rozwijających API
     }
 }
