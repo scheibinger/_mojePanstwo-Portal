@@ -166,15 +166,15 @@ jQuery(document).ready(function () {
                     'osoba': "#24333A"
                 },
                 size: {
-                    'distance': 150,
-                    'linksLength': 40,
+                    'distance': 200,
+                    'linksLength': 60,
                     'linksWidth': 1,
-                    'linkText': '4px',
-                    'nodesPodmiot': 30,
-                    'nodesOsoba': 20,
-                    'nodeText': '5px',
-                    'nodeTextBox': 6,
-                    'nodeTextSeparate': 2
+                    'linkText': '8px',
+                    'nodesPodmiot': 45,
+                    'nodesOsoba': 30,
+                    'nodeText': '10px',
+                    'nodeTextBox': 10,
+                    'nodeTextSeparate': 3
                 }
             };
 
@@ -229,7 +229,7 @@ jQuery(document).ready(function () {
             }
 
             d3Data.zoom = d3.behavior.zoom()
-                .scaleExtent([1, 4])
+                .scaleExtent([0.5, 4])
                 .on("zoom", zoomed);
 
             d3Data.drag = d3.behavior.drag()
@@ -482,7 +482,7 @@ jQuery(document).ready(function () {
                 if (node.y < ((d3Data.size.nodesPodmiot > d3Data.size.nodesOsoba) ? d3Data.size.nodesPodmiot : d3Data.size.nodesOsoba)) node.y -= node.y - ((d3Data.size.nodesPodmiot > d3Data.size.nodesOsoba) ? d3Data.size.nodesPodmiot : d3Data.size.nodesOsoba);
 
                 var radius = (node.label == "podmiot") ? d3Data.size.nodesPodmiot : ((node.label == "osoba") ? d3Data.size.nodesOsoba : ((d3Data.size.nodesPodmiot > d3Data.size.nodesOsoba) ? d3Data.size.nodesPodmiot : d3Data.size.nodesOsoba)),
-                    space = 6,
+                    space = 10,
                     r = radius + space,
                     nx1 = node.x - r,
                     nx2 = node.x + r,
