@@ -20,6 +20,7 @@ function initialize() {
     document.body.appendChild(contentStringHeightTemp);
 
     /*ADDING HEIGHT TO ORIGIN NODE*/
+    /*ADDING HEIGHT TO ORIGIN NODE*/
     contentString.style.height = contentStringHeightTemp.clientHeight;
 
     /*REMOVING CLONED NODE*/
@@ -178,9 +179,7 @@ jQuery(document).ready(function () {
                 }
             };
 
-        d3.json("/dane/krs_podmioty/" + connectionGraph.data('id') + "/graph.json", function (error, results) {
-            var graph = results;
-
+        d3.json("/dane/krs_podmioty/" + connectionGraph.data('id') + "/graph.json", function (error, graph) {
             var nodes = graph.nodes,
                 links = [],
                 root = nodes[0];
@@ -277,17 +276,17 @@ jQuery(document).ready(function () {
                 .attr("viewBox", "0 -5 10 10")
                 .attr("refX", function (d) {
                     if (d == "arrowPodmiot")
-                        return (d3Data.size.nodesPodmiot * 2);
+                        return (d3Data.size.nodesPodmiot * 2) - 4;
                     else if (d == "arrowOsoba")
-                        return (d3Data.size.nodesOsoba * 2);
+                        return (d3Data.size.nodesOsoba * 2) - 4;
                     else
-                        return ((d3Data.size.nodesPodmiot > d3Data.size.nodesOsoba) ? d3Data.size.nodesPodmiot * 2 : d3Data.size.nodesOsoba * 2);
+                        return ((d3Data.size.nodesPodmiot > d3Data.size.nodesOsoba) ? d3Data.size.nodesPodmiot * 2 : d3Data.size.nodesOsoba * 2) - 4;
                 })
                 .attr("refY", function (d) {
                     if (d == "arrowPodmiot")
-                        return -5.5;
+                        return -10;
                     else if (d == "arrowOsoba")
-                        return -3.5;
+                        return -8;
                     else
                         return ((d3Data.size.nodesPodmiot > d3Data.size.nodesOsoba) ? -5.5 : -3.5);
                 })
