@@ -179,7 +179,7 @@ jQuery(document).ready(function () {
             };
 
         d3.json("/dane/krs_podmioty/" + connectionGraph.data('id') + "/graph.json", function (error, results) {
-            var graph = results._layers.graph;
+            var graph = results;
 
             var nodes = graph.nodes,
                 links = [],

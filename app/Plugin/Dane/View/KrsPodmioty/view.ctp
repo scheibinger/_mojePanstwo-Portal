@@ -403,10 +403,8 @@ $this->Combinator->add_libs('js', 'Dane.view-krspodmioty');
 
     <div class="powiazania block">
         <div class="block-header"><h2 class="label">Powiązania</h2></div>
-
-        <div id="connectionGraph" data-id="<?php echo $object->getId() ?>">
-            <script>var connectionGraphObject = <?php echo json_encode($object) ?>;</script>
-        </div>
+				
+        <div id="connectionGraph" data-id="<?php echo $object->getId() ?>"></div>
     </div>
 
 
