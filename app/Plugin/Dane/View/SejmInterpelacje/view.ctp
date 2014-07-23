@@ -1,4 +1,4 @@
-<?php $this->Combinator->add_libs('css', $this->Less->css('htmlexDocMain')); ?>
+<?php $this->Combinator->add_libs('css', $this->Less->css('htmlexDocMain_v1')); ?>
 <?php $this->Combinator->add_libs('css', $this->Less->css('htmlexDoc', array('plugin' => 'Dane'))); ?>
 <?php $this->Combinator->add_libs('css', $this->Less->css('view-sejminterpelacje', array('plugin' => 'Dane'))); ?>
 

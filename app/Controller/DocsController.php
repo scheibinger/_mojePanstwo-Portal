@@ -48,10 +48,18 @@ class DocsController extends AppController
 
     }
     
-    public function tunell()
+    public function tunnel()
     {
 	    
-	    echo file_get_contents('http://docs.sejmometr.pl' . $_SERVER['REQUEST_URI']); die();
+	    $content = file_get_contents('http://docs.sejmometr.pl' . $_SERVER['REQUEST_URI']);
+	    $content_type = false;
+	    
+	    foreach( $http_response_header as $r )
+	    	if( stripos($r, 'Content-Type')===0 )
+	    		header( $r );
+	    
+	    echo $content;
+	    die();
 	    
     }
 
