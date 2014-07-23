@@ -26,7 +26,7 @@ class KrsPodmiotyController extends DataobjectsController
     public function view()
     {
 
-        $this->addInitLayers(array('reprezentacja', 'wspolnicy', 'jedynyAkcjonariusz', 'prokurenci', 'nadzor', 'komitetZalozycielski', 'dzialalnosci', 'graph', 'stats'));
+        $this->addInitLayers(array('reprezentacja', 'wspolnicy', 'jedynyAkcjonariusz', 'prokurenci', 'nadzor', 'komitetZalozycielski', 'dzialalnosci', 'graph'));
 
         if ($this->Session->read('KRS.odpis') == $this->params->id)
             $this->addInitLayers('odpis');
