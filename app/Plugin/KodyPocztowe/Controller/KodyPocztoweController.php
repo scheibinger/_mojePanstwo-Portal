@@ -20,8 +20,8 @@ class KodyPocztoweController extends KodyPocztoweAppController
 
         if ($kod) {
             $code = $this->API->searchCode($kod);
-            if ($code && $code['Code'] && $code['Code']['id']) {
-                $this->redirect(array('plugin' => 'Dane', 'controller' => 'kody_pocztowe', 'action' => 'view', 'id' => $code['Code']['id']));
+            if ($code && $code['object_id']) {
+                $this->redirect(array('plugin' => 'Dane', 'controller' => 'kody_pocztowe', 'action' => 'view', 'id' => $code['object_id']));
             } else {
                 $this->Session->setFlash('Podany kod pocztowy nie zostały odnaleziony');
             }
