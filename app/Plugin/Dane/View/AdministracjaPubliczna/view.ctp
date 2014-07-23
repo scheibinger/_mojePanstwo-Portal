@@ -189,19 +189,19 @@ echo $this->Element('dataobject/pageRelated', array(
 	        <div class="object mpanel">
 	            
 	            <?
-	            /*
-	            $adres = $object->getData('adres_ulica');
-	            $adres .= ' ' . $object->getData('adres_numer');
-	            $adres .= ', ' . $object->getData('adres_miejscowosc');
-	            $adres .= ', Polska';
-	            */
 	            $adres = $object->getData('adres_str');
-	            ?>
-	
+                $re = "/^([0-9][0-9][-][0-9][0-9][0-9])/";
+
+                if (preg_match($re, $adres, $matches)) {
+                    $adres_map = substr($adres, 7);
+                } else {
+                    $adres_map = $adres;
+                }
+                ?>
 	            <div class="profile_baner" data-adres="<?= urlencode($adres) ?>">
 	                <div class="bg">
 	                    <img
-                            src="http://maps.googleapis.com/maps/api/staticmap?center=<?= urlencode($adres) ?>&markers=<?= urlencode($adres) ?>&zoom=15&sensor=false&size=640x155&scale=2&feature:road"/>
+                            src="http://maps.googleapis.com/maps/api/staticmap?center=<?= urlencode($adres_map) ?>&markers=<?= urlencode($adres_map) ?>&zoom=15&sensor=false&size=640x155&scale=2&feature:road"/>
 
                         <div class="content">
 	                        <p><?= $object->getData('adres_str') ?></p>

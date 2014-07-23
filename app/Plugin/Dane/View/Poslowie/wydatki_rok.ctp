@@ -1,7 +1,6 @@
-<?php $this->Combinator->add_libs('css', $this->Less->css('htmlexDocMain')); ?>
+<?php $this->Combinator->add_libs('css', $this->Less->css('htmlexDocMain_v1')); ?>
 <?php $this->Combinator->add_libs('css', $this->Less->css('htmlexDoc', array('plugin' => 'Dane'))); ?>
 <?php $this->Combinator->add_libs('js', 'toolbar'); ?>
-
 
 <?php echo $this->Html->css($document->getCSSLocation()); ?>
 

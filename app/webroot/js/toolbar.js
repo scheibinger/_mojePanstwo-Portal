@@ -55,7 +55,7 @@ jQuery(document).ready(function () {
             jQuery('.loadMoreDocumentContent').addClass('loading');
             
             var p = parseInt(documentData.currentPackage) + 1;
-            var url = 'http://docs.sejmometr.pl/htmlex/' + documentId + '/' + documentId + '_' + p + '.html';
+            var url = '/htmlex/' + documentId + '/' + documentId + '_' + p + '.html';
             jQuery.get(url, function(data) {
                 jQuery('.loadMoreDocumentContent').removeClass('loading');
                 document.find('.canvas').append(data);
@@ -73,7 +73,7 @@ jQuery(document).ready(function () {
         jQuery('.loadMoreDocumentContent').addClass('loading');
         
         var p = parseInt(documentData.currentPackage) + 1;
-        var url = 'http://docs.sejmometr.pl/htmlex/' + documentId + '/' + documentId + '_' + p + '.html';
+        var url = '/htmlex/' + documentId + '/' + documentId + '_' + p + '.html';
         jQuery.get(url, function (data) {
             jQuery('.loadMoreDocumentContent').removeClass('loading');
             document.find('.canvas').append(data);
