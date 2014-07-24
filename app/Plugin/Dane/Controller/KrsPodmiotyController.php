@@ -22,16 +22,33 @@ class KrsPodmiotyController extends DataobjectsController
         $this->Auth->deny(array('pobierz_odpis', 'odpis'));
     }
 
-
+	public function _prepareView(){
+		
+		parent::_prepareView();
+		
+		if( defined('PK_DOMAIN') ) {
+			
+			$pieces = parse_url(Router::url($this->here, true));
+			if( ($pieces['host'] == PK_DOMAIN) && ($this->object->getData('gmina_id')!='903') ) {
+			
+				$this->redirect('http://' . PORTAL_DOMAIN . $_SERVER['REQUEST_URI']);
+                die();
+			
+			}
+			
+		}
+		
+	}
+	
     public function view()
     {
-
+			
         $this->addInitLayers(array('reprezentacja', 'wspolnicy', 'jedynyAkcjonariusz', 'prokurenci', 'nadzor', 'komitetZalozycielski', 'dzialalnosci'));
 
         if ($this->Session->read('KRS.odpis') == $this->params->id)
             $this->addInitLayers('odpis');
 
-        parent::view();
+        $this->_prepareView();
 
         if ($this->Session->read('KRS.odpis') == $this->object->getId()) {
 
