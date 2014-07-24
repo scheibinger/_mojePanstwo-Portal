@@ -13,12 +13,12 @@ class KrsOsobyController extends DataobjectsController
         'hlFields' => array(),
     );
 
-    public $initLayers = array('powiazania');
+    public $initLayers = array('powiazania', 'organizacje');
 
     public function view()
     {
         parent::view();
-        $powiazania = $this->object->getLayer('powiazania', 'organizacje');
+        $powiazania = $this->object->getLayer('powiazania');
 
         if (
             isset($powiazania['posel_id']) &&
