@@ -68,7 +68,7 @@ $( document ).ready(function() {
 				
 				if( !li.hasClass('_active') ) {
 					
-					li.css('transition-delay', i / 10 + 's');
+					li.css('transition-delay', i / 15 + 's');
 					li.addClass('_hidden');
 					
 				}
@@ -94,7 +94,7 @@ $( document ).ready(function() {
 				
 				if( !li.hasClass('_active') ) {
 					
-					li.css('transition-delay', i / 10 + 's');
+					li.css('transition-delay', i / 15 + 's');
 					li.removeClass('_hidden');
 					
 				}

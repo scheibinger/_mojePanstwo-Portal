@@ -23,12 +23,7 @@
                     </li>
                     <? } ?>
                     
-                    <? if( $object->getData('sygnatura') ) {?>
-                    <li class="dataHighlight">
-                        <p class="_label">Sygnatura</p>
-                        <p class="_value"><?= $object->getData('sygnatura'); ?></p>
-                    </li>
-                    <? } ?>
+                    
 
                     <? if( $object->getData('data_wydania') ) {?>
                     <li class="dataHighlight">
@@ -48,6 +43,26 @@
                     <li class="dataHighlight">
                         <p class="_label">Data wejścia w życie</p>
                         <p class="_value"><?= $this->Czas->dataSlownie($object->getData('data_wejscia_w_zycie')); ?></p>
+                    </li>
+                    <? } ?>
+                    
+                    <? if( $tags = $object->getLayer('tags') ) {  $t = 0;?>
+                    
+                    <li class="dataHighlight topborder">
+                        <p class="_label">Tematy</p>
+                        <ul class="_value tags">
+	                    <? foreach( $tags as $tag ) {?>
+	                    	<li><a title="<?= addslashes( $tag['q'] ) ?>" class="label label-default" href="/dane/prawo/?haslo_id=<?= $tag['id'] ?>"><?= $tag['q'] ?></a></li>
+	                    <? $t++; if($t==10) break;} ?>
+                        </ul>
+                    </li>
+                    
+                    <? } ?>
+                    
+                    <? if( $object->getData('sygnatura') ) {?>
+                    <li class="dataHighlight topborder">
+                        <p class="_label">Sygnatura</p>
+                        <p class="_value"><?= $object->getData('sygnatura'); ?></p>
                     </li>
                     <? } ?>
 

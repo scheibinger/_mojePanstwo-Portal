@@ -5,7 +5,7 @@ App::uses('DataobjectsController', 'Dane.Controller');
 class PrawoController extends DataobjectsController
 {
 	
-	public $initLayers = array('docs', 'tags');
+	public $initLayers = array('docs', 'tags', 'counters');
 	public $helpers = array('Document');
 	
 	public $objectOptions = array(
@@ -54,7 +54,7 @@ class PrawoController extends DataobjectsController
 	public function beforeRender()
 	{
 		
-		// debug( $this->object->getData() ); die();
+		
 		
         // PREPARE MENU		
 		$href_base = '/dane/prawo/' . $this->request->params['id'];
@@ -68,6 +68,20 @@ class PrawoController extends DataobjectsController
 	            ),
 	        )
 	    );
+	    
+	    if( $items = $this->object->getLayer('counters') ) {
+		    foreach( $items as $item ) {
+		    	
+		    	if( $item['count'] )
+			    	$menu['items'][] = array(
+			    		'id' => $item['slug'],
+		                'href' => $href_base . '/' . $item['slug'],
+		                'label' => $item['nazwa'],
+		                'count' => $item['count'],
+			    	);
+		    	
+		    }
+	    }
 		
 	    
         $menu['selected'] = ( $this->request->params['action'] == 'view' ) ? '' : $this->request->params['action'];
