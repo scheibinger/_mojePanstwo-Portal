@@ -18,11 +18,11 @@
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-xs-4">
-            <h3>Dlaczego otwarte dane?</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam viverra sapien sit amet lacus sagittis euismod. Vestibulum ac nisl ultricies, venenatis nibh at, luctus ligula.</p>
-            <a class="btn btn-primary" href="<?php echo $this->Html->url(array('action' => 'view')); ?>">Więcej</a>
-        </div>
+        <!--<div class="col-xs-4">-->
+            <!--<h3>Dlaczego otwarte dane?</h3>-->
+            <!--<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam viverra sapien sit amet lacus sagittis euismod. Vestibulum ac nisl ultricies, venenatis nibh at, luctus ligula.</p>-->
+            <!--<a class="btn btn-primary" href="<?php echo $this->Html->url(array('action' => 'view')); ?>">Więcej</a>-->
+        <!--</div>-->
 
         <div class="col-xs-4">
             <h3>Opis techniczny</h3>
@@ -30,11 +30,11 @@
             <a class="btn btn-primary" href="<?php echo $this->Html->url(array('action' => 'technical_info')); ?>">Więcej</a>
         </div>
 
-        <div class="col-xs-4">
-            <h3>Dlaczego otwarte dane?</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam viverra sapien sit amet lacus sagittis euismod. Vestibulum ac nisl ultricies, venenatis nibh at, luctus ligula.</p>
-            <a class="btn btn-primary" href="<?php echo $this->Html->url(array('action' => 'view')); ?>">Więcej</a>
-        </div>
+        <!--<div class="col-xs-4">-->
+            <!--<h3>Dlaczego otwarte dane?</h3>-->
+            <!--<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam viverra sapien sit amet lacus sagittis euismod. Vestibulum ac nisl ultricies, venenatis nibh at, luctus ligula.</p>-->
+            <!--<a class="btn btn-primary" href="<?php echo $this->Html->url(array('action' => 'view')); ?>">Więcej</a>-->
+        <!--</div>-->
     </div>
 </div>
 
@@ -55,5 +55,6 @@
     </div>
 </div>
 
-
+<? if (!empty($clients)) { ?>
 <h1>Klienci API</h1>
+<? } ?>
