@@ -1,5 +1,4 @@
-$(document).ready(function() 
-    { 
-        $("#wynikiTable").tablesorter(); 
-    } 
+$(document).ready(function () {
+        $("#wynikiTable").tablesorter();
+    }
 ); 

@@ -1,4 +1,4 @@
-<?php $this->Combinator->add_libs('css', $this->Less->css('htmlexDocMain')); ?>
+<?php $this->Combinator->add_libs('css', $this->Less->css('htmlexDocMain_v1')); ?>
 <?php $this->Combinator->add_libs('css', $this->Less->css('mapaprawa', array('plugin' => 'Mapaprawa'))) ?>
 
 <?php $this->Combinator->add_libs('js', '../plugins/highcharts/js/highcharts'); ?>
@@ -53,7 +53,7 @@
                                     <div class="date"><?= $this->Czas->dataSlownie($p['date']) ?></div>
                                     <div class="desc">
 
-                                    <p><?= $p['label'] ?></p>
+                                        <p><?= $p['label'] ?></p>
                                     </div>
                                     <div class="lastIcon icon icon-<?= $p['icon'] ?>"></div>
                                     <div class="path">

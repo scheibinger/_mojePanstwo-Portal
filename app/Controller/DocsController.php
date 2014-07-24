@@ -7,21 +7,21 @@ class DocsController extends AppController
 
     public function view()
     {
-		
+
         $doc = new MP\Document($this->request->params['id']);
         $this->set('doc', $doc->getData());
         $this->set('_serialize', 'doc');
 
     }
-	
-	public function download()
-	{
-		
-		$doc = new MP\Document($this->request->params['id']);
-		$this->redirect( $doc->getUrl() );
-		
-	}
-	
+
+    public function download()
+    {
+
+        $doc = new MP\Document($this->request->params['id']);
+        $this->redirect($doc->getUrl());
+
+    }
+
     public function viewPackage()
     {
 
@@ -46,6 +46,21 @@ class DocsController extends AppController
 
         }
 
+    }
+    
+    public function tunnel()
+    {
+	    
+	    $content = file_get_contents('http://docs.sejmometr.pl' . $_SERVER['REQUEST_URI']);
+	    $content_type = false;
+	    
+	    foreach( $http_response_header as $r )
+	    	if( stripos($r, 'Content-Type')===0 )
+	    		header( $r );
+	    
+	    echo $content;
+	    die();
+	    
     }
 
 }

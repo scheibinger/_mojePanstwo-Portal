@@ -1,0 +1,114 @@
+body {
+	background-color: #F3F3F3;
+}
+
+#_wrapper {
+	background-color: inherit;
+}
+
+#_mojePanstwoCockpit {
+	.container {
+		width: 100%;
+	}
+}
+
+footer {
+	position: fixed;
+	bottom: 0;
+	height: 25px;
+	padding: 5px 0;
+	font-size: 10px;
+	
+	.container {
+		width: 100%;
+		padding: 0;
+	}
+}
+
+.cookieLaw {
+	bottom: 25px !important;
+}
+
+#prawo {
+
+	#tagsDiv {
+		background-color: #FFF;
+		border-right: 1px solid #DDD;
+		
+		.input-group {
+			background-color: #F0F0F0;
+		    margin: 0;
+		    padding: 10px 10px 10px 15px;
+		    border-bottom: 1px solid #DDD;
+		    position: fixed;
+		    left: -7px;
+		    width: 25%;
+		}
+		
+		.nav {
+			
+			height: 400px;
+		    overflow: scroll;
+		    position: fixed;
+		    top: 95px;
+		    width: 25%;
+		    left: 0;
+		    background-color: #F0F0F0;
+			
+		}
+		
+		.nav > li {
+			
+			-webkit-transition: left 0.5s ease-in-out;
+			-moz-transition: left 0.5s ease-in-out;
+			-o-transition: left 0.5s ease-in-out;
+			transition: left 0.5s ease-in-out;
+			
+			
+			
+			
+		    left: 0%;
+		    top: 0;
+		    height: 31px;
+		    width: 100%;
+		    display: block;
+		    position: absolute;
+			
+			&._hidden {
+				left: -100%;
+			}
+			
+			&._active {				
+				a, a:hover, a:focus {
+					background-color: #5cb85c;
+					color: #FFF;
+					
+					span {
+						color: #FFF;
+					}
+				}
+			}
+		
+		}
+		
+		.nav > li > a {
+			font-size: 12px;
+		    font-weight: 500;
+		    padding: 5px;
+		    margin: 5px 15px 5px 10px;
+		    text-transform: uppercase;
+			
+			&:hover, &:focus {
+				background-color: #DDD;
+			}
+		}
+		
+		.nav-pills > li > a > .badge {
+			background-color: inherit;
+			color: #999;
+			font-weight: 300;
+		}
+	}
+	
+}
+

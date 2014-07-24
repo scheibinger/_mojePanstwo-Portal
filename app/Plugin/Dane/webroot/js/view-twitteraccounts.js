@@ -17,13 +17,13 @@ jQuery(document).ready(function () {
         chart: {
             type: 'spline',
             height: 250,
-            backgroundColor:'rgba(255, 255, 255, 0)'
+            backgroundColor: 'rgba(255, 255, 255, 0)'
         },
         title: {
             text: ''
         },
         legend: {
-        	enabled: false
+            enabled: false
         },
         xAxis: {
             type: 'datetime',
@@ -43,7 +43,7 @@ jQuery(document).ready(function () {
             title: false
         },
         credits: {
-	    	enabled: false    
+            enabled: false
         },
         series: [
             {

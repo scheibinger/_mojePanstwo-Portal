@@ -14,7 +14,8 @@ $this->Combinator->add_libs('js', 'Media.media');
             <? /*
             <? include('templates/intro.ctp'); ?>
             <? include('templates/navbar.ctp'); ?>
-            */ ?>
+            */
+            ?>
         </div>
     </div>
 

@@ -53,7 +53,10 @@ jQuery(document).ready(function () {
         if (intervalRunnable && (documentData.currentPackage < documentData.packages)) {
             intervalRunnable = false;
             jQuery('.loadMoreDocumentContent').addClass('loading');
-            jQuery.get('/dane/' + documentData.dataset + '/' + documentId + '/view/' + (parseInt(documentData.currentPackage) + 1) + '.json', function (data) {
+            
+            var p = parseInt(documentData.currentPackage) + 1;
+            var url = '/htmlex/' + documentId + '/' + documentId + '_' + p + '.html';
+            jQuery.get(url, function(data) {
                 jQuery('.loadMoreDocumentContent').removeClass('loading');
                 document.find('.canvas').append(data);
                 intervalRunnable = true;
@@ -68,7 +71,10 @@ jQuery(document).ready(function () {
     function loadMoreDoc(callback) {
         intervalRunnable = false;
         jQuery('.loadMoreDocumentContent').addClass('loading');
-        jQuery.get('/dane/' + documentData.dataset + '/' + documentId + '/view/' + (parseInt(documentData.currentPackage) + 1) + '.json', function (data) {
+        
+        var p = parseInt(documentData.currentPackage) + 1;
+        var url = '/htmlex/' + documentId + '/' + documentId + '_' + p + '.html';
+        jQuery.get(url, function (data) {
             jQuery('.loadMoreDocumentContent').removeClass('loading');
             document.find('.canvas').append(data);
             intervalRunnable = true;

@@ -85,11 +85,11 @@ class DataobjectHelper extends AppHelper
         $forceLabel = isset($options['forceLabel']) ? $options['forceLabel'] : false;
         $file = isset($options['file']) ? $options['file'] : false;
         $titleTag = isset($options['titleTag']) ? $options['titleTag'] : 'h1';
-        
-		$class = isset($options['class']) ? $options['class'] : false;
-		$alertsButtons = isset($options['alertsButtons']) ? $options['alertsButtons'] : false;
-		$alertsStatus = isset($options['alertsStatus']) ? $options['alertsStatus'] : false;
-		
+
+        $class = isset($options['class']) ? $options['class'] : false;
+        $alertsButtons = isset($options['alertsButtons']) ? $options['alertsButtons'] : false;
+        $alertsStatus = isset($options['alertsStatus']) ? $options['alertsStatus'] : false;
+
         $this->setObject($object);
         if (!empty($routes))
             $object->addRoutes($routes);
@@ -146,8 +146,8 @@ class DataobjectHelper extends AppHelper
                 $col_width = 2;
 
             $output .= '<div class="row dataHighlights dimmed';
-            
-            if ( ($col_width >= 4) || ( isset($options['inl']) && $options['inl'] ) )
+
+            if (($col_width >= 4) || (isset($options['inl']) && $options['inl']))
                 $output .= ' inl';
             $output .= '">';
 

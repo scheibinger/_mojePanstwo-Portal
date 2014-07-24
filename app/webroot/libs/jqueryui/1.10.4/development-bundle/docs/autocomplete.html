@@ -1213,86 +1213,87 @@
 </div>
 </section>
 <section id="extension-points">
-    <header><h2>Extension Points</h2></header>
-    <p>
-        The autocomplete widget is built with the
-        <a href="http://api.jqueryui.com/jQuery.widget/">widget factory</a> and can be
-        extended. When extending widgets, you have the ability to override or add to the
-        behavior of existing methods. The following methods are provided as extension points
-        with the same API stability as the <a href="#methods">plugin methods</a> listed
-        above. For more information on widget extensions, see
-        <a href="http://learn.jquery.com/jquery-ui/widget-factory/extending-widgets/">Extending
-            Widgets with the Widget Factory</a>.
-    </p>
-    <hr/>
-    <div id="method-_renderItem">
-        <div class="api-item first-item">
-            <h3>_renderItem( ul, item )<span class="returns">Returns: <a href="http://api.jquery.com/Types/#jQuery">jQuery</a></span>
-            </h3>
+<header><h2>Extension Points</h2></header>
+<p>
+    The autocomplete widget is built with the
+    <a href="http://api.jqueryui.com/jQuery.widget/">widget factory</a> and can be
+    extended. When extending widgets, you have the ability to override or add to the
+    behavior of existing methods. The following methods are provided as extension points
+    with the same API stability as the <a href="#methods">plugin methods</a> listed
+    above. For more information on widget extensions, see
+    <a href="http://learn.jquery.com/jquery-ui/widget-factory/extending-widgets/">Extending
+        Widgets with the Widget Factory</a>.
+</p>
+<hr/>
+<div id="method-_renderItem">
+    <div class="api-item first-item">
+        <h3>_renderItem( ul, item )<span class="returns">Returns: <a
+                href="http://api.jquery.com/Types/#jQuery">jQuery</a></span>
+        </h3>
 
-            <div>
-                <p>Method that controls the creation of each option in the widget's menu. The method must create a new
-                    <code>&lt;li&gt;</code> element, append it to the menu, and return it.</p>
+        <div>
+            <p>Method that controls the creation of each option in the widget's menu. The method must create a new
+                <code>&lt;li&gt;</code> element, append it to the menu, and return it.</p>
 
-                <p><em>Note: At this time the<code>&lt;ul&gt;</code> element created must contain an <code>
-                    &lt;a&gt;</code> element for compatibility with the <a href="/menu/">menu</a> widget. See the
-                    example below.</em></p>
-            </div>
-            <ul>
-                <li>
-                    <div><strong>ul</strong></div>
-                    <div>Type: <a href="http://api.jquery.com/Types/#jQuery">jQuery</a>
-                    </div>
-                    <div>The <code>&lt;ul&gt;</code> element that the newly created <code>&lt;li&gt;</code> element must
-                        be appended to.
-                    </div>
-                </li>
-                <li>
-                    <div><strong>item</strong></div>
-                    <div>Type: <a href="http://api.jquery.com/Types/#Object">Object</a>
-                    </div>
-                    <div></div>
-                    <ul>
-                        <li>
-                            <div><strong>label</strong></div>
-                            <div>Type: <a href="http://api.jquery.com/Types/#String">String</a>
-                            </div>
-                            <div>The string to display for the item.</div>
-                        </li>
-                        <li>
-                            <div><strong>value</strong></div>
-                            <div>Type: <a href="http://api.jquery.com/Types/#String">String</a>
-                            </div>
-                            <div>The value to insert into the input when the item is selected.</div>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-            <div>
-                <strong>Code examples:</strong>
+            <p><em>Note: At this time the<code>&lt;ul&gt;</code> element created must contain an <code>
+                &lt;a&gt;</code> element for compatibility with the <a href="/menu/">menu</a> widget. See the
+                example below.</em></p>
+        </div>
+        <ul>
+            <li>
+                <div><strong>ul</strong></div>
+                <div>Type: <a href="http://api.jquery.com/Types/#jQuery">jQuery</a>
+                </div>
+                <div>The <code>&lt;ul&gt;</code> element that the newly created <code>&lt;li&gt;</code> element must
+                    be appended to.
+                </div>
+            </li>
+            <li>
+                <div><strong>item</strong></div>
+                <div>Type: <a href="http://api.jquery.com/Types/#Object">Object</a>
+                </div>
+                <div></div>
+                <ul>
+                    <li>
+                        <div><strong>label</strong></div>
+                        <div>Type: <a href="http://api.jquery.com/Types/#String">String</a>
+                        </div>
+                        <div>The string to display for the item.</div>
+                    </li>
+                    <li>
+                        <div><strong>value</strong></div>
+                        <div>Type: <a href="http://api.jquery.com/Types/#String">String</a>
+                        </div>
+                        <div>The value to insert into the input when the item is selected.</div>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <div>
+            <strong>Code examples:</strong>
 
-                <p>Add the item's value as a data attribute on the <code>&lt;li&gt;</code>.</p>
+            <p>Add the item's value as a data attribute on the <code>&lt;li&gt;</code>.</p>
 
-                <div class="syntaxhighlighter javascript nogutter">
-                    <table>
-                        <tbody>
-                        <tr>
-                            <td class="gutter">
+            <div class="syntaxhighlighter javascript nogutter">
+                <table>
+                    <tbody>
+                    <tr>
+                        <td class="gutter">
 
-                                <div class="line n1">1</div>
+                            <div class="line n1">1</div>
 
-                                <div class="line n2">2</div>
+                            <div class="line n2">2</div>
 
-                                <div class="line n3">3</div>
+                            <div class="line n3">3</div>
 
-                                <div class="line n4">4</div>
+                            <div class="line n4">4</div>
 
-                                <div class="line n5">5</div>
+                            <div class="line n5">5</div>
 
-                                <div class="line n6">6</div>
+                            <div class="line n6">6</div>
 
-                            </td>
-                            <td class="code">
+                        </td>
+                        <td class="code">
                                 <pre><div class="container">
                                     <div class="line"><code>_renderItem: <span class="keyword">function</span>( ul, item
                                         ) {</code></div>
@@ -1310,71 +1311,72 @@
                                 </div><div class="container">
                                     <div class="line"><code>}</code></div>
                                 </div></pre>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
+
         </div>
     </div>
-    <div id="method-_renderMenu">
-        <div class="api-item">
-            <h3>_renderMenu( ul, items )<span class="returns">Returns: <a href="http://api.jquery.com/Types/#jQuery">jQuery</a> (<a
-                    href="http://learn.jquery.com/jquery-ui/widget-factory/widget-method-invocation/">plugin
-                only</a>)</span>
-            </h3>
+</div>
+<div id="method-_renderMenu">
+    <div class="api-item">
+        <h3>_renderMenu( ul, items )<span class="returns">Returns: <a
+                href="http://api.jquery.com/Types/#jQuery">jQuery</a> (<a
+                href="http://learn.jquery.com/jquery-ui/widget-factory/widget-method-invocation/">plugin
+            only</a>)</span>
+        </h3>
 
-            <div>
-                Method that controls building the widget's menu. The method is passed an empty <code>&lt;ul&gt;</code>
-                and an array of items that match the user typed term. Creation of the individual <code>&lt;li&gt;</code>
-                elements should be delegated to <code>_renderItemData()</code>, which in turn delegates to the <a
-                    href="#method-_renderItem"><code>_renderItem()</code></a> extension point.
-            </div>
-            <ul>
-                <li>
-                    <div><strong>ul</strong></div>
-                    <div>Type: <a href="http://api.jquery.com/Types/#jQuery">jQuery</a>
-                    </div>
-                    <div>An empty <code>&lt;ul&gt;</code> element to use as the widget's menu.</div>
-                </li>
-                <li>
-                    <div><strong>items</strong></div>
-                    <div>Type: <a href="http://api.jquery.com/Types/#Array">Array</a>
-                    </div>
-                    <div>An Array of items that match the user typed term. Each item is an Object with
-                        <code>label</code> and <code>value</code> properties.
-                    </div>
-                </li>
-            </ul>
-            <div>
-                <strong>Code examples:</strong>
+        <div>
+            Method that controls building the widget's menu. The method is passed an empty <code>&lt;ul&gt;</code>
+            and an array of items that match the user typed term. Creation of the individual <code>&lt;li&gt;</code>
+            elements should be delegated to <code>_renderItemData()</code>, which in turn delegates to the <a
+                href="#method-_renderItem"><code>_renderItem()</code></a> extension point.
+        </div>
+        <ul>
+            <li>
+                <div><strong>ul</strong></div>
+                <div>Type: <a href="http://api.jquery.com/Types/#jQuery">jQuery</a>
+                </div>
+                <div>An empty <code>&lt;ul&gt;</code> element to use as the widget's menu.</div>
+            </li>
+            <li>
+                <div><strong>items</strong></div>
+                <div>Type: <a href="http://api.jquery.com/Types/#Array">Array</a>
+                </div>
+                <div>An Array of items that match the user typed term. Each item is an Object with
+                    <code>label</code> and <code>value</code> properties.
+                </div>
+            </li>
+        </ul>
+        <div>
+            <strong>Code examples:</strong>
 
-                <p>Add a CSS class name to the odd menu items.</p>
+            <p>Add a CSS class name to the odd menu items.</p>
 
-                <div class="syntaxhighlighter javascript nogutter">
-                    <table>
-                        <tbody>
-                        <tr>
-                            <td class="gutter">
+            <div class="syntaxhighlighter javascript nogutter">
+                <table>
+                    <tbody>
+                    <tr>
+                        <td class="gutter">
 
-                                <div class="line n1">1</div>
+                            <div class="line n1">1</div>
 
-                                <div class="line n2">2</div>
+                            <div class="line n2">2</div>
 
-                                <div class="line n3">3</div>
+                            <div class="line n3">3</div>
 
-                                <div class="line n4">4</div>
+                            <div class="line n4">4</div>
 
-                                <div class="line n5">5</div>
+                            <div class="line n5">5</div>
 
-                                <div class="line n6">6</div>
+                            <div class="line n6">6</div>
 
-                                <div class="line n7">7</div>
+                            <div class="line n7">7</div>
 
-                            </td>
-                            <td class="code">
+                        </td>
+                        <td class="code">
                                 <pre><div class="container">
                                     <div class="line"><code>_renderMenu: <span class="keyword">function</span>( ul,
                                         items ) {</code></div>
@@ -1394,48 +1396,48 @@
                                 </div><div class="container">
                                     <div class="line"><code>}</code></div>
                                 </div></pre>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
+
         </div>
     </div>
-    <div id="method-_resizeMenu">
-        <div class="api-item">
-            <h3>_resizeMenu()<span class="returns">Returns: <a href="http://api.jquery.com/Types/#jQuery">jQuery</a> (<a
-                    href="http://learn.jquery.com/jquery-ui/widget-factory/widget-method-invocation/">plugin
-                only</a>)</span>
-            </h3>
+</div>
+<div id="method-_resizeMenu">
+    <div class="api-item">
+        <h3>_resizeMenu()<span class="returns">Returns: <a href="http://api.jquery.com/Types/#jQuery">jQuery</a> (<a
+                href="http://learn.jquery.com/jquery-ui/widget-factory/widget-method-invocation/">plugin
+            only</a>)</span>
+        </h3>
 
-            <div>Method responsible for sizing the menu before it is displayed. The menu element is available at <code>this.menu.element</code>.
-            </div>
-            <ul>
-                <li>
-                    <div class="null-signature">This method does not accept any arguments.</div>
-                </li>
-            </ul>
-            <div>
-                <strong>Code examples:</strong>
+        <div>Method responsible for sizing the menu before it is displayed. The menu element is available at <code>this.menu.element</code>.
+        </div>
+        <ul>
+            <li>
+                <div class="null-signature">This method does not accept any arguments.</div>
+            </li>
+        </ul>
+        <div>
+            <strong>Code examples:</strong>
 
-                <p>Always display the menu as 500 pixels wide.</p>
+            <p>Always display the menu as 500 pixels wide.</p>
 
-                <div class="syntaxhighlighter javascript nogutter">
-                    <table>
-                        <tbody>
-                        <tr>
-                            <td class="gutter">
+            <div class="syntaxhighlighter javascript nogutter">
+                <table>
+                    <tbody>
+                    <tr>
+                        <td class="gutter">
 
-                                <div class="line n1">1</div>
+                            <div class="line n1">1</div>
 
-                                <div class="line n2">2</div>
+                            <div class="line n2">2</div>
 
-                                <div class="line n3">3</div>
+                            <div class="line n3">3</div>
 
-                            </td>
-                            <td class="code">
+                        </td>
+                        <td class="code">
                                 <pre><div class="container">
                                     <div class="line"><code>_resizeMenu: <span class="keyword">function</span>()
                                         {</code></div>
@@ -1445,15 +1447,15 @@
                                 </div><div class="container">
                                     <div class="line"><code>}</code></div>
                                 </div></pre>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
+
         </div>
     </div>
+</div>
 </section>
 <section id="events">
 <header><h2>Events</h2></header>
@@ -2147,63 +2149,63 @@
 </div>
 </section>
 <section class="entry-examples" id="entry-examples">
-    <header><h2>Examples:</h2></header>
-    <div class="entry-example" id="example-0">
-        <h4>Example: <span class="desc">A simple jQuery UI Autocomplete</span>
-        </h4>
+<header><h2>Examples:</h2></header>
+<div class="entry-example" id="example-0">
+    <h4>Example: <span class="desc">A simple jQuery UI Autocomplete</span>
+    </h4>
 
-        <div class="syntaxhighlighter xml ">
-            <table>
-                <tbody>
-                <tr>
-                    <td class="gutter">
+    <div class="syntaxhighlighter xml ">
+        <table>
+            <tbody>
+            <tr>
+                <td class="gutter">
 
-                        <div class="line n1">1</div>
+                    <div class="line n1">1</div>
 
-                        <div class="line n2">2</div>
+                    <div class="line n2">2</div>
 
-                        <div class="line n3">3</div>
+                    <div class="line n3">3</div>
 
-                        <div class="line n4">4</div>
+                    <div class="line n4">4</div>
 
-                        <div class="line n5">5</div>
+                    <div class="line n5">5</div>
 
-                        <div class="line n6">6</div>
+                    <div class="line n6">6</div>
 
-                        <div class="line n7">7</div>
+                    <div class="line n7">7</div>
 
-                        <div class="line n8">8</div>
+                    <div class="line n8">8</div>
 
-                        <div class="line n9">9</div>
+                    <div class="line n9">9</div>
 
-                        <div class="line n10">10</div>
+                    <div class="line n10">10</div>
 
-                        <div class="line n11">11</div>
+                    <div class="line n11">11</div>
 
-                        <div class="line n12">12</div>
+                    <div class="line n12">12</div>
 
-                        <div class="line n13">13</div>
+                    <div class="line n13">13</div>
 
-                        <div class="line n14">14</div>
+                    <div class="line n14">14</div>
 
-                        <div class="line n15">15</div>
+                    <div class="line n15">15</div>
 
-                        <div class="line n16">16</div>
+                    <div class="line n16">16</div>
 
-                        <div class="line n17">17</div>
+                    <div class="line n17">17</div>
 
-                        <div class="line n18">18</div>
+                    <div class="line n18">18</div>
 
-                        <div class="line n19">19</div>
+                    <div class="line n19">19</div>
 
-                        <div class="line n20">20</div>
+                    <div class="line n20">20</div>
 
-                        <div class="line n21">21</div>
+                    <div class="line n21">21</div>
 
-                        <div class="line n22">22</div>
+                    <div class="line n22">22</div>
 
-                    </td>
-                    <td class="code">
+                </td>
+                <td class="code">
                         <pre><div class="container">
                             <div class="line"><code><span class="doctype">&lt;!doctype html&gt;</span></code></div>
                         </div><div class="container">
@@ -2279,84 +2281,84 @@
                             <div class="line"><code><span class="tag">&lt;/<span
                                     class="title">html</span>&gt;</span></code></div>
                         </div></pre>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <h4>Demo:</h4>
-
-        <div class="demo code-demo"></div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
     </div>
-    <div class="entry-example" id="example-1">
-        <h4>Example: <span class="desc">Using a custom source callback to match only the beginning of terms</span>
-        </h4>
 
-        <div class="syntaxhighlighter xml ">
-            <table>
-                <tbody>
-                <tr>
-                    <td class="gutter">
+    <h4>Demo:</h4>
 
-                        <div class="line n1">1</div>
+    <div class="demo code-demo"></div>
+</div>
+<div class="entry-example" id="example-1">
+    <h4>Example: <span class="desc">Using a custom source callback to match only the beginning of terms</span>
+    </h4>
 
-                        <div class="line n2">2</div>
+    <div class="syntaxhighlighter xml ">
+        <table>
+            <tbody>
+            <tr>
+                <td class="gutter">
 
-                        <div class="line n3">3</div>
+                    <div class="line n1">1</div>
 
-                        <div class="line n4">4</div>
+                    <div class="line n2">2</div>
 
-                        <div class="line n5">5</div>
+                    <div class="line n3">3</div>
 
-                        <div class="line n6">6</div>
+                    <div class="line n4">4</div>
 
-                        <div class="line n7">7</div>
+                    <div class="line n5">5</div>
 
-                        <div class="line n8">8</div>
+                    <div class="line n6">6</div>
 
-                        <div class="line n9">9</div>
+                    <div class="line n7">7</div>
 
-                        <div class="line n10">10</div>
+                    <div class="line n8">8</div>
 
-                        <div class="line n11">11</div>
+                    <div class="line n9">9</div>
 
-                        <div class="line n12">12</div>
+                    <div class="line n10">10</div>
 
-                        <div class="line n13">13</div>
+                    <div class="line n11">11</div>
 
-                        <div class="line n14">14</div>
+                    <div class="line n12">12</div>
 
-                        <div class="line n15">15</div>
+                    <div class="line n13">13</div>
 
-                        <div class="line n16">16</div>
+                    <div class="line n14">14</div>
 
-                        <div class="line n17">17</div>
+                    <div class="line n15">15</div>
 
-                        <div class="line n18">18</div>
+                    <div class="line n16">16</div>
 
-                        <div class="line n19">19</div>
+                    <div class="line n17">17</div>
 
-                        <div class="line n20">20</div>
+                    <div class="line n18">18</div>
 
-                        <div class="line n21">21</div>
+                    <div class="line n19">19</div>
 
-                        <div class="line n22">22</div>
+                    <div class="line n20">20</div>
 
-                        <div class="line n23">23</div>
+                    <div class="line n21">21</div>
 
-                        <div class="line n24">24</div>
+                    <div class="line n22">22</div>
 
-                        <div class="line n25">25</div>
+                    <div class="line n23">23</div>
 
-                        <div class="line n26">26</div>
+                    <div class="line n24">24</div>
 
-                        <div class="line n27">27</div>
+                    <div class="line n25">25</div>
 
-                        <div class="line n28">28</div>
+                    <div class="line n26">26</div>
 
-                    </td>
-                    <td class="code">
+                    <div class="line n27">27</div>
+
+                    <div class="line n28">28</div>
+
+                </td>
+                <td class="code">
                         <pre><div class="container">
                             <div class="line"><code><span class="doctype">&lt;!doctype html&gt;</span></code></div>
                         </div><div class="container">
@@ -2450,16 +2452,16 @@
                             <div class="line"><code><span class="tag">&lt;/<span
                                     class="title">html</span>&gt;</span></code></div>
                         </div></pre>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <h4>Demo:</h4>
-
-        <div class="demo code-demo"></div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
     </div>
+
+    <h4>Demo:</h4>
+
+    <div class="demo code-demo"></div>
+</div>
 </section>
 </div>
 </article>

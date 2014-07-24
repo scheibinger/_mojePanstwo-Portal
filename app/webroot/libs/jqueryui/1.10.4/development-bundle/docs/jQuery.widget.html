@@ -562,59 +562,60 @@
     </div>
 </section>
 <section id="options">
-    <header><h2>Options</h2></header>
-    <div id="option-disabled" class="api-item first-item">
-        <h3>disabled<span class="option-type"><strong>Type: </strong><a href="http://api.jquery.com/Types/#Boolean">Boolean</a></span>
-        </h3>
+<header><h2>Options</h2></header>
+<div id="option-disabled" class="api-item first-item">
+    <h3>disabled<span class="option-type"><strong>Type: </strong><a
+            href="http://api.jquery.com/Types/#Boolean">Boolean</a></span>
+    </h3>
 
-        <div class="default">
-            <strong>Default: </strong><code>false</code>
-        </div>
-        <div>Disables the widget if set to <code>true</code>.</div>
-        <strong>Code examples:</strong>
+    <div class="default">
+        <strong>Default: </strong><code>false</code>
+    </div>
+    <div>Disables the widget if set to <code>true</code>.</div>
+    <strong>Code examples:</strong>
 
-        <p>Initialize the widget with the <code>disabled</code> option specified:</p>
+    <p>Initialize the widget with the <code>disabled</code> option specified:</p>
 
-        <div class="syntaxhighlighter javascript nogutter">
-            <table>
-                <tbody>
-                <tr>
-                    <td class="gutter">
+    <div class="syntaxhighlighter javascript nogutter">
+        <table>
+            <tbody>
+            <tr>
+                <td class="gutter">
 
-                        <div class="line n1">1</div>
+                    <div class="line n1">1</div>
 
-                    </td>
-                    <td class="code">
+                </td>
+                <td class="code">
                         <pre><div class="container">
                             <div class="line"><code>$( <span class="string">".selector"</span> ).widget({ disabled:
                                 <span class="literal">true</span> });</code></div>
                         </div></pre>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 
-        <p>Get or set the <code>disabled</code> option, after initialization:</p>
+    <p>Get or set the <code>disabled</code> option, after initialization:</p>
 
-        <div class="syntaxhighlighter javascript nogutter">
-            <table>
-                <tbody>
-                <tr>
-                    <td class="gutter">
+    <div class="syntaxhighlighter javascript nogutter">
+        <table>
+            <tbody>
+            <tr>
+                <td class="gutter">
 
-                        <div class="line n1">1</div>
+                    <div class="line n1">1</div>
 
-                        <div class="line n2">2</div>
+                    <div class="line n2">2</div>
 
-                        <div class="line n3">3</div>
+                    <div class="line n3">3</div>
 
-                        <div class="line n4">4</div>
+                    <div class="line n4">4</div>
 
-                        <div class="line n5">5</div>
+                    <div class="line n5">5</div>
 
-                    </td>
-                    <td class="code">
+                </td>
+                <td class="code">
                         <pre><div class="container">
                             <div class="line"><code><span class="comment">// getter</span></code></div>
                         </div><div class="container">
@@ -630,98 +631,98 @@
                                     class="string">"option"</span>, <span class="string">"disabled"</span>, <span
                                     class="literal">true</span> );</code></div>
                         </div></pre>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-
+                </td>
+            </tr>
+            </tbody>
+        </table>
     </div>
-    <div id="option-hide" class="api-item">
-        <h3>hide<span class="option-type"><strong>Type: </strong><a
-                href="http://api.jquery.com/Types/#Boolean">Boolean</a> or <a
-                href="http://api.jquery.com/Types/#Number">Number</a> or <a href="http://api.jquery.com/Types/#String">String</a> or <a
-                href="http://api.jquery.com/Types/#Object">Object</a></span>
-        </h3>
 
-        <div class="default">
-            <strong>Default: </strong><code>null</code>
-        </div>
-        <div>If and how to animate the hiding of the element.</div>
-        <strong>Multiple types supported:</strong>
-        <ul>
-            <li>
-                <strong>Boolean</strong>:
-                When set to <code>false</code>, no animation will be used and the element will be hidden immediately.
-                When set to <code>true</code>, the element will fade out with the default duration and the default
-                easing.
-            </li>
-            <li>
-                <strong>Number</strong>:
-                The element will fade out with the specified duration and the default easing.
-            </li>
-            <li>
-                <strong>String</strong>:
-                The element will be hidden using the specified effect.
-                The value can either be the name of a built-in jQuery animation method, such as <code>"slideUp"</code>,
-                or the name of a <a href="/category/effects/">jQuery UI effect</a>, such as <code>"fold"</code>.
-                In either case the effect will be used with the default duration and the default easing.
-            </li>
-            <li>
-                <strong>Object</strong>: If the value is an object, then <code>effect</code>, <code>delay</code>, <code>duration</code>,
-                and <code>easing</code> properties may be provided. If the <code>effect</code> property contains the
-                name of a jQuery method, then that method will be used; otherwise it is assumed to be the name of a
-                jQuery UI effect. When using a jQuery UI effect that supports additional settings, you may include those
-                settings in the object and they will be passed to the effect. If <code>duration</code> or
-                <code>easing</code> is omitted, then the default values will be used. If <code>effect</code> is omitted,
-                then <code>"fadeOut"</code> will be used. If <code>delay</code> is omitted, then no delay is used.
-            </li>
-        </ul>
-        <strong>Code examples:</strong>
+</div>
+<div id="option-hide" class="api-item">
+    <h3>hide<span class="option-type"><strong>Type: </strong><a
+            href="http://api.jquery.com/Types/#Boolean">Boolean</a> or <a
+            href="http://api.jquery.com/Types/#Number">Number</a> or <a href="http://api.jquery.com/Types/#String">String</a> or <a
+            href="http://api.jquery.com/Types/#Object">Object</a></span>
+    </h3>
 
-        <p>Initialize the widget with the <code>hide</code> option specified:</p>
+    <div class="default">
+        <strong>Default: </strong><code>null</code>
+    </div>
+    <div>If and how to animate the hiding of the element.</div>
+    <strong>Multiple types supported:</strong>
+    <ul>
+        <li>
+            <strong>Boolean</strong>:
+            When set to <code>false</code>, no animation will be used and the element will be hidden immediately.
+            When set to <code>true</code>, the element will fade out with the default duration and the default
+            easing.
+        </li>
+        <li>
+            <strong>Number</strong>:
+            The element will fade out with the specified duration and the default easing.
+        </li>
+        <li>
+            <strong>String</strong>:
+            The element will be hidden using the specified effect.
+            The value can either be the name of a built-in jQuery animation method, such as <code>"slideUp"</code>,
+            or the name of a <a href="/category/effects/">jQuery UI effect</a>, such as <code>"fold"</code>.
+            In either case the effect will be used with the default duration and the default easing.
+        </li>
+        <li>
+            <strong>Object</strong>: If the value is an object, then <code>effect</code>, <code>delay</code>, <code>duration</code>,
+            and <code>easing</code> properties may be provided. If the <code>effect</code> property contains the
+            name of a jQuery method, then that method will be used; otherwise it is assumed to be the name of a
+            jQuery UI effect. When using a jQuery UI effect that supports additional settings, you may include those
+            settings in the object and they will be passed to the effect. If <code>duration</code> or
+            <code>easing</code> is omitted, then the default values will be used. If <code>effect</code> is omitted,
+            then <code>"fadeOut"</code> will be used. If <code>delay</code> is omitted, then no delay is used.
+        </li>
+    </ul>
+    <strong>Code examples:</strong>
 
-        <div class="syntaxhighlighter javascript nogutter">
-            <table>
-                <tbody>
-                <tr>
-                    <td class="gutter">
+    <p>Initialize the widget with the <code>hide</code> option specified:</p>
 
-                        <div class="line n1">1</div>
+    <div class="syntaxhighlighter javascript nogutter">
+        <table>
+            <tbody>
+            <tr>
+                <td class="gutter">
 
-                    </td>
-                    <td class="code">
+                    <div class="line n1">1</div>
+
+                </td>
+                <td class="code">
                         <pre><div class="container">
                             <div class="line"><code>$( <span class="string">".selector"</span> ).widget({ hide: {
                                 effect: <span class="string">"explode"</span>, duration: <span
                                         class="number">1000</span> } });</code></div>
                         </div></pre>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 
-        <p>Get or set the <code>hide</code> option, after initialization:</p>
+    <p>Get or set the <code>hide</code> option, after initialization:</p>
 
-        <div class="syntaxhighlighter javascript nogutter">
-            <table>
-                <tbody>
-                <tr>
-                    <td class="gutter">
+    <div class="syntaxhighlighter javascript nogutter">
+        <table>
+            <tbody>
+            <tr>
+                <td class="gutter">
 
-                        <div class="line n1">1</div>
+                    <div class="line n1">1</div>
 
-                        <div class="line n2">2</div>
+                    <div class="line n2">2</div>
 
-                        <div class="line n3">3</div>
+                    <div class="line n3">3</div>
 
-                        <div class="line n4">4</div>
+                    <div class="line n4">4</div>
 
-                        <div class="line n5">5</div>
+                    <div class="line n5">5</div>
 
-                    </td>
-                    <td class="code">
+                </td>
+                <td class="code">
                         <pre><div class="container">
                             <div class="line"><code><span class="comment">// getter</span></code></div>
                         </div><div class="container">
@@ -738,98 +739,98 @@
                                     class="string">"explode"</span>, duration: <span class="number">1000</span> }
                                 );</code></div>
                         </div></pre>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-
+                </td>
+            </tr>
+            </tbody>
+        </table>
     </div>
-    <div id="option-show" class="api-item">
-        <h3>show<span class="option-type"><strong>Type: </strong><a
-                href="http://api.jquery.com/Types/#Boolean">Boolean</a> or <a
-                href="http://api.jquery.com/Types/#Number">Number</a> or <a href="http://api.jquery.com/Types/#String">String</a> or <a
-                href="http://api.jquery.com/Types/#Object">Object</a></span>
-        </h3>
 
-        <div class="default">
-            <strong>Default: </strong><code>null</code>
-        </div>
-        <div>If and how to animate the showing of the element.</div>
-        <strong>Multiple types supported:</strong>
-        <ul>
-            <li>
-                <strong>Boolean</strong>:
-                When set to <code>false</code>, no animation will be used and the element will be shown immediately.
-                When set to <code>true</code>, the element will fade in with the default duration and the default
-                easing.
-            </li>
-            <li>
-                <strong>Number</strong>:
-                The element will fade in with the specified duration and the default easing.
-            </li>
-            <li>
-                <strong>String</strong>:
-                The element will be shown using the specified effect.
-                The value can either be the name of a built-in jQuery animation method, such as <code>"slideDown"</code>,
-                or the name of a <a href="/category/effects/">jQuery UI effect</a>, such as <code>"fold"</code>.
-                In either case the effect will be used with the default duration and the default easing.
-            </li>
-            <li>
-                <strong>Object</strong>: If the value is an object, then <code>effect</code>, <code>delay</code>, <code>duration</code>,
-                and <code>easing</code> properties may be provided. If the <code>effect</code> property contains the
-                name of a jQuery method, then that method will be used; otherwise it is assumed to be the name of a
-                jQuery UI effect. When using a jQuery UI effect that supports additional settings, you may include those
-                settings in the object and they will be passed to the effect. If <code>duration</code> or
-                <code>easing</code> is omitted, then the default values will be used. If <code>effect</code> is omitted,
-                then <code>"fadeIn"</code> will be used. If <code>delay</code> is omitted, then no delay is used.
-            </li>
-        </ul>
-        <strong>Code examples:</strong>
+</div>
+<div id="option-show" class="api-item">
+    <h3>show<span class="option-type"><strong>Type: </strong><a
+            href="http://api.jquery.com/Types/#Boolean">Boolean</a> or <a
+            href="http://api.jquery.com/Types/#Number">Number</a> or <a href="http://api.jquery.com/Types/#String">String</a> or <a
+            href="http://api.jquery.com/Types/#Object">Object</a></span>
+    </h3>
 
-        <p>Initialize the widget with the <code>show</code> option specified:</p>
+    <div class="default">
+        <strong>Default: </strong><code>null</code>
+    </div>
+    <div>If and how to animate the showing of the element.</div>
+    <strong>Multiple types supported:</strong>
+    <ul>
+        <li>
+            <strong>Boolean</strong>:
+            When set to <code>false</code>, no animation will be used and the element will be shown immediately.
+            When set to <code>true</code>, the element will fade in with the default duration and the default
+            easing.
+        </li>
+        <li>
+            <strong>Number</strong>:
+            The element will fade in with the specified duration and the default easing.
+        </li>
+        <li>
+            <strong>String</strong>:
+            The element will be shown using the specified effect.
+            The value can either be the name of a built-in jQuery animation method, such as <code>"slideDown"</code>,
+            or the name of a <a href="/category/effects/">jQuery UI effect</a>, such as <code>"fold"</code>.
+            In either case the effect will be used with the default duration and the default easing.
+        </li>
+        <li>
+            <strong>Object</strong>: If the value is an object, then <code>effect</code>, <code>delay</code>, <code>duration</code>,
+            and <code>easing</code> properties may be provided. If the <code>effect</code> property contains the
+            name of a jQuery method, then that method will be used; otherwise it is assumed to be the name of a
+            jQuery UI effect. When using a jQuery UI effect that supports additional settings, you may include those
+            settings in the object and they will be passed to the effect. If <code>duration</code> or
+            <code>easing</code> is omitted, then the default values will be used. If <code>effect</code> is omitted,
+            then <code>"fadeIn"</code> will be used. If <code>delay</code> is omitted, then no delay is used.
+        </li>
+    </ul>
+    <strong>Code examples:</strong>
 
-        <div class="syntaxhighlighter javascript nogutter">
-            <table>
-                <tbody>
-                <tr>
-                    <td class="gutter">
+    <p>Initialize the widget with the <code>show</code> option specified:</p>
 
-                        <div class="line n1">1</div>
+    <div class="syntaxhighlighter javascript nogutter">
+        <table>
+            <tbody>
+            <tr>
+                <td class="gutter">
 
-                    </td>
-                    <td class="code">
+                    <div class="line n1">1</div>
+
+                </td>
+                <td class="code">
                         <pre><div class="container">
                             <div class="line"><code>$( <span class="string">".selector"</span> ).widget({ show: {
                                 effect: <span class="string">"blind"</span>, duration: <span class="number">800</span> }
                                 });</code></div>
                         </div></pre>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 
-        <p>Get or set the <code>show</code> option, after initialization:</p>
+    <p>Get or set the <code>show</code> option, after initialization:</p>
 
-        <div class="syntaxhighlighter javascript nogutter">
-            <table>
-                <tbody>
-                <tr>
-                    <td class="gutter">
+    <div class="syntaxhighlighter javascript nogutter">
+        <table>
+            <tbody>
+            <tr>
+                <td class="gutter">
 
-                        <div class="line n1">1</div>
+                    <div class="line n1">1</div>
 
-                        <div class="line n2">2</div>
+                    <div class="line n2">2</div>
 
-                        <div class="line n3">3</div>
+                    <div class="line n3">3</div>
 
-                        <div class="line n4">4</div>
+                    <div class="line n4">4</div>
 
-                        <div class="line n5">5</div>
+                    <div class="line n5">5</div>
 
-                    </td>
-                    <td class="code">
+                </td>
+                <td class="code">
                         <pre><div class="container">
                             <div class="line"><code><span class="comment">// getter</span></code></div>
                         </div><div class="container">
@@ -846,13 +847,13 @@
                                     class="string">"blind"</span>, duration: <span class="number">800</span> } );</code>
                             </div>
                         </div></pre>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-
+                </td>
+            </tr>
+            </tbody>
+        </table>
     </div>
+
+</div>
 </section>
 <section id="methods">
 <header><h2>Methods</h2></header>

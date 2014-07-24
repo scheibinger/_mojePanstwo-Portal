@@ -1,15 +1,23 @@
-<?php $this->Combinator->add_libs('css', $this->Less->css('htmlexDocMain')); ?>
-<?php $this->Combinator->add_libs('css', $this->Less->css('htmlexDoc', array('plugin' => 'Dane'))); ?>
-<?php $this->Combinator->add_libs('js', 'toolbar'); ?>
-<?php echo $this->Html->css($document->getCSSLocation()); ?>
+<?php $this->Combinator->add_libs('js', 'toolbar');
+
+if ($document->getVersion() == '2') {
+    $this->Combinator->add_libs('css', $this->Less->css('htmlexDocMain_v2'));
+} else {
+    $this->Combinator->add_libs('css', $this->Less->css('htmlexDocMain_v1'));
+}
+
+$this->Combinator->add_libs('css', $this->Less->css('htmlexDoc', array('plugin' => 'Dane')));
+
+echo $this->Html->css($document->getCSSLocation());
+?>
 
 <div class="htmlexDoc" data-packages="<?php echo $document->getPackagesCount(); ?>"
      data-current-package="<?php echo $documentPackage; ?>"
      data-pages="<?php echo $document->getPagesCount(); ?>"
-     data-document-id="<?php echo $object->getId(); ?>"
-     data-dataset="<?php echo $dataset['Dataset']['alias']; ?>">
-
-    <?= $this->Element('toolbar'); ?>
+     data-document-id="<?php echo $document->getId(); ?>">
+	
+	
+	<? echo $this->Element('toolbar'); ?>
 
     <div class="document container">
         <div class="row">
@@ -26,6 +34,8 @@
 
             <? if (!empty($docs) && is_array($docs)) { ?>
                 <div class="sidebox col-md-2">
+                
+                	
                     <ul class="categories">
                         <? foreach ($docs as $category) { ?>
                             <li>

@@ -7,18 +7,20 @@
                 'object' => $object,
                 'options' => $options,
             )); ?>
-			
-			<? if( $object->getData('wartosc_kapital_zakladowy') ) {?>
-			<ul class="dataHighlights inl">
-            	<li class="dataHighlight showLabels">
-                    <p class="_label">Kapitał zakład.</p>
-					<div>
-                        <p class="_value"><?= number_format_h( $object->getData('wartosc_kapital_zakladowy') ) ?> PLN</p>
-					</div>
-                </li>
-            </ul>
+
+            <? if ($object->getData('wartosc_kapital_zakladowy')) { ?>
+                <ul class="dataHighlights inl">
+                    <li class="dataHighlight showLabels">
+                        <p class="_label">Kapitał zakład.</p>
+
+                        <div>
+                            <p class="_value"><?= number_format_h($object->getData('wartosc_kapital_zakladowy')) ?>
+                                PLN</p>
+                        </div>
+                    </li>
+                </ul>
             <? } ?>
-			
+
         </div>
 
     </div>

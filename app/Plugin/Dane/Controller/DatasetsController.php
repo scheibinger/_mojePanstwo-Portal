@@ -12,7 +12,18 @@ class DatasetsController extends DaneAppController
     {
 
         $alias = (string)@$this->request->params['alias'];
-        $data = $this->API->getDataset($alias);
+        $this->dataobjectsBrowserView(array(
+            'source' => 'dataset:' . $alias,
+            'showTitle' => true,
+            'titleTag' => 'h1',
+        ));
+
+    }
+    
+    public function beforeRender()
+    {
+	    
+	    $data = $this->dataBrowser->dataset;
         $dataset = $data['Dataset'];
         $datachannel = $data['Datachannel'];
 
@@ -25,14 +36,7 @@ class DatasetsController extends DaneAppController
 
         $title_for_layout = $dataset['name'];
         $this->set('title_for_layout', $title_for_layout);
-
-
-        $this->dataobjectsBrowserView(array(
-            'source' => 'dataset:' . $alias,
-            'showTitle' => true,
-            'titleTag' => 'h1',
-        ));
-
+	    
     }
 
 }

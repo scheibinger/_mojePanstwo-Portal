@@ -19,8 +19,8 @@ class KolejStacjeController extends DataobjectsController
 
     public function linie()
     {
-		
-		$this->addInitLayers(array('linie'));
+
+        $this->addInitLayers(array('linie'));
 
         parent::view();
 

@@ -419,7 +419,8 @@ class OAuthComponent extends Component implements IOAuth2Storage, IOAuth2Refresh
      *
      * @ingroup oauth2_section_3
      */
-    public function checkClientCredentials($client_id, $client_secret = NULL) {
+    public function checkClientCredentials($client_id, $client_secret = NULL)
+    {
         return $this->getClientDetails($client_id) !== false;
     }
 
@@ -438,7 +439,8 @@ class OAuthComponent extends Component implements IOAuth2Storage, IOAuth2Refresh
      *
      * @ingroup oauth2_section_4
      */
-    public function getClientDetails($client_id) {
+    public function getClientDetails($client_id)
+    {
         $client = $this->Client->getRedirectURL($client_id);
 
         if (isset($client['Client'])) {

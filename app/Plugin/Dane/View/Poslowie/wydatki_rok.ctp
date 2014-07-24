@@ -1,4 +1,4 @@
-<?php $this->Combinator->add_libs('css', $this->Less->css('htmlexDocMain')); ?>
+<?php $this->Combinator->add_libs('css', $this->Less->css('htmlexDocMain_v1')); ?>
 <?php $this->Combinator->add_libs('css', $this->Less->css('htmlexDoc', array('plugin' => 'Dane'))); ?>
 <?php $this->Combinator->add_libs('js', 'toolbar'); ?>
 
@@ -6,15 +6,15 @@
 <?php echo $this->Html->css($document->getCSSLocation()); ?>
 
 <?= $this->Element('dataobject/pageBegin') ?>
-	
-	<div class="block">
-		<div class="block-header">
-	        <h2 class="label">Wydatki biura poselskiego w <?= $rocznik['rok'] ?> roku</h2> 
-	        <a href="/dane/poslowie/<?= $object->getId() ?>/finanse">Wszystkie wydatki &raquo;</a>
-	    </div>
-	</div>
-	
-	<div class="htmlexDoc" data-packages="<?php echo $document->getPackagesCount(); ?>"
+
+    <div class="block">
+        <div class="block-header">
+            <h2 class="label">Wydatki biura poselskiego w <?= $rocznik['rok'] ?> roku</h2>
+            <a href="/dane/poslowie/<?= $object->getId() ?>/finanse">Wszystkie wydatki &raquo;</a>
+        </div>
+    </div>
+
+    <div class="htmlexDoc" data-packages="<?php echo $document->getPackagesCount(); ?>"
          data-current-package="<?php echo $documentPackage; ?>"
          data-pages="<?php echo $document->getPagesCount(); ?>"
          data-document-id="<?php echo $object->getId(); ?>"
@@ -55,9 +55,10 @@
                             <? } ?>
                         </ul>
                     </div>
-                <? } */ ?>
+                <? } */
+                ?>
             </div>
         </div>
     </div>
-    
+
 <?= $this->Element('dataobject/pageEnd') ?>

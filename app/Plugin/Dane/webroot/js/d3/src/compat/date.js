@@ -1,3 +1,3 @@
-if (!Date.now) Date.now = function() {
-  return +new Date;
+if (!Date.now) Date.now = function () {
+    return +new Date;
 };

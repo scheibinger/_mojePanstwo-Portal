@@ -1,10 +1,12 @@
 <?
-
 	echo $this->Element('dataobject/pageBegin');
-	echo $this->Element('docsBrowser/doc', array(
+?>
+	<div class="col-md-10">
+<?
+	echo $this->Element('Document/view', array(
 		'document' => $document,
-		'documentPackage' => $documentPackage,
+		'documentPackage' => 1,
 	));
 	echo $this->Element('dataobject/pageEnd');
-
 ?>
+	</div>

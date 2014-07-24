@@ -10,7 +10,7 @@ class BdlWskaznikiController extends DataobjectsController
     public $objectOptions = array(
         'bigTitle' => true,
     );
-    
+
     public $initLayers = array('dimennsions');
 
     private function _view($dimension = array())

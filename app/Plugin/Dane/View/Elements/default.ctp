@@ -17,7 +17,7 @@ if (in_array($object->getDataset(), array('rady_posiedzenia', 'rady_gmin_debaty'
 $this->Dataobject->setObject($object);
 
 ?>
-<div class="objectRender<? if($alertsStatus) echo " unreaded"; else echo " readed"; ?>"
+<div class="objectRender<? if ($alertsStatus) echo " unreaded"; else echo " readed"; ?>"
      oid="<?php echo $item['data']['id'] ?>" gid="<?php echo $gid ?>">
     <div class="row">
         <? if ($this->Dataobject->getDate()) { ?>
@@ -27,29 +27,30 @@ $this->Dataobject->setObject($object);
         <? } ?>
         <div class="data col-md-<?= $this->Dataobject->getDate() ? '11' : '12' ?>">
             <div class="row">
-            	
-            	<?
-                	if( $object->getPosition() ) {
-                ?>
-                <div class="content col-md-1">
-                	<span class="badge badge-position pull-right"><?= $object->getPosition() ?></span>
-                </div>
+
                 <?
-                	}
+                if ($object->getPosition()) {
+                    ?>
+                    <div class="content col-md-1">
+                        <span class="badge badge-position pull-right"><?= $object->getPosition() ?></span>
+                    </div>
+                <?
+                }
                 ?>
-            	
-                <? if ($object->getThumbnailUrl($thumbSize)) { 
-	                
-	                $size = $object_content_sizes[0];
-	                if( $object->getPosition() )
-	                	$size--;
-	                
-                ?>
+
+                <? if ($object->getThumbnailUrl($thumbSize)) {
+
+                    $size = $object_content_sizes[0];
+                    if ($object->getPosition())
+                        $size--;
+
+                    ?>
                     <div class="attachment col-md-<?= $size ?> text-center">
                         <?php if ($object->getUrl() != false) { ?>
                         <a class="thumb_cont" href="<?= $object->getUrl() ?>">
                             <?php } ?>
-                            <img class="thumb pull-right" onerror="imgFixer(this)" src="<?= $object->getThumbnailUrl($thumbSize) ?>"
+                            <img class="thumb pull-right" onerror="imgFixer(this)"
+                                 src="<?= $object->getThumbnailUrl($thumbSize) ?>"
                                  alt="<?= strip_tags($object->getTitle()) ?>"/>
                             <?php if ($object->getUrl() != false) { ?>
                         </a>
@@ -57,16 +58,16 @@ $this->Dataobject->setObject($object);
 
                     </div>
                     <div class="content col-md-<?= $object_content_sizes[1] ?>">
-						
-						<? if($alertsButtons) {?>
+
+                        <? if ($alertsButtons) { ?>
                             <div class="alertsButtons pull-right">
                                 <input class="btn btn-xs read" type="button"
                                        value="<?php echo __d('powiadomienia', 'LC_POWIADOMIENIA_OPTIONS_ALERT_BUTTON_READ'); ?>"/>
                                 <input class="btn btn-xs unread" type="button"
                                        value="<?php echo __d('powiadomienia', 'LC_POWIADOMIENIA_OPTIONS_ALERT_BUTTON_UNREAD'); ?>"/>
                             </div>
-						<? } ?>
-												
+                        <? } ?>
+
                         <? if ($object->force_hl_fields || $forceLabel) { ?>
                             <p class="header">
                                 <?= $object->getLabel(); ?>
@@ -94,27 +95,27 @@ $this->Dataobject->setObject($object);
                         else
                             echo $this->Dataobject->highlights($hlFields, $hlFieldsPush);
                         ?>
-                        
-                        <? if( $object->getDescription() ){?>
-                        <div class="description">
-                        	<?= $object->getDescription() ?>
-                        </div>
-                        <?}?>
-                        
+
+                        <? if ($object->getDescription()) { ?>
+                            <div class="description">
+                                <?= $object->getDescription() ?>
+                            </div>
+                        <? } ?>
+
                     </div>
 
                 <? } else { ?>
                     <div class="content">
-						
-						<? if($alertsButtons) {?>
+
+                        <? if ($alertsButtons) { ?>
                             <div class="alertsButtons pull-right">
                                 <input class="btn btn-xs read" type="button"
                                        value="<?php echo __d('powiadomienia', 'LC_POWIADOMIENIA_OPTIONS_ALERT_BUTTON_READ'); ?>"/>
                                 <input class="btn btn-xs unread" type="button"
                                        value="<?php echo __d('powiadomienia', 'LC_POWIADOMIENIA_OPTIONS_ALERT_BUTTON_UNREAD'); ?>"/>
                             </div>
-						<? } ?>
-						
+                        <? } ?>
+
                         <? if ($object->force_hl_fields || $forceLabel) { ?>
                             <p class="header">
                                 <?= $object->getLabel(); ?>
@@ -142,12 +143,12 @@ $this->Dataobject->setObject($object);
                         else
                             echo $this->Dataobject->highlights($hlFields, $hlFieldsPush);
                         ?>
-                        
-                        <? if( $object->getDescription() ){?>
-                        <div class="description">
-                        	<?= $this->Text->truncate($object->getDescription(), 250) ?>
-                        </div>
-                        <?}?>
+
+                        <? if ($object->getDescription()) { ?>
+                            <div class="description">
+                                <?= $this->Text->truncate($object->getDescription(), 250) ?>
+                            </div>
+                        <? } ?>
 
                     </div>
                 <? } ?>

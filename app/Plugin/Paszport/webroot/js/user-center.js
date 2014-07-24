@@ -58,15 +58,20 @@
                     },
                     success: function (data) {
                         var status = data.status;
-                        el.data('text', switchOldText).text(switchNewText).toggleClass('save');
-                        form.find('.viewElement, .editElement').toggle();
 
                         if (status == '200') {
+                            el.data('text', switchOldText).text(switchNewText).toggleClass('save');
+                            form.find('.viewElement, .editElement').toggle();
+
                             if (el.hasClass('genderButton') || el.hasClass('languageButton')) {
                                 form.find('.viewElement input').val(form.find('.editElement select option:selected').text());
                             } else {
                                 form.find('.viewElement input').val(form.find('.editElement input').val());
                             }
+                        } else if (status == 422) {
+                            /*TODO: error dla pola/pól*/
+                        } else if (status == 500) {
+                            /*TODO: error globalny*/
                         }
                     },
                     complete: function () {

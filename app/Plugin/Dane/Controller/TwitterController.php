@@ -5,7 +5,7 @@ App::uses('Set', 'Utility');
 class TwitterController extends DataobjectsController
 {
 
-	public $breadcrumbsMode = 'app';
+    public $breadcrumbsMode = 'app';
 
     public $components = array(
         'RequestHandler',
@@ -15,20 +15,19 @@ class TwitterController extends DataobjectsController
         'Time',
     );
     public $menu = array();
-    
+
     public $objectOptions = array(
         'hlFields' => array(),
     );
 
     public function view()
     {
-		
+
         parent::_prepareView();
         $this->object->loadLayer('source');
         $this->object->loadLayer('responses');
-                
-        
-        
+
+
         /*
         $this->dataobjectsBrowserView(array(
             'source' => 'twitter.responsesTo:' . $this->object->getId(),
