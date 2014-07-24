@@ -221,7 +221,7 @@ $this->Combinator->add_libs('js', 'Dane.view-krspodmioty');
 
     <?php if ($object->getId() == '481129') { ?>
         <div class="special banner">
-            <a href="http://mojepanstwo.pl/dane/krs_podmioty/481129/umowy" target="_blank">
+            <a href="/dane/krs_podmioty/481129/umowy" target="_blank">
                 <img src="/Dane/img/krakow_special_banner.png"
                      title="Zobacz umowy podpisywane przez Komitet Konkursowy Kraków 2022" width="885" height="85"/>
             </a>
