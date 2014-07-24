@@ -30,6 +30,7 @@ if ($_SERVER['HTTP_HOST'] == PK_DOMAIN) { // HTTP_X_FORWARDED_HOST
         
     Router::connect('/dane/krs_podmioty/:id', array('plugin' => 'Dane', 'controller' => 'krs_podmioty', 'action' => 'view'));
     Router::connect('/dane/krs_podmioty/:id/:action', array('plugin' => 'Dane', 'controller' => 'krs_podmioty'));    
+    Router::connect('/dane/krs_podmioty/:id/:action/*', array('plugin' => 'Dane', 'controller' => 'krs_podmioty'));    
 
     Router::connect('/', array('plugin' => 'Dane', 'controller' => 'gminy', 'action' => 'view', 'id' => 903));
     Router::connect('/:action', array('plugin' => 'Dane', 'controller' => 'gminy', 'id' => 903));
