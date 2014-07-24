@@ -69,20 +69,19 @@ class PrawoController extends DataobjectsController
 	        )
 	    );
 	    
-	    /*
 	    if( $items = $this->object->getLayer('counters') ) {
 		    foreach( $items as $item ) {
 		    	
-		    	$menu['items'][] = array(
-		    		'id' => $item['slug'],
-	                'href' => $href_base . '/' . $item['slug'],
-	                'label' => $item['nazwa'],
-	                'count' => $item['count'],
-		    	);
+		    	if( $item['count'] )
+			    	$menu['items'][] = array(
+			    		'id' => $item['slug'],
+		                'href' => $href_base . '/' . $item['slug'],
+		                'label' => $item['nazwa'],
+		                'count' => $item['count'],
+			    	);
 		    	
 		    }
 	    }
-	    */
 		
 	    
         $menu['selected'] = ( $this->request->params['action'] == 'view' ) ? '' : $this->request->params['action'];
