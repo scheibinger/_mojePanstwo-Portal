@@ -4,6 +4,8 @@ App::uses('AppHelper', 'View/Helper');
 
 class CombinatorHelper extends AppHelper
 {
+    var $helpers = array('Html');
+
     var $Vue = null;
     var $libs = array('js' => array(), 'css' => array());
     var $viewLibs = array('js' => array(), 'css' => array());
@@ -57,12 +59,24 @@ class CombinatorHelper extends AppHelper
         switch ($type) {
             case 'js':
                 $this->libs[$type] = array_merge($this->libs[$type], $this->viewLibs[$type]);
-                $cachefile_js = $this->generate_filename('js');
-                return $this->get_js_html($cachefile_js, $async);
+
+                if (Configure::read('debug') > 0) {
+                    return $this->Html->script($this->libs[$type]);
+
+                } else {
+                    $cachefile_js = $this->generate_filename('js');
+                    return $this->get_js_html($cachefile_js, $async);
+                }
             case 'css':
                 $this->libs[$type] = array_merge($this->libs[$type], $this->viewLibs[$type]);
-                $cachefile_css = $this->generate_filename('css');
-                return $this->get_css_html($cachefile_css);
+
+                if (Configure::read('debug') > 0) {
+                    return $this->Html->css($this->libs[$type]);
+
+                } else {
+                    $cachefile_css = $this->generate_filename('css');
+                    return $this->get_css_html($cachefile_css);
+                }
             default:
                 $this->libs['js'] = array_merge($this->libs['js'], $this->viewLibs['js']);
                 $cachefile_js = $this->generate_filename('js');

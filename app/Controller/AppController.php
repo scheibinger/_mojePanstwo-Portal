@@ -136,7 +136,7 @@ class AppController extends Controller
 
     public function beforeFilter()
     {
-
+						
         if (defined('PORTAL_DOMAIN')) {
 
             $pieces = parse_url(Router::url($this->here, true));
@@ -154,9 +154,15 @@ class AppController extends Controller
                 }
 
                 if (
-                    $this->request->params['controller'] != 'gminy' ||
-                    !in_array($this->request->params['action'], array('view', 'okregi_wyborcze', 'interpelacje', 'posiedzenia', 'debaty', 'rada_uchwaly', 'druki', 'radni_powiazania', 'radni', 'radni_dzielnic', 'darczyncy', 'wskazniki', 'zamowienia', 'organizacje', 'biznes', 'ngo', 'spzoz', 'dotacje_ue', 'rady_gmin_wystapienia', 'map', 'zamowienia_publiczne'))
+                    ($this->request->params['controller'] == 'gminy') &&
+                    in_array($this->request->params['action'], array('view', 'okregi_wyborcze', 'interpelacje', 'posiedzenia', 'debaty', 'rada_uchwaly', 'druki', 'radni_powiazania', 'radni', 'radni_dzielnic', 'darczyncy', 'wskazniki', 'zamowienia', 'organizacje', 'biznes', 'ngo', 'spzoz', 'dotacje_ue', 'rady_gmin_wystapienia', 'map', 'zamowienia_publiczne'))
                 ) {
+                	                	
+                } elseif(
+                	($this->request->params['controller'] == 'krs_podmioty') 
+                ) {
+                
+                } else {
 
                     $this->redirect('http://' . PORTAL_DOMAIN . $_SERVER['REQUEST_URI']);
                     die();
