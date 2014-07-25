@@ -18,6 +18,8 @@ class DataobjectsBrowserComponent extends Component
     public $routes = array();
     public $inline = false;
     public $limit = 20;
+    public $conditions = array();
+    public $orders = array();
     
     public $dataset = false;
     public $datachannel = false;
@@ -72,6 +74,9 @@ class DataobjectsBrowserComponent extends Component
 
         if (isset($settings['limit']))
             $this->limit = max(min($settings['limit'], 100), 0);
+            
+        if (isset($settings['conditions']))
+            $this->conditions = $settings['conditions'];
 
         $add_source_params = array();
         $source_params = array();
@@ -118,7 +123,7 @@ class DataobjectsBrowserComponent extends Component
     {
 		
         $q = '';
-        $conditions = array();
+        $conditions = $this->conditions;
         $order = array();
         $order_selected = false;
         $useDefaults = true;

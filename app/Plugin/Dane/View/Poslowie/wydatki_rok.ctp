@@ -2,7 +2,6 @@
 <?php $this->Combinator->add_libs('css', $this->Less->css('htmlexDoc', array('plugin' => 'Dane'))); ?>
 <?php $this->Combinator->add_libs('js', 'toolbar'); ?>
 
-
 <?php echo $this->Html->css($document->getCSSLocation()); ?>
 
 <?= $this->Element('dataobject/pageBegin') ?>
