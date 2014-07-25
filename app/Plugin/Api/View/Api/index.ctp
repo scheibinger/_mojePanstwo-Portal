@@ -49,7 +49,7 @@
 
         <p><?php echo $api['description'] ?></p>
 
-        <a class="btn btn-primary" href="<?php echo $this->Html->url(array('action' => 'view', 'version' => $version, 'slug' => $api['slug'])); ?>">Zobacz</a>
+        <a class="btn btn-primary" href="<?php echo $this->Html->url(array('action' => 'view', 'slug' => $api['slug'])); ?>">Zobacz</a>
         </div>
     <?php } ?>
     </div>
