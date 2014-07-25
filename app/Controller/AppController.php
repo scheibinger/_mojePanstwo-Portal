@@ -155,7 +155,7 @@ class AppController extends Controller
 
                 if (
                     ($this->request->params['controller'] == 'gminy') &&
-                    in_array($this->request->params['action'], array('view', 'okregi_wyborcze', 'interpelacje', 'posiedzenia', 'debaty', 'rada_uchwaly', 'druki', 'radni_powiazania', 'radni', 'radni_dzielnic', 'darczyncy', 'wskazniki', 'zamowienia', 'organizacje', 'biznes', 'ngo', 'spzoz', 'dotacje_ue', 'rady_gmin_wystapienia', 'map', 'zamowienia_publiczne'))
+                    in_array($this->request->params['action'], array('view', 'okregi_wyborcze', 'interpelacje', 'posiedzenia', 'debaty', 'rada_uchwaly', 'druki', 'radni_powiazania', 'radni', 'radni_dzielnic', 'darczyncy', 'wskazniki', 'zamowienia', 'organizacje', 'biznes', 'ngo', 'spzoz', 'dotacje_ue', 'rady_gmin_wystapienia', 'map', 'zamowienia_publiczne', 'prawo_lokalne'))
                 ) {
                 	                	
                 } elseif(
