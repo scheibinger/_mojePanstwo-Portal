@@ -84,7 +84,6 @@
  “params”: { // tablica - parametry błędu (niezależne od języka, specyficzne dla danego kodu błędu)}
     "param1": "value1",
  },
- “error_description_i18n”: “Długi opis w języku zgodnym z Http Accept Language, jeżeli obsługiwany”,
  "error_description": "Długi opis w domyślnym języku, jeżeli Http Accept Language nie został podany, lub jest nieobsługiwany"
 }</pre>
         </li>
