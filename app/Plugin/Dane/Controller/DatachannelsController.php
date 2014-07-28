@@ -91,13 +91,20 @@ class DatachannelsController extends DaneAppController
     }
     
     public function beforeRender()
-    {
+    {	
+    
+    	$datasets = array();
+    	
+	    if( $this->dataBrowser ) {
 	    
-	    $data = $this->dataBrowser->datachannel;
-        $datachannel = $data['Datachannel'];
-
-
-        $datasets = $data['Dataset'];
+		    $data = $this->dataBrowser->datachannel;
+	        $datachannel = $data['Datachannel'];
+	        $datasets = $data['Dataset'];
+	        
+	        $title_for_layout = $datachannel['name'];
+	        $this->set('title_for_layout', $title_for_layout);
+			    
+		}
 
         if (count($datasets) === 1) {
 
@@ -111,9 +118,6 @@ class DatachannelsController extends DaneAppController
 
         }
 
-
-        $title_for_layout = $datachannel['name'];
-        $this->set('title_for_layout', $title_for_layout);
 	    
     }
 
