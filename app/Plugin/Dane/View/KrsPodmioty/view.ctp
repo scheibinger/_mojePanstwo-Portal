@@ -13,6 +13,7 @@ echo $this->Html->script('Dane.d3/d3', array('block' => 'scriptBlock'));
 $this->Combinator->add_libs('css', $this->Less->css('view-krspodmioty', array('plugin' => 'Dane')));
 $this->Combinator->add_libs('css', $this->Less->css('dataobjectslider', array('plugin' => 'Dane')));
 $this->Combinator->add_libs('js', 'Dane.view-krspodmioty');
+$this->Combinator->add_libs('js', 'graph-krs');
 
 ?>
     <div class="krsPodmioty row">
