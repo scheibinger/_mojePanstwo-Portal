@@ -49,7 +49,7 @@ $(document).ready(function () {
                     infoBlock = $administracja.find('.infoBlock');
                     infoBlock.addClass('current active');
                 } else {
-                    $administracja.find('.infoBlock').addClass('old').removeClass('active').css({'height': 0, 'border-width': 0}).animate({'margin-top': 0}, 1000, function () {
+                    $administracja.find('.infoBlock').addClass('old').removeClass('active').css({'height': 0, 'border-width': 0}).animate({'margin-top': 0}, 500, function () {
                         $administracja.find('.infoBlock.old').remove()
                     });
                     slideMark.after(infoBlock);
