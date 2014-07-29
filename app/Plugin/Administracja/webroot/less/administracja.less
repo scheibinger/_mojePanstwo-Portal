@@ -77,6 +77,7 @@
             position: relative;
             border-top: 1px solid #7a94a6;
             border-bottom: 1px solid #7a94a6;
+            overflow: hidden;
             -moz-transition: height .5s;
             -ms-transition: height .5s;
             -o-transition: height .5s;
@@ -108,8 +109,32 @@
                 }
             }
 
-            .content {
+            .container {
                 padding: 40px;
+
+                .leftSide, .rightSide {
+                    color: #FFFFFF;
+                    font-size: 14px;
+                    font-weight: 300;
+
+                    h4, a, a:hover, a:active {
+                        color: #FFFFFF;
+                        font-size: 14px;
+                        font-weight: 3000;
+                        margin-bottom: 0;
+                    }
+                }
+                .rightSide h4 {
+                    font-size: 30px;
+                    margin-top: 28px;
+                    margin-bottom: 10px;
+                }
+                .slugTitle {
+                    color: #FFFFFF;
+                    font-size: 38px;
+                    font-weight: 300;
+                    line-height: 1em;
+                }
             }
         }
     }

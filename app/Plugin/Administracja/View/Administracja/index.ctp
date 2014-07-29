@@ -12,14 +12,24 @@ $this->Combinator->add_libs('js', 'Administracja.administracja.js');
 
     <div class="container">
         <? if ($items = $data['files']) ;
-        { ?>
+        {
+            ?>
             <div class="content">
                 <div class="row items">
                     <? foreach ($items as $item) { ?>
                         <div class="block col-md-<?= $item['width'] ?>">
                             <div class="item" data-id="<?= $item['id'] ?>">
-                                <a href="/dane/administracja_publiczna/<?= $item['id'] ?>" class="inner">
-                                    <div class="logo">
+                                <a href="/dane/administracja_publiczna/<?= $item['id'] ?>" class="inner"
+                                   data-title="<?= $item['nazwa'] ?>"
+                                   data-info='{
+                                        "adres": ["Skwer kard. Wyszyńskiego 9 01-015 Warszawa"],
+                                        "www": ["http://www.pg.gov.pl/bip/"],
+                                        "email":["BPG@pg.gov.pl"],
+                                        "telefon": ["22 125-14-91"],
+                                        "fax": ["22 125-18-82"],
+                                        "instytucje": ["Prokuratura Apelacyjna w Krakowie", "Prokuratura Okręgowa w Kielcach","Prokuratura Okręgowa w Krakowie","Prokuratura Okręgowa w Tarnowie","Prokuratura Okręgowa w Nowym Sączu"]
+                                    }'>
+                                <div class="logo">
                                         <img src="/administracja/img/header.png" title="<?= $item['nazwa'] ?>"/>
                                     </div>
                                     <div class="title">
