@@ -164,34 +164,35 @@
         height: 484px;
         background-color: #FFFFFF;
 
-        .vco-slider .slider-item .content .content-container {
-            width: 100% !important;
+        .vco-slider .slider-item {
+            padding-top: 12px;
 
-            .text {
-                vertical-align: top !important;
-                width: 80% !important;
-                max-width: 80% !important;
+            .content .content-container {
+                width: 100% !important;
 
-                .container {
-                    padding: 0 !important;
-                    width: 100% !important;
+                .text {
+                    vertical-align: top !important;
+                    width: 80% !important;
+                    max-width: 80% !important;
+
+                    .container {
+                        padding: 0 !important;
+                        width: 100% !important;
+                    }
                 }
-            }
 
-            .media .media-wrapper .media-container {
-                .media-frame,
-                .media-image img {
-                    border-width: 0;
+                .media .media-wrapper .media-container {
+                    .media-frame,
+                    .media-image img {
+                        border-width: 0;
+                    }
                 }
-            }
 
-            .media .media-wrapper .media-container .media-frame, .media .media-wrapper .media-container .media-image img {
-                max-width: 200px !important;
+                .media .media-wrapper .media-container .media-frame, .media .media-wrapper .media-container .media-image img {
+                    max-width: 200px !important;
+                }
             }
         }
-    }
-
-    .slide_content {
     }
 
     .poslowie {
@@ -293,6 +294,7 @@
                 li {
                     &.active {
                         border-bottom: 1px solid #d0e1ec;
+                        margin-bottom: -1px;
 
                         a {
                             color: #00b1ed;
