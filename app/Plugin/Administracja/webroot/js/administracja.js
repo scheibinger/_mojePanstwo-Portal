@@ -36,25 +36,28 @@ $(document).ready(function () {
                 }
             }
 
-            var infoBlock = $('<div></div>').addClass('infoBlock current').css('height', 0).append(
+            var infoBlock = $('<div></div>').addClass('infoBlock current active').css('height', 0).append(
                     $('<div></div>').addClass('arrow')
                 ).append(
-                    $('<div></div>').addClass('container')
+                    $('<div></div>').addClass('content').append(
+                        $('<div></div>').addClass('container')
+                    )
                 );
 
             if ($administracja.find('.infoBlock').length !== 0) {
                 if ($administracja.find('.infoBlock').data('marker')[0] === slideMark[0]) {
                     infoBlock = $administracja.find('.infoBlock');
-                    infoBlock.addClass('current');
+                    infoBlock.addClass('current active');
                 } else {
-                    $administracja.find('.infoBlock').addClass('old').css('height', 0);
+                    $administracja.find('.infoBlock').addClass('old').removeClass('active').css({'height': 0, 'border-width': 0}).animate({'margin-top': 0}, 1000, function () {
+                        $administracja.find('.infoBlock.old').remove()
+                    });
                     slideMark.after(infoBlock);
                 }
             } else {
                 slideMark.after(infoBlock);
             }
 
-            $administracja.find('.infoBlock.old').remove();
             infoBlock.data('marker', slideMark).find('.container').empty().append(function () {
                 var slug = $(this)
                     , title = $.trim(data.title)
