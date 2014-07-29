@@ -52,8 +52,16 @@ jQuery(document).ready(function () {
         }
     });
 
-    $('body').scrollspy({ target: '.sideMenu' })
+    $sideMenu.find('a').click(function (e) {
+        var target = $(this).attr('href');
 
+        jQuery('html, body').stop(true, false).animate({
+            scrollTop: $(target).offset().top
+        }, 2000);
+
+    });
+
+    $('body').scrollspy({ target: '.sideMenu' });
 
     graphPoslankiPoslowie();
 
