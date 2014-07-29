@@ -26,8 +26,8 @@ echo $this->Element('Dane.dataobject/subobject', array(
     <div class="col-md-12">
         <div class="object mpanel">
             <div class="col-md-7">
-                <div class="ytVideo">
-                    <div id="pb_player" data-youtube="<?php echo $debata->getData('yt_video_id'); ?>"></div>
+                <div id="ytVideo">
+                    <div id="player" data-youtube="<?php echo $debata->getData('yt_video_id'); ?>"></div>
                 </div>
             </div>
             <div class="col-md-5 wystapienia">
