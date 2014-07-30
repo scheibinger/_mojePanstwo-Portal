@@ -489,7 +489,7 @@ var d3Data;
             /*ADDITIONAL FUNCTIONS*/
             function init() {
                 grabIcon();
-                panIcon();
+                //panIcon();
             }
         });
     }
