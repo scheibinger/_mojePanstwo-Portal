@@ -222,8 +222,9 @@ $this->Combinator->add_libs('js', 'graph-krs');
 
     <?php if ($object->getId() == '481129') { ?>
         <div class="special banner">
-            <a title="Zobacz umowy podpisywane przez Komitet Konkursowy Kraków 2022" href="/dane/krs_podmioty/481129/umowy">
-                <img src="/Dane/img/krakow_special_banner.png" width="885" height="85"/>
+            <a title="Zobacz umowy podpisywane przez Komitet Konkursowy Kraków 2022"
+               href="/dane/krs_podmioty/481129/umowy">
+            <img src="/Dane/img/krakow_special_banner.png" width="885" height="85"/>
             </a>
         </div>
     <?php } ?>
@@ -403,8 +404,8 @@ $this->Combinator->add_libs('js', 'graph-krs');
 
     <div class="powiazania block">
         <div class="block-header"><h2 class="label">Powiązania</h2></div>
-				
-        <div id="connectionGraph" data-id="<?php echo $object->getId() ?>"></div>
+
+        <div id="connectionGraph" class="loading" data-id="<?php echo $object->getId() ?>"></div>
     </div>
 
 

@@ -173,7 +173,7 @@ if (!isset($action)) {
                 <a class="btn btn-info" href="<? echo Router::reverse($this->params); ?>" target="_self">Odśwież
                     stronę</a>
             <?php } else { ?>
-                <a class="btn btn-info" href="/" target="_self">Wróc na stronę główną</a>
+                <a class="btn btn-info" href="/" target="_self">Wróć na stronę główną</a>
             <?php } ?>
         </div>
     </div>
