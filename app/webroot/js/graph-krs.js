@@ -1,36 +1,39 @@
+var d3Data;
 (function ($) {
     var connectionGraph = jQuery('#connectionGraph');
 
     if (connectionGraph.length > 0) {
         var margin = {top: -5, right: -5, bottom: -5, left: -5},
             width = connectionGraph.outerWidth() + 60 - margin.left - margin.right,
-            height = connectionGraph.outerHeight() - margin.top - margin.bottom,
-            d3Data = {
-                'color': {
-                    'mainFill': '#278DCD',
-                    'links': '#333333',
-                    'podmiot': "#6CACD8",
-                    'osoba': "#24333A"
-                },
-                size: {
-                    'distance': 200,
-                    'linksLength': 60,
-                    'linksWidth': 1,
-                    'linkText': '8px',
-                    'nodesPodmiot': 45,
-                    'nodesOsoba': 30,
-                    'nodeText': '10px',
-                    'nodeTextBox': 10,
-                    'nodeTextSeparate': 3
-                }
-            };
+            height = connectionGraph.outerHeight() - margin.top - margin.bottom;
+        d3Data = {
+            'color': {
+                'mainFill': '#278DCD',
+                'links': '#333333',
+                'podmiot': "#6CACD8",
+                'osoba': "#24333A"
+            },
+            size: {
+                'distance': 200,
+                'linksLength': 60,
+                'linksWidth': 1,
+                'linkText': '8px',
+                'nodesPodmiot': 45,
+                'nodesOsoba': 30,
+                'nodeText': '10px',
+                'nodeTextBox': 10,
+                'nodeTextSeparate': 3
+            }
+        };
 
         d3.json("/dane/krs_podmioty/" + connectionGraph.data('id') + "/graph.json", function (error, graph) {
             var nodes = graph.nodes,
                 links = [];
-            
+
+            connectionGraph.removeClass('loading');
+
             d3Data.size.distance = Math.min(Math.max(130, 8 * nodes.length), 400);
-            
+
             var root = $.grep(nodes, function (e) {
                 return e.id == graph.root;
             })[0];
@@ -48,9 +51,6 @@
                     })[0];
                 links.push({source: s, target: t, label: link.type, id: link.id});
             });
-            
-            
-            console.log('links', links);
 
             // Sort links by source, then target
             links.sort(function (a, b) {
@@ -118,6 +118,7 @@
                 .nodes(d3.values(nodes))
                 .links(links)
                 .on("tick", tick)
+                .on("start", init)
                 .start();
 
             // Per-type markers, as they don't inherit styles.
@@ -279,6 +280,14 @@
                     detailInfo(d);
                 });
 
+            d3.select("#panControlZoomIn").on('click', function () {
+                d3Data.innerContainer.attr("transform", "translate(" + d3.event.clientX + "," + d3.event.clientY + ")scale(" + d3Data.zoom.scale() + 0.1 + ")");
+            });
+
+            d3.select("#panControlZoomOut").on('click', function () {
+                d3Data.innerContainer.attr("transform", "translate(" + d3.event.clientX + "," + d3.event.clientY + ")scale(" + d3Data.zoom.scale() - 0.1 + ")");
+            });
+
             function tick(d) {
                 path.attr("d", linkArc);
                 pathTextShadow.attr("transform", transformHalf).attr("x",function (d) {
@@ -304,8 +313,8 @@
                     n = nodes.length;
 
                 while (i < n) {
-                	q.visit(collide(nodes[i]));
-					i++;
+                    q.visit(collide(nodes[i]));
+                    i++;
                 }
             }
 
@@ -333,7 +342,7 @@
             }
 
             function collide(node) {
-            	if (node.y < ((d3Data.size.nodesPodmiot > d3Data.size.nodesOsoba) ? d3Data.size.nodesPodmiot : d3Data.size.nodesOsoba)) node.y -= node.y - ((d3Data.size.nodesPodmiot > d3Data.size.nodesOsoba) ? d3Data.size.nodesPodmiot : d3Data.size.nodesOsoba);
+                if (node.y < ((d3Data.size.nodesPodmiot > d3Data.size.nodesOsoba) ? d3Data.size.nodesPodmiot : d3Data.size.nodesOsoba)) node.y -= node.y - ((d3Data.size.nodesPodmiot > d3Data.size.nodesOsoba) ? d3Data.size.nodesPodmiot : d3Data.size.nodesOsoba);
 
                 var radius = (node.label == "podmiot") ? d3Data.size.nodesPodmiot : ((node.label == "osoba") ? d3Data.size.nodesOsoba : ((d3Data.size.nodesPodmiot > d3Data.size.nodesOsoba) ? d3Data.size.nodesPodmiot : d3Data.size.nodesOsoba)),
                     space = 10,
@@ -364,6 +373,7 @@
             }
 
             function zoomed() {
+                console.log("translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
                 d3Data.innerContainer.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
             }
 
@@ -451,6 +461,35 @@
                 connectionGraph.find('.dataContent .btn').click(function () {
                     connectionGraph.find('.dataContent').remove();
                 });
+            }
+
+            function grabIcon() {
+                connectionGraph.find('>svg').mousedown(function () {
+                    $(this).addClass('grabbing')
+                }).mouseup(function () {
+                    $(this).removeClass('grabbing')
+                });
+            }
+
+            function panIcon() {
+                if (connectionGraph.find('.panControl').length == 0) {
+                    connectionGraph.append(
+                        $('<div></div>').addClass('panControl btn-group-vertical').append(
+                                $('<div></div>').attr('id', 'panControlCenter').addClass('btn btn-default glyphicon glyphicon-fullscreen')
+                            ).append(
+                                $('<div></div>').attr('id', 'panControlZoomIn').addClass('btn btn-default glyphicon glyphicon-zoom-in')
+                            )
+                            .append(
+                                $('<div></div>').attr('id', 'panControlZoomOut').addClass('btn btn-default glyphicon glyphicon-zoom-out')
+                            )
+                    );
+                }
+            }
+
+            /*ADDITIONAL FUNCTIONS*/
+            function init() {
+                grabIcon();
+                //panIcon();
             }
         });
     }

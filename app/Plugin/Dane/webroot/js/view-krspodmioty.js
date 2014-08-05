@@ -20,7 +20,6 @@ function initialize() {
     document.body.appendChild(contentStringHeightTemp);
 
     /*ADDING HEIGHT TO ORIGIN NODE*/
-    /*ADDING HEIGHT TO ORIGIN NODE*/
     contentString.style.height = contentStringHeightTemp.clientHeight;
 
     /*REMOVING CLONED NODE*/

@@ -140,6 +140,35 @@
                 margin-right: -30px;
                 overflow: hidden;
 
+                > svg {
+                    cursor: grab;
+                    cursor: -moz-grab;
+                    cursor: -webkit-grab;
+
+                    &.grabbing {
+                        cursor: grabbing;
+                        cursor: -moz-grabbing;
+                        cursor: -webkit-grabbing;
+                    }
+                }
+
+                .panControl {
+                    @size: 30px;
+
+                    position: absolute;
+                    top: 0;
+                    right: 10px;
+                    width: @size;
+                    height: 3*@size;
+
+                    .btn {
+                        width: @size;
+                        height: @size;
+                        padding-left: 8px;
+                        padding-right: 20px;
+                    }
+                }
+
                 .circle {
                     cursor: pointer;
                 }

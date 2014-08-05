@@ -8,12 +8,6 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
     font-weight: 400;
 }
 
-header {
-    position: fixed;
-    top: 0;
-    z-index: 9999;
-}
-
 a, a:hover, a:focus {
     text-decoration: none;
     outline: none;
@@ -268,7 +262,6 @@ body > pre:first-child {
         ._label {
             font-size: 11px;
             margin: 0 0 3px;
-            color: #777;
             font-weight: bold;
             color: #555;
         }
@@ -567,6 +560,8 @@ blockquote p {
 
 html,
 body {
+    margin: 0;
+    padding: 0;
     height: 100%;
 }
 
@@ -714,12 +709,8 @@ body {
 
 /* FIRST STRUCTURE SETUP */
 #_wrapper {
-    position: relative;
     min-height: 100%;
-    height: auto !important;
-    height: 100%;
-    margin-bottom: -@footerHeight; /* the bottom margin is the negative value of the footer's height */
-    padding-top: 40px;
+    position: relative;
     background-color: #F3F3F3;
 
     &.white {
@@ -731,17 +722,21 @@ body {
     }
 
     header {
+        position: fixed;
+        top: 0;
+        z-index: 9999;
         width: 100%;
         height: @headerHeight;
     }
 
+    /*SECURE DIV TO MAKE SURE THAT CONTENT WONT TOUCH FOOTER*/
     #_sizeControl {
         height: @footerHeight;
     }
 
     #_main {
-        width: 100%;
-        height: 100%;
+        padding-top: @headerHeight;
+        padding-bottom: @footerHeight;
 
         .container.app {
             margin-top: 2em;
@@ -798,11 +793,12 @@ footer {
     font-size: 11px;
     line-height: 16px;
     color: @footerColor;
-    position: relative;
-    width: 100%;
-    height: @footerHeight;
     padding: (@footerHeight/2)-6 0;
     background-color: #222222;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: @footerHeight;
 
     a {
         color: @footerColor;
