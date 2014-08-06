@@ -11,7 +11,9 @@ var d3Data;
                 'mainFill': '#278DCD',
                 'links': '#333333',
                 'podmiot': "#6CACD8",
-                'osoba': "#24333A"
+                'osoba': "#24333A",
+                'podmiotDisabled': "#D2E5F3",
+                'osobaDisabled': "#BCC1C3"
             },
             size: {
                 'distance': 200,
@@ -23,6 +25,10 @@ var d3Data;
                 'nodeText': '10px',
                 'nodeTextBox': 10,
                 'nodeTextSeparate': 3
+            },
+            zoomConst: {
+                min: 0.5,
+                max: 4
             }
         };
 
@@ -82,7 +88,7 @@ var d3Data;
             }
 
             d3Data.zoom = d3.behavior.zoom()
-                .scaleExtent([0.5, 4])
+                .scaleExtent([d3Data.zoomConst.min, d3Data.zoomConst.max])
                 .on("zoom", zoomed);
 
             d3Data.drag = d3.behavior.drag()
@@ -170,7 +176,9 @@ var d3Data;
             var circle = d3Data.innerContainer.append("svg:g").selectAll("circle")
                 .data(d3Data.force.nodes())
                 .enter().append("svg:circle")
-                .attr('class', 'circleBottom')
+                .attr('class', function (d) {
+                    return 'circleBottom ' + d.id
+                })
                 .attr("r", function (d) {
                     if (d.label == "podmiot") {
                         return d3Data.size.nodesPodmiot;
@@ -276,17 +284,74 @@ var d3Data;
                 })
                 .style('fill-opacity', 0)
                 .call(d3Data.drag)
-                .on("dblclick", function (d) {
-                    detailInfo(d);
+                .on("mouseover", function (d) {
+                    circle.classed("node-active", function (o) {
+                        var color = isConnected(d, o) ? d3Data.color[o.label] : d3Data.color[o.label + 'Disabled'];
+                        $(this).css({'fill': color, 'stroke': color});
+                        return false;
+                    });
+
+                    path.classed("link-active", function (o) {
+                        this.setAttribute('stroke-opacity', !!((o.source === d || o.target === d)) ? 1 : .2);
+                        return false;
+                    });
+
+                    d3.select(this).classed("node-active", function (o) {
+                        d3.select('.' + d.id).classed('node-active', function () {
+
+                            $(this).css({'fill': d3Data.color[o.label], 'stroke': d3Data.color[o.label]});
+                            return false;
+                        });
+                        return false;
+                    });
+                })
+                .on("mouseout", function (d) {
+                    circle.classed('node-active', function (o) {
+                        $(this).css({'fill': d3Data.color[o.label], 'stroke': d3Data.color[o.label]});
+                        return false;
+                    });
+                    path.classed('link-active', function () {
+                        this.setAttribute('stroke-opacity', 1);
+                        return false;
+                    });
+                })
+                .on("mousedown", function (d) {
+                    d.mousePos = {x: d.x, y: d.y};
+                })
+                .on("mouseup", function (d) {
+                    if ((d.mousePos.x == d.x) && (d.mousePos.y == d.y))
+                        detailInfo(d);
+                    d.mousePos = null;
                 });
 
+            d3.select("#panControlCenter").on('click', function () {
+                d3Data.zoom.translate([0, 0]).scale(1);
+                d3Data.zoom.event(d3Data.innerContainer.transition().duration(0));
+            });
+
             d3.select("#panControlZoomIn").on('click', function () {
-                d3Data.innerContainer.attr("transform", "translate(" + d3.event.clientX + "," + d3.event.clientY + ")scale(" + d3Data.zoom.scale() + 0.1 + ")");
+                var scale = Number(d3Data.zoom.scale() + .1),
+                    scaleSet = (scale < d3Data.zoomConst.max) ? scale : d3Data.zoomConst.max;
+                d3Data.zoom.scale(scaleSet);
+                d3Data.zoom.event(d3Data.innerContainer.transition().duration(0));
             });
 
             d3.select("#panControlZoomOut").on('click', function () {
-                d3Data.innerContainer.attr("transform", "translate(" + d3.event.clientX + "," + d3.event.clientY + ")scale(" + d3Data.zoom.scale() - 0.1 + ")");
+                var scale = Number(d3Data.zoom.scale() - .1),
+                    scaleSet = (scale > d3Data.zoomConst.min) ? scale : d3Data.zoomConst.min;
+                d3Data.zoom.scale(scaleSet);
+                d3Data.zoom.event(d3Data.innerContainer.transition().duration(0));
             });
+
+            var linkedByIndex = {};
+
+            links.forEach(function (d) {
+                linkedByIndex[d.source.index + "," + d.target.index] = 1;
+            });
+
+            function isConnected(a, b) {
+                return linkedByIndex[a.index + "," + b.index] || linkedByIndex[b.index + "," + a.index];
+            }
 
             function tick(d) {
                 path.attr("d", linkArc);
@@ -373,7 +438,6 @@ var d3Data;
             }
 
             function zoomed() {
-                console.log("translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
                 d3Data.innerContainer.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
             }
 
@@ -383,8 +447,10 @@ var d3Data;
             }
 
             function dragged(d) {
-                d.x = d3.event.x;
-                d.y = d3.event.y;
+                if (d.id !== root.id) {
+                    d.x = d3.event.x;
+                    d.y = d3.event.y;
+                }
                 tick(d);
             }
 
@@ -489,7 +555,7 @@ var d3Data;
             /*ADDITIONAL FUNCTIONS*/
             function init() {
                 grabIcon();
-                //panIcon();
+                panIcon();
             }
         });
     }
