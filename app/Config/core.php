@@ -83,7 +83,7 @@ Configure::write('Exception', array(
     'handler' => 'ErrorHandler::handleException',
     'renderer' => 'AppExceptionRenderer',
     'log' => true,
-    'skipLog' => array('MissingActionException', 'MissingControllerException')
+    'skipLog' => array('MissingActionException', 'MissingControllerException', 'NotFoundException', 'ForbiddenException')
 ));
 
 /**

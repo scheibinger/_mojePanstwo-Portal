@@ -1,0 +1,3 @@
+[submodule "app/Plugin/EmailLogger"]
+	path = app/Plugin/EmailLogger
+	url = git://github.com/ceeram/EmailLogger.git
