@@ -1,3 +1,8 @@
+<div>
+    <div>FLASH TODO</div>
+    <div><? echo $this->Session->flash(); ?>    </div>
+</div>
+
 <form class="form-horizontal" role="form" method="post">
 
     <div class="form-group <? if (isset($verr['template_id'])) echo 'has-error'; ?>">

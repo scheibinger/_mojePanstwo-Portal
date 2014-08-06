@@ -11,13 +11,24 @@ class PismaController extends AppController
         parent::beforeFilter();
 
         $this->Auth->deny();
+        $this->Auth->allow('home');
+
+        $this->API->setOptions(array('passExceptions' => array(
+            403 => 'ForbiddenException',
+            404 => 'NotFoundException'
+        )));
         $this->api = $this->API->Pisma();
     }
 
     public function home()
     {
-        $this->Auth->allow();
+        $this->set('login_redirect_url', $this->Auth->redirectUrl());
         // TODO
+
+        $user = $this->Auth->user();
+        if (!empty($user)) {
+            $this->set('pisma', $this->api->documents_index());
+        }
     }
 
     /**
@@ -25,7 +36,7 @@ class PismaController extends AppController
      */
     public function add()
     {
-        if ($doc = $this->save_form($this->request->data)) {
+        if ($doc = $this->saveForm($this->request->data)) {
             $this->redirect(array('action' => 'edit', 'id' => $doc['id']));
         }
     }
@@ -86,5 +97,13 @@ class PismaController extends AppController
                 $this->set('doc', $doc);
             }
         }
+    }
+
+    public function delete($id) {
+        // TODO czy jesteś pewien, if is('get')
+        $this->api->document_delete($id);
+        $this->Session->setFlash('Skasowano pismo');
+
+        $this->redirect(array('action' => 'home', '[method]' => 'GET'   ));
     }
 }
