@@ -324,6 +324,24 @@ var d3Data;
                     d.mousePos = null;
                 });
 
+            d3.select("#panControlFullscreen").on('click', function () {
+                var pan = $(this);
+
+                if (pan.hasClass('on')) {
+                    pan.removeClass('on');
+                    connectionGraph.removeClass('fullscreen');
+                } else {
+                    pan.addClass('on');
+                    connectionGraph.addClass('fullscreen');
+                }
+
+                width = connectionGraph.outerWidth() + 60 - margin.left - margin.right;
+                height = connectionGraph.outerHeight() - margin.top - margin.bottom;
+
+                d3Data.svg.attr("width", width + margin.left + margin.right).attr("height", height + margin.top + margin.bottom);
+                d3Data.borderLine.attr("width", width).attr("height", height);
+            });
+
             d3.select("#panControlCenter").on('click', function () {
                 d3Data.zoom.translate([0, 0]).scale(1);
                 d3Data.zoom.event(d3Data.innerContainer.transition().duration(0));
@@ -541,7 +559,9 @@ var d3Data;
                 if (connectionGraph.find('.panControl').length == 0) {
                     connectionGraph.append(
                         $('<div></div>').addClass('panControl btn-group-vertical').append(
-                                $('<div></div>').attr('id', 'panControlCenter').addClass('btn btn-default glyphicon glyphicon-fullscreen')
+                                $('<div></div>').attr('id', 'panControlFullscreen').addClass('btn btn-default glyphicon glyphicon-fullscreen')
+                            ).append(
+                                $('<div></div>').attr('id', 'panControlCenter').addClass('btn btn-default glyphicon glyphicon-home')
                             ).append(
                                 $('<div></div>').attr('id', 'panControlZoomIn').addClass('btn btn-default glyphicon glyphicon-zoom-in')
                             )
