@@ -328,10 +328,10 @@ var d3Data;
                 var pan = $(this);
 
                 if (pan.hasClass('on')) {
-                    pan.removeClass('on');
+                    pan.removeClass('on glyphicon-resize-small').addClass('glyphicon-resize-full');
                     connectionGraph.removeClass('fullscreen');
                 } else {
-                    pan.addClass('on');
+                    pan.addClass('on glyphicon-resize-small').removeClass('glyphicon-resize-full');
                     connectionGraph.addClass('fullscreen');
                 }
 
@@ -559,7 +559,7 @@ var d3Data;
                 if (connectionGraph.find('.panControl').length == 0) {
                     connectionGraph.append(
                         $('<div></div>').addClass('panControl btn-group-vertical').append(
-                                $('<div></div>').attr('id', 'panControlFullscreen').addClass('btn btn-default glyphicon glyphicon-fullscreen')
+                                $('<div></div>').attr('id', 'panControlFullscreen').addClass('btn btn-default glyphicon glyphicon-resize-full')
                             ).append(
                                 $('<div></div>').attr('id', 'panControlCenter').addClass('btn btn-default glyphicon glyphicon-home')
                             ).append(
