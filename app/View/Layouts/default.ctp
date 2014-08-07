@@ -78,6 +78,7 @@
         echo $this->Element('Paszport.modal_login');
         ?>
     </header>
+
     <?php if ($this->Session->read('Message.flash.message')) { ?>
         <div class="flash-message">
             <div class="alert <?php echo (isset($class)) ? $class : 'alert-info'; ?>">
@@ -107,9 +108,9 @@
         <?php echo $content_for_layout; ?>
 
     </div>
-    <div id="_sizeControl"></div>
+
+    <?php echo $this->element('footer'); ?>
 </div>
-<?php echo $this->element('footer'); ?>
 
 <?php /* GOOGLE ANALYTIC */ ?>
 <script>

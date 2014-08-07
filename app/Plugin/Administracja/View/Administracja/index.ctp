@@ -30,8 +30,9 @@ $this->Combinator->add_libs('js', 'Administracja.administracja.js');
                                         "instytucje": ["Prokuratura Apelacyjna w Krakowie", "Prokuratura Okręgowa w Kielcach","Prokuratura Okręgowa w Krakowie","Prokuratura Okręgowa w Tarnowie","Prokuratura Okręgowa w Nowym Sączu"]
                                     }'>
                                 <div class="logo">
-                                        <img src="/administracja/img/header.png" title="<?= $item['nazwa'] ?>"/>
-                                    </div>
+                                    <img src="/Administracja/img/instytucje/<?= $item['id'] ?>.png"
+                                         title="<?= $item['nazwa'] ?>"/>
+                                </div>
                                     <div class="title">
                                         <p class="nazwa"><?= $item['nazwa'] ?></p>
 

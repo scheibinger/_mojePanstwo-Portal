@@ -279,18 +279,18 @@ body > pre:first-child {
             .add {
                 display: none;
             }
-			
-			&.tags {
-				list-style: none;
-				padding: 0;
-				margin: 0;
-				overflow: hidden;
-				li {
-					list-style: none;
-					margin: 10px 0;
-				}
-			}
-			
+
+            &.tags {
+                list-style: none;
+                padding: 0;
+                margin: 0;
+                overflow: hidden;
+                li {
+                    list-style: none;
+                    margin: 10px 0;
+                }
+            }
+
         }
 
         .__autorzy_html_ul {
@@ -707,6 +707,15 @@ body {
     }
 }
 
+/* HEADER SETUP */
+header {
+    position: fixed;
+    top: 0;
+    z-index: 9999;
+    width: 100%;
+    height: @headerHeight;
+}
+
 /* FIRST STRUCTURE SETUP */
 #_wrapper {
     min-height: 100%;
@@ -721,22 +730,9 @@ body {
         background-color: #F3F3F3;
     }
 
-    header {
-        position: fixed;
-        top: 0;
-        z-index: 9999;
-        width: 100%;
-        height: @headerHeight;
-    }
-
-    /*SECURE DIV TO MAKE SURE THAT CONTENT WONT TOUCH FOOTER*/
-    #_sizeControl {
-        height: @footerHeight;
-    }
-
     #_main {
         padding-top: @headerHeight;
-        padding-bottom: @footerHeight;
+        padding-bottom: @footerHeight + 20px; /*FOOTER HEIGHT + SECURE PADDING FOR NOT TOUCHING BOTTOM BY CONTENT */
 
         .container.app {
             margin-top: 2em;
@@ -752,6 +748,7 @@ body {
     }
 }
 
+/* COOKIE CURVES STRUCTURE SETUP */
 .cookieLaw {
     @size: 120px;
     @border: 150px 0 0 0;
@@ -785,6 +782,7 @@ body {
     }
 }
 
+/* FOOTER SETUP */
 footer {
     @footerColor: #BBB;
 
