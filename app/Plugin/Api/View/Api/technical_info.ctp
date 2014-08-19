@@ -1,3 +1,9 @@
+<?php $this->Combinator->add_libs('css', $this->Less->css('api', array('plugin' => 'Api'))) ?>
+<?php $this->Combinator->add_libs('css', $this->Less->css('new-look')) ?>
+
+<?php $this->Combinator->add_libs('js', 'Api.technical.js'); ?>
+
+
 <!-- TODO add scroll -->
 <div id="navbar" class="pull-left">
     <ul class="nav nav-pills nav-stacked">
@@ -12,7 +18,7 @@
 </div>
 
 <div id="content" class="pull-right">
-    <div class="section">
+<div class="section">
     <h1 id="t-introduction">Wstęp</h1>
 
     <p>Każde dobre API powinno być samodokumentujące się. Zdarza się jednak, że dążenie do zbyt zwięzłego przekazu,
@@ -26,9 +32,9 @@
         serwis
         jest niejako dokumentacją do API pokazując jakie dane można uzyskać wraz w informacją o filtrach i
         sortowaniach.</p>
-    </div>
+</div>
 
-    <div class="section">
+<div class="section">
     <h1 id="t-versioning">Wersjonowanie</h1>
 
     <p>Każde z API wersjonowane jest osobno. Pozwala to stopniowe wprowadzanie zmian, bez konieczności "podbicia wersji"
@@ -62,10 +68,10 @@
         działaniu serwisu.
         Będziemy ogłaszać mailowo zarówno wprowadzanie nowych wersji API aplikacji, jak i stopniowe wycofywanie wersji
         starszych.</p>
-        </div>
+</div>
 
 
-    <div class="section">
+<div class="section">
     <h1 id="t-errors">Obsługa błędów</h1>
 
     <p>API do obsługi błędów wykorzystuje <a href="https://tools.ietf.org/html/rfc2616#page-65">standardowe</a> i <a
@@ -97,83 +103,94 @@
 }</pre>
         </li>
     </ul>
-        </div>
+</div>
 
 
-    <div class="section">
+<div class="section">
     <h1 id="t-swagger">Swagger i API Discovery</h1>
-        <p>Do opisu udostępnianych API zdecydowaliśmy się użyć standardu Swagger. Jest to zdobywający popularność język
-            i zestaw narzędzi służących do dokumentacji API, dosŧępu do nich przez graficzny interfejs,
-            jak i generowania klientów w wielu językach.</p>
 
-        <p>Swagger-spec dostępny jest pod adresem <a href="http://api.mojepanstwo.pl/swagger/api-docs"><code>http://api.mojepanstwo.pl/swagger/api-docs</code></a>.
-            Nie chcąc uzależniać się od rozwijającego standardu oferujemy także własne proste API Discovery. Wystarczy
-            wejść na
-            <a href="http://api.mojepanstwo.pl/"><code>http://api.mojepanstwo.pl/</code></a> i skorzystać z wrodzonej
-            intuicji.</p>
-    </div>
+    <p>Do opisu udostępnianych API zdecydowaliśmy się użyć standardu Swagger. Jest to zdobywający popularność język
+        i zestaw narzędzi służących do dokumentacji API, dosŧępu do nich przez graficzny interfejs,
+        jak i generowania klientów w wielu językach.</p>
 
-    <div class="section">
-        <h1 id="t-search">Standardowy mechanizm wyszukiwania</h1>
+    <p>Swagger-spec dostępny jest pod adresem <a href="http://api.mojepanstwo.pl/swagger/api-docs"><code>http://api.mojepanstwo.pl/swagger/api-docs</code></a>.
+        Nie chcąc uzależniać się od rozwijającego standardu oferujemy także własne proste API Discovery. Wystarczy
+        wejść na
+        <a href="http://api.mojepanstwo.pl/"><code>http://api.mojepanstwo.pl/</code></a> i skorzystać z wrodzonej
+        intuicji.</p>
+</div>
 
-        <p>API oferuje standardowy mechanizm wyszukiwania, odpytywania o dostępne pola, możliwości sortowania, itp.</p>
+<div class="section">
+    <h1 id="t-search">Standardowy mechanizm wyszukiwania</h1>
 
-        <p>Dla każdego adresu oferującego wyszukiwania (np. <a href="http://api.mojepanstwo.pl/kodyPocztowe"><code>http://api.mojepanstwo.pl/kodyPocztowe</code></a>)
-            istnieje kilka adresów opisujących taki zbiór danych i sposoby wyszukiwania:</p>
-        <ul>
-            <li><em><a href="http://api.mojepanstwo.pl/kodyPocztowe/sortings">sortings</a></em> - Sortowania, jakich
-                można użyć podczas wyszukiwania
-            </li>
-            <li><em><a href="http://api.mojepanstwo.pl/kodyPocztowe/filters">filters</a></em> - Dostępne filtry</li>
-            <li><em><a href="http://api.mojepanstwo.pl/kodyPocztowe/switchers">switchers</a></em> - Zagregowana filtry w
-                postaci flag 0/1
-            </li>
-        </ul>
+    <p>API oferuje standardowy mechanizm wyszukiwania, odpytywania o dostępne pola, możliwości sortowania, itp.</p>
 
-        <p>Wszystkie parametry wyszukiwania podaje się w części <em>query</em> zapytania (po ?).
-            Parametry tablicowe podaje się zgodnie z konwencją wykorzystywaną przez CakePHP i Rails:</p>
-        <ul>
-            <li><em>Lista elementów</em> - <code>?fields[]=imie&fields[]=nazwisko</code></li>
-            <li><em>Tablica asocjacyjna</em> - <code>?conditions[imie]=Jan&conditions[nazwisko]=Kowalski</code></li>
-            <li><em>Pojedyczny element tablicy</em> - skrót w postaci <code>?fields=imie</code></li>
-        </ul>
+    <p>Dla każdego adresu oferującego wyszukiwania (np. <a href="http://api.mojepanstwo.pl/kodyPocztowe"><code>http://api.mojepanstwo.pl/kodyPocztowe</code></a>)
+        istnieje kilka adresów opisujących taki zbiór danych i sposoby wyszukiwania:</p>
+    <ul>
+        <li><em><a href="http://api.mojepanstwo.pl/kodyPocztowe/sortings">sortings</a></em> - Sortowania, jakich
+            można użyć podczas wyszukiwania
+        </li>
+        <li><em><a href="http://api.mojepanstwo.pl/kodyPocztowe/filters">filters</a></em> - Dostępne filtry</li>
+        <li><em><a href="http://api.mojepanstwo.pl/kodyPocztowe/switchers">switchers</a></em> - Zagregowana filtry w
+            postaci flag 0/1
+        </li>
+    </ul>
 
-        <p>Podczas wyszukiwania można użyć następujących kluczy w cześci <em>query</em></p>
-        <ul>
-            <li><em>conditions</em> - Filtry ograniczające zbiór danych, można filtrować po wszystkich polach, a także zdefiniowanych <em>switchers</em>, np. <code>?conditions[imie]=Jan&conditions[nazwisko]=Kowalski</code></li>
-            <li><em>q</em> - Pełnotekstowe wyszukiwanie (z odmianą) po podstawowych polach, np. <code>?q=epanstwo</code></li>
-            <li><em>fields</em> - Podzbiór pól do uwzględnienia w odpowiedzi, np. <code>?fields[]=imie&fields[]=nazwisko</code></li>
-            <li><em>order</em> - Sortowanie w formacie <em>"pole (desc|asc)"</em>, np. <code>?order=nazwisko asc</code></li>
-            <li><em>offset</em> - Ilość pominiętych rekordów z poczatku zbioru wynikowego. Ma pierwszeństwo nad <em>page</em>. Przykład: druga strona to <code>?offset=10&limit=10</code></li>
-            <li><em>page</em> - Skrót pozwalający na zwracanie kolejnych stron wyników. Strony numerowane są od 1. Domyślna ilosć wyników na stronie to 10. Przykład: <code>?page=2</code></li>
-            <li><em>limit</em> - Ilość wyników zwróconych na stronie (domyślnie 10)</li>
-        </ul>
+    <p>Wszystkie parametry wyszukiwania podaje się w części <em>query</em> zapytania (po ?).
+        Parametry tablicowe podaje się zgodnie z konwencją wykorzystywaną przez CakePHP i Rails:</p>
+    <ul>
+        <li><em>Lista elementów</em> - <code>?fields[]=imie&fields[]=nazwisko</code></li>
+        <li><em>Tablica asocjacyjna</em> - <code>?conditions[imie]=Jan&conditions[nazwisko]=Kowalski</code></li>
+        <li><em>Pojedyczny element tablicy</em> - skrót w postaci <code>?fields=imie</code></li>
+    </ul>
 
-        <? // TODO API cursoring - np. https://dev.twitter.com/docs/misc/cursoring ?>
-    </div>
+    <p>Podczas wyszukiwania można użyć następujących kluczy w cześci <em>query</em></p>
+    <ul>
+        <li><em>conditions</em> - Filtry ograniczające zbiór danych, można filtrować po wszystkich polach, a także
+            zdefiniowanych <em>switchers</em>, np. <code>?conditions[imie]=Jan&conditions[nazwisko]=Kowalski</code></li>
+        <li><em>q</em> - Pełnotekstowe wyszukiwanie (z odmianą) po podstawowych polach, np. <code>?q=epanstwo</code>
+        </li>
+        <li><em>fields</em> - Podzbiór pól do uwzględnienia w odpowiedzi, np.
+            <code>?fields[]=imie&fields[]=nazwisko</code></li>
+        <li><em>order</em> - Sortowanie w formacie <em>"pole (desc|asc)"</em>, np. <code>?order=nazwisko asc</code></li>
+        <li><em>offset</em> - Ilość pominiętych rekordów z poczatku zbioru wynikowego. Ma pierwszeństwo nad
+            <em>page</em>. Przykład: druga strona to <code>?offset=10&limit=10</code></li>
+        <li><em>page</em> - Skrót pozwalający na zwracanie kolejnych stron wyników. Strony numerowane są od 1. Domyślna
+            ilosć wyników na stronie to 10. Przykład: <code>?page=2</code></li>
+        <li><em>limit</em> - Ilość wyników zwróconych na stronie (domyślnie 10)</li>
+    </ul>
+
+    <? // TODO API cursoring - np. https://dev.twitter.com/docs/misc/cursoring ?>
+</div>
 
 
-    <div class="section">
+<div class="section">
     <h1 id="t-object-ids">Identyfikatory obiektów</h1>
-        <p>Każdy zasób udostępniany przez serwer jest jednoznacznie identyfikowany poprzez unikalny adres URL (pole <em>_id</em>).
-            Taki URL zapewnia także łatwą (potencjalnie automatyczną) nawigację między zasobami.</p>
 
-        <p>Przykładowo: <code>{"_id": "http://api.mojepanstwo.pl/dane/poslowie/1.json"}</code></p>
+    <p>Każdy zasób udostępniany przez serwer jest jednoznacznie identyfikowany poprzez unikalny adres URL (pole
+        <em>_id</em>).
+        Taki URL zapewnia także łatwą (potencjalnie automatyczną) nawigację między zasobami.</p>
 
-        <p>Aby ułatwić linkowanie do naszego serwisu udostępniamy także dla obiektów link, pod którym wysŧępuje on w
-            serwisie mojePaństwo.</p>
+    <p>Przykładowo: <code>{"_id": "http://api.mojepanstwo.pl/dane/poslowie/1.json"}</code></p>
 
-        <p>Przykładowo: <code>{"_mpurl": "http://mojepanstwo.pl/dane/poslowie/1"}</code></p>
-    </div>
+    <p>Aby ułatwić linkowanie do naszego serwisu udostępniamy także dla obiektów link, pod którym wysŧępuje on w
+        serwisie mojePaństwo.</p>
 
-    <div class="section">
+    <p>Przykładowo: <code>{"_mpurl": "http://mojepanstwo.pl/dane/poslowie/1"}</code></p>
+</div>
+
+<div class="section">
     <h1 id="t-object-layers">Warstwy danych</h1>
-        <p>Chcąc zapewnić lekką reprezentację obiektów w API i jednocześnie ułatwić dostęp do szczegółów i powiązań z innymi obiektami wprowadziliśmy mechanizm warstw.
-            Warstwy pozwalają na wydzielenie dodatkowych informacji o obiekcie i zostawienie decyzji klientowi API, czy chce te warstwy od razu otrzymać, czy doładować później.
-            Ładowanie warstw jest dostępne wyłącznie podczas zwracania pojedynczego obiektu.</p>
 
-        <p>
-            Listę dostępnych warstw jest wyświetlana w ramach obiektu:</p>
+    <p>Chcąc zapewnić lekką reprezentację obiektów w API i jednocześnie ułatwić dostęp do szczegółów i powiązań z innymi
+        obiektami wprowadziliśmy mechanizm warstw.
+        Warstwy pozwalają na wydzielenie dodatkowych informacji o obiekcie i zostawienie decyzji klientowi API, czy chce
+        te warstwy od razu otrzymać, czy doładować później.
+        Ładowanie warstw jest dostępne wyłącznie podczas zwracania pojedynczego obiektu.</p>
+
+    <p>
+        Listę dostępnych warstw jest wyświetlana w ramach obiektu:</p>
         <pre>
 GET: http://api.mojepanstwo.pl/kodyPocztowe/00-511
 
@@ -210,12 +227,15 @@ GET: http://api.mojepanstwo.pl/kodyPocztowe/00-511
 }
         </pre>
 
-        <p>Warstwy ładuje sie poprzez podanie w zapytaniu nazw warstw jako tablicy: <code>http://api.mojepanstwo.pl/kodyPocztowe/00-511?layers[]=obszary&layers[]=gminy</code></p>
-        <p>Istnieje także skrót pozwalający załadować wszystkie warstwy na raz: <code>http://api.mojepanstwo.pl/kodyPocztowe/00-511?layers=*</code></p>
-    </div>
+    <p>Warstwy ładuje sie poprzez podanie w zapytaniu nazw warstw jako tablicy: <code>http://api.mojepanstwo.pl/kodyPocztowe/00-511?layers[]=obszary&layers[]=gminy</code>
+    </p>
 
-    <? // TODO ograniczanie dostępu do danych (API Throttling) ?>
+    <p>Istnieje także skrót pozwalający załadować wszystkie warstwy na raz: <code>http://api.mojepanstwo.pl/kodyPocztowe/00-511?layers=*</code>
+    </p>
+</div>
 
-    <? // TODO Caching (If-Modified-Since, If-Unmodified-Since,  If-Match, If-None-Match, or If-Range) ?>
+<? // TODO ograniczanie dostępu do danych (API Throttling) ?>
+
+<? // TODO Caching (If-Modified-Since, If-Unmodified-Since,  If-Match, If-None-Match, or If-Range) ?>
 
 </div>
