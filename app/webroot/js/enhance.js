@@ -45,6 +45,40 @@ function isElementVisibled(elem) {
 
     return ((elemBottom <= docViewBottom) && (elemTop >= docViewTop));
 }
+/*TRIGGER GLOBAL ALERT VIA JS*/
+function globalAlert(status, text) {
+    var wrapper = $('#_wrapper'),
+        flashMessage,
+        status = typeof status !== 'undefined' ? status : 'alert-info;';
+
+    if ((flashMessage = wrapper.find('> .flash-message')).length == 0) {
+        flashMessage = $('<div></div>').addClass('flash-message');
+        wrapper.find('> header').after(flashMessage);
+    }
+
+    if (flashMessage.find('.alert.' + status + ' .container').filter(function () {
+        return $(this).text() === '×' + text
+    }).length == 0) {
+        flashMessage.append(
+            $('<div></div>').addClass('alert ' + status).css('display', 'none').append(
+                $('<div></div>').addClass('container').text(text).prepend(
+                    $('<a></a>').addClass('close').attr('href', '#').data('dismiss', 'alert').text('×').click(function (e) {
+                        var parent = $(this).parents('.alert');
+                        e.preventDefault();
+                        parent.slideUp(function () {
+                            parent.remove();
+                            if (flashMessage.find('.alert').length == 0)
+                                flashMessage.slideUp(function () {
+                                    flashMessage.remove();
+                                })
+                        })
+                    })
+                )
+            )
+        );
+        flashMessage.find('.alert:last').slideDown();
+    }
+}
 /*FUNCTION CUT TITLE TO SHORTER FORM WITH OPTION OF EXPANDING IT*/
 trimTitle = function () {
     jQuery('.trimTitle').each(function () {

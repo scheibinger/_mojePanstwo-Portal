@@ -1,5 +1,3 @@
-alert('123');
-
 var PLBrowser = Class.create({
         options: {
             'root': 'moja_gmina/',
@@ -41,7 +39,7 @@ var PLBrowser = Class.create({
 
             labels: {
                 '1': '',
-                '2': 'Wojew—dztwo',
+                '2': 'Wojewï¿½dztwo',
                 '3': 'Powiat',
                 '4': 'Gmina'
             }

@@ -741,3 +741,6 @@ msgstr "Odzyskaj hasło"
 
 msgid "LC_PASZPORT_RESERT_BUTTON"
 msgstr "Resetuj hasło"
+
+msgid "LC_PASZPORT_OLD_PASSWORD_INVALID"
+msgstr "Wprowadzono niepoprawne stare hasło"
