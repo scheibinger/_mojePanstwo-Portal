@@ -37,13 +37,13 @@
             <div class="col-md-12">
                 <h2>Informacje ogólne</h2>
 
-                <div class="col-xs-12 col-sm-6 col-md-4">
+                <div class="option col-xs-12 col-sm-6 col-md-4">
                     <h3>Opis techniczny</h3>
 
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam viverra sapien sit amet lacus
                         sagittis
                         euismod. Vestibulum ac nisl ultricies, venenatis nibh at, luctus ligula.</p>
-                    <a class="btn btn-primary"
+                    <a class="btn btn-primary btn-sm"
                        href="<?php echo $this->Html->url(array('action' => 'technical_info')); ?>">Więcej</a>
                 </div>
             </div>
@@ -56,11 +56,16 @@
                 <h2>Dostępne API</h2>
 
                 <?php foreach ($apis as $api) { ?>
-                    <div class="col-xs-12 col-sm-6 col-md-4">
-                        <h3><?php echo $api['name'] ?></h3>
+                    <div class="option col-xs-12 col-sm-6 col-md-4" data-icon="">
+                        <h3>
+                            <span class="icon">
+                                <img src="<?php echo '/' . $api['plugin'] . '/icon/' . $api['slug'] . '.svg' ?>"
+                                     alt=""/>
+                            </span><?php echo $api['name'] ?>
+                        </h3>
 
                         <p><?php echo $api['description'] ?></p>
-                        <a class="btn btn-primary"
+                        <a class="btn btn-primary btn-sm"
                            href="<?php echo $this->Html->url(array('action' => 'view', 'slug' => $api['slug'])); ?>">Zobacz</a>
                     </div>
                 <?php } ?>
