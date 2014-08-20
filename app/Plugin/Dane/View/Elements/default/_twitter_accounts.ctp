@@ -1,5 +1,4 @@
 <?
-
 $number_format = array(
     'places' => 0,
     'before' => '',
@@ -14,11 +13,4 @@ $number_format = array(
     <?= $object->getData('description'); ?>
 </p>
 
-</div>
-</div>
-
-<div>
-
-    <? echo $this->Dataobject->highlights($hlFields, $hlFieldsPush); ?>
-
-    <div>
+<? echo $this->Dataobject->highlights($hlFields, $hlFieldsPush); ?>
