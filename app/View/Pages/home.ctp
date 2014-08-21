@@ -2,35 +2,6 @@
 <?php $this->Combinator->add_libs('js', 'home') ?>
 
 <div id="home" class="container">
-    <div class="header row">
-        <div class="col-md-12">
-            <h1>
-                <?php echo __('LC_MAINHEADER_TEXT') ?>
-            </h1>
-        </div>
-    </div>
-
-    <? /*
-    <div class="globalSearch row">
-        <div class="col-sm-10 col-md-8 col-md-offset-2 col-lg-6 col-sm-offset-1 col-md-offset-2 col-lg-offset-3">
-
-            <div class="input-group">
-                <form action="/dane" method="get">
-                    <input name="q" type="text" class="form-control"
-                           placeholder="<?php echo __('LC_SEARCH_PUBLIC_DATA_PLACEHOLDER') ?>">
-                    <input type="submit" name="submit" style="display: none;"/>
-	                <span class="input-group-btn">
-	                    <button class="btn btn-default" type="button" data-icon="&#xe600;"></button>
-	                </span>
-                </form>
-            </div>
-
-        </div>
-    </div>
-	*/
-    ?>
-
-
     <? foreach ($folders as $folder) {
         ?>
         <div class="apps row">

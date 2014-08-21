@@ -24,7 +24,7 @@
     echo $this->Html->css('../libs/jqueryui/1.11.0/cupertino/jquery-ui.min.css');
 
     $this->Combinator->add_libs('css', $this->Less->css('jquery/jquery-ui-customize'), false);
-    $this->Combinator->add_libs('css', $this->Less->css('statusbar'), false);
+    $this->Combinator->add_libs('css', $this->Less->css('bar'), false);
     $this->Combinator->add_libs('css', $this->Less->css('main'), false);
     $this->Combinator->add_libs('css', $this->Less->css('flatly'), false);
 
@@ -64,7 +64,7 @@
 <div id="_wrapper">
     <header>
         <?php /*echo $_PORTAL_HEADER; */ ?>
-        <?php echo $this->Element('statusbar', array(
+        <?php echo $this->Element('bar', array(
             'mode' => @$statusbarMode,
             'applications' => array(
                 'list' => @$_APPLICATIONS,
@@ -79,6 +79,7 @@
         ?>
     </header>
 
+    <!--TODO: Ograc wszelkie error / notify blocks-->
     <?php if ($this->Session->read('Message.flash.message')) { ?>
         <div class="flash-message">
             <div class="alert <?php echo (isset($class)) ? $class : 'alert-info'; ?>">
