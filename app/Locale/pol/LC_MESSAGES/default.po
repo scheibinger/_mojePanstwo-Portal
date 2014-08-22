@@ -1,3 +1,6 @@
+msgid "LC_COCKPITBAR_USER_LINK"
+msgstr "Twój profil"
+
 msgid "LC_COCKPITBAR_LOGIN"
 msgstr "Zaloguj się"
 
