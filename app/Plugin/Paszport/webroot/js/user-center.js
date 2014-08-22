@@ -22,7 +22,7 @@
     $('.userCenter .basic').find('.btn.doubleState').each(function () {
         $(this).click(function (e) {
             var el = $(e.target),
-                switchOldText = el.text(),
+                switchOldText = el.val(),
                 switchNewText = el.data('text'),
                 form = el.parents('form');
             e.preventDefault();
@@ -60,7 +60,7 @@
                         var status = data.status;
 
                         if (status == '200') {
-                            el.data('text', switchOldText).text(switchNewText).toggleClass('save');
+                            el.data('text', switchOldText).val(switchNewText).toggleClass('save');
                             form.find('.viewElement, .editElement').toggle();
 
                             if (el.hasClass('genderButton') || el.hasClass('languageButton')) {
@@ -71,7 +71,12 @@
                         } else if (status == 422) {
                             /*TODO: error dla pola/pól*/
                         } else if (status == 500) {
-                            /*TODO: error globalny*/
+                            var errors = data.alerts.error;
+
+                            for (var i = 0; i < errors.length; i++) {
+                                console.log(errors[i]);
+                                globalAlert('alert-danger', eval('_mPHeart.translation.' + errors[i]));
+                            }
                         }
                     },
                     complete: function () {
@@ -79,7 +84,7 @@
                     }
                 });
             } else {
-                el.data('text', switchOldText).text(switchNewText).toggleClass('save');
+                el.data('text', switchOldText).val(switchNewText).toggleClass('save');
                 form.find('.viewElement, .editElement').toggle();
             }
         })

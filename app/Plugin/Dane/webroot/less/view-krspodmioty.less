@@ -140,6 +140,17 @@
                 margin-right: -30px;
                 overflow: hidden;
 
+                &.fullscreen {
+                    background-color: #ffffff;
+                    height: 100%;
+                    left: 0;
+                    margin: 40px 0 0;
+                    position: fixed;
+                    top: 0;
+                    width: 100%;
+                    z-index: 10;
+                }
+
                 > svg {
                     cursor: grab;
                     cursor: -moz-grab;
@@ -159,7 +170,7 @@
                     top: 0;
                     right: 10px;
                     width: @size;
-                    height: 3*@size;
+                    height: 4*@size;
 
                     .btn {
                         width: @size;

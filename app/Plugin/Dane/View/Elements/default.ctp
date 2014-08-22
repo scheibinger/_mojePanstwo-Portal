@@ -1,5 +1,4 @@
 <?
-
 $path = App::path('Plugin');
 $file = $path[0] . '/Dane/View/Elements/' . $theme . '/' . $object->getDataset() . '.ctp';
 $file_exists = file_exists($file);
@@ -159,7 +158,7 @@ $this->Dataobject->setObject($object);
     <?php if ($object->hasHighlights() && $object->getHlText()) { ?>
         <div class="row">
             <div class="text-highlights alert alert-info">
-                <?php echo $object->getHlText(); ?>
+                <?php echo(closetags($object->getHlText())); ?>
             </div>
         </div>
     <?php } ?>

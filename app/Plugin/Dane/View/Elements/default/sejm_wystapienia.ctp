@@ -3,9 +3,3 @@
 </blockquote>
 
 <?= $this->Dataobject->highlights($hlFields, $hlFieldsPush) ?>
-
-</div>
-</div>
-
-<div>
-    <div>
