@@ -50,7 +50,7 @@ $this->Combinator->add_libs('js', 'graph-krs');
                 <? } ?>
 
 
-
+				<? /*
                 <? if ($object->getData('wartosc_kapital_zakladowy')) { ?>
                     <li class="dataHighlight topborder">
                         <p class="_label">Kapitał zakładowy</p>
@@ -82,7 +82,7 @@ $this->Combinator->add_libs('js', 'graph-krs');
                         <p class="_value"><?= $object->getData('wartosc_nominalna_podwyzszenia_kapitalu'); ?></p>
                     </li>
                 <? } ?>
-
+				<? */ ?>
 
 
                 <? if ($object->getData('data_rejestracji')) { ?>
