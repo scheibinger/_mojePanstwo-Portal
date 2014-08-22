@@ -179,7 +179,7 @@ class DataobjectHelper extends AppHelper
 
         if (empty($data))
             return '';
-
+				
         $output = '<div class="dataHighlights normal">';
         $index = 0;
         $limit = isset($options['limit']) ? $options['limit'] : 4;
@@ -223,7 +223,12 @@ class DataobjectHelper extends AppHelper
         $data = array();
         if (empty($fields))
             return '';
-
+		
+		if( is_numeric($options) )
+			$options = array(
+				'col_width' => $options,
+			);
+		
         foreach ($fields as $field) {
 
             $schema = $object->getSchemaForFieldname($field);
