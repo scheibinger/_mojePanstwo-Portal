@@ -6,10 +6,6 @@ echo $this->Element('dataobject/pageBegin', array(
     'titleTag' => 'p',
 ));
 
-echo $this->Element('Dane.dataobject/menuTabs', array(
-    'menu' => $_menu,
-));
-
 echo $this->Element('Dane.dataobject/subobject', array(
     'menu' => isset($_submenu) ? $_submenu : false,
     'object' => $druk,

@@ -15,7 +15,6 @@ if (in_array($object->getDataset(), array('rady_posiedzenia', 'rady_gmin_debaty'
 }
 
 $this->Dataobject->setObject($object);
-
 ?>
 <div class="objectRender<? if ($alertsStatus) echo " unreaded"; else echo " readed"; ?>"
      oid="<?php echo $item['data']['id'] ?>" gid="<?php echo $gid ?>">
@@ -91,9 +90,10 @@ $this->Dataobject->setObject($object);
                                 'object' => $object,
                                 'hlFields' => $hlFields,
                                 'hlFieldsPush' => $hlFieldsPush,
+                                'defaults' => $defaults,
                             ));
                         else
-                            echo $this->Dataobject->highlights($hlFields, $hlFieldsPush);
+                            echo $this->Dataobject->highlights($hlFields, $hlFieldsPush, $defaults);
                         ?>
 
                         <? if ($object->getDescription()) { ?>
@@ -115,7 +115,7 @@ $this->Dataobject->setObject($object);
                                        value="<?php echo __d('powiadomienia', 'LC_POWIADOMIENIA_OPTIONS_ALERT_BUTTON_UNREAD'); ?>"/>
                             </div>
                         <? } ?>
-
+												
                         <? if ($object->force_hl_fields || $forceLabel) { ?>
                             <p class="header">
                                 <?= $object->getLabel(); ?>
@@ -139,9 +139,10 @@ $this->Dataobject->setObject($object);
                                 'object' => $object,
                                 'hlFields' => $hlFields,
                                 'hlFieldsPush' => $hlFieldsPush,
+                                'defaults' => $defaults,
                             ));
                         else
-                            echo $this->Dataobject->highlights($hlFields, $hlFieldsPush);
+                            echo $this->Dataobject->highlights($hlFields, $hlFieldsPush, $defaults);
                         ?>
 
                         <? if ($object->getDescription()) { ?>

@@ -6,10 +6,6 @@
 		'titleTag' => 'p',
 	));
 	
-	echo $this->Element('Dane.dataobject/menuTabs', array(
-		'menu' => $_menu,
-	));
-	
 	echo $this->Element('Dane.dataobject/subobject', array(
 		'object' => $umowa,
 		'objectOptions' => array(

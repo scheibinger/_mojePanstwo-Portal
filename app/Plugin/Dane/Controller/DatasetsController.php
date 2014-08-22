@@ -24,6 +24,11 @@ class DatasetsController extends DaneAppController
     {
 	    
 	    $data = $this->dataBrowser->dataset;
+	    
+	    if( !$data ){
+	        throw new NotFoundException('Could not find that post');
+	    }
+	    
         $dataset = $data['Dataset'];
         $datachannel = $data['Datachannel'];
 

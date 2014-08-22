@@ -4,9 +4,6 @@ if (isset($odpis) && $odpis) {
 }
 
 echo $this->Element('dataobject/pageBegin');
-echo $this->Element('Dane.dataobject/menuTabs', array(
-    'menu' => $_menu,
-));
 
 echo $this->Html->script('Dane.d3/d3', array('block' => 'scriptBlock'));
 

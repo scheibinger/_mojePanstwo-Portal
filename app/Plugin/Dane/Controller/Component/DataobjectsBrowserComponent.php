@@ -35,6 +35,13 @@ class DataobjectsBrowserComponent extends Component
         'Dane.Filter',
         'Dane.Dataobject',
     );
+    
+    public $config = array(
+    	'controlls' => array('sortings'),
+    	'defaults' => array(
+	    	'details' => false,
+	    ),
+    );
 
     public function __construct($collection, $settings = array())
     {
@@ -121,7 +128,7 @@ class DataobjectsBrowserComponent extends Component
 
     public function beforeRender(Controller $controller)
     {
-		
+				
         $q = '';
         $conditions = $this->conditions;
         $order = array();
@@ -158,7 +165,7 @@ class DataobjectsBrowserComponent extends Component
 
                 $this->mode = 'dataset';
                 $this->tag = $dataset;
-
+             
             }
         }
 
@@ -177,7 +184,11 @@ class DataobjectsBrowserComponent extends Component
 
             $this->href = $here;
         }
-
+		
+		if( $this->mode == 'dataset' )
+	        $this->read_dataset_config( $this->tag );
+	        
+		
         if (!empty($this->source)) {
 
             $source_parts = array();
@@ -262,64 +273,59 @@ class DataobjectsBrowserComponent extends Component
             $dataset = $controller->API->getDataset($this->tag, array(
             	'full' => true,
             ));
-            $this->dataset = $dataset;
             
-            
-            if (!$this->title)
-                $this->title = $dataset['Dataset']['name'];
-
-            // ŁADOWANIE SORTOWAŃ
-
-            $orders = array_merge($orders, $dataset['orders']);
-
-
-            if (empty($orders) || ((count($orders) === 1) && ($orders[0]['sorting']['field'] == 'score')))
-                $orders[] = array(
-                    'sorting' => array(
-                        'field' => 'date',
-                        'label' => 'Data',
-                        'direction' => 'desc',
-                    ),
-                );
-
-            if (isset($order['field'])) {
-                foreach ($orders as &$_order) {
-                    if ($_order['sorting']['field'] == $order['field']) {
-                        $this->hlFieldsPush = $order['field'];
-                        $_order['selected_direction'] = $order['direction'];
-                        $order_selected = true;
-                        break;
-                    }
-                }
-            }
-
-
-            // ŁADOWANIE PRZEŁĄCZNIKÓW
-            $switchers = $dataset['switchers'];
-            if ($useDefaults && !empty($switchers)) {
-                foreach ($switchers as $switcher) {
-
-                    $switcher = $switcher['switcher'];
-                    if ($switcher['dataset_search_default'] == '1')
-                        $conditions['!' . $switcher['name']] = '1';
-
-                }
-            }
-
-
-            // ŁADOWANIE FILTRÓW
-            $filters = $dataset['filters'];
-
-            if (!empty($filters)) {
-
-                $_filters = array();
-                foreach ($filters as $filter)
-                    if (!in_array($filter['filter']['field'], $this->excludeFilters))
-                        $_filters[] = $filter;
-
-                $filters = $_filters;
-
-            }
+            if( $dataset ) {
+	                        
+	            $this->dataset = $dataset;
+	            
+	            
+	            if (!$this->title)
+	                $this->title = $dataset['Dataset']['name'];
+	
+	            // ŁADOWANIE SORTOWAŃ
+	
+	            $orders = array_merge($orders, $dataset['orders']);	           
+				
+	            if (isset($order['field'])) {
+	                foreach ($orders as &$_order) {
+	                    if ($_order['sorting']['field'] == $order['field']) {
+	                        $this->hlFieldsPush = $order['field'];
+	                        $_order['selected_direction'] = $order['direction'];
+	                        $order_selected = true;
+	                        break;
+	                    }
+	                }
+	            }
+	            	
+	
+	            // ŁADOWANIE PRZEŁĄCZNIKÓW
+	            $switchers = $dataset['switchers'];
+	            if ($useDefaults && !empty($switchers)) {
+	                foreach ($switchers as $switcher) {
+	
+	                    $switcher = $switcher['switcher'];
+	                    if ($switcher['dataset_search_default'] == '1')
+	                        $conditions['!' . $switcher['name']] = '1';
+	
+	                }
+	            }
+	
+	
+	            // ŁADOWANIE FILTRÓW
+	            $filters = $dataset['filters'];
+	
+	            if (!empty($filters)) {
+	
+	                $_filters = array();
+	                foreach ($filters as $filter)
+	                    if (!in_array($filter['filter']['field'], $this->excludeFilters))
+	                        $_filters[] = $filter;
+	
+	                $filters = $_filters;
+	
+	            }
+	            
+			}
 
         } elseif ($this->mode == 'datachannel') {
 
@@ -426,7 +432,7 @@ class DataobjectsBrowserComponent extends Component
                 'direction' => $orders[0]['sorting']['direction'],
                 'str' => $orders[0]['sorting']['field'] . ' ' . $orders[0]['sorting']['direction'],
             );
-
+        
 
         if (!$order_selected && !empty($order))
             foreach ($orders as &$o)
@@ -438,8 +444,8 @@ class DataobjectsBrowserComponent extends Component
 
         if (!empty($order))
             $queryData['order'] = $order['str'];
-
-
+		
+		
         $this->Paginator->settings = $queryData;
         $objects = $this->Paginator->paginate('Dataobject');
 
@@ -470,27 +476,35 @@ class DataobjectsBrowserComponent extends Component
             'noResultsTitle' => $this->noResultsTitle,
         );
 
-        $controller->set(compact('conditions', 'objects', 'pagination', 'orders', 'filters', 'total', 'facets', 'page', 'title_for_layout', 'switchers', 'q'));
-        $controller->set('dataBrowser', $this);
+        $config = $this->config;
+
+		
+        if( @$controller->request->params['ext'] == 'json' ) {
 
 
-        if (@$controller->request->params['ext'] == 'json') {
+            $view = new View($controller, false);
+						
+			$objects = $view->element('Dane.DataobjectsBrowser/objects', array_merge(
+				compact('objects', 'page', 'defaults'), 
+				array(
+					'dataBrowser' => $this,
+					'defaults' => $config['defaults'],
+				)
+			));
 
-            if ($controller->request->is('ajax')) {
+			$header = $view->element('Dane.DataobjectsBrowser/header', array_merge(
+				compact('pagination', 'orders', 'page'),
+				array(
+					'controlls' => $config['controlls'],
+				)
+			));
+						
+			$filters = $view->element('Dane.DataobjectsBrowser/filters', compact('conditions', 'filters', 'switchers', 'facets', 'page'));
+			$pagination = $view->element('Dane.DataobjectsBrowser/pagination', compact('pagination'));
+			
+			$controller->set(compact('objects', 'header', 'filters', 'pagination'));
+            $controller->set('_serialize', array('objects', 'header', 'filters', 'pagination'));
 
-                $view = new View($controller, false);
-
-                $controller->set('objects', $view->element('Dane.DataobjectsBrowser/objects', compact('objects')));
-                $controller->set('header', $view->element('Dane.DataobjectsBrowser/header', compact('pagination', 'orders', 'page')));
-                $controller->set('filters', $view->element('Dane.DataobjectsBrowser/filters', compact('filters', 'switchers', 'facets', 'page')));
-                $controller->set('pagination', $view->element('Dane.DataobjectsBrowser/pagination'));
-                $controller->set('_serialize', array('objects', 'header', 'filters', 'pagination'));
-
-            } else {
-
-                $controller->set('_serialize', array('pagination', 'objects'));
-
-            }
 
         } else {
 
@@ -501,9 +515,19 @@ class DataobjectsBrowserComponent extends Component
 
             if (file_exists($path))
                 $controller->set('originalViewPath', $path);
+                
+            $controller->set(array_merge(
+	        	compact('conditions', 'objects', 'pagination', 'orders', 'filters', 'total', 'facets', 'page', 'title_for_layout', 'switchers', 'q'),
+	        	array(
+	        		'dataBrowser' => $this,
+	        	)
+	        ));
 
 
         }
+        
+        
+
 
     }
 
@@ -514,6 +538,21 @@ class DataobjectsBrowserComponent extends Component
         $path = App::path('View', 'Dane');
         return $path[0] . '/Component/dataobjectsBrowser/view.ctp';
 
+    }
+    
+    
+    private function read_dataset_config($dataset) {
+	    
+	    $file = APP . 'Config/DataobjectsBrowser/datasets/' . $dataset . '.json';
+	    if( 
+	    	file_exists( $file ) && 
+	    	( $config = json_decode(file_get_contents( $file ), true) ) 
+	    ) {
+		    $this->config = array_merge($this->config, $config);
+		}
+		
+		return $this->config;
+	    
     }
 
 }

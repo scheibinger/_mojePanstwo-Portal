@@ -64,7 +64,7 @@ function pl_dopelniacz($count = 0, $formA = '', $formB = '', $formC = '', $optio
     $options['numberTag'] = isset($options['numberTag']) ? $options['numberTag'] : 'strong';
 
     if ($options['numberTag'])
-        $count = '<' . $options['numberTag'] . '>' . $count . '</' . $options['numberTag'] . '>';
+        $count = '<' . $options['numberTag'] . '>' . _number($count) . '</' . $options['numberTag'] . '>';
 
     return $count . '&nbsp;' . $r;
 }

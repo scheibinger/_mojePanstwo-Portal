@@ -97,7 +97,32 @@ var DataObjectesAjax = {
 
             /*HISTORY.JS CHANGE STATUS*/
             setTimeout(DataObjectesAjax.objectsReload, 5);
-        })
+        });
+        
+        var dataDetailsToggle;
+        if( (dataDetailsToggle = jQuery('.dataDetailsToggle')).length ) {
+	        
+	        dataDetailsToggle.click(function(e){
+		        		        
+		        e.preventDefault();
+		        
+		        if( jQuery(this).data('state')=='more' ) {
+			        
+			        jQuery(this).data('state', 'less').find('.text').text('Mniej szczegółów');
+			        jQuery(this).find('.glyphicon').removeClass('glyphicon-plus').addClass('glyphicon-minus');
+			        $('.dataBrowser .dataHighlights').stop(true, true).slideDown();
+			        
+		        } else {
+			        
+			        jQuery(this).data('state', 'more').find('.text').text('Więcej szczegółów');
+			        jQuery(this).find('.glyphicon').removeClass('glyphicon-minus').addClass('glyphicon-plus');
+			        $('.dataBrowser .dataHighlights').stop(true, true).slideUp();
+			        
+		        }
+		        
+	        });
+	        
+        }
 
     },
     submitChanger: function () {
@@ -199,54 +224,47 @@ var DataObjectesAjax = {
         /*HIDE UNNECESSARY ELEMENTS*/
         sorting.find('.submit').hide();
         sorting.find('#DatasetDirection').hide();
-        sorting.find('#DatasetSort').hide();
         sorting.find('.sortingName').addClass('hidden');
 
         /*CREATE DROPDOWN MENU STRUCTURE*/
         var sortingChosen = (sorting.find('#DatasetSort option:selected').length > 0) ? sorting.find('#DatasetSort option:selected') : sorting.find('#DatasetSort option:first');
-        sorting.find('#DatasetSort').before(
-                jQuery('<div></div>').addClass('sortingGroup btn-group pull-right').append(
-                        jQuery('<button></button>').addClass('DatasetSort btn btn-default btn-sm').attr({'data-toggle': 'dropdown', 'type': 'button'}).text(sortingChosen.attr('title'))
-                    ).append(
-                        jQuery('<button></button>').addClass('DatasetDirection btn btn-default btn-sm').attr({'data-toggle': 'dropdown', 'type': 'button'}).append(
-                            jQuery('<span></span>').addClass('glyphicon glyphicon-chevron-down')
-                        )
-                    ).append(function () {
-                        var ul = jQuery('<ul></ul>').addClass('dropdown-menu').attr('role', 'menu');
+                
+        jQuery('.dataSortingToggle').attr({'title': sortingChosen.attr('title')});
+        var ul = jQuery('.dataSortingMenu');
+        
+        jQuery.each(sorting.find('#DatasetSort optgroup'), function () {
+            
+            var li;
+            var grp = jQuery(this);
+            
+            if (grp.data('special') == 'result') {
+                
+                li =  jQuery('<li></li>').addClass('special result').append(function () {
+                    var that = jQuery(this);
+                    jQuery.each(grp.find('option'), function () {
+                        that.append(jQuery('<a></a>').attr({'href': '#', 'title': jQuery.trim(jQuery(this).text()), 'value': jQuery(this).val()}).text(jQuery.trim(jQuery(this).text())))
+                    });
+                });
 
-                        jQuery.each(sorting.find('#DatasetSort optgroup'), function () {
-                            var grp = jQuery(this);
-                            if (grp.data('special') == 'result') {
-                                ul.append(
-                                    jQuery('<li></li>').addClass('special result').append(function () {
-                                        var that = jQuery(this);
-                                        jQuery.each(grp.find('option'), function () {
-                                            that.append(jQuery('<a></a>').attr({'href': '#', 'title': jQuery.trim(jQuery(this).text()), 'value': jQuery(this).val()}).text(jQuery.trim(jQuery(this).text())))
-                                        });
-                                    })
-                                )
-                            } else {
-                                ul.append(jQuery('<li></li>').append(
-                                        jQuery('<label></label>').text(grp.attr('label'))
-                                    ).append(function () {
-                                        var span = jQuery('<span></span>');
-                                        jQuery.each(grp.find('option'), function () {
-                                            span.append(jQuery('<a></a>').attr({'href': '#', 'title': grp.attr('label') + ' (' + jQuery.trim(jQuery(this).text()) + ')', 'value': jQuery(this).val()}).text(jQuery.trim(jQuery(this).text())));
-                                        });
-                                        jQuery(this).append(span);
-                                    })
-                                )
-                            }
-                        });
-                        ul.find('li a[value="' + sortingChosen.val() + '"]').addClass('active');
-                        jQuery(this).append(ul);
-
-                        DataObjectesAjax.sortingAddRemoveOptions();
-                    })
-            ).before(
-                jQuery('<span></span>').css({'float': 'right', 'padding-right': '10px'}).text(_mPHeart.translation.LC_DANE_SORTOWANIE)
-            );
-        sorting.find('.sortingGroup > ul a').click(function (event) {
+            } else {
+                
+                li = jQuery('<li></li>').html(
+                    jQuery('<a></a>').text(grp.attr('label')).attr('href', '#')
+                );
+                
+            }
+            
+            ul.append( li );
+            
+        });
+                
+        // ul.find('li a[value="' + sortingChosen.val() + '"]').addClass('active');
+        DataObjectesAjax.sortingAddRemoveOptions();
+            
+            
+        
+        
+        ul.find('a').click(function (event) {
             var sortingDirection = sorting.find('.DatasetSort');
             event.preventDefault();
 
@@ -254,6 +272,24 @@ var DataObjectesAjax = {
 
             DataObjectesAjax.sortingReload();
         });
+        
+        
+        var innerSearch;
+		if (innerSearch = jQuery('#innerSearch')) {
+			
+	        innerSearch.keypress(function (e) {
+	            if (e.which == 13) {	        	
+		        	e.preventDefault();
+					
+		            DataObjectesAjax.sortingReload();
+					
+	            }
+	        });
+	        
+	    }
+        
+        
+        
     },
     /*ADDING/REMOVING NEW OPTION NORMALY ADDED AT GENERATING PAGE*/
     sortingAddRemoveOptions: function () {
@@ -303,11 +339,11 @@ var DataObjectesAjax = {
     /*CLICKING ARROW SEND AJAX + CHANGE ARROW DIRECTION*/
     sortingReload: function () {
         var formSerialize = jQuery('#DatasetViewForm').serializeArray(),
-            sortSerialize = 'order=' + jQuery(".DatasetSort").data("sort");
-
+            sortSerialize = ( (jQuery(".DatasetSort").data("sort") != undefined) ? '&order='  + jQuery(".DatasetSort").data("sort") : '');		
+		
         formSerialize = DataObjectesAjax.reorganizationSerialize(formSerialize);
 
-        History.pushState({ filters: formSerialize + '&' + sortSerialize + '&search=web', reloadForm: 'sorting', page: "Dane" }, jQuery(document).find("title").html(), "?" + formSerialize + '&' + sortSerialize + '&search=web');
+        History.pushState({ filters: formSerialize + '&' + sortSerialize + '&q=' + jQuery('#innerSearch').val() + '&search=web', reloadForm: 'sorting', page: "Dane" }, jQuery(document).find("title").html(), "?" + formSerialize + sortSerialize + '&q=' + jQuery('#innerSearch').val() + '&search=web');
     },
     /*GATHER FILTER OPTION AND SEND RELOAD AJAX REQUEST*/
     objectsReload: function () {
@@ -315,12 +351,12 @@ var DataObjectesAjax = {
 
         formSerialize = DataObjectesAjax.reorganizationSerialize(formSerialize);
 
-        History.pushState({ filters: formSerialize + '&search=web', reloadForm: 'object', page: "Dane", focusInput: $('.dataBrowser input[type="text"]:focus').attr('id') }, jQuery(document).find("title").html(), "?" + formSerialize + '&search=web');
+        History.pushState({ filters: formSerialize + '&q=' + jQuery('#innerSearch').val() + '&search=web', reloadForm: 'object', page: "Dane", focusInput: $('.dataBrowser input[type="text"]:focus').attr('id') }, jQuery(document).find("title").html(), "?" + formSerialize + '&q=' + jQuery('#innerSearch').val() + '&search=web');
     },
     /*GATHER SORT AND FILTER OPTION AND SEND RELOAD AJAX REQUEST*/
     pageReload: function (target) {
         var paginationSerialize = jQuery(target).attr('href').split("?").pop();
-        History.pushState({ filters: paginationSerialize + '&search=web', reloadForm: 'page', page: "Dane" }, jQuery(document).find("title").html(), "?" + paginationSerialize + '&search=web');
+        History.pushState({ filters: paginationSerialize + '&q=' + jQuery('#innerSearch').val() + '&search=web', reloadForm: 'page', page: "Dane" }, jQuery(document).find("title").html(), "?" + paginationSerialize + '&q=' + jQuery('#innerSearch').val() + '&search=web');
     },
     /*AJAX REQUEST AND RELOAD FILTER/RESULT CONTENT*/
     ajaxReload: function (formActualFilters, focusInput) {
@@ -331,7 +367,7 @@ var DataObjectesAjax = {
             formAction = formTarget.attr('action').split("?").shift(),
             paramArray = formActualFilters.split('&'),
             redirectUrl = false,
-            delay = 400;
+            delay = 200;
 
         if (formAction.substr(formAction.length - 1) == '/') formAction = formAction.substring(0, formAction.length - 1);
 
@@ -355,7 +391,7 @@ var DataObjectesAjax = {
             url: formAction + '.json?' + paramArray,
             dataType: 'JSON',
             beforeSend: function () {
-                main.append(jQuery('<div></div>').addClass('loadingTwirl'));
+                main.append(jQuery('<div><div class="spinner"><div class="bounce1"></div><div class="bounce2"></div><div class="bounce3"></div></div><p>Ładowanie ...</p></div>').addClass('loadingTwirl'));
                 objects.find('.innerContainer').children().animate({
                     opacity: 0.5
                 }, { duration: delay, queue: false });
@@ -382,7 +418,7 @@ var DataObjectesAjax = {
                 filtersController();
 
                 /*RELOAD HEADER CONTENT WITH DATA FROM AJAX*/
-                $('.update-header').html(data.header).end().find('.DatasetSort').hide();
+                $('.update-header').html(data.header).end();
                 DataObjectesAjax.sorting();
 
                 /*CHANGE PAGINATION LIST*/
@@ -456,6 +492,7 @@ var DataObjectesAjax = {
                     highchartInit();
             });
         }
+ 
     }
 };
 

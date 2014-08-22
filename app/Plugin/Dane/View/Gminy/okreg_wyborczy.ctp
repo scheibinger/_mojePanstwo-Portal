@@ -10,9 +10,6 @@ if ($object->getId() == '903') $this->Combinator->add_libs('css', $this->Less->c
 echo $this->Element('dataobject/pageBegin', array(
     'titleTag' => 'p',
 ));
-echo $this->Element('Dane.dataobject/menuTabs', array(
-    'menu' => $_menu,
-));
 
 $objectOptions = array(
     'hlFields' => array(),

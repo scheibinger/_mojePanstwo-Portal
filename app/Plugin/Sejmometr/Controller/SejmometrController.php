@@ -16,7 +16,7 @@ class SejmometrController extends SejmometrAppController
     {
         $api = $this->API->Sejmometr();
         $stats = $api->getStats();
-
+		
         $display_callbacks = array(
             'liczba_wypowiedzi' => function ($object) {
                     return pl_dopelniacz($object->getData('liczba_wypowiedzi'), 'wystąpienie', 'wystąpienia', 'wystąpień');

@@ -85,7 +85,8 @@ class DataobjectHelper extends AppHelper
         $forceLabel = isset($options['forceLabel']) ? $options['forceLabel'] : false;
         $file = isset($options['file']) ? $options['file'] : false;
         $titleTag = isset($options['titleTag']) ? $options['titleTag'] : 'h1';
-
+		$defaults = isset($options['defaults']) ? $options['defaults'] : array();
+		
         $class = isset($options['class']) ? $options['class'] : false;
         $alertsButtons = isset($options['alertsButtons']) ? $options['alertsButtons'] : false;
         $alertsStatus = isset($options['alertsStatus']) ? $options['alertsStatus'] : false;
@@ -120,15 +121,17 @@ class DataobjectHelper extends AppHelper
             'alertsButtons' => $alertsButtons,
             'alertsStatus' => $alertsStatus,
             'titleTag' => $titleTag,
+            'defaults' => $defaults,
         );
         return $this->_View->element($theme, $params, array('plugin' => 'Dane'));
     }
 
     public function highlights($fields = false, $fieldsPush = false, $options = array())
     {
+    	
         $output = '';
         $fields = $this->object->getHiglightedFields($fields, $fieldsPush);
-
+		
         $fields_count = count($fields);
         if ($fields_count) {
 
@@ -149,7 +152,12 @@ class DataobjectHelper extends AppHelper
 
             if (($col_width >= 4) || (isset($options['inl']) && $options['inl']))
                 $output .= ' inl';
-            $output .= '">';
+            $output .= '"';
+                        
+            if( isset($options['details']) && ($options['details']===false) )	            
+	            $output .= ' style="display: none;"';
+            
+            $output .= '>';
 
             foreach ($fields as $field => $field_params) {
 

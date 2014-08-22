@@ -1,7 +1,7 @@
 @colorLabel: #0783B8;
 
 .ui-datepicker {
-    width: 248px;
+    width: 263px;
     .ui-datepicker-title {
         select, option {
             color: #216ea4 !important;
@@ -115,6 +115,38 @@ blockquote {
 
 }
 
+
+.objectsPageContent {
+	.dataBrowser {
+		
+		&.emptyFilters {
+			
+			.dataFilters {
+				display: none;
+			}
+			
+			.dataObjects {
+				padding-left: 0;
+				padding-right: 0;
+				margin-left: 12.5%;
+			}
+			
+		}
+		
+		.dataFilters {
+			padding-top: 62px;
+			
+			> .header {
+	
+	            h2 {
+	                margin-top: -16px;
+	            }
+	        }
+		}
+		
+	}
+}
+
 .dataBrowser {
 
     font-family: "Lato", sans-serif;
@@ -152,7 +184,7 @@ blockquote {
 
         #filters {
             list-style-type: none;
-            padding: 10px 20px 0 10px;
+            padding: 0 15px 0 0;
             color: #2F2F2F;
             font-size: 14px;
             margin-top: 0;
@@ -160,29 +192,22 @@ blockquote {
 
             .radio, .checkbox {
                 margin-bottom: 15px;
-            }
-
-            .filter.innerSearch {
-                input {
-                    color: @colorLabel;
-
-                    &::-webkit-input-placeholder,
-                    &:-moz-placeholder,
-                    &::-moz-placeholder,
-                    &:-ms-input-placeholder {
-                        color: @colorLabel;
-                    }
-                }
-
-                .searchWithoutPhrase {
-                    top: 50% !important;
-                    height: 22px;
-                    width: 22px;
-                    margin-top: -15px;
-                }
-            }
-
+            }           
+						
             .filter {
+            
+            	
+            	&:hover {
+	            	.options {
+	                    > .option {
+	                        > .badge {
+	                        	color: #666;
+	                        }
+	                    }
+	                }
+	            }
+            	
+            	
                 border-top: 1px solid #DDD;
                 padding-top: 10px;
                 margin-top: 10px;
@@ -204,6 +229,17 @@ blockquote {
                     overflow: auto;
 
                     label {
+                    	
+                    	span {
+	                    	color: lighten(#2e8f3e, 10%);
+						    font-size: 13px;
+						    margin-right: 2px;
+						    position: relative;
+						    top: 1px;
+						    -webkit-transition-duration: 0.5s; /* Safari */
+						    transition-duration: 0.5s;
+                    	}
+                    	
                         font-size: 16px;
                         margin-bottom: 8px;
                         float: left;
@@ -252,10 +288,35 @@ blockquote {
                     margin: 0;
 
                     > .option {
-                        padding: 4px 0;
-                        margin: 0;
+                        padding: 3px 0 0;
+                        margin: 2px 0;
                         background: none;
                         border: none;
+                        border-radius: 10px !important;
+                        -webkit-border-radius: 10px !important;
+                        
+                        
+                        
+                        &:hover {
+	                        background-color: #E2E2E2;
+	                        
+	                        &.checkbox .checkbox-inline {
+		                        label {color: #157ab5;}
+	                        } 
+	                        
+	                        &.radio .radio-inline {
+	                        	label {color: #157ab5; }
+	                        }
+                        }
+                        
+                        &.active {
+	                        background-color: tomato;
+	                        color: #FFF;	                        
+	                        > .badge {
+	                        	color: #FAFAFA;
+	                        	display: none;
+	                        }
+                        }
 
                         .sublink {
                             font-size: 12px;
@@ -268,19 +329,26 @@ blockquote {
                             right: 0;
                             margin-top: -9px;
                             height: 18px;
+                            margin-right: 5px;
+                            
+                            background-color: inherit !important;
+                            color: #999;
+                            
+                            -webkit-transition-duration: 0.5s; /* Safari */
+						    transition-duration: 0.5s;
                         }
 
                         &.checkbox {
-                            padding-left: 18px;
+                            padding-left: 28px;
                         }
 
                         label {
                             padding-right: 60px;
                         }
                     }
-
-                    .option.checkbox .checkbox-inline,
-                    .option.radio .radio-inline {
+					
+                    
+                    .option.checkbox .checkbox-inline, .option.radio .radio-inline {
                         padding-left: 0;
 
                         input[type="radio"],
@@ -289,11 +357,10 @@ blockquote {
                             position: absolute;
 
                             &:checked + label {
-                                color: #000;
+                                color: #FFF;
 
                                 &:before {
                                     content: "\e606";
-                                    color: lighten(#2E8F3E, 10%);
                                 }
                             }
                         }
@@ -304,7 +371,7 @@ blockquote {
                         }
 
                         label {
-                            color: @colorLabel;
+                            color: #666;
                             font-size: 13px;
                             font-weight: 400;
                             line-height: 14px;
@@ -317,11 +384,13 @@ blockquote {
                             user-select: none;
 
                             &:before {
-                                font-family: "mojePanstwo";
-                                content: '';
-                                position: relative;
-                                top: 0;
-                                left: -4px;
+                                color: #fff !important;
+								content: "";
+								font-family: "mojePanstwo";
+								font-size: 11px;
+								left: -6px;
+								position: relative;
+								top: 0;
                             }
                         }
                     }
@@ -331,6 +400,7 @@ blockquote {
                     padding: 2px 5px;
                     background: none;
                     border: none;
+                    color: #157ab5;
 
                     &:before {
                         font-family: 'mojePanstwo';
@@ -366,113 +436,124 @@ blockquote {
 
         .dataInfo {
             color: #2F2F2F;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 300;
-            margin: 5px 0;
+            margin: 15px 0 0;
             padding: 5px 0;
             line-height: 1.1em;
-            width: 98%;
-            float: left;
+			
+			#innerSearch {
+				font-weight: 400;
+			}
+			
+			#innerSearch::-webkit-input-placeholder { /* WebKit browsers */
+			    color: #AAA;
+			}
+			#innerSearch:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+			    color: #AAA;
+			}
+			#innerSearch::-moz-placeholder { /* Mozilla Firefox 19+ */
+			    color: #AAA;
+			}
+			#innerSearch:-ms-input-placeholder { /* Internet Explorer 10+ */
+			    color: #AAA;
+			}
+			
+			.dataSubheader {
+				margin: 5px 0;
+				
+				
+				.dataStats {
+					
+					color: #999;
+				    font-family: "Lato",sans-serif;
+				    font-size: 12px;
+				    font-weight: 700;
+					
+					p {
+						margin: 5px;
+						padding: 5px;
+					}
+				}
+				
+				.dataSortings {
+				
+	                text-align: right;
+	                line-height: 2em;
+					
+					.glyphicon {
+						color: #AAA;
+						margin-right: 2px;
+						font-size: 11px;
+						position: relative;
+					}
+					
+	                .row {
+	                    input, strong, select {
+	                        float: right;
+	                        width: auto;
+	                        margin-left: 5px;
+	                        font-weight: 300;
+	                    }
+	                }
+	
+					.dataButtons {
+						
+						margin-top: 4px;
 
-            .dataStats {
-                font-size: 13px;
-                line-height: 2em;
-                padding-left: 10px;
-                position: relative;
-                top: 5px;
-
-                p {
-                    padding: 0;
-                    margin: 0;
-                }
-
-                strong {
-                    font-weight: 400;
-                }
-            }
-
-            .dataSortings {
-                padding-right: 0;
-                text-align: right;
-                line-height: 2em;
-
-                .row {
-                    input, strong, select {
-                        float: right;
-                        width: auto;
-                        margin-left: 5px;
-                        font-weight: 300;
-                    }
-                }
-
-                .sortingGroup {
-                    margin-right: -3px;
-
-                    .dropdown-menu {
-                        padding: 6px 10px;
-
-                        li {
-                            @spacing: 10px;
-
-                            font-family: "Lato", sans-serif;
-                            font-size: 14px;
-                            line-height: 1.2em;
-                            display: table-row;
-                            width: 100%;
-
-                            &.special {
-                                &.result {
-                                    display: inline-block;
-                                    width: 100%;
-                                }
-
-                                a {
-                                    color: #157AB5;
-                                    text-align: center;
-                                    padding: @spacing 0;
-                                }
-                            }
-
-                            > label, > span {
-                                padding-top: @spacing;
-                                padding-bottom: @spacing;
-                                border-top: 1px dotted #ddddee;
-                                display: table-cell;
-                            }
-
-                            &:first-child {
-                                > label, > span {
-                                    border-top: 0;
-                                }
-                            }
-
-                            > label {
-                                text-align: left;
-                                font-weight: normal;
-                                padding-right: 5px;
-                            }
-                            > span {
-                                text-align: right;
-                                padding-left: 5px;
-
+						.btn-default {
+							background-color: #F6F6F6;
+						}
+						
+						
+					}
+					
+	                .dataSortingMenu {
+	                    margin-left: -135px;
+					    margin-top: -1px;
+					    min-width: 234px;
+	
+	                    &.dropdown-menu {
+	                        padding: 6px 10px;
+	                        background-color: #F3F3F3;
+	
+	                        li {
+	                            @spacing: 10px;
+	
+	                            font-family: "Lato", sans-serif;
+	                            font-size: 14px;
+	                            line-height: 1.2em;
+	                            display: block;
+	                            width: 100%;
+	
+	                            &.special {
+	                                &.result {
+	                                    display: inline-block;
+	                                    width: 100%;
+	                                }
+	
+	                                a {
+	                                    color: #157AB5;
+	                                    text-align: center;
+	                                    padding: @spacing 0;
+	                                }
+	                            }
+	
+	                            
+	
                                 > a {
                                     display: block;
                                     float: none;
                                     width: 100%;
-
-                                    &:hover {
-                                        text-decoration: underline;
-                                    }
-
-                                    &.active {
-                                        color: #000000;
-                                    }
+                                    text-align: left;
                                 }
-                            }
-                        }
-                    }
-                }
-            }
+
+	                        }
+	                    }
+	                }
+	            }
+			}
+            
         }
 
         .innerContainer {
@@ -625,6 +706,7 @@ blockquote {
         .thumb_cont {
             overflow: hidden;
             max-height: 100px;
+
             .thumb {
 
             }

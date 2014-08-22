@@ -138,7 +138,6 @@ class PrawoController extends DataobjectsController
 	        )
 	    );
 	    
-	    /*
 	    if( $items = $this->object->getLayer('counters') ) {
 		    foreach( $items as $item ) {
 		    	
@@ -152,7 +151,6 @@ class PrawoController extends DataobjectsController
 		    	
 		    }
 	    }
-	    */
 	    
         $menu['selected'] = ( $this->request->params['action'] == 'view' ) ? '' : $this->request->params['action'];
         

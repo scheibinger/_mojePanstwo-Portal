@@ -3,7 +3,22 @@
 var filtersController = function () {
     var filters = jQuery('#filters'),
         limit = 5;
-
+	
+	
+	// FIX HEIGHTS
+	
+	var dataFilters = jQuery('.objectsPageContent .dataBrowser .dataFilters');
+	var innerContainer = jQuery('.objectsPageContent .dataBrowser .dataObjects .innerContainer');
+	
+	if( dataFilters.length && innerContainer.length ) {
+				
+		innerContainer.css('min-height', dataFilters.height() - 103 + 'px');
+		
+	}
+	
+	
+	
+		
     /*RUN ONLY WHEN FILTER EXIST*/
     if (filters.length) {
         var showMoreFilters = jQuery('.showMoreFilters');
@@ -11,19 +26,11 @@ var filtersController = function () {
         if (showMoreFilters.length > 0)
             showMoreFilters.remove();
 
+		
+		
+		
         filters.find('.filter').each(function () {
             var filter;
-
-            if (jQuery(this).hasClass('innerSearch')) {
-                var innerSearch = jQuery(this);
-
-                innerSearch.keypress(function (e) {
-                    if (e.which == 13) {
-                        if (innerSearch.length > 0)
-                            innerSearch.parents('form').submit();
-                    }
-                });
-            }
 
             /*HIDE OPTIONS OVER LIMIT*/
             if ((filter = jQuery(this).find('.options')).length) {
