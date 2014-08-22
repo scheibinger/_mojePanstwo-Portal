@@ -62,22 +62,19 @@
 </head>
 <body>
 <div id="_wrapper">
-    <header>
-        <?php /*echo $_PORTAL_HEADER; */ ?>
-        <?php echo $this->Element('bar', array(
-            'mode' => @$statusbarMode,
-            'applications' => array(
-                'list' => @$_APPLICATIONS,
-                'perPage' => 6,
-                'perRow' => 3,
-            ),
-            'applicationCurrent' => @$_APPLICATION,
-            'applicationCrumbs' => @$statusbarCrumbs,
-            'streams' => $this->Session->read('Auth.User.streams'),
-        ));
-        echo $this->Element('Paszport.modal_login');
-        ?>
-    </header>
+    <?php echo $this->Element('bar', array(
+        'mode' => @$statusbarMode,
+        'applications' => array(
+            'list' => @$_APPLICATIONS,
+            'perPage' => 6,
+            'perRow' => 3,
+        ),
+        'applicationCurrent' => @$_APPLICATION,
+        'applicationCrumbs' => @$statusbarCrumbs,
+        'streams' => $this->Session->read('Auth.User.streams'),
+    ));
+    //echo $this->Element('Paszport.modal_login');
+    ?>
 
     <!--TODO: Ograc wszelkie error / notify blocks-->
     <?php if ($this->Session->read('Message.flash.message')) { ?>
@@ -104,13 +101,13 @@
             </div>
         </div>
     <?php } ?>
-    <div id="_main">
+    <div id="_main" class="col-xs-11">
 
-        <?php echo $content_for_layout; ?>
+    <?php echo $content_for_layout; ?>
 
     </div>
 
-    <?php echo $this->element('footer'); ?>
+    <?php /*echo $this->element('footer'); */ ?>
 </div>
 
 <?php /* GOOGLE ANALYTIC */ ?>

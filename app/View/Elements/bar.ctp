@@ -1,36 +1,46 @@
-<div id="_mPCockpit">
-    <div class="_mPContent">
+<div id="_mPCockpit" class="col-md-1">
+    <div class="_mPBasic">
         <div class="_mPLogo">
-            <p>
-                <a href="/" target="_self">
-                    <strong>_moje</strong>Państwo
-                </a>
-            </p>
+            <a href="/" target="_self">
+                <strong>moje</strong>państwo
+            </a>
         </div>
-        <div class="mPApplication">
-            <div class="mPSearch">
-                //search
+        <div class="_mPApplication">
+            <div class="_mPSearch _appBlock _appBlockBackground">
+            //search
             </div>
-            <div class="mPAppsList">
-                //AppList
+            <div class="_mPAppsList _appBlock _appBlockBackground">
+                <div class="_mojePanstwoCockpitMenuUpSubMenuTitle">Aplikacje</div>
             </div>
-            <div class="mPFavorite">
-                //favorite
+            <div class="_mPFavorite _appBlock _appBlockBackground">
+            //favorite
             </div>
         </div>
-        <div class="mpSystem">
-            <div class="mPRunning">
-                //lista app działających (?)
-            </div>
-            <div class="mPUser">
-                //Twój Profil
-            </div>
-            <div class="mPPowerButton">
-                //on i off
-            </div>
-        </div>
+        <div class="_mpSystem">
+            <div class="_mPRunning">
 
-        <div class="_mojePanstwoCockpitMenuUp">
+            </div>
+            <div class="_mPUser">
+                <?php if ($this->Session->read('Auth.User.photo_small')) echo('<img src="' . $this->Session->read('Auth.User.photo_small') . '" />'); ?>
+                <a href="<?php echo $this->Html->url(array('plugin' => 'paszport', 'controller' => 'users', 'action' => 'index')); ?>">
+                    <?php echo __('LC_COCKPITBAR_USER_LINK'); ?>
+                </a>
+            </div>
+            <div class="_mPPowerButton">
+                <?php if ($this->Session->read('Auth.User.id')) { ?>
+                    <a href="<?php echo $this->Html->url(array('plugin' => 'paszport', 'controller' => 'users', 'action' => 'logout')); ?>">
+                        <?php echo __('LC_COCKPITBAR_LOGOUT'); ?>
+                    </a>
+                <?php } else { ?>
+                    <a href="<?php echo $this->Html->url(array('plugin' => 'paszport', 'controller' => 'users', 'action' => 'login')); ?>">
+                        <?php echo __('LC_COCKPITBAR_LOGIN'); ?>
+                    </a>
+                <?php } ?>
+            </div>
+        </div>
+    </div>
+</div>
+<!--        <div class="_mojePanstwoCockpitMenuUp">
             <div id="_mojePanstwoCockpitMenuUpContent">
                 <div
                     class="_mojePanstwoCockpitMenuUpContentButton _mojePanstwoCockpitIcons _mojePanstwoCockpitIcons-menuUp _mojePanstwoCockpitBorderLeft"
@@ -39,7 +49,7 @@
                 <div id="_mojePanstwoCockpitMenuUpSubMenu">
                     <div id="_mojePanstwoCockpitMenuUpSubMenuContent">
                         <div class="_mojePanstwoCockpitMenuUpSubMenuTitle">Aplikacje</div>
-                        <?php if (!empty($applications['list'])) {
+                        <?php /*if (!empty($applications['list'])) {
                             echo '<ul id="_mojePanstwoCockpitMenuUpSubMenuList"><li>';
                             $appCount = 0;
                             foreach ($applications['list'] as $app) {
@@ -48,54 +58,56 @@
                                         echo '</li><li>';
 
                                     if ($app['Application']['type'] == 'app') {
-                                        ?>
-                                        <a class="appContruct <?= $appCount ?>"
-                                           href="/<?= $app['Application']['slug'] ?>">
+                                        */
+?>
+                                        <a class="appContruct <? /*= $appCount */ ?>"
+                                           href="/<? /*= $app['Application']['slug'] */ ?>">
                                             <div class="_mojePanstwoCockpitMenuUpSubMenuListIcon">
                                                 <div class="_mojePanstwoCockpitMenuUpSubMenuListIconInner">
                                                     <img
-                                                        src="/<?= $app['Application']['plugin'] ?>/icon/<?= $app['Application']['slug'] ?>.svg"
-                                                        alt="<?= $app['Application']['name'] ?>"/>
+                                                        src="/<? /*= $app['Application']['plugin'] */ ?>/icon/<? /*= $app['Application']['slug'] */ ?>.svg"
+                                                        alt="<? /*= $app['Application']['name'] */ ?>"/>
                                                 </div>
                                             </div>
                                             <div
-                                                class="_mojePanstwoCockpitMenuUpSubMenuListName"><?= $app['Application']['name'] ?></div>
+                                                class="_mojePanstwoCockpitMenuUpSubMenuListName"><? /*= $app['Application']['name'] */ ?></div>
                                         </a>
-                                    <?php } else if ($app['Application']['type'] == 'folder') { ?>
+                                    <?php /*} else if ($app['Application']['type'] == 'folder') { */ ?>
                                         <div class="appContruct appFolder"
-                                             data-folder-slug="/<?= $app['Application']['slug'] ?>">
+                                             data-folder-slug="/<? /*= $app['Application']['slug'] */ ?>">
                                             <div class="_mojePanstwoCockpitMenuUpSubMenuListIcon">
                                                 <div class="_mojePanstwoCockpitMenuUpSubMenuListIconInner">
                                                     <img src="/icon/folder.svg"
-                                                         alt="<?= $app['Application']['name'] ?>"/>
+                                                         alt="<? /*= $app['Application']['name'] */ ?>"/>
                                                 </div>
                                             </div>
                                             <div
-                                                class="_mojePanstwoCockpitMenuUpSubMenuListName"><?= $app['Application']['name'] ?></div>
+                                                class="_mojePanstwoCockpitMenuUpSubMenuListName"><? /*= $app['Application']['name'] */ ?></div>
                                             <ul class="appList">
-                                                <?php foreach ($app['Content'] as $key => $appList) { ?>
+                                                <?php /*foreach ($app['Content'] as $key => $appList) { */ ?>
                                                     <li>
-                                                        <a href="/<?= $appList['slug'] ?>">
+                                                        <a href="/<? /*= $appList['slug'] */ ?>">
                                                             <div class="appIcon">
                                                                 <div class="innerIcon">
                                                                     <img
-                                                                        src="/<?= $appList['plugin'] ?>/icon/<?= $appList['slug'] ?>.svg"
-                                                                        alt="<?= $appList['name'] ?>"/>
+                                                                        src="/<? /*= $appList['plugin'] */ ?>/icon/<? /*= $appList['slug'] */ ?>.svg"
+                                                                        alt="<? /*= $appList['name'] */ ?>"/>
                                                                 </div>
                                                             </div>
-                                                            <div class="appName"><?= $appList['name'] ?></div>
+                                                            <div class="appName"><? /*= $appList['name'] */ ?></div>
                                                         </a>
                                                     </li>
-                                                <?php } ?>
+                                                <?php /*} */ ?>
                                             </ul>
                                         </div>
                                     <?php
-                                    }
+/*                                    }
                                     $appCount++;
                                 }
                             }
                             echo '</li></ul>';
-                        }?>
+                        }*/
+?>
                         <div id="_mojePanstwoCockpitMenuUpSubMenuControls">
                             <a class="_mojePanstwoCockpitMenuUpSubMenuControlsArrow _mojePanstwoCockpitMenuUpSubMenuControlsArrowLeft"
                                href="javascript:void(0)" onclick="_mojePanstwoCockpitSlider.prevSlide();"><span
@@ -113,18 +125,18 @@
         </div>
 
         <div class="_mojePanstwoCockpitBreadcrumb _mojePanstwoCockpitBorderLeft">
-            <?php if (isset($applicationCurrent) && $applicationCurrent) { ?>
+            <?php /*if (isset($applicationCurrent) && $applicationCurrent) { */ ?>
                 <a class="_mojePanstwoCockpitBreadcrumbMain"
-                   href="/<?php echo $applicationCurrent['Application']['slug'] ?>">
+                   href="/<?php /*echo $applicationCurrent['Application']['slug'] */ ?>">
                     <img
-                        src="/<?php echo $applicationCurrent['Application']['plugin'] ?>/icon/<?php echo $applicationCurrent['Application']['slug'] ?>.svg"
-                        alt="<?php echo $applicationCurrent['Application']['name']; ?>"/>
+                        src="/<?php /*echo $applicationCurrent['Application']['plugin'] */ ?>/icon/<?php /*echo $applicationCurrent['Application']['slug'] */ ?>.svg"
+                        alt="<?php /*echo $applicationCurrent['Application']['name']; */ ?>"/>
 
-                    <p><?php echo $applicationCurrent['Application']['name']; ?></p>
+                    <p><?php /*echo $applicationCurrent['Application']['name']; */ ?></p>
                 </a>
-            <?php } ?>
+            <?php /*} */ ?>
 
-            <?
+            <? /*
             if (!empty($applicationCrumbs)) {
                 foreach ($applicationCrumbs as $crumb) {
                     if (!isset($crumb['href']))
@@ -146,34 +158,34 @@
 
                 }
             }
-            ?>
+            */
+?>
 
         </div>
         <div class="_mojePanstwoCockpitPower">
-            <?php if ($this->Session->read('Auth.User.id')) { ?>
+            <?php /*if ($this->Session->read('Auth.User.id')) { */ ?>
                 <a class="_mojePanstwoCockpitPowerButton _mojePanstwoCockpitIcons _mojePanstwoCockpitIcons-logout _mojePanstwoCockpitBorderLeft"
-                   href="<?php echo $this->Html->url(array('plugin' => 'paszport', 'controller' => 'users', 'action' => 'logout')); ?>">
-                    <span><?php echo __('LC_COCKPITBAR_LOGOUT'); ?></span>
+                   href="<?php /*echo $this->Html->url(array('plugin' => 'paszport', 'controller' => 'users', 'action' => 'logout')); */ ?>">
+                    <span><?php /*echo __('LC_COCKPITBAR_LOGOUT'); */ ?></span>
                 </a>
-            <?php } else { ?>
+            <?php /*} else { */ ?>
                 <a class="_mojePanstwoCockpitPowerButton _mojePanstwoCockpitIcons _mojePanstwoCockpitIcons-login _mojePanstwoCockpitBorderLeft"
-                   href="<?php echo $this->Html->url(array('plugin' => 'paszport', 'controller' => 'users', 'action' => 'login')); ?>">
-                    <span><?php echo __('LC_COCKPITBAR_LOGIN'); ?></span>
+                   href="<?php /*echo $this->Html->url(array('plugin' => 'paszport', 'controller' => 'users', 'action' => 'login')); */ ?>">
+                    <span><?php /*echo __('LC_COCKPITBAR_LOGIN'); */ ?></span>
                 </a>
-            <?php } ?>
+            <?php /*} */ ?>
         </div>
 
 
-        <?php if ($this->Session->read('Auth.User.id')) { ?>
+        <?php /*if ($this->Session->read('Auth.User.id')) { */ ?>
             <div
                 class="_mojePanstwoCockpitUser">
                 <div class="_mojePanstwoCockpitUserAvatar hidden">
-                    <img src="<?php echo $this->Session->read('Auth.User.photo_small'); ?>" class="img img-circle"/>
+                    <img src="<?php /*echo $this->Session->read('Auth.User.photo_small'); */ ?>" class="img img-circle"/>
                 </div>
                 <div class="_mojePanstwoCockpitUserName">
-                    <a href="<?php echo $this->Html->url(array('plugin' => 'paszport', 'controller' => 'users', 'action' => 'index')); ?>"><?php echo $this->Session->read('Auth.User.username'); ?></a>
+                    <a href="<?php /*echo $this->Html->url(array('plugin' => 'paszport', 'controller' => 'users', 'action' => 'index')); */ ?>"><?php /*echo $this->Session->read('Auth.User.username'); */ ?></a>
                 </div>
             </div>
-        <?php } ?>
-    </div>
-</div>
+        <?php /*} */ ?>
+    </div>-->
