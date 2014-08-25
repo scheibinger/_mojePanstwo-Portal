@@ -13,6 +13,16 @@ $this->Combinator->add_libs('js', 'Dane.view-krspodmioty');
 $this->Combinator->add_libs('js', 'graph-krs');
 
 ?>
+	<? if( $dzialy = $object->getLayer('pkd_dzialy') ) {?>
+	<ul class="chart-blocks">
+	<? foreach( $dzialy as $dzial ) { ?>
+		
+		<li style="background-color: #<?= $dzial['color'] ?>; width: <?= $dzial['score']*100 ?>%"><a href="#" title="<?= addslashes( $dzial['nazwa'] ) ?>"><?= $dzial['nazwa'] ?></a></li>
+			
+	<? } ?>
+	</ul>
+	<? } ?>
+
     <div class="krsPodmioty row">
     <div class="col-lg-3 objectSide">
         <div class="objectSideInner">

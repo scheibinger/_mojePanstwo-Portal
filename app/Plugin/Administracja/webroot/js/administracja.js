@@ -5,7 +5,7 @@ $(document).ready(function () {
     $.each($administracja.find('.item a'), function () {
         var that = $(this),
             block = that.parents('.block');
-
+				
         that.click(function (e) {
             var next = block.next(),
                 targetPos = block.position().top,
@@ -13,7 +13,24 @@ $(document).ready(function () {
                 data = that.data();
 
             e.preventDefault();
-
+			
+			
+			var items_div = jQuery( block.parent('.items') );
+			if( items_div.hasClass('focus-controll') ) {
+				
+				items_div.removeClass('focus-controll');
+				items_div.find('.block.focus').removeClass('focus');
+				
+			} else {
+				
+				items_div.addClass('focus-controll');
+				block.addClass('focus');
+				
+			}
+			
+			
+			
+			
             if (block[0] === lastChoose[0])
                 return;
             else
