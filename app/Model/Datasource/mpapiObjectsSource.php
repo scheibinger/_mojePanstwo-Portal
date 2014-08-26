@@ -45,6 +45,7 @@ class mpapiObjectsSource extends DataSource
             'objects' => $this->API->getObjects(),
             'pagination' => $this->API->getPagination(),
             'facets' => $this->API->getFacets(),
+            'didyoumean' => $this->API->getDidyoumean(),
         );
 
     }

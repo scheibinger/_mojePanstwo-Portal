@@ -32,6 +32,7 @@
 	                    'orders' => $orders,
 	                    'page' => $page,
 	                    'controlls' => $config['controlls'],
+	                    'didyoumean' => $didyoumean,
 	                )); ?>
 	            </div>
 							
