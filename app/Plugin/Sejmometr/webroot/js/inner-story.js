@@ -1,3 +1,4 @@
+/*global TweenMax,TimelineMax,ScrollMagic*/
 var infoController;
 
 jQuery(function ($) {
@@ -19,10 +20,8 @@ jQuery(function ($) {
         posMap,
         scrollDest = 0,
         duration = 1000,
-        pins = [],
 
         transformOrigin,
-        top = ($window.height() - 600) / 2 | 0,
         center = $window.width() / 2 | 0,
 
         smallJump = '20%',
@@ -38,8 +37,7 @@ jQuery(function ($) {
         },
         keyThrottle = true,
         controller,
-        lastCloudsOffset,
-        positions = {};
+        lastCloudsOffset;
 
     $.easing.easeOutExpo = function (x, t, b, c, d) {
         return t === d ? b + c : c * (-Math.pow(2, -10 * t / d) + 1) + b;
@@ -94,15 +92,15 @@ jQuery(function ($) {
     function keyHandler(e) {
         var keyCode = e.which || e.keyCode || e.originalEvent.keyCode;
 
-        if (!keyThrottle) return;
+        if (!keyThrottle) return undefined;
 
         keyThrottle = false;
         if (keyMap[keyCode] != null) {
+            e.preventDefault();
             scrollTo(keyMap[keyCode]);
             setTimeout(function () {
                 keyThrottle = true;
             }, 0);
-            return false;
         }
     }
 
@@ -120,7 +118,6 @@ jQuery(function ($) {
         transformOrigin = center + 'px ' + center * 6 + 'px';
 
         if (controller) {
-            // TODO: destroy controller
             controller.destroy();
         }
 
@@ -140,7 +137,7 @@ jQuery(function ($) {
         });
 
         /*SETTING POSITION OF ANIMATED ELEMENTS*/
-        $near.find('.posel').removeClass('hide outfit').css({left: $medium.find('.scene.sejm').position().left + 600, height: "", bottom: ""})
+        $near.find('.posel').removeClass('hide outfit').css({left: $medium.find('.scene.sejm').position().left + 600, height: "", bottom: ""});
         $near.find('.samochod').removeClass('in').css({left: $medium.find('.scene.sejm').position().left + 850});
         $near.find('.taxi').removeClass('in').css({left: $medium.find('.scene.tlumaczenia').position().left, opacity: 0});
         $near.find('.samolot').css({left: $medium.find('.scene.lotnisko').position().left + 215, bottom: "", transform: ""});
@@ -190,7 +187,7 @@ jQuery(function ($) {
         new ScrollScene({
             duration: $medium.find('.scene.biuro').width() * .7
         }).on("start",function () {
-                $near.find('.posel').removeClass('hide').css({left: $medium.find('.scene.biuro').position().left + $medium.find('.scene.biuro').width() - 920})
+                $near.find('.posel').removeClass('hide').css({left: $medium.find('.scene.biuro').position().left + $medium.find('.scene.biuro').width() - 920});
                 $near.find('.posel').addClass('outfit');
             }).on("end", function () {
                 $medium.find('.scene.biuro').find('.stat').addClass('out');
@@ -271,7 +268,7 @@ jQuery(function ($) {
         new ScrollScene({
             duration: ($medium.find('.scene.lotnisko').width() / 2)
         }).on("start", function () {
-                $near.find('.posel').removeClass('hide').css({left: $medium.find('.scene.lotnisko').position().left})
+                $near.find('.posel').removeClass('hide').css({left: $medium.find('.scene.lotnisko').position().left});
                 $near.find('.taxi').removeClass('in');
             })
             .on("end", function () {
@@ -297,10 +294,13 @@ jQuery(function ($) {
     }
 
     $window.scroll(function () {
-        var i, pos = $window['scrollLeft']() + $html['width']() / 2;
-        for (i = 0; i < posMap.length; i += 1) {
-            if (posMap[i].pos < pos) {
-                break;
+        if (posMap) {
+            var i, pos = $window['scrollLeft']() + $html['width']() / 2;
+
+            for (i = 0; i < posMap.length; i += 1) {
+                if (posMap[i].pos < pos) {
+                    break;
+                }
             }
         }
     });
