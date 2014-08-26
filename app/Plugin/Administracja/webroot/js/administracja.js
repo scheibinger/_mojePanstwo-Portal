@@ -1,11 +1,14 @@
+/*global _mPHeart*/
+
 $(document).ready(function () {
     var lastChoose,
         $administracja = lastChoose = $('#administracja');
 
     $.each($administracja.find('.item a'), function () {
         var that = $(this),
-            block = that.parents('.block');
-				
+            block = that.parents('.block'),
+            items = $(block.parent('.items'));
+
         that.click(function (e) {
             var next = block.next(),
                 targetPos = block.position().top,
@@ -13,28 +16,22 @@ $(document).ready(function () {
                 data = that.data();
 
             e.preventDefault();
-			
-			
-			var items_div = jQuery( block.parent('.items') );
-			if( items_div.hasClass('focus-controll') ) {
-				
-				items_div.removeClass('focus-controll');
-				items_div.find('.block.focus').removeClass('focus');
-				
-			} else {
-				
-				items_div.addClass('focus-controll');
-				block.addClass('focus');
-				
-			}
-			
-			
-			
-			
-            if (block[0] === lastChoose[0])
+
+            if (block[0] === lastChoose[0]) {
+                lastChoose = false;
+                items.removeClass('focus-control');
+                items.find('.block.focus').removeClass('focus');
+                $administracja.find('.infoBlock').addClass('old').css({'height': 0, 'border-width': 0}).stop(true, true).animate({'margin-top': 0}, 500, function () {
+                    $administracja.find('.infoBlock.old').remove()
+                });
+
                 return;
-            else
+            } else {
+                items.find('.block.focus').removeClass('focus');
+                items.addClass('focus-control');
+                block.addClass('focus');
                 lastChoose = block;
+            }
 
             if (next.length == 0) {
                 slideMark = block;
@@ -66,7 +63,7 @@ $(document).ready(function () {
                     infoBlock = $administracja.find('.infoBlock');
                     infoBlock.addClass('current active');
                 } else {
-                    $administracja.find('.infoBlock').addClass('old').removeClass('active').css({'height': 0, 'border-width': 0}).animate({'margin-top': 0}, 500, function () {
+                    $administracja.find('.infoBlock').addClass('old').removeClass('active').css({'height': 0, 'border-width': 0}).stop(true, true).animate({'margin-top': 0}, 500, function () {
                         $administracja.find('.infoBlock.old').remove()
                     });
                     slideMark.after(infoBlock);
@@ -80,8 +77,6 @@ $(document).ready(function () {
                     , title = $.trim(data.title)
                     , info = data.info
                     ;
-
-                console.log(slug, data);
 
                 var leftCol = $('<div></div>').addClass('leftSide col-xs-12 col-md-6').append(
                         $('<div></div>').addClass('left col-xs-6')
@@ -113,7 +108,7 @@ $(document).ready(function () {
                         i = 0;
                         while (val[i]) {
                             var www = val[i];
-                            leftCol.find('.right .slugWWW').append($('<a></a>').attr({href: www, target: '_blank'}).text(www))
+                            leftCol.find('.right .slugWWW').append($('<a></a>').attr({href: www, target: '_blank'}).text(www));
                             i++;
                         }
                     }
@@ -124,7 +119,7 @@ $(document).ready(function () {
                         i = 0;
                         while (val[i]) {
                             var email = val[i];
-                            leftCol.find('.right .slugEmail').append($('<a></a>').attr('href', 'mailto:' + $.trim(email)).text(email))
+                            leftCol.find('.right .slugEmail').append($('<a></a>').attr('href', 'mailto:' + $.trim(email)).text(email));
                             i++;
                         }
                     }
