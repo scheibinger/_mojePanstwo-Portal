@@ -1,11 +1,8 @@
 <?
 
 	$this->Combinator->add_libs('css', $this->Less->css('view-prawo', array('plugin' => 'Dane')));
-	
 	echo $this->Element('dataobject/pageBegin');
-	echo $this->Element('Dane.dataobject/menuTabs', array(
-		'menu' => $_menu,
-	));
+			
 ?>
 
 
@@ -25,21 +22,21 @@
                     
                     
 
-                    <? if( $object->getData('data_wydania') ) {?>
+                    <? if( $object->getData('data_wydania') && ( $object->getData('data_wydania')!='0000-00-00' ) ) {?>
                     <li class="dataHighlight">
                         <p class="_label">Data wydania</p>
                         <p class="_value"><?= $this->Czas->dataSlownie($object->getData('data_wydania')); ?></p>
                     </li>
                     <? } ?>
 
-                    <? if( $object->getData('data_publikacji') ) {?>
+                    <? if( $object->getData('data_publikacji') && ( $object->getData('data_publikacji')!='0000-00-00' ) ) {?>
                     <li class="dataHighlight">
                         <p class="_label">Data publikacji</p>
                         <p class="_value"><?= $this->Czas->dataSlownie($object->getData('data_publikacji')); ?></p>
                     </li>
                     <? } ?>
 
-                    <? if( $object->getData('data_wejscia_w_zycie') ) {?>
+                    <? if( $object->getData('data_wejscia_w_zycie') && ( $object->getData('data_wejscia_w_zycie')!='0000-00-00' ) ) {?>
                     <li class="dataHighlight">
                         <p class="_label">Data wejścia w życie</p>
                         <p class="_value"><?= $this->Czas->dataSlownie($object->getData('data_wejscia_w_zycie')); ?></p>

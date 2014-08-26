@@ -4,9 +4,6 @@ $this->Combinator->add_libs('css', $this->Less->css('dataobjectslider', array('p
 $this->Combinator->add_libs('js', 'Dane.view-poslowie.js');
 
 echo $this->Element('dataobject/pageBegin');
-echo $this->Element('Dane.dataobject/menuTabs', array(
-    'menu' => $_menu,
-));
 ?>
 
 

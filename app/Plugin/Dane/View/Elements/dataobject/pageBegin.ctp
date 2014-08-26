@@ -76,3 +76,11 @@ $buttons = isset($objectOptions['buttons']) ? $objectOptions['buttons'] : array(
 <div class="container">
 <div class="row">
 <div class="objectsPageContent main">
+
+
+<?
+	if( isset($_menu) && !empty($_menu) )
+		echo $this->Element('Dane.dataobject/menuTabs', array(
+			'menu' => $_menu,
+		));
+?>

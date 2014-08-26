@@ -4,9 +4,6 @@ if (isset($odpis) && $odpis) {
 }
 
 echo $this->Element('dataobject/pageBegin');
-echo $this->Element('Dane.dataobject/menuTabs', array(
-    'menu' => $_menu,
-));
 
 echo $this->Html->script('Dane.d3/d3', array('block' => 'scriptBlock'));
 
@@ -16,6 +13,16 @@ $this->Combinator->add_libs('js', 'Dane.view-krspodmioty');
 $this->Combinator->add_libs('js', 'graph-krs');
 
 ?>
+	<? if( $dzialy = $object->getLayer('pkd_dzialy') ) {?>
+	<ul class="chart-blocks">
+	<? foreach( $dzialy as $dzial ) { ?>
+		
+		<li style="background-color: #<?= $dzial['color'] ?>; width: <?= $dzial['score']*100 ?>%"><a href="#" title="<?= addslashes( $dzial['nazwa'] ) ?>"><?= $dzial['nazwa'] ?></a></li>
+			
+	<? } ?>
+	</ul>
+	<? } ?>
+
     <div class="krsPodmioty row">
     <div class="col-lg-3 objectSide">
         <div class="objectSideInner">
@@ -53,7 +60,7 @@ $this->Combinator->add_libs('js', 'graph-krs');
                 <? } ?>
 
 
-
+				<? /*
                 <? if ($object->getData('wartosc_kapital_zakladowy')) { ?>
                     <li class="dataHighlight topborder">
                         <p class="_label">Kapitał zakładowy</p>
@@ -85,7 +92,7 @@ $this->Combinator->add_libs('js', 'graph-krs');
                         <p class="_value"><?= $object->getData('wartosc_nominalna_podwyzszenia_kapitalu'); ?></p>
                     </li>
                 <? } ?>
-
+				<? */ ?>
 
 
                 <? if ($object->getData('data_rejestracji')) { ?>

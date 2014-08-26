@@ -8,9 +8,6 @@
 
 <?
 echo $this->Element('dataobject/pageBegin');
-echo $this->Element('Dane.dataobject/menuTabs', array(
-    'menu' => $_menu,
-));
 ?>
 
 <div class="gminy row">

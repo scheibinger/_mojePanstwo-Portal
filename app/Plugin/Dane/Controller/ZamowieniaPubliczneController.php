@@ -6,7 +6,7 @@ class ZamowieniaPubliczneController extends DataobjectsController
 {
     public $menu = array();
     public $objectOptions = array(
-        'hlFields' => array('status_id', 'tryb_id', 'rodzaj_id'),
+        'hlFields' => array('status_id', 'rodzaj_id'),
     );
 
     public $initLayers = array('details', 'sources', 'czesci');

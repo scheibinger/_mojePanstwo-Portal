@@ -117,6 +117,7 @@ CakePlugin::loadAll(
         'OAuth' => array('bootstrap' => false, 'routes' => true),
         'Combinator' => array('bootstrap' => false, 'routes' => false),
         'Mapaprawa' => array('routes' => true, 'bootstrap' => false),
+        'Kultura' => array('routes' => true, 'bootstrap' => false),
     )
 );
 /**

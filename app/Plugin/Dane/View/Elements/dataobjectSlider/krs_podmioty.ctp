@@ -7,7 +7,9 @@
                 'object' => $object,
                 'options' => $options,
             )); ?>
-
+			
+			
+			<? /*
             <? if ($object->getData('wartosc_kapital_zakladowy')) { ?>
                 <ul class="dataHighlights inl">
                     <li class="dataHighlight showLabels">
@@ -20,6 +22,7 @@
                     </li>
                 </ul>
             <? } ?>
+            */ ?>
 
         </div>
 

@@ -6,17 +6,15 @@ if (isset($objects)) {
         ?>
         <ul class="list-group list-dataobjects">
             <?
-            $bg = false;
             foreach ($objects as $object) {
 
                 echo $this->Dataobject->render($object['Dataobject'], 'default', array(
-                    'bg' => $bg,
                     'hlFields' => $dataBrowser->hlFields,
                     'hlFieldsPush' => $dataBrowser->hlFieldsPush,
                     'routes' => $dataBrowser->routes,
                     'forceLabel' => in_array($page['mode'], array('*', 'datachannel')),
+                    'defaults' => $defaults,
                 ));
-                $bg = !$bg;
             }
             ?>
         </ul>

@@ -11,30 +11,33 @@ class FilterHelper extends AppHelper
     public $filters = array();
     public $facets = array();
     public $switchers = array();
+    public $conditions = array();
 
-    public function generateFilters($filters = array(), $switchers = array(), $facets = array(), $page = array())
+    public function generateFilters($filters = array(), $switchers = array(), $facets = array(), $page = array(), $conditions = array())
     {
 
 
         $this->facets = $facets;
         $this->filters = $filters;
         $this->switchers = $switchers;
-
+        $this->conditions = $conditions;
+				
         $out = $this->Form->create('Dataset', array('id' => 'DatasetViewForm', 'type' => 'get', 'url' => $page['href']));
 
 
         if (isset($this->params->query['order']))
             $out .= $this->Form->hidden('order', array('value' => $this->params->query['order']));
-
-
+						
         $out .= '<ul id="filters">';
 
 
         // SEARCH
-
+		
+		/*
         $out .= '<li class="form-group filter innerSearch">';
         $out .= '<input id="innerSearch" type="text" class="form-control" autocomplete="off" name="q" placeholder="' . __d('dane', __('LC_DANE_SEARCH')) . '" data-icon-after="&#xe600;" value="' . ((isset($this->params->query['q'])) ? htmlspecialchars($this->params->query['q']) : '') . '"/>';
         $out .= '</li>';
+        */
 
 
         if (($page['mode'] == 'dataset') && !$page['datasetLocked']) {
@@ -68,11 +71,14 @@ class FilterHelper extends AppHelper
         if (!empty($this->switchers)) {
 
             $out .= '<li class="filter form-group">';
-            $out .= '<div class="label_cont"><label>Opcje</label></div>';
+            $out .= '<div class="label_cont"><label><span class="glyphicon glyphicon-cog"></span> Opcje</label></div>';
             $out .= '<ul class="options list-group">';
 
             foreach ($this->switchers as $switcher) {
-                $out .= $this->_View->element('Dane.dataset-switcher', array('switcher' => $switcher['switcher']));
+                $out .= $this->_View->element('Dane.dataset-switcher', array(
+                	'switcher' => $switcher['switcher'],
+                	'conditions' => $this->conditions,
+                ));
             }
 
             $out .= '</ul>';
@@ -93,7 +99,7 @@ class FilterHelper extends AppHelper
             } else {
 
                 $out .= '<li class="filter form-group">';
-                $out .= '<div class="label_cont"><label>' . $filter['filter']['label'] . '</label>';
+                $out .= '<div class="label_cont"><label><span class="glyphicon glyphicon-filter"></span> ' . $filter['filter']['label'] . '</label>';
 
                 if ($filter['filter']['desc'])
                     $out .= '<p class="sublabel">' . $filter['filter']['desc'] . '</p>';
@@ -104,16 +110,16 @@ class FilterHelper extends AppHelper
                 switch ($filter['filter']['typ_id']) {
                     case 1:
                     case 5: // dataset filtetr
-                        $out .= $this->_View->element('Dane.filters/dataset', array('filter' => $filter, 'facet' => $facet));
+                        $out .= $this->_View->element('Dane.filters/dataset', array('conditions' => $conditions, 'filter' => $filter, 'facet' => $facet));
                         break;
                     case 2:
-                        $out .= $this->_View->element('Dane.filters/enum', array('filter' => $filter, 'facet' => $facet));
+                        $out .= $this->_View->element('Dane.filters/enum', array('conditions' => $conditions, 'filter' => $filter, 'facet' => $facet));
                         break;
                     case 3:
-                        $out .= $this->_View->element('Dane.filters/number', array('filter' => $filter, 'facet' => $facet));
+                        $out .= $this->_View->element('Dane.filters/number', array('conditions' => $conditions, 'filter' => $filter, 'facet' => $facet));
                         break;
                     case 4:
-                        $out .= $this->_View->element('Dane.filters/date', array('filter' => $filter, 'facet' => $facet));
+                        $out .= $this->_View->element('Dane.filters/date', array('conditions' => $conditions, 'filter' => $filter, 'facet' => $facet));
                         break;
                 }
                 $out .= '</li>';

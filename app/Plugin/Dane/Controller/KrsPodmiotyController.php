@@ -316,6 +316,15 @@ class KrsPodmiotyController extends DataobjectsController
         $this->set('title_for_layout', 'Oddziały ' . $this->object->getTitle());
 
     }
+    
+    public function kultura()
+    {
+
+        $this->addInitLayers('kultura');
+        $this->_prepareView();
+        $this->set('title_for_layout', 'Indeksy kultury dla ' . $this->object->getTitle());
+
+    }
 
     public function zmiany_umow()
     {
@@ -378,7 +387,15 @@ class KrsPodmiotyController extends DataobjectsController
 				'label' => 'Emisje akcji',
 				'count' => $counters['liczba_emisji_akcji'],
 		    );
-			    
+		
+		if( $this->request->params['action'] == 'kultura' ) {
+			$menu['items'][] = array(
+				'id' => 'kultura',
+				'href' => $href_base . '/kultura',
+				'label' => 'Indeksy kultury',
+		    );
+		}
+		
         $menu['selected'] = ( $this->request->params['action'] == 'view' ) ? '' : $this->request->params['action'];
         $this->set('_menu', $menu);
 

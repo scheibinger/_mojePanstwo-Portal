@@ -7,11 +7,6 @@ echo $this->Element('dataobject/pageBegin', array(
     'titleTag' => 'p',
 ));
 
-echo $this->Element('Dane.dataobject/menuTabs', array(
-    'menu' => $_menu,
-));
-
-
 $powiazania = $object->getLayer('radni_powiazania');
 ?>
 

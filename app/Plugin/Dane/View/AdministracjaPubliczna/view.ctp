@@ -86,7 +86,7 @@ $buttons = isset($objectOptions['buttons']) ? $objectOptions['buttons'] : array(
 
                 </div>
             </div>
-            <div class="col-md-2">
+            <div class="nopadding col-md-2">
                 <ul class="objectButtons">
                     <? foreach ($buttons as $button) { ?>
                         <li><?=
