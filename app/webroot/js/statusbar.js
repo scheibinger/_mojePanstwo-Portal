@@ -13,7 +13,6 @@
             //search
         } else if (option.hasClass('_mPAppsList')) {
             var _mPAppList = $('._mPAppList');
-            console.log(_mPAppList);
             _mPAppList.animate({width: 'toggle'})
         } else if (option.hasClass('_mPFavorite ')) {
             //favorite
