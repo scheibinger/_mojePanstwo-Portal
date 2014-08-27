@@ -101,7 +101,7 @@
             </div>
         </div>
     <?php } ?>
-    <div id="_main" class="col-xs-11">
+    <div id="_main" class="col-xs-10">
 
     <?php echo $content_for_layout; ?>
 
@@ -165,7 +165,7 @@ echo $this->Html->script('../plugins/bootstrap-switch/bootstrap-switch.js');?>
 
 <?php
 $this->Combinator->add_libs('js', 'statusbar', false);
-$this->Combinator->add_libs('js', 'statusbar-portal', false);
+//$this->Combinator->add_libs('js', 'statusbar-portal', false);
 $this->Combinator->add_libs('js', 'main', false);
 
 /* BLOCK FOR SPECIAL SCRIPTS LIKE PROTOTYPE THAT CANNOT BE MERGE TO ONE FILE*/
