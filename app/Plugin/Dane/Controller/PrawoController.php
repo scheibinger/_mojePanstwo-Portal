@@ -50,6 +50,23 @@ class PrawoController extends DataobjectsController
 		
 	}
 	
+	public function tekst_aktualny() {
+		
+		$this->initLayers = array('tekst_aktualny');
+		$this->_prepareView();
+		
+		if( $data = $this->object->getLayer('tekst_aktualny') ) {
+			
+			$this->redirect('/dane/ustawy/' . $data);
+			
+		} else {
+			
+			$this->redirect($this->referer());
+			
+		}
+		
+	}
+	
 	private function connections_view($id, $title) {
 		
 		parent::_prepareView();
@@ -77,6 +94,10 @@ class PrawoController extends DataobjectsController
 	
 	public function akty_zmienione() {
 		return $this->connections_view('akty_zmienione', 'Akty zmienione');		
+	}
+	
+	public function akty_wykonawcze() {
+		return $this->connections_view('akty_wykonawcze', 'Akty wykonawcze');		
 	}
 	
 	public function akty_uchylone() {
@@ -124,7 +145,9 @@ class PrawoController extends DataobjectsController
 	{
 		
 		
-		
+    	$counters_dictionary = array();
+
+
         // PREPARE MENU		
 		$href_base = '/dane/prawo/' . $this->request->params['id'];
         
@@ -138,22 +161,59 @@ class PrawoController extends DataobjectsController
 	        )
 	    );
 	    
+	    
+	    
 	    if( $items = $this->object->getLayer('counters') ) {
+	    
+	    	$dropdowns = array();
+	    	
 		    foreach( $items as $item ) {
 		    	
-		    	if( $item['count'] )
-			    	$menu['items'][] = array(
-			    		'id' => $item['slug'],
-		                'href' => $href_base . '/' . $item['slug'],
-		                'label' => $item['nazwa'],
-		                'count' => $item['count'],
-			    	);
+		    	$counters_dictionary[ $item['slug'] ] = $item['count'];
+		    	
+		    	if( $item['count'] ) {
+		    		
+			    	if( $item['dropdown']=='1' ) {
+				    	
+				    	$dropdowns[] = array(
+				    		'id' => $item['slug'],
+			                'href' => $href_base . '/' . $item['slug'],
+			                'label' => $item['nazwa'],
+			                'count' => $item['count'],
+				    	);
+				    	
+			    	} else {
+			    	
+				    	$menu['items'][] = array(
+				    		'id' => $item['slug'],
+			                'href' => $href_base . '/' . $item['slug'],
+			                'label' => $item['nazwa'],
+			                'count' => $item['count'],
+				    	);
+			    	
+			    	}
+		    	
+		    	}
 		    	
 		    }
+		    
+		    if( !empty($dropdowns) ) {
+			
+			    $menu['items'][] = array(
+			    	'id' => 'more',
+			    	'label' => 'Więcej',
+			    	'dropdown' => array(
+			    		'items' => $dropdowns,
+			    	),
+			    );
+			    
+		    }
+		    
 	    }
 	    
         $menu['selected'] = ( $this->request->params['action'] == 'view' ) ? '' : $this->request->params['action'];
         
+        $this->set('counters_dictionary', $counters_dictionary);
         $this->set('_menu', $menu);
 		
 	}
