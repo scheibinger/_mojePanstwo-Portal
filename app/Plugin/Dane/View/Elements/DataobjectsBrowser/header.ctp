@@ -18,7 +18,11 @@
 	<div class="row dataSubheader">
 		<div class="col-xs-12 col-sm-4 dataStats">
 		    <div class="row">
-		    	<p>1 - 20 z <?= _number($pagination['total']) ?></p>
+		    	<p>
+		    		<? if( $pagination['total']>1 ) {?>
+		    			<?= _number($pagination['from']) ?> - <?= _number($pagination['to']) ?> z <?= _number($pagination['total']) ?>
+		    		<? } ?>
+		    	</p>
 		    </div>
 		</div>
 		<div class="col-xs-12 col-sm-8 dataSortings">
