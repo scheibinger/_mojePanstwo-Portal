@@ -7,6 +7,14 @@
 	    </span>
 	</div>
 	
+	<? if( isset($didyoumean) && $didyoumean ) {?>
+	<div class="row dataDidyoumean">
+		<div class="col-md-12">
+			Czy chodziło Ci o "<a href="#"><?= $didyoumean ?></a>"?
+		</div>
+	</div>
+	<? } ?>
+	
 	<div class="row dataSubheader">
 		<div class="col-xs-12 col-sm-4 dataStats">
 		    <div class="row">

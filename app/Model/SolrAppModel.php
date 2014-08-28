@@ -5,6 +5,7 @@ class SolrAppModel extends AppModel
     public $useDbConfig = 'mpapiObjects';
     public $pagination = array();
     public $facets = array();
+    public $didyoumean = false;
 
     public function afterFind($results, $primary = false)
     {
@@ -16,11 +17,19 @@ class SolrAppModel extends AppModel
             unset($results['pagination']);
 
         }
+        
         $this->facets = array();
         if (isset($results['facets'])) {
             $this->facets = $results['facets'];
             unset($results['facets']);
         }
+                
+        $this->didyoumean = false;
+        if (isset($results['didyoumean'])) {
+            $this->didyoumean = $results['didyoumean'];
+            unset($results['didyoumean']);
+        }
+        
         foreach ($results['objects'] as &$object) {
             $object = array($this->alias => $object);
         }

@@ -74,7 +74,21 @@
 	
 	    <div class="col-lg-10 objectMain">
 	        <div class="object">
+	            	            
+	            <? if( 
+	            	( $object->getData('typ_id')==1 ) && 
+	            	( isset($counters_dictionary) ) && 
+	            	( isset($counters_dictionary['akty_zmieniajace']) ) && 
+	            	( $counters_dictionary['akty_zmieniajace'] )
+	            ) { ?>
 	            
+	            <div class="alert alert-dismissable alert-info text-center">
+					<button type="button" class="close" data-dismiss="alert">×</button>
+					<h4>Uwaga!</h4>
+					<p>Poniżej widzisz treść ustawy, aktualną w momencie publikacji. Od tamtej pory, <a href="/dane/prawo/<?= $object->getId() ?>/akty_zmieniajace">tekst zmienił się <?= pl_dopelniacz($counters_dictionary['akty_zmieniajace'], 'raz', 'razy', 'razy') ?></a>.<br/> <a class="btn btn-xs btn-primary" href="/dane/prawo/<?= $object->getId() ?>/tekst_aktualny">Zobacz aktualną wersję tej ustawy &raquo;</a></p>
+				</div>
+				
+				<? } ?>
 	            
 	            <?= $this->Document->place( $document ) ?>
 	            	

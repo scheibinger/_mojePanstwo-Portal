@@ -457,7 +457,7 @@ class DataobjectsBrowserComponent extends Component
 
 
         $facets = $controller->Dataobject->facets;
-
+		$didyoumean = $controller->Dataobject->didyoumean;
 
         $total = $controller->Dataobject->total;
 
@@ -493,7 +493,7 @@ class DataobjectsBrowserComponent extends Component
 			));
 
 			$header = $view->element('Dane.DataobjectsBrowser/header', array_merge(
-				compact('pagination', 'orders', 'page'),
+				compact('pagination', 'orders', 'page', 'didyoumean'),
 				array(
 					'controlls' => $config['controlls'],
 				)
@@ -517,7 +517,7 @@ class DataobjectsBrowserComponent extends Component
                 $controller->set('originalViewPath', $path);
                 
             $controller->set(array_merge(
-	        	compact('conditions', 'objects', 'pagination', 'orders', 'filters', 'total', 'facets', 'page', 'title_for_layout', 'switchers', 'q'),
+	        	compact('conditions', 'objects', 'pagination', 'orders', 'filters', 'didyoumean', 'total', 'facets', 'page', 'title_for_layout', 'switchers', 'q'),
 	        	array(
 	        		'dataBrowser' => $this,
 	        	)
