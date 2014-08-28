@@ -90,7 +90,7 @@ a {
     background: rgba(0, 0, 0, 0.6);
     border-radius: 10px;
     -webkit-border-radius: 10px;
-    
+
     p {
 	    color: #FFF;
 	    text-align: center;
@@ -166,11 +166,12 @@ body > pre:first-child {
 }
 
 @keyframes bouncedelay {
-  0%, 80%, 100% { 
-    transform: scale(0.0);
+    0%, 80%, 100% {
+        transform: scale(0.0);
     -webkit-transform: scale(0.0);
-  } 40% { 
-    transform: scale(1.0);
+    }
+    40% {
+        transform: scale(1.0);
     -webkit-transform: scale(1.0);
   }
 }
@@ -831,19 +832,6 @@ header {
 
     &.grey {
         background-color: #F3F3F3;
-    }
-
-    header {
-        position: fixed;
-        top: 0;
-        z-index: 9999;
-        width: 100%;
-        height: @headerHeight;
-    }
-
-    /*SECURE DIV TO MAKE SURE THAT CONTENT WONT TOUCH FOOTER*/
-    #_sizeControl {
-        height: 0;
     }
 
     #_main {
