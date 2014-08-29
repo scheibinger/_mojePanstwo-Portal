@@ -36,20 +36,20 @@ $this->Html->scriptBlock('window.swaggerUi = new SwaggerUi({url: "' . $api["swag
                 <a href="https://github.com/wordnik/swagger-ui" target="_blank">Swagger UI</a>
             </p>
 
-            <div class="searchBar col-md-12">
-                <form method="GET">
-                    <div class="col-md-12 searchFor">
-                        <div class="input-group">
-                            <input type="text" name="q" placeholder="Szukaj w API..." value=""
-                                   class="form-control input-lg"
-                                   autocomplete="off">
-                        <span class="input-group-btn">
-                            <button class="btn" type="submit"></button>
-                        </span>
-                        </div>
-                    </div>
-                </form>
-            </div>
+            <!--<div class="searchBar col-md-12">-->
+                <!--<form method="GET">-->
+                    <!--<div class="col-md-12 searchFor">-->
+                        <!--<div class="input-group">-->
+                            <!--<input type="text" name="q" placeholder="Szukaj w API..." value=""-->
+                                   <!--class="form-control input-lg"-->
+                                   <!--autocomplete="off">-->
+                        <!--<span class="input-group-btn">-->
+                            <!--<button class="btn" type="submit"></button>-->
+                        <!--</span>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</form>-->
+            <!--</div>-->
 
         </div>
     </div>
