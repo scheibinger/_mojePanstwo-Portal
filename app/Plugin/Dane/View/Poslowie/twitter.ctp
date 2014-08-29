@@ -9,9 +9,6 @@ $this->Combinator->add_libs('js', 'Dane.view-twitteraccounts');
 $this->Combinator->add_libs('js', 'Dane.view-poslowie.js');
 
 echo $this->Element('dataobject/pageBegin');
-echo $this->Element('Dane.dataobject/menuTabs', array(
-    'menu' => $_menu,
-));
 ?>
 
     <div class="row">
