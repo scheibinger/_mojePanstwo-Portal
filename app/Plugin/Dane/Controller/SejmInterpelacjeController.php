@@ -12,12 +12,12 @@ class SejmInterpelacjeController extends DataobjectsController
     {
         parent::view();
         $t = isset($this->request->params['t_id']) ? $this->request->params['t_id'] : false;
-
+		
+		
         $dane = $this->object->loadLayer('dane', array(
             't' => $t,
         ));
-
-
+		
         $wydarzenia = $dane['wydarzenia'];
         $wydarzenie = $dane['wydarzenie'];
         $teksty = $dane['teksty'];

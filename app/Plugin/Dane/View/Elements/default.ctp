@@ -65,7 +65,7 @@ $this->Dataobject->setObject($object);
                                        value="<?php echo __d('powiadomienia', 'LC_POWIADOMIENIA_OPTIONS_ALERT_BUTTON_UNREAD'); ?>"/>
                             </div>
                         <? } ?>
-
+						
                         <? if ($object->force_hl_fields || $forceLabel) { ?>
                             <p class="header">
                                 <?= $object->getLabel(); ?>

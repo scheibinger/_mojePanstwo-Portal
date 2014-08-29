@@ -81,7 +81,7 @@
         <div class="document">
             <div class="content col-md-9">
                 <?php foreach ($teksty as $t) { ?>
-                    <div class="block">
+                    <div class="block mpanel">
                         <?
                         if ($wydarzenie['typ_id'] == 1 || $wydarzenie['typ_id'] == 3) {
                             ?>
@@ -97,7 +97,7 @@
                     </div>
                 <?php } ?>
             </div>
-            <div class="sidebox col-md-3">
+            <div class="row sidebox col-md-3">
                 <ul class="tables">
                     <?php foreach ($wydarzenia as $t) { ?>
                         <li<?php if ($wydarzenie['id'] == $t['id']) { ?> class="s"<?php } ?>>

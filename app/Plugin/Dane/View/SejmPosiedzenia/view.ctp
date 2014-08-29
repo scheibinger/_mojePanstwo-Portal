@@ -5,9 +5,7 @@ $this->Combinator->add_libs('css', $this->Less->css('view-sejmposiedzenia', arra
 $this->Combinator->add_libs('css', $this->Less->css('view-sejmposiedzenia-databrowser-fix', array('plugin' => 'Dane')));
 
 echo $this->Element('Dane.dataobject/pageBegin');
-echo $this->Element('Dane.dataobject/menuTabs', array(
-    'menu' => $_menu,
-));
+
 echo $this->Element('Dane.sejmposiedzenie-projekty-cont', array(
     'projekty' => $object->getLayer('projekty'),
 ));
