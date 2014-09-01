@@ -61,12 +61,12 @@ a {
 }
 
 .form-control, textarea.form-control, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], .uneditable-input {
-	border-width: 1px !important;
+    border-width: 1px !important;
 }
 
 .nopadding {
-   padding: 0 !important;
-   margin: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
 }
 
 .loading {
@@ -90,11 +90,11 @@ a {
     background: rgba(0, 0, 0, 0.6);
     border-radius: 10px;
     -webkit-border-radius: 10px;
-    
+
     p {
-	    color: #FFF;
-	    text-align: center;
-	    font-size: 14px;
+        color: #FFF;
+        text-align: center;
+        font-size: 14px;
     }
 }
 
@@ -105,8 +105,6 @@ a {
         background-color: inherit;
     }
 }
-
-
 
 /*SHOWING ERRORS FROM CAKEPHP HIDDEN UNDER HEADER*/
 body > pre:first-child {
@@ -131,48 +129,61 @@ body > pre:first-child {
 }
 
 .spinner {
-  margin: 15px auto 12px;
-  width: 70px;
-  text-align: center;
+    margin: 15px auto 12px;
+    width: 70px;
+    text-align: center;
 }
 
 .spinner > div {
-  width: 18px;
-  height: 18px;
-  background-color: #FFF;
+    width: 18px;
+    height: 18px;
+    background-color: #FFF;
 
-  border-radius: 100%;
-  display: inline-block;
-  -webkit-animation: bouncedelay 1.4s infinite ease-in-out;
-  animation: bouncedelay 1.4s infinite ease-in-out;
-  /* Prevent first frame from flickering when animation starts */
-  -webkit-animation-fill-mode: both;
-  animation-fill-mode: both;
+    border-radius: 100%;
+    display: inline-block;
+    -webkit-animation: bouncedelay 1.4s infinite ease-in-out;
+    animation: bouncedelay 1.4s infinite ease-in-out;
+    /* Prevent first frame from flickering when animation starts */
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
 }
 
 .spinner .bounce1 {
-  -webkit-animation-delay: -0.32s;
-  animation-delay: -0.32s;
+    -webkit-animation-delay: -0.32s;
+    animation-delay: -0.32s;
 }
 
 .spinner .bounce2 {
-  -webkit-animation-delay: -0.16s;
-  animation-delay: -0.16s;
+    -webkit-animation-delay: -0.16s;
+    animation-delay: -0.16s;
 }
 
 @-webkit-keyframes bouncedelay {
-  0%, 80%, 100% { -webkit-transform: scale(0.0) }
-  40% { -webkit-transform: scale(1.0) }
+    0%, 80%, 100% {
+        -webkit-transform: scale(0.0)
+    }
+    40% {
+        -webkit-transform: scale(1.0)
+    }
 }
 
 @keyframes bouncedelay {
-  0%, 80%, 100% { 
-    transform: scale(0.0);
-    -webkit-transform: scale(0.0);
-  } 40% { 
-    transform: scale(1.0);
-    -webkit-transform: scale(1.0);
-  }
+    0%, 80%, 100% {
+        transform: scale(0.0);
+        -webkit-transform: scale(0.0);
+    }
+    40% {
+        transform: scale(1.0);
+        -webkit-transform: scale(1.0);
+    }
+    0%, 80%, 100% {
+        transform: scale(0.0);
+        -webkit-transform: scale(0.0);
+    }
+    40% {
+        transform: scale(1.0);
+        -webkit-transform: scale(1.0);
+    }
 }
 
 .block-group {
@@ -599,16 +610,11 @@ body > pre:first-child {
     text-transform: lowercase;
 }
 
-.form-control::-moz-placeholder {
-    color: #444;
-}
-
-.form-control::-webkit-placeholder {
-    color: #444;
-}
-
-.form-control::-placeholder {
-    color: #444;
+::-webkit-input-placeholder,
+::-moz-placeholder,
+:-ms-input-placeholder,
+input:-moz-placeholder {
+    color: #444444;
 }
 
 blockquote p {
@@ -769,13 +775,6 @@ body {
                     background-color: #FFF;
                     font-weight: 300;
 
-                    &::-webkit-input-placeholder,
-                    &:-moz-placeholder,
-                    &::-moz-placeholder,
-                    &:-ms-input-placeholder {
-                        color: #444;
-                    }
-
                     &:focus {
                         outline: none;
                     }
@@ -835,19 +834,6 @@ header {
 
     &.grey {
         background-color: #F3F3F3;
-    }
-
-    header {
-        position: fixed;
-        top: 0;
-        z-index: 9999;
-        width: 100%;
-        height: @headerHeight;
-    }
-
-    /*SECURE DIV TO MAKE SURE THAT CONTENT WONT TOUCH FOOTER*/
-    #_sizeControl {
-        height: 0;
     }
 
     #_main {
@@ -913,7 +899,8 @@ footer {
     color: @footerColor;
     padding: (@footerHeight/2)-6 0;
     background-color: #222222;
-    position: relative;
+    position: absolute;
+    bottom: 0;
     width: 100%;
     height: @footerHeight;
 
