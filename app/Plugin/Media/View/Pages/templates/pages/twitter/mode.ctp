@@ -1,12 +1,13 @@
 <? if ($group['mode'] == 'stats') { ?>
-
+		
     <? if (isset($type['objects']) && is_array($type['objects']) && !empty($type['objects'])) { ?>
         <ul>
             <?
+                             
             $i = 0;
             foreach ($type['objects'] as $object) {
                 $i++;
-
+								
                 if ($i > 3)
                     break;
 
@@ -14,55 +15,37 @@
 
                 <li class="account">
 
-                    <? if ($group['preset'] == 'mentions') { ?>
-
-                        <div class="avatar"><? if ($object['account_id']) { ?><a
-                                href="/dane/twitter_accounts/<?= $object['id'] ?>">
-                                <img src="<?= $object['profile_image_url'] ?>"/></a><? } ?></div>
-                        <div class="info">
-                            <p class="name">
-                                <? if ($object['account_id']) { ?><a
-                                    href="/dane/twitter_accounts/<?= $object['account_id'] ?>"><? } else { ?><? } ?><a
-                                        target="_blank"
-                                        href="https://twitter.com/<?= $object['twitter_screen_name'] ?>"><?= $object['name'] ?></a>
-                            </p>
-
-                            <p class="counter"><a
-                                    href="/dane/twitter/?!bez_retweetow=1&twitter_account_id[]=<?= $object['id'] ?>&date=LAST_<?= $range ?>"><?= number_format($object['count'], 0, '.', ' ') ?></a>
-                            </p>
-                        </div>
-
-                    <? } else { ?>
-
+                    <? { ?>
+															
                         <div class="avatar"><a href="/dane/twitter_accounts/<?= $object['id'] ?>">
                                 <img src="<?= $object['profile_image_url'] ?>"/></a></div>
                         <div class="info">
                             <p class="name">
-                                <a href="/dane/twitter_accounts/<?= $object['id'] ?>"><?= $object['name'] ?></a>
+                                <? /*<a href="/dane/twitter_accounts/<?= $object['id'] ?>">*/?><?= $object['name'] ?><? /*</a>*/?>
                             </p>
 
                             <? if ($group['preset'] == 'twitter_account_id') { ?>
 
-                                <p class="counter"><a
-                                        href="/dane/twitter/?!bez_retweetow=1&twitter_account_id[]=<?= $object['id'] ?>&date=LAST_<?= $range ?>"><?= number_format($object['count'], 0, '.', ' ') ?></a>
+                                <p class="counter"><? /*<a
+                                        href="/dane/twitter/?!bez_retweetow=1&twitter_account_id[]=<?= $object['id'] ?>&_date=LAST_<?= $range ?>">*/?><?= number_format($object['count'], 0, '.', ' ') ?><? /*</a>*/?>
                                 </p>
 
-                            <? } elseif ($group['preset'] == 'accounts-retweets') { ?>
+                            <? } elseif ($group['preset'] == 'accounts_retweets') { ?>
 
-                                <p class="counter"><a
-                                        href="/dane/twitter/?!bez_retweetow=1&twitter_account_id[]=<?= $object['id'] ?>&date=LAST_<?= $range ?>"><?= number_format($object['count'], 0, '.', ' ') ?></a>
+                                <p class="counter"><? /*<a
+                                        href="/dane/twitter/?!bez_retweetow=1&twitter_account_id[]=<?= $object['id'] ?>&_date=LAST_<?= $range ?>">*/?><?= number_format($object['count'], 0, '.', ' ') ?><? /*</a>*/?>
                                 </p>
 
-                            <? } elseif ($group['preset'] == 'accounts-discussions') { ?>
+                            <? } elseif ($group['preset'] == 'accounts_replies') { ?>
 
-                                <p class="counter"><a
-                                        href="/dane/twitter/?!bez_retweetow=1&in_reply_to_account_id[]=<?= $object['id'] ?>&date=LAST_<?= $range ?>"><?= number_format($object['count'], 0, '.', ' ') ?></a>
+                                <p class="counter"><? /*<a
+                                        href="/dane/twitter/?!bez_retweetow=1&in_reply_to_account_id[]=<?= $object['id'] ?>&_date=LAST_<?= $range ?>">*/?><?= number_format($object['count'], 0, '.', ' ') ?><?/*</a>*/?>
                                 </p>
 
-                            <? } elseif ($group['preset'] == 'accounts-mentions') { ?>
+                            <? } elseif ($group['preset'] == 'mentions') { ?>
 
-                                <p class="counter"><a
-                                        href="/dane/twitter/?!bez_retweetow=1&mentions[]=<?= $object['mention_id'] ?>&date=LAST_<?= $range ?>"><?= number_format($object['count'], 0, '.', ' ') ?></a>
+                                <p class="counter"><? /*<a
+                                        href="/dane/twitter/?!bez_retweetow=1&mentions[]=<?= $object['id'] ?>&_date=LAST_<?= $range ?>">*/?><?= number_format($object['count'], 0, '.', ' ') ?><? /*</a>*/?>
                                 </p>
 
                             <? } ?>
@@ -201,14 +184,14 @@
 
 <? } elseif ($group['mode'] == 'tag') { ?>
 
-
+	
     <? if (isset($type['objects']) && is_array($type['objects']) && !empty($type['objects'])) { ?>
         <ul>
             <?
             $i = 0;
             foreach ($type['objects'] as $object) {
                 $i++;
-                $href = '/dane/twitter/?!bez_retweetow=1&tags[]=' . $object['id'] . '&twitter_accounts%3Atyp_id[]=' . $type['id'] . '&date=LAST_' . $range;
+                $href = '/dane/twitter/?!bez_retweetow=1&tags[]=' . $object['id'] . '&twitter_accounts%3Atyp_id[]=' . $type['id'] . '&_date=LAST_' . $range;
                 ?>
                 <li class="list-group-item">
                     <span class="badge"><?= number_format($object['count'], 0, '.', ' ') ?></span>
@@ -363,7 +346,7 @@
         </ul>
 
         <p><a class="btn btn-default btn-sm"
-              href="/dane/twitter/?!bez_retweetow=1&twitter_accounts:typ_id[]=<?= $type['id'] ?>&date=LAST_<?= $range ?>&order=<?= $group['field'] ?>%20desc">Więcej &raquo;</a>
+              href="/dane/twitter/?!bez_retweetow=1&twitter_accounts:typ_id[]=<?= $type['id'] ?>&_date=LAST_<?= $range ?>&order=<?= $group['field'] ?>%20desc">Więcej &raquo;</a>
 
     <? } ?>
 

@@ -109,9 +109,9 @@ class PagesController extends MediaAppController
 
 
         $stats = $this->API->getTwitterStats($range);
+		
 
-
-        $tags = $stats['tags']['*']['objects'];
+        $tags = $stats['from']['*']['tags']['objects'];
 
         $_stats = array(
             'min' => (int)$tags[count($tags) - 1]['count'],
@@ -133,15 +133,17 @@ class PagesController extends MediaAppController
         }
 
         shuffle($tags);
-        $stats['tags']['*']['objects'] = $tags;
+        $stats['from']['*']['tags']['objects'] = $tags;
         $this->set('stats', $stats);
-
+		
+		// debug( $stats ); die();
 
         $accounts_types = $this->API->getTwitterAccountsTypes();
         $accounts_types_ids = array_column($accounts_types, 'id');
         $accounts_types_nazwy = array_column($accounts_types, 'nazwa', 'id');
         $accounts_types_klasy = array_column($accounts_types, 'class', 'id');
 
+				
         $ranks = array(
 
 
@@ -228,7 +230,8 @@ class PagesController extends MediaAppController
                     ),
                 ),
             ),
-
+			
+			/*
             array(
                 'title' => 'Najaktywniejsi',
                 'name' => 'najaktywniejsi',
@@ -245,6 +248,7 @@ class PagesController extends MediaAppController
                     ),
                 ),
             ),
+            */
 
             array(
                 'title' => 'Najczęściej retweetowani',
@@ -252,7 +256,7 @@ class PagesController extends MediaAppController
                 'groups' => array(
                     array(
                         'mode' => 'stats',
-                        'preset' => 'accounts-retweets',
+                        'preset' => 'accounts_retweets',
                         'field' => 'liczba_retweetow_wlasnych_2013',
                         'order' => 'liczba_retweetow_wlasnych_2013 desc',
                         'desc' => 'Liczba retweetów tweetów z danego konta.',
@@ -269,7 +273,7 @@ class PagesController extends MediaAppController
                 'groups' => array(
                     array(
                         'mode' => 'stats',
-                        'preset' => 'accounts-discussions',
+                        'preset' => 'accounts_replies',
                         'field' => 'liczba_odpowiedzi_rts_2013',
                         'order' => 'liczba_odpowiedzi_rts_2013 desc',
                         'desc' => 'Liczba komentarzy do tweetów z danego konta.',
@@ -286,7 +290,7 @@ class PagesController extends MediaAppController
                 'groups' => array(
                     array(
                         'mode' => 'stats',
-                        'preset' => 'accounts-mentions',
+                        'preset' => 'mentions',
                         'field' => 'liczba_wzmianek_rts_2013',
                         'order' => 'liczba_wzmianek_rts_2013 desc',
                         'desc' => 'Liczba tweetów wzmiankujących dane konto.',
@@ -325,28 +329,9 @@ class PagesController extends MediaAppController
 
             foreach ($rank['groups'] as $g => $group) {
 
-                if ($group['mode'] == 'account') {
-
-
-                    $data = $this->API->getTwitterAccountsGroupByTypes($range, $accounts_types_ids, $group['preset']);
-                    $types = $data['types'];
-
-
-                    foreach ($types as &$type)
-                        $type = array_merge($type, array(
-                            'nazwa' => $accounts_types_nazwy[$type['id']],
-                            'class' => $accounts_types_klasy[$type['id']],
-                        ));
-
-                    $rank['groups'][$g] = array_merge($group, array(
-                        'types' => $types,
-                    ));
-
-                    if ($range == '24h')
-                        $rank['groups'][$g]['desc'] = 'Zakres czasowy: ' . dataSlownie($data['date']);
-
-
-                } elseif ($group['mode'] == 'tweet') {
+				// debug( $group );
+				
+                if ($group['mode'] == 'tweet') {
 
                     $types = $this->API->getTwitterTweetsGroupByTypes($range, $accounts_types_ids, $group['field']);
 
@@ -359,23 +344,57 @@ class PagesController extends MediaAppController
                     $rank['groups'][$g] = array_merge($group, array(
                         'types' => $types,
                     ));
+                    
+                    // debug( $rank['groups'][$g] );
 
                 } elseif ($group['mode'] == 'tag') {
+					
 
-                    $rank['groups'][$g]['types'] = $stats['tags']['source_types'];
+					$_data = $stats['from']['types'];
+					
+					for( $_d=0; $_d<count($_data); $_d++ ) 
+						$rank['groups'][$g]['types'][ $_data[ $_d ]['type_id'] ] = array_merge($_data[ $_d ]['data']['tags'], array(
+							'id' => $_data[ $_d ]['type_id'],
+							'nazwa' => $accounts_types_nazwy[ $_data[ $_d ]['type_id'] ],
+							'class' => $accounts_types_klasy[ $_data[ $_d ]['type_id'] ],
+						));		
+									
 
                 } elseif ($group['mode'] == 'url') {
 
-                    $rank['groups'][$g]['types'] = $stats['urls']['source_types'];
+                    $_data = $stats['from']['types'];
+					
+					for( $_d=0; $_d<count($_data); $_d++ ) 
+						$rank['groups'][$g]['types'][ $_data[ $_d ]['type_id'] ] = array_merge($_data[ $_d ]['data']['urls'], array(
+							'id' => $_data[ $_d ]['type_id'],
+							'nazwa' => $accounts_types_nazwy[ $_data[ $_d ]['type_id'] ],
+							'class' => $accounts_types_klasy[ $_data[ $_d ]['type_id'] ],
+						));	
 
                 } elseif ($group['mode'] == 'source') {
 
-                    $rank['groups'][$g]['types'] = $stats['source_id']['source_types'];
+                    $_data = $stats['from']['types'];
+					
+					for( $_d=0; $_d<count($_data); $_d++ ) 
+						$rank['groups'][$g]['types'][ $_data[ $_d ]['type_id'] ] = array_merge($_data[ $_d ]['data']['source_id'], array(
+							'id' => $_data[ $_d ]['type_id'],
+							'nazwa' => $accounts_types_nazwy[ $_data[ $_d ]['type_id'] ],
+							'class' => $accounts_types_klasy[ $_data[ $_d ]['type_id'] ],
+						));
 
                 } elseif ($group['mode'] == 'stats') {
-
-
-                    $rank['groups'][$g]['types'] = $stats[$group['preset']]['source_types'];
+					
+					
+					$_data = $stats['to']['types'];
+					
+					// debug( $_data ); die();
+					
+					for( $_d=0; $_d<count($_data); $_d++ ) 
+						$rank['groups'][$g]['types'][ $_data[ $_d ]['type_id'] ] = array_merge($_data[ $_d ]['data'][ $group['preset'] ], array(
+							'id' => $_data[ $_d ]['type_id'],
+							'nazwa' => $accounts_types_nazwy[ $_data[ $_d ]['type_id'] ],
+							'class' => $accounts_types_klasy[ $_data[ $_d ]['type_id'] ],
+						));
 
 
                 }
@@ -384,7 +403,9 @@ class PagesController extends MediaAppController
 
         }
 
-
+		
+		 // debug( $ranks );
+		
         $this->set('range', $range);
         $this->set('ranks', $ranks);
         $this->set('title_for_layout', 'Państwo w Mediach Społecznościowych');
