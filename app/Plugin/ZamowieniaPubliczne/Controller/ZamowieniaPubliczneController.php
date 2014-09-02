@@ -12,7 +12,7 @@ class ZamowieniaPubliczneController extends AppController
     public function index()
     {
 
-        $stats = $this->API->ZamowieniaPubliczne()->getNewStats();
+        $stats = $this->API->ZamowieniaPubliczne()->getStats();
         $this->set('stats', $stats);
 
 
