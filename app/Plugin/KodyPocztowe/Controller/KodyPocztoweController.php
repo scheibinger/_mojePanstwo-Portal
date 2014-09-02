@@ -85,7 +85,7 @@ class KodyPocztoweController extends KodyPocztoweAppController
             if ($q) {
                 $api->searchDataset('kody_pocztowe_ulice', array(
                     'conditions' => array(
-                        'q' => $q . '* OR ' . $q,
+                        'sq' => $q,
                     ),
                     'limit' => 10,
                 ));
