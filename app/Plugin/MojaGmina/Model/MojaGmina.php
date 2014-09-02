@@ -15,7 +15,7 @@ class MojaGmina extends AppModel
         $api = mpapiComponent::getApi()->Dane();
         $api->searchDataset('gminy', array(
             'conditions' => array(
-                'q' => $q . ' OR ' . $q . '*',
+                'sq' => $q,
             ),
             'limit' => $limit,
         ));
