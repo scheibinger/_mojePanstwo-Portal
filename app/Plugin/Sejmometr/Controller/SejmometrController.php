@@ -143,9 +143,6 @@ class SejmometrController extends SejmometrAppController
         $API = $this->API->Dane();
         $API->searchDataset('sejm_posiedzenia', array(
             'order' => 'data_stop desc',
-            'conditions' => array(
-                'numer' => '[1 TO *]',
-            ),
             'limit' => 100,
         ));
 

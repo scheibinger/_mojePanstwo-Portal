@@ -7,7 +7,14 @@ class DatasetsController extends DaneAppController
     public $components = array(
         'RequestHandler',
     );
-
+	
+	public function index()
+	{
+		
+		
+		
+	}
+	
     public function view()
     {
 
@@ -23,24 +30,28 @@ class DatasetsController extends DaneAppController
     public function beforeRender()
     {
 	    
-	    $data = $this->dataBrowser->dataset;
+	    if( $this->request->params['action'] == 'view' ) {
 	    
-	    if( !$data ){
-	        throw new NotFoundException('Could not find that post');
-	    }
-	    
-        $dataset = $data['Dataset'];
-        $datachannel = $data['Datachannel'];
-
-
-        $this->addStatusbarCrumb(array(
-            'text' => $datachannel['nazwa'],
-            'href' => '/dane/kanal/' . $datachannel['slug'],
-        ));
-
-
-        $title_for_layout = $dataset['name'];
-        $this->set('title_for_layout', $title_for_layout);
+		    $data = $this->dataBrowser->dataset;
+		    
+		    if( !$data ){
+		        throw new NotFoundException('Could not find that post');
+		    }
+		    
+	        $dataset = $data['Dataset'];
+	        $datachannel = $data['Datachannel'];
+	
+	
+	        $this->addStatusbarCrumb(array(
+	            'text' => $datachannel['nazwa'],
+	            'href' => '/dane/kanal/' . $datachannel['slug'],
+	        ));
+	
+	
+	        $title_for_layout = $dataset['name'];
+	        $this->set('title_for_layout', $title_for_layout);
+        
+        }
 	    
     }
 

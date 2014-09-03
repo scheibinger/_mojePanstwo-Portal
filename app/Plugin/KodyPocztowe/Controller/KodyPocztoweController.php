@@ -9,6 +9,7 @@ class KodyPocztoweController extends KodyPocztoweAppController
 
     public function index()
     {
+    	    	
         $details = false;
         $mstr = @$this->request->query['mstr'];
         $mid = @$this->request->query['mid'];
@@ -20,6 +21,7 @@ class KodyPocztoweController extends KodyPocztoweAppController
 
         if ($kod) {
             $code = $this->API->searchCode($kod);
+                                    
             if ($code && $code['object_id']) {
                 $this->redirect(array('plugin' => 'Dane', 'controller' => 'kody_pocztowe', 'action' => 'view', 'id' => $code['object_id']));
             } else {
@@ -68,7 +70,7 @@ class KodyPocztoweController extends KodyPocztoweAppController
         $this->set('details', $details);
 
         $application = $this->getApplication();
-        $this->set('title_for_layout', $application['Application']['name']);
+        $this->set('title_for_layout', $application['name']);
 
     }
 
@@ -85,8 +87,9 @@ class KodyPocztoweController extends KodyPocztoweAppController
             if ($q) {
                 $api->searchDataset('kody_pocztowe_ulice', array(
                     'conditions' => array(
-                        'sq' => $q,
+                        'q' => $q,
                     ),
+		            'mode' => 'title_prefix',
                     'limit' => 10,
                 ));
                 $objects = $api->getObjects();

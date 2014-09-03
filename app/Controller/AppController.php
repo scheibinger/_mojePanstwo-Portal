@@ -74,7 +74,72 @@ class AppController extends Controller
     public $statusbarCrumbs = array();
     public $statusbarMode = false;
     public $User = false;
-    public $Applications = array();
+
+    public $Applications = array(
+		array(
+			'id' => '3',
+			'slug' => 'sejmometr',
+			'name' => 'Sejmometr',
+			'plugin' => 'sejmometr',
+			'type' => 'app',
+			'home' => '1',
+			'folder_id' => '13'
+		),
+		array(
+			'id' => '9',
+			'slug' => 'ustawy',
+			'name' => 'Ustawy',
+			'plugin' => 'ustawy',
+			'type' => 'app',
+			'home' => '1',
+			'folder_id' => '13'
+		),
+		array(
+			'id' => '6',
+			'slug' => 'krs',
+			'name' => 'Krajowy Rejestr Sądowy',
+			'plugin' => 'krs',
+			'type' => 'app',
+			'home' => '1',
+			'folder_id' => '13'
+		),
+		array(
+			'id' => '5',
+			'slug' => 'zamowienia_publiczne',
+			'name' => 'Zamówienia publiczne',
+			'plugin' => 'zamowienia_publiczne',
+			'type' => 'app',
+			'home' => '1',
+			'folder_id' => '13'
+		),
+		array(
+			'id' => '12',
+			'slug' => 'media',
+			'name' => 'Media',
+			'plugin' => 'media',
+			'type' => 'app',
+			'home' => '1',
+			'folder_id' => '13'
+		),
+		array(
+			'id' => '4',
+			'slug' => 'moja_gmina',
+			'name' => 'Moja Gmina',
+			'plugin' => 'moja_gmina',
+			'type' => 'app',
+			'home' => '1',
+			'folder_id' => '13'
+		),
+		array(
+			'id' => '10',
+			'slug' => 'kody_pocztowe',
+			'name' => 'Kody Pocztowe',
+			'plugin' => 'kody_pocztowe',
+			'type' => 'app',
+			'home' => '1',
+			'folder_id' => '13'
+		),
+	);
     public $Streams = array(
         array(
             'id' => 1,
@@ -103,7 +168,7 @@ class AppController extends Controller
     {
         if ($this->params->plugin) {
             foreach ($this->getApplications() as $app) {
-                if ($app['Application']['slug'] == strtolower($this->params->plugin) || $app['Application']['slug'] == Inflector::underscore($this->params->plugin)) {
+                if ($app['slug'] == strtolower($this->params->plugin) || $app['slug'] == Inflector::underscore($this->params->plugin)) {
                     return $app;
                 }
             }
@@ -205,7 +270,10 @@ class AppController extends Controller
 
         $this->set('statusbarCrumbs', $this->statusbarCrumbs);
         $this->set('statusbarMode', $this->statusbarMode);
+        $this->set('_APPLICATIONS', $this->getApplications());
 
+		
+		
         // remember path for redirect if necessary
         if (Router::url(null) != '/null') { // hack for bug
             $this->Session->write('Auth.loginRedirect', Router::url(null, true));

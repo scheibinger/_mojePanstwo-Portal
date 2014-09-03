@@ -128,9 +128,12 @@
                         ).append(
                             $('<span></span>').addClass('subtitle').html(_mPHeart.translation.LC_USTAWY_PUBLIKACJA + ' ' + dataSearch['data_slowna'])
                         );
-                    var hl = $('<span></span>').addClass('highlight alert alert-info').html(dataSearch.hl);
                     $(this).append(header);
-                    $(this).append(hl);
+					
+					if( dataSearch.hl ) {
+	                    var hl = $('<span></span>').addClass('highlight alert alert-info').html(dataSearch.hl);
+	                    $(this).append(hl);
+                    }
                 })
             )
         });
