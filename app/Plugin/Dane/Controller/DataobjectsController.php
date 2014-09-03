@@ -39,13 +39,30 @@ class DataobjectsController extends DaneAppController
 	
 	public function suggest()
 	{
+
+		$q = (string) @$this->request->query['q'];
+		
+		if( !$q )
+			return false;		
+		
 		$params = array(
-			'q' => 'test',
+			'q' => $q,
 		);
 		$data = $this->API->Dane()->suggest($params);
 		
-		$this->set('data', $data);
-		$this->set('_serialize', 'data');
+		$hits = array();
+		
+		foreach( $data as $d )
+			$hits[] = array(
+				'date' => $d->getDate(),
+				'label' => $d->getLabel(),
+				'title' => $d->getTitle(),
+				'dataset' => $d->getDataset(),
+				'id' => $d->getId(),
+			);
+		
+		$this->set('hits', $hits);
+		$this->set('_serialize', array('hits'));
 		
 	}
 
