@@ -82,6 +82,9 @@ msgstr "Szukaj"
 msgid "LC_SEARCH_DOTS"
 msgstr "Szukaj..."
 
+msgid "LC_SEARCH_BRAK_WYNIKOW"
+msgstr "Brak wyników"
+
 msgid "Jan"
 msgstr "Sty"
 

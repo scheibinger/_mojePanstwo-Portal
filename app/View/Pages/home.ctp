@@ -10,10 +10,6 @@
         </div>
     </div>
 
-    
-
-
-
     <div class="apps row">
         
         <div class="h2cont"><h2 class="col-lg-10 col-lg-offset-1">Dane publiczne:</h2></div>
@@ -23,11 +19,11 @@
 		
 		            <div class="input-group">
 		                <form action="/dane" method="get">
-		                    <input name="q" type="text" class="form-control"
-		                           placeholder="<?php echo __('LC_SEARCH_PUBLIC_DATA_PLACEHOLDER') ?>">
+                            <input name="q" type="text" class="form-control" autocomplete="off"
+                                   placeholder="<?php echo __('LC_SEARCH_PUBLIC_DATA_PLACEHOLDER') ?>">
 		                    <input type="submit" name="submit" style="display: none;"/>
 			                <span class="input-group-btn">
-			                    <button class="btn btn-default" type="button" data-icon="&#xe600;"></button>
+			                    <button class="btn btn-success btn-lg" type="button" data-icon="&#xe600;"></button>
 			                </span>
 		                </form>
 		            </div>

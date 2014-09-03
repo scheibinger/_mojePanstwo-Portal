@@ -1,6 +1,44 @@
 @import "variable";
 @import "statusbar-submenu.less";
 
+.ui-autocomplete {
+    -moz-border-top-left-radius: 0;
+    -moz-border-top-right-radius: 0;
+    -webkit-border-top-left-radius: 0;
+    -webkit-border-top-right-radius: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-color: #CCCCCC;
+
+}
+
+.ui-menu .ui-menu-item a {
+    font-family: "Lato", sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    color: #000;
+    border-radius: 0;
+    -webkit-border-radius: 0;
+    border: none;
+
+    &:hover {
+        color: #FFFFFF;
+        background-color: #0078ac;
+        border: none;
+    }
+}
+
+.ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus {
+    background-image: none;
+    background-color: #0078ac;
+    color: #FFFFFF;
+}
+
+.ui-menu .ui-menu-item a.ui-state-focus, .ui-menu .ui-menu-item a.ui-state-active {
+    margin: 0;
+    color: #FFFFFF;
+}
+
 #_wrapper {
     .standardGradient();
 
@@ -57,72 +95,112 @@
         }
 
         .globalSearch {
-            @searchBackground: #026899;
-            @searchHeight: 44px;
-
+            @searchHeight: 45px;
             font-weight: 400;
             font-size: 18px;
             margin-bottom: 1em;
+            color: #000000;
 
             .input-group {
                 width: 100%;
+                padding-right: 35px;
+
+                input {
+                    border-radius: 5px 0 0 5px;
+                }
 
                 .form-control,
                 .input-group-btn button {
                     height: @searchHeight;
-                    color: #FFF !important;
                     font-size: 16px;
-
                 }
                 .form-control {
-                    @iconColor: #026c99;
-                    @iconColorShadow: #025A80;
-                    @iconColorBorder: lighten(@iconColor, 1%);
-
-                    border: 1px solid #02709E;
-                    background-color: @searchBackground;
-                    padding-right: @searchHeight;
-                    width: 100%;
-                    -moz-border-radius: 20px; /*Firefox*/
-                    -webkit-border-radius: 20px; /*Safari, Chrome*/
-                    border-radius: 20px;
-                    font-size: 16px;
-
+                    color: #000000;
                 }
+                .input-group-btn button {
+                    color: #FFFFFF;
+                    width: @searchHeight + 10;
+                    height: @searchHeight;
+                    display: block;
 
-                .form-control::-webkit-input-placeholder {
-                    /* WebKit browsers */
-                    color: #BBB;
-                }
-                .form-control:-moz-placeholder {
-                    /* Mozilla Firefox 4 to 18 */
-                    color: #BBB;
-                }
-                .form-control::-moz-placeholder {
-                    /* Mozilla Firefox 19+ */
-                    color: #BBB;
-                }
-                .form-control:-ms-input-placeholder {
-                    /* Internet Explorer 10+ */
-                    color: #BBB;
-                }
+                    &.loading {
+                        background: url(/img/loader/search-loading.png) center center no-repeat #5CB85C;
 
-                .input-group-btn {
-                    position: inherit;
-
-                    button {
-                        position: absolute;
-                        top: 0;
-                        right: 2px;
-                        background: none;
-                        border-width: 0;
-                        width: @searchHeight;
-                        text-align: center;
-                        color: #BBB;
+                        &:before {
+                            content: ' ';
+                        }
                     }
                 }
             }
         }
+
+        /*        .globalSearch {
+                    @searchBackground: #026899;
+                    @searchHeight: 44px;
+
+                    font-weight: 400;
+                    font-size: 18px;
+                    margin-bottom: 1em;
+
+                    .input-group {
+                        width: 100%;
+
+                        .form-control,
+                        .input-group-btn button {
+                            height: @searchHeight;
+                            color: #FFF !important;
+                            font-size: 16px;
+
+                        }
+                        .form-control {
+                            @iconColor: #026c99;
+                            @iconColorShadow: #025A80;
+                            @iconColorBorder: lighten(@iconColor, 1%);
+
+                            border: 1px solid #02709E;
+                            background-color: @searchBackground;
+                            padding-right: @searchHeight;
+                            width: 100%;
+                            -moz-border-radius: 20px; *//*Firefox*//*
+                            -webkit-border-radius: 20px; *//*Safari, Chrome*//*
+                            border-radius: 20px;
+                            font-size: 16px;
+
+                        }
+
+                        .form-control::-webkit-input-placeholder {
+                            *//* WebKit browsers *//*
+                            color: #BBB;
+                        }
+                        .form-control:-moz-placeholder {
+                            *//* Mozilla Firefox 4 to 18 *//*
+                            color: #BBB;
+                        }
+                        .form-control::-moz-placeholder {
+                            *//* Mozilla Firefox 19+ *//*
+                            color: #BBB;
+                        }
+                        .form-control:-ms-input-placeholder {
+                            *//* Internet Explorer 10+ *//*
+                            color: #BBB;
+                        }
+
+                        .input-group-btn {
+                            position: inherit;
+
+                            button {
+                                position: absolute;
+                                top: 0;
+                                right: 2px;
+                                background: none;
+                                border-width: 0;
+                                width: @searchHeight;
+                                text-align: center;
+                                color: #BBB;
+                            }
+                        }
+                    }
+                }*/
 
         .msg {
             text-align: center;
