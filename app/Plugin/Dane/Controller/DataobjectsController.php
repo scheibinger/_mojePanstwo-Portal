@@ -36,7 +36,18 @@ class DataobjectsController extends DaneAppController
         $pagination = $this->Dataobject->pagination;
         $this->set('pagination', $pagination);
     }
-
+	
+	public function suggest()
+	{
+		$params = array(
+			'q' => 'test',
+		);
+		$data = $this->API->Dane()->suggest($params);
+		
+		$this->set('data', $data);
+		$this->set('_serialize', 'data');
+		
+	}
 
     public function view()
     {

@@ -67,7 +67,9 @@ class PagesController extends AppController
         }
         $title_for_layout = '_mojePaństwo';
         $this->set(compact('page', 'subpage', 'title_for_layout'));
-
+		
+		
+		/*
         if ($page == 'home') {
 
             $this->statusbarMode = 'home';
@@ -84,6 +86,7 @@ class PagesController extends AppController
             $this->set('folders', $folders);
 
         }
+        */
 
         try {
             $this->render(implode('/', $path));

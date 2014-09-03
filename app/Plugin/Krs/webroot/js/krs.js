@@ -20,7 +20,7 @@
                 var indicatorLast = groupsAndResults.find('.carousel-indicators li:last-child'),
                     indicatorResults,
                     itemResults = $('<div></div>');
-
+								
                 itemResults.addClass('item results').append(
                         jQuery('<div></div>').addClass('carousel-title').text(_mPHeart.translation.LC_KRS_SEARCH_TITLE)
                     ).append(
@@ -94,7 +94,7 @@
 
         var resultUl = groupsAndResults.find('.carousel-inner .item.results ul');
         resultUl.html('');
-
+		
         if (data == 0) {
             resultUl.append(
                 jQuery('<span></span>').addClass('center').html(_mPHeart.translation.LC_KRS_BRAK_WYNIKOW + ': <strong>' + word + '</strong>')
@@ -105,6 +105,8 @@
                 groupsAndResults.find('.results .seeMore').show();
             resultUl.append(data);
         }
+        
+        groupsAndResults.find('.results .seeMore a').attr('href', '/dane/kanal/krs?q=' + word);
         resultUl.animate({'opacity': '1'}, animSpeed);
         groupsAndResults.find('.carousel-inner').css('height', groupsAndResults.find('.carousel-inner .item.results.active').outerHeight());
     }
