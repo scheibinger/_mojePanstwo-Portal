@@ -3,11 +3,21 @@
 
 <?php $this->Combinator->add_libs('js', 'Api.technical.js'); ?>
 
+<div id="api" class="newLayout">
+<div class="jumbotron">
+    <div class="container">
+        <h1>Opis techniczny</h1>
 
-<!-- TODO add scroll -->
-<div id="navbar" class="pull-left">
+        <p>Chcesz skorzystać z naszego API? Zapoznaj się z wprowadzeniem i informacjami technicznymi wspólnymi dla
+            wszystkich API aplikacji</p>
+    </div>
+</div>
+
+<div class="container">
+<div class="row">
+<div id="navbar" class="navbar col-md-3 pull-left">
     <ul class="nav nav-pills nav-stacked">
-        <li><a href="#t-introduction">Wstęp</a></li>
+        <li class="active"><a href="#t-introduction">Wstęp</a></li>
         <li><a href="#t-versioning">Wersjonowanie</a></li>
         <li><a href="#t-errors">Obsługa błędów</a></li>
         <li><a href="#t-swagger">Swagger i API Discovery</a></li>
@@ -17,7 +27,7 @@
     </ul>
 </div>
 
-<div id="content" class="pull-right">
+<div id="content" class="col-md-9 pull-right">
 <div class="section">
     <h1 id="t-introduction">Wstęp</h1>
 
@@ -70,7 +80,6 @@
         starszych.</p>
 </div>
 
-
 <div class="section">
     <h1 id="t-errors">Obsługa błędów</h1>
 
@@ -85,25 +94,24 @@
         <li><code>404 Not Found</code> - Nie znaleziono zasobu. Podano niepoprawną ścieżkę.</li>
         <li><code>418 I'm a teapot</code> - Wykonanie żądania zakończyła się oczekiwanym błędem. Błąd zwracany jest w
             postaci:
-            <pre>
-{“code”: ERROR_CODE_DICTIONARY_ENTRY, // kod błędu, opisany na konkretnym API
- “params”: { // tablica - parametry błędu (niezależne od języka, specyficzne dla danego kodu błędu)}
-    "param1": "value1",
- },
- "error_description": "Długi opis w domyślnym języku, jeżeli Http Accept Language nie został podany, lub jest nieobsługiwany"
-}</pre>
+                            <pre>
+                {“code”: ERROR_CODE_DICTIONARY_ENTRY, // kod błędu, opisany na konkretnym API
+                 “params”: { // tablica - parametry błędu (niezależne od języka, specyficzne dla danego kodu błędu)}
+                    "param1": "value1",
+                 },
+                 "error_description": "Długi opis w domyślnym języku, jeżeli Http Accept Language nie został podany, lub jest nieobsługiwany"
+                }</pre>
         </li>
         <li><code>422 Unprocessable Entity</code> - Błędy wprowadzanych danych w postaci:
-            <pre>
-{"errors": {
-    "fld1": ["validation_err1", "validation_err2", ...],
-    ...
-    }
-}</pre>
+                            <pre>
+                {"errors": {
+                    "fld1": ["validation_err1", "validation_err2", ...],
+                    ...
+                    }
+                }</pre>
         </li>
     </ul>
 </div>
-
 
 <div class="section">
     <h1 id="t-swagger">Swagger i API Discovery</h1>
@@ -163,7 +171,6 @@
     <? // TODO API cursoring - np. https://dev.twitter.com/docs/misc/cursoring ?>
 </div>
 
-
 <div class="section">
     <h1 id="t-object-ids">Identyfikatory obiektów</h1>
 
@@ -190,41 +197,41 @@
 
     <p>
         Listę dostępnych warstw jest wyświetlana w ramach obiektu:</p>
-        <pre>
-GET: http://api.mojepanstwo.pl/kodyPocztowe/00-511
+                        <pre>
+                GET: http://api.mojepanstwo.pl/kodyPocztowe/00-511
 
-{
-    "id": "864053",
-    "dataset": "kody_pocztowe",
-    "object_id": 17003,
-    "data": {
-        "gminy_str": "Warszawa",
-        "id": "17003",
-        "kod": "00-511",
-        "kod_int": "511",
-        "liczba_gmin": 1,
-        "liczba_miejsc": 2,
-        "liczba_miejscowosci": 1,
-        "liczba_powiatow": 1,
-        "miejscowosci_str": "Warszawa",
-        "wojewodztwo_id": "7"
-    },
-    "score": {
-        "name": "score",
-        "value": 1,
-        "boost": false
-    },
-    "layers": {
-        "obszary": null,
-        "gminy": null,
-        "miejsca": null,
-        "miejscowosci": null,
-        "powiaty": null,
-        "struktura": null,
-        "dataset": null
-    }
-}
-        </pre>
+                {
+                    "id": "864053",
+                    "dataset": "kody_pocztowe",
+                    "object_id": 17003,
+                    "data": {
+                        "gminy_str": "Warszawa",
+                        "id": "17003",
+                        "kod": "00-511",
+                        "kod_int": "511",
+                        "liczba_gmin": 1,
+                        "liczba_miejsc": 2,
+                        "liczba_miejscowosci": 1,
+                        "liczba_powiatow": 1,
+                        "miejscowosci_str": "Warszawa",
+                        "wojewodztwo_id": "7"
+                    },
+                    "score": {
+                        "name": "score",
+                        "value": 1,
+                        "boost": false
+                    },
+                    "layers": {
+                        "obszary": null,
+                        "gminy": null,
+                        "miejsca": null,
+                        "miejscowosci": null,
+                        "powiaty": null,
+                        "struktura": null,
+                        "dataset": null
+                    }
+                }
+                        </pre>
 
     <p>Warstwy ładuje sie poprzez podanie w zapytaniu nazw warstw jako tablicy: <code>http://api.mojepanstwo.pl/kodyPocztowe/00-511?layers[]=obszary&layers[]=gminy</code>
     </p>
@@ -233,8 +240,11 @@ GET: http://api.mojepanstwo.pl/kodyPocztowe/00-511
     </p>
 </div>
 
-<? // TODO ograniczanie dostępu do danych (API Throttling) ?>
+</div>
+</div>
+</div>
 
+<? // TODO ograniczanie dostępu do danych (API Throttling) ?>
 <? // TODO Caching (If-Modified-Since, If-Unmodified-Since,  If-Match, If-None-Match, or If-Range) ?>
 
 </div>
