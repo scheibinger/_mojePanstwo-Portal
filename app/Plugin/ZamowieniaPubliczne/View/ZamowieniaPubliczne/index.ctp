@@ -21,12 +21,11 @@
     */ ?>
 
     <div class="banner">
-        <p>W ciągu <b>ostatniego miesiąca</b>, Twoje Państwo udzieliło zamówień za </p>
+        <p>W ciągu <b>ostatniego miesiąca</b>, Twoje Państwo udzieliło <?= pl_dopelniacz($stats['liczba_zamowien'], 'zamówienie publiczne', 'zamówienia publiczne', 'zamówień publicznych') ?>, na kwotę:</p>
 
 
-        <p class="number"><?= $this->Waluta->slownie($stats['suma']) ?></p>
+        <p class="number"><?= $this->Waluta->slownie($stats['suma_zamowien']) ?></p>
 
-        <p>w tym na:</p>
     </div>
 
     <div>
