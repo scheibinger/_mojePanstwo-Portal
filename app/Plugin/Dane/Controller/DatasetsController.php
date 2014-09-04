@@ -3,7 +3,9 @@ App::uses('CakeTime', 'Utility');
 
 class DatasetsController extends DaneAppController
 {
-
+	
+	public $uses = array('Dane.Dataset');
+	
     public $components = array(
         'RequestHandler',
     );
@@ -11,7 +13,8 @@ class DatasetsController extends DaneAppController
 	public function index()
 	{
 		
-		
+		$datasets = $this->API->getDatasets();
+		$this->set('datasets', $datasets);
 		
 	}
 	
