@@ -9,7 +9,6 @@ jQuery(function () {
     if ((globalSearch = $('.globalSearch')).length) {
         var globalSearchInput = globalSearch.find('input.form-control'),
             globalSearchBtn = globalSearch.find('.input-group-btn .btn'),
-            globalSearchWord = '',
             globalSearchCache = {};
 
         globalSearchInput.autocomplete({
@@ -20,13 +19,8 @@ jQuery(function () {
                 if (term in globalSearchCache) {
                     response(globalSearchCache[ term ]);
                 } else {
-                    console.log('globalSearchWord', globalSearchWord);
                     globalSearchBtn.addClass('loading');
                     $.getJSON("/dane/suggest.json?q=" + request.term, function (data, status, xhr) {
-                        console.log('globalSearchWord check', request.term, globalSearchWord);
-                        if (globalSearchWord = request.term);
-                        globalSearchBtn.removeClass('loading');
-
                         var results = $.map(data.hits, function (item) {
                             var shortTitleLimit = 200,
                                 shortTitle = '';
@@ -46,7 +40,12 @@ jQuery(function () {
                         });
                         if (results.length == 0)
                             results = [
-                                {label: _mPHeart.translation.LC_SEARCH_BRAK_WYNIKOW, value: null}
+                                {
+                                    title: _mPHeart.translation.LC_SEARCH_BRAK_WYNIKOW,
+                                    shortTitle: _mPHeart.translation.LC_SEARCH_BRAK_WYNIKOW,
+                                    value: null,
+                                    dataset: null
+                                }
                             ];
                         globalSearchCache[ term ] = results;
                         response(results);
@@ -61,6 +60,7 @@ jQuery(function () {
             open: function (event, ui) {
                 var uiAutocomplete = $('.ui-autocomplete');
                 uiAutocomplete.css({'top': parseInt(uiAutocomplete.css('top')) - 6 + 'px', 'width': globalSearchInput.outerWidth()});
+                globalSearchBtn.removeClass('loading');
             },
             select: function (event, ui) {
                 if (ui.item.value !== null) {
