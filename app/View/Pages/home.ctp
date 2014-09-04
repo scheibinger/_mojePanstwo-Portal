@@ -15,7 +15,7 @@
         <div class="h2cont"><h2 class="col-lg-10 col-lg-offset-1">Dane publiczne:</h2></div>
         <div class="col-md-12 col-lg-12">
 	        <div class="globalSearch row">
-		        <div class="col-sm-10 col-md-8 col-md-offset-2 col-lg-6 col-sm-offset-1 col-md-offset-2 col-lg-offset-3">
+		        <div class="col-sm-10 col-md-10 col-lg-10 col-sm-offset-1 col-md-offset-1 col-lg-offset-1">
 		
 		            <div class="input-group">
 		                <form action="/dane" method="get">
@@ -27,6 +27,11 @@
 			                </span>
 		                </form>
 		            </div>
+		            
+		            <ul class="buttons-group">
+		            	<li><a href="/dane" class="btn btn-default">Zbiory danych &raquo;</a></li>
+		            	<li><a href="/powiadomienia" class="btn btn-default">Skonfiguruj powiadomienia &raquo;</a></li>
+		            </ul>
 		
 		        </div>
 		    </div>
