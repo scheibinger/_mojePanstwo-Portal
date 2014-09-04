@@ -40,6 +40,7 @@
                                 <p class="title"><?= $dataset['name'] ?></p>
 
                                 <p class="desc"><?= $dataset['opis'] ?></p>
+                                <p class="hidden"><?= strrev($dataset['opis']) ?></p>
                             </a>
                         </li>
                     <? } ?>

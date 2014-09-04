@@ -26,15 +26,11 @@ class DataobjectsController extends DaneAppController
 
     public function index()
     {
-        $conditions = $this->request->query;
-        $queryData = array(
-            'conditions' => $conditions,
-            'paramType' => 'querystring',
-        );
-        $this->paginate = $queryData;
-        $this->set('objects', $this->Paginator->paginate());
-        $pagination = $this->Dataobject->pagination;
-        $this->set('pagination', $pagination);
+        $this->dataobjectsBrowserView(array(
+            'source' => 'dataset:' . 'prawo',
+            'showTitle' => true,
+            'titleTag' => 'h1',
+        ));
     }
 	
 	public function suggest()
