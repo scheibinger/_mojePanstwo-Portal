@@ -2,6 +2,8 @@
 @import "statusbar-submenu.less";
 
 .ui-autocomplete {
+    @acFocusBackground: #FF6347;
+
     -moz-border-top-left-radius: 0;
     -moz-border-top-right-radius: 0;
     -webkit-border-top-left-radius: 0;
@@ -9,38 +11,44 @@
     border-top-left-radius: 0;
     border-top-right-radius: 0;
     border-color: #CCCCCC;
-	padding: 0;
+    padding: 0;
     border-top-width: 0;
-}
 
-.ui-menu .ui-menu-item {
-	a {
-	    font-family: "Lato", sans-serif;
-	    font-size: 14px;
-	    font-weight: 400;
-	    color: #000;
-	    border-radius: 0;
-	    -webkit-border-radius: 0;
-	    border: none;
-	    padding: 8px 12px;
-	
-	    &:hover, &:focus, &:active {
-	        color: #FFFFFF;
-	        background-color: #FF6347;
-	        border: none;
-	    }
-	}
-}
+    .ui-menu-item {
+        a {
+            font-family: "Lato", sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+            color: #000;
+            border-radius: 0;
+            -webkit-border-radius: 0;
+            border: none;
+            padding: 8px 12px;
+            display: block;
+            float: left;
+            width: 100%;
+            margin: 0;
 
-.ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus {
-    background-image: none;
-    background-color: #0078ac;
-    color: #FFFFFF;
-}
+            &:hover, &:focus, &:active {
+                color: #FFFFFF;
+                background-color: @acFocusBackground;
+                border: none;
+                margin: 0;
+            }
+        }
+    }
 
-.ui-menu .ui-menu-item a.ui-state-focus, .ui-menu .ui-menu-item a.ui-state-active {
-    margin: 0;
-    color: #FFFFFF;
+    .ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus {
+        background-image: none;
+        background-color: @acFocusBackground;
+        color: #FFFFFF;
+        margin: 0;
+    }
+
+    .ui-menu .ui-menu-item a.ui-state-focus, .ui-menu .ui-menu-item a.ui-state-active {
+        margin: 0;
+        color: #FFFFFF;
+    }
 }
 
 #_wrapper {
@@ -99,7 +107,7 @@
             margin-left: 6.8%;
             width: 88.4%;
         }
-				
+
         .globalSearch {
             @searchHeight: 45px;
 
@@ -124,11 +132,11 @@
                 .form-control {
                     color: #333;
                 }
-                
+
                 .form-control::-webkit-input-placeholder {
-				   color: #999;
-				}
-                
+                    color: #999;
+                }
+
                 .input-group-btn button {
                     color: #FFFFFF;
                     width: @searchHeight + 10;
@@ -224,33 +232,33 @@
             margin: 2em 0 0;
             padding: 0;
             list-style: none;
-			
-			&.buttons-group {
-				list-style: none;
-				margin-top: 20px;
-				text-align: center;
-				min-height: 34px;
-				
-				li {
-					list-style: none;
-					height: inherit;
-					margin-bottom: inherit;
-					display: inline;
-					margin-right: 10px;
-					margin-left: 10px;
-					
-					a.btn {
-						background-color: #296D97;
-						border: 3px solid #296D97;
-						color: #FFF;
-						
-						&:hover {
-							border-color: #218AB6;
-						}
-					}
-				}
-			}
-			
+
+            &.buttons-group {
+                list-style: none;
+                margin-top: 20px;
+                text-align: center;
+                min-height: 34px;
+
+                li {
+                    list-style: none;
+                    height: inherit;
+                    margin-bottom: inherit;
+                    display: inline;
+                    margin-right: 10px;
+                    margin-left: 10px;
+
+                    a.btn {
+                        background-color: #296D97;
+                        border: 3px solid #296D97;
+                        color: #FFF;
+
+                        &:hover {
+                            border-color: #218AB6;
+                        }
+                    }
+                }
+            }
+
             li {
                 margin-bottom: 5em;
                 height: 90px;
