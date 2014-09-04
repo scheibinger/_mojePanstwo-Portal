@@ -9,23 +9,34 @@ jQuery(function () {
     if ((globalSearch = $('.globalSearch')).length) {
         var globalSearchInput = globalSearch.find('input.form-control'),
             globalSearchBtn = globalSearch.find('.input-group-btn .btn'),
+            globalSearchWord = '',
             globalSearchCache = {};
 
         globalSearchInput.autocomplete({
             minLength: 2,
             delay: 100,
             source: function (request, response) {
-                var term = request.term;
+                var term = globalSearchWord = request.term;
                 if (term in globalSearchCache) {
                     response(globalSearchCache[ term ]);
                 } else {
+                    console.log('globalSearchWord', globalSearchWord);
                     globalSearchBtn.addClass('loading');
                     $.getJSON("/dane/suggest.json?q=" + request.term, function (data, status, xhr) {
+                        console.log('globalSearchWord check', request.term, globalSearchWord);
+                        if (globalSearchWord = request.term);
                         globalSearchBtn.removeClass('loading');
-                        var results = $.map(data.hits, function (item) {
-                            var shortTitle = item.title.substr(0, 200);
-                            shortTitle = shortTitle.substr(0, Math.min(shortTitle.length, shortTitle.lastIndexOf(" "))) + '...';
 
+                        var results = $.map(data.hits, function (item) {
+                            var shortTitleLimit = 200,
+                                shortTitle = '';
+
+                            if (item.title.length > shortTitleLimit) {
+                                shortTitle = item.title.substr(0, shortTitleLimit);
+                                shortTitle = shortTitle.substr(0, Math.min(shortTitle.length, shortTitle.lastIndexOf(" "))) + '...';
+                            } else {
+                                shortTitle = item.title;
+                            }
                             return {
                                 title: item.title,
                                 shortTitle: shortTitle,
