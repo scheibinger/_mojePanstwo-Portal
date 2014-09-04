@@ -18,10 +18,10 @@
 		        <div class="col-sm-10 col-md-10 col-lg-10 col-sm-offset-1 col-md-offset-1 col-lg-offset-1">
 		
 		            <div class="input-group">
-		                <form action="/dane" method="get">
+		                <form action="/dane/szukaj" method="get">
                             <input name="q" type="text" class="form-control" autocomplete="off"
                                    placeholder="<?php echo __('LC_SEARCH_PUBLIC_DATA_PLACEHOLDER') ?>">
-		                    <input type="submit" name="submit" style="display: none;"/>
+		                    <input type="submit" value="search" name="submit" style="display: none;"/>
 			                <span class="input-group-btn">
 			                    <button class="btn btn-success btn-lg" type="button" data-icon="&#xe600;"></button>
 			                </span>
