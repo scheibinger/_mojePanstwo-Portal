@@ -23,9 +23,12 @@ jQuery(function () {
                     $.getJSON("/dane/suggest.json?q=" + request.term, function (data, status, xhr) {
                         globalSearchBtn.removeClass('loading');
                         var results = $.map(data.hits, function (item) {
+                            var shortTitle = item.title.substr(0, 200);
+                            shortTitle = shortTitle.substr(0, Math.min(shortTitle.length, shortTitle.lastIndexOf(" "))) + '...';
 
                             return {
                                 title: item.title,
+                                shortTitle: shortTitle,
                                 value: item.id,
                                 dataset: item.dataset
                             };
@@ -62,7 +65,7 @@ jQuery(function () {
                             $('<span></span>').addClass('col-md-2').text(item.dataset)
                         )
                         .append(
-                            $('<span></span>').addClass('col-md-10').text(item.title)
+                            $('<span></span>').addClass('col-md-10').text(item.shortTitle)
                         )
                 )
                 .appendTo(ul);
