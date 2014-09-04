@@ -15,6 +15,7 @@ jQuery(function () {
 
         globalSearchInput.autocomplete({
             minLength: 2,
+            delay: 150,
             source: function (request, response) {
                 var term = request.term;
                 if (term in globalSearchCache) {
@@ -25,8 +26,12 @@ jQuery(function () {
                 $.getJSON("/dane/suggest.json?q=" + request.term, function (data, status, xhr) {
                     globalSearchBtn.removeClass('loading');
                     var results = $.map(data.hits, function (item) {
+                        
+                        var label = '<span class="col-md-2">' + item.dataset + '</span><span class="col-md-10">' + item.title + '</span>';
+                        
                         return {
-                            label: item.title,
+                            label: label,
+                            title: item.title,
                             value: item.id,
                             dataset: item.dataset
                         };
@@ -41,16 +46,23 @@ jQuery(function () {
             },
             focus: function (event, ui) {
                 if (ui.item.value !== null)
-                    globalSearchInput.val(ui.item.label);
+                    globalSearchInput.val(ui.item.title);
                 return false;
             },
             select: function (event, ui) {
                 if (ui.item.value !== null) {
                     globalSearchInput.val(ui.item.label);
-                    window.location = '/dane/' + ui.item.dataset + '/' + ui.item.value;
                 }
                 return false;
             }
-        });
+        }).data( "ui-autocomplete" )._renderItem = function( ul, item ) {
+	      return $( "<li class=\"row\">" )
+	        .append( "<a href=\"/dane/" + item.dataset + "/" + item.value + "\">" + item.label + "</a>" )
+	        .appendTo( ul );
+	    };
+	    
+	    // ui-menu-item
+	    // presentation
+	    
     }
 });
