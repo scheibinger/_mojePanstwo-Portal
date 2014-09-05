@@ -36,7 +36,7 @@ jQuery(function () {
                                 title: item.title,
                                 shortTitle: shortTitle,
                                 value: item.id,
-                                link: item.dataset + '/' + item.value,
+                                link: item.dataset + '/' + item.id,
                                 label: item.label
                             };
                         });
