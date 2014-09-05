@@ -20,6 +20,7 @@ class DataobjectsBrowserComponent extends Component
     public $limit = 20;
     public $conditions = array();
     public $orders = array();
+    public $allowedParams = false;
     
     public $dataset = false;
     public $datachannel = false;
@@ -84,6 +85,11 @@ class DataobjectsBrowserComponent extends Component
             
         if (isset($settings['conditions']))
             $this->conditions = $settings['conditions'];
+            
+        if (isset($settings['allowedParams']) && $settings['allowedParams'])
+            $this->allowedParams = $settings['allowedParams'];
+            
+            
 
         $add_source_params = array();
         $source_params = array();
@@ -140,7 +146,8 @@ class DataobjectsBrowserComponent extends Component
         $orders = array();
 
         $controller->mode = 'dataobjectsBrowser';
-
+		
+		
         if (
             isset($controller->request->query['dataset']) &&
             !empty($controller->request->query['dataset'])
@@ -241,6 +248,13 @@ class DataobjectsBrowserComponent extends Component
                     break;
 
                 }
+                
+                case 'submit':
+                {
+
+                    break;
+
+                }
 
                 default:
                     {
@@ -263,8 +277,7 @@ class DataobjectsBrowserComponent extends Component
 
             }
         }
-
-
+		
         if ($this->mode == 'dataset') {
 
             $conditions['dataset'] = $this->tag;
@@ -367,28 +380,6 @@ class DataobjectsBrowserComponent extends Component
 
         } else {
 
-            if (isset($controller->request->query['dataset']) &&
-                !empty($controller->request->query['dataset'])
-            ) {
-
-                $dataset = is_array($controller->request->query['dataset']) ?
-                    $controller->request->query['dataset'][0] :
-                    $controller->request->query['dataset'];
-
-
-                if ($dataset) {
-
-                    /*
-                    $query = $controller->request->query;
-                    unset($query['dataset']);
-                    unset($query['datachannel']);
-                    unset($query['search']);
-
-                    return $controller->redirect('/dane/' . $dataset . '?' . http_build_query($query));
-                    */
-
-                }
-            }
 
             $filters[] = array(
                 'filter' => array(
@@ -401,14 +392,7 @@ class DataobjectsBrowserComponent extends Component
                 ),
             );
 
-            $orders[] = array(
-                'sorting' => array(
-                    'field' => 'date',
-                    'label' => 'Data',
-                    'direction' => 'desc',
-                ),
-            );
-
+            
         }
 
 
@@ -424,7 +408,7 @@ class DataobjectsBrowserComponent extends Component
             'facets' => true,
             'limit' => $this->limit,
         );
-
+		
 
         if (empty($order) && !empty($orders))
             $order = array(
@@ -448,7 +432,7 @@ class DataobjectsBrowserComponent extends Component
 		
         $this->Paginator->settings = $queryData;
         $objects = $this->Paginator->paginate('Dataobject');
-
+		
 
         $pagination = $controller->Dataobject->pagination;
         $pagination['page'] = (int)@$controller->request->query['page'];

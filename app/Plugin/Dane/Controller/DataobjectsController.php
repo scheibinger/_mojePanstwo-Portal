@@ -27,10 +27,13 @@ class DataobjectsController extends DaneAppController
     public function index()
     {
         $this->dataobjectsBrowserView(array(
-            'source' => 'dataset:' . 'prawo',
             'showTitle' => true,
+            'title' => 'Dane publiczne',
             'titleTag' => 'h1',
+            'allowedParams' => array('q'),
         ));
+        
+        $this->set('title_for_layout', isset($this->request->query['q']) ? $this->request->query['q'] : 'Szukaj');
     }
 	
 	public function suggest()
@@ -51,7 +54,7 @@ class DataobjectsController extends DaneAppController
 		foreach( $data as $d )
 			$hits[] = array(
 				'date' => $d->getDate(),
-				'label' => $d->getLabel(),
+				'label' => $d->getLayer('label'),
 				'title' => $d->getTitle(),
 				'dataset' => $d->getDataset(),
 				'id' => $d->getId(),
