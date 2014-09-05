@@ -98,30 +98,30 @@ var DataObjectesAjax = {
             /*HISTORY.JS CHANGE STATUS*/
             setTimeout(DataObjectesAjax.objectsReload, 5);
         });
-        
+
         var dataDetailsToggle;
-        if( (dataDetailsToggle = jQuery('.dataDetailsToggle')).length ) {
-	        
-	        dataDetailsToggle.click(function(e){
-		        		        
-		        e.preventDefault();
-		        
-		        if( jQuery(this).data('state')=='more' ) {
-			        
-			        jQuery(this).data('state', 'less').find('.text').text('Mniej szczegółów');
-			        jQuery(this).find('.glyphicon').removeClass('glyphicon-plus').addClass('glyphicon-minus');
-			        $('.dataBrowser .dataHighlights').stop(true, true).slideDown();
-			        
-		        } else {
-			        
-			        jQuery(this).data('state', 'more').find('.text').text('Więcej szczegółów');
-			        jQuery(this).find('.glyphicon').removeClass('glyphicon-minus').addClass('glyphicon-plus');
-			        $('.dataBrowser .dataHighlights').stop(true, true).slideUp();
-			        
-		        }
-		        
-	        });
-	        
+        if ((dataDetailsToggle = jQuery('.dataDetailsToggle')).length) {
+
+            dataDetailsToggle.click(function (e) {
+
+                e.preventDefault();
+
+                if (jQuery(this).data('state') == 'more') {
+
+                    jQuery(this).data('state', 'less').find('.text').text('Mniej szczegółów');
+                    jQuery(this).find('.glyphicon').removeClass('glyphicon-plus').addClass('glyphicon-minus');
+                    $('.dataBrowser .dataHighlights').stop(true, true).slideDown();
+
+                } else {
+
+                    jQuery(this).data('state', 'more').find('.text').text('Więcej szczegółów');
+                    jQuery(this).find('.glyphicon').removeClass('glyphicon-minus').addClass('glyphicon-plus');
+                    $('.dataBrowser .dataHighlights').stop(true, true).slideUp();
+
+                }
+
+            });
+
         }
 
     },
@@ -228,18 +228,18 @@ var DataObjectesAjax = {
 
         /*CREATE DROPDOWN MENU STRUCTURE*/
         var sortingChosen = (sorting.find('#DatasetSort option:selected').length > 0) ? sorting.find('#DatasetSort option:selected') : sorting.find('#DatasetSort option:first');
-                
+
         jQuery('.dataSortingToggle').attr({'title': sortingChosen.attr('title')});
         var ul = jQuery('.dataSortingMenu');
-        
+
         jQuery.each(sorting.find('#DatasetSort optgroup'), function () {
-            
+
             var li;
             var grp = jQuery(this);
-            
+
             if (grp.data('special') == 'result') {
-                
-                li =  jQuery('<li></li>').addClass('special result').append(function () {
+
+                li = jQuery('<li></li>').addClass('special result').append(function () {
                     var that = jQuery(this);
                     jQuery.each(grp.find('option'), function () {
                         that.append(jQuery('<a></a>').attr({'href': '#', 'title': jQuery.trim(jQuery(this).text()), 'value': jQuery(this).val()}).text(jQuery.trim(jQuery(this).text())))
@@ -247,23 +247,21 @@ var DataObjectesAjax = {
                 });
 
             } else {
-                
+
                 li = jQuery('<li></li>').html(
                     jQuery('<a></a>').text(grp.attr('label')).attr('href', '#')
                 );
-                
+
             }
-            
-            ul.append( li );
-            
+
+            ul.append(li);
+
         });
-                
+
         // ul.find('li a[value="' + sortingChosen.val() + '"]').addClass('active');
         DataObjectesAjax.sortingAddRemoveOptions();
-            
-            
-        
-        
+
+
         ul.find('a').click(function (event) {
             var sortingDirection = sorting.find('.DatasetSort');
             event.preventDefault();
@@ -272,24 +270,23 @@ var DataObjectesAjax = {
 
             DataObjectesAjax.sortingReload();
         });
-        
-        
+
+
         var innerSearch;
-		if (innerSearch = jQuery('#innerSearch')) {
-			
-	        innerSearch.keypress(function (e) {
-	            if (e.which == 13) {	        	
-		        	e.preventDefault();
-					
-		            DataObjectesAjax.sortingReload();
-					
-	            }
-	        });
-	        
-	    }
-        
-        
-        
+        if (innerSearch = jQuery('#innerSearch')) {
+
+            innerSearch.keypress(function (e) {
+                if (e.which == 13) {
+                    e.preventDefault();
+
+                    DataObjectesAjax.sortingReload();
+
+                }
+            });
+
+        }
+
+
     },
     /*ADDING/REMOVING NEW OPTION NORMALY ADDED AT GENERATING PAGE*/
     sortingAddRemoveOptions: function () {
@@ -339,8 +336,8 @@ var DataObjectesAjax = {
     /*CLICKING ARROW SEND AJAX + CHANGE ARROW DIRECTION*/
     sortingReload: function () {
         var formSerialize = jQuery('#DatasetViewForm').serializeArray(),
-            sortSerialize = ( (jQuery(".DatasetSort").data("sort") != undefined) ? '&order='  + jQuery(".DatasetSort").data("sort") : '');		
-		
+            sortSerialize = ( (jQuery(".DatasetSort").data("sort") != undefined) ? '&order=' + jQuery(".DatasetSort").data("sort") : '');
+
         formSerialize = DataObjectesAjax.reorganizationSerialize(formSerialize);
 
         History.pushState({ filters: formSerialize + '&' + sortSerialize + '&q=' + jQuery('#innerSearch').val() + '&search=web', reloadForm: 'sorting', page: "Dane" }, jQuery(document).find("title").html(), "?" + formSerialize + sortSerialize + '&q=' + jQuery('#innerSearch').val() + '&search=web');
@@ -375,8 +372,13 @@ var DataObjectesAjax = {
             if (n.match('dataset')) {
                 var dataset = n.split('=');
 
-                if (!redirectUrl)
-                    redirectUrl = '/dane/' + dataset[1] + '?' + formActualFilters.replace(/&?((dataset)|(dataset%5B%5D)|(datachannel)|(search))=([^&]$|[^&]*)/gi, "");
+                if (!redirectUrl) {
+                    var fromActualFilterReplaced = formActualFilters.replace(/&?((dataset)|(dataset\[\])|(datachannel)|(search))=([^&]$|[^&]*)/gi, "");
+                    while (fromActualFilterReplaced.charAt(0) == '&') {
+                        fromActualFilterReplaced = fromActualFilterReplaced.substring(1);
+                    }
+                    redirectUrl = '/dane/' + dataset[1] + '?' + fromActualFilterReplaced;
+                }
             }
         });
 
@@ -492,7 +494,6 @@ var DataObjectesAjax = {
                     highchartInit();
             });
         }
- 
     }
 };
 
