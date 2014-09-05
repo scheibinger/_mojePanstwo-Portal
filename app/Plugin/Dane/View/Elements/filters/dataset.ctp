@@ -18,14 +18,15 @@
                 $checked = ($option['id'] == $value);
 
             ?>
-            <li class="option checkbox list-group-item<? if($checked) {?> active<?}?>">
+            <li class="option checkbox list-group-item<? if ($checked) { ?> active<? } ?>">
                 <span class="badge"><?= $this->Number->currency($option['count'], '', array('places' => 0)) ?></span>
 
                 <div class="checkbox-inline">
                     <input<? if ($checked) { ?> checked="checked"<? } ?> id="<?= $fid ?>" type="checkbox"
                                                                          name="<?= $name ?>[]"
                                                                          value="<?= $option['id'] ?>"/>
-                    <label title="<?= addslashes( $option['label'] ) ?>" for="<?= $fid ?>"><?= $this->Text->truncate($option['label'], 45) ?></label>
+                    <label title="<?= addslashes($option['label']) ?>"
+                           for="<?= $fid ?>"><?= $this->Text->truncate($option['label'], 45) ?></label>
                 </div>
             </li>
         <?

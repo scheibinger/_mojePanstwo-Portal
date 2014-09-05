@@ -1,3 +1,5 @@
+/*global _mPHeart*/
+
 jQuery(function () {
     jQuery('#home').find('.apps .appFolder').click(function (event) {
         event.preventDefault();
@@ -15,12 +17,12 @@ jQuery(function () {
             minLength: 2,
             delay: 200,
             source: function (request, response) {
-                var term = globalSearchWord = request.term;
+                var term = request.term;
                 if (term in globalSearchCache) {
                     response(globalSearchCache[ term ]);
                 } else {
                     globalSearchBtn.addClass('loading');
-                    $.getJSON("/dane/suggest.json?q=" + request.term, function (data, status, xhr) {
+                    $.getJSON("/dane/suggest.json?q=" + request.term, function (data) {
 
                         var results = $.map(data.hits, function (item) {
                             var shortTitleLimit = 200,
@@ -61,7 +63,7 @@ jQuery(function () {
                     });
                 }
             },
-            open: function (event, ui) {
+            open: function (ui) {
                 var uiAutocomplete = $('.ui-autocomplete');
                 uiAutocomplete.css({'top': parseInt(uiAutocomplete.css('top')) - 1 + 'px', 'width': globalSearchInput.outerWidth() - 1});
                 globalSearchInput.addClass('open');
