@@ -36,7 +36,7 @@ jQuery(function () {
                                 title: item.title,
                                 shortTitle: shortTitle,
                                 value: item.id,
-                                dataset: item.dataset,
+                                link: item.dataset + '/' + item.value,
                                 label: item.label
                             };
                         });
@@ -44,17 +44,18 @@ jQuery(function () {
                         globalSearchCache[ term ] = results;
                         
                         if (results.length == 0) {
-                            
-                            console.log('close');
                             $('.ui-autocomplete').hide();
                             globalSearchInput.removeClass('open');
                             globalSearchBtn.removeClass('loading');
-                                                        
-                            
                         } else {
-                        
-	                        response(results);
-                        
+                            results.push({
+                                title: _mPHeart.translation.LC_SEARCH_FULL,
+                                shortTitle: _mPHeart.translation.LC_SEARCH_FULL,
+                                value: 0,
+                                link: 'szukaj?q=' + request.term,
+                                label: ''
+                            });
+                            response(results);
                         }
                     });
                 }
@@ -67,7 +68,6 @@ jQuery(function () {
             },
             */
             open: function (event, ui) {
-                        	
                 var uiAutocomplete = $('.ui-autocomplete');
                 uiAutocomplete.css({'top': parseInt(uiAutocomplete.css('top'))-1 + 'px', 'width': globalSearchInput.outerWidth()-1});
                 globalSearchInput.addClass('open');
@@ -88,7 +88,7 @@ jQuery(function () {
         }).data("ui-autocomplete")._renderItem = function (ul, item) {
             return $('<li></li>').addClass("row")
                 .append(
-                    $('<a></a>').attr({'href': '/dane/' + item.dataset + '/' + item.value, 'target': '_blank'})
+                    $('<a></a>').attr({'href': '/dane/' + item.link, 'target': '_blank'})
                         .append(
                             $('<p></p>').addClass('col-md-2').addClass('_label').html('<span class="label label-default label-sm">' + item.label + '</span>')
                         )
