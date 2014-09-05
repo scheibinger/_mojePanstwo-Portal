@@ -81,7 +81,7 @@ jQuery(function () {
         }).data("ui-autocomplete")._renderItem = function (ul, item) {
             return $('<li></li>').addClass("row")
                 .append(
-                    $('<a></a>').attr({'href': '/dane/' + item.link, 'target': '_blank'})
+                    $('<a></a>').attr({'href': '/dane/' + item.link, 'target': '_self'})
                         .append(
                             $('<p></p>').addClass('col-xs-3 col-md-2').addClass('_label').html('<span class="label label-default label-sm">' + item.label + '</span>')
                         )
