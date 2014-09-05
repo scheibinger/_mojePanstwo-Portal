@@ -39,7 +39,8 @@ class FilterHelper extends AppHelper
         $out .= '</li>';
         */
 
-
+		
+		/*
         if (($page['mode'] == 'dataset') && !$page['datasetLocked']) {
 
             // DATASET INFO
@@ -65,6 +66,7 @@ class FilterHelper extends AppHelper
             $out .= '</li>';
 
         }
+        */
 
 
         // SWITCHERS
@@ -109,8 +111,7 @@ class FilterHelper extends AppHelper
 
                 switch ($filter['filter']['typ_id']) {
                     case 1:
-                    case 5: // dataset filtetr
-                        $out .= $this->_View->element('Dane.filters/dataset', array('conditions' => $conditions, 'filter' => $filter, 'facet' => $facet));
+                        $out .= $this->_View->element('Dane.filters/option', array('conditions' => $conditions, 'filter' => $filter, 'facet' => $facet));
                         break;
                     case 2:
                         $out .= $this->_View->element('Dane.filters/enum', array('conditions' => $conditions, 'filter' => $filter, 'facet' => $facet));
@@ -120,6 +121,9 @@ class FilterHelper extends AppHelper
                         break;
                     case 4:
                         $out .= $this->_View->element('Dane.filters/date', array('conditions' => $conditions, 'filter' => $filter, 'facet' => $facet));
+                        break;
+                    case 5:
+                        $out .= $this->_View->element('Dane.filters/dataset', array('conditions' => $conditions, 'filter' => $filter, 'facet' => $facet));
                         break;
                 }
                 $out .= '</li>';

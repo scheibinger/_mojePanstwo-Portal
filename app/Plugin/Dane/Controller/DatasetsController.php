@@ -16,6 +16,8 @@ class DatasetsController extends DaneAppController
 		$datasets = $this->API->getDatasets();
 		$this->set('datasets', $datasets);
 		
+		$this->set('title_for_layout', 'Zbiory danych publicznych');
+		
 	}
 	
     public function view()

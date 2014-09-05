@@ -384,7 +384,7 @@ class DataobjectsBrowserComponent extends Component
             $filters[] = array(
                 'filter' => array(
                     'field' => 'dataset',
-                    'typ_id' => '2',
+                    'typ_id' => '5',
                     'parent_field' => false,
                     'label' => 'Zbiory danych:',
                     'desc' => false,
