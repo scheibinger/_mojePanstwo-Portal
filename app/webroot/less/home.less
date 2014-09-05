@@ -3,7 +3,7 @@
 
 .ui-autocomplete {
     @acFocusBackground: #FF6347;
-
+	
     -moz-border-top-left-radius: 0;
     -moz-border-top-right-radius: 0;
     -webkit-border-top-left-radius: 0;
@@ -13,41 +13,86 @@
     border-color: #CCCCCC;
     padding: 0;
     border-top-width: 0;
+    background-color: #FCFCFC;
+	
 
+	
     .ui-menu-item {
+    
+    	border-top: 1px solid #E3E3E3;
+    	
         a {
             font-family: "Lato", sans-serif;
             font-size: 14px;
             font-weight: 400;
-            color: #000;
+            color: #333;
             border-radius: 0;
             -webkit-border-radius: 0;
             border: none;
-            padding: 8px 12px;
+            padding: 12px;
             display: block;
             float: left;
             width: 100%;
             margin: 0;
+            border: none !important;
 
             &:hover, &:focus, &:active {
                 color: #FFFFFF;
-                background-color: @acFocusBackground;
+                background-color: #EEE;
                 border: none;
                 margin: 0;
+                padding: 12px !important;
+                border: none !important;
             }
+            
+            p {
+            	
+            	margin: 0;
+            
+	            &._label {
+		            text-align: right;
+		            padding-right: 0;
+		            
+		            .label {
+			            background-color: inherit;
+			            color: #666;
+			            font-weight: 400;
+			            font-size: 11px;
+			            text-transform: uppercase;
+		            }
+	            }
+	            
+	            &._title {
+		            color: #428bca;
+		            font-weight: bold;
+		            font-size: 13px;
+		            margin-top: 2px;
+		            margin-bottom: -2px;
+	            }
+            
+            }
+            
         }
     }
 
     .ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus {
         background-image: none;
-        background-color: @acFocusBackground;
-        color: #FFFFFF;
+        background-color: #EEE;
+        color: #333 !important;
         margin: 0;
+        padding: 12px !important;
+        border: none !important;
+        
+        span {
+	        color: #333 !important;
+        }
     }
 
     .ui-menu .ui-menu-item a.ui-state-focus, .ui-menu .ui-menu-item a.ui-state-active {
         margin: 0;
-        color: #FFFFFF;
+        color: #333 !important;
+        padding: 12px !important;
+        background-color: #EEE;
     }
 }
 
@@ -122,6 +167,11 @@
 
                 input {
                     border-radius: 5px 0 0 5px;
+                }
+                
+                .ui-autocomplete-input.open {
+	                border-bottom-left-radius: 0;
+	                -webkit-border-bottom-left-radius: 0;
                 }
 
                 .form-control,
