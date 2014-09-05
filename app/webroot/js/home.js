@@ -21,17 +21,18 @@ jQuery(function () {
                 } else {
                     globalSearchBtn.addClass('loading');
                     $.getJSON("/dane/suggest.json?q=" + request.term, function (data, status, xhr) {
-                        
+
                         var results = $.map(data.hits, function (item) {
                             var shortTitleLimit = 200,
                                 shortTitle = '';
 
-                            if (item.title.length > shortTitleLimit) {
+                            if ((item.title.length > shortTitleLimit) && (item.dataset != 'twitter')) {
                                 shortTitle = item.title.substr(0, shortTitleLimit);
                                 shortTitle = shortTitle.substr(0, Math.min(shortTitle.length, shortTitle.lastIndexOf(" "))) + '...';
                             } else {
                                 shortTitle = item.title;
                             }
+
                             return {
                                 title: item.title,
                                 shortTitle: shortTitle,
@@ -40,9 +41,9 @@ jQuery(function () {
                                 label: item.label
                             };
                         });
-                        
+
                         globalSearchCache[ term ] = results;
-                        
+
                         if (results.length == 0) {
                             $('.ui-autocomplete').hide();
                             globalSearchInput.removeClass('open');
@@ -60,24 +61,14 @@ jQuery(function () {
                     });
                 }
             },
-            /*
-            focus: function (event, ui) {
-                if (ui.item.value !== null)
-                    globalSearchInput.val(ui.item.title);
-                return false;
-            },
-            */
             open: function (event, ui) {
                 var uiAutocomplete = $('.ui-autocomplete');
-                uiAutocomplete.css({'top': parseInt(uiAutocomplete.css('top'))-1 + 'px', 'width': globalSearchInput.outerWidth()-1});
+                uiAutocomplete.css({'top': parseInt(uiAutocomplete.css('top')) - 1 + 'px', 'width': globalSearchInput.outerWidth() - 1});
                 globalSearchInput.addClass('open');
                 globalSearchBtn.removeClass('loading');
-                
             },
-            close: function() {
-	          
-	          globalSearchInput.removeClass('open');
-	            
+            close: function () {
+                globalSearchInput.removeClass('open');
             },
             select: function (event, ui) {
                 if (ui.item.value !== null) {
@@ -90,10 +81,10 @@ jQuery(function () {
                 .append(
                     $('<a></a>').attr({'href': '/dane/' + item.link, 'target': '_blank'})
                         .append(
-                            $('<p></p>').addClass('col-md-2').addClass('_label').html('<span class="label label-default label-sm">' + item.label + '</span>')
+                            $('<p></p>').addClass('col-xs-3 col-md-2').addClass('_label').html('<span class="label label-default label-sm">' + item.label + '</span>')
                         )
                         .append(
-                            $('<p></p>').addClass('col-md-10').addClass('_title').text(item.shortTitle)
+                            $('<p></p>').addClass('col-md-9 col-md-10').addClass('_title').text(item.shortTitle)
                         )
                 )
                 .appendTo(ul);
