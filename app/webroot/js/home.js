@@ -36,6 +36,7 @@ jQuery(function () {
                             }
 
                             return {
+                                type: 'item',
                                 title: item.title,
                                 shortTitle: shortTitle,
                                 value: item.id,
@@ -52,11 +53,8 @@ jQuery(function () {
                             globalSearchBtn.removeClass('loading');
                         } else {
                             results.push({
-                                title: _mPHeart.translation.LC_SEARCH_FULL,
-                                shortTitle: _mPHeart.translation.LC_SEARCH_FULL,
-                                value: 0,
-                                link: 'szukaj?q=' + request.term,
-                                label: ''
+                                type: 'button',
+                                q: request.term
                             });
                             response(results);
                         }
@@ -79,17 +77,30 @@ jQuery(function () {
                 return false;
             }
         }).data("ui-autocomplete")._renderItem = function (ul, item) {
-            return $('<li></li>').addClass("row")
-                .append(
-                    $('<a></a>').attr({'href': '/dane/' + item.link, 'target': '_self'})
-                        .append(
-                            $('<p></p>').addClass('col-xs-3 col-md-2').addClass('_label').html('<span class="label label-default label-sm">' + item.label + '</span>')
-                        )
-                        .append(
-                            $('<p></p>').addClass('col-md-9 col-md-10').addClass('_title').text(item.shortTitle)
-                        )
-                )
-                .appendTo(ul);
+            
+            if( item.type == 'item' ) {
+            
+	            return $('<li></li>').addClass("row")
+	                .append(
+	                    $('<a></a>').attr({'href': '/dane/' + item.link, 'target': '_self'})
+	                        .append(
+	                            $('<p></p>').addClass('col-xs-3 col-md-2').addClass('_label').html('<span class="label label-default label-sm">' + item.label + '</span>')
+	                        )
+	                        .append(
+	                            $('<p></p>').addClass('col-md-9 col-md-10').addClass('_title').text(item.shortTitle)
+	                        )
+	                )
+	                .appendTo(ul);
+                
+            } else if ( item.type == 'button' ) {
+	            
+	            return $('<li></li>').addClass("row").addClass("button")
+	                .append(
+	                    $('<a></a>').addClass('btn btn-success').attr({'href': '/dane/szukaj?q=' + item.q, 'target': '_self'}).html( '<span class="glyphicon glyphicon-search"> </span> ' + _mPHeart.translation.LC_SEARCH_FULL )
+	                )
+	                .appendTo(ul);
+	            
+            }
         };
     }
 });

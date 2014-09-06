@@ -1,5 +1,5 @@
 {
-	"controlls": ["details"],
+	"controlls": ["details", "sortings"],
 	"defaults": {
 		"details": true
 	}
