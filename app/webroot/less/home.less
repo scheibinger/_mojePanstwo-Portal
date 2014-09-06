@@ -1,6 +1,7 @@
 @import "variable";
 @import "statusbar-submenu.less";
 
+
 .ui-autocomplete {
     @acFocusBackground: #FF6347;
 
@@ -15,31 +16,57 @@
     border-top-width: 0;
     background-color: #FCFCFC;
 
+	
+	
     .ui-menu-item {
+        
         border-top: 1px solid #E3E3E3;
-
-        &:last-child {
-            background-color: #428bca;
-
-            a p._title {
-                color: #FFFFFF;
+				
+		&.button {
+            p {
+	            text-align: center;
+	            
+	            a.btn {
+		            color: #FFF !important;
+	            }
             }
-
+            
+			a {
+				
+				color: #fff !important;
+			    font-size: 13px;
+			    padding: 8px 0;
+			    text-transform: uppercase;
+				
+				span {
+					font-size: 16px;
+				    margin-right: 5px;
+				    position: relative;
+				    top: 3px;
+				}
+			}
+            
             .ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus {
-                background-color: #428bca;
+                background-color: #5cb85c;
                 color: #FFFFFF;
-
-                span {
-                    color: #FFFFFF;
+				
+                a, &.span {
+                    color: #FFFFFF !important;
                 }
+                
             }
 
             .ui-menu .ui-menu-item a.ui-state-focus, .ui-menu .ui-menu-item a.ui-state-active {
                 color: #FFFFFF;
-                background-color: #428bca;
+                background-color: #5cb85c;
+                
+                &.a, &.span {
+                    color: #FFFFFF !important;
+                }
             }
         }
-
+		
+		
         a {
             font-family: "Lato", sans-serif;
             font-size: 14px;

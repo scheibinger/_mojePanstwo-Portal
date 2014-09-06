@@ -13,7 +13,6 @@ class SejmKomisjeController extends DataobjectsController
         $this->dataobjectsBrowserView(array(
             'source' => 'sejm_komisje.poslowie:' . $this->object->getId(),
             'dataset' => 'poslowie',
-            'title' => __d('dane', 'LC_DANE_POSLOWIE_ZASIADAJACY_W_KOMISJI'),
             'noResultsTitle' => 'Brak posłów w tej komisji',
         ));
     }
