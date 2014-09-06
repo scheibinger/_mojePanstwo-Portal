@@ -2,7 +2,7 @@
 
 App::uses('DataobjectsController', 'Dane.Controller');
 
-class SaSedziowieController extends DataobjectsController
+class SnSedziowieController extends DataobjectsController
 {
     
     public function view()
@@ -10,8 +10,8 @@ class SaSedziowieController extends DataobjectsController
     	
     	parent::_prepareView();
         $this->dataobjectsBrowserView(array(
-            'source' => 'sa_sedziowie.orzeczenia:' . $this->object->getId(),
-            'dataset' => 'sa_orzeczenia',
+            'source' => 'sn_sedziowie.orzeczenia:' . $this->object->getId(),
+            'dataset' => 'sn_orzeczenia',
             /*
             'excludeFilters' => array(
                 'wojewodztwo_id',
@@ -27,7 +27,7 @@ class SaSedziowieController extends DataobjectsController
     {
 
         // PREPARE MENU		
-        $href_base = '/dane/sa_sedziowie/' . $this->request->params['id'];
+        $href_base = '/dane/sn_sedziowie/' . $this->request->params['id'];
 
         $menu = array(
             'items' => array(
