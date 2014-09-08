@@ -21,26 +21,26 @@ class FilterHelper extends AppHelper
         $this->filters = $filters;
         $this->switchers = $switchers;
         $this->conditions = $conditions;
-				
+
         $out = $this->Form->create('Dataset', array('id' => 'DatasetViewForm', 'type' => 'get', 'url' => $page['href']));
 
 
         if (isset($this->params->query['order']))
             $out .= $this->Form->hidden('order', array('value' => $this->params->query['order']));
-						
+
         $out .= '<ul id="filters">';
 
 
         // SEARCH
-		
-		/*
+
+        /*
         $out .= '<li class="form-group filter innerSearch">';
         $out .= '<input id="innerSearch" type="text" class="form-control" autocomplete="off" name="q" placeholder="' . __d('dane', __('LC_DANE_SEARCH')) . '" data-icon-after="&#xe600;" value="' . ((isset($this->params->query['q'])) ? htmlspecialchars($this->params->query['q']) : '') . '"/>';
         $out .= '</li>';
         */
 
-		
-		/*
+
+        /*
         if (($page['mode'] == 'dataset') && !$page['datasetLocked']) {
 
             // DATASET INFO
@@ -78,8 +78,8 @@ class FilterHelper extends AppHelper
 
             foreach ($this->switchers as $switcher) {
                 $out .= $this->_View->element('Dane.dataset-switcher', array(
-                	'switcher' => $switcher['switcher'],
-                	'conditions' => $this->conditions,
+                    'switcher' => $switcher['switcher'],
+                    'conditions' => $this->conditions,
                 ));
             }
 
@@ -132,7 +132,7 @@ class FilterHelper extends AppHelper
         }
 
         $out .= '</ul>';
-        $out .= $this->Form->submit(__d('dane', 'LC_DANE_FILTER'), array('name' => 'search', 'class' => 'submitButton btn btn-primary'));
+        $out .= $this->Form->submit(__d('dane', 'LC_DANE_FILTER'), array('name' => 'search', 'class' => 'submitButton btn btn-primary', 'style' => 'visibility: hidden;'));
         $out .= $this->Form->end();
 
         return $out;

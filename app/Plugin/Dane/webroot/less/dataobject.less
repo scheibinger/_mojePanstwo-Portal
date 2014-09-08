@@ -29,24 +29,24 @@
             color: #333;
             width: 94%;
         }
-        
+
         .form-control::-webkit-input-placeholder {
             color: #AAA;
-		}
-		
-		.form-control:-moz-placeholder { /* Firefox 18- */
+        }
+
+        .form-control:-moz-placeholder {
+            /* Firefox 18- */
             color: #AAA;
-		}
-		
-		.form-control::-moz-placeholder {  /* Firefox 19+ */
+        }
+
+        .form-control::-moz-placeholder {
+            /* Firefox 19+ */
             color: #AAA;
-		}
-		
-		.form-control:-ms-input-placeholder {  
+        }
+
+        .form-control:-ms-input-placeholder {
             color: #AAA;
-		}
-        
-        
+        }
 
         .input-group-btn button {
             color: #FFFFFF;
@@ -191,36 +191,35 @@ blockquote {
 
 }
 
-
 .objectsPageContent {
-	.dataBrowser {
-		
-		&.emptyFilters {
-			
-			.dataFilters {
-				display: none;
-			}
-			
-			.dataObjects {
-				padding-left: 0;
-				padding-right: 0;
-				margin-left: 12.5%;
-			}
-			
-		}
-		
-		.dataFilters {
-			padding-top: 62px;
-			
-			> .header {
-	
-	            h2 {
-	                margin-top: -55px;
-	            }
-	        }
-		}
-		
-	}
+    .dataBrowser {
+
+        &.emptyFilters {
+
+            .dataFilters {
+                display: none;
+            }
+
+            .dataObjects {
+                padding-left: 0;
+                padding-right: 0;
+                margin-left: 12.5%;
+            }
+
+        }
+
+        .dataFilters {
+            padding-top: 62px;
+
+            > .header {
+
+                h2 {
+                    margin-top: -55px;
+                }
+            }
+        }
+
+    }
 }
 
 .dataBrowser {
@@ -268,22 +267,20 @@ blockquote {
 
             .radio, .checkbox {
                 margin-bottom: 15px;
-            }           
-						
+            }
+
             .filter {
-            
-            	
-            	&:hover {
-	            	.options {
-	                    > .option {
-	                        > .badge {
-	                        	color: #666;
-	                        }
-	                    }
-	                }
-	            }
-            	
-            	
+
+                &:hover {
+                    .options {
+                        > .option {
+                            .badge {
+                                color: #666;
+                            }
+                        }
+                    }
+                }
+
                 border-top: 1px solid #DDD;
                 padding-top: 10px;
                 margin-top: 10px;
@@ -305,17 +302,17 @@ blockquote {
                     overflow: auto;
 
                     label, a {
-                    	
-                    	span {
-	                    	color: lighten(#2e8f3e, 10%);
-						    font-size: 13px;
-						    margin-right: 2px;
-						    position: relative;
-						    top: 1px;
-						    -webkit-transition-duration: 0.5s; /* Safari */
-						    transition-duration: 0.5s;
-                    	}
-                    	
+
+                        span {
+                            color: lighten(#2e8f3e, 10%);
+                            font-size: 13px;
+                            margin-right: 2px;
+                            position: relative;
+                            top: 1px;
+                            -webkit-transition-duration: 0.5s; /* Safari */
+                            transition-duration: 0.5s;
+                        }
+
                         font-size: 16px;
                         margin-bottom: 8px;
                         float: left;
@@ -364,36 +361,41 @@ blockquote {
                     margin: 0;
 
                     > .option {
-                        padding: 3px 0 0;
+                        padding: 3px 0;
                         margin: 2px 0;
                         background: none;
                         border: none;
                         border-radius: 10px !important;
                         -webkit-border-radius: 10px !important;
-                        
-                        .checkbox-inline {
-	                        a {position: relative; top: -4px;}
+
+                        a {
+                            position: relative;
+                            display: block;
                         }
-                        
+
                         &:hover {
-	                        background-color: #E2E2E2;
-	                        
-	                        &.checkbox .checkbox-inline {
-		                        label {color: #157ab5;}
-	                        } 
-	                        
-	                        &.radio .radio-inline {
-	                        	label {color: #157ab5; }
-	                        }
+                            background-color: #E2E2E2;
+
+                            &.checkbox .checkbox-inline {
+                                label {
+                                    color: #157ab5;
+                                }
+                            }
+
+                            &.radio .radio-inline {
+                                label {
+                                    color: #157ab5;
+                                }
+                            }
                         }
-                        
+
                         &.active {
-	                        background-color: tomato;
-	                        color: #FFF;	                        
-	                        > .badge {
-	                        	color: #FAFAFA;
-	                        	display: none;
-	                        }
+                            background-color: tomato;
+                            color: #FFF;
+                            .badge {
+                                color: #FAFAFA;
+                                display: none;
+                            }
                         }
 
                         .sublink {
@@ -401,19 +403,19 @@ blockquote {
                             margin: 10px 0 -10px;
                         }
 
-                        > .badge {
+                        .badge {
                             position: absolute;
                             top: 50%;
                             right: 0;
                             margin-top: -9px;
                             height: 18px;
                             margin-right: 5px;
-                            
+
                             background-color: inherit !important;
                             color: #999;
-                            
+
                             -webkit-transition-duration: 0.5s; /* Safari */
-						    transition-duration: 0.5s;
+                            transition-duration: 0.5s;
                         }
 
                         &.checkbox {
@@ -424,8 +426,7 @@ blockquote {
                             padding-right: 60px;
                         }
                     }
-					
-                    
+
                     .option.checkbox .checkbox-inline, .option.radio .radio-inline {
                         padding-left: 0;
 
@@ -463,12 +464,12 @@ blockquote {
 
                             &:before {
                                 color: #fff !important;
-								content: "";
-								font-family: "mojePanstwo";
-								font-size: 11px;
-								left: -6px;
-								position: relative;
-								top: 0;
+                                content: "";
+                                font-family: "mojePanstwo";
+                                font-size: 11px;
+                                left: -6px;
+                                position: relative;
+                                top: 0;
                             }
                         }
                     }
@@ -519,114 +520,134 @@ blockquote {
             margin: 15px 0 0;
             padding: 5px 0;
             line-height: 1.1em;
-			
-			#innerSearch {
-				font-weight: 400;
-			}
-			
-			#innerSearch::-webkit-input-placeholder { /* WebKit browsers */
-			    color: #AAA;
-			}
-			#innerSearch:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-			    color: #AAA;
-			}
-			#innerSearch::-moz-placeholder { /* Mozilla Firefox 19+ */
-			    color: #AAA;
-			}
-			#innerSearch:-ms-input-placeholder { /* Internet Explorer 10+ */
-			    color: #AAA;
-			}
-			
-			.dataDidyoumean {
-				margin: 10px -2px 0px;
-				a {
-					margin: 0 2px;
-					font-weight: 400;
-				}
-			}
-			
-			.dataSubheader {
-				margin: 5px 0;
-				
-				
-				.dataStats {
-					
-					color: #999;
-				    font-family: "Lato",sans-serif;
-				    font-size: 12px;
-				    font-weight: 700;
-					
-					p {
-						margin: 5px;
-						padding: 5px;
-					}
-				}
-				
-				.dataSortings {
-				
-	                text-align: right;
-	                line-height: 2em;
-					
-					.glyphicon {
-						color: #AAA;
-						margin-right: 2px;
-						font-size: 11px;
-						position: relative;
-					}
-					
-	                .row {
-	                    input, strong, select {
-	                        float: right;
-	                        width: auto;
-	                        margin-left: 5px;
-	                        font-weight: 300;
-	                    }
-	                }
-	
-					.dataButtons {
-						
-						margin-top: 4px;
 
-						.btn-default {
-							background-color: #F6F6F6;
-						}
-						
-						
-					}
-					
-	                .dataSortingMenu {
-	                    margin-left: -135px;
-					    margin-top: -1px;
-					    min-width: 234px;
-	
-	                    &.dropdown-menu {
-	                        padding: 6px 10px;
-	                        background-color: #F3F3F3;
-	
-	                        li {
-	                            @spacing: 10px;
-	
-	                            font-family: "Lato", sans-serif;
-	                            font-size: 14px;
-	                            line-height: 1.2em;
-	                            display: block;
-	                            width: 100%;
-	
-	                            &.special {
-	                                &.result {
-	                                    display: inline-block;
-	                                    width: 100%;
-	                                }
-	
-	                                a {
-	                                    color: #157AB5;
-	                                    text-align: center;
-	                                    padding: @spacing 0;
-	                                }
-	                            }
-	
-	                            
-	
+            #innerSearch {
+                font-weight: 400;
+            }
+
+            #innerSearch::-webkit-input-placeholder {
+                /* WebKit browsers */
+                color: #AAA;
+            }
+            #innerSearch:-moz-placeholder {
+                /* Mozilla Firefox 4 to 18 */
+                color: #AAA;
+            }
+            #innerSearch::-moz-placeholder {
+                /* Mozilla Firefox 19+ */
+                color: #AAA;
+            }
+            #innerSearch:-ms-input-placeholder {
+                /* Internet Explorer 10+ */
+                color: #AAA;
+            }
+
+            .input-group-btn button {
+                @buttonWidth: 40px;
+
+                color: #FFFFFF;
+                display: block;
+                width: @buttonWidth;
+
+                &.loading {
+                    background: url(/img/loader/search-loading.png) center center no-repeat #5CB85C;
+
+                    span {
+                        width: @buttonWidth;
+
+                        &:before {
+                            content: ' ';
+                        }
+                    }
+                }
+            }
+
+            .dataDidyoumean {
+                margin: 10px -2px 0px;
+                a {
+                    margin: 0 2px;
+                    font-weight: 400;
+                }
+            }
+
+            .dataSubheader {
+                margin: 5px 0;
+
+                .dataStats {
+
+                    color: #999;
+                    font-family: "Lato", sans-serif;
+                    font-size: 12px;
+                    font-weight: 700;
+
+                    p {
+                        margin: 5px;
+                        padding: 5px;
+                    }
+                }
+
+                .dataSortings {
+
+                    text-align: right;
+                    line-height: 2em;
+
+                    .glyphicon {
+                        color: #AAA;
+                        margin-right: 2px;
+                        font-size: 11px;
+                        position: relative;
+                    }
+
+                    .row {
+                        input, strong, select {
+                            float: right;
+                            width: auto;
+                            margin-left: 5px;
+                            font-weight: 300;
+                        }
+                    }
+
+                    .dataButtons {
+
+                        margin-top: 4px;
+
+                        .btn-default {
+                            background-color: #F6F6F6;
+                        }
+
+                    }
+
+                    .dataSortingMenu {
+                        margin-left: -135px;
+                        margin-top: -1px;
+                        min-width: 234px;
+
+                        &.dropdown-menu {
+                            padding: 6px 10px;
+                            background-color: #F3F3F3;
+
+                            li {
+                                @spacing: 10px;
+
+                                font-family: "Lato", sans-serif;
+                                font-size: 14px;
+                                line-height: 1.2em;
+                                display: block;
+                                width: 100%;
+
+                                &.special {
+                                    &.result {
+                                        display: inline-block;
+                                        width: 100%;
+                                    }
+
+                                    a {
+                                        color: #157AB5;
+                                        text-align: center;
+                                        padding: @spacing 0;
+                                    }
+                                }
+
                                 > a {
                                     display: block;
                                     float: none;
@@ -634,12 +655,12 @@ blockquote {
                                     text-align: left;
                                 }
 
-	                        }
-	                    }
-	                }
-	            }
-			}
-            
+                            }
+                        }
+                    }
+                }
+            }
+
         }
 
         .innerContainer {
@@ -928,10 +949,10 @@ blockquote {
             margin: 0;
             padding: 3px 0 3px 10px;
             line-height: 20px;
-            
+
             em {
-				text-decoration: underline;
-			}
+                text-decoration: underline;
+            }
         }
 
         .signature {
@@ -975,7 +996,7 @@ blockquote {
                 font-size: 13px;
             }
         }
-		
+
         .description {
             margin: 10px;
         }
@@ -998,8 +1019,8 @@ blockquote {
         padding: 5px;
         margin: 5px;
         color: #999;
-	    font-size: 13px;
-	    font-style: italic;
+        font-size: 13px;
+        font-style: italic;
 
         &:before {
             color: #BBB;

@@ -3,16 +3,8 @@
     $field = $filter['filter']['field'];
     $name = str_replace('.', ':', $field);
     $value = array_key_exists($field, $conditions) ? $conditions[$field] : false;
-	
-	$href_base = '';
-	
-    if( $parts = explode('/', $this->request->url) ) {
-	    
-	    $parts = array_filter($parts);
-	    array_pop( $parts );
-	    $href_base = '/' . implode('/', $parts) . '/';
-	    
-    }
+
+    // debug($value, true, false);
 
     if (isset($facet['params']['options']) && is_array($facet['params']['options']) && !empty($facet['params']['options'])) {
         foreach ($facet['params']['options'] as $option) {
@@ -27,13 +19,13 @@
 
             ?>
             <li class="option checkbox list-group-item<? if ($checked) { ?> active<? } ?>">
-                <span class="badge"><?= $this->Number->currency($option['count'], '', array('places' => 0)) ?></span>
+                <a href="/dane/<?= $option['id'] ?><? if (isset($this->request->query['q'])) echo addslashes("?q=" . $this->request->query['q']); ?>"
+                   target="_self">
+                    <span
+                        class="badge"><?= $this->Number->currency($option['count'], '', array('places' => 0)) ?></span>
 
-                <div class="checkbox-inline">
-                    
-                    <a class="option" href="<?= $href_base . $option['id'] ?><? if( isset($this->request->query['q']) ) echo addslashes("?q=" . $this->request->query['q']); ?>"><?= $this->Text->truncate($option['label'], 45) ?></a>
-                    
-                </div>
+                    <div class="checkbox-inline"><?= $this->Text->truncate($option['label'], 45) ?></div>
+                </a>
             </li>
         <?
         }
