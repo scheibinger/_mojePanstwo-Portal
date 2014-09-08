@@ -117,7 +117,10 @@
                     }
                 },
                 open: function (ui) {
-                    $('#ui-id-' + (index + 1)).css('width', globalSearchInput.outerWidth() - 1);
+                    $('#ui-id-' + (index + 1)).css({
+                        'margin-top': ((globalSearchInput.position().top + globalSearchInput.outerHeight()) - parseInt($('#ui-id-' + (index + 1)).css('top'))) + 'px',
+                        'width': globalSearchInput.outerWidth() - 1
+                    });
                     globalSearchInput.addClass('open');
                     globalSearchBtn.removeClass('loading');
                 },
