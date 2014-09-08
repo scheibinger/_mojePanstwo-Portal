@@ -1,6 +1,7 @@
 <?
 $this->Combinator->add_libs('css', $this->Less->css('view-poslowie', array('plugin' => 'Dane')));
 $this->Combinator->add_libs('css', $this->Less->css('dataobjectslider', array('plugin' => 'Dane')));
+$this->Combinator->add_libs('js', 'jquery-tags-cloud-min');
 $this->Combinator->add_libs('js', 'Dane.view-poslowie.js');
 
 echo $this->Element('dataobject/pageBegin');
@@ -189,10 +190,41 @@ echo $this->Element('dataobject/pageBegin');
 
 
     <div class="col-lg-9 objectMain">
+    	
+    	<div class="objectSearch">
+	    	<div class="input-group">
+		        <form method="get" action="/dane/poslowie/<?= $object->getId() ?>/wystapienia">
+		            <input type="text" placeholder="Szukaj w aktywnościach <?= $object->getData('dopelniacz'); ?>..." autocomplete="off" class="form-control ui-autocomplete-input" name="q">
+		            <input type="submit" style="display: none;" name="submit" value="search">
+		            <span class="input-group-btn">
+		                <button data-icon="" type="button" class="btn btn-success btn-lg"></button>
+		            </span>
+		        </form>
+		    </div>
+    	</div>
+    	
         <div class="object mpanel">
-
+			
             <div class="block-group">
-
+				
+				<? if( isset($terms) && !empty($terms) ) {?>
+				<div class="block">
+					<div class="block-header">
+                        <h2 class="label">Charakterystyczne słowa w wystąpieniach</h2>
+                    </div>
+					
+					<ul class="objectTagsCloud row">
+			            <?
+			            foreach ($terms as $term) {
+			                $href = '/dane/poslowie/' . $object->getId() . '/wystapienia?q=' . addslashes( $term['key'] );
+		                ?>
+			                <li style="font-size: <?= $term['size'] ?>px;"><a href="<?= $href ?>"><?= $term['key'] ?></a></li>
+			            <? } ?>
+			        </ul>
+  
+				</div>
+				<? } ?>
+				
                 <? if ($projekty_za) { ?>
                     <div id="projekty_za" class="block">
                         <div class="block-header">

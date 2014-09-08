@@ -22,11 +22,9 @@
                 <span class="badge"><?= $this->Number->currency($option['count'], '', array('places' => 0)) ?></span>
 
                 <div class="checkbox-inline">
-                    <input<? if ($checked) { ?> checked="checked"<? } ?> id="<?= $fid ?>" type="checkbox"
-                                                                         name="<?= $name ?>[]"
-                                                                         value="<?= $option['id'] ?>"/>
-                    <label title="<?= addslashes($option['label']) ?>"
-                           for="<?= $fid ?>"><?= $this->Text->truncate($option['label'], 45) ?></label>
+                    
+                    <a class="option" href="<?= $option['id'] ?><? if( isset($this->request->query['q']) ) echo addslashes("?q=" . $this->request->query['q']); ?>"><?= $this->Text->truncate($option['label'], 45) ?></a>
+                    
                 </div>
             </li>
         <?

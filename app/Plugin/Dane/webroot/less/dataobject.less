@@ -1,5 +1,81 @@
 @colorLabel: #0783B8;
 
+.objectSearch {
+    @searchHeight: 45px;
+
+    font-weight: 400;
+    font-size: 18px;
+    margin-bottom: 1em;
+    color: #000000;
+
+    .input-group {
+        width: 100%;
+
+        input {
+            border-radius: 5px 0 0 5px;
+        }
+
+        .ui-autocomplete-input.open {
+            border-bottom-left-radius: 0;
+            -webkit-border-bottom-left-radius: 0;
+        }
+
+        .form-control, .input-group-btn button {
+            height: @searchHeight;
+            font-size: 16px;
+        }
+
+        .form-control {
+            color: #333;
+            width: 94%;
+        }
+        
+        .form-control::-webkit-input-placeholder {
+            color: #AAA;
+		}
+		
+		.form-control:-moz-placeholder { /* Firefox 18- */
+            color: #AAA;
+		}
+		
+		.form-control::-moz-placeholder {  /* Firefox 19+ */
+            color: #AAA;
+		}
+		
+		.form-control:-ms-input-placeholder {  
+            color: #AAA;
+		}
+        
+        
+
+        .input-group-btn button {
+            color: #FFFFFF;
+            width: @searchHeight + 10;
+            height: @searchHeight;
+            display: block;
+
+            &.loading {
+                background: url(/img/loader/search-loading.png) center center no-repeat #5CB85C;
+
+                &:before {
+                    content: ' ';
+                }
+            }
+        }
+    }
+}
+
+.objectTagsCloud {
+    width: 100%;
+    list-style: none;
+    overflow: hidden;
+    margin-bottom: 0;
+
+    li {
+        list-style: none;
+    }
+}
+
 .ui-datepicker {
     width: 263px;
     .ui-datepicker-title {
@@ -139,7 +215,7 @@ blockquote {
 			> .header {
 	
 	            h2 {
-	                margin-top: -16px;
+	                margin-top: -55px;
 	            }
 	        }
 		}
@@ -228,7 +304,7 @@ blockquote {
                 > .label_cont {
                     overflow: auto;
 
-                    label {
+                    label, a {
                     	
                     	span {
 	                    	color: lighten(#2e8f3e, 10%);
@@ -850,6 +926,10 @@ blockquote {
             margin: 0;
             padding: 3px 0 3px 10px;
             line-height: 20px;
+            
+            em {
+				text-decoration: underline;
+			}
         }
 
         .signature {
@@ -893,7 +973,7 @@ blockquote {
                 font-size: 13px;
             }
         }
-
+		
         .description {
             margin: 10px;
         }
