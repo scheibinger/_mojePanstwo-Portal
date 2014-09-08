@@ -12,10 +12,12 @@
                 $('<div></div>').addClass('_mojePanstwoCockpitSearchInput').append(
                     $('<div></div>').addClass('container').append(
                         $('<div></div>').addClass('col-md-12').append(
+
                             $('<form></form>').attr({'action': '/dane/szukaj', 'method': 'GET'}).append(
-                                $('<div></div>').addClass('col-md-12 searchFor').append(
+                                $('<div></div>').addClass('col-md-12 searchFor globalSearch').append(
+
                                     $('<div></div>').addClass('input-group').append(
-                                            $('<input>').attr({'type': 'text', 'name': 'q', 'placeholder': _mPHeart.globalSearch.placeholder, 'value': $("<div/>").html(_mPHeart.globalSearch.phrase).text()}).addClass('form-control input-lg')
+                                            $('<input>').attr({'type': 'text', 'name': 'q', 'autocomplete': 'off', 'placeholder': _mPHeart.globalSearch.placeholder, 'value': $("<div/>").html(_mPHeart.globalSearch.phrase).text()}).addClass('form-control input-lg')
                                         ).append(
                                             $('<span></span>').addClass('input-group-btn').append(
                                                 $('<button></button>').addClass('btn').attr('type', 'submit')
@@ -53,5 +55,98 @@
             searchEngineInput.stop(true, true).slideUp(400);
             $('#_main').stop(true, true).animate({'marginTop': '0'}, 400);
         }
-    })
+    });
+
+    var globalSearch;
+
+    if ((globalSearch = $('.globalSearch')).length) {
+        $.each($(".globalSearch"), function (index, block) {
+            var globalSearchInput = $(block).find('input.form-control'),
+                globalSearchBtn = $(block).find('.input-group-btn .btn'),
+                globalSearchCache = {};
+
+            globalSearchInput.autocomplete({
+                minLength: 2,
+                delay: 200,
+                source: function (request, response) {
+                    var term = request.term;
+
+                    globalSearchBtn = this.element.parents('form').find('.input-group-btn .btn');
+
+                    if (term in globalSearchCache) {
+                        response(globalSearchCache[ term ]);
+                    } else {
+                        globalSearchBtn.addClass('loading');
+                        $.getJSON("/dane/suggest.json?q=" + request.term, function (data) {
+
+                            var results = $.map(data.hits, function (item) {
+                                var shortTitleLimit = 200,
+                                    shortTitle = '';
+
+                                if ((item.title.length > shortTitleLimit) && (item.dataset != 'twitter')) {
+                                    shortTitle = item.title.substr(0, shortTitleLimit);
+                                    shortTitle = shortTitle.substr(0, Math.min(shortTitle.length, shortTitle.lastIndexOf(" "))) + '...';
+                                } else {
+                                    shortTitle = item.title;
+                                }
+
+                                return {
+                                    title: item.title,
+                                    shortTitle: shortTitle,
+                                    value: item.id,
+                                    link: item.dataset + '/' + item.id,
+                                    label: item.label
+                                };
+                            });
+
+                            globalSearchCache[ term ] = results;
+
+                            if (results.length == 0) {
+                                $('.ui-autocomplete').hide();
+                                globalSearchInput.removeClass('open');
+                                globalSearchBtn.removeClass('loading');
+                            } else {
+                                results.push({
+                                    title: 'Pełne wyszukiwanie',
+                                    shortTitle: 'Pełne wyszukiwanie',
+                                    value: 0,
+                                    link: 'szukaj?q=' + request.term,
+                                    label: ''
+                                });
+                                response(results);
+                            }
+                        });
+                    }
+                },
+                open: function (event, ui) {
+                    $('#ui-id-' + (index + 1)).css('width', globalSearchInput.width());
+                    globalSearchInput.addClass('open');
+                    globalSearchBtn.removeClass('loading');
+                },
+                close: function () {
+                    globalSearchInput.removeClass('open');
+                },
+                select: function (event, ui) {
+                    if (ui.item.value !== null) {
+                        globalSearchInput.val(ui.item.title);
+                    }
+                    return false;
+                }
+            });
+
+            globalSearchInput.data("ui-autocomplete")._renderItem = function (ul, item) {
+                return $('<li></li>').addClass("row")
+                    .append(
+                        $('<a></a>').attr({'href': '/dane/' + item.link, 'target': '_blank'})
+                            .append(
+                                $('<p></p>').addClass('col-xs-3 col-md-2').addClass('_label').html('<span class="label label-default label-sm">' + item.label + '</span>')
+                            )
+                            .append(
+                                $('<p></p>').addClass('col-md-9 col-md-10').addClass('_title').text(item.shortTitle)
+                            )
+                    )
+                    .appendTo(ul)
+            };
+        });
+    }
 })(jQuery);

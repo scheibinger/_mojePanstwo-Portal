@@ -29,7 +29,7 @@
 
             ?>
             <li class="option checkbox list-group-item<? if ($checked) { ?> active<? } ?>">
-                <span class="badge"><?= $this->Number->currency($option['count'], '', array('places' => 0)) ?></span>
+                
 
                 <div class="checkbox-inline">
                     
@@ -47,9 +47,12 @@
                     	}
                     ?>
                     
-                    <a class="option" href="<?= $href_base . $_dataset ?><? if( isset($this->request->query['q']) ) echo addslashes("?q=" . $this->request->query['q']); ?>"><?= $this->Text->truncate($_label, 45) ?></a>
+                    
+                    <a href="<?= $href_base . $_dataset ?><? if( isset($this->request->query['q']) ) echo addslashes("?q=" . $this->request->query['q']); ?>" target="_self"><?= $this->Text->truncate($_label, 45) ?></a>
+                    <span class="badge"><?= $this->Number->currency($option['count'], '', array('places' => 0)) ?></span>
                     
                 </div>
+
             </li>
         <?
         }
