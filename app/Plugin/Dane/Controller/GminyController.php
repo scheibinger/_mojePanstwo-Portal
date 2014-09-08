@@ -284,17 +284,17 @@ class GminyController extends DataobjectsController
 
         if (isset($this->request->params['pass'][0]) && is_numeric($this->request->params['pass'][0])) {
 
-            $posiedzenie = $this->API->getObject('rady_posiedzenia', $this->request->params['pass'][0], array(
+            $posiedzenie = $this->API->getObject('krakow_posiedzenia', $this->request->params['pass'][0], array(
                 'layers' => array('neighbours'),
             ));
             $this->set('posiedzenie', $posiedzenie);
             $this->set('title_for_layout', strip_tags($posiedzenie->getData('fullTitle')));
 
             $this->dataobjectsBrowserView(array(
-                'source' => 'rady_gmin_debaty.posiedzenie_id:' . $posiedzenie->getId(),
-                'dataset' => 'rady_gmin_debaty',
-                'title' => 'Debaty na tym posiedzeniu',
-                'noResultsTitle' => 'Brak debat na tym posiedzeniu',
+                'source' => 'krakow_posiedzenia.punkty:' . $posiedzenie->getId(),
+                'dataset' => 'krakow_posiedzenia_punkty',
+                'title' => 'Punkty porządku dziennego',
+                'noResultsTitle' => 'Brak punktów porządku dziennego',
                 'order' => 'numer asc',
                 /*
                 'excludeFilters' => array(
@@ -315,10 +315,10 @@ class GminyController extends DataobjectsController
         } else {
 
             $this->dataobjectsBrowserView(array(
-                'dataset' => 'rady_posiedzenia',
+                'dataset' => 'krakow_posiedzenia',
                 'title' => 'Posiedzenia',
                 'noResultsTitle' => 'Brak posiedzeń',
-                'hlFields' => array('numer', 'liczba_debat'),
+                // 'hlFields' => array('numer', 'liczba_debat'),
             ));
 
             $this->set('title_for_layout', 'Posiedzenia rady miasta ' . $this->object->getData('nazwa'));
