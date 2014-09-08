@@ -4,7 +4,8 @@ var DataObjectesAjax = {
     init: function () {
         this.setLanguage();
         this.HistoryMagic();
-        this.sniffFromClick();
+        this.sniffForClick();
+        this.sniffForWordChange();
         this.sorting();
         this.pageChange();
         this.submitChanger();
@@ -81,7 +82,7 @@ var DataObjectesAjax = {
         });
     },
     /*CHECK IF ANY OPTION WASN'T CHANGE - BY CLICK*/
-    sniffFromClick: function () {
+    sniffForClick: function () {
         var filters = jQuery('.dataBrowser').find('.dataFilters');
 
         filters.find('.option label').click(function (event) {
@@ -117,18 +118,23 @@ var DataObjectesAjax = {
                     jQuery(this).data('state', 'more').find('.text').text('Więcej szczegółów');
                     jQuery(this).find('.glyphicon').removeClass('glyphicon-minus').addClass('glyphicon-plus');
                     $('.dataBrowser .dataHighlights').stop(true, true).slideUp();
-
                 }
-
             });
-
         }
+    },
+    sniffForWordChange: function () {
+        var innerSearch;
 
+        if ((innerSearch = $('#innerSearch')).length) {
+            innerSearch.keyup(function () {
+                if (innerSearch.val() != innerSearch.data('last')) {
+                    innerSearch.data('last', innerSearch.val());
+                    setTimeout(DataObjectesAjax.objectsReload, 5);
+                }
+            })
+        }
     },
     submitChanger: function () {
-        /*HIDE SUBMIT AT FILTER WHEN PAGE USE JS*/
-        jQuery('.dataFilters .submit input').css('visibility', 'hidden');
-
         /*BLOCK SUBMIT OPTION AND SEND IT BY AJAX*/
         jQuery('#DatasetViewForm').submit(function (event) {
             event.preventDefault();
@@ -440,7 +446,7 @@ var DataObjectesAjax = {
                     }, { duration: delay });
 
                     /*RELOAD ASSIGNED FUNCTIONS*/
-                    DataObjectesAjax.sniffFromClick();
+                    DataObjectesAjax.sniffForClick();
                     DataObjectesAjax.pageChange();
                     DataObjectesAjax.submitChanger();
                     DataObjectesAjax.datepickerForInputs();

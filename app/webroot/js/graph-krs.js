@@ -330,6 +330,7 @@ var d3Data;
                 if (pan.hasClass('on')) {
                     pan.removeClass('on glyphicon-resize-small').addClass('glyphicon-resize-full');
                     connectionGraph.removeClass('fullscreen');
+
                 } else {
                     pan.addClass('on glyphicon-resize-small').removeClass('glyphicon-resize-full');
                     connectionGraph.addClass('fullscreen');

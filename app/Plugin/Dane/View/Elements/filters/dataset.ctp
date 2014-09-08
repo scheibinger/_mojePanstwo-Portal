@@ -19,13 +19,13 @@
 
             ?>
             <li class="option checkbox list-group-item<? if ($checked) { ?> active<? } ?>">
-                <span class="badge"><?= $this->Number->currency($option['count'], '', array('places' => 0)) ?></span>
+                <a href="/dane/<?= $option['id'] ?><? if (isset($this->request->query['q'])) echo addslashes("?q=" . $this->request->query['q']); ?>"
+                   target="_self">
+                    <span
+                        class="badge"><?= $this->Number->currency($option['count'], '', array('places' => 0)) ?></span>
 
-                <div class="checkbox-inline">
-                    
-                    <a class="option" href="<?= $option['id'] ?><? if( isset($this->request->query['q']) ) echo addslashes("?q=" . $this->request->query['q']); ?>"><?= $this->Text->truncate($option['label'], 45) ?></a>
-                    
-                </div>
+                    <div class="checkbox-inline"><?= $this->Text->truncate($option['label'], 45) ?></div>
+                </a>
             </li>
         <?
         }

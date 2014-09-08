@@ -82,9 +82,6 @@ msgstr "Szukaj"
 msgid "LC_SEARCH_DOTS"
 msgstr "Szukaj..."
 
-msgid "LC_SEARCH_FULL"
-msgstr "Pełne wyszukiwanie"
-
 msgid "LC_SEARCH_BRAK_WYNIKOW"
 msgstr "Brak wyników"
 
