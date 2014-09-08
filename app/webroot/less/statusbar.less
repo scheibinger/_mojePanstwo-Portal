@@ -593,6 +593,50 @@
         border-top: 1px solid #E3E3E3;
         display: inline-block;
 
+        &.button {
+            p {
+                text-align: center;
+
+                a.btn {
+                    color: #FFFFFF;
+                }
+            }
+
+            a {
+                color: #FFFFFF;
+                font-size: 13px;
+                padding: 8px 0;
+                text-transform: uppercase;
+
+                span {
+                    font-size: 16px;
+                    margin-right: 5px;
+                    position: relative;
+                    top: 3px;
+                }
+            }
+
+            .ui-state-hover, .ui-state-focus {
+                background-color: #5cb85c !important;
+                color: #FFFFFF;
+                padding: 8px 0;
+
+                > span {
+                    color: #FFFFFF;
+                }
+
+            }
+
+            .ui-menu .ui-menu-item a.ui-state-focus, .ui-menu .ui-menu-item a.ui-state-active {
+                color: #FFFFFF;
+                background-color: #5cb85c;
+
+                &.a, &.span {
+                    color: #FFFFFF;
+                }
+            }
+        }
+
         &:last-child {
             background-color: #428bca;
 
@@ -631,7 +675,7 @@
 
             &:hover, &:focus, &:active {
                 color: #FFFFFF;
-                background-color: #EEE;
+                background-color: #EEEEEE;
                 border: none;
                 margin: 0;
                 padding: 12px;
