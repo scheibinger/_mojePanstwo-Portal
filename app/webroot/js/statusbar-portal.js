@@ -91,6 +91,7 @@
                                 }
 
                                 return {
+                                    type: 'item',
                                     title: item.title,
                                     shortTitle: shortTitle,
                                     value: item.id,
@@ -107,26 +108,23 @@
                                 globalSearchBtn.removeClass('loading');
                             } else {
                                 results.push({
-                                    title: 'Pełne wyszukiwanie',
-                                    shortTitle: 'Pełne wyszukiwanie',
-                                    value: 0,
-                                    link: 'szukaj?q=' + request.term,
-                                    label: ''
+                                    type: 'button',
+                                    q: request.term
                                 });
                                 response(results);
                             }
                         });
                     }
                 },
-                open: function (event, ui) {
-                    $('#ui-id-' + (index + 1)).css('width', globalSearchInput.width());
+                open: function (ui) {
+                    $('#ui-id-' + (index + 1)).css('width', globalSearchInput.outerWidth() - 1);
                     globalSearchInput.addClass('open');
                     globalSearchBtn.removeClass('loading');
                 },
                 close: function () {
                     globalSearchInput.removeClass('open');
                 },
-                select: function (event, ui) {
+                select: function (ui) {
                     if (ui.item.value !== null) {
                         globalSearchInput.val(ui.item.title);
                     }
@@ -135,18 +133,26 @@
             });
 
             globalSearchInput.data("ui-autocomplete")._renderItem = function (ul, item) {
-                return $('<li></li>').addClass("row")
-                    .append(
-                        $('<a></a>').attr({'href': '/dane/' + item.link, 'target': '_blank'})
-                            .append(
-                                $('<p></p>').addClass('col-xs-3 col-md-2').addClass('_label').html('<span class="label label-default label-sm">' + item.label + '</span>')
-                            )
-                            .append(
-                                $('<p></p>').addClass('col-md-9 col-md-10').addClass('_title').text(item.shortTitle)
-                            )
-                    )
-                    .appendTo(ul)
-            };
+                if (item.type == 'item') {
+                    return $('<li></li>').addClass("row")
+                        .append(
+                            $('<a></a>').attr({'href': '/dane/' + item.link, 'target': '_blank'})
+                                .append(
+                                    $('<p></p>').addClass('col-xs-3 col-md-2').addClass('_label').html('<span class="label label-default label-sm">' + item.label + '</span>')
+                                )
+                                .append(
+                                    $('<p></p>').addClass('col-md-9 col-md-10').addClass('_title').text(item.shortTitle)
+                                )
+                        )
+                        .appendTo(ul)
+                } else if (item.type == 'button') {
+                    return $('<li></li>').addClass("row button").append(
+                            $('<a></a>').addClass('btn btn-success').attr({'href': '/dane/szukaj?q=' + item.q, 'target': '_self'}).html('<span class="glyphicon glyphicon-search"> </span> ' + _mPHeart.globalSearch.fullSearch)
+                        )
+                        .appendTo(ul);
+
+                }
+            }
         });
     }
 })(jQuery);

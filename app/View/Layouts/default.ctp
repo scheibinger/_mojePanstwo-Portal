@@ -160,7 +160,8 @@ echo $this->Html->script('../plugins/bootstrap-switch/bootstrap-switch.js');?>
         },
         globalSearch: {
             phrase: '<?php echo @htmlspecialchars($q) ?>',
-            placeholder: 'Szukaj w danych publicznych...'
+            placeholder: 'Szukaj w danych publicznych...',
+            fullSearch: 'Pełne szukanie'
         }
     }
 </script>

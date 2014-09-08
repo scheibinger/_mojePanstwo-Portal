@@ -1,142 +1,6 @@
 @import "variable";
 @import "statusbar-submenu.less";
 
-
-.ui-autocomplete {
-    @acFocusBackground: #FF6347;
-
-    -moz-border-top-left-radius: 0;
-    -moz-border-top-right-radius: 0;
-    -webkit-border-top-left-radius: 0;
-    -webkit-border-top-right-radius: 0;
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
-    border-color: #CCCCCC;
-    padding: 0;
-    border-top-width: 0;
-    background-color: #FCFCFC;
-
-	
-	
-    .ui-menu-item {
-        
-        border-top: 1px solid #E3E3E3;
-				
-		&.button {
-            p {
-	            text-align: center;
-	            
-	            a.btn {
-		            color: #FFF !important;
-	            }
-            }
-            
-			a {
-				
-				color: #fff !important;
-			    font-size: 13px;
-			    padding: 8px 0;
-			    text-transform: uppercase;
-				
-				span {
-					font-size: 16px;
-				    margin-right: 5px;
-				    position: relative;
-				    top: 3px;
-				}
-			}
-            
-            .ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus {
-                background-color: #5cb85c;
-                color: #FFFFFF;
-				
-                a, &.span {
-                    color: #FFFFFF !important;
-                }
-                
-            }
-
-            .ui-menu .ui-menu-item a.ui-state-focus, .ui-menu .ui-menu-item a.ui-state-active {
-                color: #FFFFFF;
-                background-color: #5cb85c;
-                
-                &.a, &.span {
-                    color: #FFFFFF !important;
-                }
-            }
-        }
-		
-		
-        a {
-            font-family: "Lato", sans-serif;
-            font-size: 14px;
-            font-weight: 400;
-            color: #333;
-            border-radius: 0;
-            -webkit-border-radius: 0;
-            border: none;
-            padding: 12px;
-            display: block;
-            float: left;
-            width: 100%;
-            margin: 0;
-
-            &:hover, &:focus, &:active {
-                color: #FFFFFF;
-                background-color: #EEE;
-                border: none;
-                margin: 0;
-                padding: 12px;
-            }
-
-            p {
-                margin: 0;
-
-                &._label {
-                    text-align: right;
-                    padding-right: 0;
-
-                    .label {
-                        background-color: inherit;
-                        color: #666;
-                        font-weight: 400;
-                        font-size: 11px;
-                        text-transform: uppercase;
-                    }
-                }
-
-                &._title {
-                    color: #428bca;
-                    font-weight: bold;
-                    font-size: 13px;
-                    margin-top: 2px;
-                    margin-bottom: -2px;
-                }
-            }
-        }
-    }
-}
-
-.ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus {
-    background-image: none;
-    background-color: #EEEEEE;
-    color: #333333;
-    margin: 0;
-    padding: 12px;
-    border: none;
-
-    span {
-        color: #333333;
-    }
-}
-
-.ui-menu .ui-menu-item a.ui-state-focus, .ui-menu .ui-menu-item a.ui-state-active {
-    margin: 0;
-    color: #333333;
-    padding: 12px;
-    background-color: #EEEEEE;
-}
-
 #_wrapper {
     .standardGradient();
 
@@ -225,21 +89,22 @@
                 }
 
                 .form-control::-webkit-input-placeholder {
-		            color: #AAA;
-				}
-				
-				.form-control:-moz-placeholder { /* Firefox 18- */
-		            color: #AAA;
-				}
-				
-				.form-control::-moz-placeholder {  /* Firefox 19+ */
-		            color: #AAA;
-				}
-				
-				.form-control:-ms-input-placeholder {  
-		            color: #AAA;
-				}
+                    color: #AAA;
+                }
 
+                .form-control:-moz-placeholder {
+                    /* Firefox 18- */
+                    color: #AAA;
+                }
+
+                .form-control::-moz-placeholder {
+                    /* Firefox 19+ */
+                    color: #AAA;
+                }
+
+                .form-control:-ms-input-placeholder {
+                    color: #AAA;
+                }
 
                 .input-group-btn button {
                     color: #FFFFFF;
