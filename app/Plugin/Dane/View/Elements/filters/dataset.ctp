@@ -3,8 +3,18 @@
     $field = $filter['filter']['field'];
     $name = str_replace('.', ':', $field);
     $value = array_key_exists($field, $conditions) ? $conditions[$field] : false;
-
-    // debug($value, true, false);
+	
+	$href_base = '';
+	
+	$dictionary = isset( $filter['filter']['dictionary'] ) ? $filter['filter']['dictionary'] : array();
+	
+    if( $parts = explode('/', $this->request->url) ) {
+	    
+	    $parts = array_filter($parts);
+	    array_pop( $parts );	    
+	    $href_base = '/' . implode('/', $parts) . '/';
+	    
+    }
 
     if (isset($facet['params']['options']) && is_array($facet['params']['options']) && !empty($facet['params']['options'])) {
         foreach ($facet['params']['options'] as $option) {
@@ -19,13 +29,27 @@
 
             ?>
             <li class="option checkbox list-group-item<? if ($checked) { ?> active<? } ?>">
-                <a href="/dane/<?= $option['id'] ?><? if (isset($this->request->query['q'])) echo addslashes("?q=" . $this->request->query['q']); ?>"
-                   target="_self">
-                    <span
-                        class="badge"><?= $this->Number->currency($option['count'], '', array('places' => 0)) ?></span>
+                <span class="badge"><?= $this->Number->currency($option['count'], '', array('places' => 0)) ?></span>
 
-                    <div class="checkbox-inline"><?= $this->Text->truncate($option['label'], 45) ?></div>
-                </a>
+                <div class="checkbox-inline">
+                    
+                    <?
+                    	
+                    	$_dataset = $option['id'];
+                    	$_label = $option['label'];
+                    	
+                    	if( array_key_exists($_dataset, $dictionary) ) {
+                    		
+                    		$_dictionary = $dictionary[ $_dataset ];
+                    		$_dataset = $_dictionary['href'];
+                    		$_label = $_dictionary['label'];
+                    			
+                    	}
+                    ?>
+                    
+                    <a class="option" href="<?= $href_base . $_dataset ?><? if( isset($this->request->query['q']) ) echo addslashes("?q=" . $this->request->query['q']); ?>"><?= $this->Text->truncate($_label, 45) ?></a>
+                    
+                </div>
             </li>
         <?
         }

@@ -24,6 +24,7 @@ class DataobjectsBrowserComponent extends Component
     
     public $dataset = false;
     public $datachannel = false;
+    public $dataset_dictionary = array();
 
     public $excludeFilters = array();
 
@@ -58,6 +59,9 @@ class DataobjectsBrowserComponent extends Component
 
         if (isset($settings['href']) && $settings['href'])
             $this->href = $settings['href'];
+            
+        if (isset($settings['dataset_dictionary']) && $settings['dataset_dictionary'] && is_array($settings['dataset_dictionary']))
+            $this->dataset_dictionary = $settings['dataset_dictionary'];
 
         if (isset($settings['titleTag']) && $settings['titleTag'])
             $this->titleTag = $settings['titleTag'];
@@ -224,6 +228,7 @@ class DataobjectsBrowserComponent extends Component
                         'direction' => isset($order_parts[1]) ? $order_parts[1] : 'desc',
                     );
                     $order['str'] = $order['field'] . ' ' . $order['direction'];
+                                        
                     break;
                 }
 
@@ -310,6 +315,8 @@ class DataobjectsBrowserComponent extends Component
 	                }
 	            }
 	            	
+	            
+	            	            
 	
 	            // ŁADOWANIE PRZEŁĄCZNIKÓW
 	            $switchers = $dataset['switchers'];
@@ -322,6 +329,8 @@ class DataobjectsBrowserComponent extends Component
 	
 	                }
 	            }
+	
+	
 	
 	
 	            // ŁADOWANIE FILTRÓW
@@ -389,6 +398,7 @@ class DataobjectsBrowserComponent extends Component
                     'label' => 'Zbiory danych:',
                     'desc' => false,
                     'multi' => '0',
+                    'dictionary' => $this->dataset_dictionary,
                 ),
             );
 
