@@ -6,10 +6,12 @@
 	
 	$href_base = '';
 	
+	$dictionary = isset( $filter['filter']['dictionary'] ) ? $filter['filter']['dictionary'] : array();
+	
     if( $parts = explode('/', $this->request->url) ) {
 	    
 	    $parts = array_filter($parts);
-	    array_pop( $parts );
+	    array_pop( $parts );	    
 	    $href_base = '/' . implode('/', $parts) . '/';
 	    
     }
@@ -31,7 +33,21 @@
 
                 <div class="checkbox-inline">
                     
-                    <a class="option" href="<?= $href_base . $option['id'] ?><? if( isset($this->request->query['q']) ) echo addslashes("?q=" . $this->request->query['q']); ?>"><?= $this->Text->truncate($option['label'], 45) ?></a>
+                    <?
+                    	
+                    	$_dataset = $option['id'];
+                    	$_label = $option['label'];
+                    	
+                    	if( array_key_exists($_dataset, $dictionary) ) {
+                    		
+                    		$_dictionary = $dictionary[ $_dataset ];
+                    		$_dataset = $_dictionary['href'];
+                    		$_label = $_dictionary['label'];
+                    			
+                    	}
+                    ?>
+                    
+                    <a class="option" href="<?= $href_base . $_dataset ?><? if( isset($this->request->query['q']) ) echo addslashes("?q=" . $this->request->query['q']); ?>"><?= $this->Text->truncate($_label, 45) ?></a>
                     
                 </div>
             </li>

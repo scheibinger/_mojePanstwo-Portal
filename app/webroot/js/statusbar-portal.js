@@ -12,7 +12,7 @@
                 $('<div></div>').addClass('_mojePanstwoCockpitSearchInput').append(
                     $('<div></div>').addClass('container').append(
                         $('<div></div>').addClass('col-md-12').append(
-                            $('<form></form>').attr({'action': '/dane', 'method': 'GET'}).append(
+                            $('<form></form>').attr({'action': '/dane/szukaj', 'method': 'GET'}).append(
                                 $('<div></div>').addClass('col-md-12 searchFor').append(
                                     $('<div></div>').addClass('input-group').append(
                                             $('<input>').attr({'type': 'text', 'name': 'q', 'placeholder': _mPHeart.globalSearch.placeholder, 'value': $("<div/>").html(_mPHeart.globalSearch.phrase).text()}).addClass('form-control input-lg')

@@ -295,6 +295,7 @@ class GminyController extends DataobjectsController
                 'dataset' => 'rady_gmin_debaty',
                 'title' => 'Debaty na tym posiedzeniu',
                 'noResultsTitle' => 'Brak debat na tym posiedzeniu',
+                'order' => 'numer asc',
                 /*
                 'excludeFilters' => array(
                     'grupa_id',

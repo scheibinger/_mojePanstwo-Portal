@@ -266,6 +266,12 @@ class PoslowieController extends DataobjectsController
         parent::_prepareView();
         $this->dataobjectsBrowserView(array(
             'source' => 'poslowie.aktywnosci:' . $this->object->getId(),
+            'dataset_dictionary' => array(
+            	'sejm_wystapienia' => array(
+            		'href' => 'wystapienia',
+            		'label' => 'Wystąpienia w Sejmie',
+            	),
+            ),
         ));
     }
 
