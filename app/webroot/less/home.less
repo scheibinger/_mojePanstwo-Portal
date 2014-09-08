@@ -225,8 +225,21 @@
                 }
 
                 .form-control::-webkit-input-placeholder {
-                    color: #999;
-                }
+		            color: #AAA;
+				}
+				
+				.form-control:-moz-placeholder { /* Firefox 18- */
+		            color: #AAA;
+				}
+				
+				.form-control::-moz-placeholder {  /* Firefox 19+ */
+		            color: #AAA;
+				}
+				
+				.form-control:-ms-input-placeholder {  
+		            color: #AAA;
+				}
+
 
                 .input-group-btn button {
                     color: #FFFFFF;

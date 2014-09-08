@@ -15,9 +15,30 @@ class PoslowieController extends DataobjectsController
 
     public function view()
     {
-
+		
+        $this->addInitLayers(array('terms'));
         parent::view();
-
+		
+		if( ($terms = $this->object->getLayer('terms')) && !empty($terms) ) {
+			
+			$font = array(
+	            'min' => 15,
+	            'max' => 100,
+	        );
+	        $font['diff'] = $font['max'] - $font['min'];
+	
+			
+			foreach( $terms as &$term )
+				$term['size'] = $font['min'] + $font['diff'] * $term['norm_score'];
+			
+								
+	        shuffle( $terms );
+			$this->set('terms', $terms);
+			
+		} 
+				
+		
+		
         $this->API->searchDataset('prawo_projekty', array(
             'limit' => 8,
             'conditions' => array(
@@ -516,7 +537,8 @@ class PoslowieController extends DataobjectsController
         $this->set('_serialize', 'data');
 
     }
-
+	
+	
     public function beforeRender()
     {
 
@@ -530,11 +552,41 @@ class PoslowieController extends DataobjectsController
                 array(
                     'id' => '',
                     'href' => $href_base,
-                    'label' => 'Prace w Sejmie',
+                    'label' => 'Podsumowanie',
                 ),
             )
         );
-
+		
+		$menu['items'][] = array(
+            'id' => 'aktywnosci',
+            'label' => 'Aktywności',
+            'dropdown' => array(
+            	'items' => array(
+            		array(
+	            		'id' => 'wszystkie',
+			            'href' => $href_base . '/aktywnosci',
+						'label' => 'Wszystkie',
+					),
+					array(
+                        'topborder' => true,
+	            		'id' => 'wystapienia',
+			            'href' => $href_base . '/wystapienia',
+						'label' => 'Wystąpienia',
+					),
+					array(
+	            		'id' => 'glosowania',
+			            'href' => $href_base . '/glosowania',
+						'label' => 'Wyniki głosowsań',
+					),
+					array(
+	            		'id' => 'interpelacje',
+			            'href' => $href_base . '/interpelacje',
+						'label' => 'Interpelacje',
+					),
+	           	),
+            ),
+        );
+		
         $menu['items'][] = array(
             'id' => 'finanse',
             'href' => $href_base . '/finanse',
