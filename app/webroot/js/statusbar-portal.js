@@ -117,8 +117,9 @@
                     }
                 },
                 open: function (ui) {
+                    console.log(globalSearchInput.offset().top, globalSearchInput.outerHeight(), parseInt($('#ui-id-' + (index + 1)).css('top')));
                     $('#ui-id-' + (index + 1)).css({
-                        'margin-top': ((globalSearchInput.position().top + globalSearchInput.outerHeight()) - parseInt($('#ui-id-' + (index + 1)).css('top'))) + 'px',
+                        'margin-top': Math.floor((globalSearchInput.offset().top + globalSearchInput.outerHeight()) - parseInt($('#ui-id-' + (index + 1)).css('top'))) + 'px',
                         'width': globalSearchInput.outerWidth() - 1
                     });
                     globalSearchInput.addClass('open');
