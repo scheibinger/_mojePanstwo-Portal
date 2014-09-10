@@ -1,6 +1,8 @@
 /*global translation*/
 
 var DataObjectesAjax = {
+    ajaxRequest: null,
+
     init: function () {
         this.setLanguage();
         this.HistoryMagic();
@@ -129,7 +131,7 @@ var DataObjectesAjax = {
             innerSearch.keyup(function () {
                 if (innerSearch.val() != innerSearch.data('last')) {
                     innerSearch.data('last', innerSearch.val());
-                    setTimeout(DataObjectesAjax.objectsReload, 5);
+                    setTimeout(DataObjectesAjax.objectsReload, 500);
                 }
             })
         }
@@ -178,7 +180,7 @@ var DataObjectesAjax = {
 
         filters.find('.jquery-datepicker').each(function () {
             jQuery(this).datepicker();
-        })
+        });
 
         filters.find('.dates').each(function () {
             var that = jQuery(this),
@@ -394,76 +396,96 @@ var DataObjectesAjax = {
         if (typeof(paramArray) == 'object')
             paramArray = paramArray.join("&");
 
-        jQuery.ajax({
+        if (DataObjectesAjax.ajaxRequest && DataObjectesAjax.ajaxRequest.readyState != 4) {
+            DataObjectesAjax.ajaxRequest.abort();
+        }
+
+        DataObjectesAjax.ajaxRequest = jQuery.ajax({
             type: 'GET',
             url: formAction + '.json?' + paramArray,
             dataType: 'JSON',
             beforeSend: function () {
-                main.append(jQuery('<div><div class="spinner"><div class="bounce1"></div><div class="bounce2"></div><div class="bounce3"></div></div><p>Ładowanie ...</p></div>').addClass('loadingTwirl'));
-                objects.find('.innerContainer').children().animate({
-                    opacity: 0.5
-                }, { duration: delay, queue: false });
+                if (main.find('.spinner').length == 0) {
+                    main.append(
+                        jQuery('<div></div>').addClass('loadingBlock loadingTwirl').append(
+                                jQuery('<div></div>').addClass('spinner').append(
+                                        jQuery('<div></div>').addClass('bounce1')
+                                    ).append(
+                                        jQuery('<div></div>').addClass('bounce2')
+                                    ).append(
+                                        jQuery('<div></div>').addClass('bounce3')
+                                    )
+                            ).append(
+                                jQuery('<p></p>').text("Ładowanie...")
+                            )
+                    );
+                    objects.find('.innerContainer').children().animate({
+                        opacity: 0.5
+                    }, { duration: delay, queue: false });
+                }
             },
             complete: function (status) {
                 var modal,
-                    modalBackground,
                     data = status.responseJSON;
 
-                /*CLOSE ALL MODAL THINGS*/
-                if ((modal = jQuery('.modal')).is(':visible')) {
-                    modal.modal('hide');
-                    jQuery('.modal-backdrop').fadeOut(300, function () {
-                        jQuery(this).remove();
-                    });
-                    jQuery('body').removeClass('modal-open');
-                }
-
-                /*REMOVE LOADING TWIRL*/
-                main.find('.loadingTwirl').remove();
-
-                /*RELOAD FILTERS CONTENT WITH DATA FROM AJAX*/
-                $('.update-filters').replaceWith(data.filters);
-                filtersController();
-
-                /*RELOAD HEADER CONTENT WITH DATA FROM AJAX*/
-                $('.update-header').html(data.header).end();
-                DataObjectesAjax.sorting();
-
-                /*CHANGE PAGINATION LIST*/
-                $('.update-pagination').html(data.pagination);
-
-                /*RELOAD OBJECT CONTENT WITH DATA FROM AJAX*/
-                objects.find('.innerContainer').children().animate({
-                    opacity: 0
-                }, delay, function () {
-                    if (data.objects == null) {
-                        objects.find('.update-objects').html('<p class="noResults">' + _mPHeart.translation.LC_DANE_BRAK_WYNIKOW + '</p>');
-                    } else {
-                        objects.find('.update-objects').html(data.objects);
+                if (DataObjectesAjax.ajaxRequest && (DataObjectesAjax.ajaxRequest.readyState == 4)) {
+                    /*CLOSE ALL MODAL THINGS*/
+                    if ((modal = jQuery('.modal')).is(':visible')) {
+                        modal.modal('hide');
+                        jQuery('.modal-backdrop').fadeOut(300, function () {
+                            jQuery(this).remove();
+                        });
+                        jQuery('body').removeClass('modal-open');
                     }
-                    objects.find('.innerContainer').children().css('opacity', 0).animate({
-                        opacity: 1
-                    }, { duration: delay });
 
-                    /*RELOAD ASSIGNED FUNCTIONS*/
-                    DataObjectesAjax.sniffForClick();
-                    DataObjectesAjax.pageChange();
-                    DataObjectesAjax.submitChanger();
-                    DataObjectesAjax.datepickerForInputs();
-                    DataObjectesAjax.removeHiddenInput();
-                    DataObjectesAjax.buttonSearchWithoutPhrase();
+                    /*REMOVE LOADING TWIRL*/
+                    main.find('.loadingTwirl').remove();
 
-                    DataObjectesAjax.sortingAddRemoveOptions();
-                    DataObjectesAjax.specialCase();
+                    /*RELOAD FILTERS CONTENT WITH DATA FROM AJAX*/
+                    $('.update-filters').replaceWith(data.filters);
+                    filtersController();
 
-                    if (focusInput !== undefined)
-                        DataObjectesAjax.setCaretAtEnd(focusInput);
-                });
+                    /*RELOAD HEADER CONTENT WITH DATA FROM AJAX*/
+                    $('.update-header').html(data.header).end();
+                    DataObjectesAjax.sorting();
 
-                /*ANIMATE SCROLL TO TOP OF PAGE*/
-                jQuery('body, html').animate({
-                    scrollTop: 0
-                }, 800);
+                    /*CHANGE PAGINATION LIST*/
+                    $('.update-pagination').html(data.pagination);
+
+                    /*RELOAD OBJECT CONTENT WITH DATA FROM AJAX*/
+                    objects.find('.innerContainer').children().animate({
+                        opacity: 0
+                    }, delay, function () {
+                        if (data.objects == null) {
+                            objects.find('.update-objects').html('<p class="noResults">' + _mPHeart.translation.LC_DANE_BRAK_WYNIKOW + '</p>');
+                        } else {
+                            objects.find('.update-objects').html(data.objects);
+                        }
+                        objects.find('.innerContainer').children().css('opacity', 0).animate({
+                            opacity: 1
+                        }, { duration: delay });
+
+                        /*RELOAD ASSIGNED FUNCTIONS*/
+                        DataObjectesAjax.sniffForClick();
+                        DataObjectesAjax.pageChange();
+                        DataObjectesAjax.sniffForWordChange();
+                        DataObjectesAjax.submitChanger();
+                        DataObjectesAjax.datepickerForInputs();
+                        DataObjectesAjax.removeHiddenInput();
+                        DataObjectesAjax.buttonSearchWithoutPhrase();
+
+                        DataObjectesAjax.sortingAddRemoveOptions();
+                        DataObjectesAjax.specialCase();
+
+                        if (focusInput !== undefined)
+                            DataObjectesAjax.setCaretAtEnd(focusInput);
+                    });
+
+                    /*ANIMATE SCROLL TO TOP OF PAGE*/
+                    jQuery('body, html').animate({
+                        scrollTop: 0
+                    }, 800);
+                }
             }
         });
     },
