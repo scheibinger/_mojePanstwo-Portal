@@ -64,6 +64,11 @@ function loadScript() {
 
 $(document).ready(function () {
     
+    $('.objectTagsCloud').cloud({
+	    hwratio: .3,
+	    fog: .4
+	});  
+    
     var banner = $('.profile_baner'),
         menu = $('.objectsPageContent .objectMenu'),
         menuAutoScroll = true,
