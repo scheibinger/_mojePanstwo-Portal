@@ -67,9 +67,13 @@ class GminyController extends DataobjectsController
 
     public function view()
     {
-
-        $this->addInitLayers(array('rada_komitety', 'szef', '', '', ''));
-
+		
+		$_layers = array('rada_komitety', 'szef');
+		if( $this->request->params['id']=='903' )
+			$_layers[] = 'ostatnie_posiedzenie';
+		
+        $this->addInitLayers( $_layers );
+		
         parent::view();
 
         $menu = array(
@@ -167,7 +171,8 @@ class GminyController extends DataobjectsController
             ));
             $this->set('rady_druki', $this->API->getObjects());
             */
-
+			
+			/*
             $this->API->searchDataset('rady_posiedzenia', array(
                 'limit' => 12,
                 'conditions' => array(
@@ -175,7 +180,7 @@ class GminyController extends DataobjectsController
                 ),
             ));
             $this->set('rady_posiedzenia', $this->API->getObjects());
-
+			*/
 
             $this->API->searchDataset('prawo_lokalne', array(
                 'limit' => 8,
