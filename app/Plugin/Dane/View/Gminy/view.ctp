@@ -1,3 +1,4 @@
+<?php $this->Combinator->add_libs('js', 'jquery-tags-cloud-min'); ?>
 <?php $this->Combinator->add_libs('css', $this->Less->css('view-gminy', array('plugin' => 'Dane'))); ?>
 <?php $this->Combinator->add_libs('css', $this->Less->css('dataobjectslider', array('plugin' => 'Dane'))) ?>
 <?php if ($object->getId() == '903') $this->Combinator->add_libs('css', $this->Less->css('view-gminy-krakow', array('plugin' => 'Dane'))); ?>
@@ -117,7 +118,46 @@ echo $this->Element('dataobject/pageBegin');
 <div class="object mpanel">
 
 <div class="block-group">
-<?php if ($object->getId() == '903') { ?>
+<?php if ( ($object->getId() == '903') && ($posiedzenie = $object->getLayer('ostatnie_posiedzenie')) && !empty($posiedzenie['data']) && !empty($posiedzenie['terms']) ) { ?>
+	
+	<div id="prawo" class="block">
+        <div class="block-header">
+            <h2 class="pull-left label">Tematy na <a href="/dane/gminy/903/posiedzenia/<?= $posiedzenie['data']['id'] ?>">ostatnim posiedzeniu Rady Miasta</a></h2>
+            <a class="btn btn-default btn-sm pull-right"
+               href="<?= Router::url(array('action' => 'posiedzenia', 'id' => $object->getId())) ?>">
+                Wszystkie posiedzenia</a>
+        </div>
+
+        <div class="content">
+            
+            <ul class="objectTagsCloud row">
+		        <?
+		        
+		        $font = array(
+		            'min' => 15,
+		            'max' => 100,
+		        );
+		        $font['diff'] = $font['max'] - $font['min'];
+		
+				$terms = $posiedzenie['terms'];
+				
+				
+				foreach( $terms as &$term )
+					$term['size'] = $font['min'] + $font['diff'] * $term['norm_score'];
+				
+									
+		        shuffle( $terms );
+		        
+		        foreach ($terms as $term) {
+		            $href = '/dane/gminy/903/posiedzenia/' . $posiedzenie['data']['id'] . '/punkty?q=' . addslashes( $term['key'] );
+		        ?>
+		            <li style="font-size: <?= $term['size'] ?>px;"><a href="<?= $href ?>"><?= $term['key'] ?></a></li>
+		        <? } ?>
+		    </ul>
+            
+        </div>
+    </div>
+	
     <div class="special banner">
         <a title="Zobacz umowy podpisywane przez Komitet Konkursowy Kraków 2022" href="/dane/krs_podmioty/481129/umowy">
             <img src="/Dane/img/krakow_special_banner.png" width="885" height="85"/>
@@ -249,6 +289,8 @@ echo $this->Element('dataobject/pageBegin');
 
 
 <? if ($object->getId() == 903) { ?>
+    
+    <? /*
     <div id="rada" class="block">
         <div class="block-header">
             <h2 class="pull-left label">Posiedzenia rady miasta</h2>
@@ -270,6 +312,7 @@ echo $this->Element('dataobject/pageBegin');
             </div>
         </div>
     </div>
+    */ ?>
 
     <div id="prawo" class="block">
         <div class="block-header">
