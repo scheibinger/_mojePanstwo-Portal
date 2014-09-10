@@ -48,7 +48,7 @@
                     ?>
                     
                     
-                    <a href="<?= $href_base . $_dataset ?><? if( isset($this->request->query['q']) ) echo addslashes("?q=" . $this->request->query['q']); ?>" target="_self"><?= $this->Text->truncate($_label, 45) ?></a>
+                    <a href="<?= $href_base . $_dataset ?><? if( isset($this->request->query['q']) ) echo addslashes("?q=" . $this->request->query['q']); ?>" target="_self"><?= $this->Text->truncate($_label, 27) ?></a>
                     <span class="badge"><?= $this->Number->currency($option['count'], '', array('places' => 0)) ?></span>
                     
                 </div>

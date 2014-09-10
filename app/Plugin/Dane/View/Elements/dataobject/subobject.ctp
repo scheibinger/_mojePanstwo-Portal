@@ -1,5 +1,5 @@
 <div class="objectPageHeaderContainer subobjectContainer">
-    <div class="container">
+    <div class="container" style="width: inherit;">
         <div class="col-md-11">
             <div class="objectPageHeader">
                 <?php

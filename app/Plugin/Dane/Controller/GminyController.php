@@ -283,34 +283,72 @@ class GminyController extends DataobjectsController
         $this->request->params['action'] = 'posiedzenia';
 
         if (isset($this->request->params['pass'][0]) && is_numeric($this->request->params['pass'][0])) {
-
+			
+			$subaction = (isset($this->request->params['pass'][1]) && $this->request->params['pass'][1]) ? $this->request->params['pass'][1] : 'view';
+            $sub_id = (isset($this->request->params['pass'][2]) && $this->request->params['pass'][2]) ? $this->request->params['pass'][2] : false;
+			
+			
+			
             $posiedzenie = $this->API->getObject('krakow_posiedzenia', $this->request->params['pass'][0], array(
-                'layers' => array('neighbours'),
+                'layers' => array('neighbours', 'terms'),
             ));
+            
+            
             $this->set('posiedzenie', $posiedzenie);
             $this->set('title_for_layout', strip_tags($posiedzenie->getData('fullTitle')));
+						
 
-            $this->dataobjectsBrowserView(array(
-                'source' => 'krakow_posiedzenia.punkty:' . $posiedzenie->getId(),
-                'dataset' => 'krakow_posiedzenia_punkty',
-                'title' => 'Punkty porządku dziennego',
-                'noResultsTitle' => 'Brak punktów porządku dziennego',
-                'order' => 'numer asc',
-                /*
-                'excludeFilters' => array(
-                    'grupa_id',
-                    'kategoria_id',
-                ),
-                */
-                // 'hlFields' => array('numer_punktu', 'opis'),
-                'hlFields' => array(),
-                'routes' => array(
-                    'date' => false,
-                ),
-                'limit' => 100,
-            ));
 
-            $this->render('posiedzenie');
+			
+			
+			
+			/*
+            $submenu['items'][] = array(
+                'id' => 'przebieg',
+                'label' => 'Przebieg posiedzenia',
+                'dropdown' => array(
+                	'items' => array(
+                		array(
+	                		'id' => 'punkty',
+			                'href' => '/dane/gminy/903/posiedzenia/' . $this->request->params['pass'][0] . '/punkty',
+			                'label' => 'Punkty porządku dziennego',
+		                ),
+                	),
+                ),
+            );
+            */            
+
+            
+			$render_view = 'punkty';
+			$subaction = 'punkty';
+			
+			switch( $subaction ) {			
+				
+				case "punkty": {
+					
+					$submenu['selected'] = 'punkty';
+					$render_view = 'posiedzenie-punkty';
+					
+					$this->dataobjectsBrowserView(array(
+		                'source' => 'krakow_posiedzenia.punkty:' . $posiedzenie->getId(),
+		                'dataset' => 'krakow_posiedzenia_punkty',
+		                'title' => 'Punkty porządku dziennego',
+		                'noResultsTitle' => 'Brak punktów porządku dziennego',
+		                'order' => '_ord asc',
+		                'routes' => array(
+		                    'date' => false,
+		                ),
+		                'limit' => 100,
+		            ));		            
+					
+					break;
+					
+				}
+				
+			}
+			
+			$this->render( $render_view );
+			            
 
         } else {
 
@@ -326,25 +364,28 @@ class GminyController extends DataobjectsController
         }
     }
 
-    public function debaty()
+    public function punkty()
     {
-        $this->request->params['action'] = 'debaty';
+        $this->request->params['action'] = 'punkty';
         $this->_prepareView();
 
         if (isset($this->request->params['pass'][0]) && is_numeric($this->request->params['pass'][0])) {
 
-            $debata = $this->API->getObject('rady_gmin_debaty', $this->request->params['pass'][0], array(
-                'layers' => array('neighbours', 'wystapienia'),
+            $debata = $this->API->getObject('krakow_posiedzenia_punkty', $this->request->params['pass'][0], array(
+                'layers' => array('neighbours', 'wystapienia', 'wyniki_glosowania'),
             ));
+                        
             $this->set('debata', $debata);
-
+			
+			/*
             $_wystapienia = $debata->getLayer('wystapienia');
             $wystapienia = array();
             foreach ($_wystapienia as $wystapienie) {
                 $wystapienia[$wystapienie['rady_posiedzenia_wystapienia']['id']] = array('mowca_str' => $wystapienie['rady_posiedzenia_wystapienia']['mowca_str'], 'video_start' => $wystapienie['rady_posiedzenia_wystapienia']['video_start']);
             }
             $this->set('wystapienia', $wystapienia);
-
+			*/
+			
             $this->set('title_for_layout', $debata->getTitle());
 
             $this->render('debata');
@@ -522,6 +563,18 @@ class GminyController extends DataobjectsController
 
                     break;
                 }
+                case 'glosowania':
+                {
+
+                    $this->dataobjectsBrowserView(array(
+                        'source' => 'radni_gmin.glosy:' . $radny->getId(),
+                        'dataset' => 'krakow_glosowania_glosy',
+                        'noResultsTitle' => 'Brak głosowań',
+                        // 'hlFields' => array('dzielnice.nazwa', 'liczba_glosow'),
+                    ));
+
+                    break;
+                }
                 case 'interpelacje':
                 {
 
@@ -598,6 +651,13 @@ class GminyController extends DataobjectsController
                         'label' => 'Wystąpienia',
                         'count' => $radny->getData('liczba_wystapien'),
                     );
+                    
+                $submenu['items'][] = array(
+                    'id' => 'glosowania',
+                    'href' => $href_base . '/glosowania',
+                    'label' => 'Wyniki głosowań',
+                    // 'count' => $radny->getData('liczba_wystapien'),
+                );
 
                 if ($radny->getData('liczba_interpelacji'))
                     $submenu['items'][] = array(
@@ -657,6 +717,42 @@ class GminyController extends DataobjectsController
             'title' => 'Radni dzielnic',
             'noResultsTitle' => 'Brak radnych dzielnic dla tej gminy',
             'hlFields' => array('dzielnice.nazwa', 'liczba_glosow'),
+        ));
+    }
+    
+    
+    public function szukaj()
+    {
+        $this->_prepareView();
+        $this->dataobjectsBrowserView(array(
+            'source' => 'gminy.szukaj:' . $this->object->getId(),
+            'noResultsTitle' => 'Brak wyników',
+            'dataset_dictionary' => array(
+            	'krakow_posiedzenia_punkty' => array(
+            		'href' => 'punkty',
+            		'label' => 'Punkty porządku dziennego',
+            	),
+            	'zamowienia_publiczne' => array(
+            		'href' => 'zamowienia',
+            		'label' => 'Zamówienia publiczne',
+            	),
+            	'rady_gmin_interpelacje' => array(
+            		'href' => 'interpelacje',
+            		'label' => 'Interpelacje radnych',
+            	),
+            	'rady_druki' => array(
+            		'href' => 'druki',
+            		'label' => 'Druki',
+            	),
+            	'radni_gmin' => array(
+            		'href' => 'radni',
+            		'label' => 'Radni',
+            	),
+            	'krakow_posiedzenia' => array(
+            		'href' => 'posiedzenia',
+            		'label' => 'Posiedzenia Rady Miasta',
+            	),
+            ),
         ));
     }
 
@@ -854,6 +950,8 @@ class GminyController extends DataobjectsController
 
     public function beforeRender()
     {
+    
+    	
         // PREPARE MENU
         $href_base = $this->object->getUrl();
 
@@ -892,8 +990,8 @@ class GminyController extends DataobjectsController
                         ),
                         array(
                             'id' => 'debaty',
-                            'label' => 'Debaty na posiedzeniach',
-                            'href' => $href_base . '/debaty',
+                            'label' => 'Punkty porządku dziennego na posiedzeniach',
+                            'href' => $href_base . '/punkty',
                         ),
                         /*
                         array(
@@ -975,6 +1073,7 @@ class GminyController extends DataobjectsController
             'id' => 'zamowienia',
             'href' => $href_base . '/zamowienia',
             'label' => 'Zamówienia publiczne',
+            'icon' => '',
         );
 
         $menu['items'][] = array(
@@ -1004,7 +1103,16 @@ class GminyController extends DataobjectsController
             'label' => 'Kody pocztowe',
         );
         */
-
+		
+		if( $this->request->params['action']=='szukaj' ) {
+			
+			$menu['items'][] = array(
+	            'id' => 'szukaj',
+	            'href' => $href_base . '/szukaj',
+	            'label' => 'Szukaj',
+	        );
+			
+		}
 
         $menu['selected'] = ($this->request->params['action'] == 'view') ? '' : $this->request->params['action'];
 

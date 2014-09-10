@@ -63,7 +63,9 @@
                                 </button>
 
                             <? } elseif ($controll == 'sortings') { ?>
-
+								
+								<? /*
+								
                                 <? if (!empty($orders)) { ?>
 
                                     <div class="btn-group">
@@ -103,7 +105,7 @@
                                         </select>
                                     </div>
 
-                                <? } ?>
+                                <? } */ ?>
 
                             <? } ?>
 
