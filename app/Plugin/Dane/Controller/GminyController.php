@@ -69,8 +69,10 @@ class GminyController extends DataobjectsController
     {
 		
 		$_layers = array('rada_komitety', 'szef');
-		if( $this->request->params['id']=='903' )
+		if( $this->request->params['id']=='903' ) {
 			$_layers[] = 'ostatnie_posiedzenie';
+			$_layers[] = 'dzielnice';
+		}
 		
         $this->addInitLayers( $_layers );
 		
@@ -398,13 +400,14 @@ class GminyController extends DataobjectsController
         } else {
 
             $this->dataobjectsBrowserView(array(
-                'dataset' => 'rady_gmin_debaty',
-                'title' => 'Debaty podczas posiedzeń',
-                'noResultsTitle' => 'Brak debat',
+                'dataset' => 'krakow_posiedzenia_punkty',
+                'title' => 'Punkty porządku dziennego',
+                'noResultsTitle' => 'Brak wyników',
                 'hlFields' => array(),
+                'order' => '_ord desc',
             ));
 
-            $this->set('title_for_layout', 'Debaty na posiedzeniach rady gminy ' . $this->object->getData('nazwa'));
+            $this->set('title_for_layout', 'Punkty porządku dziennego na posiedzeniach rady gminy ' . $this->object->getData('nazwa'));
 
         }
     }
@@ -971,7 +974,9 @@ class GminyController extends DataobjectsController
         );
 
         if ($this->object->getId() == '903') {
-
+			
+			
+			
             $menu['items'][] = array(
                 'id' => 'rada',
                 'label' => 'Rada Miasta',
@@ -994,7 +999,7 @@ class GminyController extends DataobjectsController
                             'href' => $href_base . '/posiedzenia',
                         ),
                         array(
-                            'id' => 'debaty',
+                            'id' => 'punkty',
                             'label' => 'Punkty porządku dziennego na posiedzeniach',
                             'href' => $href_base . '/punkty',
                         ),
@@ -1024,7 +1029,47 @@ class GminyController extends DataobjectsController
                     ),
                 ),
             );
-
+            
+            /*
+            $menu['items'][] = array(
+				'id' => 'urzad',
+				'label' => 'Urząd Miasta',
+				'dropdown' => array(
+					'items' => array(
+						array(
+							'id' => 'urzednicy',
+							'label' => 'Urzędnicy',
+							'href' => $href_base . '/urzednicy',
+						)
+					),
+				),
+			);
+            
+            
+            $dzielnice_items = array();
+			if( $dzielnice = $this->object->getLayer('dzielnice') ) {
+				
+				foreach( $dzielnice as $dzielnica )
+					$dzielnice_items[] = array(
+						'id' => $dzielnica['id'],
+						'label' => $dzielnica['nazwa'],
+						'href' => $href_base . '/dzielnice/' . $dzielnica['id'],
+					);
+				
+				// $dzielnice_items[1]['topborder'] = true;
+				
+				$menu['items'][] = array(
+					'id' => 'dzielnice',
+					'label' => 'Dzielnice',
+					'dropdown' => array(
+						'items' => $dzielnice_items,
+					),
+				);
+				
+			}
+			*/
+			
+			
 
         } else {
 
