@@ -3,7 +3,7 @@ $path = App::path('Plugin');
 $file = $path[0] . '/Dane/View/Elements/' . $theme . '/' . $object->getDataset() . '.ctp';
 $file_exists = file_exists($file);
 
-if (in_array($object->getDataset(), array('rady_posiedzenia'))) {
+if (in_array($object->getDataset(), array('krakow_posiedzenia'))) {
     $object_content_sizes = array(3, 9);
 } else {
     $object_content_sizes = array(2, 10);
@@ -20,35 +20,40 @@ $this->Dataobject->setObject($object);
         <? } ?>
         <div class="data col-md-<?= $this->Dataobject->getDate() ? '11' : '12' ?>">
             <div class="row">
+                                
                 <? if ($object->getThumbnailUrl($thumbSize)) { ?>
                 <div class="attachment col-md-<?= $object_content_sizes[0] ?> text-center">
-                    <?php if ($object->getUrl() != false) { ?>
-                    <a class="thumb_cont" href="<?= $object->getUrl() ?>">
-                        <?php } ?>
-                        <img class="thumb" onerror="imgFixer(this)" src="<?= $object->getThumbnailUrl($thumbSize) ?>"
+                    
+                    <?php if ($object->getUrl() != false) { ?><a class="thumb_cont" href="<?= $object->getUrl() ?>"><?php } ?>
+                    <img class="thumb" onerror="imgFixer(this)" src="<?= $object->getThumbnailUrl($thumbSize) ?>"
                              alt="<?= strip_tags($object->getTitle()) ?>"/>
-                        <?php if ($object->getUrl() != false) { ?>
-                    </a>
-                <?php } ?>
+                    <?php if ($object->getUrl() != false) { ?></a><?php } ?>
+                
                 </div>
                 <div class="content col-md-<?= $object_content_sizes[1] ?>">
+                    
                     <p class="header">
                         <?= $object->getShortLabel(); ?>
                     </p>
-
+					
                     <? if ($object->getShortTitle()) { ?>
-                    <<?= $titleTag ?> class="title trimTitle<? if ($bigTitle) { ?> big<? } ?>"
-                    title="<?= htmlspecialchars($object->getShortTitle()) ?>"
-                    data-trimlength="200">
-                    <?php if (($object->getUrl() != false) && !empty($this->request)) { ?>
-                    <a href="<?= $object->getUrl() ?>" title="<?= strip_tags($object->getTitle()) ?>">
+	                    <<?= $titleTag ?> class="title trimTitle<? if ($bigTitle) { ?> big<? } ?>"
+		                    title="<?= htmlspecialchars($object->getShortTitle()) ?>"
+		                    data-trimlength="200">
+	                    
+	                    <?php if (($object->getUrl() != false) && !empty($this->request)) { ?>
+		                    <a href="<?= $object->getUrl() ?>" title="<?= strip_tags($object->getTitle()) ?>">
                         <?php } ?>
-                        <?= $object->getShortTitle() ?>
+                        
+	                        <?= $object->getShortTitle() ?>
+                        
                         <?php if (($object->getUrl() != false) && !empty($this->request)) { ?>
-                    </a> <? if ($object->getTitleAddon()) echo '<small>' . $object->getTitleAddon() . '</small>'; ?>
-                <?php } ?>
-                </<?= $titleTag ?>>
-            <? } ?>
+                        	</a>
+                        	
+                        <? if ($object->getTitleAddon()) echo '<small>' . $object->getTitleAddon() . '</small>'; } ?>
+		                
+		                </<?= $titleTag ?>>
+		            <? } ?>
 
                 <?
                 if ($file_exists)

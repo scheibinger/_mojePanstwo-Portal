@@ -1,4 +1,4 @@
-<ul class="nav nav-tabs" style="margin-bottom: 15px;">
+<ul class="nav nav-tabs">
     <?
     foreach ($menu['items'] as $m) {
 

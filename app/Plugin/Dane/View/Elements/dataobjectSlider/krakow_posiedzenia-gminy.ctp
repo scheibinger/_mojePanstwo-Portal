@@ -1,3 +1,4 @@
+!!!
 <div class="posiedzenie objectRender <?php echo $object->getDataset() ?>" oid="<?php echo $item['data']['id'] ?>">
 
     <a title="<?= strip_tags($object->getTitle()) ?>" href="/dane/rady_posiedzenia/<?= $object->getId() ?>"><img

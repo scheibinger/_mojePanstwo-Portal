@@ -7,7 +7,7 @@ $shortTitle = (isset($options['forceTitle'])) ?
     $options['forceTitle'] :
     $object->getShortTitle();
 
-if (in_array($object->getDataset(), array('rady_posiedzenia', 'rady_gmin_debaty', 'rady_gmin_wystapienia'))) {
+if (in_array($object->getDataset(), array('krakow_posiedzenia_punkty', 'rady_gmin_debaty', 'rady_gmin_wystapienia'))) {
     $object_content_sizes = array(3, 9);
 } else {
     $object_content_sizes = array(2, 10);
@@ -104,7 +104,7 @@ $this->Dataobject->setObject($object);
                     </div>
 
                 <? } else { ?>
-                    <div class="content">
+                    <div class="content<? if( $object->getPosition() ) {?> col-md-11<? } ?>">
 
                         <? if ($alertsButtons) { ?>
                             <div class="alertsButtons pull-right">

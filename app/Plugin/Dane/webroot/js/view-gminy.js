@@ -63,6 +63,7 @@ function loadScript() {
 }
 
 $(document).ready(function () {
+    
     var banner = $('.profile_baner'),
         menu = $('.objectsPageContent .objectMenu'),
         menuAutoScroll = true,

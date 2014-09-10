@@ -38,7 +38,7 @@ $buttons = isset($objectOptions['buttons']) ? $objectOptions['buttons'] : array(
 	?>
 
 	
-    <div class="objectPageHeaderContainer<? if( ($object->getDataset()=='gminy') && ($object->getId()=='903') ) {?> krakow<?}?>">
+    <div class="objectPageHeaderContainer topheader <? if( ($object->getDataset()=='gminy') && ($object->getId()=='903') ) {?> krakow<?}?>">
         <div class="container">
         	<? if( $krakow ) { ?>
         	<div class="krakow col-md-2">
@@ -72,15 +72,25 @@ $buttons = isset($objectOptions['buttons']) ? $objectOptions['buttons'] : array(
     </div>
 
 
-<div class="objectsPageWindow">
-<div class="container">
-<div class="row">
-<div class="objectsPageContent main">
+
 
 
 <?
-	if( isset($_menu) && !empty($_menu) )
+	if( isset($_menu) && !empty($_menu) ) {
+?>
+<div class="menuTabsCont">
+	<div class="container">
+<?
 		echo $this->Element('Dane.dataobject/menuTabs', array(
 			'menu' => $_menu,
 		));
 ?>
+	</div>
+</div>
+
+<? } ?>
+
+<div class="objectsPageWindow">
+<div class="container">
+<div class="row">
+<div class="objectsPageContent main">
