@@ -4,7 +4,10 @@
 
 function _ucfirst($str)
 {
-
+	
+	if( !$str )
+		return '';
+	
     $words = explode(' ', trim($str));
     foreach ($words as &$w) {
 
