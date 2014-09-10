@@ -197,7 +197,7 @@ echo $this->Element('dataobject/pageBegin');
 		            <input type="text" placeholder="Szukaj w aktywnościach <?= $object->getData('dopelniacz'); ?>..." autocomplete="off" class="form-control ui-autocomplete-input" name="q">
 		            <input type="submit" style="display: none;" name="submit" value="search">
 		            <span class="input-group-btn">
-		                <button data-icon="" type="button" class="btn btn-success btn-lg"></button>
+		                <button data-icon="" type="submit" class="btn btn-success btn-lg"></button>
 		            </span>
 		        </form>
 		    </div>
