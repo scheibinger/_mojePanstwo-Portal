@@ -184,7 +184,7 @@ echo $this->Element('Dane.dataobject/subobject', array(
 
                 <? if ($object->getId() == '903') { ?>
 
-                    <? if (isset($wystapienia)) { ?>
+                    <? if (false && isset($wystapienia)) { ?>
                         <div id="wystapienia" class="block">
 
                             <div class="block-header">
