@@ -326,15 +326,33 @@ var d3Data;
                 });
 
             d3.select("#panControlFullscreen").on('click', function () {
-                var pan = $(this);
+                var pan = $(this),
+                    trans = connectionGraph.find('svg > g > g').attr('transform');
 
                 if (pan.hasClass('on')) {
                     pan.removeClass('on glyphicon-resize-small').addClass('glyphicon-resize-full');
                     connectionGraph.removeClass('fullscreen');
 
+                    transStart = (trans.indexOf('translate(')) + 10;
+                    transEnd = trans.indexOf(',', transStart);
+                    transX = Number(trans.substr(transStart, transEnd - transStart));
+
+                    connectionGraph.find('svg > g > g').attr('transform', trans.substr(0, transStart) + Number(transX - screen.width / 4) + trans.substr(transEnd));
+
                 } else {
                     pan.addClass('on glyphicon-resize-small').removeClass('glyphicon-resize-full');
                     connectionGraph.addClass('fullscreen');
+
+
+                    if (trans) {
+                        transStart = (trans.indexOf('translate(')) + 10;
+                        transEnd = trans.indexOf(',', transStart);
+                        transX = Number(trans.substr(transStart, transEnd - transStart));
+
+                        connectionGraph.find('svg > g > g').attr('transform', trans.substr(0, transStart) + Number(transX + screen.width / 4) + trans.substr(transEnd));
+                    } else {
+                        connectionGraph.find('svg > g > g').attr('transform', 'translate(' + screen.width / 4 + ',0)scale(1)')
+                    }
                 }
 
                 width = connectionGraph.outerWidth() + 60 - margin.left - margin.right;
