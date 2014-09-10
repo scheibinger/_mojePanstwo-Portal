@@ -5,7 +5,6 @@
 <?php $this->Combinator->add_libs('js', '../plugins/highcharts/js/highcharts'); ?>
 <?php $this->Combinator->add_libs('js', '../plugins/highcharts/locals'); ?>
 <?php $this->Combinator->add_libs('js', 'Dane.view-gminy'); ?>
-
 <?
 echo $this->Element('dataobject/pageBegin');
 ?>
@@ -100,6 +99,21 @@ echo $this->Element('dataobject/pageBegin');
 
 
 <div class="col-lg-9 objectMain">
+
+<?php if ($object->getId() == '903') { ?>
+<div class="objectSearch">
+	<div class="input-group">
+	    <form method="get" action="/dane/gminy/<?= $object->getId() ?>/szukaj">
+	        <input type="text" placeholder="Szukaj w Przejrzystym Krakowie..." autocomplete="off" class="form-control ui-autocomplete-input" name="q">
+	        <input type="submit" style="display: none;" name="submit" value="search">
+	        <span class="input-group-btn">
+	            <button data-icon="" type="button" class="btn btn-success btn-lg"></button>
+	        </span>
+	    </form>
+	</div>
+</div>
+<? } ?>
+
 <div class="object mpanel">
 
 <div class="block-group">
@@ -113,7 +127,7 @@ echo $this->Element('dataobject/pageBegin');
 
 <div class="row bottomborder">
     <div class="col-md-4">
-
+		
         <div id="rada" class="block nobottomborder">
             <div class="block-header">
                 <h2 class="label">Urząd gminy</h2>
