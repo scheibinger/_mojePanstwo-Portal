@@ -243,32 +243,30 @@ var d3Data;
                     else if (d.label == 'osoba')
                         name = d.data.imiona + ' ' + d.data.nazwisko;
 
-                    if (name == '')
-                        name = d.label;
-
-                    nameBegin = name.substring(0, limit);
-                    nameEnd = name.substring(limit);
-                    name = nameBegin + nameEnd.substring(0, nameEnd.indexOf(' '));
-
                     if (d.id == root.id) name = name.toUpperCase();
 
-                    lines = name.match(RegExp(regex, 'g')).join('\n').split('\n');
+                    if (name != '') {
+                        nameBegin = name.substring(0, limit);
+                        nameEnd = name.substring(limit);
+                        name = nameBegin + nameEnd.substring(0, nameEnd.indexOf(' '));
+                        lines = name.match(RegExp(regex, 'g')).join('\n').split('\n');
 
-                    for (var i = 0; i < lines.length; i++) {
-                        var y = ( (lines.length % 2 == 0) ? ((d3Data.size.nodeTextSeparate / 2) + d3Data.size.nodeTextBox) : (d3Data.size.nodeTextBox / 2)) - ( (Math.floor(lines.length / 2)) * (d3Data.size.nodeTextBox + d3Data.size.nodeTextSeparate) ) + ( i * (d3Data.size.nodeTextBox + d3Data.size.nodeTextSeparate) );
+                        for (var i = 0; i < lines.length; i++) {
+                            var y = ( (lines.length % 2 == 0) ? ((d3Data.size.nodeTextSeparate / 2) + d3Data.size.nodeTextBox) : (d3Data.size.nodeTextBox / 2)) - ( (Math.floor(lines.length / 2)) * (d3Data.size.nodeTextBox + d3Data.size.nodeTextSeparate) ) + ( i * (d3Data.size.nodeTextBox + d3Data.size.nodeTextSeparate) );
 
-                        d3.select(this)
-                            .append("tspan")
-                            .attr('x', 0)
-                            .attr('y', y)
-                            .style("stroke", "rgba(0,0,0,.5)")
-                            .style("stroke-width", "1.5px")
-                            .text(lines[i]);
-                        d3.select(this)
-                            .append("tspan")
-                            .attr('x', 0)
-                            .attr('y', y)
-                            .text(lines[i]);
+                            d3.select(this)
+                                .append("tspan")
+                                .attr('x', 0)
+                                .attr('y', y)
+                                .style("stroke", "rgba(0,0,0,.5)")
+                                .style("stroke-width", "1.5px")
+                                .text(lines[i]);
+                            d3.select(this)
+                                .append("tspan")
+                                .attr('x', 0)
+                                .attr('y', y)
+                                .text(lines[i]);
+                        }
                     }
                 });
 
