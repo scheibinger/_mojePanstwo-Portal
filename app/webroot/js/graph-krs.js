@@ -243,29 +243,30 @@ var d3Data;
                     else if (d.label == 'osoba')
                         name = d.data.imiona + ' ' + d.data.nazwisko;
 
-                    nameBegin = name.substring(0, limit);
-                    nameEnd = name.substring(limit);
-                    name = nameBegin + nameEnd.substring(0, nameEnd.indexOf(' '));
-
                     if (d.id == root.id) name = name.toUpperCase();
 
-                    lines = name.match(RegExp(regex, 'g')).join('\n').split('\n');
+                    if (name != '') {
+                        nameBegin = name.substring(0, limit);
+                        nameEnd = name.substring(limit);
+                        name = nameBegin + nameEnd.substring(0, nameEnd.indexOf(' '));
+                        lines = name.match(RegExp(regex, 'g')).join('\n').split('\n');
 
-                    for (var i = 0; i < lines.length; i++) {
-                        var y = ( (lines.length % 2 == 0) ? ((d3Data.size.nodeTextSeparate / 2) + d3Data.size.nodeTextBox) : (d3Data.size.nodeTextBox / 2)) - ( (Math.floor(lines.length / 2)) * (d3Data.size.nodeTextBox + d3Data.size.nodeTextSeparate) ) + ( i * (d3Data.size.nodeTextBox + d3Data.size.nodeTextSeparate) );
+                        for (var i = 0; i < lines.length; i++) {
+                            var y = ( (lines.length % 2 == 0) ? ((d3Data.size.nodeTextSeparate / 2) + d3Data.size.nodeTextBox) : (d3Data.size.nodeTextBox / 2)) - ( (Math.floor(lines.length / 2)) * (d3Data.size.nodeTextBox + d3Data.size.nodeTextSeparate) ) + ( i * (d3Data.size.nodeTextBox + d3Data.size.nodeTextSeparate) );
 
-                        d3.select(this)
-                            .append("tspan")
-                            .attr('x', 0)
-                            .attr('y', y)
-                            .style("stroke", "rgba(0,0,0,.5)")
-                            .style("stroke-width", "1.5px")
-                            .text(lines[i]);
-                        d3.select(this)
-                            .append("tspan")
-                            .attr('x', 0)
-                            .attr('y', y)
-                            .text(lines[i]);
+                            d3.select(this)
+                                .append("tspan")
+                                .attr('x', 0)
+                                .attr('y', y)
+                                .style("stroke", "rgba(0,0,0,.5)")
+                                .style("stroke-width", "1.5px")
+                                .text(lines[i]);
+                            d3.select(this)
+                                .append("tspan")
+                                .attr('x', 0)
+                                .attr('y', y)
+                                .text(lines[i]);
+                        }
                     }
                 });
 
@@ -325,15 +326,33 @@ var d3Data;
                 });
 
             d3.select("#panControlFullscreen").on('click', function () {
-                var pan = $(this);
+                var pan = $(this),
+                    trans = connectionGraph.find('svg > g > g').attr('transform');
 
                 if (pan.hasClass('on')) {
                     pan.removeClass('on glyphicon-resize-small').addClass('glyphicon-resize-full');
                     connectionGraph.removeClass('fullscreen');
 
+                    transStart = (trans.indexOf('translate(')) + 10;
+                    transEnd = trans.indexOf(',', transStart);
+                    transX = Number(trans.substr(transStart, transEnd - transStart));
+
+                    connectionGraph.find('svg > g > g').attr('transform', trans.substr(0, transStart) + Number(transX - screen.width / 4) + trans.substr(transEnd));
+
                 } else {
                     pan.addClass('on glyphicon-resize-small').removeClass('glyphicon-resize-full');
                     connectionGraph.addClass('fullscreen');
+
+
+                    if (trans) {
+                        transStart = (trans.indexOf('translate(')) + 10;
+                        transEnd = trans.indexOf(',', transStart);
+                        transX = Number(trans.substr(transStart, transEnd - transStart));
+
+                        connectionGraph.find('svg > g > g').attr('transform', trans.substr(0, transStart) + Number(transX + screen.width / 4) + trans.substr(transEnd));
+                    } else {
+                        connectionGraph.find('svg > g > g').attr('transform', 'translate(' + screen.width / 4 + ',0)scale(1)')
+                    }
                 }
 
                 width = connectionGraph.outerWidth() + 60 - margin.left - margin.right;

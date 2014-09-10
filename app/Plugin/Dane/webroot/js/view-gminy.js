@@ -64,6 +64,11 @@ function loadScript() {
 
 $(document).ready(function () {
     
+    $('.objectTagsCloud').cloud({
+	    hwratio: .3,
+	    fog: .4
+	});  
+    
     var banner = $('.profile_baner'),
         menu = $('.objectsPageContent .objectMenu'),
         menuAutoScroll = true,
@@ -131,7 +136,7 @@ $(function () {
     for (var i = 0; i < wyniki_wyborow.length; i++) {
 
         var d = wyniki_wyborow[i];
-        data.push([d['nazwa'], Number(wyniki_wyborow[i][0]['count'])]);
+        data.push({name: d['nazwa'], y: Number(wyniki_wyborow[i][0]['count']), url: 'radni/?komitet_id[]=' + wyniki_wyborow[i]['pl_gminy_radni']['komitet_id'] + '&q=&search=web'});
 
     }
 
