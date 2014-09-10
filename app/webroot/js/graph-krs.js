@@ -243,6 +243,9 @@ var d3Data;
                     else if (d.label == 'osoba')
                         name = d.data.imiona + ' ' + d.data.nazwisko;
 
+                    if (name == '')
+                        name = d.label;
+
                     nameBegin = name.substring(0, limit);
                     nameEnd = name.substring(limit);
                     name = nameBegin + nameEnd.substring(0, nameEnd.indexOf(' '));
