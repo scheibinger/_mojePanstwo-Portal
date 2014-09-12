@@ -12,7 +12,7 @@ class CrawlerPagesController extends DataobjectsController
 
     public $objectOptions = array(
         'hlFields' => array('crawler_sites.nazwa', 'liczba_rozmiar', 'content_type', 'url'),
-        'buttons' => array('shoutIt', 'careIt'),
+        'buttons' => array('shoutIt'),
     );
 
     public $menu = array(
@@ -32,6 +32,10 @@ class CrawlerPagesController extends DataobjectsController
 
     public function view()
     {
+    	
+    	if( $this->Auth->user() && ( ($this->Auth->user('group_id')=='2') || ($this->Auth->user('id')=='2578') ) ) 
+    		$this->objectOptions['buttons'][] = 'careIt';
+    	
         parent::_prepareView();
     }
 
@@ -69,4 +73,4 @@ class CrawlerPagesController extends DataobjectsController
         $this->redirect($this->referer());
     }
 
-} 
+}

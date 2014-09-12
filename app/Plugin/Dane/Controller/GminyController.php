@@ -528,7 +528,8 @@ class GminyController extends DataobjectsController
                 {
 
                     $radny->loadLayer('details');
-
+					
+					/*
                     if ($radny->getData('liczba_wystapien')) {
                         $this->API->searchDataset('rady_gmin_wystapienia', array(
                             'limit' => 8,
@@ -538,6 +539,7 @@ class GminyController extends DataobjectsController
                         ));
                         $this->set('wystapienia', $this->API->getObjects());
                     }
+                    */
 
                     if ($radny->getData('liczba_interpelacji')) {
                         $this->API->searchDataset('rady_gmin_interpelacje', array(
@@ -651,7 +653,8 @@ class GminyController extends DataobjectsController
                         'href' => $href_base . '/dyzury',
                         'label' => 'Dyżury',
                     );
-
+				
+				/*
                 if ($radny->getData('liczba_wystapien'))
                     $submenu['items'][] = array(
                         'id' => 'wystapienia',
@@ -659,6 +662,7 @@ class GminyController extends DataobjectsController
                         'label' => 'Wystąpienia',
                         'count' => $radny->getData('liczba_wystapien'),
                     );
+                */
                     
                 $submenu['items'][] = array(
                     'id' => 'glosowania',
