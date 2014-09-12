@@ -24,7 +24,8 @@ var d3Data;
                 'nodesOsoba': 30,
                 'nodeText': '10px',
                 'nodeTextBox': 10,
-                'nodeTextSeparate': 3
+                'nodeTextSeparate': 3,
+                'nodesMarkerSize': 13
             },
             zoomConst: {
                 min: 0.5,
@@ -134,33 +135,25 @@ var d3Data;
                 .attr("id", function (d) {
                     return d;
                 })
-                .attr("viewBox", "0 -5 10 10")
-                .attr("refX", function (d) {
-                    if (d == "arrowPodmiot")
-                        return (d3Data.size.nodesPodmiot * 2) - 4;
-                    else if (d == "arrowOsoba")
-                        return (d3Data.size.nodesOsoba * 2) - 4;
-                    else
-                        return ((d3Data.size.nodesPodmiot > d3Data.size.nodesOsoba) ? d3Data.size.nodesPodmiot * 2 : d3Data.size.nodesOsoba * 2) - 4;
+                .attr("cx", function (d) {
+                    return ((d.label == "podmiot") ? d3Data.size.nodesPodmiot : d3Data.size.nodesOsoba) + d3Data.size.nodesMarkerSize;
                 })
-                .attr("refY", function (d) {
-                    if (d == "arrowPodmiot")
-                        return -10;
-                    else if (d == "arrowOsoba")
-                        return -8;
-                    else
-                        return ((d3Data.size.nodesPodmiot > d3Data.size.nodesOsoba) ? -5.5 : -3.5);
+                .attr("cy", function (d) {
+                    return 5
                 })
-                .attr("markerWidth", 6)
-                .attr("markerHeight", 6)
+                .attr("markerWidth", d3Data.size.nodesMarkerSize)
+                .attr("markerHeight", d3Data.size.nodesMarkerSize)
                 .attr("orient", "auto")
                 .append("svg:path")
-                .attr("d", "M0,-5L10,0L0,5");
+                .attr("d", "M2,2 L2,11 L10,6 L2,2");
 
             /*CREATE LINE*/
             var path = d3Data.innerContainer.append("svg:g").selectAll("path")
                 .data(d3Data.force.links())
                 .enter().append("svg:path")
+                .attr('id', function (d) {
+                    return 'path-' + d.source.id + '-' + d.target.id + '-' + d.label.replace(" ", "_");
+                })
                 .attr('class', 'link')
                 .attr("marker-end", function (d) {
                     if (d.target.label == "podmiot")
@@ -199,33 +192,50 @@ var d3Data;
                 });
 
             /*CREATE SHADOW UNDER LINE TEXT*/
-            var pathTextShadow = d3Data.innerContainer.append("svg:g").selectAll("text")
+            var pathTextShadow = d3Data.innerContainer.append("svg:g")
+                .selectAll("text")
                 .data(d3Data.force.links())
-                .enter().append("svg:text")
-                .attr('class', 'pathTextShadow')
-                .style("text-anchor", "middle")
+                .enter()
+                .append('svg:text')
+                .attr('dy', -2)
+                //.style("text-anchor", "middle")
                 .style("font-size", d3Data.size.linkText)
                 .style("stroke", "white")
                 .style("stroke-width", "1px")
                 .style("opacity", '0.9')
+                .append("svg:textPath")
+                .attr('startOffset', '30%')
+                .attr('xlink:href', function (d) {
+                    return '#path-' + d.source.id + '-' + d.target.id + '-' + d.label.replace(" ", "_");
+                })
+                .attr('class', 'pathTextShadow')
                 .text(function (d) {
                     return d.label;
                 });
 
             /*CREATE LINE TEXT*/
-            var pathText = d3Data.innerContainer.append("svg:g").selectAll("text")
+            var pathText = d3Data.innerContainer.append("svg:g")
+                .selectAll("text")
                 .data(links)
-                .enter().append("svg:text")
-                .attr('class', 'pathText')
-                .style("text-anchor", "middle")
+                .enter()
+                .append('svg:text')
+                .attr('dy', -2)
+                //.style("text-anchor", "middle")
                 .style("font-size", d3Data.size.linkText)
                 .style("fill", "#000")
+                .append("svg:textPath")
+                .attr('startOffset', '30%')
+                .attr('xlink:href', function (d) {
+                    return '#path-' + d.source.id + '-' + d.target.id + '-' + d.label.replace(" ", "_");
+                })
+                .attr('class', 'pathText')
                 .text(function (d) {
                     return d.label;
                 });
 
             /*CREATE CIRCLE TEXT*/
-            var circleText = d3Data.innerContainer.append("svg:g").selectAll("text")
+            var circleText = d3Data.innerContainer.append("svg:g")
+                .selectAll("text")
                 .data(nodes)
                 .enter().append("svg:text")
                 .attr('class', 'circleText')
@@ -391,22 +401,8 @@ var d3Data;
                 return linkedByIndex[a.index + "," + b.index] || linkedByIndex[b.index + "," + a.index];
             }
 
-            function tick(d) {
+            function tick() {
                 path.attr("d", linkArc);
-                pathTextShadow.attr("transform", transformHalf).attr("x",function (d) {
-                    var x = (d.target.x - d.source.x) / 4 - (10 * d.linknum);
-                    return (x > 100) ? 10 : ((x < 20) ? 20 : x);
-                }).attr("y", function (d) {
-                    var y = -(d.target.y - d.source.y) / 4 - (10 * d.linknum);
-                    return (y < -100) ? -100 : ((y > -20) ? -20 : y);
-                });
-                pathText.attr("transform", transformHalf).attr("x",function (d) {
-                    var x = (d.target.x - d.source.x) / 4 - (10 * d.linknum);
-                    return (x > 100) ? 10 : ((x < 20) ? 20 : x);
-                }).attr("y", function (d) {
-                    var y = -(d.target.y - d.source.y) / 4 - (10 * d.linknum);
-                    return (y < -100) ? -100 : ((y > -20) ? -20 : y);
-                });
                 circle.attr("transform", transform);
                 circleText.attr("transform", transform);
                 circleDump.attr("transform", transform);
@@ -431,13 +427,6 @@ var d3Data;
                     dr = Math.floor(Math.sqrt(dx * dx + dy * dy) - (40 * d.linknum));
 
                 return "M" + sourceX + "," + sourceY + "A" + dr + "," + dr + " 0 0,1 " + targetX + "," + targetY;
-            }
-
-            function transformHalf(d) {
-                var halfX = Math.floor((d.source.x + d.target.x) / 2),
-                    halfY = Math.floor((d.source.y + d.target.y) / 2);
-
-                return "translate(" + halfX + "," + halfY + ")";
             }
 
             function transform(d) {
