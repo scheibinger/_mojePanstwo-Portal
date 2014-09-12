@@ -805,7 +805,41 @@ class GminyController extends DataobjectsController
 
         $this->set('title_for_layout', 'Zamówienia publiczne w gminie ' . $this->object->getData('nazwa'));
     }
+	
+	public function miejscowosci()
+    {        
+        
+        $this->_prepareView();
+        $this->request->params['action'] = 'miejscowosci';
 
+        if (isset($this->request->params['pass'][0]) && is_numeric($this->request->params['pass'][0])) {
+
+            $miejscowosc = $this->API->getObject('miejscowosci', $this->request->params['pass'][0], array(
+                // 'layers' => 'neighbours',
+            ));
+            $this->set('miejscowosc', $miejscowosc);
+            $this->set('title_for_layout', $miejscowosc->getTitle() . ' w gminie ' . $this->object->getTitle());
+            $this->render('miejscowosc');
+
+        } else {
+
+            $this->dataobjectsBrowserView(array(
+	            'source' => 'gminy.miejscowosci:' . $this->object->getId(),
+	            'dataset' => 'miejscowosci',
+	            'noResultsTitle' => 'Brak miejscowości',
+	            'excludeFilters' => array(
+	                'gmina_id'
+	            ),
+	            'hlFields' => array(),
+	        ));
+	        $this->set('title_for_layout', 'Miejscowości w gminie ' . $this->object->getData('nazwa'));
+
+        }
+         
+        
+        
+    }
+	
     public function organizacje()
     {
         $this->_prepareView();
@@ -1143,6 +1177,13 @@ class GminyController extends DataobjectsController
                 ),
             ),
         );
+        
+        $menu['items'][] = array(
+            'id' => 'miejscowosci',
+            'href' => $href_base . '/miejscowosci',
+            'label' => 'Miejscowości',
+        );
+        
 
         /*
         $menu['items'][] = array(
