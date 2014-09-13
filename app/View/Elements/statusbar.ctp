@@ -18,39 +18,39 @@
                 <div id="_mojePanstwoCockpitMenuUpSubMenu">
                     <div id="_mojePanstwoCockpitMenuUpSubMenuContent">
                         <div class="_mojePanstwoCockpitMenuUpSubMenuTitle">Aplikacje</div>
-                        <?php if (!empty($applications['list'])) {
+                        <?php if (!empty($_APPLICATIONS)) {
                             echo '<ul id="_mojePanstwoCockpitMenuUpSubMenuList"><li>';
                             $appCount = 0;
-                            foreach ($applications['list'] as $app) {
-                                if ($app['Application']['home'] == '1') {
+                            foreach ($_APPLICATIONS as $app) {
+                                if ($app['home'] == '1') {
                                     if (($appCount % $applications['perPage'] == 0) && ($appCount != 0))
                                         echo '</li><li>';
 
-                                    if ($app['Application']['type'] == 'app') {
+                                    if ($app['type'] == 'app') {
                                         ?>
                                         <a class="appContruct <?= $appCount ?>"
-                                           href="/<?= $app['Application']['slug'] ?>">
+                                           href="/<?= $app['slug'] ?>">
                                             <div class="_mojePanstwoCockpitMenuUpSubMenuListIcon">
                                                 <div class="_mojePanstwoCockpitMenuUpSubMenuListIconInner">
                                                     <img
-                                                        src="/<?= $app['Application']['plugin'] ?>/icon/<?= $app['Application']['slug'] ?>.svg"
-                                                        alt="<?= $app['Application']['name'] ?>"/>
+                                                        src="/<?= $app['plugin'] ?>/icon/<?= $app['slug'] ?>.svg"
+                                                        alt="<?= $app['name'] ?>"/>
                                                 </div>
                                             </div>
                                             <div
-                                                class="_mojePanstwoCockpitMenuUpSubMenuListName"><?= $app['Application']['name'] ?></div>
+                                                class="_mojePanstwoCockpitMenuUpSubMenuListName"><?= $app['name'] ?></div>
                                         </a>
-                                    <?php } else if ($app['Application']['type'] == 'folder') { ?>
+                                    <?php } else if ($app['type'] == 'folder') { ?>
                                         <div class="appContruct appFolder"
-                                             data-folder-slug="/<?= $app['Application']['slug'] ?>">
+                                             data-folder-slug="/<?= $app['slug'] ?>">
                                             <div class="_mojePanstwoCockpitMenuUpSubMenuListIcon">
                                                 <div class="_mojePanstwoCockpitMenuUpSubMenuListIconInner">
                                                     <img src="/icon/folder.svg"
-                                                         alt="<?= $app['Application']['name'] ?>"/>
+                                                         alt="<?= $app['name'] ?>"/>
                                                 </div>
                                             </div>
                                             <div
-                                                class="_mojePanstwoCockpitMenuUpSubMenuListName"><?= $app['Application']['name'] ?></div>
+                                                class="_mojePanstwoCockpitMenuUpSubMenuListName"><?= $app['name'] ?></div>
                                             <ul class="appList">
                                                 <?php foreach ($app['Content'] as $key => $appList) { ?>
                                                     <li>
@@ -90,16 +90,16 @@
                 </div>
             </div>
         </div>
-
+				
         <div class="_mojePanstwoCockpitBreadcrumb _mojePanstwoCockpitBorderLeft">
-            <?php if (isset($applicationCurrent) && $applicationCurrent) { ?>
+            <?php if (isset($_APPLICATION) && $_APPLICATION) { ?>
                 <a class="_mojePanstwoCockpitBreadcrumbMain"
-                   href="/<?php echo $applicationCurrent['Application']['slug'] ?>">
+                   href="/<?php echo $_APPLICATION['slug'] ?>">
                     <img
-                        src="/<?php echo $applicationCurrent['Application']['plugin'] ?>/icon/<?php echo $applicationCurrent['Application']['slug'] ?>.svg"
-                        alt="<?php echo $applicationCurrent['Application']['name']; ?>"/>
+                        src="/<?php echo $_APPLICATION['plugin'] ?>/icon/<?php echo $_APPLICATION['slug'] ?>.svg"
+                        alt="<?php echo $_APPLICATION['name']; ?>"/>
 
-                    <p><?php echo $applicationCurrent['Application']['name']; ?></p>
+                    <p><?php echo $_APPLICATION['name']; ?></p>
                 </a>
             <?php } ?>
 
