@@ -121,21 +121,8 @@ class DataobjectsController extends DaneAppController
 
             $this->set('object', $this->object);
             $this->set('objectOptions', $this->objectOptions);
-
-            if ($this->breadcrumbsMode == 'datachannel') {
-
-                $this->addStatusbarCrumb(array(
-                    'href' => '/dane/kanal/' . $this->dataset['Datachannel']['slug'],
-                    'text' => $this->dataset['Datachannel']['nazwa'],
-                ));
-
-            } elseif (($this->breadcrumbsMode == 'app') && isset($this->dataset['App'])) {
-
-                $this->set('_APPLICATION', array(
-                    'Application' => $this->dataset['App'],
-                ));
-
-            }
+						
+            $this->set('_APPLICATION', $this->dataset['App']);
 
             $this->addStatusbarCrumb(array(
                 'href' => '/dane/' . $this->object->getDataset(),

@@ -271,6 +271,7 @@ class AppController extends Controller
         $this->set('statusbarCrumbs', $this->statusbarCrumbs);
         $this->set('statusbarMode', $this->statusbarMode);
         $this->set('_APPLICATIONS', $this->getApplications());
+        $this->set('_APPLICATION', $this->getApplication());
 
 		
 		

@@ -46,7 +46,8 @@ class DatasetsController extends DaneAppController
 	        $dataset = $data['Dataset'];
 	        $datachannel = $data['Datachannel'];
 	
-	
+            $this->set('_APPLICATION', $data['App']);
+			
 	        $this->addStatusbarCrumb(array(
 	            'text' => $datachannel['nazwa'],
 	            'href' => '/dane/kanal/' . $datachannel['slug'],
