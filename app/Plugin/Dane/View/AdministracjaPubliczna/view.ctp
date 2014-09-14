@@ -98,6 +98,21 @@ $buttons = isset($objectOptions['buttons']) ? $objectOptions['buttons'] : array(
             </div>
         </div>
     </div>
+    
+    <?
+	if( isset($_menu) && !empty($_menu) ) {
+?>
+<div class="menuTabsCont">
+	<div class="container">
+<?
+		echo $this->Element('Dane.dataobject/menuTabs', array(
+			'menu' => $_menu,
+		));
+?>
+	</div>
+</div>
+
+<? } ?>
 
 
 <? if ($menuMode == 'vertical') { ?>
