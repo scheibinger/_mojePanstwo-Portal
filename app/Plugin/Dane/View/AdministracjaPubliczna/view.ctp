@@ -29,7 +29,10 @@ $buttons = isset($objectOptions['buttons']) ? $objectOptions['buttons'] : array(
     echo $this->Element('dataobject/searchInPage', array(
         'alerts' => $alertArray
     ));
-}?>
+}
+
+$info = $object->getLayer('info');
+?>
     <div class="objectPageHeaderContainer">
         <div class="container">
             <div class="col-md-10">
@@ -232,19 +235,17 @@ echo $this->Element('dataobject/pageRelated', array(
 				
 				
 	            <div class="block-group">
+	            		            	
 	            	
-	            	<? if( $info = $object->getLayer('info') ) { ?>
-	            	<div class="block">
-	            		<div class="block-header">
-	            			<h2 class="label">Informacje</h2>
-	            		</div>
-	            		
-	            		<div class="content opis">
-	            			<?= $info['opis_html'] ?>
-	            		</div>
-	            	</div>
+	            	<? if( isset($info['opis_html']) && $info['opis_html'] ) { ?>
+		            	<div class="block">		            		
+		            		<div class="content opis">
+		            			<?= $info['opis_html'] ?>
+		            		</div>
+		            	</div>
 	            	<? } ?>
 	            	
+	            		            	
 	            	<? if ( 
 	            		( $tree = $object->getLayer('tree') ) && 
 	            		( $items = $tree['items'] ) 
@@ -286,6 +287,15 @@ echo $this->Element('dataobject/pageRelated', array(
 	    	<div class="mpanel">
 		    
 			    <div class="block-group">
+	            	
+	            	
+	            	<? if( isset($info['opis_html']) && $info['opis_html'] ) { ?>
+		            	<div class="block">
+		            		<div class="content opis">
+		            			<?= $info['opis_html'] ?>
+		            		</div>
+		            	</div>
+	            	<? } ?>
 	            	
 	            	<? if ( 
 	            		( $tree = $object->getLayer('tree') ) && 
