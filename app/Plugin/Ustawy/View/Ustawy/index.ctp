@@ -66,12 +66,12 @@
                                     <p class="title">
                                         <a href="/dane/ustawy/<?= $obj['id'] ?>"
                                            target="_self"
-                                           title="<?= $obj['tytul'] ?>"><?= __d('ustawy', 'LC_USTAWY_TITLE_USTAWA') ?> <?= $obj['tytul_skrocony'] ?></a>
+                                           title="<?= $obj['prawo.tytul'] ?>"><?= __d('ustawy', 'LC_USTAWY_TITLE_USTAWA') ?> <?= $obj['prawo.tytul_skrocony'] ?></a>
                                     </p>
 
                                     <p class="subtitle">
                                         <span
-                                            class="label label-warning"><?= $this->Czas->dataSlownie($obj['data_publikacji']) ?></span>
+                                            class="label label-warning"><?= $this->Czas->dataSlownie($obj['prawo.data_publikacji']) ?></span>
                                     </p>
                                 </li>
                             <? } ?>
@@ -88,12 +88,12 @@
                                     <p class="title">
                                         <a href="/dane/ustawy/<?= $obj['id'] ?>"
                                            target="_self"
-                                           title="<?= $obj['tytul'] ?>"><?= __d('ustawy', 'LC_USTAWY_TITLE_USTAWA') ?> <?= $obj['tytul_skrocony'] ?></a>
+                                           title="<?= $obj['prawo.tytul'] ?>"><?= __d('ustawy', 'LC_USTAWY_TITLE_USTAWA') ?> <?= $obj['prawo.tytul_skrocony'] ?></a>
                                     </p>
 
                                     <p class="subtitle">
                                         <span
-                                            class="label label-danger"><?= $this->Czas->dataSlownie($obj['data_wejscia_w_zycie']) ?></span>
+                                            class="label label-danger"><?= $this->Czas->dataSlownie($obj['prawo.data_wejscia_w_zycie']) ?></span>
                                     </p>
                                 </li>
                             <? } ?>
@@ -112,7 +112,7 @@
                                 <li>
                                     <p class="title">
                                         <a href="/dane/ustawy/<?= $obj['id'] ?>" target="_self"
-                                           title="<?= $obj['tytul'] ?>"><?= $obj['tytul_skrocony'] ?></a>
+                                           title="<?= $obj['prawo.tytul'] ?>"><?= $obj['prawo.tytul_skrocony'] ?></a>
                                     </p>
                                 </li>
                             <? } ?>
@@ -130,7 +130,7 @@
                                 <li>
                                     <p class="title">
                                         <a href="/dane/ustawy/<?= $obj['id'] ?>" target="_self"
-                                           title="<?= $obj['tytul'] ?>"><?= $obj['tytul_skrocony'] ?></a>
+                                           title="<?= $obj['prawo.tytul'] ?>"><?= $obj['prawo.tytul_skrocony'] ?></a>
                                     </p>
                                 </li>
                             <? } ?>
