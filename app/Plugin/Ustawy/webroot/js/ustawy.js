@@ -124,7 +124,7 @@
             resultsListUl.append(
                 $('<li></li>').append(function () {
                     var header = $('<span></span>').addClass('resultHeader').append(
-                            $('<a></a>').attr({'target': '_self', 'href': '/dane/ustawy/' + dataSearch['id'], 'title': data['tytul'], 'class': 'title'}).text(_mPHeart.translation.LC_USTAWY_TITLE_USTAWA + ' ' + dataSearch['tytul_skrocony'])
+                            $('<a></a>').attr({'target': '_self', 'href': '/dane/ustawy/' + dataSearch['id'], 'title': data['prawo.tytul'], 'class': 'title'}).text(_mPHeart.translation.LC_USTAWY_TITLE_USTAWA + ' ' + dataSearch['prawo.tytul_skrocony'])
                         ).append(
                             $('<span></span>').addClass('subtitle').html(_mPHeart.translation.LC_USTAWY_PUBLIKACJA + ' ' + dataSearch['data_slowna'])
                         );
