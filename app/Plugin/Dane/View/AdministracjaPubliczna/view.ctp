@@ -233,6 +233,16 @@ echo $this->Element('dataobject/pageRelated', array(
 				
 	            <div class="block-group">
 	            	
+	            	<div class="block">
+	            		<div class="block-header">
+	            			<h2 class="label">Informacje</h2>
+	            		</div>
+	            		
+	            		<div class="content">
+	            			<? debug( $object->getLayer('info') ); ?>
+	            		</div>
+	            	</div>
+	            	
 	            	<? if ( 
 	            		( $tree = $object->getLayer('tree') ) && 
 	            		( $items = $tree['items'] ) 
