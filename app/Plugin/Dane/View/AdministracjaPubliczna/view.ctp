@@ -235,18 +235,7 @@ echo $this->Element('dataobject/pageRelated', array(
 				
 				
 	            <div class="block-group">
-	            	
-	            	<? if( isset($info['budzet']) && $info['budzet'] ) { ?>
-		            	<div class="block">
-		            		<div class="bock-header">
-		            			<h2 class="label">Budżet planowany w 2014 r.:</h2>
-		            		</div>           		
-		            		<div class="content budzet">
-		            			<? debug($info['budzet']) ?>
-		            		</div>
-		            	</div>
-	            	<? } ?>
-	            	           	
+	            		            	           	
 	            	
 	            	<? if( isset($info['opis_html']) && $info['opis_html'] ) { ?>
 		            	<div class="block">		            		
