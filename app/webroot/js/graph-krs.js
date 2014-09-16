@@ -198,7 +198,6 @@ var d3Data;
                 .enter()
                 .append('svg:text')
                 .attr('dy', -2)
-                //.style("text-anchor", "middle")
                 .style("font-size", d3Data.size.linkText)
                 .style("stroke", "white")
                 .style("stroke-width", "1px")
@@ -220,15 +219,14 @@ var d3Data;
                 .enter()
                 .append('svg:text')
                 .attr('dy', -2)
-                //.style("text-anchor", "middle")
                 .style("font-size", d3Data.size.linkText)
-                .style("fill", "#000")
                 .append("svg:textPath")
                 .attr('startOffset', '30%')
                 .attr('xlink:href', function (d) {
                     return '#path-' + d.source.id + '-' + d.target.id + '-' + d.label.replace(" ", "_");
                 })
                 .attr('class', 'pathText')
+                .style("fill", "rgba(0,0,0,1")
                 .text(function (d) {
                     return d.label;
                 });
@@ -296,20 +294,43 @@ var d3Data;
                 .style('fill-opacity', 0)
                 .call(d3Data.drag)
                 .on("mouseover", function (d) {
+                    var opacity = .2;
+
                     circle.classed("node-active", function (o) {
-                        var color = isConnected(d, o) ? d3Data.color[o.label] : d3Data.color[o.label + 'Disabled'];
+                        var color = isConnected(d, o) || (o === root) ? d3Data.color[o.label] : d3Data.color[o.label + 'Disabled'];
                         $(this).css({'fill': color, 'stroke': color});
+                        return false;
+                    });
+                    circleText.classed("text-active", function (o) {
+                        $(this).css('opacity', ((isConnected(d, o) || (o == d) || (root === o)) ? 1 : opacity));
                         return false;
                     });
 
                     path.classed("link-active", function (o) {
-                        this.setAttribute('stroke-opacity', !!((o.source === d || o.target === d)) ? 1 : .2);
+                        var pathLink;
+
+                        if (o.source === d)
+                            pathLink = o.target.id;
+                        else if (o.target === d)
+                            pathLink = o.source.id;
+
+                        this.setAttribute('stroke-opacity', !!(o.source === d || o.target === d) ? 1 : opacity);
+                        if (pathLink)
+                            $('[id^="path-' + root.id + '-' + pathLink + '"],[id^="path-' + pathLink + '-' + root.id + '"]').attr('stroke-opacity', 1);
+
+                        pathTextShadow.classed("text-active", function (o) {
+                            $(this).css('fill', 'rgba(0,0,0,' + (isConnected(d, o) || !!(o.source === d || o.target === d) || !!(o.source == root && o.target.id == pathLink) || !!(o.source.id == pathLink && o.target == root) ? 1 : opacity) + ')');
+
+                        });
+                        pathText.classed("text-active", function (o) {
+                            $(this).css('fill', 'rgba(0,0,0,' + (isConnected(d, o) || !!(o.source === d || o.target === d) || !!(o.source == root && o.target.id == pathLink) || !!(o.source.id == pathLink && o.target == root) ? 1 : opacity) + ')');
+                        });
+
                         return false;
                     });
 
                     d3.select(this).classed("node-active", function (o) {
                         d3.select('.' + d.id).classed('node-active', function () {
-
                             $(this).css({'fill': d3Data.color[o.label], 'stroke': d3Data.color[o.label]});
                             return false;
                         });
@@ -319,10 +340,19 @@ var d3Data;
                 .on("mouseout", function (d) {
                     circle.classed('node-active', function (o) {
                         $(this).css({'fill': d3Data.color[o.label], 'stroke': d3Data.color[o.label]});
+                        circleText.classed("text-active", function () {
+                            $(this).css('opacity', 1);
+                        });
                         return false;
                     });
                     path.classed('link-active', function () {
                         this.setAttribute('stroke-opacity', 1);
+                        pathTextShadow.classed("text-active", function () {
+                            $(this).css('fill', 'rgba(0,0,0,1)');
+                        });
+                        pathText.classed("text-active", function () {
+                            $(this).css('fill', 'rgba(0,0,0,1)');
+                        });
                         return false;
                     });
                 })
