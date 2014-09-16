@@ -34,6 +34,14 @@ class AdministracjaPublicznaController extends DataobjectsController
         
         $this->set('title_for_layout', "Zamówienia publiczne udzielone przez " . $this->object->getTitle());
     }
+    
+    public function budzet()
+    {
+        parent::_prepareView();
+        $this->set('title_for_layout', "Budżet " . $this->object->getTitle());
+        
+        $this->render('budzet');
+    }
 	
 	public function beforeRender()
     {
@@ -55,6 +63,19 @@ class AdministracjaPublicznaController extends DataobjectsController
             )
         );
 		
+		if( isset($_menu['budzet_czesci']) && !empty($_menu['budzet_czesci']) )
+			$menu['items'][] = array(
+				'id' => 'budzet',
+				'href' => $href_base . '/budzet',
+				'label' => 'Budżet',
+			);
+		
+		if( isset($_menu['zamowienia_udzielone']) && !empty($_menu['zamowienia_udzielone']) )
+			$menu['items'][] = array(
+				'id' => 'zamowienia',
+				'href' => $href_base . '/zamowienia',
+				'label' => 'Zamówienia',
+			);
 		
 		if( isset($_menu['prawo']) && $_menu['prawo'] )
 			$menu['items'][] = array(
@@ -63,12 +84,7 @@ class AdministracjaPublicznaController extends DataobjectsController
 				'label' => 'Akty prawne',
 			);
 			
-		if( isset($_menu['zamowienia_udzielone']) && !empty($_menu['zamowienia_udzielone']) )
-			$menu['items'][] = array(
-				'id' => 'zamowienia',
-				'href' => $href_base . '/zamowienia',
-				'label' => 'Zamówienia',
-			);
+		
 			
 		
 		
