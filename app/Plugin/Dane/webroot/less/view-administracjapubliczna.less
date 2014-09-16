@@ -125,8 +125,45 @@ h1 {
 	
 	.row {
 		
-		padding: 1px 0;
+		text-align: center;
+		padding: 10px 0;
 		
+		&.row-main {
+			
+			border-top: 1px solid #DDD;
+			font-size: 18px;
+			
+			.nazwa {
+				text-align: left;
+			}
+			
+		}
+		
+		&.row_main:first-child {
+			border-top: none;
+		}
+		
+		&.row-sub {
+			
+			.nazwa {
+				padding-left: 25px;
+				text-align: left;
+			}
+			
+		}
+		
+	}
+	
+	.ztego {
+		
+		color: #999;
+		
+		.col {
+			
+			float: left;
+			width: 14.2857%;
+			
+		}
 	}
 }
 

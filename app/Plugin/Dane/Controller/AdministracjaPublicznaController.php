@@ -37,6 +37,9 @@ class AdministracjaPublicznaController extends DataobjectsController
     
     public function budzet()
     {
+    	
+    	$this->addInitLayers(array('budzet'));
+    	
         parent::_prepareView();
         $this->set('title_for_layout', "Budżet " . $this->object->getTitle());
         
