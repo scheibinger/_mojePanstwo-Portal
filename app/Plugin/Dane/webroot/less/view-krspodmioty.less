@@ -190,6 +190,17 @@ ul.chart-blocks {
                     cursor: grab;
                     cursor: -moz-grab;
                     cursor: -webkit-grab;
+                    -webkit-user-select: none;
+                    -khtml-user-select: none;
+                    -moz-user-select: none;
+                    -ms-user-select: none;
+                    user-select: none;
+
+                    text {
+                        &::selection, &::-moz-selection {
+                            background: none;
+                        }
+                    }
 
                     &.grabbing {
                         cursor: grabbing;
