@@ -8,22 +8,27 @@ if( $budzet = $object->getLayer('budzet') ) {
 
     <div id="budzet" class="block mpanel">
         
+        <p>W 2014 roku, <?= $object->getTitle() ?> planuje wydać:</p>
+        
+        <p>123 234 złotych</p>
+        
+        
         <? if( isset($budzet['wydatki_dzialy']) && $budzet['wydatki_dzialy'] ) { ?>
 	    	
-	    	<div class="block-header">
-	    		<h2 class="label">Wydatki instytucji w 2014 r.:</h2>
-	    	</div>
-	    	    		
+
+		
+			<p class="disclaimer">Poniżej widzisz planowane wydatki instytucji, według klasyfikacji budżetowych. Wszystkie kwoty są podane w milionach złotych.</p>
+
 			<div class="budzet">
 				
 				<div class="row row-header">
-					<div class="col-md-3">
+					<div class="col nazwa">
 						&nbsp;
 					</div>
-					<div class="col-md-1">
+					<div class="col plan">
 						Plan
 					</div>
-					<div class="col-md-8 ztego">
+					<div class="col ztego">
 						<div class="col">
 							Dotacje i subwencje
 						</div>
@@ -51,33 +56,33 @@ if( $budzet = $object->getLayer('budzet') ) {
 				<? foreach( $budzet['wydatki_dzialy'] as $dzial ) {?>
 				
 					<div class="row row-main">
-						<div class="col-md-3 nazwa">
-							<?= $dzial['data']['nazwa'] ?>
+						<div class="col nazwa">
+							<a href="/dane/budzet_wydatki_dzialy/<?= $dzial['data']['id'] ?>"><?= $dzial['data']['nazwa'] ?></a>
 						</div>
-						<div class="col-md-1 plan">
-							<?= number_format_h($dzial['calc']['plan']*1000) ?>
+						<div class="col plan">
+							<?= __currency($dzial['calc']['plan']) ?>
 						</div>
-						<div class="col-md-8 ztego">
+						<div class="col ztego">
 							<div class="col">
-								<?= number_format_h($dzial['calc']['dotacje_i_subwencje']*1000) ?>
+								<?= __currency($dzial['calc']['dotacje_i_subwencje']) ?>
 							</div>
 							<div class="col">
-								<?= number_format_h($dzial['calc']['swiadczenia_na_rzecz_osob_fizycznych']*1000) ?>
+								<?= __currency($dzial['calc']['swiadczenia_na_rzecz_osob_fizycznych']) ?>
 							</div>
 							<div class="col">
-								<?= number_format_h($dzial['calc']['wydatki_biezace_jednostek_budzetowych']*1000) ?>
+								<?= __currency($dzial['calc']['wydatki_biezace_jednostek_budzetowych']) ?>
 							</div>
 							<div class="col">
-								<?= number_format_h($dzial['calc']['wydatki_majatkowe']*1000) ?>
+								<?= __currency($dzial['calc']['wydatki_majatkowe']) ?>
 							</div>
 							<div class="col">
-								<?= number_format_h($dzial['calc']['wydatki_na_obsluge_dlugu']*1000) ?>
+								<?= __currency($dzial['calc']['wydatki_na_obsluge_dlugu']) ?>
 							</div>
 							<div class="col">
-								<?= number_format_h($dzial['calc']['srodki_wlasne_ue']*1000) ?>
+								<?= __currency($dzial['calc']['srodki_wlasne_ue']) ?>
 							</div>
 							<div class="col">
-								<?= number_format_h($dzial['calc']['wspolfinansowanie_ue']*1000) ?>
+								<?= __currency($dzial['calc']['wspolfinansowanie_ue']) ?>
 							</div>
 						</div>
 					</div>
@@ -89,33 +94,33 @@ if( $budzet = $object->getLayer('budzet') ) {
 					?>
 					
 						<div class="row row-sub">
-							<div class="col-md-3 nazwa">
-								<?= $item['rozdzial_nazwa'] ?>
+							<div class="col nazwa">
+								<a href="/dane/budzet_wydatki_rozdzialy/<?= $dzial['data']['id'] ?>"><?= $item['rozdzial_nazwa'] ?></a>
 							</div>
-							<div class="col-md-1 plan">
-								<?= number_format_h($item['plan']*1000) ?>
+							<div class="col plan">
+								<?= __currency($item['plan']) ?>
 							</div>
-							<div class="col-md-8 ztego">
+							<div class="col ztego">
 								<div class="col">
-									<?= number_format_h($item['dotacje_i_subwencje']*1000) ?>
+									<?= __currency($item['dotacje_i_subwencje']) ?>
 								</div>
 								<div class="col">
-									<?= number_format_h($item['swiadczenia_na_rzecz_osob_fizycznych']*1000) ?>
+									<?= __currency($item['swiadczenia_na_rzecz_osob_fizycznych']) ?>
 								</div>
 								<div class="col">
-									<?= number_format_h($item['wydatki_biezace_jednostek_budzetowych']*1000) ?>
+									<?= __currency($item['wydatki_biezace_jednostek_budzetowych']) ?>
 								</div>
 								<div class="col">
-									<?= number_format_h($item['wydatki_majatkowe']*1000) ?>
+									<?= __currency($item['wydatki_majatkowe']) ?>
 								</div>
 								<div class="col">
-									<?= number_format_h($item['wydatki_na_obsluge_dlugu']*1000) ?>
+									<?= __currency($item['wydatki_na_obsluge_dlugu']) ?>
 								</div>
 								<div class="col">
-									<?= number_format_h($item['srodki_wlasne_ue']*1000) ?>
+									<?= __currency($item['srodki_wlasne_ue']) ?>
 								</div>
 								<div class="col">
-									<?= number_format_h($item['wspolfinansowanie_ue']*1000) ?>
+									<?= __currency($item['wspolfinansowanie_ue']) ?>
 								</div>
 							</div>
 						</div>
