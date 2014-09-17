@@ -165,32 +165,6 @@ var d3Data;
                 })
                 .style({"fill": "none", "stroke-width": d3Data.size.linksWidth, 'stroke': d3Data.color.links});
 
-            /*CREATE CIRCLE*/
-            var circle = d3Data.innerContainer.append("svg:g").selectAll("circle")
-                .data(d3Data.force.nodes())
-                .enter().append("svg:circle")
-                .attr('class', function (d) {
-                    return 'circleBottom ' + d.id
-                })
-                .attr("r", function (d) {
-                    if (d.label == "podmiot") {
-                        return d3Data.size.nodesPodmiot;
-                    }
-                    else if (d.label == "osoba") {
-                        return d3Data.size.nodesOsoba;
-                    }
-                })
-                .style("stroke-width", "2px")
-                .style("stroke", function (d) {
-                    return d3Data.color[d.label];
-                })
-                .style("fill", function (d) {
-                    if (d.id == root.id)
-                        return d3Data.color['mainFill'];
-                    else
-                        return d3Data.color[d.label];
-                });
-
             /*CREATE SHADOW UNDER LINE TEXT*/
             var pathTextShadow = d3Data.innerContainer.append("svg:g")
                 .selectAll("text")
@@ -229,6 +203,32 @@ var d3Data;
                 .style("fill", "rgba(0,0,0,1")
                 .text(function (d) {
                     return d.label;
+                });
+
+            /*CREATE CIRCLE*/
+            var circle = d3Data.innerContainer.append("svg:g").selectAll("circle")
+                .data(d3Data.force.nodes())
+                .enter().append("svg:circle")
+                .attr('class', function (d) {
+                    return 'circleBottom ' + d.id
+                })
+                .attr("r", function (d) {
+                    if (d.label == "podmiot") {
+                        return d3Data.size.nodesPodmiot;
+                    }
+                    else if (d.label == "osoba") {
+                        return d3Data.size.nodesOsoba;
+                    }
+                })
+                .style("stroke-width", "2px")
+                .style("stroke", function (d) {
+                    return d3Data.color[d.label];
+                })
+                .style("fill", function (d) {
+                    if (d.id == root.id)
+                        return d3Data.color['mainFill'];
+                    else
+                        return d3Data.color[d.label];
                 });
 
             /*CREATE CIRCLE TEXT*/
@@ -297,33 +297,54 @@ var d3Data;
                     var opacity = .2;
 
                     circle.classed("node-active", function (o) {
-                        var color = isConnected(d, o) || (o === root) ? d3Data.color[o.label] : d3Data.color[o.label + 'Disabled'];
-                        $(this).css({'fill': color, 'stroke': color});
+                        var color = (isConnected(d, o) || (o === root)) ? d3Data.color[o.label] : d3Data.color[o.label + 'Disabled'];
+                        $(this).addClass('node-active').css({'fill': color, 'stroke': color});
+
                         return false;
                     });
                     circleText.classed("text-active", function (o) {
-                        $(this).css('opacity', ((isConnected(d, o) || (o == d) || (root === o)) ? 1 : opacity));
+                        if (isConnected(d, o) || (o == d) || (root === o))
+                            $(this).addClass('text-active').css('opacity', 1);
+                        else
+                            $(this).addClass('text-active').css('opacity', opacity);
                         return false;
                     });
 
-                    path.classed("link-active", function (o) {
-                        var pathLink;
+                    arrayUnique = function (a) {
+                        return a.reduce(function (p, c) {
+                            if (p.indexOf(c) < 0) p.push(c);
+                            return p;
+                        }, []);
+                    };
 
+                    var pathLink = [];
+
+                    path.classed("link-active", function (o) {
                         if (o.source === d)
-                            pathLink = o.target.id;
+                            pathLink.push(o.target.id);
                         else if (o.target === d)
-                            pathLink = o.source.id;
+                            pathLink.push(o.source.id);
+
+                        pathLink = arrayUnique(pathLink);
 
                         this.setAttribute('stroke-opacity', !!(o.source === d || o.target === d) ? 1 : opacity);
-                        if (pathLink)
-                            $('[id^="path-' + root.id + '-' + pathLink + '"],[id^="path-' + pathLink + '-' + root.id + '"]').attr('stroke-opacity', 1);
+                        for (var j = 0; j < pathLink.length; j++) {
+                            $('[id^="path-' + root.id + '-' + pathLink[j] + '"],[id^="path-' + pathLink[j] + '-' + root.id + '"]').addClass('link-active').attr('stroke-opacity', 1);
+                        }
 
                         pathTextShadow.classed("text-active", function (o) {
-                            $(this).css('fill', 'rgba(0,0,0,' + (isConnected(d, o) || !!(o.source === d || o.target === d) || !!(o.source == root && o.target.id == pathLink) || !!(o.source.id == pathLink && o.target == root) ? 1 : opacity) + ')');
-
+                            $(this).css('fill', 'rgba(0,0,0,' + (isConnected(d, o) || !!(o.source === d || o.target === d) ? 1 : opacity) + ')');
+                            for (var k = 0; k < pathLink.length; k++) {
+                                if (!!(o.source == root && o.target.id == pathLink[k]) || !!(o.source.id == pathLink[k] && o.target == root))
+                                    $(this).addClass('text-active').css('fill', 'rgba(0,0,0,1)');
+                            }
                         });
                         pathText.classed("text-active", function (o) {
-                            $(this).css('fill', 'rgba(0,0,0,' + (isConnected(d, o) || !!(o.source === d || o.target === d) || !!(o.source == root && o.target.id == pathLink) || !!(o.source.id == pathLink && o.target == root) ? 1 : opacity) + ')');
+                            $(this).css('fill', 'rgba(0,0,0,' + (isConnected(d, o) || !!(o.source === d || o.target === d) ? 1 : opacity) + ')');
+                            for (var l = 0; l < pathLink.length; l++) {
+                                if (!!(o.source == root && o.target.id == pathLink[l]) || !!(o.source.id == pathLink[l] && o.target == root))
+                                    $(this).addClass('text-active').css('fill', 'rgba(0,0,0,1)');
+                            }
                         });
 
                         return false;
@@ -337,7 +358,7 @@ var d3Data;
                         return false;
                     });
                 })
-                .on("mouseout", function (d) {
+                .on("mouseout", function () {
                     circle.classed('node-active', function (o) {
                         $(this).css({'fill': d3Data.color[o.label], 'stroke': d3Data.color[o.label]});
                         circleText.classed("text-active", function () {
@@ -355,6 +376,8 @@ var d3Data;
                         });
                         return false;
                     });
+                    //$('.link-active').removeClass('link-active');
+                    //$('.text-active').removeClass('text-active');
                 })
                 .on("mousedown", function (d) {
                     d.mousePos = {x: d.x, y: d.y};
@@ -598,15 +621,15 @@ var d3Data;
                 if (connectionGraph.find('.panControl').length == 0) {
                     connectionGraph.append(
                         $('<div></div>').addClass('panControl btn-group-vertical').append(
-                                $('<div></div>').attr('id', 'panControlFullscreen').addClass('btn btn-default glyphicon glyphicon-resize-full')
-                            ).append(
-                                $('<div></div>').attr('id', 'panControlCenter').addClass('btn btn-default glyphicon glyphicon-home')
-                            ).append(
-                                $('<div></div>').attr('id', 'panControlZoomIn').addClass('btn btn-default glyphicon glyphicon-zoom-in')
-                            )
+                            $('<div></div>').attr('id', 'panControlFullscreen').addClass('btn btn-default glyphicon glyphicon-resize-full')
+                        ).append(
+                            $('<div></div>').attr('id', 'panControlCenter').addClass('btn btn-default glyphicon glyphicon-home')
+                        ).append(
+                            $('<div></div>').attr('id', 'panControlZoomIn').addClass('btn btn-default glyphicon glyphicon-zoom-in')
+                        )
                             .append(
-                                $('<div></div>').attr('id', 'panControlZoomOut').addClass('btn btn-default glyphicon glyphicon-zoom-out')
-                            )
+                            $('<div></div>').attr('id', 'panControlZoomOut').addClass('btn btn-default glyphicon glyphicon-zoom-out')
+                        )
                     );
                 }
             }
