@@ -193,11 +193,11 @@ function number_format_h($n, $decimals = 0, $dec_point = '.', $thousands_sep = '
     $_n = abs($n);
 
     // now filter it;
-    if ($_n > 1000000000000000) return round(($n / 1000000000000000), 1) . ' Bld';
-    else if ($_n > 1000000000000) return round(($n / 1000000000000), 1) . ' B';
-    else if ($_n > 1000000000) return round(($n / 1000000000), 1) . ' Mld';
-    else if ($_n > 1000000) return round(($n / 1000000), 1) . ' M';
-    else if ($_n > 1000) return round(($n / 1000), 1) . ' k';
+    if ($_n > 1000000000000000) return round(($n / 1000000000000000), 1) . '&nbsp;Bld';
+    else if ($_n > 1000000000000) return round(($n / 1000000000000), 1) . '&nbsp;B';
+    else if ($_n > 1000000000) return round(($n / 1000000000), 1) . '&nbsp;Mld';
+    else if ($_n > 1000000) return round(($n / 1000000), 1) . '&nbsp;M';
+    else if ($_n > 1000) return round(($n / 1000), 1) . '&nbsp;k';
 
     return number_format($n, $decimals, $dec_point, $thousands_sep);
 }
