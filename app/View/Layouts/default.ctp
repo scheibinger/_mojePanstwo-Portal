@@ -24,9 +24,9 @@
     echo $this->Html->css('../libs/jqueryui/1.11.0/cupertino/jquery-ui.min.css');
 
     $this->Combinator->add_libs('css', $this->Less->css('jquery/jquery-ui-customize'), false);
-    $this->Combinator->add_libs('css', $this->Less->css('bar'), false);
+    $this->Combinator->add_libs( 'css', $this->Less->css( 'structure' ), false );
     $this->Combinator->add_libs('css', $this->Less->css('main'), false);
-    $this->Combinator->add_libs('css', $this->Less->css('flatly'), false);
+    /*$this->Combinator->add_libs('css', $this->Less->css('flatly'), false);*/
 
     /* GLOBAL CSS FOR LOGIN FORM FOR PASZPORT PLUGIN*/
     $this->Combinator->add_libs('css', $this->Less->css('loginForm', array('plugin' => 'Paszport')), false);
@@ -101,7 +101,7 @@
             </div>
         </div>
     <?php } ?>
-    <div id="_main" class="col-xs-10">
+	<div id="_main">
 
     <?php echo $content_for_layout; ?>
 
