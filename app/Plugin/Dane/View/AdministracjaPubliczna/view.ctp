@@ -159,11 +159,25 @@ echo $this->Element('dataobject/pageRelated', array(
 	            <ul class="dataHighlights side">
 	            
 	            	
+	            	<? if( $object->getData('budzet_plan')*1000 ) {?>
+	            	<li class="dataHighlight big">
+	                    <p class="_label">Budżet roczny</p>
+	                    <div>
+	                        <p class="_value pull-left"><?= number_format_h($object->getData('budzet_plan')*1000) ?> PLN</p>
+	                        <p class="pull-right nopadding"><a class="btn btn-sm btn-default" href="/dane/administracja_publiczna/<?= $object->getId() ?>/budzet">Szczegóły &raquo;</a></p>
+	                    </div>
+	                </li>
+	                <? } ?>
+	                
+	                
+	                
+	                
+	            	
 	                <? 
 	                	if( $www = $object->getData('www') ) {
 							$url = ( stripos($www, 'http')===false ) ? 'http://' . $www : $www;
 	                ?>
-	                <li class="dataHighlight">
+	                <li class="dataHighlight<? if( $object->getData('budzet_plan')*1000 ) {?> topborder<?}?>">
 	                    <p class="_label">Adres WWW</p>
 	                    <p class="_value"><a target="_blank" title="<?= addslashes($object->getTitle()) ?>" href="<?= $url ?>"><?= $www; ?></a></p>
 	                </li>
