@@ -59,7 +59,10 @@ body {
             width: 100px;
             height: 100%;
             background-color: @cockpitBlue;
-            position: relative;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 2;
 
             ._mPLogo {
                 font-family: "Lato", sans-serif;
@@ -114,7 +117,10 @@ body {
             }
         }
         ._mPAppList {
-            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1;
             width: 100px;
             height: 100%;
             background-color: @cockpitBlueDarken;
@@ -167,18 +173,13 @@ body {
 
     #_main {
         width: 100%;
+        height: 100%;
         padding-left: 100px;
+        overflow-x: hidden;
 
-        .container.app {
-            margin-top: 2em;
-
-            .block:first-child {
-                padding-top: 10px;
-            }
-
-            .block:last-child {
-                padding-bottom: 10px;
-            }
+        #_handler {
+            width: 100%;
+            height: 100%;
         }
     }
 }
