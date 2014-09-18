@@ -28,7 +28,7 @@ $this->Html->scriptBlock('window.swaggerUi = new SwaggerUi({url: "' . $api["swag
 <div id="api" class="newLayout">
     <div class="jumbotron">
         <div class="container">
-            <h1><?php echo $api['name'] ?></h1>
+            <h1><?php echo $api['name'];  if (intval($api['version']) == 0) echo ' <span class="beta">BETA</span>'; ?></h1>
 
             <p><?php echo $api['description'] ?></p>
 
@@ -55,6 +55,10 @@ $this->Html->scriptBlock('window.swaggerUi = new SwaggerUi({url: "' . $api["swag
     </div>
 
     <div class="container">
+        <div class="details">
+            <? echo $this->element($api['slug']); ?>
+        </div>
+
         <div class="swagger-section row">
             <div id="message-bar" class="swagger-ui-wrap col-md-12">&nbsp;</div>
             <div id="swagger-ui-container" class="swagger-ui-wrap col-md-12"></div>
