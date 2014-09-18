@@ -3,7 +3,7 @@
     var _mPCockpit = $('#_mPCockpit'),
         _mPApplication = _mPCockpit.find('._mPApplication'),
         _homeHandler = $('#_handler'),
-        animateDelay = 800;
+        animateDelay = 500;
 
     _mPApplication.find('> ._appBlock').click(function (e) {
         var option = $(this);

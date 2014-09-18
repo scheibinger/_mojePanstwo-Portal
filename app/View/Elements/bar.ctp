@@ -34,29 +34,30 @@
         </div>
     </div>
     <div class="_mPAppList">
-        <?php if (!empty($applications['list'])) {
-            foreach ($applications['list'] as $app) {
-                if ($app['Application']['home'] == '1') {
-                    if ($app['Application']['type'] == 'app') {
+	    <?php if ( ! empty( $_APPLICATIONS ) ) {
+		    foreach ( $_APPLICATIONS as $app ) {
+			    if ( $app['home'] == '1' ) {
+				    if ( $app['type'] == 'app' ) {
                         ?>
                         <div class="_appBlock _appBlockBackground">
-                            <a class="_appConstruct" href="/<?= $app['Application']['slug'] ?>">
+	                        <a class="_appConstruct" href="/<?= $app['slug'] ?>">
                                 <div class="_mPAppIcon">
-                                    <img
-                                        src="/<?= $app['Application']['plugin'] ?>/icon/<?= $app['Application']['slug'] ?>.svg"
-                                        alt="<?= $app['Application']['name'] ?>"/>
+	                                <img
+		                                src="/<?= $app['plugin'] ?>/icon/<?= $app['slug'] ?>.svg"
+		                                alt="<?= $app['name'] ?>"/>
                                 </div>
-                                <div class="_mPTitle"><?= $app['Application']['name'] ?></div>
+		                        <div class="_mPTitle"><?= $app['name'] ?></div>
                             </a>
                         </div>
                     <?php } else if ($app['Application']['type'] == 'folder') { ?>
-                        <div class="_appConstruct _appFolder" data-folder-slug="/<?= $app['Application']['slug'] ?>">
+					    <div class="_appConstruct _appFolder" data-folder-slug="/<?= $app['slug'] ?>">
                             <div class="_mpAppFolderIcon">
-                                <img src="/icon/folder.svg" alt="<?= $app['Application']['name'] ?>"/>
+	                            <img src="/icon/folder.svg"
+	                                 alt="<?= $app['name'] ?>"/>
                             </div>
-                            <div class="_mPTitle"><?= $app['Application']['name'] ?></div>
+						    <div class="_mPTitle"><?= $app['name'] ?></div>
                             <div class="_appList">
-                                <?php foreach ($app['Content'] as $key => $appList) { ?>
+	                            <?php foreach ( $app['Content'] as $key => $appList ) { ?>
                                     <div class="_appBlock _appBlockBackground">
                                         <a href="/<?= $appList['slug'] ?>">
                                             <div class="_mPAppIcon">
