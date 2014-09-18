@@ -29,7 +29,10 @@ $buttons = isset($objectOptions['buttons']) ? $objectOptions['buttons'] : array(
     echo $this->Element('dataobject/searchInPage', array(
         'alerts' => $alertArray
     ));
-}?>
+}
+
+$info = $object->getLayer('info');
+?>
     <div class="objectPageHeaderContainer">
         <div class="container">
             <div class="col-md-10">
@@ -98,6 +101,21 @@ $buttons = isset($objectOptions['buttons']) ? $objectOptions['buttons'] : array(
             </div>
         </div>
     </div>
+    
+    <?
+	if( isset($_menu) && !empty($_menu) ) {
+?>
+<div class="menuTabsCont">
+	<div class="container">
+<?
+		echo $this->Element('Dane.dataobject/menuTabs', array(
+			'menu' => $_menu,
+		));
+?>
+	</div>
+</div>
+
+<? } ?>
 
 
 <? if ($menuMode == 'vertical') { ?>
@@ -141,11 +159,25 @@ echo $this->Element('dataobject/pageRelated', array(
 	            <ul class="dataHighlights side">
 	            
 	            	
+	            	<? if( $object->getData('budzet_plan')*1000 ) {?>
+	            	<li class="dataHighlight big">
+	                    <p class="_label">Budżet roczny</p>
+	                    <div>
+	                        <p class="_value pull-left"><?= number_format_h($object->getData('budzet_plan')*1000) ?> PLN</p>
+	                        <p class="pull-right nopadding"><a class="btn btn-sm btn-default" href="/dane/administracja_publiczna/<?= $object->getId() ?>/budzet">Szczegóły &raquo;</a></p>
+	                    </div>
+	                </li>
+	                <? } ?>
+	                
+	                
+	                
+	                
+	            	
 	                <? 
 	                	if( $www = $object->getData('www') ) {
 							$url = ( stripos($www, 'http')===false ) ? 'http://' . $www : $www;
 	                ?>
-	                <li class="dataHighlight">
+	                <li class="dataHighlight<? if( $object->getData('budzet_plan')*1000 ) {?> topborder<?}?>">
 	                    <p class="_label">Adres WWW</p>
 	                    <p class="_value"><a target="_blank" title="<?= addslashes($object->getTitle()) ?>" href="<?= $url ?>"><?= $www; ?></a></p>
 	                </li>
@@ -217,7 +249,17 @@ echo $this->Element('dataobject/pageRelated', array(
 				
 				
 	            <div class="block-group">
+	            		            	           	
 	            	
+	            	<? if( isset($info['opis_html']) && $info['opis_html'] ) { ?>
+		            	<div class="block">		            		
+		            		<div class="content opis">
+		            			<?= $info['opis_html'] ?>
+		            		</div>
+		            	</div>
+	            	<? } ?>
+	            	
+	            		            	
 	            	<? if ( 
 	            		( $tree = $object->getLayer('tree') ) && 
 	            		( $items = $tree['items'] ) 
@@ -259,6 +301,15 @@ echo $this->Element('dataobject/pageRelated', array(
 	    	<div class="mpanel">
 		    
 			    <div class="block-group">
+	            	
+	            	
+	            	<? if( isset($info['opis_html']) && $info['opis_html'] ) { ?>
+		            	<div class="block">
+		            		<div class="content opis">
+		            			<?= $info['opis_html'] ?>
+		            		</div>
+		            	</div>
+	            	<? } ?>
 	            	
 	            	<? if ( 
 	            		( $tree = $object->getLayer('tree') ) && 

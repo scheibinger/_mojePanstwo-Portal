@@ -2,6 +2,10 @@ h1 {
     font-size: 30px !important;
 }
 
+.objectPageHeaderContainer {
+	background-color: #e9e9e9;
+}
+
 .objectsPage .objectsPageWindow {
     padding-top: 5px;
 
@@ -29,7 +33,17 @@ h1 {
                 margin: 6px 0 5px 14px;
             }
         }
-
+		
+		.opis {
+			ul {
+				list-style: disc;
+				margin-left: 20px;
+				li {
+					list-style: disc;
+				}
+			}
+		}
+		
         .indicators {
             margin-top: 20px;
             overflow: auto;
@@ -104,6 +118,144 @@ h1 {
     }
 }
 
+
+
+#budzet {
+	
+
+	
+	a {
+		color: #333;
+		
+		&:hover {
+			color: #157ab5;
+		}
+	}
+	
+	.budzet {
+	
+		font-size: 12px;
+		padding: 0 10px 20px;
+
+		.row {
+			
+			padding: 5px 10px;
+			
+			&:hover {
+				background-color: #F6F6F6;
+			}
+						
+			.col {
+				
+				float: left;
+				width: 10%;
+				text-align: center;
+				
+				-webkit-transition-duration: .5s; /* Safari */
+			    transition-duration: .5s;
+				
+				&.nazwa {
+					width: 50%;
+				}
+				
+				&.plan {
+					width: 50%;
+					color: green;
+				}
+				
+				&.ztego {
+					width: 0;
+					height: 0;
+					overflow: hidden;
+				}
+				
+			}
+			
+			&.row-header {
+				
+				margin-bottom: -10px;
+								
+				&:hover {
+					background-color: inherit;
+				}
+				
+				.plan {
+					color: #333;
+				}
+				
+			}
+			
+			&.row-main {
+				
+				background-color: #F6F6F6;
+				border-top: 1px solid #DDD;
+				font-size: 18px;
+				margin-top: 20px;
+				padding-top: 10px;
+				padding-bottom: 10px;
+				
+				.nazwa {
+					text-align: left;
+				}
+				
+				
+				
+			}
+			
+			&.row-sub {
+				
+				.nazwa {
+					padding-left: 25px;
+					text-align: left;
+				}
+				
+			}
+			
+		}
+		
+		.ztego {
+			
+			color: #999;
+			
+			.col {
+				
+				float: left;
+				width: 14.2857%;
+				
+			}
+		}
+		
+		
+		&.full {
+			
+			.row {
+				
+				.col {
+					
+					&.nazwa {
+					width: 30%;
+					}
+					
+					&.plan {
+						width: 10%;
+					}
+					
+					&.ztego {
+						width: 60%;
+						height: inherit;
+						overflow: hidden;
+					}
+					
+				}
+				
+			}
+			
+		}
+		
+		
+	}
+	
+}
 
 
 

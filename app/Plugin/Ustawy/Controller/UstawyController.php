@@ -20,10 +20,10 @@ class UstawyController extends AppController
 
         $api->searchDataset('ustawy', array(
             'conditions' => array(
-                'data_wejscia_w_zycie' => '[* TO NOW/DAY]',
+                'prawo.data_wejscia_w_zycie' => '[* TO NOW/DAY]',
             ),
             'limit' => 5,
-            'order' => 'data_wejscia_w_zycie desc',
+            'order' => 'prawo.data_wejscia_w_zycie desc',
         ));
         $data['niedawno_weszly'] = $api->getObjects();
 
@@ -32,10 +32,10 @@ class UstawyController extends AppController
 
         $api->searchDataset('ustawy', array(
             'conditions' => array(
-                'data_wejscia_w_zycie' => '[NOW/DAY TO *]',
+                'prawo.data_wejscia_w_zycie' => '[NOW/DAY TO *]',
             ),
             'limit' => 5,
-            'order' => 'data_wejscia_w_zycie asc',
+            'order' => 'prawo.data_wejscia_w_zycie asc',
         ));
         $data['niedlugo_wejda'] = $api->getObjects();
 
@@ -90,7 +90,7 @@ class UstawyController extends AppController
 
                 foreach ($objects as $obj)
                     $search[] = array_merge($obj->getData(), array(
-                        'data_slowna' => dataSlownie($obj->getData('data_publikacji')),
+                        'data_slowna' => dataSlownie($obj->getData('prawo.data_publikacji')),
                         'hl' => $obj->getHlText(),
                     ));
             }

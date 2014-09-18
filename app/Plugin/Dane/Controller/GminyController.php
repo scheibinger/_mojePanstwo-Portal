@@ -805,7 +805,39 @@ class GminyController extends DataobjectsController
 
         $this->set('title_for_layout', 'Zamówienia publiczne w gminie ' . $this->object->getData('nazwa'));
     }
+	
+	public function miejscowosci()
+    {        
+        
+        $this->_prepareView();
+        $this->request->params['action'] = 'miejscowosci';
 
+        if (isset($this->request->params['pass'][0]) && is_numeric($this->request->params['pass'][0])) {
+
+            $miejscowosc = $this->API->getObject('miejscowosci', $this->request->params['pass'][0], array(
+                // 'layers' => 'neighbours',
+            ));
+            $this->set('miejscowosc', $miejscowosc);
+            $this->set('title_for_layout', $miejscowosc->getTitle() . ' w gminie ' . $this->object->getTitle());
+            $this->render('miejscowosc');
+
+        } else {
+
+            $this->dataobjectsBrowserView(array(
+	            'source' => 'gminy.miejscowosci:' . $this->object->getId(),
+	            'dataset' => 'miejscowosci',
+	            'noResultsTitle' => 'Brak miejscowości',
+	            'excludeFilters' => array(
+	                'gmina_id'
+	            ),
+	            'hlFields' => array(),
+	        ));
+	        $this->set('title_for_layout', 'Miejscowości w gminie ' . $this->object->getData('nazwa'));
+
+        }        
+        
+    }
+	
     public function organizacje()
     {
         $this->_prepareView();
@@ -883,6 +915,61 @@ class GminyController extends DataobjectsController
         ));
 
         $this->set('title_for_layout', 'Dotacje Unii Europejskiej w gminie ' . $this->object->getData('nazwa'));
+
+    }
+    
+    public function urzednicy()
+    {
+        $this->_prepareView();
+        $this->dataobjectsBrowserView(array(
+            'dataset' => 'krakow_urzednicy',
+            'title' => 'Urzędnicy',
+        ));
+
+        $this->set('title_for_layout', 'Urzędnicy urzędu miasta ' . $this->object->getData('nazwa'));
+
+    }
+    
+    public function jednostki()
+    {
+        $this->_prepareView();
+        $this->dataobjectsBrowserView(array(
+            'dataset' => 'krakow_jednostki',
+            'title' => 'Jednostki administracyjne',
+        ));
+
+        $this->set('title_for_layout', 'Jednostki administracyjne urzędu miasta ' . $this->object->getData('nazwa'));
+
+    }
+    
+    public function oswiadczenia()
+    {
+    	
+    	$this->_prepareView();
+        $this->request->params['action'] = 'oswiadczenia';
+
+        if (isset($this->request->params['pass'][0]) && is_numeric($this->request->params['pass'][0])) {
+
+            $oswiadczenie = $this->API->getObject('krakow_oswiadczenia', $this->request->params['pass'][0], array(
+                // 'layers' => 'neighbours',
+            ));
+            $this->set('oswiadczenie', $oswiadczenie);
+            $document = $this->API->document($oswiadczenie->getData('dokument_id'));
+            $this->set('document', $document);
+            $this->set('documentPackage', 1);
+            $this->set('title_for_layout', $oswiadczenie->getTitle());
+            $this->render('oswiadczenie');
+
+        } else {
+
+            $this->dataobjectsBrowserView(array(
+	            'dataset' => 'krakow_oswiadczenia',
+	            'title' => 'Oświadczenia majątkowe',
+	        ));
+	
+	        $this->set('title_for_layout', 'Oświadczenia majątkowe urzędu miasta ' . $this->object->getData('nazwa'));
+
+        }        
 
     }
 
@@ -1034,7 +1121,6 @@ class GminyController extends DataobjectsController
                 ),
             );
             
-            /*
             $menu['items'][] = array(
 				'id' => 'urzad',
 				'label' => 'Urząd Miasta',
@@ -1044,12 +1130,23 @@ class GminyController extends DataobjectsController
 							'id' => 'urzednicy',
 							'label' => 'Urzędnicy',
 							'href' => $href_base . '/urzednicy',
+						),
+						array(
+							'id' => 'jednostki',
+							'label' => 'Jednostki organizacyjne',
+							'href' => $href_base . '/jednostki',
+						),
+						array(
+							'topborder' => true,
+							'id' => 'oswiadczenia',
+							'label' => 'Oświadczenia majątkowe',
+							'href' => $href_base . '/oswiadczenia',
 						)
 					),
 				),
 			);
             
-            
+            /*
             $dzielnice_items = array();
 			if( $dzielnice = $this->object->getLayer('dzielnice') ) {
 				
@@ -1143,6 +1240,13 @@ class GminyController extends DataobjectsController
                 ),
             ),
         );
+        
+        $menu['items'][] = array(
+            'id' => 'miejscowosci',
+            'href' => $href_base . '/miejscowosci',
+            'label' => 'Miejscowości',
+        );
+        
 
         /*
         $menu['items'][] = array(

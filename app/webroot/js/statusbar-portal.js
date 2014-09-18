@@ -82,13 +82,26 @@
                             var results = $.map(data.hits, function (item) {
                                 var shortTitleLimit = 200,
                                     shortTitle = '';
+								
+								if( item.dataset == 'twitter' ) {
+									
+									shortTitle = item.title.replace(/(<([^>]+)>)/ig,"");
 
-                                if ((item.title.length > shortTitleLimit) && (item.dataset != 'twitter')) {
-                                    shortTitle = item.title.substr(0, shortTitleLimit);
-                                    shortTitle = shortTitle.substr(0, Math.min(shortTitle.length, shortTitle.lastIndexOf(" "))) + '...';
-                                } else {
-                                    shortTitle = item.title;
-                                }
+									
+								} else {
+									
+									if( item.title.length > shortTitleLimit ) {
+	                                
+	                                    shortTitle = item.title.substr(0, shortTitleLimit);
+	                                    shortTitle = shortTitle.substr(0, Math.min(shortTitle.length, shortTitle.lastIndexOf(" "))) + '...';
+	                                } else {
+	                                    
+	                                    shortTitle = item.title;
+	                                    
+	                                }
+									
+								}
+																
 
                                 return {
                                     type: 'item',
@@ -140,7 +153,7 @@
                 if (item.type == 'item') {
                     return $('<li></li>').addClass("row")
                         .append(
-                            $('<a></a>').attr({'href': '/dane/' + item.link, 'target': '_blank'})
+                            $('<a></a>').attr({'href': '/dane/' + item.link})
                                 .append(
                                     $('<p></p>').addClass('col-xs-3 col-md-2').addClass('_label').html('<span class="label label-default label-sm">' + item.label + '</span>')
                                 )

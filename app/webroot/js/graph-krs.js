@@ -24,7 +24,8 @@ var d3Data;
                 'nodesOsoba': 30,
                 'nodeText': '10px',
                 'nodeTextBox': 10,
-                'nodeTextSeparate': 3
+                'nodeTextSeparate': 3,
+                'nodesMarkerSize': 13
             },
             zoomConst: {
                 min: 0.5,
@@ -134,33 +135,25 @@ var d3Data;
                 .attr("id", function (d) {
                     return d;
                 })
-                .attr("viewBox", "0 -5 10 10")
-                .attr("refX", function (d) {
-                    if (d == "arrowPodmiot")
-                        return (d3Data.size.nodesPodmiot * 2) - 4;
-                    else if (d == "arrowOsoba")
-                        return (d3Data.size.nodesOsoba * 2) - 4;
-                    else
-                        return ((d3Data.size.nodesPodmiot > d3Data.size.nodesOsoba) ? d3Data.size.nodesPodmiot * 2 : d3Data.size.nodesOsoba * 2) - 4;
+                .attr("cx", function (d) {
+                    return ((d.label == "podmiot") ? d3Data.size.nodesPodmiot : d3Data.size.nodesOsoba) + d3Data.size.nodesMarkerSize;
                 })
-                .attr("refY", function (d) {
-                    if (d == "arrowPodmiot")
-                        return -10;
-                    else if (d == "arrowOsoba")
-                        return -8;
-                    else
-                        return ((d3Data.size.nodesPodmiot > d3Data.size.nodesOsoba) ? -5.5 : -3.5);
+                .attr("cy", function (d) {
+                    return 5
                 })
-                .attr("markerWidth", 6)
-                .attr("markerHeight", 6)
+                .attr("markerWidth", d3Data.size.nodesMarkerSize)
+                .attr("markerHeight", d3Data.size.nodesMarkerSize)
                 .attr("orient", "auto")
                 .append("svg:path")
-                .attr("d", "M0,-5L10,0L0,5");
+                .attr("d", "M2,2 L2,11 L10,6 L2,2");
 
             /*CREATE LINE*/
             var path = d3Data.innerContainer.append("svg:g").selectAll("path")
                 .data(d3Data.force.links())
                 .enter().append("svg:path")
+                .attr('id', function (d) {
+                    return 'path-' + d.source.id + '-' + d.target.id + '-' + d.label.replace(" ", "_");
+                })
                 .attr('class', 'link')
                 .attr("marker-end", function (d) {
                     if (d.target.label == "podmiot")
@@ -171,6 +164,46 @@ var d3Data;
                         return "url(#arrow)";
                 })
                 .style({"fill": "none", "stroke-width": d3Data.size.linksWidth, 'stroke': d3Data.color.links});
+
+            /*CREATE SHADOW UNDER LINE TEXT*/
+            var pathTextShadow = d3Data.innerContainer.append("svg:g")
+                .selectAll("text")
+                .data(d3Data.force.links())
+                .enter()
+                .append('svg:text')
+                .attr('dy', -2)
+                .style("font-size", d3Data.size.linkText)
+                .style("stroke", "white")
+                .style("stroke-width", "1px")
+                .style("opacity", '0.9')
+                .append("svg:textPath")
+                .attr('startOffset', '30%')
+                .attr('xlink:href', function (d) {
+                    return '#path-' + d.source.id + '-' + d.target.id + '-' + d.label.replace(" ", "_");
+                })
+                .attr('class', 'pathTextShadow')
+                .text(function (d) {
+                    return d.label;
+                });
+
+            /*CREATE LINE TEXT*/
+            var pathText = d3Data.innerContainer.append("svg:g")
+                .selectAll("text")
+                .data(links)
+                .enter()
+                .append('svg:text')
+                .attr('dy', -2)
+                .style("font-size", d3Data.size.linkText)
+                .append("svg:textPath")
+                .attr('startOffset', '30%')
+                .attr('xlink:href', function (d) {
+                    return '#path-' + d.source.id + '-' + d.target.id + '-' + d.label.replace(" ", "_");
+                })
+                .attr('class', 'pathText')
+                .style("fill", "rgba(0,0,0,1")
+                .text(function (d) {
+                    return d.label;
+                });
 
             /*CREATE CIRCLE*/
             var circle = d3Data.innerContainer.append("svg:g").selectAll("circle")
@@ -198,34 +231,9 @@ var d3Data;
                         return d3Data.color[d.label];
                 });
 
-            /*CREATE SHADOW UNDER LINE TEXT*/
-            var pathTextShadow = d3Data.innerContainer.append("svg:g").selectAll("text")
-                .data(d3Data.force.links())
-                .enter().append("svg:text")
-                .attr('class', 'pathTextShadow')
-                .style("text-anchor", "middle")
-                .style("font-size", d3Data.size.linkText)
-                .style("stroke", "white")
-                .style("stroke-width", "1px")
-                .style("opacity", '0.9')
-                .text(function (d) {
-                    return d.label;
-                });
-
-            /*CREATE LINE TEXT*/
-            var pathText = d3Data.innerContainer.append("svg:g").selectAll("text")
-                .data(links)
-                .enter().append("svg:text")
-                .attr('class', 'pathText')
-                .style("text-anchor", "middle")
-                .style("font-size", d3Data.size.linkText)
-                .style("fill", "#000")
-                .text(function (d) {
-                    return d.label;
-                });
-
             /*CREATE CIRCLE TEXT*/
-            var circleText = d3Data.innerContainer.append("svg:g").selectAll("text")
+            var circleText = d3Data.innerContainer.append("svg:g")
+                .selectAll("text")
                 .data(nodes)
                 .enter().append("svg:text")
                 .attr('class', 'circleText')
@@ -286,35 +294,90 @@ var d3Data;
                 .style('fill-opacity', 0)
                 .call(d3Data.drag)
                 .on("mouseover", function (d) {
+                    var opacity = .2;
+
                     circle.classed("node-active", function (o) {
-                        var color = isConnected(d, o) ? d3Data.color[o.label] : d3Data.color[o.label + 'Disabled'];
-                        $(this).css({'fill': color, 'stroke': color});
+                        var color = (isConnected(d, o) || (o === root)) ? d3Data.color[o.label] : d3Data.color[o.label + 'Disabled'];
+                        $(this).addClass('node-active').css({'fill': color, 'stroke': color});
+
+                        return false;
+                    });
+                    circleText.classed("text-active", function (o) {
+                        if (isConnected(d, o) || (o == d) || (root === o))
+                            $(this).addClass('text-active').css('opacity', 1);
+                        else
+                            $(this).addClass('text-active').css('opacity', opacity);
                         return false;
                     });
 
+                    arrayUnique = function (a) {
+                        return a.reduce(function (p, c) {
+                            if (p.indexOf(c) < 0) p.push(c);
+                            return p;
+                        }, []);
+                    };
+
+                    var pathLink = [];
+
                     path.classed("link-active", function (o) {
-                        this.setAttribute('stroke-opacity', !!((o.source === d || o.target === d)) ? 1 : .2);
+                        if (o.source === d)
+                            pathLink.push(o.target.id);
+                        else if (o.target === d)
+                            pathLink.push(o.source.id);
+
+                        pathLink = arrayUnique(pathLink);
+
+                        this.setAttribute('stroke-opacity', !!(o.source === d || o.target === d) ? 1 : opacity);
+                        for (var j = 0; j < pathLink.length; j++) {
+                            $('[id^="path-' + root.id + '-' + pathLink[j] + '"],[id^="path-' + pathLink[j] + '-' + root.id + '"]').addClass('link-active').attr('stroke-opacity', 1);
+                        }
+
+                        pathTextShadow.classed("text-active", function (o) {
+                            $(this).css('fill', 'rgba(0,0,0,' + (isConnected(d, o) || !!(o.source === d || o.target === d) ? 1 : opacity) + ')');
+                            for (var k = 0; k < pathLink.length; k++) {
+                                if (!!(o.source == root && o.target.id == pathLink[k]) || !!(o.source.id == pathLink[k] && o.target == root))
+                                    $(this).addClass('text-active').css('fill', 'rgba(0,0,0,1)');
+                            }
+                        });
+                        pathText.classed("text-active", function (o) {
+                            $(this).css('fill', 'rgba(0,0,0,' + (isConnected(d, o) || !!(o.source === d || o.target === d) ? 1 : opacity) + ')');
+                            for (var l = 0; l < pathLink.length; l++) {
+                                if (!!(o.source == root && o.target.id == pathLink[l]) || !!(o.source.id == pathLink[l] && o.target == root))
+                                    $(this).addClass('text-active').css('fill', 'rgba(0,0,0,1)');
+                            }
+                        });
+
                         return false;
                     });
 
                     d3.select(this).classed("node-active", function (o) {
                         d3.select('.' + d.id).classed('node-active', function () {
-
                             $(this).css({'fill': d3Data.color[o.label], 'stroke': d3Data.color[o.label]});
                             return false;
                         });
                         return false;
                     });
                 })
-                .on("mouseout", function (d) {
+                .on("mouseout", function () {
                     circle.classed('node-active', function (o) {
                         $(this).css({'fill': d3Data.color[o.label], 'stroke': d3Data.color[o.label]});
+                        circleText.classed("text-active", function () {
+                            $(this).css('opacity', 1);
+                        });
                         return false;
                     });
                     path.classed('link-active', function () {
                         this.setAttribute('stroke-opacity', 1);
+                        pathTextShadow.classed("text-active", function () {
+                            $(this).css('fill', 'rgba(0,0,0,1)');
+                        });
+                        pathText.classed("text-active", function () {
+                            $(this).css('fill', 'rgba(0,0,0,1)');
+                        });
                         return false;
                     });
+                    //$('.link-active').removeClass('link-active');
+                    //$('.text-active').removeClass('text-active');
                 })
                 .on("mousedown", function (d) {
                     d.mousePos = {x: d.x, y: d.y};
@@ -391,22 +454,8 @@ var d3Data;
                 return linkedByIndex[a.index + "," + b.index] || linkedByIndex[b.index + "," + a.index];
             }
 
-            function tick(d) {
+            function tick() {
                 path.attr("d", linkArc);
-                pathTextShadow.attr("transform", transformHalf).attr("x",function (d) {
-                    var x = (d.target.x - d.source.x) / 4 - (10 * d.linknum);
-                    return (x > 100) ? 10 : ((x < 20) ? 20 : x);
-                }).attr("y", function (d) {
-                    var y = -(d.target.y - d.source.y) / 4 - (10 * d.linknum);
-                    return (y < -100) ? -100 : ((y > -20) ? -20 : y);
-                });
-                pathText.attr("transform", transformHalf).attr("x",function (d) {
-                    var x = (d.target.x - d.source.x) / 4 - (10 * d.linknum);
-                    return (x > 100) ? 10 : ((x < 20) ? 20 : x);
-                }).attr("y", function (d) {
-                    var y = -(d.target.y - d.source.y) / 4 - (10 * d.linknum);
-                    return (y < -100) ? -100 : ((y > -20) ? -20 : y);
-                });
                 circle.attr("transform", transform);
                 circleText.attr("transform", transform);
                 circleDump.attr("transform", transform);
@@ -431,13 +480,6 @@ var d3Data;
                     dr = Math.floor(Math.sqrt(dx * dx + dy * dy) - (40 * d.linknum));
 
                 return "M" + sourceX + "," + sourceY + "A" + dr + "," + dr + " 0 0,1 " + targetX + "," + targetY;
-            }
-
-            function transformHalf(d) {
-                var halfX = Math.floor((d.source.x + d.target.x) / 2),
-                    halfY = Math.floor((d.source.y + d.target.y) / 2);
-
-                return "translate(" + halfX + "," + halfY + ")";
             }
 
             function transform(d) {
@@ -579,15 +621,15 @@ var d3Data;
                 if (connectionGraph.find('.panControl').length == 0) {
                     connectionGraph.append(
                         $('<div></div>').addClass('panControl btn-group-vertical').append(
-                                $('<div></div>').attr('id', 'panControlFullscreen').addClass('btn btn-default glyphicon glyphicon-resize-full')
-                            ).append(
-                                $('<div></div>').attr('id', 'panControlCenter').addClass('btn btn-default glyphicon glyphicon-home')
-                            ).append(
-                                $('<div></div>').attr('id', 'panControlZoomIn').addClass('btn btn-default glyphicon glyphicon-zoom-in')
-                            )
+                            $('<div></div>').attr('id', 'panControlFullscreen').addClass('btn btn-default glyphicon glyphicon-resize-full')
+                        ).append(
+                            $('<div></div>').attr('id', 'panControlCenter').addClass('btn btn-default glyphicon glyphicon-home')
+                        ).append(
+                            $('<div></div>').attr('id', 'panControlZoomIn').addClass('btn btn-default glyphicon glyphicon-zoom-in')
+                        )
                             .append(
-                                $('<div></div>').attr('id', 'panControlZoomOut').addClass('btn btn-default glyphicon glyphicon-zoom-out')
-                            )
+                            $('<div></div>').attr('id', 'panControlZoomOut').addClass('btn btn-default glyphicon glyphicon-zoom-out')
+                        )
                     );
                 }
             }

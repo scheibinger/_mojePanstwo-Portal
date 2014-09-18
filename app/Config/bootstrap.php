@@ -118,6 +118,7 @@ CakePlugin::loadAll(
         'Combinator' => array('bootstrap' => false, 'routes' => false),
         'Mapaprawa' => array('routes' => true, 'bootstrap' => false),
         'Kultura' => array('routes' => true, 'bootstrap' => false),
+        'Finanse' => array('routes' => true, 'bootstrap' => false),
     )
 );
 /**

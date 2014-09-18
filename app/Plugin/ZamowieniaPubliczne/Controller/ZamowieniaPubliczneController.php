@@ -48,7 +48,7 @@ class ZamowieniaPubliczneController extends AppController
         */
 
         $application = $this->getApplication();
-        $this->set('title_for_layout', $application['Application']['name']);
+        $this->set('title_for_layout', $this->Application['name']);
     }
 
 } 
