@@ -8,10 +8,11 @@ if( $budzet = $object->getLayer('budzet') ) {
 
     <div id="budzet" class="block mpanel">
         
+        <? /*
         <p>W 2014 roku, <?= $object->getTitle() ?> planuje wydać:</p>
         
         <p>123 234 złotych</p>
-        
+        */ ?>
         
         <? if( isset($budzet['wydatki_dzialy']) && $budzet['wydatki_dzialy'] ) { ?>
 	    	
