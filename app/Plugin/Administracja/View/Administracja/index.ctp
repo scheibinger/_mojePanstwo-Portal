@@ -6,7 +6,7 @@ $this->Combinator->add_libs('js', 'Administracja.administracja.js');
 <div id="administracja">
     <div class="appHeader">
         <div class="container innerContent">
-            <h1><?php echo __d('administracja', 'LC_ADMINISTRACJA_TITLE'); ?></h1>
+            <h1>Władze centralne</h1>
             <p class="desc">Kilknij kartę instytucji poniżej, aby dowiedzieć się więcej.</p>
         </div>
     </div>
@@ -35,10 +35,16 @@ $this->Combinator->add_libs('js', 'Administracja.administracja.js');
 									<div class="logo">
 										<img src="/Administracja/img/instytucje/<?= $item['id'] ?>.png" title="<?= $item['nazwa'] ?>"/>
 									</div>
+                                                                        
+									<div class="details">
+										<? if( $item['budzet_plan'] ) {?><span class="detail">Budżet: <?= number_format_h($item['budzet_plan']*1000) ?></span><?}?>
+										<? if( $item['budzet_plan'] && $item['childsCount'] ) {?><span class="separator">|</span><?}?>
+										<? if( $item['childsCount'] ) {?><span class="detail">Instytucje podległe: <?= $item['childsCount'] ?></span><?}?>
+									</div>
+
                                     
 									<div class="title">
                                         <div class="nazwa"><?= $item['nazwa'] ?></div>
-										<? /*<p class="desc"><?= pl_dopelniacz($item['childsCount'], 'instytucja', 'instytucje', 'instytucji') ?></p> */ ?>
 									</div>
 									
 									<div class="text">
