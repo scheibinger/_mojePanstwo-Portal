@@ -52,7 +52,7 @@
                             <span class="icon">
                                 <img src="<?php echo '/' . strtolower($api['slug']) . '/icon/' . $api['slug'] . '.svg' ?>"
                                      alt=""/>
-                            </span><?php echo $api['name'] ?>
+                            </span><?php echo $api['name']; if (intval($api['version']) == 0) echo ' <span class="beta">BETA</span>'; ?>
                         </h3>
 
                         <p><?php echo $api['description'] ?></p>
