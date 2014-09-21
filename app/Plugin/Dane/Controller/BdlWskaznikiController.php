@@ -120,7 +120,7 @@ class BdlWskaznikiController extends DataobjectsController
 
     public function view_dimension()
     {
-
+				
         if (isset($this->request->query['d']) && $this->request->query['d']) {
 
             $dimmensions_array = array();
@@ -129,7 +129,7 @@ class BdlWskaznikiController extends DataobjectsController
                     (int)$this->request->query['d' . $d] :
                     0;
 
-            $data_for_dimmensions = $this->API->BDL()->getDataForDimmesions(array($dimmensions_array));
+            $data_for_dimmensions = $this->API->BDL()->getDataForDimmesions(array($dimmensions_array), $this->request->params['id']);
             if ($data_for_dimmensions) {
                 $url = '/dane/bdl_wskazniki/' . $this->request->params['id'] . '/' . $data_for_dimmensions[0]['id'];
                 $this->redirect($url);
@@ -139,6 +139,7 @@ class BdlWskaznikiController extends DataobjectsController
         }
 
         $dimension = $this->API->BDL()->getDataForDimension($this->request->params['dim_id']);
+                
         $this->_view($dimension);
 
 
