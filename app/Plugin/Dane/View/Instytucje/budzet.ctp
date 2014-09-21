@@ -8,11 +8,10 @@ if( $budzet = $object->getLayer('budzet') ) {
 
     <div id="budzet" class="block mpanel">
         
-        <? /*
-        <p>W 2014 roku, <?= $object->getTitle() ?> planuje wydać:</p>
-        
-        <p>123 234 złotych</p>
-        */ ?>
+        <div class="text-center">
+	        <p>W wydatkach budżetu państwa na rok 2014, <strong><?= $object->getTitle() ?></strong> ma zarezerwowane:</p>
+	        <p class="budget_number"><?= $this->Waluta->slownie( $object->getData('budzet_plan')*1000 ) ?></p>
+        </div>
         
         <? if( isset($budzet['wydatki_dzialy']) && $budzet['wydatki_dzialy'] ) { ?>
 	    	
@@ -58,7 +57,7 @@ if( $budzet = $object->getLayer('budzet') ) {
 				
 					<div class="row row-main">
 						<div class="col nazwa">
-							<a href="/dane/budzet_wydatki_dzialy/<?= $dzial['data']['id'] ?>"><?= $dzial['data']['nazwa'] ?></a>
+							<?= $dzial['data']['nazwa'] ?>
 						</div>
 						<div class="col plan">
 							<?= __currency($dzial['calc']['plan']) ?>
@@ -96,7 +95,7 @@ if( $budzet = $object->getLayer('budzet') ) {
 					
 						<div class="row row-sub">
 							<div class="col nazwa">
-								<a href="/dane/budzet_wydatki_rozdzialy/<?= $dzial['data']['id'] ?>"><?= $item['rozdzial_nazwa'] ?></a>
+								<?= $item['rozdzial_nazwa'] ?>
 							</div>
 							<div class="col plan">
 								<?= __currency($item['plan']) ?>

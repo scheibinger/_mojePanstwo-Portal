@@ -81,11 +81,9 @@ $(document).ready(function () {
 								
                 var leftCol = $('<div></div>').addClass('leftSide col-xs-12 col-md-8');
                 var rightCol = $('<div></div>').addClass('rightSide col-xs-12 col-md-4');
-
-                // leftCol.find('.left').before($('<h3></h3>').addClass('slugTitle').text(title));
-                
+                                
                 leftCol.append( that.find('.text').html() );
-                
+                rightCol.append( '<a href="' + that.attr('href') + '" class="btn btn-md btn-primary">Dowiedz się więcej &raquo;</a>' );
 				
 				/*
                 leftCol.find('.left').append(

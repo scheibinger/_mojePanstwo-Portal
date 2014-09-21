@@ -1,6 +1,6 @@
 <?php
 
-class AdministracjaController extends AppController
+class KtoTuRzadziController extends AppController
 {
     public $components = array(
         'Session',
@@ -9,9 +9,9 @@ class AdministracjaController extends AppController
 
     public function index()
     {
-        $data = $this->API->Administracja()->getData();
+        $data = $this->API->KtoTuRzadzi()->getData();
         $this->set('data', $data);
-
+        $this->set('title_for_layout', 'Kto tu rządzi?');
     }
 
 } 

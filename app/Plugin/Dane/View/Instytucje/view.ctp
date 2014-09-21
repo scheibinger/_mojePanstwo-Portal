@@ -51,14 +51,14 @@ $info = $object->getLayer('info');
 					        <? foreach( $nav as $n ) { ?>
 					        	<ul>
 						        	<li>
-					        		<a href="/dane/administracja_publiczna/<?= $n['id'] ?>"><span><?= $n['nazwa']; ?></span></a>
+					        		<a href="/dane/instytucje/<?= $n['id'] ?>"><span><?= $n['nazwa']; ?></span></a>
 					        
 					        
 					        <? } ?>
 					        	
 					        	<ul>
 					        		<li class="title">
-					        			<a href="/dane/administracja_publiczna/<?= $object->getId() ?>"><?= $object->getTitle() ?></a></p>
+					        			<a href="/dane/instytucje/<?= $object->getId() ?>"><?= $object->getTitle() ?></a></p>
 					        		</li>
 					        	</ul>
 					        	
@@ -78,7 +78,7 @@ $info = $object->getLayer('info');
                     	
                     	<ul>
 			        		<li class="title alone">
-			        			<a href="/dane/administracja_publiczna/<?= $object->getId() ?>"><?= $object->getTitle() ?></a></p>
+			        			<a href="/dane/instytucje/<?= $object->getId() ?>"><?= $object->getTitle() ?></a></p>
 			        		</li>
 			        	</ul>
                     	
@@ -164,7 +164,7 @@ echo $this->Element('dataobject/pageRelated', array(
 	                    <p class="_label">Budżet roczny</p>
 	                    <div>
 	                        <p class="_value pull-left"><?= number_format_h($object->getData('budzet_plan')*1000) ?> PLN</p>
-	                        <p class="pull-right nopadding"><a class="btn btn-sm btn-default" href="/dane/administracja_publiczna/<?= $object->getId() ?>/budzet">Szczegóły &raquo;</a></p>
+	                        <p class="pull-right nopadding"><a class="btn btn-sm btn-default" href="/dane/instytucje/<?= $object->getId() ?>/budzet">Szczegóły &raquo;</a></p>
 	                    </div>
 	                </li>
 	                <? } ?>
@@ -272,7 +272,7 @@ echo $this->Element('dataobject/pageRelated', array(
 									<li>
 										<h2 class="label">Podległe instytucje</h2>
 										<?
-							    			echo $this->Element('Dane.objects/administracja_publiczna/list', array(
+							    			echo $this->Element('Dane.objects/instytucje/list', array(
 									    		'items' => $items,
 									    		'i' => 0,
 									    	));
@@ -323,7 +323,7 @@ echo $this->Element('dataobject/pageRelated', array(
 									<li>
 										<h2 class="label">Podległe instytucje</h2>
 										<?
-							    			echo $this->Element('Dane.objects/administracja_publiczna/list', array(
+							    			echo $this->Element('Dane.objects/instytucje/list', array(
 									    		'items' => $items,
 									    		'i' => 0,
 									    	));

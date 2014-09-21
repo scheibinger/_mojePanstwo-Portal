@@ -2,7 +2,7 @@
 
 App::uses('DataobjectsController', 'Dane.Controller');
 
-class AdministracjaPublicznaController extends DataobjectsController
+class InstytucjeController extends DataobjectsController
 {
     public $menu = array();
 	public $initLayers = array('nav', 'tree', 'menu', 'info');
@@ -11,7 +11,7 @@ class AdministracjaPublicznaController extends DataobjectsController
     {
         parent::_prepareView();
         $this->dataobjectsBrowserView(array(
-            'source' => 'administracja_publiczna.prawo:' . $this->object->getId(),
+            'source' => 'instytucje.prawo:' . $this->object->getId(),
             'dataset' => 'prawo',
             'noResultsTitle' => 'Brak aktów prawnych',
             'excludeFilters' => array(
@@ -27,7 +27,7 @@ class AdministracjaPublicznaController extends DataobjectsController
     {
         parent::_prepareView();
         $this->dataobjectsBrowserView(array(
-            'source' => 'administracja_publiczna.zamowienia_udzielone:' . $this->object->getId(),
+            'source' => 'instytucje.zamowienia_udzielone:' . $this->object->getId(),
             'dataset' => 'zamowienia_publiczne',
             'noResultsTitle' => 'Brak zamówień',
         ));
@@ -54,7 +54,7 @@ class AdministracjaPublicznaController extends DataobjectsController
 		$_menu = $this->object->getLayer('menu');
 		
         // PREPARE MENU		
-        $href_base = '/dane/administracja_publiczna/' . $this->request->params['id'];
+        $href_base = '/dane/instytucje/' . $this->request->params['id'];
 
         $menu = array(
             'items' => array(
@@ -77,7 +77,7 @@ class AdministracjaPublicznaController extends DataobjectsController
 			$menu['items'][] = array(
 				'id' => 'zamowienia',
 				'href' => $href_base . '/zamowienia',
-				'label' => 'Zamówienia',
+				'label' => 'Zamówienia publiczne',
 			);
 		
 		if( isset($_menu['prawo']) && $_menu['prawo'] )
