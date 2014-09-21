@@ -104,6 +104,7 @@ CakePlugin::loadAll(
         'DebugKit' => array('routes' => false),
         'UserBar' => array('routes' => false, 'bootstrap' => true),
         'BoostCake' => array('bootstrap' => false, 'routes' => false),
+        'Administracja' => array('routes' => false, 'bootstrap' => false),
         'Composer' => array('routes' => false),
         'Less' => array('routes' => false, 'bootstrap' => false),
         'Facebook' => array('routes' => false, 'bootstrap' => false),
