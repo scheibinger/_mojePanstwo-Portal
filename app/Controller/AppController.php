@@ -77,6 +77,24 @@ class AppController extends Controller
 
     public $Applications = array(
 		array(
+			'id' => '16',
+			'slug' => 'kto_tu_rzadzi',
+			'name' => 'Kto tu rządzi?',
+			'plugin' => 'KtoTuRzadzi',
+			'type' => 'app',
+			'home' => '1',
+			'folder_id' => '13'
+		),
+		array(
+			'id' => '12',
+			'slug' => 'media',
+			'name' => 'Media',
+			'plugin' => 'media',
+			'type' => 'app',
+			'home' => '1',
+			'folder_id' => '13'
+		),
+		array(
 			'id' => '3',
 			'slug' => 'sejmometr',
 			'name' => 'Sejmometr',
@@ -108,15 +126,6 @@ class AppController extends Controller
 			'slug' => 'zamowienia_publiczne',
 			'name' => 'Zamówienia publiczne',
 			'plugin' => 'zamowienia_publiczne',
-			'type' => 'app',
-			'home' => '1',
-			'folder_id' => '13'
-		),
-		array(
-			'id' => '12',
-			'slug' => 'media',
-			'name' => 'Media',
-			'plugin' => 'media',
 			'type' => 'app',
 			'home' => '1',
 			'folder_id' => '13'
