@@ -9,6 +9,8 @@ class PrawoProjektyController extends DataobjectsController
     public $objectOptions = array(
         'hlFields' => array('status_str'),
     );
+    
+    public $initLayers = array('related');
 
     public function view()
     {
