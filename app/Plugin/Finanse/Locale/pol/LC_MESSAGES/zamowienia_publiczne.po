@@ -1,0 +1,23 @@
+msgid "LC_ZAMOWIENIA_PUBLICZNE_HEADLINE"
+msgstr "Sprawdzaj jak Twoje Państwo wydaje Twoje pieniądze"
+
+msgid "LC_ZAMOWIENIA_PUBLICZNE_SUBHEADLINE"
+msgstr "Każdego dnia urzędnicy składają setki zamówień publicznych. Dzięki tej aplikacji możesz znaleźć zlecenie dla swojej firmy lub sprawdzać kto dostaje zlecenia za publiczne pieniądze."
+
+msgid "LC_ZAMOWIENIA_PUBLICZNE_USLUGI"
+msgstr "Usługi"
+
+msgid "LC_ZAMOWIENIA_PUBLICZNE_DOSTAWY_SPRZETU_I_MATERIALOW"
+msgstr "Dostawy sprzętów i materiałów"
+
+msgid "LC_ZAMOWIENIA_PUBLICZNE_ROBOTY_BUDOWLANE"
+msgstr "Roboty budowlane"
+
+msgid "LC_ZAMOWIENIA_PUBLICZNE_SEE_ALL"
+msgstr "Zobacz wszystkie"
+
+msgid "LC_SEARCH_ALL_TENDERS"
+msgstr "Szukaj we wszystkich zamówieniach publicznych..."
+
+msgid "LC_ZAMOWIENIA_PUBLICZNE_LICZBA_ZAMOWIEN"
+msgstr "Liczba ogłaszanych zamówień publicznych"

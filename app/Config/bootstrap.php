@@ -104,6 +104,7 @@ CakePlugin::loadAll(
         'DebugKit' => array('routes' => false),
         'UserBar' => array('routes' => false, 'bootstrap' => true),
         'BoostCake' => array('bootstrap' => false, 'routes' => false),
+        'Administracja' => array('routes' => false, 'bootstrap' => false),
         'Composer' => array('routes' => false),
         'Less' => array('routes' => false, 'bootstrap' => false),
         'Facebook' => array('routes' => false, 'bootstrap' => false),
@@ -118,6 +119,7 @@ CakePlugin::loadAll(
         'Combinator' => array('bootstrap' => false, 'routes' => false),
         'Mapaprawa' => array('routes' => true, 'bootstrap' => false),
         'Kultura' => array('routes' => true, 'bootstrap' => false),
+        'Finanse' => array('routes' => true, 'bootstrap' => false),
     )
 );
 /**

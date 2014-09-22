@@ -202,6 +202,16 @@ function number_format_h($n, $decimals = 0, $dec_point = '.', $thousands_sep = '
     return number_format($n, $decimals, $dec_point, $thousands_sep);
 }
 
+function __currency( $input, $inputFormat = 'k' )
+{
+
+	if( !$input )
+		return '';
+	
+	return number_format($input / 1000, $decimals = 1, $dec_point = '.', $thousands_sep = '&nbsp;');
+
+}
+
 function atomTime($inp = false)
 {
     if ($inp === false)
