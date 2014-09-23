@@ -298,6 +298,41 @@ class KrsPodmiotyController extends DataobjectsController
         }
 
     }
+    
+    public function faktury()
+    {
+	    
+	    $this->_prepareView();
+        
+        
+        if( isset($this->request->params['pass'][0]) && is_numeric($this->request->params['pass'][0]) ) {
+			
+		    $this->helpers[] = 'Document';
+			$faktura = $this->API->getObject('faktury', $this->request->params['pass'][0], array(
+				'layers' => array('neighbours'),
+			));
+			
+			$document = $this->API->document($faktura->getData('dokument_id'));
+	    	$this->set('faktura', $faktura);
+			$this->set('document', $document);
+	        $this->set('title_for_layout', $faktura->getTitle());
+	    	
+	    	$this->render('faktura');
+			
+		} else {
+        
+	        $this->dataobjectsBrowserView(array(
+	            'source' => 'krs_podmioty.faktury:' . $this->object->getId(),
+	            'dataset' => 'faktury',
+	            'noResultsTitle' => 'Brak faktur',
+	            'limit' => 50,
+	        ));
+	
+	        $this->set('title_for_layout', 'Faktury wystawione dla ' . $this->object->getTitle());
+        
+        }
+
+    }
 
     public function emisje_akcji()
     {
@@ -360,6 +395,13 @@ class KrsPodmiotyController extends DataobjectsController
 				'href' => $href_base . '/umowy',
 				'label' => 'Podpisane umowy',
 				'count' => 94,
+		    );
+		    
+		    $menu['items'][] = array(
+				'id' => 'faktury',
+				'href' => $href_base . '/faktury',
+				'label' => 'Faktury',
+				'count' => 129,
 		    );
 	    }
 		
