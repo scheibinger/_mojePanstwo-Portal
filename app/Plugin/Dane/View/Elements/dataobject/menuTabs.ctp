@@ -1,3 +1,5 @@
+<? if( isset($menu) && isset($menu['items']) ) {?>
+ 
 <ul class="nav nav-tabs">
     <?
     foreach ($menu['items'] as $m) {
@@ -46,3 +48,5 @@
     }
     ?>
 </ul>
+
+<? } ?>

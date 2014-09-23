@@ -86,7 +86,7 @@
                                         $options = array(
                                             'hlFields' => array(),
                                         );
-
+																				
                                         switch ($obj->getDataset()) {
                                             case 'sejm_zamrazarka':
                                             {
@@ -132,7 +132,7 @@
 
                                         // echo $obj->getDataset();
                                         echo $this->Dataobject->render($obj, 'default', $options);
-
+																				
                                     }
                                     ?>
                                 </div>

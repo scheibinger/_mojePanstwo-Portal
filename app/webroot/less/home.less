@@ -7,7 +7,7 @@
     ._mojePanstwoCockpitMenuUp {
         display: none;
     }
-    
+
     ._mojePanstwoCockpitSearch {
         display: none;
     }
@@ -89,7 +89,9 @@
                 }
                 .form-control {
                     color: #333;
-                    width: 92%;
+                    width: 97%;
+                    margin-right: -(@searchHeight);
+                    padding-right: (@searchHeight + 5);
                 }
 
                 .form-control::-webkit-input-placeholder {
@@ -115,6 +117,7 @@
                     width: @searchHeight + 10;
                     height: @searchHeight;
                     display: block;
+                    z-index: 2;
 
                     &.loading {
                         background: url(/img/loader/search-loading.png) center center no-repeat #5CB85C;
