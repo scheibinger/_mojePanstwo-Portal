@@ -64,18 +64,7 @@
 
 	/* BLOCK FOR SPECIAL STYLES THAT CANNOT BE MERGE TO ONE FILE*/
 	echo $this->fetch( 'cssBlock' );
-
-	/* ENHANCE SCRIPTS */
-	echo $this->Html->script( 'enhance' );
-
-	/* VIEW SPECIFIC HEAD */
-	echo $scripts_for_layout;
 	?>
-
-	<!--[if lt IE 9]>
-	<?php echo $this->Html->script('ie/html5shiv.js'); ?>
-	<?php echo $this->Html->script('ie/respond.js'); ?>
-	<![endif]-->
 </head>
 <body>
 <div id="_wrapper">
@@ -161,37 +150,41 @@ echo $this->Html->script( '../plugins/bootstrap-switch/bootstrap-switch.js' );?>
 
 <?php /*PHP DATA FOR JS */ ?>
 <script type="text/javascript">
-    var _mPHeart = {
-        translation: jQuery.parseJSON('<?php echo json_encode($translation); ?>'),
-        social: {
-            facebook: {
-                id: "<?php echo @FACEBOOK_appId; ?>",
-                key: "<?php echo @FACEBOOK_apiKey; ?>"
-            }
-        },
-        language: {
-            twoDig: "<?php switch (Configure::read('Config.language')) { case 'pol': echo "pl"; break; case 'eng': echo "en"; break; }  ?>",
-            threeDig: "<?php echo Configure::read('Config.language'); ?>"
-        },
-        globalSearch: {
-            phrase: '<?php echo @htmlspecialchars($q) ?>',
-            placeholder: 'Szukaj w danych publicznych...',
-            fullSearch: 'Pełne szukanie'
-        }
-    }
+	var _mPHeart = {
+		translation: jQuery.parseJSON('<?php echo json_encode($translation); ?>'),
+		social: {
+			facebook: {
+				id: "<?php echo @FACEBOOK_appId; ?>",
+				key: "<?php echo @FACEBOOK_apiKey; ?>"
+			}
+		},
+		language: {
+			twoDig: "<?php switch (Configure::read('Config.language')) { case 'pol': echo "pl"; break; case 'eng': echo "en"; break; }  ?>",
+			threeDig: "<?php echo Configure::read('Config.language'); ?>"
+		},
+		globalSearch: {
+			phrase: '<?php echo @htmlspecialchars($q) ?>',
+			placeholder: 'Szukaj w danych publicznych...',
+			fullSearch: 'Pełne szukanie'
+		}
+	}
 </script>
 
 <?php
-$this->Combinator->add_libs( 'js', 'structure', false );
-//$this->Combinator->add_libs( 'js', 'statusbar', false );
-//$this->Combinator->add_libs('js', 'statusbar-portal', false);
-$this->Combinator->add_libs( 'js', 'main', false );
-
 /* BLOCK FOR SPECIAL SCRIPTS LIKE PROTOTYPE THAT CANNOT BE MERGE TO ONE FILE*/
 echo $this->fetch( 'scriptBlock' );
-?>
 
-<?php echo $this->Combinator->scripts( 'js' ); ?>
+$this->Combinator->add_libs( 'js', 'enhance', false );
+$this->Combinator->add_libs( 'js', 'structure', false );
+$this->Combinator->add_libs( 'js', 'main', false );
+
+echo $this->Combinator->scripts( 'js' );
+
+/* VIEW SPECIFIC HEAD */
+if ( isset( $scripts_for_layout ) && ! empty( $scripts_for_layout ) ) {
+	echo $scripts_for_layout;
+}
+?>
 
 </body>
 </html>

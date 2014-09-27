@@ -1,6 +1,7 @@
-<?php $this->Combinator->add_libs( 'css', '../plugins/gridster.js/dist/jquery.gridster.css' ) ?>
+<?php echo $this->Html->css( '../plugins/gridster.js/dist/jquery.gridster.css', array( 'block' => 'cssBlock' ) ); ?>
+<?php echo $this->Html->script( '../plugins/gridster.js/dist/jquery.gridster.js', array( 'block' => 'scriptBlock' ) ); ?>
+
 <?php $this->Combinator->add_libs( 'css', $this->Less->css( 'home' ) ) ?>
-<?php $this->Combinator->add_libs( 'js', '../plugins/gridster.js/dist/jquery.gridster.with-extras.js' ) ?>
 <?php $this->Combinator->add_libs( 'js', 'home' ) ?>
 
 <div id="home" style="background-image: url('./img/home-background-default.png')">
