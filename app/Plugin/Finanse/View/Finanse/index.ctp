@@ -1,4 +1,4 @@
-<?php $this->Combinator->add_libs('css', $this->Less->css('finanse', array('plugin' => 'Finanse'))) ?>
+<?php $this->Combinator->add_libs( 'css', $this->Less->css( 'finanse', array( 'plugin' => 'Finanse' ) ) ) ?>
 
 <?/*
 <?php $this->Combinator->add_libs('css', $this->Less->css('dataobject', array('plugin' => 'Dane'))) ?>
@@ -14,37 +14,39 @@
 
 <div class="container" id="zamowienia">
 	<div class="mpanel" id="wydatki">
-		
-		<? if( $dzialy = $spendings['dzialy'] ) {?>
-		
-		<div class="buttons">
-			<input type="button" value="Rozwiń rozdziały" onclick="$('.rozdzialy').slideToggle(); return false;" />
-		</div>
-		
-		<ul class="dzialy">
-		<? foreach( $dzialy as $dzial ) {?>
-			
-			<li>
-				<div class="row">
-					<p class="col-md-6 nazwa"><?= $dzial['nazwa'] ?></p>
-					<p class="col-md-6 budzet"><?= number_format_h($dzial['plan']*1000) ?></p>
-				</div>
-				<ul class="rozdzialy">
-				<? foreach($dzial['rozdzialy'] as $rozdzial) {?>
+
+		<? if ( $dzialy = $spendings['dzialy'] ) { ?>
+
+			<div class="buttons">
+				<input type="button" value="Rozwiń rozdziały" onclick="$('.rozdzialy').slideToggle(); return false;"/>
+			</div>
+
+			<ul class="dzialy">
+				<? foreach ( $dzialy as $dzial ) { ?>
+
 					<li>
 						<div class="row">
-							<p class="col-md-6 nazwa"><?= $rozdzial['nazwa'] ?></p>
-							<p class="col-md-6 budzet"><?= number_format_h($rozdzial['plan']*1000) ?></p>
+							<p class="col-md-6 nazwa"><?= $dzial['nazwa'] ?></p>
+
+							<p class="col-md-6 budzet"><?= number_format_h( $dzial['plan'] * 1000 ) ?></p>
 						</div>
+						<ul class="rozdzialy">
+							<? foreach ( $dzial['rozdzialy'] as $rozdzial ) { ?>
+								<li>
+									<div class="row">
+										<p class="col-md-6 nazwa"><?= $rozdzial['nazwa'] ?></p>
+
+										<p class="col-md-6 budzet"><?= number_format_h( $rozdzial['plan'] * 1000 ) ?></p>
+									</div>
+								</li>
+							<? } ?>
+						</ul>
 					</li>
+
 				<? } ?>
-				</ul>
-			</li>
-			
+			</ul>
+
 		<? } ?>
-		</ul>
-		
-		<? } ?>
-		
+
 	</div>
 </div>
