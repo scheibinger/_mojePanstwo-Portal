@@ -38,7 +38,7 @@ $this->Combinator->add_libs('js', 'Finanse.dzialy.js');
 		<div class="row banner">
 			
 			<p>W drugim kwartale 2014 r. polskie gminy wydały:</p>
-			<p class="number"><?= $this->Waluta->slownie(12343123232) ?></p>
+			<p class="number"><?= $this->Waluta->slownie( $data['stats']['sum'] ) ?></p>
 						
 		</div>
 	</div>
@@ -75,13 +75,13 @@ $this->Combinator->add_libs('js', 'Finanse.dzialy.js');
 	<div class="mpanel" id="sections">
 		
 		<ul id="sections">
-		<? foreach( $sections as $section ) {?>
-		
-			<li class="section" data-id="<?= $section['dzial.id'] ?>">
+		<? foreach( $data['sections'] as $section ) {?>
+						
+			<li class="section" data-id="<?= $section['id'] ?>">
 				
 				<div class="row">
 					<div class="col-md-2 text-right icon">
-						<img src="/finanse/img/sections/<?= $section['dzial.id'] ?>.svg" />
+						<img src="/finanse/img/sections/<?= $section['id'] ?>.svg" />
 					</div>
 					
 					<div class="col-md-10">
@@ -91,7 +91,7 @@ $this->Combinator->add_libs('js', 'Finanse.dzialy.js');
 								
 								<div class="col-md-10">
 							
-									<h3 class="name"><?= $section['dzial.nazwa'] ?></h3>
+									<h3 class="name"><?= $section['nazwa'] ?></h3>
 									
 									<? /*
 									<p class="desc_switcher"><a class="switcher" data-target="<?= $section['dzial.id'] ?>" href="#" onclick="return false;">Więcej &raquo;</a></p>
@@ -100,7 +100,7 @@ $this->Combinator->add_libs('js', 'Finanse.dzialy.js');
 									
 								</div>
 								<div class="col-md-2 text-center">
-									<p class="value"><?= _number( rand(1000, 10000) ) ?> PLN</p>
+									<p class="value"><?= number_format_h( $section['sum_section'] ) ?></p>
 								</div>
 							</div>
 						</div>
@@ -108,8 +108,8 @@ $this->Combinator->add_libs('js', 'Finanse.dzialy.js');
 						<div class="gradient_cont">
 							<p class="gradient"></p>
 							<ul class="addons">
-								<li class="min" style="left: 0;"><p>Gmina A</p></li>
-								<li class="max" style="left: 100%;"><p>Gmina B</p></li>
+								<li class="min" style="left: 0;"><p><span class="n"><?= $section['min_nazwa'] ?></span><br/><span class="v"><?= _number($section['min']) ?></span></p></li>
+								<li class="max" style="left: 100%;"><p><span class="n"><?= $section['max_nazwa'] ?></span><br/><span class="v"><?= _number($section['max']) ?></span></p></li>
 							</ul>
 						</div>
 					

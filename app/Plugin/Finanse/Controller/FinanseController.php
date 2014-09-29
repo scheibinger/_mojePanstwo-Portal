@@ -21,8 +21,8 @@ class FinanseController extends AppController
     public function dzialy()
     {
 		
-        $sections = $this->API->Finanse()->getBudgetSections();
-        $this->set('sections', $sections);
+        $data = $this->API->Finanse()->getBudgetData();
+        $this->set('data', $data);
 
 
         // $application = $this->getApplication();

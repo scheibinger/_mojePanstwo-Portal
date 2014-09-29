@@ -53,7 +53,8 @@ h1 {
 }
 #sections ul li .icon img {
   opacity: .1;
-  width: 85%;
+  width: 65%;
+  margin: 7%;
   -webkit-transition-duration: 1s;
   transition-duration: 1s;
 }
@@ -87,8 +88,8 @@ h1 {
 }
 #sections ul li .gradient_cont {
   padding: 0 60px;
-  min-height: 30px;
-  margin-top: 20px;
+  min-height: 45px;
+  margin-top: 40px;
 }
 #sections ul li .gradient_cont .gradient {
   background: #2746f7;
@@ -119,9 +120,9 @@ h1 {
   position: absolute;
   background: inherit;
   border: none;
-  width: 100px;
+  width: 250px;
   text-align: center;
-  margin-left: -50px;
+  margin-left: -125px;
   margin-top: 6px;
   -webkit-transition-duration: .5s;
   -webkit-transition-timing-function: ease-out;
@@ -131,10 +132,12 @@ h1 {
 #sections ul li .gradient_cont .addons li._teryt {
   font-weight: bold;
   z-index: 1;
+  top: -57px;
 }
 #sections ul li .gradient_cont .addons li._teryt:before {
   background-color: #333;
   border: 3px solid #fff;
+  top: 41px;
 }
 #sections ul li .gradient_cont .addons li:before {
   background-color: #fff;
