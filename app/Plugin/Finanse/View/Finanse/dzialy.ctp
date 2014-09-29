@@ -73,8 +73,7 @@ $this->Combinator->add_libs( 'js', 'Finanse.dzialy.js' );
 			<p class="title"></p>
 			<p class="desc">Jakieś informacje o wybranej gminie. Ta warstwa powinna się przyklejać do górnego brzegu okna roboczego.</p>
 		</div>
-		<div class="pull-right">
-			Guzik do zamykania wybranej gminy.
+		<div class="pull-right"><a href="#close" class="closeTerytInfo">x</a>
 		</div>
 		
 	</div>

@@ -62,7 +62,6 @@ jQuery(document).ready(function () {
     autocomplete.autocomplete({
         minLength: 2,
         source: function (request, response) {
-            console.log(request.term);
             var term = request.term;
             if (term in cache) {
                 response(cache[term]);
@@ -111,27 +110,38 @@ jQuery(document).ready(function () {
                 );
 
                 jQuery.getJSON("/finanse/finanse/getBudgetData.json?gmina_id=" + ui.item.value, function (data) {
+                    var $terytInfo = $('#teryt_info');
+
                     $('#_main').css('opacity', '1');
                     $('.loadingBlock.loadingTwirl').remove();
                     $('#sections ._teryt').remove();
-                    $('#teryt_info .title').html('<a href="/dane/gminy/' + ui.item.id + '">' + data['gmina']['nazwa'] + '</a>');
-                    $('#teryt_info').slideDown();
+                    $terytInfo.find('.title').html('<a href="/dane/gminy/' + ui.item.id + '">' + data['gmina']['nazwa'] + '</a>');
+                    $terytInfo.slideDown();
+
+                    $terytInfo.affix({
+                        offset: {
+                            top: function () {
+                                return (this.top = $terytInfo.offset().top - $('header').outerHeight(true) - 10)
+                            }, bottom: function () {
+                                return (this.bottom = $('footer').outerHeight(true))
+                            }
+                        }
+                    });
+
+                    $terytInfo.find('.closeTerytInfo').click(function (e) {
+                        e.preventDefault();
+                        $terytInfo.slideUp();
+                    });
 
                     var sections = data['sections'];
 
                     for (var i = 0; i < sections.length; i++) {
-
                         var section = sections[i];
-
 
                         if (!section['teryt_sum_section_percent'])
                             continue;
 
-
                         var v = String(section['teryt_section_percent']) + '%';
-                        console.log(v);
-
-
                         var section_li = jQuery('#sections .section[data-id=' + section['id'] + ']');
                         var gradient_cont_div = section_li.find('.gradient_cont');
                         var gradient_addons = gradient_cont_div.find('.addons');

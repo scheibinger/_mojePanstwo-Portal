@@ -65,7 +65,7 @@ h1 {
         height: 34px;
 
         &.loading {
-            background-color: #428bca;
+            background: url(/img/loader/search-loading.png) center center no-repeat #428bca;
             border-color: #357ebd;
             font-size: 0;
             transition: none;
@@ -78,10 +78,32 @@ h1 {
     border: 1px solid #DDD;
     border-style: solid none;
 
+    &.affix {
+        top: 40px;
+        z-index: 5;
+    }
+
     .title {
         font-size: 30px;
         font-weight: 300;
         margin: 10px 0;
+    }
+
+    .closeTerytInfo {
+        background: #fefefe;
+        border: 1px solid #ddd;
+        border-radius: 50px;
+        color: #666;
+        display: block;
+        font-family: "Lato", Arial, sans-serif;
+        font-size: 16px;
+        font-weight: bold;
+        height: 22px;
+        line-height: 1em;
+        margin: 5px;
+        padding: 1px 2px;
+        text-align: center;
+        width: 22px;
     }
 }
 
