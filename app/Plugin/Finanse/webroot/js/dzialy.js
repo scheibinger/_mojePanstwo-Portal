@@ -63,6 +63,8 @@ jQuery(document).ready(function () {
      });
      */
 
+	$('#teryt_search_input').val(''); 
+	
     var autocomplete = jQuery("#teryt_search_input"),
         cache = {};
 
@@ -100,9 +102,14 @@ jQuery(document).ready(function () {
             if (ui.item.value !== null) {
                 autocomplete.val(ui.item.name);
                 
+                location.hash = ui.item.value;
+                
                 jQuery.getJSON("/finanse/finanse/getBudgetData.json?gmina_id=" + ui.item.value, function (data, status, xhr) {
                 	
                 	$('#sections ._teryt').remove();
+                	
+                	$('#teryt_info .title').html('<a href="/dane/gminy/' + ui.item.id + '">' + data['gmina']['nazwa'] + '</a>');
+                	$('#teryt_info').slideDown();
                 	
                 	var sections = data['sections'];
                 	

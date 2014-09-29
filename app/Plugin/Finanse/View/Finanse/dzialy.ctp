@@ -38,7 +38,7 @@ $this->Combinator->add_libs( 'js', 'Finanse.dzialy.js' );
 	<div class="col-md-10 col-md-offset-1 text-center">
 		<div class="row banner">
 
-			<p>W drugim kwartale 2014 r. polskie gminy wydały:</p>
+			<p>W drugim kwartale 2014 r. polskie gminy wydały łącznie:</p>
 			<p class="number"><?= $this->Waluta->slownie( $data['stats']['sum'] ) ?></p>
 
 		</div>
@@ -54,7 +54,7 @@ $this->Combinator->add_libs( 'js', 'Finanse.dzialy.js' );
 			<div class="form-group">
 				<div class="col-md-8 col-md-offset-2">
 					<div class="input-group">
-						<input id="teryt_search_input" class="form-control" type="text" placeholder="Szukaj gminy...">
+						<input id="teryt_search_input" class="form-control" type="text" placeholder="Szukaj gminy..." value="">
 						<span class="input-group-btn">
 							<input type="submit" class="btn btn-primary btn-default" value="Szukaj"/>
 						</span>
@@ -64,7 +64,23 @@ $this->Combinator->add_libs( 'js', 'Finanse.dzialy.js' );
 
 		</div>
 	</div>
+</div>
 
+<div class="mpanel" id="teryt_info" style="display: none;">
+	<div class="container">
+		
+		<div class="pull-left">
+			<p class="title"></p>
+			<p class="desc">Jakieś informacje o wybranej gminie. Ta warstwa powinna się przyklejać do górnego brzegu okna roboczego.</p>
+		</div>
+		<div class="pull-right">
+			Guzik do zamykania wybranej gminy.
+		</div>
+		
+	</div>
+</div>
+
+<div class="container">
 
 	<div class="mpanel" id="sections">
 
