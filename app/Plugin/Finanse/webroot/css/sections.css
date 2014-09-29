@@ -1,3 +1,11 @@
+.ui-autocomplete .ui-menu-item {
+  border-top-width: 0;
+}
+.ui-autocomplete .ui-menu-item:last-child a,
+.ui-autocomplete .ui-menu-item:last-child p,
+.ui-autocomplete .ui-menu-item:last-child p._title {
+  color: #333333;
+}
 h1 {
   font-weight: 300;
 }
@@ -89,7 +97,7 @@ h1 {
 #sections ul li .gradient_cont {
   padding: 0 60px;
   min-height: 45px;
-  margin-top: 40px;
+  margin-top: 95px;
 }
 #sections ul li .gradient_cont .gradient {
   background: #2746f7;

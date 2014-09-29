@@ -1,5 +1,5 @@
-<?php $this->Combinator->add_libs('css', $this->Less->css('sections', array('plugin' => 'Finanse'))) ?>
-<?php $this->Combinator->add_libs('js', 'Finanse.dzialy.js') ?>
+<?php $this->Combinator->add_libs( 'css', $this->Less->css( 'sections', array( 'plugin' => 'Finanse' ) ) ) ?>
+<?php $this->Combinator->add_libs( 'js', 'Finanse.dzialy.js' ) ?>
 
 <?/*
 <?php $this->Combinator->add_libs('css', $this->Less->css('dataobject', array('plugin' => 'Dane'))) ?>
@@ -11,16 +11,16 @@
 <?php $this->Combinator->add_libs('js', 'ZamowieniaPubliczne.zamowieniapubliczne') ?>
 */
 
-$this->Combinator->add_libs('js', 'Finanse.dzialy.js');
+$this->Combinator->add_libs( 'js', 'Finanse.dzialy.js' );
 ?>
 
 <div class="container">
-	
+
 	<div class="row">
 		<div class="col-md-12">
-		
+
 			<h1 class="pull-left">Wydatki gmin w Polsce</h1>
-			
+
 			<? /*
 			<div class="range text-center pull-right">
 		        <ul class="pagination">
@@ -28,53 +28,48 @@ $this->Combinator->add_libs('js', 'Finanse.dzialy.js');
 		            <li><a href="?range=3d">Q1 2014</a></li>
 		        </ul>
 		    </div>
-		    */?>
-		    
+		    */
+			?>
+
 		</div>
 	</div>
-	
-	
+
+
 	<div class="col-md-10 col-md-offset-1 text-center">
 		<div class="row banner">
-			
+
 			<p>W drugim kwartale 2014 r. polskie gminy wydały:</p>
 			<p class="number"><?= $this->Waluta->slownie( $data['stats']['sum'] ) ?></p>
-						
+
 		</div>
 	</div>
-	
-	
+
+
 	<div class="col-md-8 col-md-offset-2 text-center">
 		<div class="row teryt">
-			
-			<p>Poniżej widzisz wydatki gmin, według kategorii budżetowych. Możesz też sprawdzić wydatki swojej gminy i zobaczyć je w kontekście wydatków innych gmin, o podobnej liczbie mieszkańców.</p>
-			
+
+			<p>Poniżej widzisz wydatki gmin, według kategorii budżetowych. Możesz też sprawdzić wydatki swojej gminy i
+				zobaczyć je w kontekście wydatków innych gmin, o podobnej liczbie mieszkańców.</p>
+
 			<div class="form-group">
 				<div class="col-md-8 col-md-offset-2">
 					<div class="input-group">
 						<input id="teryt_search_input" class="form-control" type="text" placeholder="Szukaj gminy...">
 						<span class="input-group-btn">
-							<input type="submit" class="btn btn-primary btn-default" value="Szukaj" />
+							<input type="submit" class="btn btn-primary btn-default" value="Szukaj"/>
 						</span>
 					</div>
 				</div>
 			</div>
-						
+
 		</div>
 	</div>
-	
-	
-	
-			
-			
-			
-			
-			
-	
-	
+
+
 	<div class="mpanel" id="sections">
-		
+
 		<ul id="sections">
+
 		<? foreach( $data['sections'] as $section ) {?>
 						
 			<li class="section" data-id="<?= $section['id'] ?>">
@@ -101,9 +96,11 @@ $this->Combinator->add_libs('js', 'Finanse.dzialy.js');
 								</div>
 								<div class="col-md-2 text-center">
 									<p class="value"><?= number_format_h( $section['sum_section'] ) ?></p>
+
 								</div>
 							</div>
-						</div>
+
+
 						
 						<div class="gradient_cont">
 							<p class="gradient"></p>
@@ -113,14 +110,14 @@ $this->Combinator->add_libs('js', 'Finanse.dzialy.js');
 							</ul>
 						</div>
 					
-					</div>
-				</div>
 
-				
-			</li>
-		
-		<? } ?>
+					</div>
+
+
+				</li>
+
+			<? } ?>
 		</ul>
-		
+
 	</div>
 </div>

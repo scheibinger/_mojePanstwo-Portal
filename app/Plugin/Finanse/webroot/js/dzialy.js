@@ -56,12 +56,12 @@ function number_format_h(n)
 
 
 jQuery(document).ready(function () {
-    
+
     /*
-    jQuery('#localizeMe').click(function () {
-        localizer.request_position()
-    });
-    */
+     jQuery('#localizeMe').click(function () {
+     localizer.request_position()
+     });
+     */
 
     var autocomplete = jQuery("#teryt_search_input"),
         cache = {};
@@ -72,10 +72,10 @@ jQuery(document).ready(function () {
             console.log(request.term);
             var term = request.term;
             if (term in cache) {
-                response(cache[ term ]);
+                response(cache[term]);
                 return;
             }
-            jQuery.getJSON("/moja_gmina/search.json?q=" + request.term, function (data, status, xhr) {
+            jQuery.getJSON("/moja_gmina/search.json?q=" + request.term, function (data) {
                 var results = jQuery.map(data, function (item) {
                     return {
                         name: item.nazwa,
@@ -85,9 +85,9 @@ jQuery(document).ready(function () {
                 });
                 if (results.length == 0)
                     results = [
-                        {label: _mPHeart.translation.LC_MOJA_GMINA_SEARCH_BRAK_WYNIKOW, value: null}
-                    ]
-                cache[ term ] = results;
+                        {label: _mPHeart.translation.LC_FINANSE_SEARCH_BRAK_WYNIKOW, value: null}
+                    ];
+                cache[term] = results;
                 response(results);
             });
         },
@@ -171,7 +171,7 @@ jQuery(document).ready(function () {
                 	}
                 	
                 });
-                
+
             }
             return false;
         }
