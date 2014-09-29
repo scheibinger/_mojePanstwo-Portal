@@ -59,185 +59,191 @@ h1 {
 
 .teryt {
     margin: 20px 0;
+
+    .btn {
+        width: 70px;
+        height: 34px;
+
+        &.loading {
+            background-color: #428bca;
+            border-color: #357ebd;
+            font-size: 0;
+            transition: none;
+        }
+    }
 }
 
 #teryt_info {
-	margin-bottom: 20px;
-	border: 1px solid #DDD;
-	border-style: solid none; 
-	
-	.title {
-		font-size: 30px;
-	    font-weight: 300;
-	    margin: 10px 0;
-	}
+    margin-bottom: 20px;
+    border: 1px solid #DDD;
+    border-style: solid none;
+
+    .title {
+        font-size: 30px;
+        font-weight: 300;
+        margin: 10px 0;
+    }
 }
 
 #sections {
-	
-	
-	
-	ul {
-		list-style: none;
-		margin: 0;
-		padding: 0;
-		li {
-			
-			.icon {
-				img {
-					opacity: .1;
-					width: 65%;
-					margin: 7%;
-					-webkit-transition-duration: 1s; /* Safari */
-				    transition-duration: 1s;
-				}
-			}
-			
-			&:hover {
-				img {
-					opacity: .4;
-					
-				}
-			}
-			
-			&:nth-child(even){
-				background-color: #FAFAFA;
-				
-				.gradient_cont {
-					.addons {
-						li {
-							p {
-								background-color: #FAFAFA;
-							}
-						}
-					}
-				}
-			}
-			
-			list-style: none;
-			border-top: 1px solid #DDD;
-			padding: 20px 0;
-			padding: 20px 0;
-			
-			.row-header {
 
-			    font-weight: 300;
-				
-				
-				.name {
-					font-size: 24px;
-				    margin: 15px 0px;
-				    font-weight: 300;
-				}
-				
-				.value {
-					font-size: 24px;
-					color: green;
-					margin-top: 15px;
-				}
-							
-			}
-			
-			.desc {
-				font-size: 13px;
-				color: #999;
-				padding: 0 10px;
-				font-weight: 400;
-			}
-			
-			
-			.gradient_cont {
-				
-				padding: 0 60px;
-				min-height: 45px;
-				margin-top: 95px;
-				
-				.gradient {
-					background: #2746f7; /* Old browsers */
-					background: -moz-linear-gradient(left,  blue 0%, red 100%); /* FF3.6+ */
-					background: -webkit-gradient(linear, left top, right top, color-stop(0%,#2746f7), color-stop(100%,#cc1c1c)); /* Chrome,Safari4+ */
-					background: -webkit-linear-gradient(left,  blue 0%,red 100%); /* Chrome10+,Safari5.1+ */
-					background: -o-linear-gradient(left,  blue 0%,red 100%); /* Opera 11.10+ */
-					background: -ms-linear-gradient(left,  blue 0%,red 100%); /* IE10+ */
-					background: linear-gradient(to right,  blue 0%,red 100%); /* W3C */
-					filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2746f7', endColorstr='#cc1c1c',GradientType=1 ); /* IE6-9 */
-					height: 5px;
-					margin: 10px 0 0;
-					border-radius: 4px;
-					-webkit-border-radius: 4px;
-					-moz-border-radius: 4px;
-					-o-border-radius: 4px;				  
-				}
-				
-				.addons {
-					margin: 0;
-					padding: 0;
-					list-style: none;
-					position: relative;
-					li {
-						margin: 0;
-						padding: 0;
-						list-style: none;
-						position: absolute;
-						background: inherit;
-						border: none;
-						width: 250px;
-						text-align: center;
-						margin-left: -125px;
-						margin-top: 6px;
-						
-						/* For Safari 3.1 to 6.0 */
-					    -webkit-transition-duration: .5s;
-					    -webkit-transition-timing-function: ease-out;
-					    /* Standard syntax */
-					    transition-duration: .5s;
-					    transition-timing-function: ease-out;
-						
-						&._teryt {
-							font-weight: bold;
-							z-index: 1;
-							
-							&:before {
-								background-color: #333;
-							    border: 3px solid #fff;
-							    top: 41px;
-							}
-							
-							top: -57px;
-							
-						}
-						
-						&:before {
-							background-color: #fff;
-						    border: 1px solid #666;
-						    border-radius: 50px;
-						    content: " ";
-						    height: 16px;
-						    left: 50%;
-						    margin-left: -8px;
-						    position: absolute;
-						    top: -17px;
-						    width: 16px;
-						}
-						
-						p {
-							
-						    border: medium none;
-						    border-radius: 5px;
-						    display: inline;
-						    font-size: 14px;
-						    margin: 0;
-						    padding: 1px 5px;
-						    background-color: #FFF;
-						    
-						
-						    
-						}
-					}
-				}
-			
-			}
-			
-		}
-	}
+    ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        li {
+
+            .icon {
+                img {
+                    opacity: .1;
+                    width: 65%;
+                    margin: 7%;
+                    -webkit-transition-duration: 1s; /* Safari */
+                    transition-duration: 1s;
+                }
+            }
+
+            &:hover {
+                img {
+                    opacity: .4;
+
+                }
+            }
+
+            &:nth-child(even) {
+                background-color: #FAFAFA;
+
+                .gradient_cont {
+                    .addons {
+                        li {
+                            p {
+                                background-color: #FAFAFA;
+                            }
+                        }
+                    }
+                }
+            }
+
+            list-style: none;
+            border-top: 1px solid #DDD;
+            padding: 20px 0;
+            padding: 20px 0;
+
+            .row-header {
+
+                font-weight: 300;
+
+                .name {
+                    font-size: 24px;
+                    margin: 15px 0px;
+                    font-weight: 300;
+                }
+
+                .value {
+                    font-size: 24px;
+                    color: green;
+                    margin-top: 15px;
+                }
+
+            }
+
+            .desc {
+                font-size: 13px;
+                color: #999;
+                padding: 0 10px;
+                font-weight: 400;
+            }
+
+            .gradient_cont {
+
+                padding: 0 60px;
+                min-height: 45px;
+                margin-top: 95px;
+
+                .gradient {
+                    background: #2746f7; /* Old browsers */
+                    background: -moz-linear-gradient(left, blue 0%, red 100%); /* FF3.6+ */
+                    background: -webkit-gradient(linear, left top, right top, color-stop(0%, #2746f7), color-stop(100%, #cc1c1c)); /* Chrome,Safari4+ */
+                    background: -webkit-linear-gradient(left, blue 0%, red 100%); /* Chrome10+,Safari5.1+ */
+                    background: -o-linear-gradient(left, blue 0%, red 100%); /* Opera 11.10+ */
+                    background: -ms-linear-gradient(left, blue 0%, red 100%); /* IE10+ */
+                    background: linear-gradient(to right, blue 0%, red 100%); /* W3C */
+                    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#2746f7', endColorstr='#cc1c1c', GradientType=1); /* IE6-9 */
+                    height: 5px;
+                    margin: 10px 0 0;
+                    border-radius: 4px;
+                    -webkit-border-radius: 4px;
+                    -moz-border-radius: 4px;
+                    -o-border-radius: 4px;
+                }
+
+                .addons {
+                    margin: 0;
+                    padding: 0;
+                    list-style: none;
+                    position: relative;
+                    li {
+                        margin: 0;
+                        padding: 0;
+                        list-style: none;
+                        position: absolute;
+                        background: inherit;
+                        border: none;
+                        width: 250px;
+                        text-align: center;
+                        margin-left: -125px;
+                        margin-top: 6px;
+
+                        /* For Safari 3.1 to 6.0 */
+                        -webkit-transition-duration: .5s;
+                        -webkit-transition-timing-function: ease-out;
+                        /* Standard syntax */
+                        transition-duration: .5s;
+                        transition-timing-function: ease-out;
+
+                        &._teryt {
+                            font-weight: bold;
+                            z-index: 1;
+
+                            &:before {
+                                background-color: #333;
+                                border: 3px solid #fff;
+                                top: 41px;
+                            }
+
+                            top: -57px;
+
+                        }
+
+                        &:before {
+                            background-color: #fff;
+                            border: 1px solid #666;
+                            border-radius: 50px;
+                            content: " ";
+                            height: 16px;
+                            left: 50%;
+                            margin-left: -8px;
+                            position: absolute;
+                            top: -17px;
+                            width: 16px;
+                        }
+
+                        p {
+
+                            border: medium none;
+                            border-radius: 5px;
+                            display: inline;
+                            font-size: 14px;
+                            margin: 0;
+                            padding: 1px 5px;
+                            background-color: #FFF;
+
+                        }
+                    }
+                }
+
+            }
+
+        }
+    }
 }

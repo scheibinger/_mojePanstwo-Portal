@@ -48,6 +48,18 @@ h1 {
 .teryt {
   margin: 20px 0;
 }
+
+.teryt .btn {
+    width: 70px;
+    height: 34px;
+}
+
+.teryt .btn.loading {
+    background-color: #428bca;
+    border-color: #357ebd;
+    font-size: 0;
+    transition: none;
+}
 #teryt_info {
   margin-bottom: 20px;
   border: 1px solid #DDD;

@@ -104,19 +104,14 @@ var DataObjectesAjax = {
 
         var dataDetailsToggle;
         if ((dataDetailsToggle = jQuery('.dataDetailsToggle')).length) {
-
             dataDetailsToggle.click(function (e) {
-
                 e.preventDefault();
 
                 if (jQuery(this).data('state') == 'more') {
-
                     jQuery(this).data('state', 'less').find('.text').text('Mniej szczegółów');
                     jQuery(this).find('.glyphicon').removeClass('glyphicon-plus').addClass('glyphicon-minus');
                     $('.dataBrowser .dataHighlights').stop(true, true).slideDown();
-
                 } else {
-
                     jQuery(this).data('state', 'more').find('.text').text('Więcej szczegółów');
                     jQuery(this).find('.glyphicon').removeClass('glyphicon-minus').addClass('glyphicon-plus');
                     $('.dataBrowser .dataHighlights').stop(true, true).slideUp();
@@ -241,60 +236,50 @@ var DataObjectesAjax = {
         var ul = jQuery('.dataSortingMenu');
 
         jQuery.each(sorting.find('#DatasetSort optgroup'), function () {
-
-            var li;
-            var grp = jQuery(this);
+            var li = jQuery('<li></li>'),
+                grp = jQuery(this);
 
             if (grp.data('special') == 'result') {
-
-                li = jQuery('<li></li>').addClass('special result').append(function () {
+                li.addClass('special result').append(function () {
                     var that = jQuery(this);
                     jQuery.each(grp.find('option'), function () {
-                        that.append(jQuery('<a></a>').attr({'href': '#', 'title': jQuery.trim(jQuery(this).text()), 'value': jQuery(this).val()}).text(jQuery.trim(jQuery(this).text())))
+                        that.append(jQuery('<a></a>').attr({
+                            'href': '#',
+                            'title': jQuery.trim(jQuery(this).text()),
+                            'value': jQuery(this).val()
+                        }).text(jQuery.trim(jQuery(this).text())))
                     });
                 });
-
             } else {
-
-                li = jQuery('<li></li>').html(
+                li.append(
                     jQuery('<a></a>').text(grp.attr('label')).attr('href', '#')
                 );
-
             }
-
             ul.append(li);
-
         });
 
         // ul.find('li a[value="' + sortingChosen.val() + '"]').addClass('active');
         DataObjectesAjax.sortingAddRemoveOptions();
-
 
         ul.find('a').click(function (event) {
             var sortingDirection = sorting.find('.DatasetSort');
             event.preventDefault();
 
             sortingDirection.data('sort', jQuery(this).attr('value')).text(jQuery(this).attr('title'));
-
             DataObjectesAjax.sortingReload();
         });
 
 
         var innerSearch;
         if (innerSearch = jQuery('#innerSearch')) {
-
             innerSearch.keypress(function (e) {
                 if (e.which == 13) {
                     e.preventDefault();
 
                     DataObjectesAjax.sortingReload();
-
                 }
             });
-
         }
-
-
     },
     /*ADDING/REMOVING NEW OPTION NORMALY ADDED AT GENERATING PAGE*/
     sortingAddRemoveOptions: function () {
@@ -305,7 +290,11 @@ var DataObjectesAjax = {
 
         /*WHEN "LOOKING PHRASE" EXIST - WE ADD NEW OPTIONS AT SORTING...*/
         if (((filtersInputQ.length > 0) && (filtersInputQ.val() != '')) && (sortingList.find('a[value="score desc"]').length == 0)) {
-            sortingList.prepend(jQuery('<li></li>').addClass('special result').append(jQuery('<a></a>').attr({'href': '#', 'title': _mPHeart.translation.LC_DANE_SORTOWANIE_TRAFNOSC, 'value': 'score desc'}).text(_mPHeart.translation.LC_DANE_SORTOWANIE_TRAFNOSC)));
+            sortingList.prepend(jQuery('<li></li>').addClass('special result').append(jQuery('<a></a>').attr({
+                'href': '#',
+                'title': _mPHeart.translation.LC_DANE_SORTOWANIE_TRAFNOSC,
+                'value': 'score desc'
+            }).text(_mPHeart.translation.LC_DANE_SORTOWANIE_TRAFNOSC)));
             sortingName.text(_mPHeart.translation.LC_DANE_SORTOWANIE_TRAFNOSC);
         }
 
@@ -348,7 +337,11 @@ var DataObjectesAjax = {
 
         formSerialize = DataObjectesAjax.reorganizationSerialize(formSerialize);
 
-        History.pushState({ filters: formSerialize + '&' + sortSerialize + '&q=' + jQuery('#innerSearch').val() + '&search=web', reloadForm: 'sorting', page: "Dane" }, jQuery(document).find("title").html(), "?" + formSerialize + sortSerialize + '&q=' + jQuery('#innerSearch').val() + '&search=web');
+        History.pushState({
+            filters: formSerialize + '&' + sortSerialize + '&q=' + jQuery('#innerSearch').val() + '&search=web',
+            reloadForm: 'sorting',
+            page: "Dane"
+        }, jQuery(document).find("title").html(), "?" + formSerialize + sortSerialize + '&q=' + jQuery('#innerSearch').val() + '&search=web');
     },
     /*GATHER FILTER OPTION AND SEND RELOAD AJAX REQUEST*/
     objectsReload: function () {
@@ -356,12 +349,21 @@ var DataObjectesAjax = {
 
         formSerialize = DataObjectesAjax.reorganizationSerialize(formSerialize);
 
-        History.pushState({ filters: formSerialize + '&q=' + jQuery('#innerSearch').val() + '&search=web', reloadForm: 'object', page: "Dane", focusInput: $('.dataBrowser input[type="text"]:focus').attr('id') }, jQuery(document).find("title").html(), "?" + formSerialize + '&q=' + jQuery('#innerSearch').val() + '&search=web');
+        History.pushState({
+            filters: formSerialize + '&q=' + jQuery('#innerSearch').val() + '&search=web',
+            reloadForm: 'object',
+            page: "Dane",
+            focusInput: $('.dataBrowser input[type="text"]:focus').attr('id')
+        }, jQuery(document).find("title").html(), "?" + formSerialize + '&q=' + jQuery('#innerSearch').val() + '&search=web');
     },
     /*GATHER SORT AND FILTER OPTION AND SEND RELOAD AJAX REQUEST*/
     pageReload: function (target) {
         var paginationSerialize = jQuery(target).attr('href').split("?").pop();
-        History.pushState({ filters: paginationSerialize + '&q=' + jQuery('#innerSearch').val() + '&search=web', reloadForm: 'page', page: "Dane" }, jQuery(document).find("title").html(), "?" + paginationSerialize + '&q=' + jQuery('#innerSearch').val() + '&search=web');
+        History.pushState({
+            filters: paginationSerialize + '&q=' + jQuery('#innerSearch').val() + '&search=web',
+            reloadForm: 'page',
+            page: "Dane"
+        }, jQuery(document).find("title").html(), "?" + paginationSerialize + '&q=' + jQuery('#innerSearch').val() + '&search=web');
     },
     /*AJAX REQUEST AND RELOAD FILTER/RESULT CONTENT*/
     ajaxReload: function (formActualFilters, focusInput) {
@@ -396,32 +398,31 @@ var DataObjectesAjax = {
         if (typeof(paramArray) == 'object')
             paramArray = paramArray.join("&");
 
-        if (DataObjectesAjax.ajaxRequest && DataObjectesAjax.ajaxRequest.readyState != 4) {
-            DataObjectesAjax.ajaxRequest.abort();
-        }
-
         DataObjectesAjax.ajaxRequest = jQuery.ajax({
             type: 'GET',
             url: formAction + '.json?' + paramArray,
             dataType: 'JSON',
             beforeSend: function () {
+                if (DataObjectesAjax.ajaxRequest && DataObjectesAjax.ajaxRequest.readyState != 4) {
+                    DataObjectesAjax.ajaxRequest.abort();
+                }
                 if (main.find('.spinner').length == 0) {
                     main.append(
                         jQuery('<div></div>').addClass('loadingBlock loadingTwirl').append(
-                                jQuery('<div></div>').addClass('spinner').append(
-                                        jQuery('<div></div>').addClass('bounce1')
-                                    ).append(
-                                        jQuery('<div></div>').addClass('bounce2')
-                                    ).append(
-                                        jQuery('<div></div>').addClass('bounce3')
-                                    )
+                            jQuery('<div></div>').addClass('spinner').append(
+                                jQuery('<div></div>').addClass('bounce1')
                             ).append(
-                                jQuery('<p></p>').text("Ładowanie...")
+                                jQuery('<div></div>').addClass('bounce2')
+                            ).append(
+                                jQuery('<div></div>').addClass('bounce3')
                             )
+                        ).append(
+                            jQuery('<p></p>').text("Ładowanie...")
+                        )
                     );
                     objects.find('.innerContainer').children().animate({
                         opacity: 0.5
-                    }, { duration: delay, queue: false });
+                    }, {duration: delay, queue: false});
                 }
             },
             complete: function (status) {
@@ -463,7 +464,7 @@ var DataObjectesAjax = {
                         }
                         objects.find('.innerContainer').children().css('opacity', 0).animate({
                             opacity: 1
-                        }, { duration: delay });
+                        }, {duration: delay});
 
                         /*RELOAD ASSIGNED FUNCTIONS*/
                         DataObjectesAjax.sniffForClick();
