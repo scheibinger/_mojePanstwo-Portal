@@ -131,6 +131,9 @@ jQuery(document).ready(function () {
                     $terytInfo.find('.closeTerytInfo').click(function (e) {
                         e.preventDefault();
                         $terytInfo.slideUp();
+                        $('.addons').find('._teryt').fadeOut(function () {
+                            $(this).remove();
+                        });
                     });
 
                     var sections = data['sections'];
@@ -149,7 +152,7 @@ jQuery(document).ready(function () {
                         gradient_addons.find('._teryt').fadeOut(function () {
                             $(this).remove();
                         });
-
+                        ~
                         /*
                          gradient_addons.html('');
 
@@ -174,10 +177,10 @@ jQuery(document).ready(function () {
                          */
 
                         gradient_addons.find('.min .n').text(section['teryt_min_nazwa']);
-                        gradient_addons.find('.min .v').text(number_format_h(section['teryt_min']));
+                        gradient_addons.find('.min .v').html(number_format_h(section['teryt_min']));
 
                         gradient_addons.find('.max .n').text(section['teryt_max_nazwa']);
-                        gradient_addons.find('.max .v').text(number_format_h(section['teryt_max']));
+                        gradient_addons.find('.max .v').html(number_format_h(section['teryt_max']));
 
                         var li_teryt = jQuery('<li/>', {
                             html: '<p><a href="/dane/gminy/' + '1' + '">' + data['stats']['teryt_nazwa'] + '</a><br/>' + number_format_h(section['teryt_sum_section']) + '</p>',
