@@ -38,9 +38,12 @@ class PowiadomieniaController extends PowiadomieniaAppController
 
             $this->API->_search($queryData);
             $objects = $this->API->getObjects();
+            $groups = $this->API->getGroups();
+                        
             $this->set('objects', $objects);
-
-
+            $this->set('groups', $groups);
+			
+			
             if (@$this->request->params['ext'] == 'json') {
 
                 $html = '';
@@ -55,12 +58,8 @@ class PowiadomieniaController extends PowiadomieniaAppController
                 $this->set('_serialize', 'html');
 
 
-            } else {
-
-                $groups = $this->API->getGroups();
-                $this->set('groups', $groups);
-
             }
+            
 
         } else {
 
