@@ -10,7 +10,19 @@ class GroupsController extends PowiadomieniaAppController
 
     public function index()
     {
+		
+		
+		$queryData = array(
+            'conditions' => array(
+                'mode' => 1,
+            ),
+            'limit' => 0,
+            'paramType' => 'querystring',
+            'page' => 1,
+        );
 
+        $this->API->_search($queryData);
+		
         $groups = $this->API->getGroups();
         if (@$this->request->params['ext'] == 'json') {
 
