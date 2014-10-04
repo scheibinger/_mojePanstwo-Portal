@@ -120,6 +120,9 @@ echo $this->Element('dataobject/pageBegin');
 <div class="object mpanel">
 
 <div class="block-group">
+
+<? debug($object->getLayer('ostatnie_posiedzenie')); ?>
+
 <?php if (($object->getId() == '903') && ($posiedzenie = $object->getLayer('ostatnie_posiedzenie')) && !empty($posiedzenie['data']) && !empty($posiedzenie['terms'])) { ?>
 
     <div id="prawo" class="block">
@@ -162,12 +165,14 @@ echo $this->Element('dataobject/pageBegin');
         </div>
     </div>
 
+
+<?php } ?>
+
     <div class="special banner">
         <a title="Zobacz umowy podpisywane przez Komitet Konkursowy Kraków 2022" href="/dane/krs_podmioty/481129/umowy">
             <img src="/Dane/img/krakow_special_banner.png" width="885" height="85"/>
         </a>
     </div>
-<?php } ?>
 
 <div class="row bottomborder">
     <div class="col-md-4">

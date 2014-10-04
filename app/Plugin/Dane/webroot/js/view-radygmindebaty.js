@@ -26,7 +26,7 @@ function onYouTubePlayerAPIReady() {
                     return false;
                 });
 
-                sticky('#ytVideo', 'down');
+                // sticky('#ytVideo', 'down');
             }
         }
     });

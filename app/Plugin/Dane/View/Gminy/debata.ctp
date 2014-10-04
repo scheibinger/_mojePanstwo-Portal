@@ -66,49 +66,48 @@ echo $this->Element('Dane.dataobject/subobject', array(
     'objectOptions' => array(
         // 'hlFields' => array('rady_gmin_posiedzenia.numer', 'numer_punktu'),
         'bigTitle' => true,
+        'routes' => array(
+        	'date' => false,
+        ),
     ),
 ));
 ?>
-
-
 	
-    <div class="col-md-12">
-        <div class="object mpanel">
-            
-            
-            <? if( isset($wystapienia) ) { ?>
-            <div class="row">
-	            <div class="col-md-7">
-	                <div id="ytVideo">
-	                    <div id="player" data-youtube="<?php echo $debata->getData('yt_video_id'); ?>"></div>
-	                </div>
-	            </div>
-	            <div class="col-md-5 wystapienia">
-	
-	                <div class="block">
-	
-	                    <div class="block-header">
-	                        <h2 class="label"><?php echo __d('dane', 'LC_RADYGMINDEBATY_WYSTAPIENIA'); ?></h2>
-	                    </div>
-	
-	                    <div class="content">
-	                        <ul class="nav nav-pills nav-stacked">
-	                            <?php foreach ($wystapienia as $id => $wystapienie) { ?>
-	                                <li>
-	                                    <a data-video-position="<?php echo $wystapienie['video_start']; ?>"
-	                                       href="#<?php echo $id; ?>">
-	                                        <span><?php echo (date('H', $wystapienie['video_start']) - 1) . date(':i:s', $wystapienie['video_start']); ?></span> <?php echo $wystapienie['mowca_str']; ?>
-	                                    </a>
-	                                </li>
-	                            <?php } ?>
-	                        </ul>
-	                    </div>
-	                </div>
-	            </div>
+	<? if( $debata->getData('yt_video_id') ) { ?>
+    <div id="ytVideoCont" class="row">
+        <div class="<? if( $wystapienia ) {?>col-md-7 text-right<? } else {?>col-md-9 col-md-offset-3<?}?>">
+            <div id="ytVideo" class="row">
+                <div id="player" data-youtube="<?php echo $debata->getData('yt_video_id'); ?>"></div>
             </div>
-            <? } ?>
         </div>
+        
+        <? if( $wystapienia ) {?>
+        <div class="col-md-5 wystapienia">
+
+            <div class="block">
+
+                <div class="block-header">
+                    <h2 class="label"><?php echo __d('dane', 'LC_RADYGMINDEBATY_WYSTAPIENIA'); ?></h2>
+                </div>
+
+                <div class="content">
+                    <ul class="nav nav-pills nav-stacked">
+                        <?php foreach ($wystapienia as $id => $wystapienie) { ?>
+                            <li>
+                                <a data-video-position="<?php echo $wystapienie['video_start']; ?>"
+                                   href="#<?php echo $id; ?>">
+                                    <span><?php echo (date('H', $wystapienie['video_start']) - 1) . date(':i:s', $wystapienie['video_start']); ?></span> <?php echo $wystapienie['mowca_str']; ?>
+                                </a>
+                            </li>
+                        <?php } ?>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <? } ?>
+        
     </div>
+    <? } ?>
     
     
     <div class="gminy row">

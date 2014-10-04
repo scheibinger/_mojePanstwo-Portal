@@ -384,14 +384,8 @@ class GminyController extends DataobjectsController
                         
             $this->set('debata', $debata);
 			
-			/*
-            $_wystapienia = $debata->getLayer('wystapienia');
-            $wystapienia = array();
-            foreach ($_wystapienia as $wystapienie) {
-                $wystapienia[$wystapienie['rady_posiedzenia_wystapienia']['id']] = array('mowca_str' => $wystapienie['rady_posiedzenia_wystapienia']['mowca_str'], 'video_start' => $wystapienie['rady_posiedzenia_wystapienia']['video_start']);
-            }
+            $wystapienia = $debata->getLayer('wystapienia');
             $this->set('wystapienia', $wystapienia);
-			*/
 			
             $this->set('title_for_layout', $debata->getTitle());
 
